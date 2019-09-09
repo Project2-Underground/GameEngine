@@ -9,8 +9,6 @@
 #include "MeshVbo.h"
 #include "glm.hpp"
 #include "DrawableObject.h"
-#include "SDL_surface.h"
-#include "SDL_image.h"
 
 using namespace std;
 
@@ -24,11 +22,9 @@ protected:
 	GLuint mMatrixId = -1;
 	GLuint pMatrixId = -1;
 	GLuint colorUniformId = -1;
-	GLuint modeUniformId = -1;
 
 	GLuint gProgramId;
 	int gPos2DLocation;
-	int gTex2DLocation;
 	void PrintProgramLog(GLuint program);
 	bool Initialize(string vertexShaderFile, string fragmentShaderFile);
 	Shader *vertexShader;
@@ -53,8 +49,5 @@ public:
 	GLuint GetModelMatrixAttrId();
 	GLuint GetProjectionMatrixAttrId();
 	GLuint GetColorUniformId();
-	GLuint GetModeUniformId();
-
-	GLuint LoadTexture(string path);
 
 };

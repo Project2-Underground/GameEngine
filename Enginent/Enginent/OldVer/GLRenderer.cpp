@@ -74,12 +74,6 @@ bool GLRenderer::Initialize(string vertexShaderFile, string fragmentShaderFile)
 		cout << "pos2D is not a valid glsl program variable" << endl;
 		return false;
 	}
-	gTex2DLocation = glGetAttribLocation(gProgramId, "inTexCoord");
-	if (gTex2DLocation == -1)
-	{
-		cout << "inTexCoord is not a valid glsl program variable" << endl;
-		return false;
-	}
 
 	//Setting color uniform id
 	colorUniformId = glGetUniformLocation(gProgramId, "color");
@@ -102,22 +96,12 @@ bool GLRenderer::Initialize(string vertexShaderFile, string fragmentShaderFile)
 		cout << "mMatrix is not a valid glsl uniform variable" << endl;
 		return false;
 	}
-	modeUniformId = glGetUniformLocation(gProgramId, "mode");
-	if (modeUniformId == -1)
-	{
-		cout << "mode is not a valid glsl uniform variable" << endl;
-		return false;
-	}
 
 
 	glEnableVertexAttribArray(gPos2DLocation);
-	glEnableVertexAttribArray(gTex2DLocation);
 
 	//Initialize clear color
 	glClearColor(1.0f, 1.0f, 1.0f, 1.f);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	return true;
 
@@ -138,7 +122,6 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 	}
 
 	glm::mat4 camera = glm::mat4(1.0);
-	//camera = glm::translate(camera, glm::vec3(1, 0, 0));
 
 	for (DrawableObject *obj : objList) {
 		obj->Render(camera);
@@ -150,7 +133,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 
 void GLRenderer::SetMeshAttribId(MeshVbo * shape)
 {
-	shape->SetAttribId(gPos2DLocation, gTex2DLocation);
+	shape->SetAttribId(gPos2DLocation, -1);
 }
 
 void GLRenderer::AddMesh(string name, MeshVbo * shape)
@@ -237,40 +220,4 @@ GLuint GLRenderer::GetProjectionMatrixAttrId()
 GLuint GLRenderer::GetColorUniformId()
 {
 	return this->colorUniformId;
-}
-
-GLuint GLRenderer::GetModeUniformId()
-{
-	return this->modeUniformId;
-}
-
-GLuint GLRenderer::LoadTexture(string path)
-{
-	glActiveTexture(GL_TEXTURE0);
-	SDL_Surface *image = IMG_Load(path.c_str());
-	if (image == NULL)
-	{
-		cerr << "IMG_Load: " << SDL_GetError() << endl;
-		return -1;
-	}
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	int Mode = GL_RGB;
-	if (image->format->BytesPerPixel == 4)
-	{
-		Mode = GL_RGBA;
-	}
-
-	glTexImage2D(GL_TEXTURE_2D, 0, Mode, image->w, image->h, 0, Mode, GL_UNSIGNED_BYTE, image->pixels);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	SDL_FreeSurface(image);
-
-	return texture;
 }

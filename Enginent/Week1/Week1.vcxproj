@@ -18,43 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CombineObject.h" />
-    <ClInclude Include="DrawableObject.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GLRenderer.h" />
-    <ClInclude Include="ImageObject.h" />
-    <ClInclude Include="MeshVbo.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="SquareMeshVbo.h" />
-    <ClInclude Include="TriangleMeshVbo.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CombineObject.cpp" />
-    <ClCompile Include="DrawableObject.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GLRenderer.cpp" />
-    <ClCompile Include="ImageObject.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MeshVbo.cpp" />
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SquareMeshVbo.cpp" />
-    <ClCompile Include="TriangleMeshVbo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shader\fragment.shd" />
-    <None Include="Shader\vertext.shd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{9258B26B-6459-4BD6-A25A-BE41EFE3F48E}</ProjectGuid>
+    <ProjectGuid>{1C8C67CD-2BC8-474E-8841-856CCB7EC921}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Enginent</RootNamespace>
+    <RootNamespace>Week1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>TextureExample</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -122,31 +92,28 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Resource\glew\include;..\Resource\SDL2-2.0.5\include;..\Resource\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\resource\glew\lib\Release\Win32;..\resource\SDL2-2.0.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Resource\glew\lib\Release\Win32;..\Resource\SDL2-2.0.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\resource\glew\lib\Release\Win32;..\resource\SDL2-2.0.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -187,6 +154,42 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="CombineObject.h" />
+    <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GLRenderer.h" />
+    <ClInclude Include="ImageObject.h" />
+    <ClInclude Include="MeshVbo.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="SquareMeshVbo.h" />
+    <ClInclude Include="TriangleMeshVbo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CombineObject.cpp" />
+    <ClCompile Include="DrawableObject.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MeshVbo.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="TriangleMeshVbo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\fragment.shd" />
+    <None Include="Shader\vertext.shd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

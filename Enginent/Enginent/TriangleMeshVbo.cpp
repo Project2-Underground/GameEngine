@@ -1,17 +1,16 @@
 
-#include "SquareMeshVbo.h"
+#include "TriangleMeshVbo.h"
 
-string const SquareMeshVbo::MESH_NAME = "square";
+string const TriangleMeshVbo::MESH_NAME = "Triangle";
 
-void SquareMeshVbo::LoadData()
+void TriangleMeshVbo::LoadData()
 {
 	//VBO data
 	GLfloat vertexData[] =
 	{
 	  -0.5f, -0.5f,
 	  0.5f, -0.5f,
-	  0.5f,  0.5f,
-	  -0.5f,  0.5f
+	  0.0f,  0.5f,
 	};
 
 	GLfloat texData[] =
@@ -25,25 +24,25 @@ void SquareMeshVbo::LoadData()
 	//Create VBO
 	glGenBuffers(1, &(this->posVboId));
 	glBindBuffer(GL_ARRAY_BUFFER, this->posVboId);
-	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 3 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &(this->texVboId));
 	glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
-	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
 
 
 }
 
-SquareMeshVbo::SquareMeshVbo()
+TriangleMeshVbo::TriangleMeshVbo()
 {
 }
 
-string SquareMeshVbo::GetMeshName()
+string TriangleMeshVbo::GetMeshName()
 {
 	return MESH_NAME;
 }
 
-void SquareMeshVbo::Render()
+void TriangleMeshVbo::Render()
 {
 	if (this->posAttribId != -1) {
 		glBindBuffer(GL_ARRAY_BUFFER, this->posVboId);
@@ -51,7 +50,7 @@ void SquareMeshVbo::Render()
 	}
 	if (this->texAttribId != -1) {
 		glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
-		glVertexAttribPointer(this->texAttribId, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+		glVertexAttribPointer(this->texAttribId, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 	}
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 3);
 }

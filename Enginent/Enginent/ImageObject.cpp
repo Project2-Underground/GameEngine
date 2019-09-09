@@ -1,44 +1,40 @@
 
-#include "GameObject.h"
+#include "ImageObject.h"
 #include "Game.h"
 #include "SquareMeshVbo.h"
 
 
-GameObject::GameObject()
+ImageObject::ImageObject()
 {
-	color = glm::vec3(0.0, 0.0, 0.0);
+
 }
 
 
-GameObject::~GameObject()
+ImageObject::~ImageObject()
 {
 }
 
-void GameObject::SetColor(float r, float g, float b)
+void ImageObject::SetTexture(string path)
 {
-	color = glm::vec3(r, g, b);
+	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-void GameObject::Render(glm::mat4 globalModelTransform)
+void ImageObject::Render(glm::mat4 globalModelTransform)
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
-	GLuint colorId = Game::GetInstance()->GetRenderer()->GetColorUniformId();
 	GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
 
 	if (modelMatixId == -1) {
 		cout << "Error: Can't perform transformation " << endl;
 		return;
 	}
-	if (colorId == -1) {
-		cout << "Error: Can't set color " << endl;
-		return;
-	}
 	if (modeId == -1) {
-		cout << "Error: Can't set mode in GameObject " << endl;
+		cout << "Error: Can't set mode in ImageObject " << endl;
 		return;
 	}
+
 	vector <glm::mat4> matrixStack;
 
 	glm::mat4 currentMatrix = this->getTransform();
@@ -47,8 +43,8 @@ void GameObject::Render(glm::mat4 globalModelTransform)
 
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-		glUniform3f(colorId, color.x, color.y, color.z);
-		glUniform1i(modeId, 0);
+		glUniform1i(modeId, 1);
+		glBindTexture(GL_TEXTURE_2D, texture);
 		squareMesh->Render();
 
 	}
