@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Player.h"
 #include "DrawableObject.h"
 #include "GLRenderer.h"
 
@@ -11,6 +12,7 @@ class Game
 	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
 	GLRenderer *renderer;
+	Player * player;
 	Game();
 public:
 	static Game* GetInstance();

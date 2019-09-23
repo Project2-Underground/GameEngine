@@ -25,14 +25,11 @@ GLRenderer * Game::GetRenderer()
 
 void Game::rightClick(int x, int y)
 {
-
 	float realX, realY;
-	realX = -3 + x * (6.0 / winWidth);
-	realY = -3 + (winHeight - y) * (6.0 / winHeight);
-	if (this->objects.size() > 0) {
-		DrawableObject *obj = this->objects.at(2);
-		obj->SetPosition(glm::vec3(realX, realY, 0));
-	}
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	player->setTarget(realX, realY);
+
 }
 
 void Game::leftClick(int x, int y)
@@ -59,7 +56,7 @@ void Game::Init(int width, int height)
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
 	renderer->InitGL("Shader/vertext.shd", "Shader/fragment.shd");
-	renderer->SetOrthoProjection(-3, 3, -3, 3);
+	renderer->SetOrthoProjection(-540, 540, -360, 360);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
 
 	SquareMeshVbo * square = new SquareMeshVbo();
@@ -72,19 +69,19 @@ void Game::Init(int width, int height)
 
 	ImageObject * ice = new ImageObject();
 	ice->SetTexture("Texture/IceBerge.png");
-	ice->SetSize(6.0f, -6.0f);
+	ice->SetSize(600.0f, -600.0f);
 	objects.push_back(ice);
 
 	ImageObject * qq = new ImageObject();
 	qq->SetTexture("Texture/qq.png");
-	qq->SetSize(1.0f, -1.0f);
+	qq->SetSize(100.0f, -100.0f);
 	qq->Translate(glm::vec3(2.0f, 0.5f, 0.0f));
 	objects.push_back(qq);
 
-	ImageObject * penguin = new ImageObject();
-	penguin->SetTexture("Texture/penguin.png");
-	penguin->SetSize(1.0f, -1.0f);
-	objects.push_back(penguin);
+	player = new Player();
+	player->SetTexture("Texture/penguin.png");
+	player->SetSize(100.0f, -100.0f);
+	objects.push_back(player);
 
 
 
@@ -105,7 +102,7 @@ void Game::Init(int width, int height)
 
 void Game::Update()
 {
-
+	player->Move();
 }
 
 void Game::Render()
