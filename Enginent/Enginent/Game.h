@@ -15,9 +15,12 @@ class Game
 public:
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();
-	void HandleMouse(int x, int y);
+	void rightClick(int x, int y);
+	void leftClick(int x, int y);
 	void HandleKey(char ch);
 	void Init(int width, int height);
+	void Update();
 	void Render();
+
 
 };

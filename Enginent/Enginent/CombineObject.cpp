@@ -4,7 +4,6 @@
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
 
-
 CombineObject::CombineObject()
 {
 	color = glm::vec3(0.0, 0.0, 0.0);

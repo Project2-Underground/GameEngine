@@ -23,8 +23,9 @@ GLRenderer * Game::GetRenderer()
 	return this->renderer;
 }
 
-void Game::HandleMouse(int x, int y)
+void Game::rightClick(int x, int y)
 {
+
 	float realX, realY;
 	realX = -3 + x * (6.0 / winWidth);
 	realY = -3 + (winHeight - y) * (6.0 / winHeight);
@@ -32,6 +33,11 @@ void Game::HandleMouse(int x, int y)
 		DrawableObject *obj = this->objects.at(2);
 		obj->SetPosition(glm::vec3(realX, realY, 0));
 	}
+}
+
+void Game::leftClick(int x, int y)
+{
+
 }
 
 void Game::HandleKey(char ch)
@@ -94,6 +100,11 @@ void Game::Init(int width, int height)
 	//obj2->SetColor(0.0, 0.0, 1.0);
 	//obj2->Translate(glm::vec3(1.0, 1.0, 0));
 	//objects.push_back(obj2);
+
+}
+
+void Game::Update()
+{
 
 }
 

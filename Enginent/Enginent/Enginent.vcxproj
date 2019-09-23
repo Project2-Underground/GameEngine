@@ -23,10 +23,13 @@
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameUtilities.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="ImageObject.h" />
+    <ClInclude Include="InteractObj.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SquareMeshVbo.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
@@ -41,9 +44,11 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd" />

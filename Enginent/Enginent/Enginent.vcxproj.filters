@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GameUtilities">
+      <UniqueIdentifier>{8fd8bf5b-f71a-44db-8d4a-8af63e4593bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObj">
+      <UniqueIdentifier>{bc9e683c-501f-4e50-b8ee-02b3c90fe111}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CombineObject.h">
@@ -47,6 +53,15 @@
     </ClInclude>
     <ClInclude Include="TriangleMeshVbo.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtilities.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractObj.h">
+      <Filter>GameObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +100,12 @@
     </ClCompile>
     <ClCompile Include="TriangleMeshVbo.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
