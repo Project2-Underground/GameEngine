@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="CombinableItem.h" />
     <ClInclude Include="CombineObject.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="InfoPhone.h" />
     <ClInclude Include="InteractObj.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
