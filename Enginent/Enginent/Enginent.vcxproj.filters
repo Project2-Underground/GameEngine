@@ -69,6 +69,18 @@
     <ClInclude Include="Item.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoPhone.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="SeparatableItem.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
