@@ -19,6 +19,9 @@
     <Filter Include="GameObj">
       <UniqueIdentifier>{bc9e683c-501f-4e50-b8ee-02b3c90fe111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObj\interactable">
+      <UniqueIdentifier>{994d6135-ca35-4dcd-b7a6-4c25d3b39d3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CombineObject.h">
@@ -61,7 +64,10 @@
       <Filter>GameObj</Filter>
     </ClInclude>
     <ClInclude Include="InteractObj.h">
-      <Filter>GameObj</Filter>
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>GameObj\interactable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

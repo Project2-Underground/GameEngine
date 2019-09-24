@@ -27,6 +27,7 @@
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="InteractObj.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
