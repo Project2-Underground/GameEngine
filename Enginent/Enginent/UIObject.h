@@ -1,18 +1,17 @@
-#pragma once
+#pragma once 
 
-#include "DrawableObject.h"
+#include "ImageObject.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
-class ImageObject :public DrawableObject
-{
+class UIObject : public DrawableObject {
 protected:
 	unsigned int texture;
 	string texturePath;
 
 public:
-	ImageObject();
-	~ImageObject();
+	UIObject();
+	~UIObject();
 	void SetTexture(string path);
 	unsigned int GetTexture();
-	virtual void Render(glm::mat4 globalModelTransform);
+	virtual void Render();
 };

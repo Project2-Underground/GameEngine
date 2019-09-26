@@ -32,6 +32,7 @@
     <ClInclude Include="InfoPhone.h" />
     <ClInclude Include="InteractObj.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SquareMeshVbo.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
+    <ClInclude Include="UIObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp" />
@@ -48,6 +50,8 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
@@ -55,6 +59,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
+    <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>

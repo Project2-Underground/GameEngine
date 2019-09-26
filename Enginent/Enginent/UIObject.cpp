@@ -1,33 +1,24 @@
-
-#include "ImageObject.h"
+#include "UIObject.h"
 #include "Game.h"
 #include "SquareMeshVbo.h"
 
 
-ImageObject::ImageObject()
-{
-
+UIObject::UIObject() {
 }
 
-
-ImageObject::~ImageObject()
-{
+UIObject::~UIObject() {
 }
 
-
-unsigned int ImageObject::GetTexture() {
-	return texture;
-}
-
-void ImageObject::SetTexture(string path)
-{
-	texturePath = path;
+void UIObject::SetTexture(string path) {
 	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-void ImageObject::Render(glm::mat4 globalModelTransform)
-{
-	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+unsigned int UIObject::GetTexture() {
+	return texture;
+}
+
+void UIObject::Render() {
+	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
 	GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
@@ -46,8 +37,6 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 	glm::mat4 currentMatrix = this->getTransform();
 
 	if (squareMesh != nullptr) {
-
-		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, 1);
 		glBindTexture(GL_TEXTURE_2D, texture);
@@ -55,4 +44,3 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 
 	}
 }
-

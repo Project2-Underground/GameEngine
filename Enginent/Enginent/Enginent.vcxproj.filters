@@ -90,6 +90,12 @@
     <ClInclude Include="Inventory.h">
       <Filter>GameUI</Filter>
     </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBox.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -133,6 +139,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBox.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
