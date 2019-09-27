@@ -10,6 +10,7 @@ protected:
 	glm::vec3 pos;
 	glm::vec3 size;
 	float rot;
+	float test;
 
 public:
 	glm::mat4 getTransform();
