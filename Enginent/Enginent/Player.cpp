@@ -9,22 +9,14 @@ void Player::Move()
 {
 	if (this->pos.x > target.x)
 	{
-		if (pos.x - target.x < 3)
-		{
-			this->Translate(glm::vec3(target.x - pos.x, 0, 0));
-		}
-		else
+		if (pos.x - target.x > 3)
 		{
 			this->Translate(glm::vec3(-3, 0, 0));
 		}
 	}
 	else if (this->pos.x < target.x)
 	{
-		if (target.x - pos.x < 3)
-		{
-			this->Translate(glm::vec3(pos.x - target.x, 0, 0));
-		}
-		else
+		if (target.x - pos.x > 3)
 		{
 			this->Translate(glm::vec3(3, 0, 0));
 		}
