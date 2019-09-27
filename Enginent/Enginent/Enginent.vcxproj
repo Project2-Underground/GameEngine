@@ -39,6 +39,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SeparatableItem.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SquareMeshVbo.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
     <ClCompile Include="UIObject.cpp" />
