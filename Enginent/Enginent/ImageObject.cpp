@@ -14,8 +14,14 @@ ImageObject::~ImageObject()
 {
 }
 
+
+unsigned int ImageObject::GetTexture() {
+	return texture;
+}
+
 void ImageObject::SetTexture(string path)
 {
+	texturePath = path;
 	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 

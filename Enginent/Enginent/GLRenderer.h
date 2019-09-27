@@ -11,6 +11,7 @@
 #include "DrawableObject.h"
 #include "SDL_surface.h"
 #include "SDL_image.h"
+#include "UIObject.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ protected:
 
 public:
 	void Render(vector <DrawableObject*> & objList);
+	void Render(vector <UIObject*> & objList);
 	GLRenderer(int w, int h);
 	bool InitGL(string vertexShaderFile, string fragmentShaderFile);
 

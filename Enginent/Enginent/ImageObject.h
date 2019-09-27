@@ -5,11 +5,14 @@
 #include "gtc/type_ptr.hpp"
 class ImageObject :public DrawableObject
 {
+protected:
 	unsigned int texture;
+	string texturePath;
 
 public:
 	ImageObject();
 	~ImageObject();
 	void SetTexture(string path);
-	void Render(glm::mat4 globalModelTransform);
+	unsigned int GetTexture();
+	virtual void Render(glm::mat4 globalModelTransform);
 };

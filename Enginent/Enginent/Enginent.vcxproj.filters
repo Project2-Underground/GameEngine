@@ -19,6 +19,12 @@
     <Filter Include="GameObj">
       <UniqueIdentifier>{bc9e683c-501f-4e50-b8ee-02b3c90fe111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObj\interactable">
+      <UniqueIdentifier>{994d6135-ca35-4dcd-b7a6-4c25d3b39d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUI">
+      <UniqueIdentifier>{fd4910da-1bfc-4dac-94df-1e96ecf03a6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CombineObject.h">
@@ -61,7 +67,34 @@
       <Filter>GameObj</Filter>
     </ClInclude>
     <ClInclude Include="InteractObj.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoPhone.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="SeparatableItem.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="CombinableItem.h">
       <Filter>GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBox.h">
+      <Filter>GameUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +139,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBox.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
