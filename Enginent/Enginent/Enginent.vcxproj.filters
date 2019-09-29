@@ -99,6 +99,9 @@
     <ClInclude Include="SoundManager.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

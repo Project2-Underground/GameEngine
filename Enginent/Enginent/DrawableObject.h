@@ -16,6 +16,8 @@ public:
 	DrawableObject();
 	~DrawableObject();
 	virtual void Render(glm::mat4 globalModelTransform) = 0;
+	glm::vec3 getPos();
+	glm::vec3 getSize();
 	void SetSize(float sizeX, float sizeY);
 	void SetPosition(glm::vec3 newPosition);
 	void Translate(glm::vec3 moveDistance);
