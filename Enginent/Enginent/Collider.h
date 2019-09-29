@@ -27,4 +27,5 @@ public:
 	void setNewWidth(float newW);
 	void setNewHeight(float newH);
 	bool isCollide(Collider *other);
+
 };
