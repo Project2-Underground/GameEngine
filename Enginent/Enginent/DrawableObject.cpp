@@ -27,6 +27,14 @@ DrawableObject::~DrawableObject()
 {
 }
 
+glm::vec3 DrawableObject::getPos() {
+	return pos;
+}
+
+glm::vec3 DrawableObject::getSize() {
+	return size;
+}
+
 void DrawableObject::SetSize(float sizeX, float sizeY)
 {
 	size = glm::vec3(sizeX, sizeY, 1);
