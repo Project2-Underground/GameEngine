@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "CombineObject.h"
 #include "ImageObject.h"
+#include "TextObject.h"
 
 Game* Game::instance = nullptr;
 
@@ -60,7 +61,7 @@ void Game::Init(int width, int height)
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
 	renderer->InitGL("Shader/vertext.shd", "Shader/fragment.shd");
-	renderer->SetOrthoProjection(-540, 540, -360, 360);
+	renderer->SetOrthoProjection(-width * 0.5f, width * 0.5f, -height * 0.5f, height * 0.5f);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
 
 	SquareMeshVbo * square = new SquareMeshVbo();
@@ -71,21 +72,26 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	ImageObject * ice = new ImageObject();
-	ice->SetTexture("Texture/IceBerge.png");
-	ice->SetSize(600.0f, -600.0f);
-	objects.push_back(ice);
-
-	ImageObject * qq = new ImageObject();
-	qq->SetTexture("Texture/qq.png");
-	qq->SetSize(100.0f, -100.0f);
-	qq->Translate(glm::vec3(2.0f, 0.5f, 0.0f));
-	objects.push_back(qq);
+	ImageObject * _roomElias = new ImageObject();
+	_roomElias->SetTexture("Texture/EliasRoom/room1.png");
+	_roomElias->SetSize(width, -height);
+	objects.push_back(_roomElias);
 
 	player = new Player();
-	player->SetTexture("Texture/penguin.png");
-	player->SetSize(100.0f, -100.0f);
+	player->SetTexture("Texture/Character/Elias.png");
+	player->SetSize(100.0f, -240.0f);
+	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
 	objects.push_back(player);
+
+	SDL_Color a;
+	a.r = 0;
+	a.b = 0;
+	a.g = 0;
+
+	TextObject * text = new TextObject();
+	text->loadText("Jin's fault", a, 100);
+	text->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+	objects.push_back(text);
 
 	Collider *col = new Collider(player);
 	colliders.push_back(col);
