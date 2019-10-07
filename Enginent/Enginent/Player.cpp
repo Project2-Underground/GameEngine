@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player()
 {
@@ -27,6 +28,5 @@ void Player::Move()
 
 void Player::setTarget(int x, int y)
 {
-
 	target = glm::vec3(x, y, 0);
 }

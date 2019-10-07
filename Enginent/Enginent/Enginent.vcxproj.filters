@@ -102,6 +102,9 @@
     <ClInclude Include="Collider.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="TextObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -146,9 +149,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameObj</Filter>
     </ClCompile>
-    <ClCompile Include="UIObject.cpp">
-      <Filter>GameUI</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
@@ -159,6 +159,15 @@
       <Filter>GameUI</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="TextObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
