@@ -1,12 +1,10 @@
 
 #include "Game.h"
-#include "GLRenderer.h"
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
 #include "GameObject.h"
 #include "CombineObject.h"
 #include "ImageObject.h"
-#include "TextObject.h"
 
 Game* Game::instance = nullptr;
 
@@ -27,16 +25,20 @@ GLRenderer * Game::GetRenderer()
 void Game::rightClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5f) + x;
-	realY = -(winHeight * 0.5f) + (winHeight - y);
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
 	player->setTarget(realX, realY);
-	cout << x << endl;
 
 }
 
 void Game::leftClick(int x, int y)
 {
-
+	float realX, realY;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	if (colliders[0]->isClicked(realX, realY)) {
+		cout << "collide\n";
+	}
 }
 
 void Game::HandleKey(char ch)
@@ -58,7 +60,7 @@ void Game::Init(int width, int height)
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
 	renderer->InitGL("Shader/vertext.shd", "Shader/fragment.shd");
-	renderer->SetOrthoProjection(-width * 0.5f, width * 0.5f, -height * 0.5f, height * 0.5f);
+	renderer->SetOrthoProjection(-540, 540, -360, 360);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
 
 	SquareMeshVbo * square = new SquareMeshVbo();
@@ -70,26 +72,24 @@ void Game::Init(int width, int height)
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
 	ImageObject * ice = new ImageObject();
-	ice->SetTexture("Texture/EliasRoom/room1.png");
-	ice->SetSize(width, -height);
+	ice->SetTexture("Texture/IceBerge.png");
+	ice->SetSize(600.0f, -600.0f);
 	objects.push_back(ice);
 
+	ImageObject * qq = new ImageObject();
+	qq->SetTexture("Texture/qq.png");
+	qq->SetSize(100.0f, -100.0f);
+	qq->Translate(glm::vec3(2.0f, 0.5f, 0.0f));
+	objects.push_back(qq);
+
 	player = new Player();
-	player->SetTexture("Texture/Character/Elias.png");
-	player->SetSize(100.0f, -240.0f);
-	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
+	player->SetTexture("Texture/penguin.png");
+	player->SetSize(100.0f, -100.0f);
 	objects.push_back(player);
 
-	SDL_Color a;
-	a.r = 0;
-	a.b = 0;
-	a.g = 0;
-
-	TextObject * text = new TextObject();
-	text->loadText("Jin's fault", a ,100 );
-	text->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	objects.push_back(text);
-
+	Collider *col = new Collider(player);
+	colliders.push_back(col);
+	player->SetCollder(col);
 
 
 	//CombineObject * obj = new CombineObject();

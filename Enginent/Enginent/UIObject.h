@@ -3,15 +3,10 @@
 #include "ImageObject.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
-class UIObject : public DrawableObject {
-protected:
-	unsigned int texture;
-	string texturePath;
 
+class UIObject : public ImageObject 
+{
 public:
-	UIObject();
-	~UIObject();
-	void SetTexture(string path);
-	unsigned int GetTexture();
-	virtual void Render();
+	void Render(glm::mat4 globalModelTransform) {};
+	void Render();
 };

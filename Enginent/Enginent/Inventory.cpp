@@ -1,24 +1,37 @@
-//#include "Inventory.h"
-//#include "Game.h"
-//
-//
-//Inventory::Inventory() {
-//	// create UIObject and get position of each set from game.h
-//}
-//
-//void Inventory::addItem(Item item) {
-//	items.push_back(item);
-//}
-//
-//void Inventory::removeItem(Item item) {
-//	for (int i = 0; i < items.size(); i++) {
-//		if (items[i] == item) {
-//			items.erase(items.begin()+i);
-//			break;
-//		}
-//	}
-//}
-//
-//void Inventory::displayItem() {
-//	// put info of items into each boxes
-//}
+#include "Inventory.h"
+#include "Game.h"
+
+Inventory::Inventory(int numOfInventory, glm::vec3* arrOfPos, int size) {
+	itemSize = numOfInventory;
+	// create UIObject and get position of each set from game.h
+	for (int i = 0; i < itemSize; i++) {
+		InventoryBox *tmpObj =  new InventoryBox();
+		tmpObj->SetPosition(arrOfPos[i]);
+		tmpObj->SetSize(size, size);
+		InventoryBoxes.push_back(tmpObj);
+	}
+}
+
+void Inventory::addItem(Item* item) {
+	for (InventoryBox *ib : InventoryBoxes) {
+		if (ib->GetItem() == nullptr) {
+			ib->SetItem(item);
+			break;
+		}
+	}
+}
+
+void Inventory::removeItem(Item* item) {
+	for (InventoryBox *ib : InventoryBoxes) {
+		if (*(ib->GetItem()) == *item) {
+			ib->RemoveItem();
+			break;
+		}
+	}
+}
+
+Inventory::~Inventory() {
+	for (InventoryBox *ib : InventoryBoxes) {
+		delete ib;
+	}
+}
