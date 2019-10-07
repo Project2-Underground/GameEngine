@@ -2,16 +2,22 @@
 #include "SquareMeshVbo.h"
 #include "Game.h"
 
+InventoryBox::InventoryBox() {
+	item = nullptr;
+}
+
 void InventoryBox::SetItem(Item* item) {
 	this->item = item;
 }
 
-Item InventoryBox::GetItem() {
-	return *item;
+Item* InventoryBox::GetItem() {
+	return item;
 }
 
 void InventoryBox::RemoveItem() {
+	Item *tmp = item;
 	item = nullptr;
+	delete tmp;
 }
 
 void InventoryBox::Render() {
@@ -41,4 +47,8 @@ void InventoryBox::Render() {
 			squareMesh->Render();
 		}
 	}
+}
+
+InventoryBox::~InventoryBox() {
+
 }

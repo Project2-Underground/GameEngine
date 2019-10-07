@@ -6,8 +6,10 @@
 class InventoryBox :public UIObject {
 	Item* item;
 public:
+	InventoryBox();
 	void SetItem(Item* item);
-	Item GetItem();
+	Item* GetItem();
 	void RemoveItem();
 	void Render();
+	~InventoryBox();
 };

@@ -21,7 +21,7 @@ void Player::Move()
 			this->Translate(glm::vec3(3, 0, 0));
 		}
 	}
-
+	col->Update();
 
 }
 
@@ -29,4 +29,10 @@ void Player::setTarget(int x, int y)
 {
 
 	target = glm::vec3(x, y, 0);
+}
+
+
+void Player::SetCollder(Collider* n_col) {
+	col = n_col;
+	col->setRefObject(this);
 }

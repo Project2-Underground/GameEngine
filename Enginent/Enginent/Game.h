@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "DrawableObject.h"
 #include "GLRenderer.h"
+#include "Collider.h"
 
 using namespace std;
 class Game
@@ -11,6 +12,7 @@ class Game
 	static Game* instance;
 	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
+	vector<Collider*> colliders;
 	GLRenderer *renderer;
 	Player * player;
 	Game();

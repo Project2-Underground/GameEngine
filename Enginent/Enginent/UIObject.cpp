@@ -2,21 +2,6 @@
 #include "Game.h"
 #include "SquareMeshVbo.h"
 
-
-UIObject::UIObject() {
-}
-
-UIObject::~UIObject() {
-}
-
-void UIObject::SetTexture(string path) {
-	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
-}
-
-unsigned int UIObject::GetTexture() {
-	return texture;
-}
-
 void UIObject::Render() {
 	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
@@ -41,6 +26,5 @@ void UIObject::Render() {
 		glUniform1i(modeId, 1);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		squareMesh->Render();
-
 	}
 }

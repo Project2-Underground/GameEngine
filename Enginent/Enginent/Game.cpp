@@ -1,6 +1,5 @@
 
 #include "Game.h"
-#include "GLRenderer.h"
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
 #include "GameObject.h"
@@ -34,7 +33,12 @@ void Game::rightClick(int x, int y)
 
 void Game::leftClick(int x, int y)
 {
-
+	float realX, realY;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	if (colliders[0]->isClicked(realX, realY)) {
+		cout << "collide\n";
+	}
 }
 
 void Game::HandleKey(char ch)
@@ -83,8 +87,9 @@ void Game::Init(int width, int height)
 	player->SetSize(100.0f, -100.0f);
 	objects.push_back(player);
 
-
-
+	Collider *col = new Collider(player);
+	colliders.push_back(col);
+	player->SetCollder(col);
 
 
 	//CombineObject * obj = new CombineObject();
