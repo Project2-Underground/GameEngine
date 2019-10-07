@@ -26,8 +26,8 @@ GLRenderer * Game::GetRenderer()
 void Game::rightClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5f) + x;
+	realY = -(winHeight * 0.5f) + (winHeight - y);
 	player->setTarget(realX, realY);
 
 }
