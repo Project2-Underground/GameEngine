@@ -2,22 +2,24 @@
 #include <vector>
 #include <map>
 #include <string>
-
+#include <GL\glew.h>
 #include "ImageObject.h"
 
 class Animation {
-	std::string animationName;
-	std::map<std::string ,Animation> nextAnimation;
-	int frame;				// assume only one row of animations
-	int fps;
-	ImageObject object;
-	// int x_interval;
+	ImageObject* ref;
+	int frame;									// assume only one row of animations
+	float currentX;
+	int x_interval;
 	// int y_interval;
 public:
-	void AddNextAnimation(std::string, Animation animation);
-	void setFrame(int frameNum);
-	void setFPS(int newFPS);
-	void Update();
-	/*void setXInterval(int newX_interval);
-	void setYInterval(int newY_interval);*/
+	std::string animationName;
+	int fps;
+
+	Animation(ImageObject* object, std::string name);
+	void SetFrame(int frameNum);
+	void SetFPS(int newFPS);
+	GLfloat* GetNextFrame();
+	void SetXInterval(int newX_interval);
+	void ResetAnimation();
+	// void setYInterval(int newY_interval);
 };

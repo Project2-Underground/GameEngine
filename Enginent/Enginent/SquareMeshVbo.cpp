@@ -34,6 +34,27 @@ void SquareMeshVbo::LoadData()
 
 }
 
+// use to change frame for animations
+void SquareMeshVbo::setNewTexData(GLfloat n_texData[8]) {
+	GLfloat texData[8];
+	memcpy(texData, n_texData, 8 * sizeof(GLfloat));
+	glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
+}
+
+void SquareMeshVbo::resetTexData() {
+	GLfloat texData[] =
+	{
+	  0.0f, 0.0f,
+	  1.0f, 0.0f,
+	  1.0f, 1.0f,
+	  0.0f, 1.0f
+	};
+
+	glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
+}
+
 SquareMeshVbo::SquareMeshVbo()
 {
 }

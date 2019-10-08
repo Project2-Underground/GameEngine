@@ -170,6 +170,12 @@
     <ClCompile Include="UIObject.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">

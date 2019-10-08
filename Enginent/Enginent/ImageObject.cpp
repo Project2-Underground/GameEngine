@@ -6,7 +6,8 @@
 
 ImageObject::ImageObject()
 {
-
+	col = nullptr;
+	anim = nullptr;
 }
 
 
@@ -14,6 +15,10 @@ ImageObject::~ImageObject()
 {
 }
 
+void ImageObject::SetCollder(Collider* n_col) {
+	col = n_col;
+	col->setRefObject(this);
+}
 
 unsigned int ImageObject::GetTexture() {
 	return texture;
@@ -28,6 +33,13 @@ void ImageObject::SetTexture(string path)
 void ImageObject::Render(glm::mat4 globalModelTransform)
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+
+	// update frame if has an animator
+	if (anim != nullptr) {
+		// update current animation
+		squareMesh->setNewTexData(anim->currentAnim->getNextFrame());
+	}
+
 
 	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
 	GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
@@ -52,7 +64,7 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 		glUniform1i(modeId, 1);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		squareMesh->Render();
-
+		squareMesh->resetTexData();
 	}
 }
 
