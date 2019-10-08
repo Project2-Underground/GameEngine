@@ -4,6 +4,11 @@
 Player::Player()
 {
 	target = glm::vec3(this->pos);
+	dialogueText = new TextObject();
+	dialogueColor.r = 255;
+	dialogueColor.b = 255;
+	dialogueColor.g = 255;
+	dialogueColor.a = 0;
 }
 
 void Player::Move()
@@ -23,7 +28,7 @@ void Player::Move()
 		}
 	}
 	col->Update();
-
+	
 }
 
 void Player::setTarget(int x, int y)
@@ -35,4 +40,11 @@ void Player::setTarget(int x, int y)
 void Player::SetCollder(Collider* n_col) {
 	col = n_col;
 	col->setRefObject(this);
+}
+
+TextObject* Player::setDialogue(string dialogue)
+{
+	dialogueText->loadText(dialogue, dialogueColor, 18);
+	dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
+	return dialogueText;
 }
