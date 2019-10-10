@@ -13,7 +13,7 @@ protected:
 
 public:
 	Collider* col;
-	Animator* anim;
+	//Animator* anim;
 
 	ImageObject();
 	~ImageObject();

@@ -7,7 +7,7 @@ Collider::Collider(DrawableObject* ref) {
 	this->pos.z = 1;
 	this->size = ref->getSize();
 	this->maxBound = glm::vec3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f * -1, pos.z);
-	this->minBound = glm::vec3(pos.x - size.x * 0.5f, -1*pos.y - size.y * 0.5f * -1, pos.z);
+	this->minBound = glm::vec3(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f * -1, pos.z);
 }
 
 Collider::Collider() {

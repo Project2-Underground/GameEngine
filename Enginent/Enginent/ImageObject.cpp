@@ -7,7 +7,7 @@
 ImageObject::ImageObject()
 {
 	col = nullptr;
-	anim = nullptr;
+	//anim = nullptr;
 }
 
 
@@ -35,10 +35,10 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	// update frame if has an animator
-	if (anim != nullptr) {
-		// update current animation
-		squareMesh->setNewTexData(anim->currentAnim->getNextFrame());
-	}
+	//if (anim != nullptr) {
+	//	// update current animation
+	//	squareMesh->setNewTexData(anim->currentAnim->getNextFrame());
+	//}
 
 
 	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
