@@ -38,6 +38,7 @@ void Game::leftClick(int x, int y)
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
 	if (colliders[0]->isClicked(realX, realY)) {
+		cout << "x, y: " << realX << ", " << realY << endl;
 		cout << "collide\n";
 	}
 }
