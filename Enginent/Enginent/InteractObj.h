@@ -14,7 +14,7 @@ enum IneractTypeList
 class InteractableObj : public ImageObject {
 	IneractTypeList interactType = NORMAL;
 public:
-	virtual void action() = 0;
+	virtual void action() {};
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	IneractTypeList getType() { return interactType; };
 };
