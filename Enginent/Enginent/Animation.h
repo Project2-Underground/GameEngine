@@ -6,20 +6,16 @@
 #include "ImageObject.h"
 
 class Animation {
+private:
 	ImageObject* ref;
-	int frame;									// assume only one row of animations
-	float currentX;
-	int x_interval;
-	// int y_interval;
-public:
+	float frameWidth;
+	int frame;								// assume only changing the x value
+	int currentFrame;
 	std::string animationName;
-	int fps;
-
-	Animation(ImageObject* object, std::string name);
-	void SetFrame(int frameNum);
-	void SetFPS(int newFPS);
-	GLfloat* GetNextFrame();
-	void SetXInterval(int newX_interval);
+public:
+	Animation(ImageObject* ref, std::string name);
+	bool Finished();
+	void SetFrame(int frame);
+	GLfloat* GetNextFrame();				// calculates and return the new texData[] 
 	void ResetAnimation();
-	// void setYInterval(int newY_interval);
 };

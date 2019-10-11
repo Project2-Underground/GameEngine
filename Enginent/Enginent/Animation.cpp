@@ -1,45 +1,38 @@
 #include "Animation.h"
 
-Animation::Animation(ImageObject* object, std::string name) {
-	ref = object;
-	animationName = name;
-	currentX = 0;
+Animation::Animation(ImageObject* ref, std::string name) {
+	this->ref = ref;
+	this->animationName = name;
 }
 
-void Animation::SetFrame(int frameNum) {
-	this->frame = frameNum;
-}
-
-void Animation::SetFPS(int newFPS) {
-	this->fps = newFPS;
+void Animation::SetFrame(int frame) {
+	this->frame = frame;
+	frameWidth = 1.0f / (float)frame;
+	currentFrame = 0;
 }
 
 GLfloat* Animation::GetNextFrame() {
-	currentX += x_interval;
-	if (currentX >= x_interval * frame) {
-		currentX = 0;
-	}
-
-	GLfloat texData[] =
+	currentFrame %= frame;
+	float tmp = currentFrame * frameWidth;
+	GLfloat newTexData[] =
 	{
-	  0.0f + currentX, 0.0f,
-	  1.0f + currentX, 0.0f,
-	  1.0f + currentX, 1.0f,
-	  0.0f + currentX, 1.0f
+	  0.0f + tmp, 0.0f,
+	  frameWidth + tmp, 0.0f,
+	  frameWidth + tmp, 1.0f,
+	  0.0f + tmp, 1.0f
 	};
 
-	return texData;
+	currentFrame++;
+
+	return newTexData;
 }
 
-void Animation::SetXInterval(int newX_interval) {
-	this->x_interval = newX_interval;
+bool Animation::Finished() {
+	if (currentFrame == frame) 
+		return true;
+	return false;
 }
-
 
 void Animation::ResetAnimation() {
-	currentX = 0;
+	currentFrame = 0;
 }
-
-//void Animation::setYInterval(int newY_interval) {
-//
-//}
