@@ -77,7 +77,15 @@ void Game::Init(int width, int height)
 	_roomElias->SetSize(width, -height);
 	objects.push_back(_roomElias);
 
+	ImageObject * _door = new ImageObject();
+	_door->SetTexture("Texture/EliasRoom/door.png");
+	_door->SetSize(150, -300);
+	_door->SetPosition(glm::vec3(200.0f, 0.0f, 1.0f));
+	objects.push_back(_door);
 
+	//Collider *col2 = new Collider(_door);
+	//colliders.push_back(col2);
+	//player->SetCollder(col2);
 
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");
