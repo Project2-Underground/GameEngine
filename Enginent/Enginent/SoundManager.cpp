@@ -40,6 +40,13 @@ void SoundManager::downVolume() {
 	}
 }
 
+void SoundManager::toggleMute() {
+	ik_f32 vol = 1.0f;
+	if (soundEngine->getSoundVolume() == 1.0f)
+		ik_f32 vol = 0.0f;
+
+	soundEngine->setSoundVolume(vol);
+}
 
 SoundManager::~SoundManager() {
 	soundEngine->stopAllSounds();

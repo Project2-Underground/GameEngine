@@ -15,5 +15,6 @@ public:
 	void stopBg();
 	void upVolume();
 	void downVolume();
+	void toggleMute();
 	~SoundManager();
 };
