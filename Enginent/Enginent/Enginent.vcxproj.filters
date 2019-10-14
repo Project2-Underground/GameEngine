@@ -84,9 +84,6 @@
     <ClInclude Include="SeparatableItem.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
-    <ClInclude Include="CombinableItem.h">
-      <Filter>GameObj</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>GameUI</Filter>
     </ClInclude>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="TextObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CombinableItem.h">
+      <Filter>GameObj\interactable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +169,12 @@
     </ClCompile>
     <ClCompile Include="UIObject.cpp">
       <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SeparatableItem.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="CombinableItem.cpp">
+      <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

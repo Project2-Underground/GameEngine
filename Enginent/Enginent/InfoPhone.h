@@ -3,8 +3,11 @@
 #include "InteractObj.h"
 
 class InfoPhone : public InteractableObj {
+	std::string file;
 public:
-	void action();
-	void chat();
-	void note();
+	void LoadNote();
+	void LoadChat();
+	void Action();
+	void Chat();
+	void Note();
 };

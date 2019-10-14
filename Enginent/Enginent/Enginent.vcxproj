@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CombinableItem.cpp" />
     <ClCompile Include="CombineObject.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -61,6 +62,7 @@
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SeparatableItem.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
