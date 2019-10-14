@@ -1,8 +1,18 @@
 #include "Animation.h"
+#include "Game.h"
 
-Animation::Animation(ImageObject* ref, std::string name) {
-	this->ref = ref;
+Animation::Animation(std::string name, std::string path) {
+	texture = path;
 	this->animationName = name;
+}
+
+std::string Animation::GetTexturePath() {
+	return texture;
+}
+
+
+std::string Animation::GetName() {
+	return animationName;
 }
 
 void Animation::SetFrame(int frame) {

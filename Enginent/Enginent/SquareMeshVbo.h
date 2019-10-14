@@ -12,5 +12,5 @@ public:
 	virtual void Render();
 	virtual void LoadData();
 	void setNewTexData(GLfloat n_texData[8]);
-	void resetTexData();
+	void ResetTexData();
 };

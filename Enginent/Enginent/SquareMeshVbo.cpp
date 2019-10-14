@@ -42,7 +42,7 @@ void SquareMeshVbo::setNewTexData(GLfloat n_texData[8]) {
 	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
 }
 
-void SquareMeshVbo::resetTexData() {
+void SquareMeshVbo::ResetTexData() {
 	GLfloat texData[] =
 	{
 	  0.0f, 0.0f,

@@ -2,6 +2,7 @@
 
 #include "DrawableObject.h"
 #include "Collider.h"
+#include "Animator.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 
@@ -13,6 +14,7 @@ protected:
 
 public:
 	Collider* col;
+	Animator* anim;
 
 	ImageObject();
 	~ImageObject();
