@@ -9,6 +9,13 @@
 
 Game* Game::instance = nullptr;
 
+enum objectType {
+	IMAGE_OBJ = 0,
+	INTERACT_OBJ,
+	PORTOL,
+	NPC
+};
+
 
 Game * Game::GetInstance()
 {
@@ -29,7 +36,6 @@ void Game::rightClick(int x, int y)
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
 	player->setTarget(realX, realY);
-
 }
 
 void Game::leftClick(int x, int y)
@@ -37,9 +43,14 @@ void Game::leftClick(int x, int y)
 	float realX, realY;
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
-	if (colliders[0]->isClicked(realX, realY)) {
-		cout << "collide\n";
+	for (int i = 0; i < colliders.size(); i++)
+	{
+		if (colliders[i]->isClicked(realX, realY)) {
+			cout << "collide\n";
+			printf("%d\n", i);
+		}
 	}
+
 }
 
 void Game::HandleKey(char ch)
@@ -47,7 +58,7 @@ void Game::HandleKey(char ch)
 	if (this->objects.size() > 0) {
 		DrawableObject *obj = this->objects.at(2);
 		switch (ch) {
-		case 'u': objects.push_back(player->setDialogue("Fly")); break;
+		case 'u': player->setDialogue("Fly"); break;
 		case 'd': break;
 		case 'l': break;
 		case 'r': break;
@@ -72,32 +83,35 @@ void Game::Init(int width, int height)
 	//triangle->LoadData();
 	//renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	ImageObject * _roomElias = new ImageObject();
-	_roomElias->SetTexture("Texture/EliasRoom/room1.png");
-	_roomElias->SetSize(width, -height);
-	objects.push_back(_roomElias);
+	//
+	//create object
+	//
+	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), "");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f,30.0f,1.0f), "Lock");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), "");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), "Guess it is time to do the laundry.");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), "");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), "");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), "");
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), "");
 
-	ImageObject * _door = new ImageObject();
-	_door->SetTexture("Texture/EliasRoom/door.png");
-	_door->SetSize(150, -300);
-	_door->SetPosition(glm::vec3(200.0f, 0.0f, 1.0f));
-	objects.push_back(_door);
 
-	//Collider *col2 = new Collider(_door);
-	//colliders.push_back(col2);
-	//player->SetCollder(col2);
-
+	//
+	//Create player
+	//
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");
-	player->SetSize(100.0f, -240.0f);
-	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
+	player->SetSize(150.0f, -340.0f);
+	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	objects.push_back(player);
 
-	objects.push_back(player->setDialogue("What?"));
+	objects.push_back(player->setDialogue(" "));
 
 	Collider *col = new Collider(player);
 	colliders.push_back(col);
 	player->SetCollder(col);
+
+
 }
 
 void Game::Update()
@@ -118,4 +132,49 @@ Game::Game()
 	renderer = nullptr;
 }
 
+void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::string dialogue)
+{
+	ImageObject *tmp = nullptr;
+	switch (type)
+	{
+		case IMAGE_OBJ:
+		{
+			tmp = new ImageObject();
+			break;
+		}
+		case INTERACT_OBJ:
+		{
+			if(dialogue != "")
+			{
+				tmp = new InteractableObj(dialogue);
+				Collider *col2 = new Collider(tmp);
+				colliders.push_back(col2);
+				((InteractableObj*)tmp)->SetCollder(col2);
+
+			}
+			else
+			{
+				tmp = new InteractableObj();
+				Collider *col2 = new Collider(tmp);
+				colliders.push_back(col2);
+				((InteractableObj*)tmp)->SetCollder(col2);
+			}
+			break;
+		}
+		case PORTOL:
+		{
+			break;
+		}
+		case NPC:
+		{
+			break;
+		}
+	}
+
+	tmp->SetTexture(texture);
+	tmp->SetSize(sizeX, sizeY);
+	tmp->SetPosition(pos);
+
+	objects.push_back(tmp);
+}
 

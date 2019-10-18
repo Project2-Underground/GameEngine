@@ -25,6 +25,7 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
+	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::string dialogue);
 
 
 };
