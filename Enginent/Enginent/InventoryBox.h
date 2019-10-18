@@ -8,8 +8,8 @@ class InventoryBox :public UIObject {
 public:
 	InventoryBox();
 	void SetItem(Item* item);
-	Item* GetItem();
 	void RemoveItem();
 	void Render();
+	Item* GetItem();
 	~InventoryBox();
 };
