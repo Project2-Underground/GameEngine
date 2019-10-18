@@ -1,18 +1,9 @@
 #include "Animation.h"
-#include "Game.h"
 
-Animation::Animation(std::string name, std::string path) {
-	texture = path;
+Animation::Animation(ImageObject* ref, std::string name, std::string TexturePath) {
+	this->ref = ref;
 	this->animationName = name;
-}
-
-std::string Animation::GetTexturePath() {
-	return texture;
-}
-
-
-std::string Animation::GetName() {
-	return animationName;
+	this->texturePath = TexturePath;
 }
 
 void Animation::SetFrame(int frame) {
@@ -21,9 +12,14 @@ void Animation::SetFrame(int frame) {
 	currentFrame = 0;
 }
 
+void Animation::SetTexture() {
+	ref->SetTexture(texturePath);
+}
+
 GLfloat* Animation::GetNextFrame() {
 	currentFrame %= frame;
 	float tmp = currentFrame * frameWidth;
+
 	GLfloat newTexData[] =
 	{
 	  0.0f + tmp, 0.0f,

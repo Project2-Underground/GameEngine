@@ -3,22 +3,21 @@
 #include <map>
 #include <string>
 #include <GL\glew.h>
+#include "ImageObject.h"
 
 class Animation {
 private:
-	std::string texture;
+	ImageObject* ref;
 	float frameWidth;
 	int frame;								// assume only changing the x value
 	int currentFrame;
 	std::string animationName;
+	std::string texturePath;
 public:
-	Animation(std::string name, std::string path);
-
-	void SetFrame(int frame);
-	void ResetAnimation();
-
-	GLfloat* GetNextFrame();				// calculates and return the new texData[] 
+	Animation(ImageObject* ref, std::string name, std::string TexturePath);
 	bool Finished();
-	std::string GetName();
-	std::string GetTexturePath();
+	void SetFrame(int frame);
+	void SetTexture();						// set animation texture to the ref object
+	GLfloat* GetNextFrame();				// calculates and return the new texData[] 
+	void ResetAnimation();
 };

@@ -3,17 +3,15 @@
 #include <map>
 
 #include "Animation.h"
-#include "DrawableObject.h"
 
 class Animator {
 private:
-	DrawableObject* ref;
 	std::map<std::string, Animation*> animations;
 	Animation* currentAnimation;
+	std::string defaultAnimation;
 	bool loop;
 public:
-	void AddAnimation(Animation* animation, DrawableObject* ref);
+	void SetDefaultAnimation(std::string animationName);		// usually idle animation
 	void Play(std::string animationName, bool loop);
 	void Update();
-	void ResetSquareMeshVbo();
 };

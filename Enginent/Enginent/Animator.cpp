@@ -1,30 +1,37 @@
 #include "Animator.h"
 #include "Game.h"
 #include "SquareMeshVbo.h"
-#include "ImageObject.h"
 
-void Animator::AddAnimation(Animation* animation, DrawableObject* ref) {
-	this->ref = ref;
-	animations[animation->GetName()] = animation;
-	currentAnimation = animation;
-}
+#include <iostream>
 
 void Animator::Play(std::string animationName, bool loop) {
-	this->loop = loop;
+	// check if animation is added in map
+	if(animations.find(animationName) == animations.end()){
+		std::cout << "Animation name is not found" << std::endl;
+		return;
+	}
+
+	currentAnimation->ResetAnimation();
 	currentAnimation = animations[animationName];
-	((ImageObject*)ref)->SetTexture(currentAnimation->GetTexturePath());
+	currentAnimation->SetTexture();
+	this->loop = loop;
+}
+
+void Animator::SetDefaultAnimation(std::string animationName) {
+	// check if animation is added in map
+	if (animations.find(animationName) == animations.end()) {
+		std::cout << "Animation name is not found" << std::endl;
+		return;
+	}
+	defaultAnimation = animationName;
 }
 
 void Animator::Update() {
 	if (loop || !currentAnimation->Finished()) {
-		SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
-		if(squareMesh != nullptr)
-			squareMesh->setNewTexData(currentAnimation->GetNextFrame());
+		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+		squareMesh->setNewTexData(currentAnimation->GetNextFrame());
+		if (currentAnimation->Finished() && !loop) {
+			Play(defaultAnimation, true);
+		}
 	}
-}
-
-void Animator::ResetSquareMeshVbo() {
-	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
-	if (squareMesh != nullptr)
-		squareMesh->ResetTexData();
 }
