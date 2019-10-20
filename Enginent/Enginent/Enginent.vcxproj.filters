@@ -105,6 +105,9 @@
     <ClInclude Include="TextObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -174,6 +177,9 @@
       <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>

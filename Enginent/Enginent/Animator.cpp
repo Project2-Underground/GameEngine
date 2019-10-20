@@ -27,7 +27,7 @@ void Animator::SetDefaultAnimation(std::string animationName) {
 }
 
 void Animator::Update() {
-	if (loop || !currentAnimation->Finished()) {
+	if ((loop || !currentAnimation->Finished()) && currentAnimation->ChangeFrame()) {
 		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 		squareMesh->setNewTexData(currentAnimation->GetNextFrame());
 		if (currentAnimation->Finished() && !loop) {
