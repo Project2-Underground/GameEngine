@@ -105,6 +105,9 @@
     <ClInclude Include="CombinableItem.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="xmlFileManager.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">

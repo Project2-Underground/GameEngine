@@ -45,6 +45,7 @@
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
+    <ClInclude Include="xmlFileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collider.cpp" />
@@ -166,7 +167,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;..\resource\irrKlang-64bit-1.6.0\include;..\resource\SDL2_ttf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;..\resource\irrKlang-64bit-1.6.0\include;..\resource\SDL2_ttf\include;..\resource\pugixml-1.10\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
