@@ -71,6 +71,7 @@
     <ClCompile Include="TriangleMeshVbo.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="xmlFileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd" />

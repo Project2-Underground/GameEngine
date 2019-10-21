@@ -179,6 +179,9 @@
     <ClCompile Include="CombinableItem.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
+    <ClCompile Include="xmlFileManager.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">
