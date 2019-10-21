@@ -108,6 +108,9 @@
     <ClInclude Include="xmlFileManager.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="xmlDialogue.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="xmlFileManager.cpp">
       <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlDialogue.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

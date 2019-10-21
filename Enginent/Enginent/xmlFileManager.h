@@ -1,18 +1,21 @@
+#pragma once
+
 #include <pugixml.hpp>
 #include <string>
 
 class xmlManager {
+protected:
 	pugi::xml_document doc;
 public:
 	bool LoadFile(std::string filename);
 	void SaveFile(std::string filename);
 
+	char* GetPcData(pugi::xml_node node, int childPos);
 	pugi::xml_node GetNode(pugi::xml_node node, std::string nodeName);
-	pugi::xml_node GetPcData(pugi::xml_node node, int ptr);
 	pugi::xml_attribute GetAttribute(pugi::xml_node node, std::string attr);
 
 	void ChangeAttributeValue(pugi::xml_attribute attr, std::string value);
-	void SetTextValue(pugi::xml_node node, int ptr, std::string newValue);
+	void ChangeTextValue(pugi::xml_node node, int childPos, std::string newValue);
 };
 
 /*loading doc
