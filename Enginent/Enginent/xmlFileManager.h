@@ -4,13 +4,15 @@
 class xmlManager {
 	pugi::xml_document doc;
 public:
-	void OpenForWrite(std::string filename);
-	void OpenForRead(std::string filename);
-	void AddNode(std::string nodeName);
-	void AddAttribute(std::string nodeName, std::string attrName, std::string value);
-	void ChangeAttribute(std::string nodeName, std::string attrName, std::string value);
-	void SaveFile();
-	void Close();
+	bool LoadFile(std::string filename);
+	void SaveFile(std::string filename);
+
+	pugi::xml_node GetNode(pugi::xml_node node, std::string nodeName);
+	pugi::xml_node GetPcData(pugi::xml_node node, int ptr);
+	pugi::xml_attribute GetAttribute(pugi::xml_node node, std::string attr);
+
+	void ChangeAttributeValue(pugi::xml_attribute attr, std::string value);
+	void SetTextValue(pugi::xml_node node, int ptr, std::string newValue);
 };
 
 /*loading doc
