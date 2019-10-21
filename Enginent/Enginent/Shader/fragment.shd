@@ -17,5 +17,10 @@ void main()
     else
     {
     	finalColor = texture(ourTexture, TexCoord);
+		
+		//if(finalColor.w >= 0.5)
+		//{
+		//	finalColor.w = 0.5;
+		//}
     }
 }
