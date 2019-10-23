@@ -111,6 +111,9 @@
     <ClInclude Include="xmlDialogue.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="xmlDialogue.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

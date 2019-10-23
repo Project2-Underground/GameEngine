@@ -35,6 +35,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
