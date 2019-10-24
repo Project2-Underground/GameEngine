@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- declaration of the file, needed in every xml file-->
+
+<!-- item type will be calculated within the code-->
+<room>
+	<background>
+		<item1 texture="texturePath.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
+		<item2/>
+		<item3/>
+	</background>
+	<interactable>
+		<item1 texture="texturePath.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
+		<item2/>
+		<item3/>
+	</interactable>
+</room>
