@@ -50,6 +50,9 @@
     <ClInclude Include="xmlFileManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CombinableItem.cpp" />
     <ClCompile Include="CombineObject.cpp" />

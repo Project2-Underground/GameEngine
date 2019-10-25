@@ -194,6 +194,9 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">

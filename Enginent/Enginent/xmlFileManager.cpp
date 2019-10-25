@@ -14,7 +14,7 @@ void xmlManager::SaveFile(std::string filename) {
 }
 
 pugi::xml_node xmlManager::GetNode(pugi::xml_node node, std::string nodeName) {
-	return node.find_node(nodeName);
+	return node.child(nodeName.c_str());
 }
 char* xmlManager::GetPcData(pugi::xml_node node, int childPos) {
 	int i = 0;
@@ -26,7 +26,7 @@ char* xmlManager::GetPcData(pugi::xml_node node, int childPos) {
 	return (char*)nextNode.text().get();
 }
 pugi::xml_attribute xmlManager::GetAttribute(pugi::xml_node node, std::string attr) {
-	return node.find_attribute(attr);
+	return node.attribute(attr.c_str());
 }
 
 void xmlManager::ChangeAttributeValue(pugi::xml_attribute attr, std::string value) {

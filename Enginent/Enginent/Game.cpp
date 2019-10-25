@@ -6,6 +6,7 @@
 #include "CombineObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
+#include "LevelGenerator.h"
 
 Game* Game::instance = nullptr;
 
@@ -86,7 +87,7 @@ void Game::Init(int width, int height)
 	//
 	//create object
 	//
-	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), "");
+	/*createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), "");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f,30.0f,1.0f), "Lock");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), "");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), "Guess it is time to do the laundry.");
@@ -94,7 +95,9 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), "");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), "");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), "");
-
+*/
+	RoomGenerator room;
+	room.GenerateRoom("example_xml_file_format\map.xml");
 
 	//
 	//Create player

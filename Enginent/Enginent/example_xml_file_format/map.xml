@@ -3,13 +3,13 @@
 
 <room>
 	<background type="0">
-		<item1 texture="texturePath.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
-		<item2/>
-		<item3/>
+		<item1 texture="Texture/EliasRoom/door.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
+		<!--<item2/>
+		<item3/>-->
 	</background>
 	<interactable type="1">
-		<item1 texture="texturePath.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
-		<item2/>
-		<item3/>
+		<item1 texture="Texture/EliasRoom/door.png" sizeX="50" sizeY="50" posX="200" posY="150" dialoguePath="dialogue1.xml"/>
+		<!--<item2/>
+		<item3/>-->
 	</interactable>
 </room>
