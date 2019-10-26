@@ -29,3 +29,10 @@ public:
 
 
 };
+
+enum objectType {
+	IMAGE_OBJ = 0,
+	INTERACT_OBJ,
+	PORTOL,
+	NPC
+};

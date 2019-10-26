@@ -10,12 +10,6 @@
 
 Game* Game::instance = nullptr;
 
-enum objectType {
-	IMAGE_OBJ = 0,
-	INTERACT_OBJ,
-	PORTOL,
-	NPC
-};
 
 
 Game * Game::GetInstance()
@@ -96,8 +90,9 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), "");
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), "");
 */
+	std::string filename("example_xml_file_format/map.xml");
 	RoomGenerator room;
-	room.GenerateRoom("example_xml_file_format\map.xml");
+	room.GenerateRoom(filename);
 
 	//
 	//Create player

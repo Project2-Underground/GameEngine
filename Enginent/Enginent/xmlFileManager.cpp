@@ -5,7 +5,7 @@ bool xmlManager::LoadFile(std::string filename) {
 	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default|pugi::parse_declaration);
 	if (!result)
 		return false;
-		//std::cout << "Error to load file" << std::endl;
+		/*std::cout << "Error to load file" << std::endl;*/
 	return true;
 }
 
@@ -13,7 +13,7 @@ void xmlManager::SaveFile(std::string filename) {
 	doc.save_file(filename.c_str());
 }
 
-pugi::xml_node xmlManager::GetNode(pugi::xml_node node, std::string nodeName) {
+pugi::xml_node xmlManager::GetChild(pugi::xml_node node, std::string nodeName) {
 	return node.child(nodeName.c_str());
 }
 char* xmlManager::GetPcData(pugi::xml_node node, int childPos) {

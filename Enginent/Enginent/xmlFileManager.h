@@ -11,7 +11,7 @@ public:
 	void SaveFile(std::string filename);
 
 	char* GetPcData(pugi::xml_node node, int childPos);
-	pugi::xml_node GetNode(pugi::xml_node node, std::string nodeName);
+	pugi::xml_node GetChild(pugi::xml_node node, std::string nodeName);
 	pugi::xml_attribute GetAttribute(pugi::xml_node node, std::string attr);
 
 	void ChangeAttributeValue(pugi::xml_attribute attr, std::string value);

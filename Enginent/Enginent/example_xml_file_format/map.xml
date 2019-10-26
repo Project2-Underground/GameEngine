@@ -3,13 +3,17 @@
 
 <room>
 	<background type="0">
-		<item1 texture="Texture/EliasRoom/door.png" sizeX="50" sizeY="50" posX="100" posY="150" dialoguePath="dialogue1.xml"/>
-		<!--<item2/>
-		<item3/>-->
+		<item texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0" dialoguePath=""/>
 	</background>
 	<interactable type="1">
-		<item1 texture="Texture/EliasRoom/door.png" sizeX="50" sizeY="50" posX="200" posY="150" dialoguePath="dialogue1.xml"/>
-		<!--<item2/>
-		<item3/>-->
+		<item texture="Texture/EliasRoom/door.png" sizeX="220" sizeY="350" posX="480" posY="30" dialoguePath=""/>
+		<item texture="Texture/EliasRoom/Bed.png" sizeX="450" sizeY="280" posX="-415" posY="-100" dialoguePath="Lock"/>
+		<item texture="Texture/EliasRoom/cloth.png" sizeX="300" sizeY="150" posX="-305" posY="-140" dialoguePath="Guess it is time to do the laundry."/>
+		<item texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="0" posY="-30" dialoguePath=""/>
+		<item texture="Texture/EliasRoom/Elias Room_Hoody.png" sizeX="150" sizeY="300" posX="250" posY="-5" dialoguePath=""/>
+		<item texture="Texture/EliasRoom//Elias Room_Poster1.png" sizeX="150" sizeY="200" posX="-430" posY="100" dialoguePath=""/>
+		<item texture="Texture/EliasRoom/Elias Room_Poster2.png" sizeX="150" sizeY="150" posX="-240" posY="100" dialoguePath=""/>
+		<!--<item/>
+		<item/>-->
 	</interactable>
 </room>
