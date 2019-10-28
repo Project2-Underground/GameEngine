@@ -1,8 +1,8 @@
 #include "Animation.h"
 #include "TimeSystem.h"
+#include <iostream>
 
-Animation::Animation(ImageObject* ref, std::string name, std::string TexturePath) {
-	this->ref = ref;
+Animation::Animation( std::string name, std::string TexturePath) {
 	this->animationName = name;
 	this->texturePath = TexturePath;
 }
@@ -14,9 +14,12 @@ void Animation::SetFrame(int frame) {
 }
 
 bool Animation::ChangeFrame() {
-	time += GetTimeBetweenFrame();
-	if ((time / 1000) >= period)
+	time += TimeSystem::instance()->GetTimeBetweenFrame();
+	std::cout << time << std::endl;
+	if ((time / 1000.0f) >= period) {
+		time = 0.0;
 		return true;
+	}
 	return false;
 }
 
@@ -24,25 +27,28 @@ void Animation::SetFramePeriod(double time) {
 	period = time;
 }
 
-void Animation::SetTexture() {
-	ref->SetTexture(texturePath);
+std::string Animation::GetTexture() {
+	return texturePath;
 }
 
-GLfloat* Animation::GetNextFrame() {
+GLfloat* Animation::GetCurrentFrame() {
 	currentFrame %= frame;
 	float tmp = currentFrame * frameWidth;
-
-	GLfloat newTexData[] =
-	{
-	  0.0f + tmp, 0.0f,
-	  frameWidth + tmp, 0.0f,
-	  frameWidth + tmp, 1.0f,
-	  0.0f + tmp, 1.0f
-	};
-
-	currentFrame++;
-
+	
+	GLfloat* newTexData = new GLfloat[8];
+	newTexData[0] = 0.0f + tmp;
+	newTexData[1] = 0.0f;
+	newTexData[2] = frameWidth + tmp;
+	newTexData[3] = 0.0f;
+	newTexData[4] = frameWidth + tmp;
+	newTexData[5] = 1.0f;
+	newTexData[6] = 0.0f + tmp;
+	newTexData[7] = 1.0f;
 	return newTexData;
+}
+
+void Animation::NextFrame() {
+	currentFrame++;
 }
 
 bool Animation::Finished() {
@@ -53,4 +59,5 @@ bool Animation::Finished() {
 
 void Animation::ResetAnimation() {
 	currentFrame = 0;
+	time = 0.0;
 }

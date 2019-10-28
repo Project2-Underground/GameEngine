@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ImageObject.h"
 
 class Player : public ImageObject

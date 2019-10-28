@@ -1,9 +1,24 @@
 #include "Player.h"
+#include "SquareMeshVbo.h"
 #include <iostream>
 
 Player::Player()
 {
 	target = glm::vec3(this->pos);
+	anim = new Animator();
+
+	Animation* move = new Animation("Move", "Texture/move_test.png");
+	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
+	move->SetFrame(6);
+	move->SetFramePeriod(0.06f); 
+
+	idle->SetFrame(8);
+	idle->SetFramePeriod(0.09f);
+
+	anim->AddAnimation(idle);
+	anim->AddAnimation(move);
+	anim->SetDefaultAnimation("Idle");
+
 }
 
 void Player::Move()

@@ -11,10 +11,9 @@ void Animator::Play(std::string animationName, bool loop) {
 		return;
 	}
 
-	currentAnimation->ResetAnimation();
 	currentAnimation = animations[animationName];
-	currentAnimation->SetTexture();
 	this->loop = loop;
+	currentAnimation->ResetAnimation();
 }
 
 void Animator::SetDefaultAnimation(std::string animationName) {
@@ -27,11 +26,20 @@ void Animator::SetDefaultAnimation(std::string animationName) {
 }
 
 void Animator::Update() {
-	if ((loop || !currentAnimation->Finished()) && currentAnimation->ChangeFrame()) {
-		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
-		squareMesh->setNewTexData(currentAnimation->GetNextFrame());
-		if (currentAnimation->Finished() && !loop) {
-			Play(defaultAnimation, true);
-		}
-	}
+	if (currentAnimation->ChangeFrame())
+		currentAnimation->NextFrame();
+	if (currentAnimation->Finished() && !loop) 
+		Play(defaultAnimation, true);
+}
+
+
+void Animator::AddAnimation(Animation* animation) {
+	animations[animation->animationName] = animation;
+}
+
+
+Animator::~Animator() {
+	std::map<std::string, Animation*>::iterator it;
+	for (it = animations.begin(); it != animations.end(); ++it)
+		delete it->second;
 }

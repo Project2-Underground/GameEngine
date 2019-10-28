@@ -98,6 +98,7 @@ void Game::Init(int width, int height)
 	colliders.push_back(col);
 	player->SetCollder(col);
 
+	player->anim->Play("Move", false);
 
 	//CombineObject * obj = new CombineObject();
 	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
@@ -115,6 +116,7 @@ void Game::Init(int width, int height)
 void Game::Update()
 {
 	player->Move();
+	player->anim->Update();
 }
 
 void Game::Render()

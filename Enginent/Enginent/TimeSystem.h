@@ -1,9 +1,13 @@
 #include <SDL.h>
 
-double prevTime = 0.0f;
-double currTime = 0.0f;
-
-void FrameInit();
-void FrameStart();
-double GetTimeBetweenFrame();
-void FrameEnd();
+class TimeSystem {
+	static TimeSystem* _instance;
+public:
+	static TimeSystem* instance();
+	double prevTime;
+	double currTime;
+	void FrameInit();
+	void FrameStart();
+	double GetTimeBetweenFrame();
+	void FrameEnd();
+};

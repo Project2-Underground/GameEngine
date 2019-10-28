@@ -6,12 +6,14 @@
 
 class Animator {
 private:
+	~Animator();
 	std::map<std::string, Animation*> animations;
-	Animation* currentAnimation;
 	std::string defaultAnimation;
 	bool loop;
 public:
+	Animation* currentAnimation;
 	void SetDefaultAnimation(std::string animationName);		// usually idle animation
 	void Play(std::string animationName, bool loop);
 	void Update();
+	void AddAnimation(Animation* animation);
 };
