@@ -15,7 +15,6 @@ void Animation::SetFrame(int frame) {
 
 bool Animation::ChangeFrame() {
 	time += TimeSystem::instance()->GetTimeBetweenFrame();
-	std::cout << time << std::endl;
 	if ((time / 1000.0f) >= period) {
 		time = 0.0;
 		return true;

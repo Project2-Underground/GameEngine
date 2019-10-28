@@ -7,17 +7,17 @@ Player::Player()
 	target = glm::vec3(this->pos);
 	anim = new Animator();
 
-	Animation* move = new Animation("Move", "Texture/move_test.png");
+	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
 	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
-	move->SetFrame(6);
-	move->SetFramePeriod(0.06f); 
+	move->SetFrame(8);
+	move->SetFramePeriod(0.1f); 
 
 	idle->SetFrame(8);
 	idle->SetFramePeriod(0.09f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
-	anim->SetDefaultAnimation("Idle");
+	anim->SetDefaultAnimation("Move");
 
 }
 
@@ -27,14 +27,14 @@ void Player::Move()
 	{
 		if (pos.x - target.x > 3)
 		{
-			this->Translate(glm::vec3(-3, 0, 0));
+			this->Translate(glm::vec3(-5, 0, 0));
 		}
 	}
 	else if (this->pos.x < target.x)
 	{
 		if (target.x - pos.x > 3)
 		{
-			this->Translate(glm::vec3(3, 0, 0));
+			this->Translate(glm::vec3(5, 0, 0));
 		}
 	}
 	col->Update();
