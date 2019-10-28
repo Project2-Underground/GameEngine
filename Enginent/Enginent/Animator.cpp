@@ -10,7 +10,6 @@ void Animator::Play(std::string animationName, bool loop) {
 		std::cout << "Animation name is not found" << std::endl;
 		return;
 	}
-
 	currentAnimation = animations[animationName];
 	this->loop = loop;
 	currentAnimation->ResetAnimation();

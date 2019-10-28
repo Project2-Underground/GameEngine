@@ -11,7 +11,7 @@ class ImageObject :public DrawableObject
 protected:
 	unsigned int texture;
 	string texturePath;
-
+	GLfloat texData[8];
 public:
 	Collider* col;
 	Animator* anim;

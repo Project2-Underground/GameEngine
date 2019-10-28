@@ -30,24 +30,25 @@ std::string Animation::GetTexture() {
 	return texturePath;
 }
 
-GLfloat* Animation::GetCurrentFrame() {
+void Animation::GetCurrentFrame(GLfloat* texData) {
 	currentFrame %= frame;
 	float tmp = currentFrame * frameWidth;
 	
-	GLfloat* newTexData = new GLfloat[8];
-	newTexData[0] = 0.0f + tmp;
-	newTexData[1] = 0.0f;
-	newTexData[2] = frameWidth + tmp;
-	newTexData[3] = 0.0f;
-	newTexData[4] = frameWidth + tmp;
-	newTexData[5] = 1.0f;
-	newTexData[6] = 0.0f + tmp;
-	newTexData[7] = 1.0f;
-	return newTexData;
+	texData[0] = 0.0f + tmp;
+	texData[1] = 0.0f;
+	texData[2] = frameWidth + tmp;
+	texData[3] = 0.0f;
+	texData[4] = frameWidth + tmp;
+	texData[5] = 1.0f;
+	texData[6] = 0.0f + tmp;
+	texData[7] = 1.0f;
+
+	changed = true;
 }
 
 void Animation::NextFrame() {
 	currentFrame++;
+	changed = false;
 }
 
 bool Animation::Finished() {

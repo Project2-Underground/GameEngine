@@ -13,13 +13,14 @@ private:
 	double period = 0.0;
 	std::string texturePath;
 public:
+	bool changed = false;
 	std::string animationName;
 	Animation(std::string name, std::string TexturePath);
 	bool Finished();
 	void SetFrame(int frame);
 	void SetFramePeriod(double time);
 	std::string GetTexture();						// set animation texture to the ref object
-	GLfloat* GetCurrentFrame();				// calculates and return the new texData[] 
+	void GetCurrentFrame(GLfloat* texData);			// calculates and return the new texData[] 
 	void NextFrame();
 	void ResetAnimation();
 	bool ChangeFrame();
