@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- declaration of the file is needed in every xml file-->
+
+<!-- some ideas for saving key actions-->
+<action>
+	<npc1 dialogue_pos="2" Item_given="no"/>
+	<book_puzzle solved="yes">
+		<book1 pos="0"/>
+		<book2 pos="5"/>
+		<book3 pos="6"/>
+		<book.../>
+	</book_puzzle>
+</action>
