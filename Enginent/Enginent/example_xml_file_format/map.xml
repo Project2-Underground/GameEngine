@@ -17,3 +17,6 @@
 		<item/>-->
 	</interactable>
 </room>
+
+
+<!-- change the name of the nodes to be unique so that we can get data from the right node -->
