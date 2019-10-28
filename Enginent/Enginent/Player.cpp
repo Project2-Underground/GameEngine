@@ -10,7 +10,7 @@ Player::Player()
 	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
 	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
 	move->SetFrame(8);
-	move->SetFramePeriod(0.1f); 
+	move->SetFramePeriod(0.08f); 
 
 	idle->SetFrame(8);
 	idle->SetFramePeriod(0.09f);

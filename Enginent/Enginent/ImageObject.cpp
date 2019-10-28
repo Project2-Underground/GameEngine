@@ -33,9 +33,11 @@ void ImageObject::SetTexture(string path)
 void ImageObject::Render(glm::mat4 globalModelTransform)
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
-	
+
+	GLfloat* texData = nullptr;
 	if (anim) {
-		squareMesh->setNewTexData(anim->currentAnimation->GetCurrentFrame());
+		texData = anim->currentAnimation->GetCurrentFrame();
+		squareMesh->setNewTexData(texData);
 		SetTexture(anim->currentAnimation->GetTexture());
 	}
 	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
@@ -63,5 +65,8 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 		squareMesh->Render();
 		squareMesh->ResetTexData();
 	}
+
+	if (texData)
+		delete texData;
 }
 
