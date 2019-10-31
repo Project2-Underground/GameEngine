@@ -31,13 +31,6 @@ public:
 	virtual void action(int x, int y) {
 		Game::GetInstance()->getPlayer()->setTarget(x, y);
 		
-		//while (Game::GetInstance()->getPlayer()->walk)
-		//{
-		//	Game::GetInstance()->getPlayer()->Move();
-		//	printf("move");
-		//}
-		//ANIMATION
-		//UPDATE TEXT
 		if (dialogue != nullptr)
 		{
 			Game::GetInstance()->getPlayer()->setDialogue((*dialogue)[currDialogue]);
@@ -47,6 +40,9 @@ public:
 				currDialogue = 0;
 			}
 		}
+		//ANIMATION
+		//UPDATE TEXT
+
 	};
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	IneractTypeList getType() { return interactType; };

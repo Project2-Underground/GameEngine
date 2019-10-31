@@ -29,5 +29,4 @@ public:
 	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue);
 	Player* getPlayer() { return player;}
 
-
 };

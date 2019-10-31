@@ -4,6 +4,7 @@
 #include "TriangleMeshVbo.h"
 #include "GameObject.h"
 #include "CombineObject.h"
+#include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
 
@@ -15,7 +16,6 @@ enum objectType {
 	PORTOL,
 	NPC
 };
-
 
 Game * Game::GetInstance()
 {
@@ -36,6 +36,7 @@ void Game::rightClick(int x, int y)
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
 	player->setTarget(realX, realY);
+
 }
 
 void Game::leftClick(int x, int y)
@@ -50,7 +51,6 @@ void Game::leftClick(int x, int y)
 			((InteractableObj*)objects[i])->checkCollider(realX, realY);
 		}
 	}
-
 }
 
 void Game::HandleKey(char ch)
@@ -83,17 +83,13 @@ void Game::Init(int width, int height)
 	//triangle->LoadData();
 	//renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	//
-	//create object
-	//
 	vector<std::string>* doorDialogue = new vector<std::string>;
 	doorDialogue->push_back("Lock.");
 	doorDialogue->push_back("Seem like it needs card to unlock.");
 	doorDialogue->push_back("I need to find a key card.");
 
-	
-	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f,30.0f,1.0f), doorDialogue);
+	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f, 0.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f, 30.0f, 1.0f), doorDialogue);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), nullptr);
@@ -102,27 +98,38 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
 
 
-	//
-	//Create player
-	//
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");
-	player->SetSize(150.0f, -340.0f);
-	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
+	player->SetSize(100.0f, -240.0f);
+	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
 	objects.push_back(player);
-
-	objects.push_back(player->setDialogue("Where am I?"));
 
 	Collider *col = new Collider(player);
 	colliders.push_back(col);
 	player->SetCollder(col);
 
+	player->anim->Play("Move", true);
+
+	objects.push_back(player->createDialogueText());
+
+	//CombineObject * obj = new CombineObject();
+	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
+	//obj->SetColor(1.0, 0.0, 0.0);
+	//obj->SetColor2(0.0, 1.0, 0.0);
+	//objects.push_back(obj);
+
+	//GameObject * obj2 = new GameObject();
+	//obj2->SetColor(0.0, 0.0, 1.0);
+	//obj2->Translate(glm::vec3(1.0, 1.0, 0));
+	//objects.push_back(obj2);
 
 }
 
 void Game::Update()
 {
-	player->Move();
+	player->Update();
+	//player->Move();
+	player->anim->Update();
 }
 
 void Game::Render()
@@ -138,41 +145,37 @@ Game::Game()
 	renderer = nullptr;
 }
 
-
-//
-//เหลือ portal + NPC
-//
 void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue)
 {
 	ImageObject *tmp = nullptr;
 	switch (type)
 	{
-		case IMAGE_OBJ:
+	case IMAGE_OBJ:
+	{
+		tmp = new ImageObject();
+		break;
+	}
+	case INTERACT_OBJ:
+	{
+		if (dialogue != nullptr)
 		{
-			tmp = new ImageObject();
-			break;
-		}
-		case INTERACT_OBJ:
-		{
-			if(dialogue != nullptr)
-			{
-				tmp = new InteractableObj(dialogue);
+			tmp = new InteractableObj(dialogue);
 
-			}
-			else
-			{
-				tmp = new InteractableObj();
-			}
-			break;
 		}
-		case PORTOL:
+		else
 		{
-			break;
+			tmp = new InteractableObj();
 		}
-		case NPC:
-		{
-			break;
-		}
+		break;
+	}
+	case PORTOL:
+	{
+		break;
+	}
+	case NPC:
+	{
+		break;
+	}
 	}
 
 	tmp->SetTexture(texture);

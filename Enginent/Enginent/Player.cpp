@@ -1,15 +1,43 @@
 #include "Player.h"
+#include "SquareMeshVbo.h"
 #include <iostream>
 
 Player::Player()
 {
 	target = glm::vec3(this->pos);
+	anim = new Animator();
+
+	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
+	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
+	move->SetFrame(8);
+	move->SetFramePeriod(0.08f);
+
+	idle->SetFrame(8);
+	idle->SetFramePeriod(0.09f);
+
+	anim->AddAnimation(idle);
+	anim->AddAnimation(move);
+	anim->SetDefaultAnimation("Move");
+
+
 	walk = false;
 	dialogueText = new TextObject();
 	dialogueColor.r = 255;
 	dialogueColor.b = 255;
 	dialogueColor.g = 255;
 	dialogueColor.a = 0;
+	dialogue = " ";
+
+}
+
+void Player::Update()
+{
+	Move();
+	if (!walk)
+	{
+		dialogueText->loadText(dialogue, dialogueColor, 18);
+		dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
+	}
 }
 
 void Player::Move()
@@ -70,9 +98,14 @@ void Player::SetCollder(Collider* n_col) {
 	col->setRefObject(this);
 }
 
-TextObject* Player::setDialogue(string dialogue)
+TextObject* Player::createDialogueText()
 {
 	dialogueText->loadText(dialogue, dialogueColor, 18);
 	dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 	return dialogueText;
+}
+
+void Player::setDialogue(string dialogue)
+{
+	this->dialogue = dialogue;
 }
