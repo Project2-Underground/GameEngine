@@ -17,6 +17,7 @@ class Game
 	Player * player;
 	Game();
 public:
+	~Game();
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();
 	void rightClick(int x, int y);
@@ -25,7 +26,8 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
-	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::string dialogue);
+	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue);
+	Player* getPlayer() { return player;}
 
 
 };

@@ -2,6 +2,7 @@
 
 #include "ImageObject.h"
 #include "Collider.h"
+#include "Game.h"
 
 enum IneractTypeList
 {
@@ -14,22 +15,46 @@ enum IneractTypeList
 
 class InteractableObj : public ImageObject {
 	IneractTypeList interactType = NORMAL;
-	std::string dialogue;
+	vector<std::string>* dialogue;
+	int currDialogue = 0;
 	Collider* col;
 public:
 	InteractableObj() {};
-	InteractableObj(std::string s) { dialogue = s; };
+	InteractableObj(vector<std::string>* s) {
+		dialogue = s;
+	};
 	void SetCollder(Collider* n_col) {
 		printf("Col create\n");
-		if (dialogue != "")
-		{
-			printf("%s\n", dialogue);
-		}
 		col = n_col;
 		col->setRefObject(this);
 	};
-	virtual void action() {};
+	virtual void action(int x, int y) {
+		Game::GetInstance()->getPlayer()->setTarget(x, y);
+		
+		//while (Game::GetInstance()->getPlayer()->walk)
+		//{
+		//	Game::GetInstance()->getPlayer()->Move();
+		//	printf("move");
+		//}
+		//ANIMATION
+		//UPDATE TEXT
+		if (dialogue != nullptr)
+		{
+			Game::GetInstance()->getPlayer()->setDialogue((*dialogue)[currDialogue]);
+			currDialogue++;
+			if (currDialogue >= dialogue->size())
+			{
+				currDialogue = 0;
+			}
+		}
+	};
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	IneractTypeList getType() { return interactType; };
+	void checkCollider(int x, int y){ 
+		if (this->col->isClicked(x, y))
+		{
+			action(x, y);
+		}
+	}
 };
 

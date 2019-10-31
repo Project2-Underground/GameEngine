@@ -4,6 +4,7 @@
 Player::Player()
 {
 	target = glm::vec3(this->pos);
+	walk = false;
 	dialogueText = new TextObject();
 	dialogueColor.r = 255;
 	dialogueColor.b = 255;
@@ -15,25 +16,52 @@ void Player::Move()
 {
 	if (this->pos.x > target.x)
 	{
-		if (pos.x - target.x > 3)
+		if (pos.x - target.x > WALK_SPEED)
 		{
-			this->Translate(glm::vec3(-3, 0, 0));
+			this->Translate(glm::vec3(-WALK_SPEED, 0, 0));
+		}
+		else
+		{
+			walk = false;
 		}
 	}
 	else if (this->pos.x < target.x)
 	{
-		if (target.x - pos.x > 3)
+		if (target.x - pos.x > WALK_SPEED)
 		{
-			this->Translate(glm::vec3(3, 0, 0));
+			this->Translate(glm::vec3(WALK_SPEED, 0, 0));
+		}
+		else
+		{
+			walk = false;
 		}
 	}
 	col->Update();
-	
 }
 
 void Player::setTarget(int x, int y)
 {
 	target = glm::vec3(x, y, 0);
+	walk = true;
+}
+
+void Player::Walk(int x, int y)
+{
+	if (this->pos.x > target.x)
+	{
+		if (pos.x - target.x > WALK_SPEED)
+		{
+			this->Translate(glm::vec3(-WALK_SPEED, 0, 0));
+		}
+	}
+	else if (this->pos.x < target.x)
+	{
+		if (target.x - pos.x > WALK_SPEED)
+		{
+			this->Translate(glm::vec3(WALK_SPEED, 0, 0));
+		}
+	}
+	col->Update();
 }
 
 

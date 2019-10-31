@@ -43,11 +43,11 @@ void Game::leftClick(int x, int y)
 	float realX, realY;
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
-	for (int i = 0; i < colliders.size(); i++)
+	for (int i = 0; i < objects.size(); i++)
 	{
-		if (colliders[i]->isClicked(realX, realY)) {
-			cout << "collide\n";
-			printf("%d\n", i);
+		if (dynamic_cast<InteractableObj*>(objects[i]))
+		{
+			((InteractableObj*)objects[i])->checkCollider(realX, realY);
 		}
 	}
 
@@ -58,10 +58,10 @@ void Game::HandleKey(char ch)
 	if (this->objects.size() > 0) {
 		DrawableObject *obj = this->objects.at(2);
 		switch (ch) {
-		case 'u': player->setDialogue("Fly"); break;
-		case 'd': break;
-		case 'l': break;
-		case 'r': break;
+		case 'u': player->setDialogue("Up"); break;
+		case 'd': player->setDialogue("Down"); break;
+		case 'l': player->setDialogue("Left"); break;
+		case 'r': player->setDialogue("Right"); break;
 		}
 	}
 }
@@ -86,14 +86,20 @@ void Game::Init(int width, int height)
 	//
 	//create object
 	//
-	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), "");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f,30.0f,1.0f), "Lock");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), "");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), "Guess it is time to do the laundry.");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), "");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), "");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), "");
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), "");
+	vector<std::string>* doorDialogue = new vector<std::string>;
+	doorDialogue->push_back("Lock.");
+	doorDialogue->push_back("Seem like it needs card to unlock.");
+	doorDialogue->push_back("I need to find a key card.");
+
+	
+	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f,0.0f,1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f,30.0f,1.0f), doorDialogue);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), nullptr);
+	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
 
 
 	//
@@ -105,7 +111,7 @@ void Game::Init(int width, int height)
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	objects.push_back(player);
 
-	objects.push_back(player->setDialogue(" "));
+	objects.push_back(player->setDialogue("Where am I?"));
 
 	Collider *col = new Collider(player);
 	colliders.push_back(col);
@@ -132,7 +138,11 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::string dialogue)
+
+//
+//เหลือ portal + NPC
+//
+void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue)
 {
 	ImageObject *tmp = nullptr;
 	switch (type)
@@ -144,20 +154,14 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 		}
 		case INTERACT_OBJ:
 		{
-			if(dialogue != "")
+			if(dialogue != nullptr)
 			{
 				tmp = new InteractableObj(dialogue);
-				Collider *col2 = new Collider(tmp);
-				colliders.push_back(col2);
-				((InteractableObj*)tmp)->SetCollder(col2);
 
 			}
 			else
 			{
 				tmp = new InteractableObj();
-				Collider *col2 = new Collider(tmp);
-				colliders.push_back(col2);
-				((InteractableObj*)tmp)->SetCollder(col2);
 			}
 			break;
 		}
@@ -174,7 +178,18 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 	tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, sizeY);
 	tmp->SetPosition(pos);
+	if (type != IMAGE_OBJ)
+	{
+		Collider *col2 = new Collider(tmp);
+		colliders.push_back(col2);
+		((InteractableObj*)tmp)->SetCollder(col2);
+	}
 
 	objects.push_back(tmp);
+}
+
+Game::~Game()
+{
+
 }
 
