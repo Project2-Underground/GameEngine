@@ -19,6 +19,7 @@ public:
 	ImageObject();
 	~ImageObject();
 	void SetTexture(string path);
+	void SetTexture(unsigned int texture);
 	unsigned int GetTexture();
 	virtual void Render(glm::mat4 globalModelTransform);
 	void SetCollder(Collider* n_col);

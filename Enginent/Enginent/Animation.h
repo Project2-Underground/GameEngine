@@ -11,7 +11,7 @@ private:
 	int currentFrame = 0;
 	double time = 0.0;
 	double period = 0.0;
-	std::string texturePath;
+	unsigned int texture;
 public:
 	bool changed = false;
 	std::string animationName;
@@ -19,7 +19,7 @@ public:
 	bool Finished();
 	void SetFrame(int frame);
 	void SetFramePeriod(double time);
-	std::string GetTexture();						// set animation texture to the ref object
+	unsigned int GetTexture();						// set animation texture to the ref object
 	void GetCurrentFrame(GLfloat* texData);			// calculates and return the new texData[] 
 	void NextFrame();
 	void ResetAnimation();

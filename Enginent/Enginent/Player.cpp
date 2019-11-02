@@ -21,6 +21,7 @@ Player::Player()
 
 
 	walk = false;
+	faceLeft = true;
 	dialogueText = new TextObject();
 	dialogueColor.r = 255;
 	dialogueColor.b = 255;
@@ -46,6 +47,11 @@ void Player::Move()
 	{
 		if (pos.x - target.x > WALK_SPEED)
 		{
+			if (!faceLeft)
+			{
+				this->SetScale(-1, 1);
+				faceLeft = true;
+			}
 			this->Translate(glm::vec3(-WALK_SPEED, 0, 0));
 		}
 		else
@@ -57,6 +63,11 @@ void Player::Move()
 	{
 		if (target.x - pos.x > WALK_SPEED)
 		{
+			if (faceLeft)
+			{
+				this->SetScale(-1, 1);
+				faceLeft = false;
+			}
 			this->Translate(glm::vec3(WALK_SPEED, 0, 0));
 		}
 		else
@@ -71,25 +82,6 @@ void Player::setTarget(int x, int y)
 {
 	target = glm::vec3(x, y, 0);
 	walk = true;
-}
-
-void Player::Walk(int x, int y)
-{
-	if (this->pos.x > target.x)
-	{
-		if (pos.x - target.x > WALK_SPEED)
-		{
-			this->Translate(glm::vec3(-WALK_SPEED, 0, 0));
-		}
-	}
-	else if (this->pos.x < target.x)
-	{
-		if (target.x - pos.x > WALK_SPEED)
-		{
-			this->Translate(glm::vec3(WALK_SPEED, 0, 0));
-		}
-	}
-	col->Update();
 }
 
 

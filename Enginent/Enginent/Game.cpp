@@ -128,7 +128,6 @@ void Game::Init(int width, int height)
 void Game::Update()
 {
 	player->Update();
-	//player->Move();
 	player->anim->Update();
 }
 

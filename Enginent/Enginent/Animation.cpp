@@ -1,10 +1,11 @@
 #include "Animation.h"
 #include "TimeSystem.h"
+#include "Game.h"
 #include <iostream>
 
 Animation::Animation( std::string name, std::string TexturePath) {
 	this->animationName = name;
-	this->texturePath = TexturePath;
+	this->texture = Game::GetInstance()->GetRenderer()->LoadTexture(TexturePath);;
 }
 
 void Animation::SetFrame(int frame) {
@@ -26,8 +27,8 @@ void Animation::SetFramePeriod(double time) {
 	period = time;
 }
 
-std::string Animation::GetTexture() {
-	return texturePath;
+unsigned int Animation::GetTexture() {
+	return texture;
 }
 
 void Animation::GetCurrentFrame(GLfloat* texData) {

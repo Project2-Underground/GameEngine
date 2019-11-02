@@ -38,6 +38,10 @@ void ImageObject::SetTexture(string path)
 	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
+void ImageObject::SetTexture(unsigned int texture) {
+	this->texture = texture;
+}
+
 void ImageObject::Render(glm::mat4 globalModelTransform)
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));

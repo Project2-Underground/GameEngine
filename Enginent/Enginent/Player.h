@@ -11,6 +11,7 @@ class Player : public ImageObject
 {
 public:
 	bool walk;
+	bool faceLeft;
 	Player();
 	void Update();
 	void Move();
@@ -18,7 +19,6 @@ public:
 	void setTarget(int x, int y);
 	Collider* col;
 	void SetCollder(Collider* n_col);
-	//TextObject* setDialogue(string dialogue);
 	TextObject* createDialogueText();
 	void setDialogue(string dialogue);
 private:
