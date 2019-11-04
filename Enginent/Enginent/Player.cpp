@@ -82,6 +82,7 @@ void Player::setTarget(int x, int y)
 {
 	target = glm::vec3(x, y, 0);
 	walk = true;
+	setDialogue(" ");
 }
 
 
