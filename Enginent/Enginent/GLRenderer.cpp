@@ -150,7 +150,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 
 void GLRenderer::Render(vector <UIObject*>& objList) {
 	// Clear color buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Update window with OpenGL rendering
 

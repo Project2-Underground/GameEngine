@@ -7,6 +7,7 @@
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
+#include "Cursor.h"
 
 Game* Game::instance = nullptr;
 
@@ -35,8 +36,7 @@ void Game::rightClick(int x, int y)
 	float realX, realY;
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
-	player->setTarget(realX, realY);
-
+	player->setTarget(findRealPos(x, y));
 }
 
 void Game::leftClick(int x, int y)
@@ -51,6 +51,7 @@ void Game::leftClick(int x, int y)
 			((InteractableObj*)objects[i])->checkCollider(realX, realY);
 		}
 	}
+	printf("left %f\n", realX);
 }
 
 void Game::HandleKey(char ch)
@@ -74,6 +75,9 @@ void Game::Init(int width, int height)
 	renderer->InitGL("Shader/vertext.shd", "Shader/fragment.shd");
 	renderer->SetOrthoProjection(-width * 0.5f, width * 0.5f, -height * 0.5f, height * 0.5f);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
+	//SDL_GL_SetSwapInterval(1);
+
+	SDL_ShowCursor(SDL_DISABLE);
 
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
@@ -97,6 +101,8 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
 
+	cursorGame = new CursorUI();
+	UI.push_back(cursorGame);
 
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");
@@ -129,11 +135,13 @@ void Game::Update()
 {
 	player->Update();
 	player->anim->Update();
+	cursorGame->updateCursor();
 }
 
 void Game::Render()
 {
 	this->GetRenderer()->Render(this->objects);
+	this->GetRenderer()->Render(this->UI);
 }
 
 Game::Game()
@@ -193,5 +201,14 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 Game::~Game()
 {
 
+}
+
+glm::vec3 Game::findRealPos(int x, int y)
+{
+	float realX, realY;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	printf("right %f\n", realX);
+	return glm::vec3(realX, realY, 1);
 }
 

@@ -15,8 +15,7 @@ public:
 	Player();
 	void Update();
 	void Move();
-	void Walk(int x, int y);
-	void setTarget(int x, int y);
+	void setTarget(glm::vec3);
 	Collider* col;
 	void SetCollder(Collider* n_col);
 	TextObject* createDialogueText();

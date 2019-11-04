@@ -78,9 +78,9 @@ void Player::Move()
 	col->Update();
 }
 
-void Player::setTarget(int x, int y)
+void Player::setTarget(glm::vec3 realPos)
 {
-	target = glm::vec3(x, y, 0);
+	target = realPos;
 	walk = true;
 }
 

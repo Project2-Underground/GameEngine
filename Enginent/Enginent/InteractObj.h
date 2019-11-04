@@ -29,7 +29,7 @@ public:
 		col->setRefObject(this);
 	};
 	virtual void action(int x, int y) {
-		Game::GetInstance()->getPlayer()->setTarget(x, y);
+		Game::GetInstance()->getPlayer()->setTarget(glm::vec3(x , y , 1));
 		
 		if (dialogue != nullptr)
 		{
