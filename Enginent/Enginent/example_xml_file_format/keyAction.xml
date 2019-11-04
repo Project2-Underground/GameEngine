@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- declaration of the file is needed in every xml file-->
+
+<!-- some ideas for saving key actions-->
+<action>
+	<room1>
+		<jacket pickup="yes"/>
+		<door lock="no"/>
+	</room1>
+	<room2>
+		<npc1 dialogue_pos="2" item_name="name" item_given="no"/>
+		<book_puzzle solved="yes">
+			<book1 pos="0"/>
+			<book2 pos="5"/>
+			<book3 pos="6"/>
+			<book.../>
+		</book_puzzle>
+	</room2>
+	<room3>
+		<npc1 dialogue_pos="2"/>
+		<otherPuzzle>
+		
+		</otherPuzzle>
+	</room3>
+	<player>
+		<inventory>
+		<!-- Eg. 5 item slots in the inventory -->
+			<itemName/>
+			<itemName/>
+			<itemName/>
+			<itemName/>
+			<itemName/>
+		</inventory>
+		<position x="50" y="-100"/>
+	</player>
+</action>
