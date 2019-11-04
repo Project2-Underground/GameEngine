@@ -29,6 +29,9 @@ Player::Player()
 	dialogueColor.a = 0;
 	dialogue = " ";
 
+	const int inventoryNum = 5;
+	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(0,0,1), glm::vec3(100,500,1), glm::vec3(500,100,1), glm::vec3(-500,100,1), glm::vec3(-600,-800,1) };
+	inventory = new Inventory(inventoryNum, inventoryBoxPos, 50);
 }
 
 void Player::Update()
