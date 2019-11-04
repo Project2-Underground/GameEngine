@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Item.h"
 #include "InventoryBox.h"
 
 class Inventory {

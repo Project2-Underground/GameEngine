@@ -24,6 +24,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CombinableItem.h" />
     <ClInclude Include="CombineObject.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SquareMeshVbo.h" />
+    <ClInclude Include="Stair.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TimeSystem.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
@@ -53,11 +55,13 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CombinableItem.cpp" />
     <ClCompile Include="CombineObject.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="InteractObj.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -69,6 +73,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="Stair.cpp" />
     <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="TimeSystem.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />

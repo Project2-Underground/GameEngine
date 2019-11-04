@@ -105,6 +105,15 @@
     <ClInclude Include="CombinableItem.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="Stair.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -174,6 +183,24 @@
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
     <ClCompile Include="CombinableItem.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractObj.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>

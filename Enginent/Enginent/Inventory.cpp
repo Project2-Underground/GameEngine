@@ -1,5 +1,4 @@
 #include "Inventory.h"
-#include "Game.h"
 
 Inventory::Inventory(int numOfInventory, glm::vec3 arrOfPos[], int boxSize) {
 	itemSize = numOfInventory;
