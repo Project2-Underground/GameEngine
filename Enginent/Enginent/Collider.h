@@ -9,6 +9,8 @@ class Collider {
 	glm::vec3 maxBound;
 	DrawableObject* refObjectPos;
 public:
+	bool enable;
+
 	Collider(DrawableObject* ref);
 	Collider();
 	~Collider();

@@ -12,6 +12,7 @@ protected:
 	unsigned int texture;
 	string texturePath;
 	GLfloat texData[8];
+	bool display;
 public:
 	Collider* col;
 	Animator* anim;
