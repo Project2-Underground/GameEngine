@@ -13,6 +13,7 @@ protected:
 	float test;
 
 public:
+
 	glm::mat4 getTransform();
 
 	DrawableObject();

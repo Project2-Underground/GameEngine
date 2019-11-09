@@ -3,28 +3,30 @@
 #include "SquareMeshVbo.h"
 
 void UIObject::Render() {
-	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+	if (display) {
+		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
-	GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
-	GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
+		GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
+		GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
 
-	if (modelMatixId == -1) {
-		cout << "Error: Can't perform transformation " << endl;
-		return;
-	}
-	if (modeId == -1) {
-		cout << "Error: Can't set mode in ImageObject " << endl;
-		return;
-	}
+		if (modelMatixId == -1) {
+			cout << "Error: Can't perform transformation " << endl;
+			return;
+		}
+		if (modeId == -1) {
+			cout << "Error: Can't set mode in ImageObject " << endl;
+			return;
+		}
 
-	vector <glm::mat4> matrixStack;
+		vector <glm::mat4> matrixStack;
 
-	glm::mat4 currentMatrix = this->getTransform();
+		glm::mat4 currentMatrix = this->getTransform();
 
-	if (squareMesh != nullptr) {
-		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-		glUniform1i(modeId, 1);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		squareMesh->Render();
+		if (squareMesh != nullptr) {
+			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
+			glUniform1i(modeId, 1);
+			glBindTexture(GL_TEXTURE_2D, texture);
+			squareMesh->Render();
+		}
 	}
 }
