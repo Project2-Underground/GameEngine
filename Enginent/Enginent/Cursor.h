@@ -4,16 +4,16 @@
 
 class CursorUI : public UIObject {
 	private:
-		ImageObject* normalCS;
-		//ImageObject* chatCS;
-		//ImageObject pickCS;
-		//ImageObject moveCS;
-		//ImageObject viewCS;
-		//ImageObject saveCS;
+		ImageObject* CS_Normal;
+		ImageObject* CS_Chat;
+		ImageObject* CS_Pick;
+		ImageObject* CS_Door;
+		ImageObject* CS_View;
+		ImageObject* CS_Save;
 
 	public:
 		CursorUI();
 		~CursorUI();
 		void updateCursor();
-		void setCursor();
+		void setCursor(int type);
 };

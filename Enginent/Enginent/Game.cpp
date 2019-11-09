@@ -51,7 +51,6 @@ void Game::leftClick(int x, int y)
 			((InteractableObj*)objects[i])->checkCollider(realX, realY);
 		}
 	}
-	printf("left %f\n", realX);
 }
 
 void Game::HandleKey(char ch)
@@ -208,7 +207,6 @@ glm::vec3 Game::findRealPos(int x, int y)
 	float realX, realY;
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
-	printf("right %f\n", realX);
 	return glm::vec3(realX, realY, 1);
 }
 
