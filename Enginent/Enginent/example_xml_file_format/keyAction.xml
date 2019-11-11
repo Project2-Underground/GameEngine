@@ -2,6 +2,12 @@
 <!-- declaration of the file is needed in every xml file-->
 
 <!-- some ideas for saving key actions-->
+
+<!-- 
+	only save the states of the objects
+	the behaviours are coded inside the engine
+-->
+
 <action>
 	<room1>
 		<jacket pickup="yes"/>
