@@ -10,13 +10,13 @@ using namespace std;
 class Game
 {
 	static Game* instance;
-	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
 	vector<Collider*> colliders;
 	GLRenderer *renderer;
 	Player * player;
 	Game();
 public:
+	int winWidth, winHeight;
 	~Game();
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();

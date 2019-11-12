@@ -7,8 +7,7 @@ Collider::Collider(DrawableObject* ref) {
 	this->pos = ref->getPos();
 	this->pos.z = 1;
 	this->size = ref->getSize();
-	this->maxBound = glm::vec3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f * -1, pos.z);
-	this->minBound = glm::vec3(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f * -1, pos.z);
+	CalNewBound();
 }
 
 Collider::Collider() {
@@ -16,8 +15,7 @@ Collider::Collider() {
 	this->refObjectPos = nullptr;
 	this->pos = glm::vec3(0.0f, 0.0f, 1.0f);
 	this->size = glm::vec3(10.0f, 10.0f, 1.0f);
-	this->maxBound = glm::vec3(size.x*0.5f, size.y*0.5f, 1.0f);
-	this->minBound = glm::vec3(-size.x*0.5f, -size.y*0.5f, 1.0f);
+	CalNewBound();
 }
 
 Collider::~Collider() {
@@ -64,18 +62,27 @@ void Collider::setNewPos(float x, float y) {
 void Collider::setNewSize(glm::vec3 newSize) {
 	this->size = newSize;
 	this->size.z = 1;
+	CalNewBound();
 }
 
 void Collider::setNewSize(float x, float y) {
 	this->size = glm::vec3(x, y, 1);
+	CalNewBound();
 }
 
 void Collider::setNewWidth(float newW) {
 	this->size.x = newW;
+	CalNewBound();
 }
 
 void Collider::setNewHeight(float newH) {
 	this->size.y = newH;
+	CalNewBound();
+}
+
+void Collider::CalNewBound() {
+	this->maxBound = glm::vec3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f * -1, pos.z);
+	this->minBound = glm::vec3(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f * -1, pos.z);
 }
 
 bool Collider::isCollide(Collider* other) {

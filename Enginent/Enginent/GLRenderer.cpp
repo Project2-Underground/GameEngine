@@ -4,6 +4,7 @@
 #include "gtc/type_ptr.hpp"
 #include <vector>
 #include "DrawableObject.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -137,7 +138,9 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 		glUniformMatrix4fv(pMatrixId, 1, GL_FALSE, glm::value_ptr(this->projectionMatrix));
 	}
 
-	glm::mat4 camera = glm::mat4(1.0);
+	glm::mat4 camera = Camera::GetInstance()->GetViewMatrix();
+
+	//glm::mat4 camera = glm::mat4(1.0);
 	//camera = glm::translate(camera, glm::vec3(1, 0, 0));
 
 	for (DrawableObject *obj : objList) {

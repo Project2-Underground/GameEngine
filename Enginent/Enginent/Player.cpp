@@ -105,3 +105,12 @@ void Player::setDialogue(string dialogue)
 {
 	this->dialogue = dialogue;
 }
+
+Player::~Player() {
+	if (col != nullptr)
+		delete col;
+	if (inventory != nullptr)
+		delete inventory;
+	if (dialogueText != nullptr)
+		delete dialogueText;
+}

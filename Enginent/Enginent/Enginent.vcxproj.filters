@@ -114,6 +114,9 @@
     <ClInclude Include="Stair.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="InfoPhone.cpp">
       <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

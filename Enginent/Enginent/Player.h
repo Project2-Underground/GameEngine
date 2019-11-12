@@ -14,14 +14,16 @@ public:
 	bool walk;
 	bool faceLeft;
 	Player();
+	~Player();
 	void Update();
 	void Move();
 	void Walk(int x, int y);
 	void setTarget(int x, int y);
-	Collider* col;
 	void SetCollder(Collider* n_col);
-	TextObject* createDialogueText();
 	void setDialogue(string dialogue);
+
+	Collider* col;
+	TextObject* createDialogueText();
 	Inventory* inventory;
 private:
 	glm::vec3 target;

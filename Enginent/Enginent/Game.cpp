@@ -7,6 +7,7 @@
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
+#include "Camera.h"
 
 Game* Game::instance = nullptr;
 
@@ -109,6 +110,13 @@ void Game::Init(int width, int height)
 	player->SetCollder(col);
 
 	player->anim->Play("Move", true);
+
+	Camera::GetInstance()->SetTarget(player);
+
+	Collider* limit = new Collider();
+	limit->setNewSize(winWidth, winHeight);
+
+	Camera::GetInstance()->SetLimit(limit);
 
 	objects.push_back(player->createDialogueText());
 
