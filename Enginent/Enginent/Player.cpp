@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "SquareMeshVbo.h"
+#include "Game.h"
 #include <iostream>
 
 Player::Player()
@@ -30,8 +31,16 @@ Player::Player()
 	dialogue = " ";
 
 	const int inventoryNum = 5;
-	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(0,0,1), glm::vec3(100,500,1), glm::vec3(500,100,1), glm::vec3(-500,100,1), glm::vec3(-600,-800,1) };
-	inventory = new Inventory(inventoryNum, inventoryBoxPos, 50);
+	float start_x = -550;
+	float start_y = -300;
+	float space = 20;
+	int size = 100;
+	
+	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
+	inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
+	
+	for (int i = 0; i < inventoryNum; i++)
+		Game::GetInstance()->AddObject(inventory->GetInventoryBox(i));
 }
 
 void Player::Update()
@@ -104,4 +113,13 @@ TextObject* Player::createDialogueText()
 void Player::setDialogue(string dialogue)
 {
 	this->dialogue = dialogue;
+}
+
+Player::~Player() {
+	if (col)
+		delete col;
+	if (inventory)
+		delete inventory;
+	if (dialogueText)
+		delete dialogueText;
 }

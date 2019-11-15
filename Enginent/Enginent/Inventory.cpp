@@ -11,6 +11,10 @@ Inventory::Inventory(int numOfInventory, glm::vec3 arrOfPos[], int boxSize) {
 	}
 }
 
+InventoryBox* Inventory::GetInventoryBox(int index) {
+	return InventoryBoxes[index];
+}
+
 void Inventory::addItem(Item* item) {
 	for (InventoryBox *ib : InventoryBoxes) {
 		if (ib->GetItem() == nullptr) {

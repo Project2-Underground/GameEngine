@@ -15,9 +15,7 @@ Item* InventoryBox::GetItem() {
 }
 
 void InventoryBox::RemoveItem() {
-	Item *tmp = item;
 	item = nullptr;
-	delete tmp;
 }
 
 void InventoryBox::Render() {

@@ -27,6 +27,7 @@ public:
 	void Update();
 	void Render();
 	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue);
+	void AddObject(DrawableObject* obj);
 	Player* getPlayer() { return player;}
 
 };
