@@ -5,8 +5,6 @@
 #include "DrawableObject.h"
 #include "GLRenderer.h"
 #include "Collider.h"
-#include "Cursor.h"
-#include "ImageObject.h"
 
 using namespace std;
 class Game
@@ -14,10 +12,8 @@ class Game
 	static Game* instance;
 	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
-	vector<UIObject*> UI;
 	vector<Collider*> colliders;
-	GLRenderer* renderer;
-	CursorUI* cursorGame;
+	GLRenderer *renderer;
 	Player * player;
 	Game();
 public:
@@ -30,8 +26,8 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
-	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList, vector<std::string>* dialogue);
+	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, vector<std::string>* dialogue);
+	void AddObject(DrawableObject* obj);
 	Player* getPlayer() { return player;}
-	glm::vec3 findRealPos(int x, int y);
-	int checkPointObject(glm::vec3);
+
 };

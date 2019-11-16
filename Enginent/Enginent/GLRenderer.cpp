@@ -4,6 +4,7 @@
 #include "gtc/type_ptr.hpp"
 #include <vector>
 #include "DrawableObject.h"
+#include "InventoryBox.h"
 
 using namespace std;
 
@@ -141,7 +142,12 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 	//camera = glm::translate(camera, glm::vec3(1, 0, 0));
 
 	for (DrawableObject *obj : objList) {
-		obj->Render(camera);
+		if (InventoryBox * ib = dynamic_cast<InventoryBox*>(obj)) {
+			ib->Render();
+		}
+		else {
+			obj->Render(camera);
+		}
 	}
 
 	//Unbind program

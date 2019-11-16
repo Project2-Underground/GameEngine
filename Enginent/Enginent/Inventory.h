@@ -11,4 +11,5 @@ public:
 	void removeItem(Item *item);
 	//void displayItem();
 	~Inventory();
+	InventoryBox* GetInventoryBox(int index);
 };

@@ -136,6 +136,17 @@ void Game::Init(int width, int height)
 
 	objects.push_back(player->createDialogueText());
 
+
+
+	Item* item1 = new Item("temp");
+	item1->SetTexture("Texture/EliasRoom/cloth.png");
+
+	player->inventory->addItem(item1);
+	player->inventory->addItem(item1);
+	player->inventory->addItem(item1);
+	player->inventory->addItem(item1);
+	player->inventory->addItem(item1);
+
 	//CombineObject * obj = new CombineObject();
 	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
 	//obj->SetColor(1.0, 0.0, 0.0);
@@ -214,6 +225,10 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 	}
 
 	objects.push_back(tmp);
+}
+
+void Game::AddObject(DrawableObject* obj) {
+	objects.push_back(obj);
 }
 
 Game::~Game()
