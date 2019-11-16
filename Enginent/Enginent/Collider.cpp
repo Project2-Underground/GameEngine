@@ -2,6 +2,7 @@
 #include <iostream>
 
 Collider::Collider(DrawableObject* ref) {
+	this->enable = true;
 	this->refObjectPos = ref;
 	this->pos = ref->getPos();
 	this->pos.z = 1;
@@ -11,6 +12,7 @@ Collider::Collider(DrawableObject* ref) {
 }
 
 Collider::Collider() {
+	this->enable = true;
 	this->refObjectPos = nullptr;
 	this->pos = glm::vec3(0.0f, 0.0f, 1.0f);
 	this->size = glm::vec3(10.0f, 10.0f, 1.0f);
@@ -77,29 +79,33 @@ void Collider::setNewHeight(float newH) {
 }
 
 bool Collider::isCollide(Collider* other) {
-	if (this->maxBound.y <= other->getMaxBound().y && this->maxBound.y >= other->getMinBound().y &&
-		this->pos.x <= other->getMaxBound().x && this->pos.x >= other->getMinBound().x) {
-		return true;
-	}// top
-	else if (this->minBound.y <= other->getMaxBound().y && this->minBound.y >= other->getMinBound().y &&
-		this->pos.x <= other->getMaxBound().x && this->pos.x >= other->getMinBound().x) {
-		return true;
-	}// bottom
-	else if (this->minBound.x <= other->getMaxBound().x && this->minBound.x >= other->getMinBound().x &&
-		this->pos.y <= other->getMaxBound().y && this->pos.y >= other->getMinBound().y) {
-		return true;
-	}// left
-	else if (this->maxBound.x <= other->getMaxBound().x && this->maxBound.x >= other->getMinBound().x &&
-		this->pos.y <= other->getMaxBound().y && this->pos.y >= other->getMinBound().y) {
-		return true;
-	} // right
+	if (enable) {
+		if (this->maxBound.y <= other->getMaxBound().y && this->maxBound.y >= other->getMinBound().y &&
+			this->pos.x <= other->getMaxBound().x && this->pos.x >= other->getMinBound().x) {
+			return true;
+		}// top
+		else if (this->minBound.y <= other->getMaxBound().y && this->minBound.y >= other->getMinBound().y &&
+			this->pos.x <= other->getMaxBound().x && this->pos.x >= other->getMinBound().x) {
+			return true;
+		}// bottom
+		else if (this->minBound.x <= other->getMaxBound().x && this->minBound.x >= other->getMinBound().x &&
+			this->pos.y <= other->getMaxBound().y && this->pos.y >= other->getMinBound().y) {
+			return true;
+		}// left
+		else if (this->maxBound.x <= other->getMaxBound().x && this->maxBound.x >= other->getMinBound().x &&
+			this->pos.y <= other->getMaxBound().y && this->pos.y >= other->getMinBound().y) {
+			return true;
+		} // right
+	}
 	return false;
 }
 
 bool Collider::isClicked(int x, int y) {
-	if (x >= this->minBound.x && x <= this->maxBound.x &&
-		y >= this->minBound.y && y <= this->maxBound.y) {
-		return true;
+	if (enable) {
+		if (x >= this->minBound.x && x <= this->maxBound.x &&
+			y >= this->minBound.y && y <= this->maxBound.y) {
+			return true;
+		}
 	}
 	return false;
 }

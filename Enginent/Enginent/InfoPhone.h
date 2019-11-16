@@ -1,13 +1,14 @@
 #pragma once
 
-#include "InteractObj.h"
+#include "UIObject.h"
 
-class InfoPhone : public InteractableObj {
-	std::string file;
+class InfoPhone : public UIObject {
+	UIObject* noteIcon;
+	UIObject* chatIcon;
+	UIObject* exitButton;
 public:
-	void LoadNote();
-	void LoadChat();
-	void Action();
+	InfoPhone();
+	void Open();			// bring up the Phone onto the screen
 	void Chat();
 	void Note();
 };
