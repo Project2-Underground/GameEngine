@@ -8,12 +8,12 @@ Player::Player()
 	anim = new Animator();
 
 	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
-	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
+	Animation* idle = new Animation("Idle", "Texture/Character/Elias.png");
 	move->SetFrame(8);
 	move->SetFramePeriod(0.08f);
 
-	idle->SetFrame(8);
-	idle->SetFramePeriod(0.09f);
+	idle->SetFrame(1);
+	idle->SetFramePeriod(0.0f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
@@ -39,6 +39,7 @@ void Player::Update()
 	Move();
 	if (!walk)
 	{
+		anim->Play("Idle", true);
 		dialogueText->loadText(dialogue, dialogueColor, 18);
 		dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 	}
@@ -86,8 +87,19 @@ void Player::setTarget(glm::vec3 realPos)
 	target = realPos;
 	walk = true;
 	setDialogue(" ");
+	if(!(anim->currentAnimation->animationName == "Move"))
+		anim->Play("Move", true);
 }
 
+void Player::setTarget(float x, float y)
+{
+	target = glm::vec3(x, y , 1);
+	walk = true;
+	setDialogue(" ");
+	if (!(anim->currentAnimation->animationName == "Move"))
+		anim->Play("Move", true);
+
+}
 
 void Player::SetCollder(Collider* n_col) {
 	col = n_col;

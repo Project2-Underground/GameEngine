@@ -17,6 +17,7 @@ public:
 	void Update();
 	void Move();
 	void setTarget(glm::vec3);
+	void setTarget(float x, float y);
 	Collider* col;
 	void SetCollder(Collider* n_col);
 	TextObject* createDialogueText();

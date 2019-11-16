@@ -5,11 +5,12 @@
 
 enum IneractTypeList
 {
-	NORMAL = 0,
+	NORMAL = 1,
 	VIEW,
 	PICKUP,
 	TALK,
-	MOVESCENE
+	MOVESCENE,
+	SAVE
 };
 
 class InteractableObj : public ImageObject {
@@ -19,13 +20,15 @@ class InteractableObj : public ImageObject {
 	Collider* col;
 public:
 	InteractableObj() {};
-	InteractableObj(vector<std::string>* s);
+	InteractableObj(IneractTypeList type);
+	InteractableObj(IneractTypeList type, vector<std::string>* s);
 
 	virtual void action(int x, int y);
 
 	void SetCollder(Collider* n_col);
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	void checkCollider(int x, int y);
+	bool checkPointing(int x, int y);
 
 	IneractTypeList getType() { return interactType; };
 };

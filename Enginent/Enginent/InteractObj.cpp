@@ -1,8 +1,13 @@
 #include "InteractObj.h"
 #include "Game.h"
 
-InteractableObj::InteractableObj(vector<std::string>* s) {
+InteractableObj::InteractableObj(IneractTypeList type, vector<std::string>* s) {
 	dialogue = s;
+	interactType = type;
+}
+
+InteractableObj::InteractableObj(IneractTypeList type) {
+	interactType = type;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -33,4 +38,13 @@ void InteractableObj::checkCollider(int x, int y) {
 	{
 		action(x, y);
 	}
+}
+
+bool InteractableObj::checkPointing(int x, int y)
+{
+	if (this->col->isClicked(x, y))
+	{
+		return true;
+	}
+	return false;
 }
