@@ -14,6 +14,7 @@ public:
 	bool walk;
 	bool faceLeft;
 	Player();
+	~Player();
 	void Update();
 	void Move();
 	void setTarget(glm::vec3);

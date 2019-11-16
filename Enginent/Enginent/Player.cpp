@@ -8,10 +8,10 @@ Player::Player()
 	target = glm::vec3(this->pos);
 	anim = new Animator();
 
-	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
+	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
 	Animation* idle = new Animation("Idle", "Texture/Character/Elias.png");
-	move->SetFrame(8);
-	move->SetFramePeriod(0.08f);
+	move->SetFrame(4);
+	move->SetFramePeriod(0.1f);
 
 	idle->SetFrame(1);
 	idle->SetFramePeriod(0.0f);
@@ -40,7 +40,7 @@ Player::Player()
 	inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
 	
 	for (int i = 0; i < inventoryNum; i++)
-		Game::GetInstance()->AddObject(inventory->GetInventoryBox(i));
+		Game::GetInstance()->AddUI(inventory->GetInventoryBox(i));
 }
 
 void Player::Update()

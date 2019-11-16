@@ -231,6 +231,10 @@ void Game::AddObject(DrawableObject* obj) {
 	objects.push_back(obj);
 }
 
+void Game::AddUI(UIObject* obj) {
+	UI.push_back(obj);
+}
+
 Game::~Game()
 {
 

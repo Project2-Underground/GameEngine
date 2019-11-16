@@ -142,12 +142,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 	//camera = glm::translate(camera, glm::vec3(1, 0, 0));
 
 	for (DrawableObject *obj : objList) {
-		if (InventoryBox * ib = dynamic_cast<InventoryBox*>(obj)) {
-			ib->Render();
-		}
-		else {
 			obj->Render(camera);
-		}
 	}
 
 	//Unbind program
@@ -171,7 +166,12 @@ void GLRenderer::Render(vector <UIObject*>& objList) {
 	//camera = glm::translate(camera, glm::vec3(1, 0, 0));
 
 	for (UIObject* obj : objList) {
-		obj->Render();
+		if (InventoryBox * ib = dynamic_cast<InventoryBox*>(obj)) {
+			ib->Render();
+		}
+		else {
+			obj->Render();
+		}
 	}
 
 	//Unbind program

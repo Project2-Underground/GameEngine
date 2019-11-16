@@ -39,6 +39,7 @@ void CursorUI::updateCursor()
 	this->SetPosition(realPos);
 	setCursor(Game::GetInstance()->checkPointObject(realPos));
 }
+
 void CursorUI::setCursor(int type)
 {
 	switch (type)
