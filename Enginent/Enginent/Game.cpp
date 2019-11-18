@@ -8,6 +8,7 @@
 #include "TextObject.h"
 #include "InteractObj.h"
 #include "Camera.h"
+#include "Door.h"
 
 Game* Game::instance = nullptr;
 
@@ -90,7 +91,7 @@ void Game::Init(int width, int height)
 	doorDialogue->push_back("I need to find a key card.");
 
 	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f, 0.0f, 1.0f), nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f, 30.0f, 1.0f), doorDialogue);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f, 30.0f, 1.0f), doorDialogue);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), nullptr);
@@ -98,6 +99,17 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
 
+
+	Collider* door_next_limit = new Collider();
+	door_next_limit->setNewSize(winWidth+50, winHeight);
+
+	Door* door = new Door(0, 0, 0,0);
+	door->SetTexture("Texture/EliasRoom/door.png");
+	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
+	door->SetSize(220, -350);
+	door->SetDialogue(doorDialogue);
+	door->SetCollder(new Collider(door));
+	objects.push_back(door);
 
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");

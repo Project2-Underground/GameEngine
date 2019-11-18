@@ -18,6 +18,7 @@ public:
 
 	void SetTarget(DrawableObject*);
 	void SetLimit(Collider*);
+	void SetPosition(glm::vec3);
 
 	Camera();
 	~Camera();

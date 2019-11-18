@@ -11,6 +11,10 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	col->setRefObject(this);
 }
 
+void InteractableObj::SetDialogue(vector<std::string>* s) {
+	dialogue = s;
+}
+
 void InteractableObj::action(int x, int y) {
 	Game::GetInstance()->getPlayer()->setTarget(x, y);
 
@@ -33,4 +37,11 @@ void InteractableObj::checkCollider(int x, int y) {
 	{
 		action(x, y);
 	}
+}
+
+InteractableObj::~InteractableObj() {
+	if (col)
+		delete col;
+	if (dialogue)
+		delete dialogue;
 }

@@ -32,6 +32,10 @@ Camera::~Camera() {
 	delete _instance;
 }
 
+void Camera::SetPosition(glm::vec3 pos) {
+	currrent_cam_pos = pos;
+}
+
 glm::mat4 Camera::GetViewMatrix() {
 	if (target != nullptr) {
 		glm::vec3 next_pos = glm::vec3(-target->getPos().x, target->getPos().y + offset_y, 1.0);
