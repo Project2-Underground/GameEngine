@@ -10,7 +10,8 @@ enum IneractTypeList
 	PICKUP,
 	TALK,
 	MOVESCENE,
-	SAVE
+	SAVE,
+	BUTTON
 };
 
 class InteractableObj : public ImageObject {

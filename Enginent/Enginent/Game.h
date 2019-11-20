@@ -6,6 +6,7 @@
 #include "GLRenderer.h"
 #include "Collider.h"
 #include "Cursor.h"
+#include "SoundManager.h"
 
 using namespace std;
 class Game
@@ -18,6 +19,7 @@ class Game
 	GLRenderer *renderer;
 	Player * player;
 	CursorUI* cursorGame;
+	SoundManager _soundManager;
 	Game();
 public:
 	~Game();
@@ -35,5 +37,4 @@ public:
 	Player* getPlayer() { return player;}
 	glm::vec3 findRealPos(int x, int y);
 	int checkPointObject(glm::vec3 pos);
-
 };

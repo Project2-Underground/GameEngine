@@ -24,4 +24,5 @@ public:
 	unsigned int GetTexture();
 	virtual void Render(glm::mat4 globalModelTransform);
 	void SetCollder(Collider* n_col);
+	void setDisplay(bool);
 };

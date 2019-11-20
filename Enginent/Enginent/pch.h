@@ -10,5 +10,9 @@
 #define PCH_H
 
 // TODO: add headers that you want to pre-compile here
+//#include "Player.h"
+//#include "Animation.h"
+//#include "Animator.h"
+//#include "Scene.h"
 
 #endif //PCH_H

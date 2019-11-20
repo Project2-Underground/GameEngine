@@ -8,6 +8,7 @@
 #include "TextObject.h"
 #include "InteractObj.h"
 #include "Cursor.h"
+#include "Button.h"
 
 Game* Game::instance = nullptr;
 
@@ -15,7 +16,8 @@ enum objectType {
 	IMAGE_OBJ = 0,
 	INTERACT_OBJ,
 	PORTOL,
-	NPC
+	NPC,
+	BUTTON_Obj
 };
 
 Game * Game::GetInstance()
@@ -98,7 +100,35 @@ void Game::Init(int width, int height)
 	//triangle->LoadData();
 	//renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	vector<std::string>* doorDialogue = new vector<std::string>;
+	/*********************************************************************************************************************************************/
+	/**************************************************************Main screen********************************************************************/
+	/*********************************************************************************************************************************************/
+	createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
+	SwitchScene_Button* startButton = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
+	startButton->SetTexture("Texture/UI/MainScreen/StartBotton_Normal.png");
+	startButton->SetSize(300, -120);
+	startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
+	Collider *col2 = new Collider(startButton);
+	colliders.push_back(col2);
+	((InteractableObj*)startButton)->SetCollder(col2);
+
+	UI.push_back(startButton);
+
+	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/StartBotton_Normal.png", 300, -120, glm::vec3(-170.0f, 70.0f, 1.0f), NORMAL, nullptr);
+	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/ExitBotton_Normal.png", 300, -120, glm::vec3(-170.0f, -70.0f, 1.0f), NORMAL, nullptr);
+
+
+	/*********************************************************************************************************************************************/
+	/*********************************************************************************************************************************************/
+	/*********************************************************************************************************************************************/
+
+
+
+	/*********************************************************************************************************************************************/
+	/********************************************************************Room 1*******************************************************************/
+	/*********************************************************************************************************************************************/
+
+	/*vector<std::string>* doorDialogue = new vector<std::string>;
 	doorDialogue->push_back("Lock.");
 	doorDialogue->push_back("Seem like it needs card to unlock.");
 	doorDialogue->push_back("I need to find a key card.");
@@ -115,17 +145,16 @@ void Game::Init(int width, int height)
 	border->SetTexture("Texture/UI/Black_Border.png");
 	border->SetSize(1280, 720);
 	border->SetPosition(glm::vec3(0, 0, 1));
-	UI.push_back(border);
+	UI.push_back(border);*/
 
 	cursorGame = new CursorUI();
 	UI.push_back(cursorGame);
 
-
-
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");
-	player->SetSize(150.0f, -300.0f);
-	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
+	player->SetSize(230.0f, -350.0f);
+	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
+	player->setDisplay(false);
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);
@@ -136,16 +165,14 @@ void Game::Init(int width, int height)
 
 	objects.push_back(player->createDialogueText());
 
+	//Item* item1 = new Item("temp");
+	//item1->SetTexture("Texture/EliasRoom/cloth.png");
 
-
-	Item* item1 = new Item("temp");
-	item1->SetTexture("Texture/EliasRoom/cloth.png");
-
-	player->inventory->addItem(item1);
-	player->inventory->addItem(item1);
-	player->inventory->addItem(item1);
-	player->inventory->addItem(item1);
-	player->inventory->addItem(item1);
+	//player->inventory->addItem(item1);
+	//player->inventory->addItem(item1);
+	//player->inventory->addItem(item1);
+	//player->inventory->addItem(item1);
+	//player->inventory->addItem(item1);
 
 	//CombineObject * obj = new CombineObject();
 	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
@@ -157,6 +184,10 @@ void Game::Init(int width, int height)
 	//obj2->SetColor(0.0, 0.0, 1.0);
 	//obj2->Translate(glm::vec3(1.0, 1.0, 0));
 	//objects.push_back(obj2);
+
+	/*********************************************************************************************************************************************/
+	/*********************************************************************************************************************************************/
+	/*********************************************************************************************************************************************/
 
 }
 
@@ -186,32 +217,32 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 	ImageObject *tmp = nullptr;
 	switch (type)
 	{
-	case IMAGE_OBJ:
-	{
-		tmp = new ImageObject();
-		break;
-	}
-	case INTERACT_OBJ:
-	{
-		if (dialogue != nullptr)
+		case IMAGE_OBJ:
 		{
-			tmp = new InteractableObj(objType, dialogue);
+			tmp = new ImageObject();
+			break;
+		}
+		case INTERACT_OBJ:
+		{
+			if (dialogue != nullptr)
+			{
+				tmp = new InteractableObj(objType, dialogue);
 
+			}
+			else 
+			{
+				tmp = new InteractableObj();
+			}
+			break;
 		}
-		else 
+		case PORTOL:
 		{
-			tmp = new InteractableObj();
+			break;
 		}
-		break;
-	}
-	case PORTOL:
-	{
-		break;
-	}
-	case NPC:
-	{
-		break;
-	}
+		case NPC:
+		{
+			break;
+		}
 	}
 
 	tmp->SetTexture(texture);

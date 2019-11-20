@@ -117,6 +117,12 @@
     <ClInclude Include="Cursor.h">
       <Filter>GameUI</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -211,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

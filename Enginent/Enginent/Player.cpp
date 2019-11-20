@@ -9,9 +9,9 @@ Player::Player()
 	anim = new Animator();
 
 	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
-	Animation* idle = new Animation("Idle", "Texture/Character/Elias.png");
+	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
 	move->SetFrame(4);
-	move->SetFramePeriod(0.1f);
+	move->SetFramePeriod(0.16f);
 
 	idle->SetFrame(1);
 	idle->SetFramePeriod(0.0f);
@@ -93,7 +93,10 @@ void Player::Move()
 
 void Player::setTarget(glm::vec3 realPos)
 {
-	target = realPos;
+	if (this->display)
+	{
+		target = realPos;
+	}
 	walk = true;
 	setDialogue(" ");
 	if(!(anim->currentAnimation->animationName == "Move"))
