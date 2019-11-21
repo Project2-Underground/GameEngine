@@ -50,7 +50,6 @@ void Player::Update()
 	if (!walk)
 	{
 		anim->Play("Idle", true);
-		std::cout << "stop sound";
 		SoundManager::GetInstance()->stop(walkSound);
 		dialogueText->loadText(dialogue, dialogueColor, 18);
 		dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));

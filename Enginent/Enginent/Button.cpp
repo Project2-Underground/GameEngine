@@ -1,32 +1,44 @@
 #include "Button.h"
 #include "Game.h"
 
-Button::Button(std::string hover, std::string press)
+Button::Button(std::string normal, ::string hover, std::string press)
 {
+	normalTexture = new ImageObject();
+	normalTexture->SetTexture(normal);
+	this->SetTexture(normalTexture->GetTexture());
 	hoverTexture = new ImageObject();
 	hoverTexture->SetTexture(hover);
 	pressTexture = new ImageObject();
 	pressTexture->SetTexture(press);
 }
 
-void Button::pressButton(int x, int y)
+void Button::updateButton(int x, int y)
 {
-	UIObject::SetTexture(((Button*)pressTexture)->texture);
-}
-
-void Button::hoverCursor(int x, int y)
-{
-	this->SetTexture(((Button* )hoverTexture)->texture);
-}
-
-void Button::updateButton()
-{
-
+	if (this->col->isClicked(x, y))
+	{
+		SetTexture(this->hoverTexture->GetTexture());
+	}
+	else
+	{
+		SetTexture(normalTexture->GetTexture());
+	}
 }
 
 void Button::action(int x, int y)
 {
+}
 
+void Button::checkCollider(int x, int y)
+{
+	if (this->col->isClicked(x, y))
+	{
+		SetTexture(this->pressTexture->GetTexture());
+		action(x, y);
+	}
+	else
+	{
+		this->SetTexture(normalTexture->GetTexture());
+	}
 }
 
 //////////////Exit Button
@@ -36,14 +48,6 @@ void Exit_Button::action(int x, int y)
 }
 
 //////////////Switch Scene Button
-SwitchScene_Button::SwitchScene_Button(std::string hover, std::string press)
-{
-	hoverTexture = new ImageObject();
-	pressTexture = new ImageObject();
-	this->hoverTexture->SetTexture(hover);
-	this->pressTexture->SetTexture(press);
-}
-
 SwitchScene_Button::~SwitchScene_Button()
 {
 	delete hoverTexture;
@@ -52,5 +56,5 @@ SwitchScene_Button::~SwitchScene_Button()
 
 void SwitchScene_Button::action(int x, int y)
 {
-
+	std::cout << "Change scene";
 }

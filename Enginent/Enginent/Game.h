@@ -33,6 +33,7 @@ public:
 	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, vector<std::string>* dialogue);
 	void AddObject(DrawableObject* obj);
 	void AddUI(UIObject* obj);
+	void updateMouseState(int, int);
 	Player* getPlayer() { return player;}
 	glm::vec3 findRealPos(int x, int y);
 	int checkPointObject(glm::vec3 pos);
