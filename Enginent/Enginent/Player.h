@@ -5,6 +5,7 @@
 #include "TextObject.h"
 #include "SDL.h"
 #include "Inventory.h"
+#include "SoundManager.h"
 
 #define WALK_SPEED 3
 
@@ -29,5 +30,6 @@ private:
 	SDL_Color dialogueColor;
 	TextObject * dialogueText;
 	string dialogue;
+	ISound* walkSound;
 };
 

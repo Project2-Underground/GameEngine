@@ -103,16 +103,16 @@ void Game::Init(int width, int height)
 	/*********************************************************************************************************************************************/
 	/**************************************************************Main screen********************************************************************/
 	/*********************************************************************************************************************************************/
-	createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
-	SwitchScene_Button* startButton = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	startButton->SetTexture("Texture/UI/MainScreen/StartBotton_Normal.png");
-	startButton->SetSize(300, -120);
-	startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
-	Collider *col2 = new Collider(startButton);
-	colliders.push_back(col2);
-	((InteractableObj*)startButton)->SetCollder(col2);
+	//createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
+	//SwitchScene_Button* startButton = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
+	//startButton->SetTexture("Texture/UI/MainScreen/StartBotton_Normal.png");
+	//startButton->SetSize(300, -120);
+	//startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
+	//Collider *col2 = new Collider(startButton);
+	//colliders.push_back(col2);
+	//((InteractableObj*)startButton)->SetCollder(col2);
 
-	UI.push_back(startButton);
+	//UI.push_back(startButton);
 
 	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/StartBotton_Normal.png", 300, -120, glm::vec3(-170.0f, 70.0f, 1.0f), NORMAL, nullptr);
 	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/ExitBotton_Normal.png", 300, -120, glm::vec3(-170.0f, -70.0f, 1.0f), NORMAL, nullptr);
@@ -128,7 +128,7 @@ void Game::Init(int width, int height)
 	/********************************************************************Room 1*******************************************************************/
 	/*********************************************************************************************************************************************/
 
-	/*vector<std::string>* doorDialogue = new vector<std::string>;
+	vector<std::string>* doorDialogue = new vector<std::string>;
 	doorDialogue->push_back("Lock.");
 	doorDialogue->push_back("Seem like it needs card to unlock.");
 	doorDialogue->push_back("I need to find a key card.");
@@ -145,7 +145,7 @@ void Game::Init(int width, int height)
 	border->SetTexture("Texture/UI/Black_Border.png");
 	border->SetSize(1280, 720);
 	border->SetPosition(glm::vec3(0, 0, 1));
-	UI.push_back(border);*/
+	UI.push_back(border);
 
 	cursorGame = new CursorUI();
 	UI.push_back(cursorGame);
@@ -154,7 +154,7 @@ void Game::Init(int width, int height)
 	player->SetTexture("Texture/Character/Elias.png");
 	player->SetSize(230.0f, -350.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
-	player->setDisplay(false);
+	//player->setDisplay(false);
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);

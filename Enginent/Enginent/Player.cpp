@@ -20,6 +20,7 @@ Player::Player()
 	anim->AddAnimation(move);
 	anim->SetDefaultAnimation("Move");
 
+	walkSound = SoundManager::GetInstance()->play2D("Sound/walking_sound.mp3", true, true, true);
 
 	walk = false;
 	faceLeft = true;
@@ -49,6 +50,9 @@ void Player::Update()
 	if (!walk)
 	{
 		anim->Play("Idle", true);
+		std::cout << "stop sound";
+		walkSound->setIsPaused(true);
+		walkSound->setPlayPosition(0);
 		dialogueText->loadText(dialogue, dialogueColor, 18);
 		dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 	}
@@ -97,6 +101,7 @@ void Player::setTarget(glm::vec3 realPos)
 	{
 		target = realPos;
 	}
+	walkSound->setIsPaused(false);
 	walk = true;
 	setDialogue(" ");
 	if(!(anim->currentAnimation->animationName == "Move"))

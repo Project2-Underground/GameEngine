@@ -121,7 +121,7 @@
       <Filter>GameUtilities</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>GameObj\interactable</Filter>
+      <Filter>GameUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +173,6 @@
     <ClCompile Include="InventoryBox.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>GameUI</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
@@ -221,8 +218,11 @@
     <ClCompile Include="Scene.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

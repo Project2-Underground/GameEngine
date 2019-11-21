@@ -1,6 +1,7 @@
 #include "SoundManager.h"
 #include <GL\glew.h>
 
+ISoundEngine* SoundManager::_instance = 0;
 
 SoundManager::SoundManager() {
 	soundEngine = createIrrKlangDevice();
@@ -50,5 +51,16 @@ void SoundManager::toggleMute() {
 
 SoundManager::~SoundManager() {
 	soundEngine->stopAllSounds();
+	soundEngine->drop();
 	delete soundEngine;
+	delete _instance;
+}
+
+ISoundEngine* SoundManager::GetInstance()
+{
+	if (_instance == nullptr)
+	{
+		_instance = createIrrKlangDevice();
+	}
+	return _instance;
 }

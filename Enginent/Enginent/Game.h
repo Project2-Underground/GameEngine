@@ -19,7 +19,6 @@ class Game
 	GLRenderer *renderer;
 	Player * player;
 	CursorUI* cursorGame;
-	SoundManager _soundManager;
 	Game();
 public:
 	~Game();
