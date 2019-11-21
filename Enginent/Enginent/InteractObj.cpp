@@ -6,9 +6,10 @@ InteractableObj::InteractableObj(vector<std::string>* s) {
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
-	printf("Col create\n");
 	col = n_col;
 	col->setRefObject(this);
+	/*std::cout << "collider min bound: " << col->getMinBound().x << ", " << col->getMinBound().y << std::endl;
+	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
 void InteractableObj::SetDialogue(vector<std::string>* s) {
@@ -29,7 +30,6 @@ void InteractableObj::action(int x, int y) {
 	}
 	//ANIMATION
 	//UPDATE TEXT
-
 }
 
 void InteractableObj::checkCollider(int x, int y) {

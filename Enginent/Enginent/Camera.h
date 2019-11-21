@@ -12,6 +12,9 @@ protected:
 
 	Collider* limit;
 	float offset_y;
+
+	int cam_width;
+	int cam_height;
 public:
 	static Camera* _instance;
 	static Camera* GetInstance();

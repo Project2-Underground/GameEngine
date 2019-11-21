@@ -82,9 +82,9 @@ void Game::Init(int width, int height)
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	//TriangleMeshVbo * triangle = new TriangleMeshVbo();
-	//triangle->LoadData();
-	//renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
+	TriangleMeshVbo * triangle = new TriangleMeshVbo();
+	triangle->LoadData();
+	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
 	vector<std::string>* doorDialogue = new vector<std::string>;
 	doorDialogue->push_back("Lock.");
@@ -102,10 +102,10 @@ void Game::Init(int width, int height)
 
 	// testing door -----------------------------------------
 	Collider* door_next_limit = new Collider();
-	door_next_limit->setNewSize(winWidth+100, winHeight+50);
-	door_next_limit->setNewPos(100, 100);
+	door_next_limit->setNewSize(winWidth+100, winHeight);
+	door_next_limit->setNewPos(winWidth, 0);
 
-	Door* door = new Door(0, -10, 100, 100);
+	Door* door = new Door(winWidth*0.5, -80, winWidth, winHeight);
 	door->SetTexture("Texture/EliasRoom/door.png");
 	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
 	door->SetSize(220, -350);
@@ -153,7 +153,6 @@ void Game::Update()
 {
 	player->Update();
 	player->anim->Update();
-	//std::cout << camera->GetPosition().x << std::endl;
 }
 
 void Game::Render()
