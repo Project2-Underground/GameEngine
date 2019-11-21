@@ -2,9 +2,10 @@
 #include "Game.h"
 #include "Camera.h"
 
-Door::Door(float px, float py, float cx, float cy){
-	nextPlayerPos = glm::vec3(px, py, 1);
-	nextCameraPos = glm::vec3(cx, cy, 1);
+Door::Door(float next_playerx, float next_playery, float next_camx, float next_camy){
+	nextPlayerPos = glm::vec3(next_playerx, next_playery, 1);
+	nextCameraPos = glm::vec3(next_camx, next_camy, 1);
+	next_cam_limit = nullptr;
 }
 
 void Door::travel() {
@@ -15,7 +16,8 @@ void Door::travel() {
 	player->setTarget(nextPlayerPos.x, nextPlayerPos.y);
 
 	camera->SetPosition(nextCameraPos);
-	camera->SetLimit(next_cam_limit);
+	if (next_cam_limit)
+		camera->SetLimit(next_cam_limit);
 }
 
 void Door::SetNextCamLimit(Collider* lim) {

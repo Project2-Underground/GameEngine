@@ -33,6 +33,7 @@ Camera::~Camera() {
 }
 
 void Camera::SetPosition(glm::vec3 pos) {
+	pos.x *= -1;
 	next_pos = pos;
 }
 

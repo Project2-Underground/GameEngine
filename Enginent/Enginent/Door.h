@@ -12,7 +12,7 @@ protected:
 public:
 	~Door();
 	virtual void action(int x, int y);
-	Door(float px, float py, float cx, float cy);
+	Door(float next_playerx, float next_playery, float next_camx, float next_camy);
 	void SetNextCamLimit(Collider* lim);
 	void travel();
 };

@@ -102,10 +102,10 @@ void Game::Init(int width, int height)
 
 	// testing door -----------------------------------------
 	Collider* door_next_limit = new Collider();
-	door_next_limit->setNewSize(winWidth+50, winHeight);
-	door_next_limit->setNewPos(winWidth * 0.5, 0);
+	door_next_limit->setNewSize(winWidth+100, winHeight);
+	door_next_limit->setNewPos(0, 0);
 
-	Door* door = new Door(-winWidth*0.5, -80, width, height);
+	Door* door = new Door(0, -80, 0, 0);
 	door->SetTexture("Texture/EliasRoom/door.png");
 	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
 	door->SetSize(220, -350);
@@ -153,6 +153,7 @@ void Game::Update()
 {
 	player->Update();
 	player->anim->Update();
+	//std::cout << camera->GetPosition().x << std::endl;
 }
 
 void Game::Render()
@@ -216,6 +217,11 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 
 Game::~Game()
 {
-
+	delete player;
+	for (auto obj : objects)
+		if (obj)
+			delete obj;
+	delete camera;
+	delete renderer;
 }
 
