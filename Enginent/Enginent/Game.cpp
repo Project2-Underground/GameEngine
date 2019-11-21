@@ -35,22 +35,21 @@ GLRenderer * Game::GetRenderer()
 void Game::rightClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
+	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
 	player->setTarget(realX, realY);
-
 }
 
 void Game::leftClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
+	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
 	for (int i = 0; i < objects.size(); i++)
 	{
-		if (dynamic_cast<InteractableObj*>(objects[i]))
+		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 		{
-			((InteractableObj*)objects[i])->checkCollider(realX, realY);
+			ib->checkCollider(realX, realY);
 		}
 	}
 }
@@ -77,6 +76,8 @@ void Game::Init(int width, int height)
 	renderer->SetOrthoProjection(-width * 0.5f, width * 0.5f, -height * 0.5f, height * 0.5f);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
 
+	camera = Camera::GetInstance();
+
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -99,17 +100,20 @@ void Game::Init(int width, int height)
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), nullptr);
 	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
 
-
+	// testing door -----------------------------------------
 	Collider* door_next_limit = new Collider();
 	door_next_limit->setNewSize(winWidth+50, winHeight);
+	door_next_limit->setNewPos(winWidth * 0.5, 0);
 
-	Door* door = new Door(0, 0, 0,0);
+	Door* door = new Door(-winWidth*0.5, -80, width, height);
 	door->SetTexture("Texture/EliasRoom/door.png");
 	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
 	door->SetSize(220, -350);
 	door->SetDialogue(doorDialogue);
-	door->SetCollder(new Collider(door));
+	door->SetNextCamLimit(door_next_limit);						// limit for the camera in the next room
+	door->SetCollder(new Collider(door));						// collider of the door
 	objects.push_back(door);
+	// testing door -----------------------------------------
 
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias.png");

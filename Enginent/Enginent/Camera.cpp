@@ -33,7 +33,7 @@ Camera::~Camera() {
 }
 
 void Camera::SetPosition(glm::vec3 pos) {
-	currrent_cam_pos = pos;
+	next_pos = pos;
 }
 
 glm::mat4 Camera::GetViewMatrix() {
@@ -43,16 +43,25 @@ glm::mat4 Camera::GetViewMatrix() {
 
 		// check if out of game view
 		if (limit != nullptr) {
-			if (((next_pos.x - Game::GetInstance()->winWidth / 2) < limit->getMinBound().x) ||
-				((next_pos.x + Game::GetInstance()->winWidth / 2) > limit->getMaxBound().x))
-				next_pos.x = currrent_cam_pos.x;
-			if (((next_pos.y - Game::GetInstance()->winWidth / 2) < limit->getMinBound().y) ||
-				((next_pos.y + Game::GetInstance()->winWidth / 2) > limit->getMaxBound().y))
-				next_pos.y = currrent_cam_pos.y;
+			if ((next_pos.x - Game::GetInstance()->winWidth * 0.5) < limit->getMinBound().x) {
+				next_pos.x = limit->getMinBound().x + Game::GetInstance()->winWidth * 0.5;
+			}
+			else if ((next_pos.x + Game::GetInstance()->winWidth * 0.5) > limit->getMaxBound().x) {
+				next_pos.x = limit->getMaxBound().x - Game::GetInstance()->winWidth * 0.5;
+			}
+			else if ((next_pos.y - Game::GetInstance()->winHeight * 0.5) < limit->getMinBound().y) {
+				next_pos.y = limit->getMinBound().y - Game::GetInstance()->winHeight * 0.5;
+			}
+			else if ((next_pos.y + Game::GetInstance()->winHeight * 0.5) > limit->getMaxBound().y) {
+				next_pos.y = limit->getMaxBound().y + Game::GetInstance()->winHeight * 0.5;
+			}
 		}
-
 		currrent_cam_pos = next_pos;
 		return glm::translate(view, next_pos);
 	}
 	return glm::mat4(1.0);
+}
+
+glm::vec3 Camera::GetPosition() {
+	return currrent_cam_pos;
 }

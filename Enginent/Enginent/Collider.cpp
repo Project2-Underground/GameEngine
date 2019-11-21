@@ -1,4 +1,5 @@
 #include "Collider.h"
+#include "Camera.h"
 #include <iostream>
 
 Collider::Collider(DrawableObject* ref) {

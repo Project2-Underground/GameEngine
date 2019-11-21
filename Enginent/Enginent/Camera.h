@@ -20,6 +20,8 @@ public:
 	void SetLimit(Collider*);
 	void SetPosition(glm::vec3);
 
+	glm::vec3 GetPosition();
+
 	Camera();
 	~Camera();
 

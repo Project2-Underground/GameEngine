@@ -5,6 +5,7 @@
 #include "DrawableObject.h"
 #include "GLRenderer.h"
 #include "Collider.h"
+#include "Camera.h"
 
 using namespace std;
 class Game
@@ -14,6 +15,7 @@ class Game
 	vector<Collider*> colliders;
 	GLRenderer *renderer;
 	Player * player;
+	Camera* camera;
 	Game();
 public:
 	int winWidth, winHeight;

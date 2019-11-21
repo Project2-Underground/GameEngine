@@ -8,16 +8,24 @@ Door::Door(float px, float py, float cx, float cy){
 }
 
 void Door::travel() {
-	Game::GetInstance()->getPlayer()->SetPosition(nextPlayerPos);
-	// set camera pos here
-	/*Camera::GetInstance()->SetPosition(nextCameraPos);
-	Camera::GetInstance()->SetLimit(next_cam_limit);*/
+	Player* player = Game::GetInstance()->getPlayer();
+	Camera* camera = Camera::GetInstance();
+
+	player->SetPosition(nextPlayerPos);
+	player->setTarget(nextPlayerPos.x, nextPlayerPos.y);
+
+	camera->SetPosition(nextCameraPos);
+	camera->SetLimit(next_cam_limit);
+}
+
+void Door::SetNextCamLimit(Collider* lim) {
+	next_cam_limit = lim;
 }
 
 void Door::action(int x, int y) {
 	this->InteractableObj::action(x, y);
 	// travel only when player stops walking
-	//travel();
+	travel();
 }
 
 Door::~Door() {
