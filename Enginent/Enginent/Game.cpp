@@ -102,10 +102,10 @@ void Game::Init(int width, int height)
 
 	// testing door -----------------------------------------
 	Collider* door_next_limit = new Collider();
-	door_next_limit->setNewSize(winWidth+100, winHeight);
-	door_next_limit->setNewPos(0, 0);
+	door_next_limit->setNewSize(winWidth+100, winHeight+50);
+	door_next_limit->setNewPos(100, 100);
 
-	Door* door = new Door(0, -80, 0, 0);
+	Door* door = new Door(0, -10, 100, 100);
 	door->SetTexture("Texture/EliasRoom/door.png");
 	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
 	door->SetSize(220, -350);

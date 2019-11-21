@@ -15,7 +15,7 @@ void Door::travel() {
 	player->SetPosition(nextPlayerPos);
 	player->setTarget(nextPlayerPos.x, nextPlayerPos.y);
 
-	camera->SetPosition(nextCameraPos);
+	//camera->SetPosition(nextCameraPos);
 	if (next_cam_limit)
 		camera->SetLimit(next_cam_limit);
 }

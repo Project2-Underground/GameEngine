@@ -82,8 +82,8 @@ void Collider::setNewHeight(float newH) {
 }
 
 void Collider::CalNewBound() {
-	this->maxBound = glm::vec3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f * -1, pos.z);
-	this->minBound = glm::vec3(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f * -1, pos.z);
+	this->maxBound = glm::vec3(pos.x + size.x * 0.5f, pos.y * -1 + size.y * 0.5f , pos.z);
+	this->minBound = glm::vec3(pos.x - size.x * 0.5f, pos.y * -1 - size.y * 0.5f, pos.z);
 }
 
 bool Collider::isCollide(Collider* other) {
