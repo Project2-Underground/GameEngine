@@ -9,16 +9,16 @@ class SoundManager {
 private:
 	ISoundEngine *soundEngine;
 	std::map<std::string, ISound*> sound;
-	static ISoundEngine* _instance;
+	static SoundManager* _instance;
 protected:
 	SoundManager();
 public:
-	static ISoundEngine* GetInstance();
-	void playBg(const char* filename);
-	void playSFX(const char* filename);
-	void pause();
-	void unPause();
-	void stopBg();
+	static SoundManager* GetInstance();
+	ISound* createSound(const char* filename, bool loop, bool pauseAtStart);
+	void playSound(ISound*);
+	void pause(ISound*);
+	void stop(ISound*);
+	void stopAllSounds();
 	void upVolume();
 	void downVolume();
 	void toggleMute();

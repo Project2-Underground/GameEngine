@@ -1,29 +1,31 @@
 #include "SoundManager.h"
 #include <GL\glew.h>
 
-ISoundEngine* SoundManager::_instance = 0;
+SoundManager* SoundManager::_instance = 0;
 
 SoundManager::SoundManager() {
 	soundEngine = createIrrKlangDevice();
 }
 
-void SoundManager::playBg(const char *filename) {
-	soundEngine->play2D(filename, GL_TRUE);
+ISound* SoundManager::createSound(const char* filename, bool loop, bool pauseAtStart)
+{
+	return soundEngine->play2D(filename, loop, pauseAtStart);
 }
 
-void SoundManager::playSFX(const char* filename) {
-	soundEngine->play2D(filename, GL_FALSE);
+void SoundManager::playSound(ISound* sound) {
+	sound->setIsPaused(false);
 }
 
-void SoundManager::pause() {
-	soundEngine->setAllSoundsPaused();
+void SoundManager::pause(ISound* sound) {
+	sound->setIsPaused(true);
 }
 
-void SoundManager::unPause() {
-	soundEngine->setAllSoundsPaused(false);
+void SoundManager::stop(ISound* sound) {
+	sound->setIsPaused(true);
+	sound->setPlayPosition(0);
 }
 
-void SoundManager::stopBg() {
+void SoundManager::stopAllSounds() {
 	soundEngine->stopAllSounds();
 }
 
@@ -56,11 +58,11 @@ SoundManager::~SoundManager() {
 	delete _instance;
 }
 
-ISoundEngine* SoundManager::GetInstance()
+SoundManager* SoundManager::GetInstance()
 {
 	if (_instance == nullptr)
 	{
-		_instance = createIrrKlangDevice();
+		_instance = new SoundManager();
 	}
 	return _instance;
 }
