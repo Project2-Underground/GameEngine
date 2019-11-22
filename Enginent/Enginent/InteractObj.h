@@ -11,10 +11,12 @@ enum IneractTypeList
 	TALK,
 	CHANGESCENE,
 	SAVE,
-	BUTTON
+	BUTTON,
+	DOOR
 };
 
 class InteractableObj : public ImageObject {
+protected:
 	IneractTypeList interactType = NORMAL;
 	vector<std::string>* dialogue;
 	int currDialogue = 0;
@@ -27,11 +29,14 @@ public:
 
 	virtual void action(int x, int y);
 
+	void SetDialogue(vector<std::string>* s);
 	void SetCollder(Collider* n_col);
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	void checkCollider(int x, int y);
 	bool checkPointing(int x, int y);
 
 	IneractTypeList getType() { return interactType; };
+
+	~InteractableObj();
 };
 

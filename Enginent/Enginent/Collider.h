@@ -28,4 +28,5 @@ public:
 	void setNewHeight(float newH);
 	bool isCollide(Collider *other);
 	bool isClicked(int x, int y);
+	void CalNewBound();
 };

@@ -5,31 +5,26 @@
 #include "DrawableObject.h"
 #include "GLRenderer.h"
 #include "Collider.h"
-#include "Cursor.h"
-#include "SoundManager.h"
-#include "SquareMeshVbo.h"
-#include "TriangleMeshVbo.h"
-#include "GameObject.h"
-#include "CombineObject.h"
-#include "TextObject.h"
-#include "InteractObj.h"
-#include "LevelGenerator.h"
+#include "Camera.h"
 #include "Cursor.h"
 #include "Button.h"
+#include "LevelGenerator.h"
 
 using namespace std;
 class Game
 {
 	static Game* instance;
-	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
-	vector<UIObject*> UI;
 	vector<Collider*> colliders;
+	vector<UIObject*> UI;
 	GLRenderer *renderer;
 	Player * player;
+	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
 public:
+	int winWidth, winHeight;
+	~Game();
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();
 	void rightClick(int x, int y);
@@ -42,12 +37,13 @@ public:
 	void AddObject(DrawableObject* obj);
 	void AddUI(UIObject* obj);
 	void updateMouseState(int, int);
-	Player* getPlayer() { return player; }
+	Player* getPlayer() { return player;}
 	glm::vec3 findRealPos(int x, int y);
 	int checkPointObject(glm::vec3 pos);
-	~Game();
 
 };
+
+
 
 enum objectType {
 	IMAGE_OBJ = 0,
