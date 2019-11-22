@@ -120,6 +120,15 @@
     <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -202,6 +211,24 @@
     </ClCompile>
     <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractObj.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

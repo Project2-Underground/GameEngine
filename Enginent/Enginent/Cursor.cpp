@@ -50,7 +50,7 @@ void CursorUI::setCursor(int type)
 		case IneractTypeList::TALK:
 				this->SetTexture(((CursorUI*)CS_Chat)->texture);
 				break;
-		case IneractTypeList::MOVESCENE:
+		case IneractTypeList::CHANGESCENE:
 				this->SetTexture(((CursorUI*)CS_Door)->texture);
 				break;
 		case IneractTypeList::PICKUP:

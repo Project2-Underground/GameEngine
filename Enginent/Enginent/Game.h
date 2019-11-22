@@ -7,6 +7,15 @@
 #include "Collider.h"
 #include "Cursor.h"
 #include "SoundManager.h"
+#include "SquareMeshVbo.h"
+#include "TriangleMeshVbo.h"
+#include "GameObject.h"
+#include "CombineObject.h"
+#include "TextObject.h"
+#include "InteractObj.h"
+#include "LevelGenerator.h"
+#include "Cursor.h"
+#include "Button.h"
 
 using namespace std;
 class Game

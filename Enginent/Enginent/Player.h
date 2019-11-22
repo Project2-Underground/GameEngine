@@ -7,6 +7,7 @@
 #include "Inventory.h"
 #include "SoundManager.h"
 
+
 #define WALK_SPEED 3
 
 class Player : public ImageObject

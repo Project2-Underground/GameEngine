@@ -1,14 +1,6 @@
 
 #include "Game.h"
-#include "SquareMeshVbo.h"
-#include "TriangleMeshVbo.h"
-#include "GameObject.h"
-#include "CombineObject.h"
-#include "TextObject.h"
-#include "InteractObj.h"
-#include "LevelGenerator.h"
-#include "Cursor.h"
-#include "Button.h"
+
 
 Game* Game::instance = nullptr;
 
@@ -130,14 +122,17 @@ void Game::Init(int width, int height)
 	RoomGenerator room;
 	room.GenerateRoom(filename);
 
+	cursorGame = new CursorUI();
+	UI.push_back(cursorGame);
+
 	//
 	//Create player
 	//
 	player = new Player();
-	player->SetTexture("Texture/Character/Elias.png");
+	player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(230.0f, -350.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
-	player->setDisplay(false);
+	//player->setDisplay(false);
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);
@@ -182,7 +177,7 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, vector<std::string>* dialogue)
+void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::string dialogue)
 {
 	ImageObject *tmp = nullptr;
 	switch (type)
@@ -194,7 +189,7 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 	}
 	case INTERACT_OBJ:
 	{
-		if (dialogue != nullptr)
+		if (dialogue != "")
 		{
 			tmp = new InteractableObj(objType, dialogue);
 

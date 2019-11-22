@@ -9,7 +9,7 @@ enum IneractTypeList
 	VIEW,
 	PICKUP,
 	TALK,
-	MOVESCENE,
+	CHANGESCENE,
 	SAVE,
 	BUTTON
 };
@@ -22,6 +22,7 @@ class InteractableObj : public ImageObject {
 public:
 	InteractableObj() {};
 	InteractableObj(IneractTypeList type);
+	InteractableObj(IneractTypeList type, std::string);
 	InteractableObj(IneractTypeList type, vector<std::string>* s);
 
 	virtual void action(int x, int y);

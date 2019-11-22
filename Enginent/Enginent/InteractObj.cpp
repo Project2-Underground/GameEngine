@@ -6,6 +6,12 @@ InteractableObj::InteractableObj(IneractTypeList type, vector<std::string>* s) {
 	interactType = type;
 }
 
+InteractableObj::InteractableObj(IneractTypeList type, std::string s)
+{
+	interactType = type;
+	dialogue->push_back(s);
+}
+
 InteractableObj::InteractableObj(IneractTypeList type) {
 	interactType = type;
 }

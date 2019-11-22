@@ -21,7 +21,7 @@ void RoomGenerator::GenerateRoom(std::string filename) {
 					1.0f);
 				std::string dialoguePath = aChild->attribute("dialogue").as_string();
 
-				Game::GetInstance()->createObject(type, texture, sizeX, -sizeY, pos, dialoguePath);
+				Game::GetInstance()->createObject(type, texture, sizeX, -sizeY, pos, NORMAL, dialoguePath);
 			}
 		}
 	}
