@@ -1,4 +1,5 @@
 #include "SoundManager.h"
+#include "Game.h"
 #include <GL\glew.h>
 
 SoundManager* SoundManager::_instance = 0;
@@ -7,22 +8,28 @@ SoundManager::SoundManager() {
 	soundEngine = createIrrKlangDevice();
 }
 
+void SoundManager::Init()
+{
+	sounds["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3", true, true);
+	sounds["Walking"] = createSound("Sound/walking_sound.mp3", true, true);
+}
+
 ISound* SoundManager::createSound(const char* filename, bool loop, bool pauseAtStart)
 {
 	return soundEngine->play2D(filename, loop, pauseAtStart);
 }
 
-void SoundManager::playSound(ISound* sound) {
-	sound->setIsPaused(false);
+void SoundManager::playSound(std::string sound) {
+	sounds[sound]->setIsPaused(false);
 }
 
-void SoundManager::pause(ISound* sound) {
-	sound->setIsPaused(true);
+void SoundManager::pause(std::string sound) {
+	sounds[sound]->setIsPaused(true);
 }
 
-void SoundManager::stop(ISound* sound) {
-	sound->setIsPaused(true);
-	sound->setPlayPosition(0);
+void SoundManager::stop(std::string sound) {
+	sounds[sound]->setIsPaused(true);
+	sounds[sound]->setPlayPosition(0);
 }
 
 void SoundManager::stopAllSounds() {

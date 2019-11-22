@@ -20,8 +20,6 @@ Player::Player()
 	anim->AddAnimation(move);
 	anim->SetDefaultAnimation("Move");
 
-	walkSound = SoundManager::GetInstance()->createSound("Sound/walking_sound.mp3", true, true);
-
 	walk = false;
 	faceLeft = true;
 	dialogueText = new TextObject();
@@ -53,7 +51,7 @@ void Player::Update()
 		if (!walk)
 		{
 			anim->Play("Idle", true);
-			SoundManager::GetInstance()->stop(walkSound);
+			SoundManager::GetInstance()->stop("Walking");
 			dialogueText->loadText(dialogue, dialogueColor, 18);
 			dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 		}
@@ -104,7 +102,7 @@ void Player::setTarget(float x, float y)
 	{
 		target = glm::vec3(x, y, 1);
 		walk = true;
-		SoundManager::GetInstance()->playSound(walkSound);
+		SoundManager::GetInstance()->playSound("Walking");
 		setDialogue(" ");
 		if (!(anim->currentAnimation->animationName == "Move"))
 			anim->Play("Move", true);
@@ -118,7 +116,7 @@ void Player::setTarget(glm::vec3 realPos)
 		target = realPos;
 	}
 
-	SoundManager::GetInstance()->playSound(walkSound);
+	SoundManager::GetInstance()->playSound("Walking");
 	walk = true;
 	setDialogue(" ");
 	if (!(anim->currentAnimation->animationName == "Move"))

@@ -31,6 +31,5 @@ private:
 	SDL_Color dialogueColor;
 	TextObject * dialogueText;
 	string dialogue;
-	ISound* walkSound;
 };
 

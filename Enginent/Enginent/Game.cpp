@@ -102,7 +102,8 @@ void Game::Init(int width, int height)
 
 	SDL_ShowCursor(SDL_DISABLE);
 	camera = Camera::GetInstance();
-
+	SoundManager::GetInstance()->Init();
+	SoundManager::GetInstance()->playSound("MainScreen");
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -160,8 +161,8 @@ void Game::Init(int width, int height)
 
 	Door* door = new Door(winWidth*0.5, -80, winWidth, winHeight);
 	door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
-	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
-	door->SetSize(220, -350);
+	door->SetPosition(glm::vec3(420.0f, 20.0f, 1.0f));
+	door->SetSize(208, -379);
 	door->SetDialogue(doorDialogue);
 	door->SetNextCamLimit(door_next_limit);						// limit for the camera in the next room
 	door->SetCollder(new Collider(door));						// collider of the door
