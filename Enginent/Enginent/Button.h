@@ -23,8 +23,10 @@ class Exit_Button : public Button {
 };
 
 class SwitchScene_Button : public Button {
+private:
+	std::vector<ImageObject*> t_screen;
 public:
-	SwitchScene_Button(std::string normal, std::string hover, std::string press) : Button(normal, hover, press) {};
+	SwitchScene_Button(std::string normal, std::string hover, std::string press, std::vector<ImageObject*> s) : Button(normal, hover, press) { t_screen = s; };
 	~SwitchScene_Button();
 	void action(int x, int y);
 };

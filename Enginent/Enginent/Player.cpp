@@ -14,7 +14,7 @@ Player::Player()
 	move->SetFramePeriod(0.16f);
 
 	idle->SetFrame(1);
-	idle->SetFramePeriod(1.0f);
+	idle->SetFramePeriod(0.0f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
@@ -47,14 +47,18 @@ Player::Player()
 
 void Player::Update()
 {
-	Move();
-	if (!walk)
+	if (display)
 	{
-		anim->Play("Idle", true);
-		SoundManager::GetInstance()->stop(walkSound);
-		dialogueText->loadText(dialogue, dialogueColor, 18);
-		dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
+		Move();
+		if (!walk)
+		{
+			anim->Play("Idle", true);
+			SoundManager::GetInstance()->stop(walkSound);
+			dialogueText->loadText(dialogue, dialogueColor, 18);
+			dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
+		}
 	}
+
 }
 
 void Player::Move()
@@ -96,12 +100,15 @@ void Player::Move()
 
 void Player::setTarget(float x, float y)
 {
-	target = glm::vec3(x, y, 1);
-	walk = true;
-	setDialogue(" ");
-	if (!(anim->currentAnimation->animationName == "Move"))
-		anim->Play("Move", true);
-
+	if (display)
+	{
+		target = glm::vec3(x, y, 1);
+		walk = true;
+		SoundManager::GetInstance()->playSound(walkSound);
+		setDialogue(" ");
+		if (!(anim->currentAnimation->animationName == "Move"))
+			anim->Play("Move", true);
+	}
 }
 
 void Player::setTarget(glm::vec3 realPos)

@@ -51,6 +51,7 @@ Exit_Button::~Exit_Button()
 
 void Exit_Button::action(int x, int y)
 {
+	if(display)
 	SDL_Quit();
 }
 
@@ -65,4 +66,10 @@ SwitchScene_Button::~SwitchScene_Button()
 void SwitchScene_Button::action(int x, int y)
 {
 	std::cout << "Change scene";
+	for (int i = 0; i < t_screen.size(); i++)
+	{
+		t_screen[i]->setDisplay(false);
+	}
+	display = false;
+	Game::GetInstance()->getPlayer()->setDisplay(true);
 }

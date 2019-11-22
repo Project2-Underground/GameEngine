@@ -18,7 +18,6 @@ public:
 	~Player();
 	void Update();
 	void Move();
-	void Walk(int x, int y);
 	void setTarget(glm::vec3);
 	void setTarget(float x, float y);
 	void SetCollder(Collider* n_col);
