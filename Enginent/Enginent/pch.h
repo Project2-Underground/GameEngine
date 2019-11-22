@@ -9,6 +9,20 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include <vector>
+#include "Game.h"
+#include "SquareMeshVbo.h"
+#include "TriangleMeshVbo.h"
+#include "GameObject.h"
+#include "CombineObject.h"
+#include "TextObject.h"
+#include "InteractObj.h"
+#include "LevelGenerator.h"
+#include "Cursor.h"
+#include "Button.h"
+#include "Item.h"
+#include "Player.h"
+
 // TODO: add headers that you want to pre-compile here
 //#include "Player.h"
 //#include "Animation.h"

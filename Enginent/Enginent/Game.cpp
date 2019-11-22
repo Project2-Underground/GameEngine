@@ -1,4 +1,3 @@
-
 #include "Game.h"
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
@@ -7,18 +6,9 @@
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
-#include "Cursor.h"
-#include "Button.h"
+#include "Door.h"
 
 Game* Game::instance = nullptr;
-
-enum objectType {
-	IMAGE_OBJ = 0,
-	INTERACT_OBJ,
-	PORTOL,
-	NPC,
-	BUTTON_Obj
-};
 
 Game * Game::GetInstance()
 {
@@ -49,36 +39,28 @@ int Game::checkPointObject(glm::vec3 pos)
 void Game::rightClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
-	player->setTarget(findRealPos(x, y));
+	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
+	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
+	player->setTarget(realX, realY);
 }
 
 void Game::leftClick(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
+	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
 	for (int i = 0; i < objects.size(); i++)
 	{
-		if (dynamic_cast<InteractableObj*>(objects[i]))
+		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 		{
-			((InteractableObj*)objects[i])->checkCollider(realX, realY);
-		}
-	}
-	
-	for (int j = 0; j < UI.size(); j++)
-	{
-		if (dynamic_cast<Button*>(UI[j]))
-		{
-			((Button*)UI[j])->checkCollider(realX, realY);
+			ib->checkCollider(realX, realY);
 		}
 	}
 }
 
 void Game::updateMouseState(int x, int y)
 {
-	glm::vec3 realPos = Game::GetInstance()->findRealPos(x , y);
+	glm::vec3 realPos = Game::GetInstance()->findRealPos(x, y);
 	for (int i = 0; i < UI.size(); i++)
 	{
 		if (dynamic_cast<Button*>(UI[i]))
@@ -87,7 +69,6 @@ void Game::updateMouseState(int x, int y)
 		}
 	}
 }
-
 
 void Game::HandleKey(char ch)
 {
@@ -110,80 +91,56 @@ void Game::Init(int width, int height)
 	renderer->InitGL("Shader/vertext.shd", "Shader/fragment.shd");
 	renderer->SetOrthoProjection(-width * 0.5f, width * 0.5f, -height * 0.5f, height * 0.5f);
 	renderer->SetClearColor(1.0f, 1.0f, 200.0f / 255);
-	//SDL_GL_SetSwapInterval(1);
 
 	SDL_ShowCursor(SDL_DISABLE);
+	camera = Camera::GetInstance();
 
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	//TriangleMeshVbo * triangle = new TriangleMeshVbo();
-	//triangle->LoadData();
-	//renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
+	TriangleMeshVbo * triangle = new TriangleMeshVbo();
+	triangle->LoadData();
+	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	/*********************************************************************************************************************************************/
-	/**************************************************************Main screen********************************************************************/
-	/*********************************************************************************************************************************************/
-	createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
-	SwitchScene_Button* startButton = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	startButton->SetSize(300, -120);
-	startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
-	Collider *col2 = new Collider(startButton);
-	colliders.push_back(col2);
-	((ImageObject*)startButton)->SetCollder(col2);
-	UI.push_back(startButton);
-
-	Exit_Button* exitButton = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");
-	exitButton->SetSize(300, -120);
-	exitButton->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
-	Collider *col3 = new Collider(exitButton);
-	colliders.push_back(col3);
-	((ImageObject*)exitButton)->SetCollder(col3);
-
-	UI.push_back(exitButton);
-
-	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/StartBotton_Normal.png", 300, -120, glm::vec3(-170.0f, 70.0f, 1.0f), NORMAL, nullptr);
-	//createObject(BUTTON_Obj, "Texture/UI/MainScreen/ExitBotton_Normal.png", 300, -120, glm::vec3(-170.0f, -70.0f, 1.0f), NORMAL, nullptr);
-
-
-	/*********************************************************************************************************************************************/
-	/*********************************************************************************************************************************************/
-	/*********************************************************************************************************************************************/
-
-
-
-	/*********************************************************************************************************************************************/
-	/********************************************************************Room 1*******************************************************************/
-	/*********************************************************************************************************************************************/
-
-	/*vector<std::string>* doorDialogue = new vector<std::string>;
+	vector<std::string>* doorDialogue = new vector<std::string>;
 	doorDialogue->push_back("Lock.");
 	doorDialogue->push_back("Seem like it needs card to unlock.");
 	doorDialogue->push_back("I need to find a key card.");
 
-	createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias_Room_DoorAni.png", 208, -379, glm::vec3(420.0f, 20.0f, 1.0f), PICKUP, doorDialogue);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(50.0f, -30.0f, 1.0f), NORMAL, nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias_Room_Bed.png", 450, -250, glm::vec3(-330.0f, -120.0f, 1.0f), NORMAL, nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), NORMAL, nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), NORMAL, nullptr);
-	createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), NORMAL, nullptr);
+	//createObject(IMAGE_OBJ, "Texture/EliasRoom/room1.png", width, -height, glm::vec3(0.0f, 0.0f, 1.0f), nullptr);
+	////createObject(INTERACT_OBJ, "Texture/EliasRoom/door.png", 220, -350, glm::vec3(480.0f, 30.0f, 1.0f), doorDialogue);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/Bed.png", 450, -280, glm::vec3(-415.0f, -100.0f, 1.0f), nullptr);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/cloth.png", 300, -150, glm::vec3(-305.0f, -140.0f, 1.0f), nullptr);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/TV.png", 300, -250, glm::vec3(0.0f, -30.0f, 1.0f), nullptr);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Hoody.png", 150, -300, glm::vec3(250.0f, -5.0f, 1.0f), nullptr);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster1.png", 150, -200, glm::vec3(-430.0f, 100.0f, 1.0f), nullptr);
+	//createObject(INTERACT_OBJ, "Texture/EliasRoom/Elias Room_Poster2.png", 150, -150, glm::vec3(-240.0f, 100.0f, 1.0f), nullptr);
+	std::string filename("example_xml_file_format/map.xml");
+	RoomGenerator room;
+	room.GenerateRoom(filename);
+	// testing door -----------------------------------------
+	Collider* door_next_limit = new Collider();
+	door_next_limit->setNewSize(winWidth+100, winHeight);
+	door_next_limit->setNewPos(winWidth, 0);
 
-	UIObject* border = new UIObject();
-	border->SetTexture("Texture/UI/Black_Border.png");
-	border->SetSize(1280, 720);
-	border->SetPosition(glm::vec3(0, 0, 1));
-	UI.push_back(border);
-	*/
+	Door* door = new Door(winWidth*0.5, -80, winWidth, winHeight);
+	door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
+	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
+	door->SetSize(220, -350);
+	door->SetDialogue(doorDialogue);
+	door->SetNextCamLimit(door_next_limit);						// limit for the camera in the next room
+	door->SetCollder(new Collider(door));						// collider of the door
+	objects.push_back(door);
+	// testing door -----------------------------------------
+
 	cursorGame = new CursorUI();
 	UI.push_back(cursorGame);
 
 	player = new Player();
-	player->SetTexture("Texture/Character/Elias.png");
+	player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(230.0f, -350.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
-	player->setDisplay(false);
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);
@@ -192,16 +149,14 @@ void Game::Init(int width, int height)
 
 	player->anim->Play("Move", true);
 
+	Camera::GetInstance()->SetTarget(player);
+
+	Collider* limit = new Collider();
+	limit->setNewSize(winWidth, winHeight);
+
+	Camera::GetInstance()->SetLimit(limit);
+
 	objects.push_back(player->createDialogueText());
-
-	//Item* item1 = new Item("temp");
-	//item1->SetTexture("Texture/EliasRoom/cloth.png");
-
-	//player->inventory->addItem(item1);
-	//player->inventory->addItem(item1);
-	//player->inventory->addItem(item1);
-	//player->inventory->addItem(item1);
-	//player->inventory->addItem(item1);
 
 	//CombineObject * obj = new CombineObject();
 	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
@@ -213,10 +168,6 @@ void Game::Init(int width, int height)
 	//obj2->SetColor(0.0, 0.0, 1.0);
 	//obj2->Translate(glm::vec3(1.0, 1.0, 0));
 	//objects.push_back(obj2);
-
-	/*********************************************************************************************************************************************/
-	/*********************************************************************************************************************************************/
-	/*********************************************************************************************************************************************/
 
 }
 
@@ -241,37 +192,37 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, vector<std::string>* dialogue)
+void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::string dialogue)
 {
 	ImageObject *tmp = nullptr;
 	switch (type)
 	{
-		case IMAGE_OBJ:
+	case IMAGE_OBJ:
+	{
+		tmp = new ImageObject();
+		break;
+	}
+	case INTERACT_OBJ:
+	{
+		if (dialogue != "")
 		{
-			tmp = new ImageObject();
-			break;
-		}
-		case INTERACT_OBJ:
-		{
-			if (dialogue != nullptr)
-			{
-				tmp = new InteractableObj(objType, dialogue);
+			tmp = new InteractableObj(objType, dialogue);
 
-			}
-			else 
-			{
-				tmp = new InteractableObj();
-			}
-			break;
 		}
-		case PORTOL:
+		else
 		{
-			break;
+			tmp = new InteractableObj();
 		}
-		case NPC:
-		{
-			break;
-		}
+		break;
+	}
+	case PORTOL:
+	{
+		break;
+	}
+	case NPC:
+	{
+		break;
+	}
 	}
 
 	tmp->SetTexture(texture);
@@ -297,14 +248,19 @@ void Game::AddUI(UIObject* obj) {
 
 Game::~Game()
 {
-
+	delete player;
+	for (auto obj : objects)
+		if (obj)
+			delete obj;
+	delete camera;
+	delete renderer;
 }
+
 
 glm::vec3 Game::findRealPos(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
+	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
 	return glm::vec3(realX, realY, 1);
 }
-

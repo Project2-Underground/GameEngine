@@ -105,23 +105,35 @@
     <ClInclude Include="CombinableItem.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="xmlFileManager.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="xmlDialogue.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource\pugixml-1.10\src\pugiconfig.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
     <ClInclude Include="TimeSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
-    <ClInclude Include="Stair.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>GameUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>GameObj\interactable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +185,9 @@
     <ClCompile Include="InventoryBox.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
@@ -191,38 +206,41 @@
     <ClCompile Include="CombinableItem.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
+    <ClCompile Include="xmlFileManager.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlDialogue.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="TimeSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Door.cpp">
-      <Filter>GameObj\interactable</Filter>
-    </ClCompile>
-    <ClCompile Include="Stair.cpp">
-      <Filter>GameObj\interactable</Filter>
+      <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="InteractObj.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
-    <ClCompile Include="InfoPhone.cpp">
-      <Filter>GameObj\interactable</Filter>
+    <ClCompile Include="Button.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>GameUI</Filter>
+    <ClCompile Include="Door.cpp">
+      <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

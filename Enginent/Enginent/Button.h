@@ -10,8 +10,6 @@ class Button : public UIObject {
 		ImageObject* pressTexture;
 	public:
 		Button(std::string, std::string, std::string);
-		void pressButton(int x, int y);
-		void hoverCursor(int x, int y);
 		void updateButton(int, int);
 		virtual void action(int x, int y);
 		void checkCollider(int x, int y);

@@ -14,7 +14,7 @@ Player::Player()
 	move->SetFramePeriod(0.16f);
 
 	idle->SetFrame(1);
-	idle->SetFramePeriod(0.0f);
+	idle->SetFramePeriod(1.0f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
@@ -31,15 +31,16 @@ Player::Player()
 	dialogueColor.a = 0;
 	dialogue = " ";
 
+	// inventory
 	const int inventoryNum = 5;
 	float start_x = -550;
 	float start_y = -300;
 	float space = 20;
 	int size = 100;
-	
+
 	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
 	inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
-	
+
 	for (int i = 0; i < inventoryNum; i++)
 		Game::GetInstance()->AddUI(inventory->GetInventoryBox(i));
 }
@@ -93,28 +94,28 @@ void Player::Move()
 	col->Update();
 }
 
+void Player::setTarget(float x, float y)
+{
+	target = glm::vec3(x, y, 1);
+	walk = true;
+	setDialogue(" ");
+	if (!(anim->currentAnimation->animationName == "Move"))
+		anim->Play("Move", true);
+
+}
+
 void Player::setTarget(glm::vec3 realPos)
 {
 	if (this->display)
 	{
 		target = realPos;
 	}
-	
-	SoundManager::GetInstance()->playSound(walkSound);
-	walk = true;
-	setDialogue(" ");
-	if(!(anim->currentAnimation->animationName == "Move"))
-		anim->Play("Move", true);
-}
 
-void Player::setTarget(float x, float y)
-{
-	target = glm::vec3(x, y , 1);
+	SoundManager::GetInstance()->playSound(walkSound);
 	walk = true;
 	setDialogue(" ");
 	if (!(anim->currentAnimation->animationName == "Move"))
 		anim->Play("Move", true);
-
 }
 
 void Player::SetCollder(Collider* n_col) {
@@ -135,10 +136,10 @@ void Player::setDialogue(string dialogue)
 }
 
 Player::~Player() {
-	if (col)
+	if (col != nullptr)
 		delete col;
-	if (inventory)
+	if (inventory != nullptr)
 		delete inventory;
-	if (dialogueText)
+	if (dialogueText != nullptr)
 		delete dialogueText;
 }
