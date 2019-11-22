@@ -42,6 +42,13 @@ void Button::checkCollider(int x, int y)
 }
 
 //////////////Exit Button
+Exit_Button::~Exit_Button()
+{
+	delete normalTexture;
+	delete hoverTexture;
+	delete pressTexture;
+}
+
 void Exit_Button::action(int x, int y)
 {
 	SDL_Quit();
@@ -50,6 +57,7 @@ void Exit_Button::action(int x, int y)
 //////////////Switch Scene Button
 SwitchScene_Button::~SwitchScene_Button()
 {
+	delete normalTexture;
 	delete hoverTexture;
 	delete pressTexture;
 }

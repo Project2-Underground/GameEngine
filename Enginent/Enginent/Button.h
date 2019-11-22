@@ -19,6 +19,7 @@ class Button : public UIObject {
 
 class Exit_Button : public Button {
 	public:
+		~Exit_Button();
 		Exit_Button(std::string normal, ::string hover, std::string press) : Button(normal, hover, press) {};
 		void action(int x, int y);
 };
