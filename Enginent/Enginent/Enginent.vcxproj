@@ -21,12 +21,9 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CombinableItem.h" />
     <ClInclude Include="CombineObject.h" />
-    <ClInclude Include="Cursor.h" />
-    <ClInclude Include="Door.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -38,54 +35,50 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Scene.h" />
     <ClInclude Include="SeparatableItem.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SquareMeshVbo.h" />
-    <ClInclude Include="Stair.h" />
     <ClInclude Include="TextObject.h" />
-    <ClInclude Include="TimeSystem.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
+    <ClInclude Include="xmlDialogue.h" />
+    <ClInclude Include="xmlFileManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CombinableItem.cpp" />
     <ClCompile Include="CombineObject.cpp" />
-    <ClCompile Include="Cursor.cpp" />
-    <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
-    <ClCompile Include="InfoPhone.cpp" />
-    <ClCompile Include="InteractObj.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeparatableItem.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
-    <ClCompile Include="Stair.cpp" />
     <ClCompile Include="TextObject.cpp" />
-    <ClCompile Include="TimeSystem.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="xmlDialogue.cpp" />
+    <ClCompile Include="xmlFileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd" />
@@ -182,7 +175,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;..\resource\irrKlang-64bit-1.6.0\include;..\resource\SDL2_ttf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\resource\glew\include;..\resource\SDL2-2.0.5\include;..\resource\glm;..\resource\irrKlang-64bit-1.6.0\include;..\resource\SDL2_ttf\include;..\resource\pugixml-1.10\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -212,7 +205,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>

@@ -5,8 +5,6 @@
 #include "DrawableObject.h"
 #include "GLRenderer.h"
 #include "Collider.h"
-#include "Cursor.h"
-#include "SoundManager.h"
 
 using namespace std;
 class Game
@@ -14,14 +12,11 @@ class Game
 	static Game* instance;
 	int winWidth, winHeight;
 	vector<DrawableObject*> objects;
-	vector<UIObject*> UI;
 	vector<Collider*> colliders;
 	GLRenderer *renderer;
 	Player * player;
-	CursorUI* cursorGame;
 	Game();
 public:
-	~Game();
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();
 	void rightClick(int x, int y);
@@ -30,11 +25,14 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
-	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, vector<std::string>* dialogue);
-	void AddObject(DrawableObject* obj);
-	void AddUI(UIObject* obj);
-	void updateMouseState(int, int);
-	Player* getPlayer() { return player;}
-	glm::vec3 findRealPos(int x, int y);
-	int checkPointObject(glm::vec3 pos);
+	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::string dialogue);
+
+
+};
+
+enum objectType {
+	IMAGE_OBJ = 0,
+	INTERACT_OBJ,
+	PORTOL,
+	NPC
 };
