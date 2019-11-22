@@ -33,12 +33,12 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
-	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::string dialoguePath);
+	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::vector<std::string> dialoguePath);
 	void AddObject(DrawableObject* obj);
 	void AddUI(UIObject* obj);
 	void updateMouseState(int, int);
 	Player* getPlayer() { return player;}
-	glm::vec3 findRealPos(int x, int y);
+	glm::vec3 FindMousePosition(int x, int y);
 	int checkPointObject(glm::vec3 pos);
 
 };
@@ -48,6 +48,6 @@ public:
 enum objectType {
 	IMAGE_OBJ = 0,
 	INTERACT_OBJ,
-	PORTOL,
+	PORTAL,
 	NPC
 };

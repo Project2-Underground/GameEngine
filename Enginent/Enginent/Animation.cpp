@@ -3,9 +3,10 @@
 #include "Game.h"
 #include <iostream>
 
-Animation::Animation( std::string name, std::string TexturePath) {
+Animation::Animation(std::string name, std::string TexturePath, bool leaveTime) {
 	this->animationName = name;
 	this->texture = Game::GetInstance()->GetRenderer()->LoadTexture(TexturePath);;
+	this->hasLeaveTime = leaveTime;
 }
 
 void Animation::SetFrame(int frame) {

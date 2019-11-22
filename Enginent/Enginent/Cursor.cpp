@@ -35,7 +35,7 @@ void CursorUI::updateCursor()
 	int mouseX;
 	int mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
-	glm::vec3 realPos = Game::GetInstance()->findRealPos(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
+	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
 	this->SetPosition(realPos);
 	setCursor(Game::GetInstance()->checkPointObject(realPos));
 }

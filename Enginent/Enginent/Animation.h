@@ -14,8 +14,9 @@ private:
 	unsigned int texture;
 public:
 	bool changed = false;
+	bool hasLeaveTime;
 	std::string animationName;
-	Animation(std::string name, std::string TexturePath);
+	Animation(std::string name, std::string TexturePath, bool leaveTime = false);
 	bool Finished();
 	void SetFrame(int frame);
 	void SetFramePeriod(double time);

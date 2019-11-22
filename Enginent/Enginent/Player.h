@@ -18,16 +18,22 @@ public:
 	~Player();
 	void Update();
 	void Move();
-	void setTarget(glm::vec3);
-	void setTarget(float x, float y);
+	void SetNextPosition(glm::vec3);
+	void SetNextPosition(float x, float y);
+	void SetTarget(InteractableObj* target);
 	void SetCollder(Collider* n_col);
+	void SetWalkLimit(Collider* limit);
 	void setDialogue(string dialogue);
+	void StopWalking();
+	void CheckWalkLimit();
 
 	Collider* col;
 	TextObject* createDialogueText();
 	Inventory* inventory;
 private:
-	glm::vec3 target;
+	Collider* walkLimit;
+	InteractableObj* target;
+	glm::vec3 next_position;
 	SDL_Color dialogueColor;
 	TextObject * dialogueText;
 	string dialogue;

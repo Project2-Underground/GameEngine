@@ -8,6 +8,7 @@
 #include "InteractObj.h"
 #include "Door.h"
 
+
 Game* Game::instance = nullptr;
 
 Game * Game::GetInstance()
@@ -41,7 +42,7 @@ void Game::rightClick(int x, int y)
 	float realX, realY;
 	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
 	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
-	player->setTarget(realX, realY);
+	player->SetNextPosition(realX, realY);
 }
 
 void Game::leftClick(int x, int y)
@@ -53,7 +54,8 @@ void Game::leftClick(int x, int y)
 	{
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 		{
-			ib->checkCollider(realX, realY);
+			if (ib->checkCollider(realX, realY))
+				player->SetTarget(ib);
 		}
 	}
 
@@ -68,7 +70,7 @@ void Game::leftClick(int x, int y)
 
 void Game::updateMouseState(int x, int y)
 {
-	glm::vec3 realPos = Game::GetInstance()->findRealPos(x, y);
+	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
 	for (int i = 0; i < UI.size(); i++)
 	{
 		if (dynamic_cast<Button*>(UI[i]))
@@ -112,10 +114,10 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	vector<std::string>* doorDialogue = new vector<std::string>;
-	doorDialogue->push_back("Lock.");
-	doorDialogue->push_back("Seem like it needs card to unlock.");
-	doorDialogue->push_back("I need to find a key card.");
+	vector<std::string> doorDialogue;
+	doorDialogue.push_back("Lock.");
+	doorDialogue.push_back("Seem like it needs card to unlock.");
+	doorDialogue.push_back("I need to find a key card.");
 
 	/*********************************************************************************************************************************************/
 	/*********************************************************************************************************************************************/
@@ -147,24 +149,36 @@ void Game::Init(int width, int height)
 	UI.push_back(border);
 	*/
 
+	UIObject* blackBold1 = new UIObject();
+	blackBold1->SetTexture("Texture/UI/Black_Border.png");
+	blackBold1->SetSize(1280, -720);
+	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+	UI.push_back(blackBold1);
 
-
-
+	// testing item pickup
 
 	std::string filename("example_xml_file_format/map.xml");
 	RoomGenerator room;
 	room.GenerateRoom(filename);
 	// testing door -----------------------------------------
 	Collider* door_next_limit = new Collider();
-	door_next_limit->setNewSize(winWidth+100, winHeight);
+	door_next_limit->setNewSize(winWidth, winHeight);
 	door_next_limit->setNewPos(winWidth, 0);
 
-	Door* door = new Door(winWidth*0.5, -80, winWidth, winHeight);
+	// testing item pickup
+	Item* item = new Item("Hoodies");
+	item->SetTexture("Texture/EliasRoom/Elias Room_Hoody.png");
+	item->SetInventoryTexture("Texture/EliasRoom/E Room_Hoody_I.png");
+	item->SetSize(150, -300);
+	item->SetPosition(glm::vec3(250.0f, -5.0f, 1.0f));
+	item->SetCollder(new Collider(item));
+	objects.push_back(item);
+
+	Door* door = new Door(winWidth*0.5, -80, door_next_limit, item);
 	door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
 	door->SetPosition(glm::vec3(420.0f, 20.0f, 1.0f));
 	door->SetSize(208, -379);
 	door->SetDialogue(doorDialogue);
-	door->SetNextCamLimit(door_next_limit);						// limit for the camera in the next room
 	door->SetCollder(new Collider(door));						// collider of the door
 	objects.push_back(door);
 	// testing door -----------------------------------------
@@ -179,6 +193,12 @@ void Game::Init(int width, int height)
 	Collider *col = new Collider(player);
 	colliders.push_back(col);
 	player->SetCollder(col);
+	
+	col = new Collider();
+	col->setNewWidth(winWidth * 0.75);
+	col->setNewPos(winWidth * 0.25, 0);
+	player->SetWalkLimit(col);
+
 
 	player->anim->Play("Move", true);
 
@@ -207,11 +227,6 @@ void Game::Init(int width, int height)
 	/*********************************************************************************************************************************************/
 	//createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
 
-	UIObject* blackBold1 = new UIObject();
-	blackBold1->SetTexture("Texture/UI/Black_Border.png");
-	blackBold1->SetSize(1280, -720);
-	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	UI.push_back(blackBold1);
 
 
 	UIObject* mainScreen = new UIObject();
@@ -240,7 +255,6 @@ void Game::Init(int width, int height)
 	((ImageObject*)startButton)->SetCollder(col2);
 	UI.push_back(startButton);
 
-
 	//the last
 
 	cursorGame = new CursorUI();
@@ -268,7 +282,7 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::string dialogue)
+void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::vector<std::string> dialogue)
 {
 	ImageObject *tmp = nullptr;
 	switch (type)
@@ -280,7 +294,7 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 	}
 	case INTERACT_OBJ:
 	{
-		if (dialogue != "")
+		if (dialogue.size() > 0)
 		{
 			tmp = new InteractableObj(objType, dialogue);
 
@@ -291,7 +305,7 @@ void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm
 		}
 		break;
 	}
-	case PORTOL:
+	case PORTAL:
 	{
 		break;
 	}
@@ -333,10 +347,10 @@ Game::~Game()
 }
 
 
-glm::vec3 Game::findRealPos(int x, int y)
+glm::vec3 Game::FindMousePosition(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
-	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
 	return glm::vec3(realX, realY, 1);
 }

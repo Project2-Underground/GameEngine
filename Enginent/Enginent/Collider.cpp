@@ -58,8 +58,8 @@ void Collider::setNewPos(float x, float y) {
 	this->maxBound += shiftDist;
 	this->minBound += shiftDist;
 	this->pos = glm::vec3(x, y, 1);
-	std::cout << minBound.x << ", " << minBound.y << std::endl;
-	std::cout << maxBound.x << ", " << maxBound.y << std::endl;
+	/*std::cout << minBound.x << ", " << minBound.y << std::endl;
+	std::cout << maxBound.x << ", " << maxBound.y << std::endl;*/
 }
 
 void Collider::setNewSize(glm::vec3 newSize) {

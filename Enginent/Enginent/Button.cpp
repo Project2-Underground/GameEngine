@@ -65,7 +65,7 @@ SwitchScene_Button::~SwitchScene_Button()
 
 void SwitchScene_Button::action(int x, int y)
 {
-	std::cout << "Change scene";
+	std::cout << "Change scene\n";
 	for (int i = 0; i < t_screen.size(); i++)
 	{
 		t_screen[i]->setDisplay(false);

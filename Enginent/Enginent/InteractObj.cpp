@@ -1,7 +1,7 @@
 #include "InteractObj.h"
 #include "Game.h"
 
-InteractableObj::InteractableObj(IneractTypeList type, vector<std::string>* s) {
+InteractableObj::InteractableObj(IneractTypeList type, vector<std::string> s) {
 	dialogue = s;
 	interactType = type;
 }
@@ -9,7 +9,7 @@ InteractableObj::InteractableObj(IneractTypeList type, vector<std::string>* s) {
 InteractableObj::InteractableObj(IneractTypeList type, std::string s)
 {
 	interactType = type;
-	dialogue->push_back(s);
+	dialogue.push_back(s);
 }
 
 InteractableObj::InteractableObj(IneractTypeList type) {
@@ -23,31 +23,26 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
-void InteractableObj::SetDialogue(vector<std::string>* s) {
+void InteractableObj::SetDialogue(vector<std::string> s) {
 	dialogue = s;
 }
 
-void InteractableObj::action(int x, int y) {
-	Game::GetInstance()->getPlayer()->setTarget(x, y);
-
-	if (dialogue != nullptr)
+void InteractableObj::action() {
+	if (dialogue.size() > 0)
 	{
-		Game::GetInstance()->getPlayer()->setDialogue((*dialogue)[currDialogue]);
-		currDialogue++;
-		if (currDialogue >= dialogue->size())
-		{
-			currDialogue = 0;
-		}
+		Game::GetInstance()->getPlayer()->setDialogue(dialogue[currDialogue]);
+		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	//ANIMATION
 	//UPDATE TEXT
 }
 
-void InteractableObj::checkCollider(int x, int y) {
-	if (this->col->isClicked(x, y))
+bool InteractableObj::checkCollider(int x, int y) {
+	return this->col->isClicked(x, y);
+	/*if (this->col->isClicked(x, y))
 	{
 		action(x, y);
-	}
+	}*/
 }
 bool InteractableObj::checkPointing(int x, int y)
 {
@@ -61,6 +56,4 @@ bool InteractableObj::checkPointing(int x, int y)
 InteractableObj::~InteractableObj() {
 	if (col)
 		delete col;
-	if (dialogue)
-		delete dialogue;
 }

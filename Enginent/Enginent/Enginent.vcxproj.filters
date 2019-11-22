@@ -197,9 +197,6 @@
     <ClCompile Include="TextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIObject.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
     <ClCompile Include="SeparatableItem.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
@@ -241,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

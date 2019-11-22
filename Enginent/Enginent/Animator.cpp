@@ -6,13 +6,19 @@
 
 void Animator::Play(std::string animationName, bool loop) {
 	// check if animation is added in map
-	if(animations.find(animationName) == animations.end()){
-		std::cout << "Animation name is not found" << std::endl;
+	if (currentAnimation && currentAnimation->hasLeaveTime && !currentAnimation->Finished()) {
 		return;
 	}
-	currentAnimation = animations[animationName];
-	this->loop = loop;
-	currentAnimation->ResetAnimation();
+	else {
+		if (animations.find(animationName) == animations.end()) {
+			std::cout << "Animation name is not found" << std::endl;
+			return;
+		}
+		currentAnimation = animations[animationName];
+		this->loop = loop;
+		currentAnimation->ResetAnimation();
+		currentAnimation->NextFrame();
+	}
 }
 
 void Animator::SetDefaultAnimation(std::string animationName) {

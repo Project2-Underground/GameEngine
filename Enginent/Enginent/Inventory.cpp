@@ -6,7 +6,7 @@ Inventory::Inventory(int numOfInventory, glm::vec3 arrOfPos[], int boxSize) {
 	for (int i = 0; i < itemSize; i++) {
 		InventoryBox *tmpObj =  new InventoryBox();
 		tmpObj->SetPosition(arrOfPos[i]);
-		tmpObj->SetSize(boxSize, boxSize);
+		tmpObj->SetSize(boxSize, -boxSize);
 		InventoryBoxes.push_back(tmpObj);
 	}
 }

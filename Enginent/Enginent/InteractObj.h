@@ -8,31 +8,31 @@ enum IneractTypeList
 	NORMAL = 1,
 	VIEW,
 	PICKUP,
+	DOOR,
 	TALK,
 	CHANGESCENE,
 	SAVE,
-	BUTTON,
-	DOOR
+	BUTTON
 };
 
 class InteractableObj : public ImageObject {
 protected:
 	IneractTypeList interactType = NORMAL;
-	vector<std::string>* dialogue;
+	vector<std::string> dialogue;
 	int currDialogue = 0;
 	Collider* col;
 public:
 	InteractableObj() {};
 	InteractableObj(IneractTypeList type);
 	InteractableObj(IneractTypeList type, std::string);
-	InteractableObj(IneractTypeList type, vector<std::string>* s);
+	InteractableObj(IneractTypeList type, vector<std::string> s);
 
-	virtual void action(int x, int y);
+	virtual void action();
 
-	void SetDialogue(vector<std::string>* s);
+	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
-	void checkCollider(int x, int y);
+	bool checkCollider(int x, int y);
 	bool checkPointing(int x, int y);
 
 	IneractTypeList getType() { return interactType; };

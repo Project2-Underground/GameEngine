@@ -1,24 +1,32 @@
 #include "Player.h"
 #include "SquareMeshVbo.h"
 #include "Game.h"
+#include "Door.h"
 #include <iostream>
 
 Player::Player()
 {
-	target = glm::vec3(this->pos);
+	walkLimit = nullptr;
+	target = nullptr;
+	next_position = glm::vec3(this->pos);
 	anim = new Animator();
 
 	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
 	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
+	Animation* pickup = new Animation("Pickup", "Texture/Character/Elias_pick.png", true);
 	move->SetFrame(4);
 	move->SetFramePeriod(0.16f);
 
 	idle->SetFrame(1);
 	idle->SetFramePeriod(0.0f);
+	
+	pickup->SetFrame(3);
+	pickup->SetFramePeriod(0.16f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
-	anim->SetDefaultAnimation("Move");
+	anim->AddAnimation(pickup);
+	anim->SetDefaultAnimation("Idle");
 
 	walk = false;
 	faceLeft = true;
@@ -53,7 +61,7 @@ void Player::Update()
 			anim->Play("Idle", true);
 			SoundManager::GetInstance()->stop("Walking");
 			dialogueText->loadText(dialogue, dialogueColor, 18);
-			dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
+			//dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 		}
 	}
 
@@ -61,9 +69,9 @@ void Player::Update()
 
 void Player::Move()
 {
-	if (this->pos.x > target.x)
+	if (this->pos.x > next_position.x)
 	{
-		if (pos.x - target.x > WALK_SPEED)
+		if (pos.x - next_position.x > WALK_SPEED)
 		{
 			if (!faceLeft)
 			{
@@ -74,12 +82,12 @@ void Player::Move()
 		}
 		else
 		{
-			walk = false;
+			StopWalking();
 		}
 	}
-	else if (this->pos.x < target.x)
+	else if (this->pos.x < next_position.x)
 	{
-		if (target.x - pos.x > WALK_SPEED)
+		if (next_position.x - pos.x > WALK_SPEED)
 		{
 			if (faceLeft)
 			{
@@ -90,17 +98,51 @@ void Player::Move()
 		}
 		else
 		{
-			walk = false;
+			StopWalking();
 		}
 	}
+	CheckWalkLimit();
 	col->Update();
 }
 
-void Player::setTarget(float x, float y)
+void Player::StopWalking() {
+	walk = false;
+	if (target != nullptr) {
+		target->action();
+		target = nullptr;
+	}
+}
+
+void Player::CheckWalkLimit() {
+	if (walkLimit != nullptr) {
+		// right limit
+		if (pos.x + size.x * 0.5 > walkLimit->getMaxBound().x) {
+			pos.x = walkLimit->getMaxBound().x - size.x * 0.5;
+			StopWalking();
+		}
+		// left limit
+		else if (pos.x - size.x * 0.5 < walkLimit->getMinBound().x) {
+			pos.x = walkLimit->getMinBound().x + size.x * 0.5;
+			StopWalking();
+		}
+	}
+}
+
+void Player::SetTarget(InteractableObj* target) {
+	this->target = target;
+	this->next_position = target->getPos();
+	SoundManager::GetInstance()->playSound("Walking");
+	walk = true;
+	setDialogue(" ");
+	if (!(anim->currentAnimation->animationName == "Move"))
+		anim->Play("Move", true);
+}
+
+void Player::SetNextPosition(float x, float y)
 {
 	if (display)
 	{
-		target = glm::vec3(x, y, 1);
+		next_position = glm::vec3(x, y, 1);
 		walk = true;
 		SoundManager::GetInstance()->playSound("Walking");
 		setDialogue(" ");
@@ -109,11 +151,11 @@ void Player::setTarget(float x, float y)
 	}
 }
 
-void Player::setTarget(glm::vec3 realPos)
+void Player::SetNextPosition(glm::vec3 realPos)
 {
 	if (this->display)
 	{
-		target = realPos;
+		next_position = realPos;
 	}
 
 	SoundManager::GetInstance()->playSound("Walking");
@@ -126,6 +168,10 @@ void Player::setTarget(glm::vec3 realPos)
 void Player::SetCollder(Collider* n_col) {
 	col = n_col;
 	col->setRefObject(this);
+}
+
+void Player::SetWalkLimit(Collider* limit) {
+	walkLimit = limit;
 }
 
 TextObject* Player::createDialogueText()

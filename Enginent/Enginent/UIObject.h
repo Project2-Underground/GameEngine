@@ -8,5 +8,5 @@ class UIObject : public ImageObject
 {
 public:
 	void Render(glm::mat4 globalModelTransform) {};
-	void Render();
+	virtual void Render();
 };

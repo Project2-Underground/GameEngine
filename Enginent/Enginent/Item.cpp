@@ -7,7 +7,12 @@ Item::Item(std::string name) {
 
 void Item::action() {
 	// to be picked up by the player
-	Game::GetInstance()->getPlayer()->inventory->addItem(this);
+	if (display) {
+		SetTexture(Inventory_texture);
+		Game::GetInstance()->getPlayer()->anim->Play("Pickup", false);
+		Game::GetInstance()->getPlayer()->inventory->addItem(this);
+	}
+	display = false;
 }
 
 bool Item::operator==(const Item& item) {
@@ -15,4 +20,8 @@ bool Item::operator==(const Item& item) {
 		return true;
 	}
 	return false;
+}
+
+void Item::SetInventoryTexture(std::string path) {
+	Inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
