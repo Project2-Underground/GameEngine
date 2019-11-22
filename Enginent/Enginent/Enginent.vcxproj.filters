@@ -114,6 +114,12 @@
     <ClInclude Include="LevelGenerator.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\resource\pugixml-1.10\src\pugiconfig.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
