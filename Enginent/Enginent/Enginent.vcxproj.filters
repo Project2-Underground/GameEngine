@@ -129,6 +129,12 @@
     <ClInclude Include="Cursor.h">
       <Filter>GameUI</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -229,6 +235,12 @@
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

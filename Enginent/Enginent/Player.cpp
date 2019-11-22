@@ -8,17 +8,19 @@ Player::Player()
 	target = glm::vec3(this->pos);
 	anim = new Animator();
 
-	Animation* move = new Animation("Move", "Texture/Character/Elias_move.png");
-	Animation* idle = new Animation("Idle", "Texture/idle_test2.png");
-	move->SetFrame(8);
-	move->SetFramePeriod(0.08f);
+	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
+	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
+	move->SetFrame(4);
+	move->SetFramePeriod(0.16f);
 
-	idle->SetFrame(8);
-	idle->SetFramePeriod(0.09f);
+	idle->SetFrame(1);
+	idle->SetFramePeriod(1.0f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
 	anim->SetDefaultAnimation("Move");
+
+	walkSound = SoundManager::GetInstance()->createSound("Sound/walking_sound.mp3", true, true);
 
 	walk = false;
 	faceLeft = true;

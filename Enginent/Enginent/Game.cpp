@@ -125,7 +125,7 @@ void Game::Init(int width, int height)
 	door_next_limit->setNewPos(winWidth, 0);
 
 	Door* door = new Door(winWidth*0.5, -80, winWidth, winHeight);
-	door->SetTexture("Texture/EliasRoom/door.png");
+	door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
 	door->SetPosition(glm::vec3(480.0f, 30.0f, 1.0f));
 	door->SetSize(220, -350);
 	door->SetDialogue(doorDialogue);
@@ -134,8 +134,11 @@ void Game::Init(int width, int height)
 	objects.push_back(door);
 	// testing door -----------------------------------------
 
+	cursorGame = new CursorUI();
+	UI.push_back(cursorGame);
+
 	player = new Player();
-	player->SetTexture("Texture/Character/Elias.png");
+	player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(100.0f, -240.0f);
 	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
 	objects.push_back(player);

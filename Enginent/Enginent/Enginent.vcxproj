@@ -24,10 +24,12 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CombinableItem.h" />
     <ClInclude Include="CombineObject.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -61,10 +63,12 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CombinableItem.cpp" />
     <ClCompile Include="CombineObject.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
