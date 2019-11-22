@@ -47,7 +47,7 @@ glm::mat4 Camera::GetViewMatrix() {
 		// check if out of game view
 		if (limit != nullptr) {
 			// left bound
-			std::cout << (-next_pos.x - cam_width * 0.5) << ", " << limit->getMinBound().x << std::endl;
+			//std::cout << (-next_pos.x - cam_width * 0.5) << ", " << limit->getMinBound().x << std::endl;
 			if ((-next_pos.x - cam_width * 0.5) < limit->getMinBound().x) {
 				next_pos.x = -(limit->getMinBound().x + cam_width * 0.5);
 			}

@@ -139,8 +139,8 @@ void Game::Init(int width, int height)
 
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias_idle.png");
-	player->SetSize(100.0f, -240.0f);
-	player->SetPosition(glm::vec3(0.0f, -80.0f, 1.0f));
+	player->SetSize(230.0f, -350.0f);
+	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);
