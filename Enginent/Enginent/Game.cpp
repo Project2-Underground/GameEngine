@@ -168,18 +168,20 @@ void Game::Init(int width, int height)
 	// testing item pickup
 	Item* item = new Item("Hoodies");
 	item->SetTexture("Texture/EliasRoom/Elias Room_Hoody.png");
-	item->SetInventoryTexture("Texture/EliasRoom/E Room_Hoody_I.png");
+	item->SetInventoryTexture("Texture/EliasRoom/PersonalCard_I.png");
 	item->SetSize(150, -300);
 	item->SetPosition(glm::vec3(250.0f, -5.0f, 1.0f));
 	item->SetCollder(new Collider(item));
 	objects.push_back(item);
 
-	Door* door = new Door(winWidth*0.5, -80, door_next_limit, item);
+	Door* door = new Door(winWidth, -80, door_next_limit, item);
 	door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
 	door->SetPosition(glm::vec3(420.0f, 20.0f, 1.0f));
 	door->SetSize(208, -379);
 	door->SetDialogue(doorDialogue);
-	door->SetCollder(new Collider(door));						// collider of the door
+	door->SetCollder(new Collider(door));		
+	door->SetSound("Locked");
+	// collider of the door
 	objects.push_back(door);
 	// testing door -----------------------------------------
 

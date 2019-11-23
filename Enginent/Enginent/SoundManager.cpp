@@ -12,6 +12,8 @@ void SoundManager::Init()
 {
 	sounds["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3", true, true);
 	sounds["Walking"] = createSound("Sound/walking_sound.mp3", true, true);
+	sounds["Door"] = createSound("Sound/Door_sound.mp3", false, true);
+	sounds["Locked"] = createSound("Sound/Locked_sound.mp3", false, true);
 }
 
 ISound* SoundManager::createSound(const char* filename, bool loop, bool pauseAtStart)
@@ -20,6 +22,12 @@ ISound* SoundManager::createSound(const char* filename, bool loop, bool pauseAtS
 }
 
 void SoundManager::playSound(std::string sound) {
+	sounds[sound]->setIsPaused(false);
+}
+
+void SoundManager::playSFX(std::string sound)
+{
+	sounds[sound]->setPlayPosition(0);
 	sounds[sound]->setIsPaused(false);
 }
 

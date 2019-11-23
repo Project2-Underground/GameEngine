@@ -3,17 +3,17 @@
 
 CursorUI::CursorUI() {
 	CS_Normal = new ImageObject();
-	CS_Normal->SetTexture("Texture/UI/Normal_Cursor.png");
+	CS_Normal->SetTexture("Texture/UI/Cursor/Normal_Cursor.png");
 	CS_Chat = new ImageObject();
-	CS_Chat->SetTexture("Texture/UI/Chat_cursor.png");
+	CS_Chat->SetTexture("Texture/UI/Cursor/Chat_cursor.png");
 	CS_Door = new ImageObject();
-	CS_Door->SetTexture("Texture/UI/Move_cursor.png");
+	CS_Door->SetTexture("Texture/UI/Cursor/Move_cursor.png");
 	CS_Pick = new ImageObject();
-	CS_Pick->SetTexture("Texture/UI/Pickup_cursor.png");
+	CS_Pick->SetTexture("Texture/UI/Cursor/Pickup_cursor.png");
 	CS_View = new ImageObject();
-	CS_View->SetTexture("Texture/UI/View_cursor.png");
+	CS_View->SetTexture("Texture/UI/Cursor/View_cursor.png");
 	CS_Save = new ImageObject();
-	CS_Save->SetTexture("Texture/UI/Save_cursor.png");
+	CS_Save->SetTexture("Texture/UI/Cursor/Save_cursor.png");
 
 
 	this->SetTexture(((CursorUI*)CS_Normal)->texture);
@@ -42,28 +42,37 @@ void CursorUI::updateCursor()
 
 void CursorUI::setCursor(int type)
 {
-	switch (type)
+	if (enable)
 	{
-		case IneractTypeList::NORMAL:
+		switch (type)
+		{
+			case IneractTypeList::NORMAL:
 				this->SetTexture(((CursorUI*)CS_View)->texture);
 				break;
-		case IneractTypeList::TALK:
+			case IneractTypeList::TALK:
 				this->SetTexture(((CursorUI*)CS_Chat)->texture);
 				break;
-		case IneractTypeList::CHANGESCENE:
+			case IneractTypeList::CHANGESCENE:
 				this->SetTexture(((CursorUI*)CS_Door)->texture);
 				break;
-		case IneractTypeList::PICKUP:
+			case IneractTypeList::PICKUP:
 				this->SetTexture(((CursorUI*)CS_Pick)->texture);
 				break;
-		case IneractTypeList::VIEW:
+			case IneractTypeList::VIEW:
 				this->SetTexture(((CursorUI*)CS_View)->texture);
 				break;
-		case IneractTypeList::SAVE:
+			case IneractTypeList::SAVE:
 				this->SetTexture(((CursorUI*)CS_Save)->texture);
 				break;
-		default:
+			default:
 				this->SetTexture(((CursorUI*)CS_Normal)->texture);
 				break;
+		}
 	}
+
+}
+
+void CursorUI::enableChange(bool e)
+{
+	enable = e;
 }

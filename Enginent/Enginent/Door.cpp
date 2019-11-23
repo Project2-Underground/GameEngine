@@ -13,6 +13,7 @@ Door::Door(float next_playerx, float next_playery, Collider* lim, InteractableOb
 }
 
 void Door::action() {
+	Unlock(Game::GetInstance()->getPlayer()->inventory->GetInventoryBox(0)->GetItem());
 	if (open) {
 		Player* player = Game::GetInstance()->getPlayer();
 		Camera* camera = Camera::GetInstance();

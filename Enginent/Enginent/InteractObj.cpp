@@ -34,6 +34,11 @@ void InteractableObj::action() {
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	//ANIMATION
+	//SOUND
+	if (interact_sound != "")
+	{
+		SoundManager::GetInstance()->playSFX(interact_sound);
+	}
 	//UPDATE TEXT
 }
 
@@ -56,4 +61,9 @@ bool InteractableObj::checkPointing(int x, int y)
 InteractableObj::~InteractableObj() {
 	if (col)
 		delete col;
+}
+
+void InteractableObj::SetSound(std::string s)
+{
+	interact_sound = s;
 }

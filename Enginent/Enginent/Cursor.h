@@ -10,10 +10,12 @@ class CursorUI : public UIObject {
 		ImageObject* CS_Door;
 		ImageObject* CS_View;
 		ImageObject* CS_Save;
+		bool enable = false;
 
 	public:
 		CursorUI();
 		~CursorUI();
 		void updateCursor();
 		void setCursor(int type);
+		void enableChange(bool);
 };

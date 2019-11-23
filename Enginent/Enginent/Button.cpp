@@ -73,4 +73,5 @@ void SwitchScene_Button::action(int x, int y)
 	display = false;
 	SoundManager::GetInstance()->stop("MainScreen");
 	Game::GetInstance()->getPlayer()->setDisplay(true);
+	Game::GetInstance()->getCursor()->enableChange(true);
 }

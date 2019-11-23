@@ -15,13 +15,13 @@ Player::Player()
 	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
 	Animation* pickup = new Animation("Pickup", "Texture/Character/Elias_pick.png", true);
 	move->SetFrame(4);
-	move->SetFramePeriod(0.16f);
+	move->SetFramePeriod(0.25f);
 
 	idle->SetFrame(1);
 	idle->SetFramePeriod(0.0f);
 	
 	pickup->SetFrame(3);
-	pickup->SetFramePeriod(0.16f);
+	pickup->SetFramePeriod(0.25f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
@@ -129,13 +129,17 @@ void Player::CheckWalkLimit() {
 }
 
 void Player::SetTarget(InteractableObj* target) {
-	this->target = target;
-	this->next_position = target->getPos();
-	SoundManager::GetInstance()->playSound("Walking");
-	walk = true;
-	setDialogue(" ");
-	if (!(anim->currentAnimation->animationName == "Move"))
-		anim->Play("Move", true);
+	if (display)
+	{
+		this->target = target;
+		this->next_position = target->getPos();
+		SoundManager::GetInstance()->playSound("Walking");
+		walk = true;
+		setDialogue(" ");
+		if (!(anim->currentAnimation->animationName == "Move"))
+			anim->Play("Move", true);
+	}
+
 }
 
 void Player::SetNextPosition(float x, float y)

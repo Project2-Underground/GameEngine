@@ -40,7 +40,7 @@ public:
 	Player* getPlayer() { return player;}
 	glm::vec3 FindMousePosition(int x, int y);
 	int checkPointObject(glm::vec3 pos);
-
+	CursorUI* getCursor() { return cursorGame; };
 };
 
 

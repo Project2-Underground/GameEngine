@@ -17,6 +17,7 @@ public:
 	ISound* createSound(const char* filename, bool loop, bool pauseAtStart);
 	void Init();
 	void playSound(std::string);
+	void playSFX(std::string);
 	void pause(std::string);
 	void stop(std::string);
 	void stopAllSounds();

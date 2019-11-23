@@ -3,6 +3,7 @@
 <room>
 	<background type="0">
 		<obj texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0" dialogue=""/>
+		<obj texture="Texture/MainHall/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220" dialogue=""/>
 	</background>
 	<interactable type="1">
 		<obj texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120" dialogue="Guess it is time to do the laundry."/>

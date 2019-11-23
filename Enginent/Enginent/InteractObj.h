@@ -21,6 +21,7 @@ protected:
 	vector<std::string> dialogue;
 	int currDialogue = 0;
 	Collider* col;
+	std::string interact_sound = "";
 public:
 	InteractableObj() {};
 	InteractableObj(IneractTypeList type);
@@ -28,7 +29,7 @@ public:
 	InteractableObj(IneractTypeList type, vector<std::string> s);
 
 	virtual void action();
-
+	void SetSound(std::string);
 	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
 	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
