@@ -1,19 +1,9 @@
 #include "InteractObj.h"
 #include "Game.h"
 
-InteractableObj::InteractableObj(IneractTypeList type, vector<std::string> s) {
+InteractableObj::InteractableObj(vector<std::string> s) {
+	interactType = NORMAL;
 	dialogue = s;
-	interactType = type;
-}
-
-InteractableObj::InteractableObj(IneractTypeList type, std::string s)
-{
-	interactType = type;
-	dialogue.push_back(s);
-}
-
-InteractableObj::InteractableObj(IneractTypeList type) {
-	interactType = type;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -27,6 +17,10 @@ void InteractableObj::SetDialogue(vector<std::string> s) {
 	dialogue = s;
 }
 
+void InteractableObj::SetName(std::string name) {
+	object_name = name;
+}
+
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
@@ -37,14 +31,14 @@ void InteractableObj::action() {
 	//UPDATE TEXT
 }
 
-bool InteractableObj::checkCollider(int x, int y) {
+bool InteractableObj::CheckCollider(int x, int y) {
 	return this->col->isClicked(x, y);
 	/*if (this->col->isClicked(x, y))
 	{
 		action(x, y);
 	}*/
 }
-bool InteractableObj::checkPointing(int x, int y)
+bool InteractableObj::CheckPointing(int x, int y)
 {
 	if (this->col->isClicked(x, y))
 	{
@@ -56,4 +50,11 @@ bool InteractableObj::checkPointing(int x, int y)
 InteractableObj::~InteractableObj() {
 	if (col)
 		delete col;
+}
+
+bool InteractableObj::operator==(const InteractableObj& obj) {
+	if (this->object_name == obj.object_name) {
+		return true;
+	}
+	return false;
 }

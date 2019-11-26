@@ -3,6 +3,7 @@
 #include "Camera.h"
 
 Door::Door(float next_playerx, float next_playery, Collider* lim, InteractableObj* item_to_unlock) {
+	interactType = DOOR;
 	open = true;
 	nextPlayerPos = glm::vec3(next_playerx, next_playery, 1);
 	next_cam_limit = lim;
@@ -12,8 +13,18 @@ Door::Door(float next_playerx, float next_playery, Collider* lim, InteractableOb
 	}
 }
 
+Door::Door(int next_room, int door_no) {
+	this->next_room = next_room;
+	this->door_no = door_no;
+}
+
 void Door::action() {
 	if (open) {
+		// new settings
+		// load next room and next door position;
+
+
+		// old settings
 		Player* player = Game::GetInstance()->getPlayer();
 		Camera* camera = Camera::GetInstance();
 
@@ -28,6 +39,10 @@ void Door::action() {
 	else {
 		this->InteractableObj::action();
 	}
+}
+
+void Door::SetDoorLevelPosition(glm::vec3 pos) {
+	doorLevelPosition = pos;
 }
 
 Door::~Door() {

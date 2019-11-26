@@ -1,14 +1,32 @@
 #pragma once
 #include "InteractObj.h"
 
+enum ItemType {
+	SEPARATABLE = 0,
+	COMBINABLE
+};
+
 class Item : public InteractableObj {
-	// description: show on screen when interact with the item
 	unsigned int Inventory_texture;
 public:
-	std::string itemName;
-	Item() {};
+	Item() { interactType = PICKUP; };
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);
 	void action();
-	bool operator==(const Item& item);
+};
+
+class SeparatableItem :public Item {
+	// the items that will be separated into
+	std::vector<Item*> items;
+public:
+	SeparatableItem(std::vector<Item*>);
+	void Separate();
+};
+
+class CombinableItem :public Item {
+	std::string itemToCombine;			// item that can be combined with
+	Item* combinedItem;			// item after combined
+public:
+	CombinableItem(std::string itc, Item* ci);
+	bool Combine(Item* item);	// return false if combination failed
 };

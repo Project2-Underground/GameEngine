@@ -81,9 +81,6 @@
     <ClInclude Include="InfoPhone.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
-    <ClInclude Include="SeparatableItem.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>GameUI</Filter>
     </ClInclude>
@@ -102,13 +99,7 @@
     <ClInclude Include="TextObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CombinableItem.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
     <ClInclude Include="xmlFileManager.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
-    <ClInclude Include="xmlDialogue.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
     <ClInclude Include="LevelGenerator.h">
@@ -197,17 +188,8 @@
     <ClCompile Include="TextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SeparatableItem.cpp">
-      <Filter>GameObj\interactable</Filter>
-    </ClCompile>
-    <ClCompile Include="CombinableItem.cpp">
-      <Filter>GameObj\interactable</Filter>
-    </ClCompile>
     <ClCompile Include="xmlFileManager.cpp">
       <Filter>GameUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="xmlDialogue.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>GameUtilities</Filter>

@@ -4,5 +4,5 @@
 
 class RoomGenerator : public xmlManager {
 public:
-	void GenerateRoom(std::string filename);
+	void GenerateRoom(std::string);
 };

@@ -2,7 +2,7 @@
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
 #include "GameObject.h"
-#include "CombineObject.h"
+#include "Item.h"
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
@@ -28,7 +28,7 @@ int Game::checkPointObject(glm::vec3 pos)
 {
 	for (int i = objects.size() - 1; i >= 0; i--)
 	{
-		if (dynamic_cast<InteractableObj*>(objects[i]) && dynamic_cast<InteractableObj*>(objects[i])->checkPointing(pos.x, pos.y))
+		if (dynamic_cast<InteractableObj*>(objects[i]) && dynamic_cast<InteractableObj*>(objects[i])->CheckPointing(pos.x, pos.y))
 		{
 			return dynamic_cast<InteractableObj*>(objects[i])->getType();
 		}
@@ -54,7 +54,7 @@ void Game::leftClick(int x, int y)
 	{
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 		{
-			if (ib->checkCollider(realX, realY))
+			if (ib->CheckCollider(realX, realY))
 				player->SetTarget(ib);
 		}
 	}
@@ -282,51 +282,99 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::vector<std::string> dialogue)
-{
-	ImageObject *tmp = nullptr;
+void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos) {
+	// bg
+	ImageObject* tmp = new ImageObject();
+	CreateObject(tmp, texture, sizeX, sizeY, pos);
+}
+
+void Game::CreateObject(std::string name, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue) {
+	// interactable
+	InteractableObj* tmp = new InteractableObj(dialogue);
+	tmp->SetName(name);
+	tmp->SetCollder(new Collider(tmp));
+	CreateObject(tmp, texture, sizeX, sizeY, pos);
+}
+
+void Game::CreateObject(std::string name, std::string texture, std::string i_texture, int type, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue, std::vector<Item*> items) {
+	// item
+	Item* tmp; 
 	switch (type)
 	{
-	case IMAGE_OBJ:
-	{
-		tmp = new ImageObject();
+	case SEPARATABLE:
+		tmp = new SeparatableItem(items);
+		break;
+	case COMBINABLE:
+		tmp = new CombinableItem(items[0]->object_name, items[1]);
 		break;
 	}
-	case INTERACT_OBJ:
-	{
-		if (dialogue.size() > 0)
-		{
-			tmp = new InteractableObj(objType, dialogue);
+	tmp->SetInventoryTexture(i_texture);
+	tmp->SetName(name);
+	tmp->SetCollder(new Collider(tmp));
+	CreateObject(tmp, texture, sizeX, sizeY, pos);
+}
 
-		}
-		else
-		{
-			tmp = new InteractableObj();
-		}
-		break;
-	}
-	case PORTAL:
-	{
-		break;
-	}
-	case NPC:
-	{
-		break;
-	}
-	}
+void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, int next_room, int door_no, std::vector<std::string> dialogue) {
+	// door
+	Door* tmp = new Door(next_room, door_no);
+	tmp->SetDialogue(dialogue);
+	tmp->SetCollder(new Collider(tmp));
+	CreateObject(tmp, texture, sizeX, sizeY, pos);
+}
 
+void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue) {
+	// NPC
+}
+
+void Game::CreateObject(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos) {
 	tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, sizeY);
 	tmp->SetPosition(pos);
-	if (type != IMAGE_OBJ)
-	{
-		Collider *col2 = new Collider(tmp);
-		colliders.push_back(col2);
-		((InteractableObj*)tmp)->SetCollder(col2);
-	}
-
 	objects.push_back(tmp);
 }
+
+//void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue)
+//{
+//	ImageObject *tmp = nullptr;
+//	switch (type)
+//	{
+//	case IMAGE_OBJ:
+//	{
+//		tmp = new ImageObject();
+//		break;
+//	}
+//	case INTERACT_OBJ:
+//	{
+//		tmp = new InteractableObj(dialogue);
+//		break;
+//	}
+//	case ITEM: 
+//	{
+//		tmp = new Item();
+//		break;
+//	}
+//	case PORTAL:
+//	{
+//		break;
+//	}
+//	case NPC:
+//	{
+//		break;
+//	}
+//	}
+//
+//	tmp->SetTexture(texture);
+//	tmp->SetSize(sizeX, sizeY);
+//	tmp->SetPosition(pos);
+//	if (type != IMAGE_OBJ)
+//	{
+//		Collider *col2 = new Collider(tmp);
+//		colliders.push_back(col2);
+//		((InteractableObj*)tmp)->SetCollder(col2);
+//	}
+//
+//	objects.push_back(tmp);
+//}
 
 void Game::AddObject(DrawableObject* obj) {
 	objects.push_back(obj);
