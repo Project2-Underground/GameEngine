@@ -10,12 +10,19 @@
 #include "Button.h"
 #include "LevelGenerator.h"
 
+enum objectType {
+	IMAGE_OBJ = 0,
+	INTERACT_OBJ,
+	ITEM,
+	PORTAL,
+	NPC,
+};
+
 using namespace std;
 class Game
 {
 	static Game* instance;
 	vector<DrawableObject*> objects;
-	vector<Collider*> colliders;
 	vector<UIObject*> UI;
 	GLRenderer *renderer;
 	Player * player;
@@ -41,18 +48,13 @@ public:
 	glm::vec3 FindMousePosition(int x, int y);
 	int checkPointObject(glm::vec3 pos);
 
-	void CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos);																				// background
-	void CreateObject(std::string name, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue);							// interactable
-	void CreateObject(std::string name, std::string texture, std::string i_texture, int type, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue, std::vector<Item*> Items);	// items
-	void CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, int next_room, int door_no, std::vector<std::string> dialogue);																	// door
-	void CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue);												// NPC
-	void CreateObject(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos);
-};
+	void createObject(objectType type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue);
+	void createObject(InteractableObj* tmp, std::string name);
 
-enum objectType {
-	IMAGE_OBJ = 0,
-	INTERACT_OBJ,
-	ITEM,
-	PORTAL,
-	NPC,
+	void CreateBackgroundObj(std::string);
+	void CreateInteractObj(std::string);
+	void CreateItemObj(std::string name, std::string i_texture, int itemType, std::vector<Item*> items);
+	void CreateDoorObj(std::string);
+	void CreateDoorObj(std::string name, float next_playerx, float next_playery, Collider* lim, InteractableObj* item_to_unlock);
+	void SetObjectAttributes(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos);
 };

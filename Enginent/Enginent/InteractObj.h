@@ -22,7 +22,6 @@ protected:
 	int currDialogue = 0;
 	Collider* col;
 public:
-	std::string object_name;
 
 	InteractableObj() {};
 	InteractableObj(vector<std::string> s);
@@ -32,7 +31,6 @@ public:
 	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
 	void SetType(IneractTypeList newInteractType) { interactType = newInteractType; };
-	void SetName(std::string);
 	bool CheckCollider(int x, int y);
 	bool CheckPointing(int x, int y);
 

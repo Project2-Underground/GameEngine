@@ -2,17 +2,24 @@
 
 <room>
 	<background type="0">
-		<obj texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0" dialogue=""/>
+		<obj texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
+		<bg2 texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2178" sizeY="1784" posX="1728" posY="-220"/>
 	</background>
 	<interactable type="1">
-		<obj texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120" dialogue="Guess it is time to do the laundry."/>
+		<obj texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120" dialogue="Guess it is time to do the laundry.">
+			<dialogue>
+				<d>Guess it is time to do the laundry.</d>
+				<d>dialogue 2 is in here</d>
+				<d>dialogue 3 is in here</d>
+			</dialogue>
+		</obj>
 		<obj texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30" dialogue=""/>
 		<obj texture="Texture/EliasRoom/hanger.png" sizeX="150" sizeY="300" posX="250" posY="-5" dialogue=""/>
 		<obj texture="Texture/EliasRoom//Elias Room_Poster1.png" sizeX="150" sizeY="200" posX="-430" posY="100" dialogue=""/>
 		<obj texture="Texture/EliasRoom/Elias Room_Poster2.png" sizeX="150" sizeY="150" posX="-240" posY="100" dialogue=""/>
 	</interactable>
 	<item type="2">
-		<obj name="Hoodies" texture="Texture/EliasRoom/Elias Room_Hoody.png" i_texture="Texture/EliasRoom/E Room_Hoody_I.png" sizeX="150" sizeY="300" posX="250" posY="-5"/>
+		<!-- <obj name="Hoodies" texture="Texture/EliasRoom/Elias Room_Hoody.png" i_texture="Texture/EliasRoom/E Room_Hoody_I.png" sizeX="150" sizeY="300" posX="250" posY="-5"/> -->
 	</item>
 	<door type="3">
 		<obj texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="2"/>

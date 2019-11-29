@@ -191,16 +191,12 @@ void Game::Init(int width, int height)
 	objects.push_back(player);
 
 	Collider *col = new Collider(player);
-	colliders.push_back(col);
 	player->SetCollder(col);
 	
 	col = new Collider();
 	col->setNewWidth(winWidth * 0.75);
 	col->setNewPos(winWidth * 0.25, 0);
 	player->SetWalkLimit(col);
-
-
-	player->anim->Play("Move", true);
 
 	Camera::GetInstance()->SetTarget(player);
 
@@ -210,6 +206,8 @@ void Game::Init(int width, int height)
 	Camera::GetInstance()->SetLimit(limit);
 
 	objects.push_back(player->createDialogueText());
+
+	player->anim->Play("Move", true);
 
 	//CombineObject * obj = new CombineObject();
 	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
@@ -239,7 +237,6 @@ void Game::Init(int width, int height)
 	exitButton->SetSize(300, -120);
 	exitButton->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
 	Collider *col3 = new Collider(exitButton);
-	colliders.push_back(col3);
 	((ImageObject*)exitButton)->SetCollder(col3);
 	UI.push_back(exitButton);
 
@@ -251,7 +248,6 @@ void Game::Init(int width, int height)
 	startButton->SetSize(300, -120);
 	startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
 	Collider *col2 = new Collider(startButton);
-	colliders.push_back(col2);
 	((ImageObject*)startButton)->SetCollder(col2);
 	UI.push_back(startButton);
 
@@ -282,99 +278,96 @@ Game::Game()
 	renderer = nullptr;
 }
 
-void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos) {
-	// bg
+void Game::SetObjectAttributes(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos) {
+	tmp->SetTexture(texture);
+	tmp->SetSize(sizeX, sizeY);
+	tmp->SetPosition(pos);
+}
+
+void Game::CreateBackgroundObj(std::string name) {
 	ImageObject* tmp = new ImageObject();
-	CreateObject(tmp, texture, sizeX, sizeY, pos);
-}
-
-void Game::CreateObject(std::string name, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue) {
-	// interactable
-	InteractableObj* tmp = new InteractableObj(dialogue);
 	tmp->SetName(name);
-	tmp->SetCollder(new Collider(tmp));
-	CreateObject(tmp, texture, sizeX, sizeY, pos);
+	objects.push_back(tmp);
 }
 
-void Game::CreateObject(std::string name, std::string texture, std::string i_texture, int type, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue, std::vector<Item*> items) {
-	// item
-	Item* tmp; 
-	switch (type)
+void Game::CreateInteractObj(std::string name) {
+	InteractableObj* tmp = new InteractableObj();
+	createObject(tmp, name);
+}
+
+void Game::CreateItemObj(std::string name, std::string i_texture, int itemType, std::vector<Item*> items) {
+	Item* tmp = nullptr;
+	switch (itemType)
 	{
 	case SEPARATABLE:
 		tmp = new SeparatableItem(items);
 		break;
 	case COMBINABLE:
 		tmp = new CombinableItem(items[0]->object_name, items[1]);
-		break;
 	}
-	tmp->SetInventoryTexture(i_texture);
+	if (tmp)
+		createObject(tmp, name);
+}
+
+void Game::CreateDoorObj(std::string name) {
+	Door* tmp = new Door(2, 1);
+	createObject(tmp, name);
+}
+
+void Game::CreateDoorObj(std::string name, float next_playerx, float next_playery, Collider* lim, InteractableObj* item_to_unlock) {
+	Door* tmp = new Door(next_playerx, next_playery, lim, item_to_unlock);
+	createObject(tmp, name);
+}
+
+void Game::createObject(InteractableObj* tmp, std::string name) {
 	tmp->SetName(name);
 	tmp->SetCollder(new Collider(tmp));
-	CreateObject(tmp, texture, sizeX, sizeY, pos);
-}
-
-void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, int next_room, int door_no, std::vector<std::string> dialogue) {
-	// door
-	Door* tmp = new Door(next_room, door_no);
-	tmp->SetDialogue(dialogue);
-	tmp->SetCollder(new Collider(tmp));
-	CreateObject(tmp, texture, sizeX, sizeY, pos);
-}
-
-void Game::CreateObject(std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue) {
-	// NPC
-}
-
-void Game::CreateObject(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos) {
-	tmp->SetTexture(texture);
-	tmp->SetSize(sizeX, sizeY);
-	tmp->SetPosition(pos);
 	objects.push_back(tmp);
 }
 
-//void Game::createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue)
-//{
-//	ImageObject *tmp = nullptr;
-//	switch (type)
-//	{
-//	case IMAGE_OBJ:
-//	{
-//		tmp = new ImageObject();
-//		break;
-//	}
-//	case INTERACT_OBJ:
-//	{
-//		tmp = new InteractableObj(dialogue);
-//		break;
-//	}
-//	case ITEM: 
-//	{
-//		tmp = new Item();
-//		break;
-//	}
-//	case PORTAL:
-//	{
-//		break;
-//	}
-//	case NPC:
-//	{
-//		break;
-//	}
-//	}
-//
-//	tmp->SetTexture(texture);
-//	tmp->SetSize(sizeX, sizeY);
-//	tmp->SetPosition(pos);
-//	if (type != IMAGE_OBJ)
-//	{
-//		Collider *col2 = new Collider(tmp);
-//		colliders.push_back(col2);
-//		((InteractableObj*)tmp)->SetCollder(col2);
-//	}
-//
-//	objects.push_back(tmp);
-//}
+void Game::createObject(objectType type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue)
+{
+	ImageObject *tmp = nullptr;
+	switch (type)
+	{
+	case IMAGE_OBJ:
+	{
+		tmp = new ImageObject();
+		break;
+	}
+	case INTERACT_OBJ:
+	{
+		tmp = new InteractableObj(dialogue);
+		break;
+	}
+	case ITEM: 
+	{
+		tmp = new Item();
+		break;
+	}
+	case PORTAL:
+	{
+		break;
+	}
+	case NPC:
+	{
+		break;
+	}
+	}
+
+	if (tmp != nullptr) {
+		tmp->SetTexture(texture);
+		tmp->SetSize(sizeX, sizeY);
+		tmp->SetPosition(pos);
+		if (type != IMAGE_OBJ)
+		{
+			Collider* col2 = new Collider(tmp);
+			((InteractableObj*)tmp)->SetCollder(col2);
+		}
+
+		objects.push_back(tmp);
+	}
+}
 
 void Game::AddObject(DrawableObject* obj) {
 	objects.push_back(obj);

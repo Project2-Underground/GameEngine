@@ -61,4 +61,7 @@ void DrawableObject::SetScale(float x, float y)
 	this->size.y *= y;
 }
 
+void DrawableObject::SetName(std::string name) {
+	object_name = name;
+}
 

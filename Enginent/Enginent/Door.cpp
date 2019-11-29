@@ -35,9 +35,14 @@ void Door::action() {
 		if (next_cam_limit)
 			camera->SetLimit(next_cam_limit);
 		player->walk = false;
+		camera->SetLimit(new Collider(glm::vec3(639, -1112, 1), glm::vec3(2817, 672, 1)));
+		player->SetWalkLimit(new Collider(glm::vec3(639, -1112, 1), glm::vec3(2817, 672, 1)));
 	}
 	else {
-		this->InteractableObj::action();
+		Unlock(Game::GetInstance()->getPlayer()->inventory->GetInventoryBox(0)->GetItem());
+		if (!open) {
+			this->InteractableObj::action();
+		}
 	}
 }
 

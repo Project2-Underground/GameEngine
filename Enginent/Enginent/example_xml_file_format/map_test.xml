@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<room>
-	<background type="0">
-		<obj texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0">
-		<obj texture="Texture/MainHall/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220">
-	</background>
-	<interactable type="1">
-		<obj texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120">
+<rooms>
+	<room1>
+		<bg1 texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0">
+		<bg2 texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220">
+		<bed texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120">
 			<dialogue>
 				<d>dialogue 1 is in here</d>
 				<d>dialogue 2 is in here</d>
 				<d>dialogue 3 is in here</d>
 			</dialogue>
-		</obj>
-		<obj texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30">
-		<obj texture="Texture/EliasRoom/hanger.png" sizeX="150" sizeY="300" posX="250" posY="-5">
-		<obj texture="Texture/EliasRoom//Elias Room_Poster1.png" sizeX="150" sizeY="200" posX="-430" posY="100">
-		<obj texture="Texture/EliasRoom/Elias Room_Poster2.png" sizeX="150" sizeY="150" posX="-240" posY="100">
-	</interactable>
-	<item type="2">
-		<!-- spearateble = 0 -->
-		<!-- combinable = 1 -->
-		<obj type="0" name="Hoodies" texture="Texture/EliasRoom/Elias Room_Hoody.png" i_texture="Texture/EliasRoom/E Room_Hoody_I.png" sizeX="150" sizeY="300" posX="250" posY="-5">
-			<key_card texture="Texture/EliasRoom/PersonalCard_I.png"/>
-		</obj>
-	</item>
-	<door type="3">
-		<obj texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="2" door_no="1"/>
+		</bed>
+		<tv texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30"/>
+		<hanger texture="Texture/EliasRoom/hanger.png" sizeX="150" sizeY="300" posX="250" posY="-5"/>
+		<poster1 texture="Texture/EliasRoom//Elias Room_Poster1.png" sizeX="150" sizeY="200" posX="-430" posY="100"/>
+		<poster2 texture="Texture/EliasRoom/Elias Room_Poster2.png" sizeX="150" sizeY="150" posX="-240" posY="100"/>
+		<hoody texture="Texture/EliasRoom/Elias Room_Hoody.png" sizeX="150" sizeY="300" posX="250" posY="-5"/>
+		<door texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20">
 			<dialogue>
 				<d>Lock.</d>
 				<d>Seems like it needs a key card to unlock.</d>
 				<d>I need to find a key card.</d>
 			</dialogue>
-		</obj>
-	</door>
-</room>
+		</door>
+	</room1>
+</rooms>

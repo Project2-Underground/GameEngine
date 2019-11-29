@@ -17,10 +17,6 @@ void InteractableObj::SetDialogue(vector<std::string> s) {
 	dialogue = s;
 }
 
-void InteractableObj::SetName(std::string name) {
-	object_name = name;
-}
-
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
