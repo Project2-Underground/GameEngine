@@ -352,3 +352,6 @@ MigrationBackup/
 .ionide/
 
 Enginent/resource/
+Underground_setup_script.iss
+Enginent/Enginent/Texture/tmp_icon.ico
+Underground_setup.exe
