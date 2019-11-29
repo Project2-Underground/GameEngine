@@ -9,8 +9,6 @@
 		<obj texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120" dialogue="Guess it is time to do the laundry.">
 			<dialogue>
 				<d>Guess it is time to do the laundry.</d>
-				<d>dialogue 2 is in here</d>
-				<d>dialogue 3 is in here</d>
 			</dialogue>
 		</obj>
 		<obj texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30" dialogue=""/>
