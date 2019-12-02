@@ -48,13 +48,4 @@ public:
 	glm::vec3 FindMousePosition(int x, int y);
 	int checkPointObject(glm::vec3 pos);
 
-	void createObject(objectType type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, std::vector<std::string> dialogue);
-	void createObject(InteractableObj* tmp, std::string name);
-
-	void CreateBackgroundObj(std::string);
-	void CreateInteractObj(std::string);
-	void CreateItemObj(std::string name, std::string i_texture, int itemType, std::vector<Item*> items);
-	void CreateDoorObj(std::string);
-	void CreateDoorObj(std::string name, float next_playerx, float next_playery, Collider* lim, InteractableObj* item_to_unlock);
-	void SetObjectAttributes(ImageObject* tmp, std::string texture, int sizeX, int sizeY, glm::vec3 pos);
 };

@@ -3,7 +3,8 @@
 
 enum ItemType {
 	SEPARATABLE = 0,
-	COMBINABLE
+	COMBINABLE,
+	NONE
 };
 
 class Item : public InteractableObj {

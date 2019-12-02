@@ -12,6 +12,7 @@ void Item::action() {
 		SetTexture(Inventory_texture);
 		Game::GetInstance()->getPlayer()->anim->Play("Pickup", false);
 		Game::GetInstance()->getPlayer()->inventory->addItem(this);
+		this->col->enable = false;
 	}
 	display = false;
 }
@@ -20,7 +21,7 @@ void Item::SetInventoryTexture(std::string path) {
 	Inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-SeparatableItem::SeparatableItem(std::vector<Item*> items) {
+SeparatableItem::SeparatableItem(std::vector<Item*> items):Item(){
 	this->items = items;
 }
 
@@ -33,7 +34,7 @@ void SeparatableItem::Separate() {
 	Game::GetInstance()->getPlayer()->inventory->removeItem(this);
 }
 
-CombinableItem::CombinableItem(std::string itc, Item* ci) {
+CombinableItem::CombinableItem(std::string itc, Item* ci) :Item() {
 	itemToCombine = itc;
 	combinedItem = ci;
 }

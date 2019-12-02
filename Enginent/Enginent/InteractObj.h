@@ -17,7 +17,7 @@ enum IneractTypeList
 
 class InteractableObj : public ImageObject {
 protected:
-	IneractTypeList interactType;
+	IneractTypeList interactType = NORMAL;
 	vector<std::string> dialogue;
 	int currDialogue = 0;
 	Collider* col;
