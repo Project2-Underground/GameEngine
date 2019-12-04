@@ -24,7 +24,6 @@ void Door::SetKey(std::string item_to_unlock) {
 }
 
 void Door::action() {
-	Unlock(Game::GetInstance()->getPlayer()->inventory->GetInventoryBox(0)->GetItem());
 	if (open) {
 		// new settings
 		// load next room and next door position;
@@ -48,6 +47,7 @@ void Door::action() {
 		if (Game::GetInstance()->getPlayer()->inventory->GetInventoryBox(0)->GetItem() != nullptr)
 			Unlock(Game::GetInstance()->getPlayer()->inventory->GetInventoryBox(0)->GetItem());
 		if (!open) {
+			SoundManager::GetInstance()->playSFX("Locked");
 			this->InteractableObj::action();
 		}
 	}
