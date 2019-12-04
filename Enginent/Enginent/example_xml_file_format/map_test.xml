@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<rooms>
+	<room1>
+		<background>
+			<bg1 texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
+			<bg2 texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220"/>
+		</background>
+		<interactObj>
+			<tv texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30"/>
+			<hanger texture="Texture/EliasRoom/hanger.png" sizeX="150" sizeY="300" posX="250" posY="-5"/>
+			<poster1 texture="Texture/EliasRoom//Elias Room_Poster1.png" sizeX="150" sizeY="200" posX="-430" posY="100"/>
+			<poster2 texture="Texture/EliasRoom/Elias Room_Poster2.png" sizeX="150" sizeY="150" posX="-240" posY="100"/>
+			<bed texture="Texture/EliasRoom/Elias_Room_Bed.png" sizeX="450" sizeY="250" posX="-330" posY="-120">
+				<dialogue>
+					<d>Guess it is time to do the laundry.</d>
+				</dialogue>
+			</bed>
+		</interactObj>
+		<item>
+		<!-- separatable = 0; combinable = 1; -->
+			<hoodies texture="Texture/EliasRoom/Elias Room_Hoody.png" i_texture="Texture/EliasRoom/PersonalCard_I.png" sizeX="150" sizeY="300" posX="250" posY="-5" type="0">
+				<item name="keyCard" texture="Texture/EliasRoom/PersonalCard_I.png"/>
+			</hoodies>
+		</item>
+		<doors>
+			<door texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="2" next_door="0">
+				<key name="hoodies"/>
+				<dialogue>
+					<d>Lock.</d>
+					<d>Seems like it needs a key card to unlock.</d>
+					<d>I need to find a key card.</d>
+				</dialogue>
+			</door>
+		</doors>
+		<NPCs>
+		</NPCs>
+	</room1>
+</rooms>

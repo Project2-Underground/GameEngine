@@ -9,13 +9,6 @@ protected:
 public:
 	bool LoadFile(std::string filename);
 	void SaveFile(std::string filename);
-
-	char* GetPcData(pugi::xml_node node, int childPos);
-	pugi::xml_node GetChild(pugi::xml_node node, std::string nodeName);
-	pugi::xml_attribute GetAttribute(pugi::xml_node node, std::string attr);
-
-	void ChangeAttributeValue(pugi::xml_attribute attr, std::string value);
-	void ChangeTextValue(pugi::xml_node node, int childPos, std::string newValue);
 };
 
 /*loading doc

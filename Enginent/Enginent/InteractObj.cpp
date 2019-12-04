@@ -1,19 +1,9 @@
 #include "InteractObj.h"
 #include "Game.h"
 
-InteractableObj::InteractableObj(IneractTypeList type, vector<std::string> s) {
+InteractableObj::InteractableObj(vector<std::string> s) {
+	interactType = NORMAL;
 	dialogue = s;
-	interactType = type;
-}
-
-InteractableObj::InteractableObj(IneractTypeList type, std::string s)
-{
-	interactType = type;
-	dialogue.push_back(s);
-}
-
-InteractableObj::InteractableObj(IneractTypeList type) {
-	interactType = type;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -34,22 +24,17 @@ void InteractableObj::action() {
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	//ANIMATION
-	//SOUND
-	if (interact_sound != "")
-	{
-		SoundManager::GetInstance()->playSFX(interact_sound);
-	}
 	//UPDATE TEXT
 }
 
-bool InteractableObj::checkCollider(int x, int y) {
+bool InteractableObj::CheckCollider(int x, int y) {
 	return this->col->isClicked(x, y);
 	/*if (this->col->isClicked(x, y))
 	{
 		action(x, y);
 	}*/
 }
-bool InteractableObj::checkPointing(int x, int y)
+bool InteractableObj::CheckPointing(int x, int y)
 {
 	if (this->col->isClicked(x, y))
 	{
@@ -63,7 +48,9 @@ InteractableObj::~InteractableObj() {
 		delete col;
 }
 
-void InteractableObj::SetSound(std::string s)
-{
-	interact_sound = s;
+bool InteractableObj::operator==(const InteractableObj& obj) {
+	if (this->object_name == obj.object_name) {
+		return true;
+	}
+	return false;
 }

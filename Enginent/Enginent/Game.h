@@ -10,12 +10,19 @@
 #include "Button.h"
 #include "LevelGenerator.h"
 
+enum objectType {
+	IMAGE_OBJ = 0,
+	INTERACT_OBJ,
+	ITEM,
+	PORTAL,
+	NPC,
+};
+
 using namespace std;
 class Game
 {
 	static Game* instance;
 	vector<DrawableObject*> objects;
-	vector<Collider*> colliders;
 	vector<UIObject*> UI;
 	GLRenderer *renderer;
 	Player * player;
@@ -33,7 +40,7 @@ public:
 	void Init(int width, int height);
 	void Update();
 	void Render();
-	void createObject(int type, std::string texture, int sizeX, int sizeY, glm::vec3 pos, IneractTypeList objType, std::vector<std::string> dialoguePath);
+	
 	void AddObject(DrawableObject* obj);
 	void AddUI(UIObject* obj);
 	void updateMouseState(int, int);
@@ -41,13 +48,4 @@ public:
 	glm::vec3 FindMousePosition(int x, int y);
 	int checkPointObject(glm::vec3 pos);
 	CursorUI* getCursor() { return cursorGame; };
-};
-
-
-
-enum objectType {
-	IMAGE_OBJ = 0,
-	INTERACT_OBJ,
-	PORTAL,
-	NPC
 };

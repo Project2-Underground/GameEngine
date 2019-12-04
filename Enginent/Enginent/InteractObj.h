@@ -23,21 +23,21 @@ protected:
 	Collider* col;
 	std::string interact_sound = "";
 public:
+
 	InteractableObj() {};
-	InteractableObj(IneractTypeList type);
-	InteractableObj(IneractTypeList type, std::string);
-	InteractableObj(IneractTypeList type, vector<std::string> s);
+	InteractableObj(vector<std::string> s);
 
 	virtual void action();
 	void SetSound(std::string);
 	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
-	void setType(IneractTypeList newInteractType) { interactType = newInteractType; };
-	bool checkCollider(int x, int y);
-	bool checkPointing(int x, int y);
+	void SetType(IneractTypeList newInteractType) { interactType = newInteractType; };
+	bool CheckCollider(int x, int y);
+	bool CheckPointing(int x, int y);
 
 	IneractTypeList getType() { return interactType; };
 
 	~InteractableObj();
+	bool operator==(const InteractableObj& obj);
 };
 

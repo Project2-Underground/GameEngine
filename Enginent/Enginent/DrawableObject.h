@@ -13,6 +13,7 @@ protected:
 	float test;
 
 public:
+	std::string object_name;
 
 	glm::mat4 getTransform();
 
@@ -24,6 +25,7 @@ public:
 	void SetSize(float sizeX, float sizeY);
 	void SetPosition(glm::vec3 newPosition);
 	void Translate(glm::vec3 moveDistance);
+	void SetName(std::string);
 
 	//Rotate, Scale ???
 	void SetRotate(float r);

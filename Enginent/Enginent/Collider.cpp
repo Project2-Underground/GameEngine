@@ -19,6 +19,11 @@ Collider::Collider() {
 	CalNewBound();
 }
 
+Collider::Collider(glm::vec3 min, glm::vec3 max) {
+	minBound = min;
+	maxBound = max;
+}
+
 Collider::~Collider() {
 
 }

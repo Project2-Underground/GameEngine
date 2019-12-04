@@ -12,6 +12,7 @@ public:
 	bool enable;
 
 	Collider(DrawableObject* ref);
+	Collider(glm::vec3, glm::vec3);
 	Collider();
 	~Collider();
 
