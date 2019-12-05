@@ -126,6 +126,12 @@
     <ClInclude Include="Door.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -223,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="UIObject.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

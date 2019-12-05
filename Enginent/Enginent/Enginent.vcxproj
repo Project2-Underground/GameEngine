@@ -40,10 +40,12 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SquareMeshVbo.h" />
@@ -79,6 +81,7 @@
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />

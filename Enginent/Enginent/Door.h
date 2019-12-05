@@ -26,4 +26,5 @@ public:
 	void SetDoorLevelPosition(glm::vec3);
 	void action();
 	void Unlock(InteractableObj* item);
+	void Unlock() { open = true; };
 };

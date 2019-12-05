@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
-#include "GameObject.h"
+//#include "GameObject.h"
 #include "Item.h"
 #include "ImageObject.h"
 #include "TextObject.h"
