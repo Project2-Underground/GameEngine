@@ -40,6 +40,8 @@ protected:
 public:
 	void Render(vector <DrawableObject*> & objList);
 	void Render(vector <UIObject*> & objList);
+	void Render(UIObject* obj);
+	void Render(DrawableObject* obj);
 	GLRenderer(int w, int h);
 	bool InitGL(string vertexShaderFile, string fragmentShaderFile);
 

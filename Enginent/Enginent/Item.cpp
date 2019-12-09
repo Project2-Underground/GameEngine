@@ -9,9 +9,10 @@ Item::Item(std::string name) {
 void Item::action() {
 	// to be picked up by the player
 	if (display) {
+		Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 		SetTexture(Inventory_texture);
-		Game::GetInstance()->getPlayer()->anim->Play("Pickup", false);
-		Game::GetInstance()->getPlayer()->inventory->addItem(this);
+		player->anim->Play("Pickup", false);
+		player->inventory->addItem(this);
 		this->col->enable = false;
 	}
 	display = false;
@@ -27,11 +28,12 @@ SeparatableItem::SeparatableItem(std::vector<Item*> items):Item(){
 
 void SeparatableItem::Separate() {
 	// add the new items to the inventory
+	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 	for (Item* i : items) {
-		Game::GetInstance()->getPlayer()->inventory->addItem(i);
+		player->inventory->addItem(i);
 	}
 	// remove *this from the inventory
-	Game::GetInstance()->getPlayer()->inventory->removeItem(this);
+	player->inventory->removeItem(this);
 }
 
 CombinableItem::CombinableItem(std::string itc, Item* ci) :Item() {
@@ -41,11 +43,12 @@ CombinableItem::CombinableItem(std::string itc, Item* ci) :Item() {
 
 bool CombinableItem::Combine(Item* item) {
 	if (item->object_name == itemToCombine) {
+		Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 		// add combinedItem to the inventory
-		Game::GetInstance()->getPlayer()->inventory->addItem(combinedItem);
+		player->inventory->addItem(combinedItem);
 		// remove item and *this from the inventory
-		Game::GetInstance()->getPlayer()->inventory->removeItem(item);
-		Game::GetInstance()->getPlayer()->inventory->removeItem(this);
+		player->inventory->removeItem(item);
+		player->inventory->removeItem(this);
 		return true;
 	}
 	return false;

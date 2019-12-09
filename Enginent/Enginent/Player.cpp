@@ -27,6 +27,7 @@ Player::Player()
 	anim->AddAnimation(move);
 	anim->AddAnimation(pickup);
 	anim->SetDefaultAnimation("Idle");
+	anim->Play("Idle", true);
 
 	walk = false;
 	faceLeft = true;
@@ -48,7 +49,7 @@ Player::Player()
 	inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
 
 	for (int i = 0; i < inventoryNum; i++)
-		Game::GetInstance()->AddUI(inventory->GetInventoryBox(i));
+		((GameScreen*)Game::GetInstance()->GetScreen())->AddUI(inventory->GetInventoryBox(i));
 }
 
 void Player::Update()
@@ -64,6 +65,7 @@ void Player::Update()
 			//dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 		}
 	}
+	anim->Update();
 
 }
 

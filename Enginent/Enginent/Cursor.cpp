@@ -15,7 +15,6 @@ CursorUI::CursorUI() {
 	CS_Save = new ImageObject();
 	CS_Save->SetTexture("Texture/UI/Cursor/Save_cursor.png");
 
-
 	this->SetTexture(((CursorUI*)CS_Normal)->texture);
 	this->SetSize(25, -25);
 	this->SetPosition(glm::vec3(0, 0, 1));
@@ -32,12 +31,13 @@ CursorUI::~CursorUI() {
 
 void CursorUI::updateCursor()
 {
+	Game* game = Game::GetInstance();
 	int mouseX;
 	int mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
-	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
+	glm::vec3 realPos = game->FindMousePosition(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
 	this->SetPosition(realPos);
-	setCursor(Game::GetInstance()->checkPointObject(realPos));
+	setCursor(game->GetScreen()->GetPointedObject(realPos));
 }
 
 void CursorUI::setCursor(int type)

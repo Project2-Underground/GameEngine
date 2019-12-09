@@ -20,7 +20,7 @@ void InteractableObj::SetDialogue(vector<std::string> s) {
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
-		Game::GetInstance()->getPlayer()->setDialogue(dialogue[currDialogue]);
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->setDialogue(dialogue[currDialogue]);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	//ANIMATION

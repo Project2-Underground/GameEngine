@@ -65,13 +65,6 @@ SwitchScene_Button::~SwitchScene_Button()
 
 void SwitchScene_Button::action(int x, int y)
 {
-	std::cout << "Change scene\n";
-	for (int i = 0; i < t_screen.size(); i++)
-	{
-		t_screen[i]->setDisplay(false);
-	}
-	display = false;
+	Game::GetInstance()->ChangeScreenState(GAMESCREEN);
 	SoundManager::GetInstance()->stop("MainScreen");
-	Game::GetInstance()->getPlayer()->setDisplay(true);
-	Game::GetInstance()->getCursor()->enableChange(true);
 }

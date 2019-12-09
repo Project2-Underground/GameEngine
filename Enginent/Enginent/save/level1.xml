@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <rooms>
-	<room1>
+	<room1 left_limit="-500" right_limit="640" top_limit="360" bottom_limit="-360">
 		<background>
 			<bg1 texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
 			<bg2 texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220"/>

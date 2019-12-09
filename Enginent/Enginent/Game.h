@@ -38,11 +38,17 @@ public:
 	~Game();
 	static Game* GetInstance();
 	GLRenderer * GetRenderer();
+	Screen* GetScreen() { return currentScreen; };
+	Camera* GetCamera() { return camera; };
 	void Init(int width, int height);
 	void Update();
 	void Render();
 	void UpdateScreenState();
 	void ChangeScreenState(ScreenState newState);
+	void RightClick(int, int);
+	void LeftClick(int, int);
+	void UpdateMouseState(int, int);
 	
+	glm::vec3 FindMousePosition(int, int);
 	CursorUI* getCursor() { return cursorGame; };
 };

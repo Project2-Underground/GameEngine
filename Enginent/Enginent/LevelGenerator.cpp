@@ -42,6 +42,10 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 			Room* newRoom = new Room();
 			std::string roomName = room->name();
 
+			glm::vec3 minLimit = glm::vec3(room->attribute("left_limit").as_int(), room->attribute("bottom_limit").as_int(), 1);
+			glm::vec3 maxLimit = glm::vec3(room->attribute("right_limit").as_int(), room->attribute("top_limit").as_int(), 1);
+			newRoom->SetRoomLimit(new Collider(minLimit, maxLimit));
+
 			std::vector<DrawableObject*>& objects = newRoom->objects;
 			GenerateBackground(*room, objects);
 			GenerateInteractObj(*room, objects);

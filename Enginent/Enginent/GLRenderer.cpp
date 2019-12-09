@@ -124,6 +124,38 @@ bool GLRenderer::Initialize(string vertexShaderFile, string fragmentShaderFile)
 
 }
 
+void GLRenderer::Render(UIObject* obj) {
+	// Update window with OpenGL rendering
+
+	glUseProgram(gProgramId);
+	//Set up matrix uniform
+
+	if (pMatrixId != -1) {
+		glUniformMatrix4fv(pMatrixId, 1, GL_FALSE, glm::value_ptr(this->projectionMatrix));
+	}
+
+	obj->Render();
+	
+	//Unbind program
+	glUseProgram(NULL);
+}
+
+void GLRenderer::Render(DrawableObject* obj) {
+	// Update window with OpenGL rendering
+
+	glUseProgram(gProgramId);
+	//Set up matrix uniform
+
+	if (pMatrixId != -1) {
+		glUniformMatrix4fv(pMatrixId, 1, GL_FALSE, glm::value_ptr(this->projectionMatrix));
+	}
+	glm::mat4 camera = Camera::GetInstance()->GetViewMatrix();
+	obj->Render(camera);
+	
+	//Unbind program
+	glUseProgram(NULL);
+}
+
 void GLRenderer::Render(vector <DrawableObject*> & objList)
 {
 	// Clear color buffer
@@ -152,9 +184,6 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 }
 
 void GLRenderer::Render(vector <UIObject*>& objList) {
-	// Clear color buffer
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	// Update window with OpenGL rendering
 
 	glUseProgram(gProgramId);

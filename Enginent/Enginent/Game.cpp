@@ -45,31 +45,58 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
+	currentState = MENUSCREEN;
+	UpdateScreenState();
+	cursorGame = new CursorUI();
 }
 
 void Game::Update()
 {
+	if (changeScreen) {
+		UpdateScreenState();
+		changeScreen = false;
+	}
 	currentScreen->Update();
+	cursorGame->updateCursor();
 }
 
 void Game::Render()
 {
 	currentScreen->Render();
+	GetRenderer()->Render(cursorGame);
 }
 
 void Game::UpdateScreenState() {
+	delete currentScreen;
 	switch (currentState)
 	{
 	case MENUSCREEN:
+		currentScreen = new MenuScreen();
 		break;
 	case GAMESCREEN:
+		currentScreen = new GameScreen(1);
 		break;
 	case CUTSCENE:
+		currentScreen = new CutsceneScreen();
 		break;
-	case PUZZLE:
+	case ENDSCENE:
 		break;
 	default:
 		break;
+	}
+}
+
+void Game::RightClick(int x, int y) {
+	currentScreen->RightClick(x, y);
+}
+
+void Game::LeftClick(int x, int y) {
+	currentScreen->LeftClick(x, y);
+}
+
+void Game::UpdateMouseState(int x, int y) {
+	if (currentState == MENUSCREEN) {
+		((MenuScreen*)currentScreen)->UpdateMouseState(x, y);
 	}
 }
 
@@ -89,4 +116,12 @@ Game::~Game()
 {
 	delete camera;
 	delete renderer;
+}
+
+glm::vec3 Game::FindMousePosition(int x, int y)
+{
+	float realX, realY;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	return glm::vec3(realX, realY, 1);
 }
