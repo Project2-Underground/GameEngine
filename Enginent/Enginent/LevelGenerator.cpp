@@ -33,7 +33,28 @@
 //	}
 //}
 
-void RoomGenerator::GenerateRoom(std::string filename, std::string roomNo, std::vector<DrawableObject*> &objects){
+void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Room*> &rooms) {
+	if (LoadFile(filename)) {
+		pugi::xml_node xmlRooms = doc.child("rooms");
+
+		// generate all the rooms in that level
+		for (pugi::xml_node_iterator room = xmlRooms.begin(); room != xmlRooms.end(); room++) {
+			Room* newRoom = new Room();
+			std::string roomName = room->name();
+
+			std::vector<DrawableObject*>& objects = newRoom->objects;
+			GenerateBackground(*room, objects);
+			GenerateInteractObj(*room, objects);
+			GenerateDoor(*room, objects);
+			GenerateItem(*room, objects);
+			GenerateNPC(*room, objects);
+
+			rooms.insert(std::pair<std::string, Room*>(roomName, newRoom));
+		}
+	}
+}
+
+void LevelGenerator::GenerateRoom(std::string filename, std::string roomNo, std::vector<DrawableObject*> &objects){
 	if (LoadFile(filename)) {
 		pugi::xml_node room = doc.child("rooms").child(roomNo.c_str());
 		//std::cout << "in GenerateRoom\n";
@@ -45,7 +66,7 @@ void RoomGenerator::GenerateRoom(std::string filename, std::string roomNo, std::
 	}
 }
 
-void RoomGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
 	pugi::xml_node background = room.child("background");
 	
 	for (pugi::xml_node_iterator child = background.begin(); child != background.end(); child++) {
@@ -56,7 +77,7 @@ void RoomGenerator::GenerateBackground(pugi::xml_node room, std::vector<Drawable
 	}
 }
 
-void RoomGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
 	pugi::xml_node interactObj = room.child("interactObj");
 
 	for (pugi::xml_node_iterator child = interactObj.begin(); child != interactObj.end(); child++) {
@@ -78,7 +99,7 @@ void RoomGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<Drawabl
 	}
 }
 
-void RoomGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
 	pugi::xml_node doors = room.child("doors");
 
 	for (pugi::xml_node_iterator child = doors.begin(); child != doors.end(); child++) {
@@ -107,7 +128,7 @@ void RoomGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject
 	}
 }
 
-void RoomGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 	pugi::xml_node items = room.child("item");
 
 	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
@@ -146,11 +167,15 @@ void RoomGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObject
 	}
 }
 
-void RoomGenerator::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
 
 }
 
-void RoomGenerator::CreateObject(ImageObject* tmp, pugi::xml_node node) {
+void LevelGenerator::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+
+}
+
+void LevelGenerator::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	//std::cout << "in CreateObject\n";
 
 	std::string texture = node.attribute("texture").as_string();

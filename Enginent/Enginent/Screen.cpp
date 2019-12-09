@@ -6,7 +6,7 @@ MenuScreen::MenuScreen() {
 
 }
 
-void MenuScreen::OnRender() {
+void MenuScreen::Render() {
 
 }
 
@@ -27,7 +27,7 @@ GameScreen::GameScreen(int level) {
 	
 }
 
-void GameScreen::OnRender() {
+void GameScreen::Render() {
 
 }
 
@@ -52,7 +52,7 @@ CutsceneScreen::CutsceneScreen() {
 
 }
 
-void CutsceneScreen::OnRender() {
+void CutsceneScreen::Render() {
 	// play the cutscene
 }
 

@@ -76,6 +76,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />

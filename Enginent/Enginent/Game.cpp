@@ -24,74 +24,6 @@ GLRenderer * Game::GetRenderer()
 	return this->renderer;
 }
 
-int Game::checkPointObject(glm::vec3 pos)
-{
-	for (int i = objects.size() - 1; i >= 0; i--)
-	{
-		if (dynamic_cast<InteractableObj*>(objects[i]) && dynamic_cast<InteractableObj*>(objects[i])->CheckPointing(pos.x, pos.y))
-		{
-			return dynamic_cast<InteractableObj*>(objects[i])->getType();
-		}
-	}
-	return 0;
-}
-
-void Game::rightClick(int x, int y)
-{
-	float realX, realY;
-	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
-	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
-	player->SetNextPosition(realX, realY);
-}
-
-void Game::leftClick(int x, int y)
-{
-	float realX, realY;
-	realX = -(winWidth * 0.5) + x - camera->GetPosition().x;
-	realY = -(winHeight * 0.5) + (winHeight - y) - camera->GetPosition().y;
-	for (int i = 0; i < objects.size(); i++)
-	{
-		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
-		{
-			if (ib->CheckCollider(realX, realY))
-				player->SetTarget(ib);
-		}
-	}
-
-	for (int j = 0; j < UI.size(); j++)
-	{
-		if (dynamic_cast<Button*>(UI[j]))
-		{
-			((Button*)UI[j])->checkCollider(realX, realY);
-		}
-	}
-}
-
-void Game::updateMouseState(int x, int y)
-{
-	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
-	for (int i = 0; i < UI.size(); i++)
-	{
-		if (dynamic_cast<Button*>(UI[i]))
-		{
-			((Button*)UI[i])->updateButton(realPos.x, realPos.y);
-		}
-	}
-}
-
-void Game::HandleKey(char ch)
-{
-	if (this->objects.size() > 0) {
-		DrawableObject *obj = this->objects.at(2);
-		switch (ch) {
-		case 'u': player->setDialogue("Up"); break;
-		case 'd': player->setDialogue("Down"); break;
-		case 'l': player->setDialogue("Left"); break;
-		case 'r': player->setDialogue("Right"); break;
-		}
-	}
-}
-
 void Game::Init(int width, int height)
 {
 	winWidth = width;
@@ -104,7 +36,7 @@ void Game::Init(int width, int height)
 	SDL_ShowCursor(SDL_DISABLE);
 	camera = Camera::GetInstance();
 	SoundManager::GetInstance()->Init();
-	SoundManager::GetInstance()->playSound("MainScreen");
+
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -113,158 +45,48 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	UIObject* blackBold1 = new UIObject();
-	blackBold1->SetTexture("Texture/UI/Black_Border.png");
-	blackBold1->SetSize(1280, -720);
-	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	UI.push_back(blackBold1);
-
-	// testing item pickup
-
-	std::string filename("example_xml_file_format/map_test.xml");
-	RoomGenerator room;
-	room.GenerateRoom(filename, "room1", objects);
-	//room.GenerateRoom(filename);
-	//// testing door -----------------------------------------
-	//Collider* door_next_limit = new Collider();
-	//door_next_limit->setNewSize(winWidth, winHeight);
-	//door_next_limit->setNewPos(winWidth, 0);
-
-	//// testing item pickup
-	//Item* item = new Item("Hoodies");
-	//item->SetTexture("Texture/EliasRoom/Elias Room_Hoody.png");
-	//item->SetInventoryTexture("Texture/EliasRoom/E Room_Hoody_I.png");
-	//item->SetSize(150, -300);
-	//item->SetPosition(glm::vec3(250.0f, -5.0f, 1.0f));
-	//item->SetCollder(new Collider(item));
-	//objects.push_back(item);
-
-	//Door* door = new Door(winWidth*0.5, -80, door_next_limit, item);
-	//door->SetTexture("Texture/EliasRoom/Elias_Room_Door.png");
-	//door->SetPosition(glm::vec3(420.0f, 20.0f, 1.0f));
-	//door->SetSize(208, -379);
-	//door->SetDialogue(doorDialogue);
-	//door->SetCollder(new Collider(door));						// collider of the door
-	//objects.push_back(door);
-	// testing door -----------------------------------------
-
-	player = new Player();
-	player->SetTexture("Texture/Character/Elias_idle.png");
-	player->SetSize(230.0f, -350.0f);
-	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
-	player->setDisplay(false);
-	objects.push_back(player);
-
-	Collider *col = new Collider(player);
-	player->SetCollder(col);
-	
-	col = new Collider();
-	col->setNewWidth(winWidth * 0.75);
-	col->setNewPos(winWidth * 0.25, 0);
-	player->SetWalkLimit(col);
-
-	Camera::GetInstance()->SetTarget(player);
-
-	Collider* limit = new Collider();
-	limit->setNewSize(winWidth, winHeight);
-
-	Camera::GetInstance()->SetLimit(limit);
-
-	objects.push_back(player->createDialogueText());
-
-	player->anim->Play("Move", true);
-
-
-	//CombineObject * obj = new CombineObject();
-	//obj->Translate(glm::vec3(-1.0f, 1.0f, 0.0f));
-	//obj->SetColor(1.0, 0.0, 0.0);
-	//obj->SetColor2(0.0, 1.0, 0.0);
-	//objects.push_back(obj);
-
-	//GameObject * obj2 = new GameObject();
-	//obj2->SetColor(0.0, 0.0, 1.0);
-	//obj2->Translate(glm::vec3(1.0, 1.0, 0));
-	//objects.push_back(obj2);
-
-	/*********************************************************************************************************************************************/
-	/**************************************************************Main screen********************************************************************/
-	/*********************************************************************************************************************************************/
-	//createObject(IMAGE_OBJ, "Texture/UI/MainScreen/MainScreen_Click.png", 1280, -720, glm::vec3(0.0f, 0.0f, 1.0f), NORMAL, nullptr);
-
-	UIObject* mainScreen = new UIObject();
-	mainScreen->SetTexture("Texture/UI/MainScreen/MainScreen_Click.png");
-	mainScreen->SetSize(1280, -720);
-	mainScreen->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	UI.push_back(mainScreen);
-
-	Exit_Button* exitButton = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");
-	exitButton->SetSize(300, -120);
-	exitButton->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
-	Collider *col3 = new Collider(exitButton);
-	((ImageObject*)exitButton)->SetCollder(col3);
-	UI.push_back(exitButton);
-
-	vector<ImageObject*> tmp;
-	tmp.push_back(mainScreen);
-	tmp.push_back(exitButton);
-
-	SwitchScene_Button* startButton = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png", tmp);
-	startButton->SetSize(300, -120);
-	startButton->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
-	Collider *col2 = new Collider(startButton);
-	((ImageObject*)startButton)->SetCollder(col2);
-	UI.push_back(startButton);
-
-	//the last
-
-	cursorGame = new CursorUI();
-	UI.push_back(cursorGame);
 }
 
 void Game::Update()
 {
-	player->Update();
-	player->anim->Update();
-	cursorGame->updateCursor();
+	currentScreen->Update();
 }
 
 void Game::Render()
 {
-	this->GetRenderer()->Render(this->objects);
-	this->GetRenderer()->Render(this->UI);
+	currentScreen->Render();
+}
+
+void Game::UpdateScreenState() {
+	switch (currentState)
+	{
+	case MENUSCREEN:
+		break;
+	case GAMESCREEN:
+		break;
+	case CUTSCENE:
+		break;
+	case PUZZLE:
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::ChangeScreenState(ScreenState newState) {
+	currentState = newState;
+	changeScreen = true;
 }
 
 Game::Game()
 {
-	for (DrawableObject* obj : objects) {
-		delete obj;
-	}
+	currentState = MENUSCREEN;
+	changeScreen = false;
 	renderer = nullptr;
-}
-
-void Game::AddObject(DrawableObject* obj) {
-	objects.push_back(obj);
-}
-
-void Game::AddUI(UIObject* obj) {
-	UI.push_back(obj);
 }
 
 Game::~Game()
 {
-	delete player;
-	for (auto obj : objects)
-		if (obj)
-			delete obj;
 	delete camera;
 	delete renderer;
-}
-
-
-glm::vec3 Game::FindMousePosition(int x, int y)
-{
-	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
-	return glm::vec3(realX, realY, 1);
 }

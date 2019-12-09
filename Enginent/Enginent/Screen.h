@@ -4,16 +4,9 @@
 
 #include "Button.h"
 #include "Level.h"
+#include "Player.h"
 
-enum objectType {
-	IMAGE_OBJ = 0,
-	INTERACT_OBJ,
-	ITEM,
-	PORTAL,
-	NPC,
-};
-
-enum ScreenType {
+enum ScreenState {
 	MENUSCREEN = 0,
 	GAMESCREEN,
 	CUTSCENE,
@@ -22,7 +15,8 @@ enum ScreenType {
 
 class Screen {
 public:
-	virtual void OnRender() = 0;
+	virtual void Render() = 0;
+	virtual void Update() = 0;
 	virtual void OnMouseDown() = 0;
 	virtual void OnMouseUp() = 0;
 	virtual void OnMouseDrag() = 0;
@@ -34,19 +28,23 @@ class MenuScreen :public Screen {
 	Button* quit;
 public:
 	MenuScreen();
-	void OnRender();
+	void Render();
+	void Update();
 	void OnMouseDown();
 	void OnMouseUp();
 	void OnMouseDrag();
 };
 
 class GameScreen :public Screen {
+	vector<UIObject*> UI;
+	Player* player;
 	Level* currentLevel;
 	Button* pause;
 	// player
 public:
 	GameScreen(int level);
-	void OnRender();
+	void Render();
+	void Update();
 	void OnMouseDown();
 	void OnMouseUp();
 	void OnMouseDrag();
@@ -56,7 +54,8 @@ public:
 class CutsceneScreen :public Screen {
 public:
 	CutsceneScreen();
-	void OnRender();
+	void Render();
+	void Update();
 	void OnMouseDown();
 	void OnMouseUp() {};
 	void OnMouseDrag() {};

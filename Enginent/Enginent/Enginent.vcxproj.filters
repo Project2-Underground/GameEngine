@@ -233,6 +233,9 @@
     <ClCompile Include="Screen.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">
