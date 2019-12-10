@@ -20,21 +20,21 @@ void InteractableObj::SetDialogue(vector<std::string> s) {
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->setDialogue(dialogue[currDialogue]);
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	//ANIMATION
 	//UPDATE TEXT
 }
 
-bool InteractableObj::CheckCollider(int x, int y) {
+bool InteractableObj::CheckCollider(float x, float y) {
 	return this->col->isClicked(x, y);
 	/*if (this->col->isClicked(x, y))
 	{
 		action(x, y);
 	}*/
 }
-bool InteractableObj::CheckPointing(int x, int y)
+bool InteractableObj::CheckPointing(float x, float y)
 {
 	if (this->col->isClicked(x, y))
 	{

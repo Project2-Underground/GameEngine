@@ -8,34 +8,40 @@
 #include "SoundManager.h"
 
 #define WALK_SPEED 3
+#define ACTION_DISTANCE 10.0f
 
 class Player : public ImageObject
 {
 public:
 	bool walk;
 	bool faceLeft;
+
 	Player();
 	~Player();
+
 	void Update();
-	void Move();
+
 	void SetNextPosition(glm::vec3);
 	void SetNextPosition(float x, float y);
-	void SetTarget(InteractableObj* target);
 	void SetCollder(Collider* n_col);
 	void SetWalkLimit(Collider* limit);
-	void setDialogue(string dialogue);
+	void SetDialogue(string dialogue);
+
+	void Move();
 	void StopWalking();
+
+	void CheckTarget(InteractableObj* target);
 	void CheckWalkLimit();
 
 	Collider* col;
 	TextObject* createDialogueText();
+	TextObject* dialogueText;
 	Inventory* inventory;
+	glm::vec3 next_position;
 private:
 	Collider* walkLimit;
 	InteractableObj* target;
-	glm::vec3 next_position;
 	SDL_Color dialogueColor;
-	TextObject * dialogueText;
 	string dialogue;
 };
 

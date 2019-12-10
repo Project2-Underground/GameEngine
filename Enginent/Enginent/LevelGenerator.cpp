@@ -1,6 +1,5 @@
 #include "LevelGenerator.h"
 #include "Item.h"
-#include "Door.h"
 
 #include <iostream>
 
@@ -42,33 +41,38 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 			Room* newRoom = new Room();
 			std::string roomName = room->name();
 
+			// player walking limit
 			glm::vec3 minLimit = glm::vec3(room->attribute("left_limit").as_int(), room->attribute("bottom_limit").as_int(), 1);
 			glm::vec3 maxLimit = glm::vec3(room->attribute("right_limit").as_int(), room->attribute("top_limit").as_int(), 1);
-			newRoom->SetRoomLimit(new Collider(minLimit, maxLimit));
+			newRoom->SetPlayerWalkLimit(new Collider(minLimit, maxLimit));
+
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
 			GenerateBackground(*room, objects);
 			GenerateInteractObj(*room, objects);
-			GenerateDoor(*room, objects);
+			GenerateDoor(*room, objects, newRoom->doors);
 			GenerateItem(*room, objects);
 			GenerateNPC(*room, objects);
+
+			// camera limit
+			newRoom->SetCameraLimit(new Collider(objects[0]));
 
 			rooms.insert(std::pair<std::string, Room*>(roomName, newRoom));
 		}
 	}
 }
-
-void LevelGenerator::GenerateRoom(std::string filename, std::string roomNo, std::vector<DrawableObject*> &objects){
-	if (LoadFile(filename)) {
-		pugi::xml_node room = doc.child("rooms").child(roomNo.c_str());
-		//std::cout << "in GenerateRoom\n";
-		GenerateBackground(room, objects);
-		GenerateInteractObj(room, objects);
-		GenerateDoor(room, objects);
-		GenerateItem(room, objects);
-		GenerateNPC(room, objects);
-	}
-}
+//
+//void LevelGenerator::GenerateRoom(std::string filename, std::string roomNo, std::vector<DrawableObject*> &objects){
+//	if (LoadFile(filename)) {
+//		pugi::xml_node room = doc.child("rooms").child(roomNo.c_str());
+//		//std::cout << "in GenerateRoom\n";
+//		GenerateBackground(room, objects);
+//		GenerateInteractObj(room, objects);
+//		GenerateDoor(room, objects);
+//		GenerateItem(room, objects);
+//		GenerateNPC(room, objects);
+//	}
+//}
 
 void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
 	pugi::xml_node background = room.child("background");
@@ -103,13 +107,13 @@ void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<Drawab
 	}
 }
 
-void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*> &objects, std::map<std::string, Door*>& doorsList) {
 	pugi::xml_node doors = room.child("doors");
 
 	for (pugi::xml_node_iterator child = doors.begin(); child != doors.end(); child++) {
 		//std::cout << "in GenerateDoor\n";
-		int next_room = child->attribute("next_room").as_int();
-		int next_door = child->attribute("next_door").as_int();
+		std::string next_room = child->attribute("next_room").as_string();
+		std::string next_door = child->attribute("next_door").as_string();
 
 		Door* door = new Door(next_room, next_door);
 		CreateObject(door, *child);
@@ -129,6 +133,7 @@ void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObjec
 		}
 
 		objects.push_back(door);
+		doorsList.insert(std::pair<std::string,Door*>(child->name(), door));
 	}
 }
 

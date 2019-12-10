@@ -115,7 +115,7 @@ bool Collider::isCollide(Collider* other) {
 	return false;
 }
 
-bool Collider::isClicked(int x, int y) {
+bool Collider::isClicked(float x, float y) {
 	if (enable) {
 		if (x >= this->minBound.x && x <= this->maxBound.x &&
 			y >= this->minBound.y && y <= this->maxBound.y) {

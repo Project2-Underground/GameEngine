@@ -39,7 +39,7 @@ public:
 
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
-	vector <std::string> levels;
+	vector<std::string> levels;
 	Player* player;
 	Level* currentLevel;
 	Button* pause;
@@ -51,8 +51,7 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 	void ChangeLevel(int level);
-
-	void AddUI(UIObject*);
+	void ChangeRoom(std::string, std::string);
 
 	int GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };

@@ -4,7 +4,6 @@
 /*MAIN MENU*/
 
 MenuScreen::MenuScreen() {
-	std::cout << "hi\n";
 	play = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->SetSize(300, -120);
 	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
@@ -67,19 +66,38 @@ GameScreen::GameScreen(int level) {
 	player->SetSize(230.0f, -350.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
-	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetRoomLimit());
+	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
+	player->createDialogueText();
+
+	Camera* camera = Game::GetInstance()->GetCamera();
+	camera->SetTarget(player);
+	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 
 	UIObject* blackBold1 = new UIObject();
 	blackBold1->SetTexture("Texture/UI/Black_Border.png");
 	blackBold1->SetSize(1280, -720);
 	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 	UI.push_back(blackBold1);
+
+	// inventory
+	const int inventoryNum = 5;
+	float start_x = -550;
+	float start_y = -300;
+	float space = 20;
+	int size = 100;
+
+	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
+	player->inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
+
+	for (int i = 0; i < inventoryNum; i++)
+		UI.push_back(player->inventory->GetInventoryBox(i));
 }
 
 void GameScreen::Render() {
 	currentLevel->Render();
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(player);
+	renderer->Render(player->dialogueText);
 	renderer->Render(UI);
 }
 
@@ -102,8 +120,8 @@ void GameScreen::ChangeLevel(int level) {
 	currentLevel = new Level(levels[level]);
 }
 
-void GameScreen::AddUI(UIObject* uio) {
-	//UI.push_back(uio);
+void GameScreen::ChangeRoom(std::string room, std::string door) {
+	currentLevel->ChangeRoom(room, door);
 }
 
 int GameScreen::GetPointedObject(glm::vec3 pos) {

@@ -11,9 +11,14 @@ void Room::Update() {
 
 }
 
-void Room::SetRoomLimit(Collider* col) {
-	delete roomLimit;
-	roomLimit = col;
+void Room::SetPlayerWalkLimit(Collider* col) {
+	delete playerWalkLimit;
+	playerWalkLimit = col;
+}
+
+void Room::SetCameraLimit(Collider* col) {
+	delete cameraLimit;
+	cameraLimit = col;
 }
 
 void Room::RightClick(int x, int y) {
@@ -22,8 +27,8 @@ void Room::RightClick(int x, int y) {
 	// temporary while waiting for handle mouse
 	int winWidth = 1280;
 	int winHeight = 720;
-	realX = -(winWidth * 0.5) + x - game->GetCamera()->GetPosition().x;
-	realY = -(winHeight * 0.5) + (winHeight - y) - game->GetCamera()->GetPosition().y;
+	realX = -(winWidth * 0.5f) + x - game->GetCamera()->GetPosition().x;
+	realY = -(winHeight * 0.5f) + (winHeight - y) - game->GetCamera()->GetPosition().y;
 	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition(realX, realY);
 }
 
@@ -33,14 +38,15 @@ void Room::LeftClick(int x, int y) {
 	// temporary while waiting for handle mouse
 	int winWidth = 1280;
 	int winHeight = 720;
-	realX = -(winWidth * 0.5) + x - game->GetCamera()->GetPosition().x;
-	realY = -(winHeight * 0.5) + (winHeight - y) - game->GetCamera()->GetPosition().y;
+	realX = -(winWidth * 0.5f) + x - game->GetCamera()->GetPosition().x;
+	realY = -(winHeight * 0.5f) + (winHeight - y) - game->GetCamera()->GetPosition().y;
 	for (int i = 0; i < objects.size(); i++)
 	{
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 		{
-			if (ib->CheckCollider(realX, realY))
-				((GameScreen*)game->GetScreen())->GetPlayer()->SetTarget(ib);
+			if (ib->CheckCollider(realX, realY)) {
+				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
+			}
 		}
 	}
 }
@@ -84,8 +90,16 @@ void Level::LeftClick(int x, int y) {
 	currentRoom->LeftClick(x,y);
 }
 
-void Level::ChangeRoom(std::string roomName) {
+void Level::ChangeRoom(std::string roomName, std::string door) {
 	currentRoom = rooms[roomName];
+
+	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
+	glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, player->getPos().y, 1);
+	player->SetPosition(nextPlayerPosition);
+	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());
+	player->StopWalking();
+
+	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
 }
 
 void Level::OpenPuzzle(std::string puzzleName) {

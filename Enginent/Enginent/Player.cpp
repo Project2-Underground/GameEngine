@@ -7,7 +7,6 @@
 Player::Player()
 {
 	walkLimit = nullptr;
-	target = nullptr;
 	next_position = glm::vec3(this->pos);
 	anim = new Animator();
 
@@ -37,19 +36,6 @@ Player::Player()
 	dialogueColor.g = 255;
 	dialogueColor.a = 0;
 	dialogue = " ";
-
-	// inventory
-	const int inventoryNum = 5;
-	float start_x = -550;
-	float start_y = -300;
-	float space = 20;
-	int size = 100;
-
-	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
-	inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
-
-	for (int i = 0; i < inventoryNum; i++)
-		((GameScreen*)Game::GetInstance()->GetScreen())->AddUI(inventory->GetInventoryBox(i));
 }
 
 void Player::Update()
@@ -71,6 +57,7 @@ void Player::Update()
 
 void Player::Move()
 {
+	// walk left
 	if (this->pos.x > next_position.x)
 	{
 		if (pos.x - next_position.x > WALK_SPEED)
@@ -87,6 +74,7 @@ void Player::Move()
 			StopWalking();
 		}
 	}
+	// walk right
 	else if (this->pos.x < next_position.x)
 	{
 		if (next_position.x - pos.x > WALK_SPEED)
@@ -109,39 +97,30 @@ void Player::Move()
 
 void Player::StopWalking() {
 	walk = false;
-	if (target != nullptr) {
-		target->action();
-		target = nullptr;
-	}
+	next_position = getPos();
 }
 
 void Player::CheckWalkLimit() {
 	if (walkLimit != nullptr) {
 		// right limit
-		if (pos.x + size.x * 0.5 > walkLimit->getMaxBound().x) {
-			pos.x = walkLimit->getMaxBound().x - size.x * 0.5;
+		if (pos.x + size.x * -0.5 >= walkLimit->getMaxBound().x) {
+			pos.x = walkLimit->getMaxBound().x - size.x * -0.5f;
 			StopWalking();
 		}
 		// left limit
-		else if (pos.x - size.x * 0.5 < walkLimit->getMinBound().x) {
+		else if (pos.x - size.x * 0.5 <= walkLimit->getMinBound().x) {
 			pos.x = walkLimit->getMinBound().x + size.x * 0.5;
 			StopWalking();
 		}
 	}
 }
 
-void Player::SetTarget(InteractableObj* target) {
-	if (display)
-	{
-		this->target = target;
-		this->next_position = target->getPos();
-		SoundManager::GetInstance()->playSound("Walking");
-		walk = true;
-		setDialogue(" ");
-		if (!(anim->currentAnimation->animationName == "Move"))
-			anim->Play("Move", true);
+void Player::CheckTarget(InteractableObj* target) {
+	float distance = (abs(target->getPos().x - pos.x) - (abs(size.x) * 0.5f + abs(target->getSize().x) * 0.5f));
+	if (distance <= ACTION_DISTANCE) {
+		target->action();
+		StopWalking();
 	}
-
 }
 
 void Player::SetNextPosition(float x, float y)
@@ -151,7 +130,7 @@ void Player::SetNextPosition(float x, float y)
 		next_position = glm::vec3(x, y, 1);
 		walk = true;
 		SoundManager::GetInstance()->playSound("Walking");
-		setDialogue(" ");
+		SetDialogue(" ");
 		if (!(anim->currentAnimation->animationName == "Move"))
 			anim->Play("Move", true);
 	}
@@ -166,7 +145,7 @@ void Player::SetNextPosition(glm::vec3 realPos)
 
 	SoundManager::GetInstance()->playSound("Walking");
 	walk = true;
-	setDialogue(" ");
+	SetDialogue(" ");
 	if (!(anim->currentAnimation->animationName == "Move"))
 		anim->Play("Move", true);
 }
@@ -187,7 +166,7 @@ TextObject* Player::createDialogueText()
 	return dialogueText;
 }
 
-void Player::setDialogue(string dialogue)
+void Player::SetDialogue(string dialogue)
 {
 	this->dialogue = dialogue;
 }

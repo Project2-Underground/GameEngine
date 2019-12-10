@@ -32,8 +32,8 @@ public:
 	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
 	void SetType(IneractTypeList newInteractType) { interactType = newInteractType; };
-	bool CheckCollider(int x, int y);
-	bool CheckPointing(int x, int y);
+	bool CheckCollider(float x, float y);
+	bool CheckPointing(float x, float y);
 
 	IneractTypeList getType() { return interactType; };
 

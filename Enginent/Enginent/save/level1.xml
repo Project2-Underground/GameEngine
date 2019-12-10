@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <rooms>
-	<room1 left_limit="-500" right_limit="640" top_limit="360" bottom_limit="-360">
+	<EliasRoom left_limit="-180" right_limit="640" top_limit="360" bottom_limit="-360">
 		<background>
-			<bg1 texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
-			<bg2 texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="1730" posY="-220"/>
+			<bg texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
 		</background>
 		<interactObj>
 			<tv texture="Texture/EliasRoom/TV.png" sizeX="300" sizeY="250" posX="50" posY="-30"/>
@@ -24,16 +23,31 @@
 			</hoodies>
 		</item>
 		<doors>
-			<door texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="2" next_door="0">
+			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="HallRoom" next_door="EliasRoomOuterDoor">
 				<key name="hoodies"/>
 				<dialogue>
 					<d>Lock.</d>
 					<d>Seems like it needs a key card to unlock.</d>
 					<d>I need to find a key card.</d>
 				</dialogue>
-			</door>
+			</EliasRoomInnerDoor>
 		</doors>
 		<NPCs>
 		</NPCs>
-	</room1>
+	</EliasRoom>
+	<HallRoom left_limit="-1080" right_limit="1080" top_limit="1424" bottom_limit="-360">
+		<background>
+			<bg texture="Texture/EliasRoom/HallRoom_Template.png" sizeX="2177" sizeY="1784" posX="0" posY="532"/>
+		</background>
+		<interactObj>
+		</interactObj>
+		<item>
+		<!-- separatable = 0; combinable = 1; -->
+		</item>
+		<doors>
+			<EliasRoomOuterDoor texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="-980" posY="20" next_room="EliasRoom" next_door="EliasRoomInnerDoor"/>
+		</doors>
+		<NPCs>
+		</NPCs>
+	</HallRoom>
 </rooms>

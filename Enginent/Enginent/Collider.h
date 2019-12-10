@@ -28,6 +28,6 @@ public:
 	void setNewWidth(float newW);
 	void setNewHeight(float newH);
 	bool isCollide(Collider *other);
-	bool isClicked(int x, int y);
+	bool isClicked(float x, float y);
 	void CalNewBound();
 };
