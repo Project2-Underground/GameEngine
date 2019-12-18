@@ -9,8 +9,8 @@ Door::Door(std::string next_room, std::string next_door) {
 }
 
 void Door::SetKey(std::string item_to_unlock) {
-	open = false;
 	this->item_to_unlock = item_to_unlock;
+	open = false;
 }
 
 void Door::action() {
@@ -20,13 +20,8 @@ void Door::action() {
 		((GameScreen*)Game::GetInstance()->GetScreen())->ChangeRoom(nextRoom, nextDoor);
 	}
 	else {
-		// hard-code: getting the first item in the inventory to compare
-		if (player->inventory->GetInventoryBox(0)->GetItem() != nullptr)
-			Unlock(player->inventory->GetInventoryBox(0)->GetItem());
-		if (!open) {
-			SoundManager::GetInstance()->playSFX("Locked");
-			this->InteractableObj::action();
-		}
+		SoundManager::GetInstance()->playSFX("Locked");
+		this->InteractableObj::action();
 	}
 }
 

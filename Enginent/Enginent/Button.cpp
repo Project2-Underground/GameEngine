@@ -1,5 +1,6 @@
 #include "Button.h"
 #include "Game.h"
+#include "InfoPhone.h"
 
 Button::Button(std::string normal, ::string hover, std::string press)
 {
@@ -41,14 +42,14 @@ void Button::checkCollider(int x, int y)
 	}
 }
 
-//////////////Exit Button
-Exit_Button::~Exit_Button()
-{
+
+Button::~Button() {
 	delete normalTexture;
 	delete hoverTexture;
 	delete pressTexture;
 }
 
+//////////////Exit Button
 void Exit_Button::action(int x, int y)
 {
 	if(display)
@@ -56,15 +57,13 @@ void Exit_Button::action(int x, int y)
 }
 
 //////////////Switch Scene Button
-SwitchScene_Button::~SwitchScene_Button()
-{
-	delete normalTexture;
-	delete hoverTexture;
-	delete pressTexture;
-}
-
 void SwitchScene_Button::action(int x, int y)
 {
 	Game::GetInstance()->ChangeScreenState(GAMESCREEN);
 	SoundManager::GetInstance()->stop("MainScreen");
+}
+
+////////////// PhoneAppsButton
+void PhoneAppsButton::action(int x, int y) {
+	Phone::GetInstance()->OpenApp((AppType)appType);
 }

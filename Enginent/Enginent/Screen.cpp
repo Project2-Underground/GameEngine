@@ -24,13 +24,13 @@ MenuScreen::MenuScreen() {
 	background->SetSize(1280, -720);
 	background->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 
-	UIs.push_back(background);
-	UIs.push_back(play);
-	UIs.push_back(quit);
+	UI.push_back(background);
+	UI.push_back(play);
+	UI.push_back(quit);
 }
 
 void MenuScreen::Render() {
-	Game::GetInstance()->GetRenderer()->Render(UIs);
+	Game::GetInstance()->GetRenderer()->Render(UI);
 }
 
 void MenuScreen::Update() {
@@ -39,9 +39,9 @@ void MenuScreen::Update() {
 
 void MenuScreen::LeftClick(int x, int y) {
 	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-	for (int j = 0; j < UIs.size(); j++)
+	for (int j = 0; j < UI.size(); j++)
 	{
-		if (Button* button = dynamic_cast<Button*>(UIs[j]))
+		if (Button* button = dynamic_cast<Button*>(UI[j]))
 		{
 			button->checkCollider(tmp.x, tmp.y);
 		}
@@ -91,6 +91,7 @@ GameScreen::GameScreen(int level) {
 
 	for (int i = 0; i < inventoryNum; i++)
 		UI.push_back(player->inventory->GetInventoryBox(i));
+	phone = Phone::GetInstance();
 }
 
 void GameScreen::Render() {
@@ -107,11 +108,19 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(int x, int y) {
-	currentLevel->RightClick(x, y);
+	if (!phone->open)
+		currentLevel->RightClick(x, y);
 }
 
 void GameScreen::LeftClick(int x, int y) {
-	currentLevel->LeftClick(x, y);
+	if (phone->open) {
+		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		phone->ClickButton(tmp.x, tmp.y);
+	}
+	else {
+		currentLevel->LeftClick(x, y);
+	}
+
 }
 
 void GameScreen::ChangeLevel(int level) {

@@ -236,6 +236,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="InfoPhone.cpp">
+      <Filter>GameObj\interactable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">

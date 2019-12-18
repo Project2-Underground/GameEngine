@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Level.h"
 #include "Player.h"
+#include "InfoPhone.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,
@@ -27,7 +28,7 @@ class MenuScreen :public Screen {
 	Button* setting;
 	Button* quit;
 	UIObject* background;
-	std::vector<UIObject*> UIs;
+	std::vector<UIObject*> UI;
 public:
 	MenuScreen();
 	void Render();
@@ -40,10 +41,12 @@ public:
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
 	vector<std::string> levels;
+
 	Player* player;
-	Level* currentLevel;
+	Phone* phone;
+
 	Button* pause;
-	// player
+	Level* currentLevel;
 public:
 	GameScreen(int level);
 	void Render();

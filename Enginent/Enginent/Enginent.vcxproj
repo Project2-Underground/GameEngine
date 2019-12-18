@@ -72,6 +72,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="InfoPhone.cpp" />
     <ClCompile Include="InteractObj.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
