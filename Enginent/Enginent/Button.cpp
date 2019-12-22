@@ -67,3 +67,8 @@ void SwitchScene_Button::action(int x, int y)
 void PhoneAppsButton::action(int x, int y) {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
+
+
+void PhoneButton::action(int x, int y) {
+	Phone::GetInstance()->Open();
+}

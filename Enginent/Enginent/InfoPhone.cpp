@@ -6,6 +6,8 @@ Application::Application() {
 	currentPage = 0;
 	apps[NOTE] = notes;
 	apps[CHAT] = chats;
+
+	//init first note/chat or add later
 }
 
 void Application::Next() {
@@ -33,15 +35,30 @@ Phone* Phone::GetInstance() {
 
 
 Phone::Phone() {
-	//SetTexture(); phone image
-	app = nullptr;
+	phone = new UIObject();
+	phone->SetTexture("Texture/EliasRoom/Elias_Room_DoorAni.png"); //phone image
+	phone->SetSize(100, 200);
+	phone->SetPosition(glm::vec3(0, 0, 1));
+
+	app = new Application();
 	notiChat = false;
 	notiNote = false;
+	open = true;
 
 	// init all buttons
-	noteIcon;
-	chatIcon;
-	exitButton;
+	noteIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	noteIcon->SetSize(50, 50);
+	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * 0.25, 1));
+	noteIcon->SetApp(NOTE);
+
+	chatIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	chatIcon->SetSize(50, 50);
+	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * 0.25, 1));
+	chatIcon->SetApp(CHAT);
+
+	exitButton = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	exitButton->SetSize(50, 50);
+	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * 0.25, 1));
 
 	icons.push_back(noteIcon);
 	icons.push_back(chatIcon);
@@ -49,10 +66,13 @@ Phone::Phone() {
 }
 
 void Phone::Render() {
-	Game::GetInstance()->GetRenderer()->Render(this);
-	Game::GetInstance()->GetRenderer()->Render(icons);
-	if (app->open)
+	Game::GetInstance()->GetRenderer()->Render(phone);
+	if (app->open) {
 		app->Render();
+	}
+	else {
+		Game::GetInstance()->GetRenderer()->Render(icons);
+	}
 }
 
 void Phone::ClickButton(int x, int y) {

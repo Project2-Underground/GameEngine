@@ -29,7 +29,7 @@ private:
 	Button* home;
 };
 
-class Phone : public UIObject {
+class Phone{
 public:
 	static Phone* GetInstance();
 
@@ -53,6 +53,7 @@ private:
 	bool notiChat;
 	bool notiNote;
 
+	UIObject* phone;
 	PhoneAppsButton* noteIcon;
 	PhoneAppsButton* chatIcon;
 	Button* exitButton;

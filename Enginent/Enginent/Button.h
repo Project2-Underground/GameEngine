@@ -29,6 +29,12 @@ public:
 	void action(int x, int y);
 };
 
+class PhoneButton :public Button {
+public:
+	PhoneButton(std::string texture) { SetTexture(texture); }
+	void action(int x, int y);
+};
+
 class PhoneAppsButton :public Button {
 	int appType;
 public:

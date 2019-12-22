@@ -100,6 +100,8 @@ void GameScreen::Render() {
 	renderer->Render(player);
 	renderer->Render(player->dialogueText);
 	renderer->Render(UI);
+	if (phone->open)
+		phone->Render();
 }
 
 void GameScreen::Update() {
@@ -114,8 +116,8 @@ void GameScreen::RightClick(int x, int y) {
 
 void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
-		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-		phone->ClickButton(tmp.x, tmp.y);
+		/*glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		phone->ClickButton(tmp.x, tmp.y);*/
 	}
 	else {
 		currentLevel->LeftClick(x, y);
