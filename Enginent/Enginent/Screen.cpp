@@ -111,8 +111,7 @@ GameScreen::GameScreen() {
 }
 
 void GameScreen::LoadGame(std::string filename) {
-	ChangeLevel(LevelGenerator::GetInstance()->GetLevelNumber(filename));
-	currentLevel->LoadLevel(filename);
+	LevelGenerator::GetInstance()->LoadFromSave(filename);
 }
 
 void GameScreen::Render() {

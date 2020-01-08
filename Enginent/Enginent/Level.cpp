@@ -58,6 +58,13 @@ void Room::LeftClick(int x, int y) {
 	}
 }
 
+DrawableObject* Room::FindObject(std::string name) {
+	for (auto obj : objects)
+		if (obj->object_name == name)
+			return obj;
+	return nullptr;
+}
+
 //puzzle
 void Puzzle::Update() {
 
@@ -110,10 +117,6 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
 }
 
-void Level::LoadLevel(std::string filename) {
-	LevelGenerator::GetInstance()->LoadFromSave(filename, rooms);
-}
-
 void Level::OpenPuzzle(std::string puzzleName) {
 	//change game state to puzzle
 }
@@ -126,4 +129,13 @@ Level::~Level() {
 	for (std::map<std::string, Room*>::iterator itr = rooms.begin(); itr != rooms.end(); itr++) {
 		delete itr->second;
 	}
+}
+
+DrawableObject* Level::FindObject(std::string name) {
+	std::map<std::string, Room*>::iterator itr;
+	for (itr = rooms.begin(); itr != rooms.end(); itr++) {
+		if (itr->second->FindObject(name) != nullptr)
+			return itr->second->FindObject(name);
+	}
+	return nullptr;
 }

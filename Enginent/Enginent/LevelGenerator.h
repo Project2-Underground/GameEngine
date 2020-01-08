@@ -23,7 +23,7 @@ public:
 
 	int GetLevelNumber(std::string);
 	void SaveGame(std::string);
-	void LoadFromSave(std::string, std::map<std::string, Room*>& rooms);
+	void LoadFromSave(std::string);
 
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
 

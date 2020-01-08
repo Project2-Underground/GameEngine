@@ -181,14 +181,56 @@ int LevelGenerator::GetLevelNumber(std::string filename) {
 		return doc.child("level").attribute("currentLevel").as_int();
 }
 
-void LevelGenerator::LoadFromSave(std::string filename, std::map<std::string, Room*>& rooms) {
+void LevelGenerator::LoadFromSave(std::string filename) {
 	if (LoadFile(filename)) {
+		Game* game = Game::GetInstance();
+		GameScreen* gs = (GameScreen*)game->GetScreen();
+		Level* level = gs->GetCurrentLevel();
+
+		// check saved level
+		// if not the same level, reload the saved level
+		if (int l = doc.child("level").attribute("currentLevel").as_int() != level->levelNo)
+			gs->ChangeLevel(l - 1);
 		std::map<std::string, Room*>::iterator itr;
-		for (itr = rooms.begin(); itr != rooms.end(); itr++) {
+		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
+			std::vector<DrawableObject*> objects = itr->second->objects;
 			for (int i = 0; i < itr->second->objects.size(); i++) {
-				// if object is an interactObj, NPC, door or items 
 				// load from save
+				if (Item * item = dynamic_cast<Item*>(objects[i])) {
+					item->setDisplay(doc.child("level").child("item").child(item->object_name.c_str()).attribute("display").as_bool());
+					item->SetCurrentDialogue(doc.child("level").child("item").child(item->object_name.c_str()).attribute("current_dialogue").as_int());
+				}
+				else if (Door * door = dynamic_cast<Door*>(objects[i])) {
+					door->lock = doc.child("level").child("doors").child(door->object_name.c_str()).attribute("lock").as_bool();
+					door->SetCurrentDialogue(doc.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
+				}
+				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
+					obj->SetCurrentDialogue(doc.child("level").child("interactObj").child(obj->object_name.c_str()).attribute("current_dialogue").as_int());
+				}
+				/*else if (dynamic_cast<NonPlayer*>(objects[i])) {
+
+				}*/
 			}
+		}
+
+		// load puzzles
+
+
+		// load player and inventory
+		pugi::xml_node playerNode = doc.child("level").child("Player");
+		Player* player =  game->GetPlayer();
+		float px = playerNode.attribute("posX").as_int();
+		float py = playerNode.attribute("posY").as_int();
+		player->SetPosition(glm::vec3(px, py, 1.0f));
+
+		pugi::xml_node item = playerNode.child("inventory").first_child();
+		for (int i = 0; i < player->inventory->GetSize(); i++) {
+			// has attribute named "name"
+			if (item.attribute("name").as_string() != "") {
+				// put that item in the inventory
+				player->inventory->GetInventoryBox(i)->SetItem((Item*)level->FindObject(item.attribute("name").as_string()));
+			}
+			item = item.next_sibling();
 		}
 	}
 }
@@ -225,7 +267,7 @@ void LevelGenerator::SaveGame(std::string filename) {
 				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("current_dialogue").set_value(item->GetCurrentDialogue());
 			}
 			else if (Door * door = dynamic_cast<Door*>(objects[i])) {	
-				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->open);
+				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->lock);
 				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {

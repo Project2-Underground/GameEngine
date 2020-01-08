@@ -20,6 +20,7 @@ public:
 	virtual void LeftClick(int, int);
 	void SetPlayerWalkLimit(Collider*);
 	void SetCameraLimit(Collider*);
+	DrawableObject* FindObject(std::string);
 	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
 	Collider* GetCameraLimit() { return cameraLimit; };
 
@@ -46,12 +47,13 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 
-	void LoadLevel(std::string filename);
 	void ChangeRoom(std::string roomName, std::string door);
 	void OpenPuzzle(std::string puzzleName);
 
 	std::vector<DrawableObject*>* Getobjects();
 	Room* GetCurrentRoom() { return currentRoom; };
+	void SetCurrentRoom(Room* r) { currentRoom = r; }
+	DrawableObject* FindObject(std::string);
 
 	~Level();
 };

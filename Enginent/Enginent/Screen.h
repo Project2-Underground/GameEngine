@@ -7,7 +7,6 @@
 #include "Player.h"
 #include "InfoPhone.h"
 
-
 enum ScreenState {
 	MENUSCREEN = 0,
 	GAMESCREEN,
@@ -44,7 +43,6 @@ public:
 
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
-	vector<std::string> levels;
 
 	Player* player;
 	Phone* phone;
@@ -52,6 +50,8 @@ class GameScreen :public Screen {
 	Button* pause;
 	Level* currentLevel;
 public:
+	vector<std::string> levels;
+
 	GameScreen();
 	void Render();
 	void Update();

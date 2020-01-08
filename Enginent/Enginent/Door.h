@@ -9,11 +9,11 @@ class Door : public InteractableObj {
 	std::string nextDoor;
 	std::string item_to_unlock;
 public:
-	bool open;
+	bool lock;
 	Door(std::string, std::string);
 	Door() {};
 	void SetKey(std::string item_to_unlock);
 	void action();
 	void Unlock(InteractableObj* item);
-	void Unlock() { open = true; };
+	void Unlock() { lock = false; };
 };
