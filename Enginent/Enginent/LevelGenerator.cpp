@@ -1,51 +1,38 @@
 #include "LevelGenerator.h"
 #include "Item.h"
+#include "Game.h"
 
 #include <iostream>
 
-//void RoomGenerator::GenerateRoom(std::string filename) {
-//	/* generate room base on the xml doc */
-//	if (LoadFile(filename)) {
-//		pugi::xml_node object = doc.child("room");	// get the first node of the root
-//		for (pugi::xml_node_iterator child = object.begin(); child != object.end(); child++) {
-//			std::cout << "in";
-//			 //loop through headers
-//			int type = child->attribute("type").as_int();
-//			for (pugi::xml_node_iterator aChild = child->begin(); aChild != child->end(); aChild++) {
-//				// get attributes
-//				// createObject
-//				std::string texture = aChild->attribute("texture").as_string();
-//				int sizeX = aChild->attribute("sizeX").as_int();
-//				int sizeY = aChild->attribute("sizeY").as_int();
-//				glm::vec3 pos = glm::vec3(aChild->attribute("posX").as_float(),
-//					aChild->attribute("posY").as_float(),
-//					1.0f);
-//				std::vector<std::string> dialogueVec;
-//				if (aChild->child("dialogue")) {
-//					for (pugi::xml_node_iterator dialogue = aChild->child("dialogue").begin(); dialogue != aChild->child("dialogue").end(); dialogue++) {
-//						dialogueVec.push_back(dialogue->child_value());
-//					}
-//				}
-//				//Game::GetInstance()->createObject((objectType)type, texture, sizeX, -sizeY, pos, dialogueVec);
-//			}
-//		}
-//	}
-//}
+LevelGenerator* LevelGenerator::_instance = nullptr;
 
-void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Room*> &rooms) {
+LevelGenerator* LevelGenerator::GetInstance() {
+	if (_instance == nullptr)
+		_instance = new LevelGenerator();
+	return _instance;
+}
+
+bool LevelGenerator::LoadFile(std::string filename) {
+	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
+	if (result)
+		return true;
+	std::cout << "cannot open file\n";
+	return false;
+}
+
+void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms) {
 	if (LoadFile(filename)) {
-		pugi::xml_node xmlRooms = doc.child("rooms");
+		pugi::xml_node xmlRooms = doc.child("level");
 
 		// generate all the rooms in that level
 		for (pugi::xml_node_iterator room = xmlRooms.begin(); room != xmlRooms.end(); room++) {
 			Room* newRoom = new Room();
-			std::string roomName = room->name();
+			newRoom->name = room->name();
 
 			// player walking limit
 			glm::vec3 minLimit = glm::vec3(room->attribute("left_limit").as_int(), room->attribute("bottom_limit").as_int(), 1);
 			glm::vec3 maxLimit = glm::vec3(room->attribute("right_limit").as_int(), room->attribute("top_limit").as_int(), 1);
 			newRoom->SetPlayerWalkLimit(new Collider(minLimit, maxLimit));
-
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
 			GenerateBackground(*room, objects);
@@ -57,26 +44,14 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
 
-			rooms.insert(std::pair<std::string, Room*>(roomName, newRoom));
+			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
 		}
 	}
 }
-//
-//void LevelGenerator::GenerateRoom(std::string filename, std::string roomNo, std::vector<DrawableObject*> &objects){
-//	if (LoadFile(filename)) {
-//		pugi::xml_node room = doc.child("rooms").child(roomNo.c_str());
-//		//std::cout << "in GenerateRoom\n";
-//		GenerateBackground(room, objects);
-//		GenerateInteractObj(room, objects);
-//		GenerateDoor(room, objects);
-//		GenerateItem(room, objects);
-//		GenerateNPC(room, objects);
-//	}
-//}
 
-void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 	pugi::xml_node background = room.child("background");
-	
+
 	for (pugi::xml_node_iterator child = background.begin(); child != background.end(); child++) {
 		//std::cout << "in GenerateBackground\n";
 		ImageObject* bg = new ImageObject();
@@ -85,12 +60,13 @@ void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<Drawabl
 	}
 }
 
-void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 	pugi::xml_node interactObj = room.child("interactObj");
 
 	for (pugi::xml_node_iterator child = interactObj.begin(); child != interactObj.end(); child++) {
 		//std::cout << "in GenerateInteractObj\n";
 		InteractableObj* interactObj = new InteractableObj();
+		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
 		std::vector<std::string> dialogues;
@@ -107,7 +83,7 @@ void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<Drawab
 	}
 }
 
-void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*> &objects, std::map<std::string, Door*>& doorsList) {
+void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::map<std::string, Door*>& doorsList) {
 	pugi::xml_node doors = room.child("doors");
 
 	for (pugi::xml_node_iterator child = doors.begin(); child != doors.end(); child++) {
@@ -116,6 +92,8 @@ void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObjec
 		std::string next_door = child->attribute("next_door").as_string();
 
 		Door* door = new Door(next_room, next_door);
+		door->object_name = child->name();
+
 		CreateObject(door, *child);
 		std::vector<std::string> dialogues;
 
@@ -133,7 +111,7 @@ void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObjec
 		}
 
 		objects.push_back(door);
-		doorsList.insert(std::pair<std::string,Door*>(child->name(), door));
+		doorsList.insert(std::pair<std::string, Door*>(child->name(), door));
 	}
 }
 
@@ -152,7 +130,7 @@ void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObjec
 				resultItems.push_back(tmp);
 			}
 		}
-		
+
 		switch (child->attribute("type").as_int())
 		{
 		case SEPARATABLE:
@@ -176,11 +154,11 @@ void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObjec
 	}
 }
 
-void LevelGenerator::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 
 }
 
-void LevelGenerator::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*> &objects) {
+void LevelGenerator::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 
 }
 
@@ -196,4 +174,89 @@ void LevelGenerator::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, -sizeY);
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
+}
+
+int LevelGenerator::GetLevelNumber(std::string filename) {
+	if (LoadFile(filename))
+		return doc.child("level").attribute("currentLevel").as_int();
+}
+
+void LevelGenerator::LoadFromSave(std::string filename, std::map<std::string, Room*>& rooms) {
+	if (LoadFile(filename)) {
+		std::map<std::string, Room*>::iterator itr;
+		for (itr = rooms.begin(); itr != rooms.end(); itr++) {
+			for (int i = 0; i < itr->second->objects.size(); i++) {
+				// if object is an interactObj, NPC, door or items 
+				// load from save
+			}
+		}
+	}
+}
+
+void LevelGenerator::SaveGame(std::string filename) {
+	Game* game = Game::GetInstance();
+	pugi::xml_document save;
+	Level* level = game->GetCurrentLevel();
+	save.append_child("level").append_attribute("currentLevel").set_value(level->levelNo);
+	save.child("level").append_attribute("currentRoom").set_value(level->GetCurrentRoom()->name.c_str());
+	save.child("level").append_child("interactObj");
+	save.child("level").append_child("item");
+	save.child("level").append_child("doors");
+	save.child("level").append_child("NPCs");
+	save.child("level").append_child("puzzles");
+	save.child("level").append_child("Player");
+	save.child("level").child("Player").append_child("inventory");
+
+	pugi::xml_node saveLevel = save.child("level");
+
+	// saving objects
+	std::map<std::string, Room*>::iterator itr;
+	for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
+		std::vector<DrawableObject*> objects = itr->second->objects;
+		for (int i = 0; i < objects.size(); i++) {
+			// if object is an interactObj, NPC, door or items 
+			// save
+
+			if (Item * item = dynamic_cast<Item*>(objects[i])) {
+				saveLevel.child("item").append_child(item->object_name.c_str());
+				// display
+				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("display").set_value(item->IsDisplay());
+				// current dialogue
+				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("current_dialogue").set_value(item->GetCurrentDialogue());
+			}
+			else if (Door * door = dynamic_cast<Door*>(objects[i])) {	
+				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->open);
+				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
+			}
+			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
+				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
+				// current dialogue
+				saveLevel.child("interactObj").child(obj->object_name.c_str()).append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+			}
+			/*else if (dynamic_cast<NonPlayer*>(objects[i])) {
+
+			}*/
+		}
+	}
+
+	// saving puzzles 
+
+
+	// saving player and inventory
+	Player* player = game->GetPlayer();
+	saveLevel.child("Player").append_attribute("posX").set_value(player->getPos().x);
+	saveLevel.child("Player").append_attribute("posY").set_value(player->getPos().y);
+
+	for (int i = 0; i < player->inventory->GetSize(); i++) {
+		pugi::xml_node node = saveLevel.child("Player").child("inventory").append_child("item");
+		Item* item = player->inventory->GetInventoryBox(i)->GetItem();
+		if (item != nullptr)
+			node.append_attribute("name").set_value(item->object_name.c_str());
+	}
+
+	save.save_file(filename.c_str());
+}
+
+LevelGenerator::~LevelGenerator() {
+	delete _instance;
 }

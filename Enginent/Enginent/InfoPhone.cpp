@@ -43,7 +43,7 @@ Phone::Phone() {
 	app = new Application();
 	notiChat = false;
 	notiNote = false;
-	open = true;
+	open = false;
 
 	// init all buttons
 	noteIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");

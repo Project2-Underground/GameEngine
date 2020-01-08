@@ -8,8 +8,8 @@ class Door : public InteractableObj {
 	std::string nextRoom;
 	std::string nextDoor;
 	std::string item_to_unlock;
-	bool open;
 public:
+	bool open;
 	Door(std::string, std::string);
 	Door() {};
 	void SetKey(std::string item_to_unlock);

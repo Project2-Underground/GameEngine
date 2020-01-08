@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<rooms>
+<level currentLevel="1" startPosX="0" startPosY="-50">
 	<EliasRoom left_limit="-180" right_limit="640" top_limit="360" bottom_limit="-360">
 		<background>
 			<bg texture="Texture/EliasRoom/room1.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
@@ -24,7 +24,7 @@
 		</item>
 		<doors>
 			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="HallRoom" next_door="EliasRoomOuterDoor">
-				<key name="hoodies"/>
+				<key name="keyCard"/>
 				<dialogue>
 					<d>Lock.</d>
 					<d>Seems like it needs a key card to unlock.</d>
@@ -50,4 +50,4 @@
 		<NPCs>
 		</NPCs>
 	</HallRoom>
-</rooms>
+</level>

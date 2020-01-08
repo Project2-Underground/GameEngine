@@ -34,6 +34,8 @@ public:
 	void SetType(IneractTypeList newInteractType) { interactType = newInteractType; };
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
+	int GetCurrentDialogue() { return currDialogue; }
+	void SetCurrentDialogue(int num) { currDialogue = num; }
 
 	IneractTypeList getType() { return interactType; };
 

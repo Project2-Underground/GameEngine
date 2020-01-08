@@ -27,7 +27,7 @@ class Game
 	Screen* currentScreen;
 	ScreenState currentState;
 
-	GLRenderer *renderer;
+	GLRenderer* renderer;
 	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
@@ -37,7 +37,7 @@ public:
 	int winWidth, winHeight;
 	~Game();
 	static Game* GetInstance();
-	GLRenderer * GetRenderer();
+	GLRenderer* GetRenderer();
 	Screen* GetScreen() { return currentScreen; };
 	Camera* GetCamera() { return camera; };
 	void Init(int width, int height);
@@ -48,7 +48,9 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 	void UpdateMouseState(int, int);
-	
+
+	Level* GetCurrentLevel();
+	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
 	CursorUI* getCursor() { return cursorGame; };
 };

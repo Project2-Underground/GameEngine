@@ -22,6 +22,8 @@ public:
 	void SetTexture(string path);
 	void SetTexture(unsigned int texture);
 	unsigned int GetTexture();
+	bool IsDisplay() { return display; }
+	void SetDisplay(bool d) { display = d; }
 	virtual void Render(glm::mat4 globalModelTransform);
 	void SetCollder(Collider* n_col);
 	void setDisplay(bool);

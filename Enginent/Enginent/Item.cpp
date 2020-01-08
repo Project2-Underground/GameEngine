@@ -10,7 +10,6 @@ void Item::action() {
 	// to be picked up by the player
 	if (display) {
 		Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
-		SetTexture(Inventory_texture);
 		player->anim->Play("Pickup", false);
 		player->inventory->addItem(this);
 		this->col->enable = false;
@@ -19,10 +18,10 @@ void Item::action() {
 }
 
 void Item::SetInventoryTexture(std::string path) {
-	Inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
+	inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-SeparatableItem::SeparatableItem(std::vector<Item*> items):Item(){
+SeparatableItem::SeparatableItem(std::vector<Item*> items) :Item() {
 	this->items = items;
 }
 

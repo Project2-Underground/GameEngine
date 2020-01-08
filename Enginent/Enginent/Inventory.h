@@ -9,6 +9,7 @@ public:
 	Inventory(int numOfInventory, glm::vec3 arrOfPos[], int boxSize);	// initialize the inventory boxes
 	void addItem(Item *item);
 	void removeItem(Item *item);
+	int GetSize() { return itemSize; }
 	//void displayItem();
 	~Inventory();
 	InventoryBox* GetInventoryBox(int index);

@@ -8,11 +8,12 @@ enum ItemType {
 };
 
 class Item : public InteractableObj {
-	unsigned int Inventory_texture;
+	unsigned int inventory_texture;
 public:
 	Item() { interactType = PICKUP; };
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);
+	unsigned int GetInventoryTexture() { return inventory_texture; }
 	void action();
 };
 

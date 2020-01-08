@@ -41,7 +41,7 @@ void InventoryBox::Render() {
 		if (squareMesh != nullptr) {
 			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 			glUniform1i(modeId, 1);
-			glBindTexture(GL_TEXTURE_2D, item->GetTexture());
+			glBindTexture(GL_TEXTURE_2D, item->GetInventoryTexture());
 			squareMesh->Render();
 		}
 	}

@@ -12,6 +12,8 @@ MenuScreen::MenuScreen() {
 
 	// setting button
 	setting;
+	// load button
+	load;
 
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
@@ -41,7 +43,7 @@ void MenuScreen::LeftClick(int x, int y) {
 	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
 	for (int j = 0; j < UI.size(); j++)
 	{
-		if (Button* button = dynamic_cast<Button*>(UI[j]))
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
 		{
 			button->checkCollider(tmp.x, tmp.y);
 		}
@@ -56,9 +58,23 @@ void MenuScreen::UpdateMouseState(int x, int y) {
 	quit->updateButton(realPos.x, realPos.y);
 }
 
+MenuScreen::~MenuScreen() {
+	delete play;
+	//delete load;
+	//delete setting;
+	delete quit;
+	delete background;
+
+	for (auto ui : UI)
+		delete ui;
+}
+
 /*GAME SCREEN*/
-GameScreen::GameScreen(int level) {
+GameScreen::GameScreen() {
+	// filepath of levels
 	levels.push_back("save/level1.xml");
+	//levels.push_back("save/level2.xml");
+	//levels.push_back("save/level3.xml");
 
 	currentLevel = new Level(levels[0]);
 	player = new Player();
@@ -92,6 +108,11 @@ GameScreen::GameScreen(int level) {
 	for (int i = 0; i < inventoryNum; i++)
 		UI.push_back(player->inventory->GetInventoryBox(i));
 	phone = Phone::GetInstance();
+}
+
+void GameScreen::LoadGame(std::string filename) {
+	ChangeLevel(LevelGenerator::GetInstance()->GetLevelNumber(filename));
+	currentLevel->LoadLevel(filename);
 }
 
 void GameScreen::Render() {
@@ -146,6 +167,16 @@ int GameScreen::GetPointedObject(glm::vec3 pos) {
 	}
 }
 
+GameScreen::~GameScreen() {
+	delete player;
+	delete phone;
+	//delete pause;
+	delete currentLevel;
+
+	for (auto ui : UI)
+		delete ui;
+}
+
 /*CUTSCENE*/
 CutsceneScreen::CutsceneScreen() {
 
@@ -156,7 +187,7 @@ void CutsceneScreen::Render() {
 }
 
 void CutsceneScreen::Update() {
-	// 2 clicks to skip cutscene
+	// eg. 2 clicks to skip a cutscene
 }
 
 void CutsceneScreen::LeftClick(int x, int y) {
