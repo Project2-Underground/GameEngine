@@ -27,6 +27,9 @@ MenuScreen::MenuScreen() {
 	UI.push_back(background);
 	UI.push_back(play);
 	UI.push_back(quit);
+
+	//play sound
+	SoundManager::GetInstance()->playSound("MainScreen");
 }
 
 void MenuScreen::Render() {

@@ -105,6 +105,11 @@ void Game::ChangeScreenState(ScreenState newState) {
 	changeScreen = true;
 }
 
+int Game::GetScreenState()
+{
+	return currentState;
+}
+
 Game::Game()
 {
 	currentState = MENUSCREEN;

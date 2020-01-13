@@ -52,8 +52,8 @@ Button::~Button() {
 //////////////Exit Button
 void Exit_Button::action(int x, int y)
 {
-	if(display)
-	SDL_Quit();
+	if (display)
+		Game::GetInstance()->quitGame();
 }
 
 //////////////Switch Scene Button

@@ -11,7 +11,8 @@ enum ScreenState {
 	MENUSCREEN = 0,
 	GAMESCREEN,
 	CUTSCENE,
-	ENDSCENE
+	ENDSCENE,
+	EXIT
 };
 
 class Screen {

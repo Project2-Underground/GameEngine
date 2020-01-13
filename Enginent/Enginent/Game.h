@@ -31,8 +31,9 @@ class Game
 	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
-
+	bool quit = false;
 	bool changeScreen;
+
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -45,9 +46,12 @@ public:
 	void Render();
 	void UpdateScreenState();
 	void ChangeScreenState(ScreenState newState);
+	int GetScreenState();
 	void RightClick(int, int);
 	void LeftClick(int, int);
 	void UpdateMouseState(int, int);
+	void quitGame() { quit = true; };
+	bool getQuitState() { return quit; };
 	
 	glm::vec3 FindMousePosition(int, int);
 	CursorUI* getCursor() { return cursorGame; };

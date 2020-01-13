@@ -182,9 +182,6 @@
     <ClCompile Include="InventoryBox.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>GameUI</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
@@ -238,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="InfoPhone.cpp">
       <Filter>GameObj\interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

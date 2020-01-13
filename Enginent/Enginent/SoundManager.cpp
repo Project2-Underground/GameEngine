@@ -36,8 +36,16 @@ void SoundManager::pause(std::string sound) {
 }
 
 void SoundManager::stop(std::string sound) {
-	sounds[sound]->setIsPaused(true);
-	sounds[sound]->setPlayPosition(0);
+	if (sounds[sound] == nullptr)
+	{
+		cout << "Cannot find sound " << sound << endl;
+	}
+	else
+	{
+		sounds[sound]->setIsPaused(true);
+		sounds[sound]->setPlayPosition(0);
+	}
+
 }
 
 void SoundManager::stopAllSounds() {
