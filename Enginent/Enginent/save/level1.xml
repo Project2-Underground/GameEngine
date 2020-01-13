@@ -34,6 +34,8 @@
 		</doors>
 		<NPCs>
 		</NPCs>
+		<foreground>
+		</foreground>
 	</EliasRoom>
 	<HallRoom left_limit="-1080" right_limit="1080" top_limit="1424" bottom_limit="-360">
 		<background>

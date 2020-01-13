@@ -8,7 +8,7 @@
 		<bed current_dialogue="0" />
 	</interactObj>
 	<item>
-		<hoodies display="true" current_dialogue="0" />
+		<hoodies display="false" current_dialogue="0" />
 	</item>
 	<doors>
 		<EliasRoomInnerDoor lock="true" current_dialogue="0" />
@@ -16,9 +16,9 @@
 	</doors>
 	<NPCs />
 	<puzzles />
-	<Player posX="354" posY="-50">
+	<Player posX="277" posY="-50">
 		<inventory>
-			<item />
+			<item name="hoodies" />
 			<item />
 			<item />
 			<item />

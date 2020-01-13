@@ -9,12 +9,15 @@
 class LevelGenerator {
 	static LevelGenerator* _instance;
 	pugi::xml_document doc;
+	pugi::xml_document chatDoc;
+
+	LevelGenerator();
 	bool LoadFile(std::string filename);
 public:
 	static LevelGenerator* GetInstance();
 
 	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms);
-	void GenerateBackground(pugi::xml_node, std::vector<DrawableObject*>&);
+	void GenerateImage(pugi::xml_node, std::vector<DrawableObject*>&, std::string);
 	void GenerateInteractObj(pugi::xml_node, std::vector<DrawableObject*>&);
 	void GenerateDoor(pugi::xml_node, std::vector<DrawableObject*>&, std::map<std::string, Door*>&);
 	void GenerateItem(pugi::xml_node, std::vector<DrawableObject*>&);

@@ -1,17 +1,36 @@
 #include "InfoPhone.h"
 #include "Game.h"
 
+Chat::Chat(std::string name) {
+	// load chat from xml
+}
+
+void Chat::LoadMessages(int number) {
+	// load next number of messages
+}
+
+void Chat::Render() {
+	Game::GetInstance()->GetRenderer()->Render(pic);
+	// render text bubble
+}
+
 Application::Application() {
 	open = false;
 	currentPage = 0;
-	apps[NOTE] = notes;
-	apps[CHAT] = chats;
 
 	//init first note/chat or add later
 }
 
 void Application::Next() {
-	currentPage = (currentPage + 1) % apps[currentApp].size();
+	switch (currentAppType)
+	{
+	case NOTE:
+		currentPage = (currentPage + 1) % notes.size();
+		break;
+	case CHAT:
+		currentPage = (currentPage + 1) % chats.size();
+		break;
+	}
 }
 
 void Application::Back() {
@@ -21,9 +40,24 @@ void Application::Back() {
 }
 
 void Application::Render() {
-	Game::GetInstance()->GetRenderer()->Render(apps[currentApp].at(currentPage));
+	switch (currentAppType)
+	{
+	case NOTE:
+		Game::GetInstance()->GetRenderer()->Render(notes.at(currentPage));
+		break;
+	case CHAT:
+		chats.at(currentPage)->Render();
+		break;
+	}
 }
 
+void Application::AddNote(UIObject* obj) {
+	notes.push_back(obj);
+}
+
+void Application::AddChat(std::string name) {
+	chats.push_back(new Chat(name));
+}
 
 Phone* Phone::_instance = nullptr;
 
@@ -97,21 +131,22 @@ void Phone::Close() {
 
 void Phone::OpenApp(AppType apptype) {
 	app->open = true;
-	app->currentApp = apptype;
+	app->currentAppType = apptype;
 }
 
 void Phone::CloseApp() {
 	app->open = false;
 }
 
-void Phone::AddPage(AppType apptype, UIObject* page) {
-	app->apps[apptype].push_back(page);
+void Phone::AddPage(AppType apptype, UIObject* page, std::string name) {
 	switch (apptype)
 	{
 	case NOTE:
+		app->AddNote(page);
 		notiNote = false;
 		break;
 	case CHAT:
+		app->AddChat(page, name);
 		notiChat = false;
 	default:
 		break;

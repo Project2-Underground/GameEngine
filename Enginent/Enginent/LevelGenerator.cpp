@@ -12,6 +12,10 @@ LevelGenerator* LevelGenerator::GetInstance() {
 	return _instance;
 }
 
+LevelGenerator::LevelGenerator() {
+	//load all constant files
+}
+
 bool LevelGenerator::LoadFile(std::string filename) {
 	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 	if (result)
@@ -35,11 +39,12 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 			newRoom->SetPlayerWalkLimit(new Collider(minLimit, maxLimit));
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
-			GenerateBackground(*room, objects);
+			GenerateImage(*room, objects, "background");
 			GenerateInteractObj(*room, objects);
 			GenerateDoor(*room, objects, newRoom->doors);
 			GenerateItem(*room, objects);
 			GenerateNPC(*room, objects);
+			GenerateImage(*room, objects, "foreground");
 
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
@@ -49,8 +54,8 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 	}
 }
 
-void LevelGenerator::GenerateBackground(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
-	pugi::xml_node background = room.child("background");
+void LevelGenerator::GenerateImage(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::string type) {
+	pugi::xml_node background = room.child(type.c_str());
 
 	for (pugi::xml_node_iterator child = background.begin(); child != background.end(); child++) {
 		//std::cout << "in GenerateBackground\n";
