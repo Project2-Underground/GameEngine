@@ -132,6 +132,12 @@
     <ClInclude Include="Level.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewWin.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -238,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

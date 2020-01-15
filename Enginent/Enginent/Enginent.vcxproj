@@ -49,10 +49,12 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SquareMeshVbo.h" />
+    <ClInclude Include="TextBox.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TimeSystem.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
+    <ClInclude Include="ViewWin.h" />
     <ClInclude Include="xmlFileManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +89,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="TimeSystem.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
