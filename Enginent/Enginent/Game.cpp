@@ -11,7 +11,7 @@
 
 Game* Game::instance = nullptr;
 
-Game * Game::GetInstance()
+Game* Game::GetInstance()
 {
 	if (instance == nullptr) {
 		instance = new Game();
@@ -19,7 +19,7 @@ Game * Game::GetInstance()
 	return instance;
 }
 
-GLRenderer * Game::GetRenderer()
+GLRenderer* Game::GetRenderer()
 {
 	return this->renderer;
 }
@@ -37,11 +37,11 @@ void Game::Init(int width, int height)
 	camera = Camera::GetInstance();
 	SoundManager::GetInstance()->Init();
 
-	SquareMeshVbo * square = new SquareMeshVbo();
+	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	renderer->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	TriangleMeshVbo * triangle = new TriangleMeshVbo();
+	TriangleMeshVbo* triangle = new TriangleMeshVbo();
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
@@ -74,7 +74,7 @@ void Game::UpdateScreenState() {
 		currentScreen = new MenuScreen();
 		break;
 	case GAMESCREEN:
-		currentScreen = new GameScreen(1);
+		currentScreen = new GameScreen();
 		break;
 	case CUTSCENE:
 		currentScreen = new CutsceneScreen();
@@ -87,6 +87,7 @@ void Game::UpdateScreenState() {
 }
 
 void Game::RightClick(int x, int y) {
+	LevelGenerator::GetInstance()->SaveGame("save/test.xml");
 	currentScreen->RightClick(x, y);
 }
 
@@ -119,8 +120,9 @@ Game::Game()
 
 Game::~Game()
 {
-	delete camera;
 	delete renderer;
+	delete currentScreen;
+	delete cursorGame;
 }
 
 glm::vec3 Game::FindMousePosition(int x, int y)
@@ -129,4 +131,12 @@ glm::vec3 Game::FindMousePosition(int x, int y)
 	realX = -(winWidth * 0.5) + x;
 	realY = -(winHeight * 0.5) + (winHeight - y);
 	return glm::vec3(realX, realY, 1);
+}
+
+Level* Game::GetCurrentLevel() {
+	return ((GameScreen*)currentScreen)->GetCurrentLevel();
+}
+
+Player* Game::GetPlayer() {
+	return ((GameScreen*)currentScreen)->GetPlayer();
 }

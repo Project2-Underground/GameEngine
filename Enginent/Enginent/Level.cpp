@@ -7,6 +7,13 @@ void Room::Render() {
 	Game::GetInstance()->GetRenderer()->Render(objects);
 }
 
+Room::~Room() {
+	delete playerWalkLimit;
+	delete cameraLimit;
+	for (auto obj : objects)
+		delete obj;
+}
+
 void Room::Update() {
 
 }
@@ -51,6 +58,13 @@ void Room::LeftClick(int x, int y) {
 	}
 }
 
+DrawableObject* Room::FindObject(std::string name) {
+	for (auto obj : objects)
+		if (obj->object_name == name)
+			return obj;
+	return nullptr;
+}
+
 //puzzle
 void Puzzle::Update() {
 
@@ -67,8 +81,9 @@ void Puzzle::LeftClick() {
 //level
 
 Level::Level(std::string filename) {
-	LevelGenerator lg;
-	lg.GenerateRoom(filename, rooms);
+	LevelGenerator* lg = LevelGenerator::GetInstance();
+	lg->GenerateRoom(filename, rooms);
+	levelNo = lg->GetLevelNumber(filename);
 
 	// assign first room as current room
 	currentRoom = rooms.begin()->second;
@@ -83,11 +98,11 @@ void Level::Render() {
 }
 
 void Level::RightClick(int x, int y) {
-	currentRoom->RightClick(x,y);
+	currentRoom->RightClick(x, y);
 }
 
 void Level::LeftClick(int x, int y) {
-	currentRoom->LeftClick(x,y);
+	currentRoom->LeftClick(x, y);
 }
 
 void Level::ChangeRoom(std::string roomName, std::string door) {
@@ -108,4 +123,19 @@ void Level::OpenPuzzle(std::string puzzleName) {
 
 std::vector<DrawableObject*>* Level::Getobjects() {
 	return &currentRoom->objects;
+}
+
+Level::~Level() {
+	for (std::map<std::string, Room*>::iterator itr = rooms.begin(); itr != rooms.end(); itr++) {
+		delete itr->second;
+	}
+}
+
+DrawableObject* Level::FindObject(std::string name) {
+	std::map<std::string, Room*>::iterator itr;
+	for (itr = rooms.begin(); itr != rooms.end(); itr++) {
+		if (itr->second->FindObject(name) != nullptr)
+			return itr->second->FindObject(name);
+	}
+	return nullptr;
 }

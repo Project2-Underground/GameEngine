@@ -26,6 +26,7 @@ public:
 
 class MenuScreen :public Screen {
 	Button* play;
+	Button* load;
 	Button* setting;
 	Button* quit;
 	UIObject* background;
@@ -37,11 +38,12 @@ public:
 	void RightClick(int, int) {};
 	void LeftClick(int, int);
 	void UpdateMouseState(int x, int y);
+
+	~MenuScreen();
 };
 
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
-	vector<std::string> levels;
 
 	Player* player;
 	Phone* phone;
@@ -49,16 +51,22 @@ class GameScreen :public Screen {
 	Button* pause;
 	Level* currentLevel;
 public:
-	GameScreen(int level);
+	vector<std::string> levels;
+
+	GameScreen();
 	void Render();
 	void Update();
 	void RightClick(int, int);
 	void LeftClick(int, int);
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
+	void LoadGame(std::string);
 
+	Level* GetCurrentLevel() { return currentLevel; }
 	int GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };
+
+	~GameScreen();
 };
 
 class CutsceneScreen :public Screen {

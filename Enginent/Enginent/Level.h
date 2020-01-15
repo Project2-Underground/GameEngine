@@ -12,6 +12,7 @@ class Room {
 public:
 	std::vector<DrawableObject*> objects;
 	std::map<std::string, Door*> doors;
+	std::string name;
 
 	void Render();
 	virtual void Update();
@@ -19,8 +20,11 @@ public:
 	virtual void LeftClick(int, int);
 	void SetPlayerWalkLimit(Collider*);
 	void SetCameraLimit(Collider*);
+	DrawableObject* FindObject(std::string);
 	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
 	Collider* GetCameraLimit() { return cameraLimit; };
+
+	~Room();
 };
 
 class Puzzle :public Room {
@@ -32,10 +36,11 @@ public:
 
 
 class Level {
-	std::map<std::string, Room*> rooms;
-	std::map<std::string, Puzzle*> puzzles;
 	Room* currentRoom;
 public:
+	int levelNo;
+	std::map<std::string, Room*> rooms;
+	std::map<std::string, Puzzle*> puzzles;
 	Level(std::string);
 	void Render();
 	void Update();
@@ -44,6 +49,11 @@ public:
 
 	void ChangeRoom(std::string roomName, std::string door);
 	void OpenPuzzle(std::string puzzleName);
+
 	std::vector<DrawableObject*>* Getobjects();
 	Room* GetCurrentRoom() { return currentRoom; };
+	void SetCurrentRoom(Room* r) { currentRoom = r; }
+	DrawableObject* FindObject(std::string);
+
+	~Level();
 };
