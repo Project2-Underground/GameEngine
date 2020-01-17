@@ -4,19 +4,20 @@
 
 #include <iostream>
 
-LevelGenerator* LevelGenerator::_instance = nullptr;
+XMLManager* XMLManager::_instance = nullptr;
 
-LevelGenerator* LevelGenerator::GetInstance() {
+XMLManager* XMLManager::GetInstance() {
 	if (_instance == nullptr)
-		_instance = new LevelGenerator();
+		_instance = new XMLManager();
 	return _instance;
 }
 
-LevelGenerator::LevelGenerator() {
+XMLManager::XMLManager() {
 	//load all constant files
+	chatDoc.load_file("save/chats.xml", pugi::parse_default | pugi::parse_declaration);
 }
 
-bool LevelGenerator::LoadFile(std::string filename) {
+bool XMLManager::LoadFile(std::string filename) {
 	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 	if (result)
 		return true;
@@ -24,7 +25,7 @@ bool LevelGenerator::LoadFile(std::string filename) {
 	return false;
 }
 
-void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms) {
+void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms) {
 	if (LoadFile(filename)) {
 		pugi::xml_node xmlRooms = doc.child("level");
 
@@ -54,7 +55,7 @@ void LevelGenerator::GenerateRoom(std::string filename, std::map<std::string, Ro
 	}
 }
 
-void LevelGenerator::GenerateImage(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::string type) {
+void XMLManager::GenerateImage(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::string type) {
 	pugi::xml_node background = room.child(type.c_str());
 
 	for (pugi::xml_node_iterator child = background.begin(); child != background.end(); child++) {
@@ -65,7 +66,7 @@ void LevelGenerator::GenerateImage(pugi::xml_node room, std::vector<DrawableObje
 	}
 }
 
-void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 	pugi::xml_node interactObj = room.child("interactObj");
 
 	for (pugi::xml_node_iterator child = interactObj.begin(); child != interactObj.end(); child++) {
@@ -88,7 +89,7 @@ void LevelGenerator::GenerateInteractObj(pugi::xml_node room, std::vector<Drawab
 	}
 }
 
-void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::map<std::string, Door*>& doorsList) {
+void XMLManager::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::map<std::string, Door*>& doorsList) {
 	pugi::xml_node doors = room.child("doors");
 
 	for (pugi::xml_node_iterator child = doors.begin(); child != doors.end(); child++) {
@@ -120,7 +121,7 @@ void LevelGenerator::GenerateDoor(pugi::xml_node room, std::vector<DrawableObjec
 	}
 }
 
-void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 	pugi::xml_node items = room.child("item");
 
 	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
@@ -131,7 +132,7 @@ void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObjec
 		if (child->first_child()) {
 			for (pugi::xml_node_iterator cChild = child->begin(); cChild != child->end(); cChild++) {
 				Item* tmp = new Item(cChild->name());
-				tmp->SetTexture(cChild->attribute("texture").as_string());
+				tmp->SetInventoryTexture(cChild->attribute("i_texture").as_string());
 				resultItems.push_back(tmp);
 			}
 		}
@@ -159,15 +160,15 @@ void LevelGenerator::GenerateItem(pugi::xml_node room, std::vector<DrawableObjec
 	}
 }
 
-void LevelGenerator::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 
 }
 
-void LevelGenerator::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
 
 }
 
-void LevelGenerator::CreateObject(ImageObject* tmp, pugi::xml_node node) {
+void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	//std::cout << "in CreateObject\n";
 
 	std::string texture = node.attribute("texture").as_string();
@@ -181,12 +182,12 @@ void LevelGenerator::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
 }
 
-int LevelGenerator::GetLevelNumber(std::string filename) {
+int XMLManager::GetLevelNumber(std::string filename) {
 	if (LoadFile(filename))
 		return doc.child("level").attribute("currentLevel").as_int();
 }
 
-void LevelGenerator::LoadFromSave(std::string filename) {
+void XMLManager::LoadFromSave(std::string filename) {
 	if (LoadFile(filename)) {
 		Game* game = Game::GetInstance();
 		GameScreen* gs = (GameScreen*)game->GetScreen();
@@ -202,7 +203,7 @@ void LevelGenerator::LoadFromSave(std::string filename) {
 			for (int i = 0; i < itr->second->objects.size(); i++) {
 				// load from save
 				if (Item * item = dynamic_cast<Item*>(objects[i])) {
-					item->setDisplay(doc.child("level").child("item").child(item->object_name.c_str()).attribute("display").as_bool());
+					item->SetDisplay(doc.child("level").child("item").child(item->object_name.c_str()).attribute("display").as_bool());
 					item->SetCurrentDialogue(doc.child("level").child("item").child(item->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
 				else if (Door * door = dynamic_cast<Door*>(objects[i])) {
@@ -217,6 +218,8 @@ void LevelGenerator::LoadFromSave(std::string filename) {
 				}*/
 			}
 		}
+
+		level->ChangeRoom(doc.child("level").attribute("currentRoom").as_string());
 
 		// load puzzles
 
@@ -237,10 +240,12 @@ void LevelGenerator::LoadFromSave(std::string filename) {
 			}
 			item = item.next_sibling();
 		}
+
+		// load infoPhone
 	}
 }
 
-void LevelGenerator::SaveGame(std::string filename) {
+void XMLManager::SaveGame(std::string filename) {
 	Game* game = Game::GetInstance();
 	pugi::xml_document save;
 	Level* level = game->GetCurrentLevel();
@@ -301,9 +306,23 @@ void LevelGenerator::SaveGame(std::string filename) {
 			node.append_attribute("name").set_value(item->object_name.c_str());
 	}
 
+	// save infoPhone
+
 	save.save_file(filename.c_str());
 }
 
-LevelGenerator::~LevelGenerator() {
+void XMLManager::GetChat(std::string name, ImageObject* obj) {
+	obj->SetTexture(chatDoc.child("chats").child(name.c_str()).attribute("pic").as_string());
+}
+
+std::string XMLManager::GetMessage(std::string name, int index) {
+	pugi::xml_node_iterator itr = chatDoc.child("chats").child(name.c_str()).begin();
+	for (int i = 0; i < index; i++) {
+		itr++;
+	}
+	return itr->attribute("value").as_string();
+}
+
+XMLManager::~XMLManager() {
 	delete _instance;
 }

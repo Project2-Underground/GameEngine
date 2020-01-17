@@ -58,6 +58,10 @@ void MenuScreen::UpdateMouseState(int x, int y) {
 	quit->updateButton(realPos.x, realPos.y);
 }
 
+void MenuScreen::HandleKey(SDL_Keycode key) {
+
+}
+
 MenuScreen::~MenuScreen() {
 	delete play;
 	//delete load;
@@ -111,7 +115,7 @@ GameScreen::GameScreen() {
 }
 
 void GameScreen::LoadGame(std::string filename) {
-	LevelGenerator::GetInstance()->LoadFromSave(filename);
+	XMLManager::GetInstance()->LoadFromSave(filename);
 }
 
 void GameScreen::Render() {
@@ -166,6 +170,32 @@ int GameScreen::GetPointedObject(glm::vec3 pos) {
 	}
 }
 
+void GameScreen::HandleKey(SDL_Keycode key) {
+	switch (key)
+	{
+	case SDLK_d: {
+		// unlock door
+		Item* item = player->inventory->GetInventoryBox(1)->GetItem();
+		if (item != nullptr)
+			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->Unlock(item);
+	}break;
+	case SDLK_w: {
+		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
+		if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
+			((SeparatableItem*)item)->Separate();
+	}break;
+	case SDLK_s:
+		// save current game
+		XMLManager::GetInstance()->SaveGame("save/test.xml");
+		break;
+	case SDLK_l:
+		XMLManager::GetInstance()->LoadFromSave("save/test.xml");
+		break;
+	default:
+		break;
+	}
+}
+
 GameScreen::~GameScreen() {
 	delete player;
 	delete phone;
@@ -190,5 +220,9 @@ void CutsceneScreen::Update() {
 }
 
 void CutsceneScreen::LeftClick(int x, int y) {
+
+}
+
+void CutsceneScreen::HandleKey(SDL_Keycode key) {
 
 }

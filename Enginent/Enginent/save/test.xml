@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<level currentLevel="1" currentRoom="EliasRoom">
+<level currentLevel="1" currentRoom="HallRoom">
 	<interactObj>
 		<tv current_dialogue="0" />
 		<hanger current_dialogue="0" />
@@ -11,14 +11,14 @@
 		<hoodies display="false" current_dialogue="0" />
 	</item>
 	<doors>
-		<EliasRoomInnerDoor lock="true" current_dialogue="0" />
+		<EliasRoomInnerDoor lock="false" current_dialogue="0" />
 		<EliasRoomOuterDoor lock="false" current_dialogue="0" />
 	</doors>
 	<NPCs />
 	<puzzles />
-	<Player posX="277" posY="-50">
+	<Player posX="-2" posY="-50">
 		<inventory>
-			<item name="hoodies" />
+			<item />
 			<item />
 			<item />
 			<item />

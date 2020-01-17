@@ -6,16 +6,17 @@
 #include "Door.h"
 #include "Level.h"
 
-class LevelGenerator {
-	static LevelGenerator* _instance;
+class XMLManager {
+	static XMLManager* _instance;
 	pugi::xml_document doc;
 	pugi::xml_document chatDoc;
 
-	LevelGenerator();
+	XMLManager();
 	bool LoadFile(std::string filename);
 public:
-	static LevelGenerator* GetInstance();
+	static XMLManager* GetInstance();
 
+	// doc
 	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms);
 	void GenerateImage(pugi::xml_node, std::vector<DrawableObject*>&, std::string);
 	void GenerateInteractObj(pugi::xml_node, std::vector<DrawableObject*>&);
@@ -23,12 +24,15 @@ public:
 	void GenerateItem(pugi::xml_node, std::vector<DrawableObject*>&);
 	void GenerateNPC(pugi::xml_node, std::vector<DrawableObject*>&);
 	void GeneratePuzzle(pugi::xml_node, std::vector<DrawableObject*>&);
+	void CreateObject(ImageObject* tmp, pugi::xml_node);
 
 	int GetLevelNumber(std::string);
 	void SaveGame(std::string);
 	void LoadFromSave(std::string);
 
-	void CreateObject(ImageObject* tmp, pugi::xml_node);
+	// chat doc
+	void GetChat(std::string, ImageObject*);
+	std::string GetMessage(std::string, int);
 
-	~LevelGenerator();
+	~XMLManager();
 };

@@ -3,10 +3,24 @@
 
 Chat::Chat(std::string name) {
 	// load chat from xml
+	this->name = name;
+	currentMsgIndex = 0;
+	pic = new UIObject();
+	XMLManager::GetInstance()->GetChat(name,pic);
+}
+
+Chat::~Chat() {
+	delete pic;
 }
 
 void Chat::LoadMessages(int number) {
 	// load next number of messages
+	XMLManager* lg = XMLManager::GetInstance();
+	for (int i = currentMsgIndex; i < currentMsgIndex + number; i++) {
+		// store messages in texts
+		texts.push_back(lg->GetMessage(name, i));
+	}
+	currentMsgIndex += number;
 }
 
 void Chat::Render() {
@@ -18,7 +32,12 @@ Application::Application() {
 	open = false;
 	currentPage = 0;
 
-	//init first note/chat or add later
+	// init buttons
+	next;
+	back;
+	home;
+
+	// init first note/chat or add later
 }
 
 void Application::Next() {
@@ -56,6 +75,7 @@ void Application::AddNote(UIObject* obj) {
 }
 
 void Application::AddChat(std::string name) {
+	// pull chat info from xml file
 	chats.push_back(new Chat(name));
 }
 
@@ -66,7 +86,6 @@ Phone* Phone::GetInstance() {
 		_instance = new Phone();
 	return _instance;
 }
-
 
 Phone::Phone() {
 	phone = new UIObject();
@@ -138,7 +157,7 @@ void Phone::CloseApp() {
 	app->open = false;
 }
 
-void Phone::AddPage(AppType apptype, UIObject* page, std::string name) {
+void Phone::AddPage(AppType apptype, UIObject* page = nullptr, std::string name = "") {
 	switch (apptype)
 	{
 	case NOTE:
@@ -146,7 +165,7 @@ void Phone::AddPage(AppType apptype, UIObject* page, std::string name) {
 		notiNote = false;
 		break;
 	case CHAT:
-		app->AddChat(page, name);
+		app->AddChat(name);
 		notiChat = false;
 	default:
 		break;

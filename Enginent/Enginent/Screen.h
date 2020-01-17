@@ -20,6 +20,7 @@ public:
 	virtual void Update() = 0;
 	virtual void RightClick(int, int) = 0;
 	virtual void LeftClick(int, int) = 0;
+	virtual void HandleKey(SDL_Keycode) = 0;
 	virtual int GetPointedObject(glm::vec3 pos) { return 1; };
 };
 
@@ -36,6 +37,7 @@ public:
 	void Update();
 	void RightClick(int, int) {};
 	void LeftClick(int, int);
+	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(int x, int y);
 
 	~MenuScreen();
@@ -57,6 +59,7 @@ public:
 	void Update();
 	void RightClick(int, int);
 	void LeftClick(int, int);
+	void HandleKey(SDL_Keycode);
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void LoadGame(std::string);
@@ -75,4 +78,5 @@ public:
 	void Update();
 	void RightClick(int, int) {};
 	void LeftClick(int, int);
+	void HandleKey(SDL_Keycode);
 };

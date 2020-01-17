@@ -87,12 +87,15 @@ void Game::UpdateScreenState() {
 }
 
 void Game::RightClick(int x, int y) {
-	LevelGenerator::GetInstance()->SaveGame("save/test.xml");
 	currentScreen->RightClick(x, y);
 }
 
 void Game::LeftClick(int x, int y) {
 	currentScreen->LeftClick(x, y);
+}
+
+void Game::HandleKey(SDL_Keycode key) {
+	currentScreen->HandleKey(key);
 }
 
 void Game::UpdateMouseState(int x, int y) {

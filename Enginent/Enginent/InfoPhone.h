@@ -9,10 +9,13 @@ enum AppType {
 };
 
 class Chat{
-	std::string name;
-	UIObject* pic;
+	std::string name;					// name of the chat
+	UIObject* pic;						// profile picture (?)
+	int currentMsgIndex;				// show up to this message
+	std::vector<std::string> texts;		// store all messages from the chat
 	// bubble message
 public:
+	~Chat();
 	Chat(std::string);
 	void LoadMessages(int index);
 	void Render();
@@ -58,6 +61,7 @@ public:
 
 	bool open;
 private:
+	Phone();
 	std::vector<UIObject*> icons;
 
 	Application* app;
@@ -71,5 +75,4 @@ private:
 	Button* exitButton;
 
 	static Phone* _instance;
-	Phone();
 };
