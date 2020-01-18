@@ -229,7 +229,9 @@ void XMLManager::LoadFromSave(std::string filename) {
 		Player* player =  game->GetPlayer();
 		float px = playerNode.attribute("posX").as_int();
 		float py = playerNode.attribute("posY").as_int();
-		player->SetPosition(glm::vec3(px, py, 1.0f));
+		glm::vec3 playerPos(px, py, 1.0f);
+		player->SetPosition(playerPos);
+		player->next_position = playerPos;
 
 		pugi::xml_node item = playerNode.child("inventory").first_child();
 		for (int i = 0; i < player->inventory->GetSize(); i++) {

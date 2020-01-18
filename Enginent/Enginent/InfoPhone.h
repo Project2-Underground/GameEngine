@@ -38,10 +38,12 @@ public:
 
 	std::vector<UIObject*> notes;
 	std::vector<Chat*> chats;
+	std::vector<UIObject*> buttons;
 private:
-	Button* next;
-	Button* back;
-	Button* home;
+	UIObject* appBG;
+	PhoneNextButton* next;
+	PhoneBackButton* back;
+	PhoneHomeButton* home;
 };
 
 class Phone{
@@ -49,22 +51,23 @@ public:
 	static Phone* GetInstance();
 
 	void Render();
-	void ClickButton(int, int);
+	void LeftClick(int, int);
 	void UpdateButton(int, int);
 
-	void Open();
-	void Close();
 	void OpenApp(AppType);
 	void CloseApp();
 	void AddPage(AppType, UIObject*, std::string);
 	void SetNotification(AppType);
+	void Open() { open = true; }
+	void Close() { open = false; }
+	glm::vec3 GetPhoneSize() { return phone->getSize(); }
+	glm::vec3 GetPhonePos() { return phone->getPos(); }
 
 	bool open;
+	Application* app;
 private:
 	Phone();
 	std::vector<UIObject*> icons;
-
-	Application* app;
 
 	bool notiChat;
 	bool notiNote;
@@ -72,7 +75,7 @@ private:
 	UIObject* phone;
 	PhoneAppsButton* noteIcon;
 	PhoneAppsButton* chatIcon;
-	Button* exitButton;
+	PhoneExitButton* exitButton;
 
 	static Phone* _instance;
 };

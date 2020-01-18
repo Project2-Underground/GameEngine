@@ -18,8 +18,7 @@ MenuScreen::MenuScreen() {
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
 	quit->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
-	col = new Collider(quit);
-	quit->SetCollder(col);
+	quit->SetCollder(new Collider(quit));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Click.png");
@@ -140,13 +139,12 @@ void GameScreen::RightClick(int x, int y) {
 
 void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
-		/*glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-		phone->ClickButton(tmp.x, tmp.y);*/
+		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		phone->LeftClick(tmp.x, tmp.y);
 	}
 	else {
 		currentLevel->LeftClick(x, y);
 	}
-
 }
 
 void GameScreen::ChangeLevel(int level) {
@@ -190,6 +188,9 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 		break;
 	case SDLK_l:
 		XMLManager::GetInstance()->LoadFromSave("save/test.xml");
+		break;
+	case SDLK_p:
+		Phone::GetInstance()->open = !Phone::GetInstance()->open;
 		break;
 	default:
 		break;

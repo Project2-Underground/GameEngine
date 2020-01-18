@@ -29,10 +29,6 @@ void InteractableObj::action() {
 
 bool InteractableObj::CheckCollider(float x, float y) {
 	return this->col->isClicked(x, y);
-	/*if (this->col->isClicked(x, y))
-	{
-		action(x, y);
-	}*/
 }
 bool InteractableObj::CheckPointing(float x, float y)
 {
