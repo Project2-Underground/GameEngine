@@ -74,11 +74,11 @@ void PhoneAppsButton::checkCollider(int x, int y) {
 	}
 }
 
-void PhoneButton::action(int x, int y) {
+void ActionButton::action(int x, int y) {
 	Phone::GetInstance()->Open();
 }
 
-void PhoneButton::checkCollider(int x, int y) {
+void ActionButton::checkCollider(int x, int y) {
 	if (this->col->isClicked(x, y)) {
 		action(x, y);
 	}

@@ -24,9 +24,10 @@ public:
 
 class Application {
 public:
-	Application();
+	Application(glm::vec3 phoneSize, glm::vec3 phonePos);
 	void Render();
 
+	void LeftClick(int, int);
 	void Next();
 	void Back();
 	void AddNote(UIObject*);
@@ -60,8 +61,6 @@ public:
 	void SetNotification(AppType);
 	void Open() { open = true; }
 	void Close() { open = false; }
-	glm::vec3 GetPhoneSize() { return phone->getSize(); }
-	glm::vec3 GetPhonePos() { return phone->getPos(); }
 
 	bool open;
 	Application* app;

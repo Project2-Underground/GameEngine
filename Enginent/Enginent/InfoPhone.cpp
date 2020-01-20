@@ -28,23 +28,26 @@ void Chat::Render() {
 	// render text bubble
 }
 
-Application::Application() {
+Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	open = false;
 	currentPage = 0;
 	appBG = new UIObject();
 
 	// init buttons
-	int size = 100;
-	next = new PhoneNextButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	next->SetSize(size, -size);
+	int iconSize = phoneSize.x*0.25f;
+	next = new PhoneNextButton("Texture/EliasRoom/Elias_Room_Door.png");
+	next->SetSize(iconSize, -iconSize);
+	next->SetPosition(glm::vec3(phoneSize.x * 0.25 - phonePos.x, phonePos.y + phoneSize.y * -0.25, 1));
 	next->SetCollder(new Collider(next));
 
-	back = new PhoneBackButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	back->SetSize(size, -size);
+	back = new PhoneBackButton("Texture/EliasRoom/Elias_Room_Door.png");
+	back->SetPosition(glm::vec3(-phoneSize.x * 0.25 - phonePos.x, phonePos.y + phoneSize.y * -0.25, 1));
+	back->SetSize(iconSize, -iconSize);
 	back->SetCollder(new Collider(back));
 
-	home = new PhoneHomeButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	home->SetSize(size, -size);
+	home = new PhoneHomeButton("Texture/EliasRoom/Elias_Room_Door.png");
+	home->SetPosition(glm::vec3(phonePos.x, phonePos.y - phoneSize.y * 0.25, 1));
+	home->SetSize(iconSize, -iconSize);
 	home->SetCollder(new Collider(home));
 	
 	buttons.push_back(next);
@@ -53,16 +56,23 @@ Application::Application() {
 	// init first note/chat or add later
 }
 
+void Application::LeftClick(int x, int y) {
+	next->checkCollider(x, y);
+	back->checkCollider(x, y);
+	home->checkCollider(x, y);
+}
+
 void Application::Next() {
+	currentPage++;
 	switch (currentAppType)
 	{
 	case NOTE:
-		if (notes.size() != 0)
-			currentPage = (currentPage + 1) % notes.size();
+		if (currentPage == notes.size())
+			currentPage--;
 		break;
 	case CHAT:
-		if (chats.size() != 0)
-			currentPage = (currentPage + 1) % chats.size();
+		if (currentPage == chats.size())
+			currentPage--;
 		break;
 	}
 }
@@ -112,10 +122,20 @@ Phone* Phone::GetInstance() {
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/EliasRoom/Elias_Room_DoorAni.png"); //phone image
-	phone->SetSize(200, -400);
+	int sizeX = 200;
+	int sizeY = 400;
+	phone->SetSize(sizeX, -sizeY);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
-	app = new Application();
+	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
+	UIObject* tmp_note = new UIObject();
+	tmp_note->SetSize(sizeX, -sizeY*0.5);
+	app->AddNote(tmp_note);
+	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_i.png");
+	tmp_note = new UIObject();
+	tmp_note->SetSize(sizeX, -sizeY*0.5);
+	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_r.png");
+	app->AddNote(tmp_note);
 	notiChat = false;
 	notiNote = false;
 	open = false;
@@ -155,9 +175,14 @@ void Phone::Render() {
 }
 
 void Phone::LeftClick(int x, int y) {
-	noteIcon->checkCollider(x, y);
-	chatIcon->checkCollider(x, y);
-	exitButton->checkCollider(x, y);
+	if (app->open) {
+		app->LeftClick(x, y);
+	}
+	else {
+		noteIcon->checkCollider(x, y);
+		chatIcon->checkCollider(x, y);
+		exitButton->checkCollider(x, y);
+	}
 }
 
 void Phone::UpdateButton(int x, int y) {
@@ -167,6 +192,7 @@ void Phone::UpdateButton(int x, int y) {
 }
 
 void Phone::OpenApp(AppType apptype) {
+	app->currentPage = 0;
 	app->open = true;
 	app->currentAppType = apptype;
 }

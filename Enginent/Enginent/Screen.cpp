@@ -98,6 +98,8 @@ GameScreen::GameScreen() {
 	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 	UI.push_back(blackBold1);
 
+	
+
 	// inventory
 	const int inventoryNum = 5;
 	float start_x = -550;
