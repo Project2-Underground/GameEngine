@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "SquareMeshVbo.h"
 #include "TriangleMeshVbo.h"
-//#include "GameObject.h"
+#include "InfoPhone.h"
 #include "Item.h"
 #include "ImageObject.h"
 #include "TextObject.h"
@@ -87,12 +87,15 @@ void Game::UpdateScreenState() {
 }
 
 void Game::RightClick(int x, int y) {
-	LevelGenerator::GetInstance()->SaveGame("save/test.xml");
 	currentScreen->RightClick(x, y);
 }
 
 void Game::LeftClick(int x, int y) {
 	currentScreen->LeftClick(x, y);
+}
+
+void Game::HandleKey(SDL_Keycode key) {
+	currentScreen->HandleKey(key);
 }
 
 void Game::UpdateMouseState(int x, int y) {

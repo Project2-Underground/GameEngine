@@ -81,7 +81,7 @@ void Puzzle::LeftClick() {
 //level
 
 Level::Level(std::string filename) {
-	LevelGenerator* lg = LevelGenerator::GetInstance();
+	XMLManager* lg = XMLManager::GetInstance();
 	lg->GenerateRoom(filename, rooms);
 	levelNo = lg->GetLevelNumber(filename);
 
@@ -109,8 +109,10 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	currentRoom = rooms[roomName];
 
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
-	glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, player->getPos().y, 1);
-	player->SetPosition(nextPlayerPosition);
+	if (door != " ") {
+		glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, player->getPos().y, 1);
+		player->SetPosition(nextPlayerPosition);
+	}
 	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());
 	player->StopWalking();
 

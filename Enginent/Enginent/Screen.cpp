@@ -18,8 +18,7 @@ MenuScreen::MenuScreen() {
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
 	quit->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
-	col = new Collider(quit);
-	quit->SetCollder(col);
+	quit->SetCollder(new Collider(quit));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Click.png");
@@ -59,6 +58,10 @@ void MenuScreen::UpdateMouseState(int x, int y) {
 	play->updateButton(realPos.x, realPos.y);
 	//setting->updateButton(realPos.x, realPos.y);
 	quit->updateButton(realPos.x, realPos.y);
+}
+
+void MenuScreen::HandleKey(SDL_Keycode key) {
+
 }
 
 MenuScreen::~MenuScreen() {
@@ -114,7 +117,7 @@ GameScreen::GameScreen() {
 }
 
 void GameScreen::LoadGame(std::string filename) {
-	LevelGenerator::GetInstance()->LoadFromSave(filename);
+	XMLManager::GetInstance()->LoadFromSave(filename);
 }
 
 void GameScreen::Render() {
@@ -139,13 +142,12 @@ void GameScreen::RightClick(int x, int y) {
 
 void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
-		/*glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-		phone->ClickButton(tmp.x, tmp.y);*/
+		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		phone->LeftClick(tmp.x, tmp.y);
 	}
 	else {
 		currentLevel->LeftClick(x, y);
 	}
-
 }
 
 void GameScreen::ChangeLevel(int level) {
@@ -166,6 +168,35 @@ int GameScreen::GetPointedObject(glm::vec3 pos) {
 		{
 			return dynamic_cast<InteractableObj*>((*objects)[i])->getType();
 		}
+	}
+}
+
+void GameScreen::HandleKey(SDL_Keycode key) {
+	switch (key)
+	{
+	case SDLK_d: {
+		// unlock door
+		Item* item = player->inventory->GetInventoryBox(1)->GetItem();
+		if (item != nullptr)
+			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->Unlock(item);
+	}break;
+	case SDLK_w: {
+		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
+		if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
+			((SeparatableItem*)item)->Separate();
+	}break;
+	case SDLK_s:
+		// save current game
+		XMLManager::GetInstance()->SaveGame("save/test.xml");
+		break;
+	case SDLK_l:
+		XMLManager::GetInstance()->LoadFromSave("save/test.xml");
+		break;
+	case SDLK_p:
+		Phone::GetInstance()->open = !Phone::GetInstance()->open;
+		break;
+	default:
+		break;
 	}
 }
 
@@ -193,5 +224,9 @@ void CutsceneScreen::Update() {
 }
 
 void CutsceneScreen::LeftClick(int x, int y) {
+
+}
+
+void CutsceneScreen::HandleKey(SDL_Keycode key) {
 
 }

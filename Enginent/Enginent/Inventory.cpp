@@ -26,7 +26,7 @@ void Inventory::addItem(Item* item) {
 
 void Inventory::removeItem(Item* item) {
 	for (InventoryBox *ib : InventoryBoxes) {
-		if (*(ib->GetItem()) == *item) {
+		if (ib->GetItem() != nullptr && *(ib->GetItem()) == *item) {
 			ib->RemoveItem();
 			break;
 		}

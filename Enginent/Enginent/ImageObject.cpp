@@ -80,8 +80,3 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 		}
 	}
 }
-
-void ImageObject::setDisplay(bool dis)
-{
-	this->display = dis;
-}

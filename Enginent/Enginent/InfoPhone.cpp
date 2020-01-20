@@ -3,10 +3,24 @@
 
 Chat::Chat(std::string name) {
 	// load chat from xml
+	this->name = name;
+	currentMsgIndex = 0;
+	pic = new UIObject();
+	XMLManager::GetInstance()->GetChat(name,pic);
+}
+
+Chat::~Chat() {
+	delete pic;
 }
 
 void Chat::LoadMessages(int number) {
 	// load next number of messages
+	XMLManager* lg = XMLManager::GetInstance();
+	for (int i = currentMsgIndex; i < currentMsgIndex + number; i++) {
+		// store messages in texts
+		texts.push_back(lg->GetMessage(name, i));
+	}
+	currentMsgIndex += number;
 }
 
 void Chat::Render() {
@@ -17,18 +31,38 @@ void Chat::Render() {
 Application::Application() {
 	open = false;
 	currentPage = 0;
+	appBG = new UIObject();
 
-	//init first note/chat or add later
+	// init buttons
+	int size = 100;
+	next = new PhoneNextButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	next->SetSize(size, -size);
+	next->SetCollder(new Collider(next));
+
+	back = new PhoneBackButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	back->SetSize(size, -size);
+	back->SetCollder(new Collider(back));
+
+	home = new PhoneHomeButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	home->SetSize(size, -size);
+	home->SetCollder(new Collider(home));
+	
+	buttons.push_back(next);
+	buttons.push_back(back);
+	buttons.push_back(home);
+	// init first note/chat or add later
 }
 
 void Application::Next() {
 	switch (currentAppType)
 	{
 	case NOTE:
-		currentPage = (currentPage + 1) % notes.size();
+		if (notes.size() != 0)
+			currentPage = (currentPage + 1) % notes.size();
 		break;
 	case CHAT:
-		currentPage = (currentPage + 1) % chats.size();
+		if (chats.size() != 0)
+			currentPage = (currentPage + 1) % chats.size();
 		break;
 	}
 }
@@ -40,15 +74,22 @@ void Application::Back() {
 }
 
 void Application::Render() {
+	Game* game = Game::GetInstance();
+	game->GetRenderer()->Render(appBG);
+
 	switch (currentAppType)
 	{
 	case NOTE:
-		Game::GetInstance()->GetRenderer()->Render(notes.at(currentPage));
+		if (notes.size() != 0)
+			game->GetRenderer()->Render(notes.at(currentPage));
 		break;
 	case CHAT:
-		chats.at(currentPage)->Render();
+		if (chats.size() != 0)
+			chats.at(currentPage)->Render();
 		break;
 	}
+
+	game->GetRenderer()->Render(buttons);
 }
 
 void Application::AddNote(UIObject* obj) {
@@ -56,6 +97,7 @@ void Application::AddNote(UIObject* obj) {
 }
 
 void Application::AddChat(std::string name) {
+	// pull chat info from xml file
 	chats.push_back(new Chat(name));
 }
 
@@ -67,11 +109,10 @@ Phone* Phone::GetInstance() {
 	return _instance;
 }
 
-
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/EliasRoom/Elias_Room_DoorAni.png"); //phone image
-	phone->SetSize(100, 200);
+	phone->SetSize(200, -400);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
 	app = new Application();
@@ -79,20 +120,24 @@ Phone::Phone() {
 	notiNote = false;
 	open = false;
 
+	int size = 100;
 	// init all buttons
 	noteIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	noteIcon->SetSize(50, 50);
-	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * 0.25, 1));
+	noteIcon->SetSize(size, -size);
+	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25, 1));
 	noteIcon->SetApp(NOTE);
-
+	noteIcon->SetCollder(new Collider(noteIcon));
+	
 	chatIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	chatIcon->SetSize(50, 50);
-	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * 0.25, 1));
+	chatIcon->SetSize(size, -size);
+	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25, 1));
 	chatIcon->SetApp(CHAT);
-
-	exitButton = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
-	exitButton->SetSize(50, 50);
-	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * 0.25, 1));
+	chatIcon->SetCollder(new Collider(chatIcon));
+	
+	exitButton = new PhoneExitButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	exitButton->SetSize(size, -size);
+	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * -0.25, 1));
+	exitButton->SetCollder(new Collider(exitButton));
 
 	icons.push_back(noteIcon);
 	icons.push_back(chatIcon);
@@ -109,7 +154,7 @@ void Phone::Render() {
 	}
 }
 
-void Phone::ClickButton(int x, int y) {
+void Phone::LeftClick(int x, int y) {
 	noteIcon->checkCollider(x, y);
 	chatIcon->checkCollider(x, y);
 	exitButton->checkCollider(x, y);
@@ -121,14 +166,6 @@ void Phone::UpdateButton(int x, int y) {
 	exitButton->updateButton(x, y);
 }
 
-void Phone::Open() {
-	open = true;
-}
-
-void Phone::Close() {
-	open = false;
-}
-
 void Phone::OpenApp(AppType apptype) {
 	app->open = true;
 	app->currentAppType = apptype;
@@ -138,7 +175,7 @@ void Phone::CloseApp() {
 	app->open = false;
 }
 
-void Phone::AddPage(AppType apptype, UIObject* page, std::string name) {
+void Phone::AddPage(AppType apptype, UIObject* page = nullptr, std::string name = "") {
 	switch (apptype)
 	{
 	case NOTE:
@@ -146,7 +183,7 @@ void Phone::AddPage(AppType apptype, UIObject* page, std::string name) {
 		notiNote = false;
 		break;
 	case CHAT:
-		app->AddChat(page, name);
+		app->AddChat(name);
 		notiChat = false;
 	default:
 		break;

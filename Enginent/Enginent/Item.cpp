@@ -22,7 +22,8 @@ void Item::SetInventoryTexture(std::string path) {
 }
 
 SeparatableItem::SeparatableItem(std::vector<Item*> items) :Item() {
-	this->items = items;
+	for (Item* i : items)
+		this->items.push_back(i);
 }
 
 void SeparatableItem::Separate() {

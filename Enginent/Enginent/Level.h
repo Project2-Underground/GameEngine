@@ -47,12 +47,11 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 
-	void ChangeRoom(std::string roomName, std::string door);
+	void ChangeRoom(std::string roomName, std::string door =" ");
 	void OpenPuzzle(std::string puzzleName);
 
 	std::vector<DrawableObject*>* Getobjects();
 	Room* GetCurrentRoom() { return currentRoom; };
-	void SetCurrentRoom(Room* r) { currentRoom = r; }
 	DrawableObject* FindObject(std::string);
 
 	~Level();

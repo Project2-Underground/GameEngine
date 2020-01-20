@@ -14,7 +14,7 @@ class Button : public UIObject {
 		~Button();
 		void updateButton(int, int);
 		virtual void action(int x, int y);
-		void checkCollider(int x, int y);
+		virtual void checkCollider(int x, int y);
 };
 
 class Exit_Button : public Button {
@@ -29,16 +29,42 @@ public:
 	void action(int x, int y);
 };
 
-class PhoneButton :public Button {
-public:
-	PhoneButton(std::string texture) { SetTexture(texture); }
-	void action(int x, int y);
-};
-
 class PhoneAppsButton :public Button {
 	int appType;
 public:
 	PhoneAppsButton(std::string texture) { SetTexture(texture); }
 	void action(int x, int y);
 	void SetApp(int type) { appType = type; }
+	void checkCollider(int x, int y);
+};
+
+class PhoneButton :public Button {
+public:
+	PhoneButton(std::string texture) { SetTexture(texture); }
+	virtual void action(int x, int y);
+	void checkCollider(int x, int y);
+};
+
+class PhoneExitButton : public PhoneButton {
+public:
+	PhoneExitButton(std::string texture) :PhoneButton(texture) {};
+	void action(int x, int y);
+};
+
+class PhoneNextButton : public PhoneButton {
+public:
+	PhoneNextButton(std::string texture) :PhoneButton(texture) {};
+	void action(int x, int y);
+};
+
+class PhoneBackButton : public PhoneButton {
+public:
+	PhoneBackButton(std::string texture) :PhoneButton(texture) {};
+	void action(int x, int y);
+};
+
+class PhoneHomeButton : public PhoneButton {
+public:
+	PhoneHomeButton(std::string texture) :PhoneButton(texture) {};
+	void action(int x, int y);
 };

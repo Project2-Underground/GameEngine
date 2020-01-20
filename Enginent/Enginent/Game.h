@@ -47,6 +47,7 @@ public:
 	void ChangeScreenState(ScreenState newState);
 	void RightClick(int, int);
 	void LeftClick(int, int);
+	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(int, int);
 
 	Level* GetCurrentLevel();
