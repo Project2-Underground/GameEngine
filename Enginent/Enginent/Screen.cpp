@@ -92,12 +92,6 @@ GameScreen::GameScreen() {
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 
-	UIObject* blackBold1 = new UIObject();
-	blackBold1->SetTexture("Texture/UI/Black_Border.png");
-	blackBold1->SetSize(1280, -720);
-	blackBold1->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	UI.push_back(blackBold1);
-
 	
 
 	// inventory
