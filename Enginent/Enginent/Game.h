@@ -31,7 +31,7 @@ class Game
 	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
-
+	bool quit = false;
 	bool changeScreen;
 public:
 	int winWidth, winHeight;
@@ -45,10 +45,13 @@ public:
 	void Render();
 	void UpdateScreenState();
 	void ChangeScreenState(ScreenState newState);
+	int GetScreenState();
 	void RightClick(int, int);
 	void LeftClick(int, int);
 	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(int, int);
+	void quitGame() { quit = true; };
+	bool getQuitState() { return quit; };
 
 	Level* GetCurrentLevel();
 	Player* GetPlayer();

@@ -10,42 +10,32 @@ SoundManager::SoundManager() {
 
 void SoundManager::Init()
 {
-	sounds["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3", true, true);
-	sounds["Walking"] = createSound("Sound/walking_sound.mp3", true, true);
-	sounds["Door"] = createSound("Sound/Door_sound.mp3", false, true);
-	sounds["Locked"] = createSound("Sound/Locked_sound.mp3", false, true);
+	sounds["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3");
+	sounds["Walking"] = createSound("Sound/walking_sound.mp3");
+	sounds["Door"] = createSound("Sound/Door_sound.mp3");
+	sounds["Locked"] = createSound("Sound/Locked_sound.mp3");
 }
 
-ISound* SoundManager::createSound(const char* filename, bool loop, bool pauseAtStart)
+ISoundSource* SoundManager::createSound(const char* filename)
 {
-	return soundEngine->play2D(filename, loop, pauseAtStart);
+	return soundEngine->addSoundSourceFromFile(filename);
 }
 
-void SoundManager::playSound(std::string sound) {
-	sounds[sound]->setIsPaused(false);
+void SoundManager::playSound(std::string sound, bool loop) {
+	soundEngine->play2D(sounds[sound], loop);
 }
 
 void SoundManager::playSFX(std::string sound)
 {
-	sounds[sound]->setPlayPosition(0);
-	sounds[sound]->setIsPaused(false);
+	soundEngine->play2D(sounds[sound], false);
 }
 
 void SoundManager::pause(std::string sound) {
-	sounds[sound]->setIsPaused(true);
+	soundEngine->setAllSoundsPaused(sounds[sound]);
 }
 
 void SoundManager::stop(std::string sound) {
-	if (sounds[sound] == nullptr)
-	{
-		cout << "Cannot find sound " << sound << endl;
-	}
-	else
-	{
-		sounds[sound]->setIsPaused(true);
-		sounds[sound]->setPlayPosition(0);
-	}
-
+	soundEngine->stopAllSoundsOfSoundSource(sounds[sound]);
 }
 
 void SoundManager::stopAllSounds() {

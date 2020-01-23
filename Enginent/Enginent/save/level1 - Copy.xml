@@ -11,16 +11,15 @@
 					<d>Guess it is time to do the laundry.</d>
 				</dialogue>
 			</bed>
-			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92">
-			</Table>
-			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="448" sizeY="488" posX="-441" posY="-18">
-			</Closet>
-			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25">
-			</Calendar>
 		</interactObj>
-		
+		<item>
+		<!-- separatable = 0; combinable = 1; -->
+			<hoodies texture="Texture/EliasRoom/Elias Room_Hoody.png" i_texture="Texture/EliasRoom/E Room_Hoody_I.png" sizeX="150" sizeY="300" posX="250" posY="-5" type="0">
+				<keyCard i_texture="Texture/EliasRoom/PersonalCard_I.png"/>
+			</hoodies>
+		</item>
 		<doors>
-			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="HallRoom" next_door="EliasRoomOuterDoor">
+			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="208" sizeY="379" posX="420" posY="20" next_room="HallRoom" next_door="EliasRoomOuterDoor">
 				<key name="keyCard"/>
 				<dialogue>
 					<d>Lock.</d>
@@ -32,7 +31,6 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
-		<fg texture="Texture/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0"/>
 		</foreground>
 	</EliasRoom>
 	<HallRoom left_limit="-1080" right_limit="1080" top_limit="1424" bottom_limit="-360">
