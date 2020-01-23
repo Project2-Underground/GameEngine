@@ -38,33 +38,45 @@ public:
 	void checkCollider(int x, int y);
 };
 
-class PhoneButton :public Button {
+class ActionButton :public Button {
 public:
-	PhoneButton(std::string texture) { SetTexture(texture); }
+	ActionButton(std::string texture) { SetTexture(texture); }
 	virtual void action(int x, int y);
 	void checkCollider(int x, int y);
 };
 
-class PhoneExitButton : public PhoneButton {
+class PhoneExitButton : public ActionButton {
 public:
-	PhoneExitButton(std::string texture) :PhoneButton(texture) {};
+	PhoneExitButton(std::string texture) :ActionButton(texture) {};
 	void action(int x, int y);
 };
 
-class PhoneNextButton : public PhoneButton {
+class PhoneNextButton : public ActionButton {
 public:
-	PhoneNextButton(std::string texture) :PhoneButton(texture) {};
+	PhoneNextButton(std::string texture) :ActionButton(texture) {};
 	void action(int x, int y);
 };
 
-class PhoneBackButton : public PhoneButton {
+class PhoneBackButton : public ActionButton {
 public:
-	PhoneBackButton(std::string texture) :PhoneButton(texture) {};
+	PhoneBackButton(std::string texture) :ActionButton(texture) {};
 	void action(int x, int y);
 };
 
-class PhoneHomeButton : public PhoneButton {
+class PhoneHomeButton : public ActionButton {
 public:
-	PhoneHomeButton(std::string texture) :PhoneButton(texture) {};
+	PhoneHomeButton(std::string texture) :ActionButton(texture) {};
+	void action(int x, int y);
+};
+
+class SeparateButton : public ActionButton {
+public:
+	SeparateButton(std::string texture) :ActionButton(texture) {};
+	void action(int x, int y);
+};
+
+class CombineButton : public ActionButton {
+public:
+	CombineButton(std::string texture) :ActionButton(texture) {};
 	void action(int x, int y);
 };
