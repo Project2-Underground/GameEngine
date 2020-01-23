@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "Level.h"
 #include "LevelGenerator.h"
 #include "Game.h"
@@ -56,6 +58,11 @@ void Room::LeftClick(int x, int y) {
 			}
 		}
 	}
+}
+
+void Room::SortObjLayer() {
+	sort(objects.begin(), objects.end());
+
 }
 
 DrawableObject* Room::FindObject(std::string name) {

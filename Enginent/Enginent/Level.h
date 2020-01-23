@@ -6,6 +6,14 @@
 #include <map>
 #include <vector>
 
+enum layer {
+	BACKGROUND = 0,
+	INTERACTOBJ,
+	NPC,
+	PLAYER,
+	FOREGROUND
+};
+
 class Room {
 	Collider* playerWalkLimit;
 	Collider* cameraLimit;
@@ -23,6 +31,8 @@ public:
 	DrawableObject* FindObject(std::string);
 	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
 	Collider* GetCameraLimit() { return cameraLimit; };
+
+	void SortObjLayer();
 
 	~Room();
 };
@@ -47,7 +57,7 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 
-	void ChangeRoom(std::string roomName, std::string door =" ");
+	void ChangeRoom(std::string roomName, std::string door = " ");
 	void OpenPuzzle(std::string puzzleName);
 
 	std::vector<DrawableObject*>* Getobjects();

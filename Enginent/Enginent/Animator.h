@@ -6,7 +6,6 @@
 
 class Animator {
 private:
-	~Animator();
 	std::map<std::string, Animation*> animations;
 	std::string defaultAnimation;
 	bool loop;
@@ -16,4 +15,5 @@ public:
 	void Play(std::string animationName, bool loop);
 	void Update();
 	void AddAnimation(Animation* animation);
+	~Animator();
 };

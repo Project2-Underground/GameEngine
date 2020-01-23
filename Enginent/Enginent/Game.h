@@ -16,7 +16,7 @@ enum objectType {
 	INTERACT_OBJ,
 	ITEM,
 	PORTAL,
-	NPC,
+	NPC_LAYER,
 };
 
 using namespace std;

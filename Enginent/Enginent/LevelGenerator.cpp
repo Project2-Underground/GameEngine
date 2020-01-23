@@ -1,6 +1,7 @@
 #include "LevelGenerator.h"
 #include "Item.h"
 #include "Game.h"
+#include "Level.h"
 
 #include <iostream>
 
@@ -226,7 +227,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 		// load player and inventory
 		pugi::xml_node playerNode = doc.child("level").child("Player");
-		Player* player =  game->GetPlayer();
+		Player* player = game->GetPlayer();
 		float px = playerNode.attribute("posX").as_int();
 		float py = playerNode.attribute("posY").as_int();
 		glm::vec3 playerPos(px, py, 1.0f);
@@ -278,7 +279,7 @@ void XMLManager::SaveGame(std::string filename) {
 				// current dialogue
 				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("current_dialogue").set_value(item->GetCurrentDialogue());
 			}
-			else if (Door * door = dynamic_cast<Door*>(objects[i])) {	
+			else if (Door * door = dynamic_cast<Door*>(objects[i])) {
 				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->lock);
 				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}

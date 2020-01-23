@@ -16,6 +16,8 @@ protected:
 public:
 	Collider* col;
 	Animator* anim;
+	int layer;
+	int subLayer;
 
 	ImageObject();
 	~ImageObject();
@@ -26,4 +28,5 @@ public:
 	void SetDisplay(bool d) { display = d; }
 	virtual void Render(glm::mat4 globalModelTransform);
 	void SetCollder(Collider* n_col);
+	bool operator<(const ImageObject& obj)const;
 };
