@@ -6,7 +6,7 @@
 
 void Room::Render() {
 	// render objects
-	Game::GetInstance()->GetRenderer()->Render(objects);
+	Game::GetInstance()->GetRenderer()->Render(objects, true);
 }
 
 Room::~Room() {
@@ -15,6 +15,7 @@ Room::~Room() {
 	for (auto obj : objects)
 		delete obj;
 }
+
 
 void Room::Update() {
 
@@ -49,20 +50,50 @@ void Room::LeftClick(int x, int y) {
 	int winHeight = 720;
 	realX = -(winWidth * 0.5f) + x - game->GetCamera()->GetPosition().x;
 	realY = -(winHeight * 0.5f) + (winHeight - y) - game->GetCamera()->GetPosition().y;
+
 	for (int i = 0; i < objects.size(); i++)
-	{
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
-		{
-			if (ib->CheckCollider(realX, realY)) {
+			if (ib->CheckCollider(realX, realY)) 
 				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
-			}
-		}
-	}
 }
 
 void Room::SortObjLayer() {
-	sort(objects.begin(), objects.end());
+	// sort the main layers
+	DrawableObject* key;
+	int ptr;
+	for (int i = 1; i < objects.size(); i++) {
+		key = objects[i]; 
+		ptr = i - 1;
+		while (key->layer < objects[ptr]->layer && ptr >= 0) {
+			objects[ptr + 1] = objects[ptr];
+			ptr--;
+		}
+		objects[ptr + 1] = key;
+	}
 
+	// sort the layers within each main layers
+	int iStart = 0;
+	Layers currentLayer = BACKGROUND_LAYER;
+	for (int i = 0; i < objects.size(); i++) {
+		if ((Layers)objects[i]->layer != currentLayer || i == objects.size() - 1) {
+			for (int j = iStart + 1; j <= i; j++) {
+				key = objects[j];
+				ptr = j - 1;
+				while (key->subLayer < objects[ptr]->subLayer && ptr >= iStart) {
+					objects[ptr + 1] = objects[ptr];
+					ptr--;
+				}
+				objects[ptr + 1] = key;
+			}
+			currentLayer = (Layers)objects[i]->layer;
+			iStart = i;
+		}
+	}
+
+	std::cout << "--------------------------------layers--------------------------------\n";
+	for (auto obj : objects) {
+		std::cout << "obj " << obj->object_name << "layer: "  << obj->layer << " sublayer: " << obj->subLayer << std::endl;
+	}
 }
 
 DrawableObject* Room::FindObject(std::string name) {
@@ -94,6 +125,8 @@ Level::Level(std::string filename) {
 
 	// assign first room as current room
 	currentRoom = rooms.begin()->second;
+
+	GameScreen* game = ((GameScreen*)Game::GetInstance());
 }
 
 void Level::Update() {

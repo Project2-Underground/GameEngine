@@ -43,3 +43,10 @@ public:
 	bool operator==(const InteractableObj& obj);
 };
 
+class Cabinet : public InteractableObj {
+	bool open;
+public:
+	Cabinet();
+	void action();
+};
+

@@ -28,9 +28,6 @@ ImageObject::~ImageObject()
 		delete anim;
 }
 
-bool ImageObject::operator<(const ImageObject& obj)const {
-	return (this->layer < obj.layer);
-}
 
 void ImageObject::SetCollder(Collider* n_col) {
 	col = n_col;

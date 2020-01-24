@@ -6,12 +6,12 @@
 #include <map>
 #include <vector>
 
-enum layer {
-	BACKGROUND = 0,
-	INTERACTOBJ,
-	NPC,
-	PLAYER,
-	FOREGROUND
+enum Layers {
+	BACKGROUND_LAYER = 0,
+	OBJECT_LAYER,
+	NPC_LAYER,
+	PLAYER_LAYER,
+	FOREGROUND_LAYER
 };
 
 class Room {
@@ -19,6 +19,7 @@ class Room {
 	Collider* cameraLimit;
 public:
 	std::vector<DrawableObject*> objects;
+	std::vector<DrawableObject*> foreground;
 	std::map<std::string, Door*> doors;
 	std::string name;
 

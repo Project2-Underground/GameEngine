@@ -41,37 +41,50 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			newRoom->SetPlayerWalkLimit(new Collider(minLimit, maxLimit));
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
-			GenerateImage(*room, objects, "background");
-			GenerateInteractObj(*room, objects);
-			GenerateDoor(*room, objects, newRoom->doors);
-			GenerateItem(*room, objects);
-			GenerateNPC(*room, objects);
-			GenerateImage(*room, objects, "foreground");
+			GenerateImage(*room, newRoom, "background");
+			GenerateInteractObj(*room, newRoom);
+			GenerateDoor(*room, newRoom);
+			GenerateItem(*room, newRoom);
+			GenerateNPC(*room, newRoom);
+			GenerateImage(*room, newRoom, "foreground");
 
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
+			newRoom->SortObjLayer();
 
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
 		}
 	}
 }
 
-void XMLManager::GenerateImage(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::string type) {
+void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {
 	pugi::xml_node background = room.child(type.c_str());
 
 	for (pugi::xml_node_iterator child = background.begin(); child != background.end(); child++) {
 		//std::cout << "in GenerateBackground\n";
 		ImageObject* bg = new ImageObject();
 		CreateObject(bg, *child);
-		objects.push_back(bg);
+		bg->subLayer = child->attribute("layer").as_int();
+
+		if (type == "background") {
+			bg->layer = BACKGROUND_LAYER;
+			r->objects.push_back(bg);
+		}else if (type == "foreground") {
+			bg->layer = FOREGROUND_LAYER;
+			r->foreground.push_back(bg);
+		}
+		
 	}
 }
 
-void XMLManager::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 	pugi::xml_node interactObj = room.child("interactObj");
 
 	for (pugi::xml_node_iterator child = interactObj.begin(); child != interactObj.end(); child++) {
 		//std::cout << "in GenerateInteractObj\n";
+
+
+
 		InteractableObj* interactObj = new InteractableObj();
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -83,14 +96,17 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, std::vector<DrawableOb
 				dialogues.push_back(d->child_value());
 			}
 		}
+
 		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
+		interactObj->layer = OBJECT_LAYER;
+		interactObj->subLayer = child->attribute("layer").as_int();
 
-		objects.push_back(interactObj);
+		r->objects.push_back(interactObj);
 	}
 }
 
-void XMLManager::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*>& objects, std::map<std::string, Door*>& doorsList) {
+void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 	pugi::xml_node doors = room.child("doors");
 
 	for (pugi::xml_node_iterator child = doors.begin(); child != doors.end(); child++) {
@@ -117,12 +133,15 @@ void XMLManager::GenerateDoor(pugi::xml_node room, std::vector<DrawableObject*>&
 			door->SetKey(child->child("key").attribute("name").as_string());
 		}
 
-		objects.push_back(door);
-		doorsList.insert(std::pair<std::string, Door*>(child->name(), door));
+		door->layer = OBJECT_LAYER;
+		door->subLayer = child->attribute("layer").as_int();
+
+		r->objects.push_back(door);
+		r->doors.insert(std::pair<std::string, Door*>(child->name(), door));
 	}
 }
 
-void XMLManager::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateItem(pugi::xml_node room, Room* r) {
 	pugi::xml_node items = room.child("item");
 
 	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
@@ -151,21 +170,24 @@ void XMLManager::GenerateItem(pugi::xml_node room, std::vector<DrawableObject*>&
 			break;
 		}
 
+		item->layer = OBJECT_LAYER;
+		item->subLayer = child->attribute("layer").as_int();
+
 		item->SetName(child->name());
 		std::string i_texture = child->attribute("i_texture").as_string();
 		item->SetInventoryTexture(i_texture);
 
 		CreateObject(item, *child);
 		item->SetCollder(new Collider(item));
-		objects.push_back(item);
+		r->objects.push_back(item);
 	}
 }
 
-void XMLManager::GenerateNPC(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 
 }
 
-void XMLManager::GeneratePuzzle(pugi::xml_node room, std::vector<DrawableObject*>& objects) {
+void XMLManager::GeneratePuzzle(pugi::xml_node room, Room* r) {
 
 }
 

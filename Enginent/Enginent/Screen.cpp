@@ -92,8 +92,6 @@ GameScreen::GameScreen() {
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 
-	
-
 	// inventory
 	const int inventoryNum = 5;
 	float start_x = -550;
@@ -118,6 +116,7 @@ void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(player);
 	renderer->Render(player->dialogueText);
+	renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	renderer->Render(UI);
 	if (phone->open)
 		phone->Render();
@@ -144,7 +143,6 @@ void GameScreen::LeftClick(int x, int y) {
 }
 
 void GameScreen::ChangeLevel(int level) {
-	// save current level to xml
 	delete currentLevel;
 	currentLevel = new Level(levels[level]);
 }

@@ -38,7 +38,7 @@ protected:
 	void SetMeshAttribId(MeshVbo * shape);
 
 public:
-	void Render(vector <DrawableObject*> & objList);
+	void Render(vector <DrawableObject*> & objList, bool clear);
 	void Render(vector <UIObject*> & objList);
 	void Render(UIObject* obj);
 	void Render(DrawableObject* obj);
