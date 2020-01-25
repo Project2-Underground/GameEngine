@@ -5,22 +5,22 @@
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: change scene-->
 		<interactObj>
-			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" layer="4">
+			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4">
 				<dialogue>
 					<d>Guess it is time to do the laundry.</d>
 				</dialogue>
 			</bed>
-			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" layer="2"/>
-			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="448" sizeY="488" posX="-441" posY="-18" layer="1">
+			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="1" layer="2"/>
+			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="448" sizeY="488" posX="-441" posY="-18" type="8" layer="1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
-				<item name="keyCard" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
+				<item name="keyCard" i_texture="" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 			</Closet>
-			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" layer="3"/>
+			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3">
+				<view texture=""/>
+			</Calendar>
 		</interactObj>
-		<item>
-			
-		</item>
 		<doors>
 			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="HallRoom" next_door="EliasRoomOuterDoor" layer="0">
 				<key name="keyCard"/>

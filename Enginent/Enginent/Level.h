@@ -3,6 +3,7 @@
 #include "DrawableObject.h"
 #include "Collider.h"
 #include "Door.h"
+#include "Item.h"
 #include <map>
 #include <vector>
 
@@ -18,6 +19,7 @@ class Room {
 	Collider* playerWalkLimit;
 	Collider* cameraLimit;
 public:
+	std::vector<Item*> items;
 	std::vector<DrawableObject*> objects;
 	std::vector<DrawableObject*> foreground;
 	std::map<std::string, Door*> doors;

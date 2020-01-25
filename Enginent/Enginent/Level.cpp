@@ -89,11 +89,11 @@ void Room::SortObjLayer() {
 			iStart = i;
 		}
 	}
-
+/*
 	std::cout << "--------------------------------layers--------------------------------\n";
 	for (auto obj : objects) {
 		std::cout << "obj " << obj->object_name << "layer: "  << obj->layer << " sublayer: " << obj->subLayer << std::endl;
-	}
+	}*/
 }
 
 DrawableObject* Room::FindObject(std::string name) {

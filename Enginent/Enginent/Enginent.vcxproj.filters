@@ -138,6 +138,9 @@
     <ClInclude Include="ViewWin.h">
       <Filter>GameUI</Filter>
     </ClInclude>
+    <ClInclude Include="GameViewWindow.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -246,6 +249,9 @@
       <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="TextBox.cpp">
+      <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameViewWindow.cpp">
       <Filter>GameUI</Filter>
     </ClCompile>
   </ItemGroup>

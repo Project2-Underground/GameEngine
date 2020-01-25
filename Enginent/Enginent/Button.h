@@ -80,3 +80,9 @@ public:
 	CombineButton(std::string texture) :ActionButton(texture) {};
 	void action(int x, int y);
 };
+
+class ViewWindowClose :public ActionButton {
+public:
+	ViewWindowClose(std::string texture) :ActionButton(texture) {};
+	void action(int x, int y);
+};

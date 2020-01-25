@@ -2,8 +2,6 @@
 
 #include <pugixml.hpp>
 #include <string>
-#include "ImageObject.h"
-#include "Door.h"
 #include "Level.h"
 
 class XMLManager {
@@ -21,7 +19,7 @@ public:
 	void GenerateImage(pugi::xml_node, Room*, std::string);
 	void GenerateInteractObj(pugi::xml_node, Room*);
 	void GenerateDoor(pugi::xml_node, Room*);
-	void GenerateItem(pugi::xml_node, Room*);
+	//void GenerateItem(pugi::xml_node, Room*);
 	void GenerateNPC(pugi::xml_node, Room*);
 	void GeneratePuzzle(pugi::xml_node, Room*);
 	void CreateObject(ImageObject* tmp, pugi::xml_node);

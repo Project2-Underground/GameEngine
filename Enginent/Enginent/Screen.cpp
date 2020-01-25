@@ -174,7 +174,7 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	case SDLK_w: {
 		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
-			((SeparatableItem*)item)->Separate();
+			((SeparatableItem*)item)->action();
 	}break;
 	case SDLK_s:
 		// save current game

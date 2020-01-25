@@ -33,6 +33,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameUtilities.h" />
+    <ClInclude Include="GameViewWindow.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="InfoPhone.h" />
@@ -72,6 +73,7 @@
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameViewWindow.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="InfoPhone.cpp" />

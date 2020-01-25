@@ -2,9 +2,10 @@
 
 #include "InteractObj.h"
 #include "Collider.h"
+#include "Item.h"
 
 class Door : public InteractableObj {
-	IneractTypeList interactType = DOOR;
+	InteractTypeList interactType = DOOR;
 	std::string nextRoom;
 	std::string nextDoor;
 	std::string item_to_unlock;
@@ -14,6 +15,5 @@ public:
 	Door() {};
 	void SetKey(std::string item_to_unlock);
 	void action();
-	void Unlock(InteractableObj* item);
-	void Unlock() { lock = false; };
+	void Unlock(Item* item);
 };

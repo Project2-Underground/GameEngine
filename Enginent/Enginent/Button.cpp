@@ -1,6 +1,7 @@
 #include "Button.h"
 #include "Game.h"
 #include "InfoPhone.h"
+#include "GameViewWindow.h"
 
 Button::Button(std::string normal, std::string hover, std::string press)
 {
@@ -100,3 +101,6 @@ void PhoneHomeButton::action(int x, int y) {
 	Phone::GetInstance()->CloseApp();
 }
 
+void ViewWindowClose::action(int x, int y) {
+	ViewWindow::GetInstance()->SetDisplay(false);
+}

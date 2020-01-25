@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "Inventory.h"
 #include "SoundManager.h"
+#include "InteractObj.h"
 
 #define WALK_SPEED 3
 #define ACTION_DISTANCE 10.0f

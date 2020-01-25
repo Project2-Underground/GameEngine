@@ -25,8 +25,8 @@ void Door::action() {
 	}
 }
 
-void Door::Unlock(InteractableObj* item) {
-	if (item->object_name == item_to_unlock) {
+void Door::Unlock(Item* item) {
+	if (item->name == item_to_unlock) {
 		lock = false;
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->inventory->removeItem((Item*)item);
 	}

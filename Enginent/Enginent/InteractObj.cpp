@@ -1,5 +1,6 @@
 #include "InteractObj.h"
 #include "Game.h"
+#include "GameViewWindow.h"
 
 InteractableObj::InteractableObj(vector<std::string> s) {
 	interactType = NORMAL;
@@ -49,4 +50,53 @@ bool InteractableObj::operator==(const InteractableObj& obj) {
 		return true;
 	}
 	return false;
+}
+
+OpenObj::OpenObj() { 
+	interactType = OPEN;
+	open = false; 
+	item = nullptr; 
+}
+
+void OpenObj::SetOpenTexture(std::string openT) {
+	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
+}
+
+void OpenObj::SetNextTexture(std::string next) {
+	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
+}
+
+void OpenObj::action() {
+	if (!open) {
+		open = true;
+		SetTexture(openTexture);
+		if (item)interactType = PICKUP;
+		std::cout << "open\n";
+	}
+	else {
+		if (item) {
+			std::cout << "take\n";
+			SetTexture(nextTexture);
+			Game::GetInstance()->GetPlayer()->inventory->addItem(item);
+			item = nullptr;
+			interactType = NORMAL;
+		}
+	}
+}
+
+OpenObj::~OpenObj() {
+	if (item)
+		delete item;
+}
+
+void ViewObj::SetViewTexture(std::string view) {
+	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(view);
+}
+
+void ViewObj::action() {
+	ViewWindow* vw = ViewWindow::GetInstance();
+
+	vw->SetDisplay(true);
+	vw->SetViewItem(viewTexture);
+	// set description
 }

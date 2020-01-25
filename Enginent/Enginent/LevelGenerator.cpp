@@ -1,7 +1,6 @@
 #include "LevelGenerator.h"
 #include "Item.h"
 #include "Game.h"
-#include "Level.h"
 
 #include <iostream>
 
@@ -44,7 +43,7 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			GenerateImage(*room, newRoom, "background");
 			GenerateInteractObj(*room, newRoom);
 			GenerateDoor(*room, newRoom);
-			GenerateItem(*room, newRoom);
+			//GenerateItem(*room, newRoom);
 			GenerateNPC(*room, newRoom);
 			GenerateImage(*room, newRoom, "foreground");
 
@@ -82,10 +81,32 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 	for (pugi::xml_node_iterator child = interactObj.begin(); child != interactObj.end(); child++) {
 		//std::cout << "in GenerateInteractObj\n";
+		InteractableObj* interactObj;
+		InteractTypeList type = (InteractTypeList)child->attribute("type").as_int();
 
+		switch (type)
+		{
+		case VIEW: {
+			ViewObj* obj = new ViewObj();
+			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
+			interactObj = obj;
+		}break;
+		case OPEN: {
+			OpenObj* obj = new OpenObj();
+			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
+			if (child->child("item")) {
+				obj->SetNextTexture(child->child("item").attribute("texture").as_string());
+				Item* item = new Item(child->child("item").attribute("name").as_string());
+				item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
+				obj->SetItem(item);
+			}
+			interactObj = obj;
+		}break;
+		default: {
+			interactObj = new InteractableObj();
+		}break;
+		}
 
-
-		InteractableObj* interactObj = new InteractableObj();
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
@@ -96,6 +117,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 				dialogues.push_back(d->child_value());
 			}
 		}
+
 
 		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
@@ -141,47 +163,43 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 	}
 }
 
-void XMLManager::GenerateItem(pugi::xml_node room, Room* r) {
-	pugi::xml_node items = room.child("item");
-
-	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
-		Item* item;
-		//std::cout << "in GenerateItem\n";
-		std::vector<Item*> resultItems;
-		// if the item can be separate or combine
-		if (child->first_child()) {
-			for (pugi::xml_node_iterator cChild = child->begin(); cChild != child->end(); cChild++) {
-				Item* tmp = new Item(cChild->name());
-				tmp->SetInventoryTexture(cChild->attribute("i_texture").as_string());
-				resultItems.push_back(tmp);
-			}
-		}
-
-		switch (child->attribute("type").as_int())
-		{
-		case SEPARATABLE:
-			item = new SeparatableItem(resultItems);
-			break;
-		case COMBINABLE:
-			item = new CombinableItem(resultItems[0]->object_name, resultItems[1]);
-			break;
-		default:
-			item = new Item();
-			break;
-		}
-
-		item->layer = OBJECT_LAYER;
-		item->subLayer = child->attribute("layer").as_int();
-
-		item->SetName(child->name());
-		std::string i_texture = child->attribute("i_texture").as_string();
-		item->SetInventoryTexture(i_texture);
-
-		CreateObject(item, *child);
-		item->SetCollder(new Collider(item));
-		r->objects.push_back(item);
-	}
-}
+//void XMLManager::GenerateItem(pugi::xml_node room, Room* r) {
+//	pugi::xml_node items = room.child("item");
+//
+//	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
+//		Item* item;
+//		//std::cout << "in GenerateItem\n";
+//		std::vector<Item*> resultItems;
+//		// if the item can be separate or combine
+//		if (child->first_child()) {
+//			for (pugi::xml_node_iterator cChild = child->begin(); cChild != child->end(); cChild++) {
+//				Item* tmp = new Item(cChild->name());
+//				tmp->SetInventoryTexture(cChild->attribute("i_texture").as_string());
+//				resultItems.push_back(tmp);
+//			}
+//		}
+//
+//		std::string itemName = child->name();
+//
+//		switch (child->attribute("type").as_int())
+//		{
+//		case SEPARATABLE:
+//			item = new SeparatableItem(itemName, resultItems);
+//			break;
+//		case COMBINABLE:
+//			item = new CombinableItem(itemName, resultItems[0]->name, resultItems[1]);
+//			break;
+//		default:
+//			item = new Item(itemName);
+//			break;
+//		}
+//
+//		std::string i_texture = child->attribute("i_texture").as_string();
+//		item->SetInventoryTexture(i_texture);
+//
+//		r->items.push_back(item);
+//	}
+//}
 
 void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 
@@ -225,11 +243,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 			std::vector<DrawableObject*> objects = itr->second->objects;
 			for (int i = 0; i < itr->second->objects.size(); i++) {
 				// load from save
-				if (Item * item = dynamic_cast<Item*>(objects[i])) {
-					item->SetDisplay(doc.child("level").child("item").child(item->object_name.c_str()).attribute("display").as_bool());
-					item->SetCurrentDialogue(doc.child("level").child("item").child(item->object_name.c_str()).attribute("current_dialogue").as_int());
-				}
-				else if (Door * door = dynamic_cast<Door*>(objects[i])) {
+				if (Door * door = dynamic_cast<Door*>(objects[i])) {
 					door->lock = doc.child("level").child("doors").child(door->object_name.c_str()).attribute("lock").as_bool();
 					door->SetCurrentDialogue(doc.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
@@ -294,14 +308,7 @@ void XMLManager::SaveGame(std::string filename) {
 			// if object is an interactObj, NPC, door or items 
 			// save
 
-			if (Item * item = dynamic_cast<Item*>(objects[i])) {
-				saveLevel.child("item").append_child(item->object_name.c_str());
-				// display
-				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("display").set_value(item->IsDisplay());
-				// current dialogue
-				saveLevel.child("item").child(item->object_name.c_str()).append_attribute("current_dialogue").set_value(item->GetCurrentDialogue());
-			}
-			else if (Door * door = dynamic_cast<Door*>(objects[i])) {
+			if (Door * door = dynamic_cast<Door*>(objects[i])) {
 				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->lock);
 				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
@@ -328,7 +335,7 @@ void XMLManager::SaveGame(std::string filename) {
 		pugi::xml_node node = saveLevel.child("Player").child("inventory").append_child("item");
 		Item* item = player->inventory->GetInventoryBox(i)->GetItem();
 		if (item != nullptr)
-			node.append_attribute("name").set_value(item->object_name.c_str());
+			node.append_attribute("name").set_value(item->name.c_str());
 	}
 
 	// save infoPhone

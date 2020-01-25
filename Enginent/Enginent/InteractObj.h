@@ -2,8 +2,9 @@
 
 #include "ImageObject.h"
 #include "Collider.h"
+#include "Item.h"
 
-enum IneractTypeList
+enum InteractTypeList
 {
 	NORMAL = 1,
 	VIEW,
@@ -12,18 +13,17 @@ enum IneractTypeList
 	TALK,
 	CHANGESCENE,
 	SAVE,
-	BUTTON
+	OPEN
 };
 
 class InteractableObj : public ImageObject {
 protected:
-	IneractTypeList interactType = NORMAL;
+	InteractTypeList interactType = NORMAL;
 	vector<std::string> dialogue;
 	int currDialogue = 0;
 	Collider* col;
 	std::string interact_sound = "";
 public:
-
 	InteractableObj() {};
 	InteractableObj(vector<std::string> s);
 
@@ -31,22 +31,43 @@ public:
 	void SetSound(std::string);
 	void SetDialogue(vector<std::string> s);
 	void SetCollder(Collider* n_col);
-	void SetType(IneractTypeList newInteractType) { interactType = newInteractType; };
+	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
 	int GetCurrentDialogue() { return currDialogue; }
 	void SetCurrentDialogue(int num) { currDialogue = num; }
 
-	IneractTypeList getType() { return interactType; };
+	InteractTypeList getType() { return interactType; };
 
 	~InteractableObj();
 	bool operator==(const InteractableObj& obj);
 };
 
-class Cabinet : public InteractableObj {
+class OpenObj : public InteractableObj {
 	bool open;
+	unsigned int openTexture;
+	unsigned int nextTexture; // after picking up an item
+	Item* item;
 public:
-	Cabinet();
+	OpenObj();
+
+	void SetOpenTexture(std::string);
+	void SetNextTexture(std::string);
+	void SetItem(Item* item) { this->item = item; }
+	Item* GetItem() { return item; }
+	void action();
+
+	~OpenObj();
+};
+
+class ViewObj : public InteractableObj {
+	unsigned int viewTexture;
+public:
+	std::string description;
+
+	ViewObj() { interactType = VIEW; }
+
+	void SetViewTexture(std::string);
 	void action();
 };
 
