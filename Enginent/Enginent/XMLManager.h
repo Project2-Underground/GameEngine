@@ -3,6 +3,7 @@
 #include <pugixml.hpp>
 #include <string>
 #include "Level.h"
+#include "ImageObject.h"
 
 class XMLManager {
 	static XMLManager* _instance;
@@ -31,6 +32,9 @@ public:
 	// chat doc
 	void GetChat(std::string, ImageObject*);
 	std::string GetMessage(std::string, int);
+
+	// save game option
+	void SaveGameOptions();
 
 	~XMLManager();
 };

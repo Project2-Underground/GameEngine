@@ -1,4 +1,4 @@
-#include "LevelGenerator.h"
+#include "XMLManager.h"
 #include "Item.h"
 #include "Game.h"
 
@@ -152,7 +152,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->SetCollder(new Collider(door));
 
 		if (child->child("key")) {
-			door->SetKey(child->child("key").attribute("name").as_string());
+			door->SetItemToUse(child->child("key").attribute("name").as_string());
 		}
 
 		door->layer = OBJECT_LAYER;
@@ -213,10 +213,10 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	//std::cout << "in CreateObject\n";
 
 	std::string texture = node.attribute("texture").as_string();
-	int sizeX = node.attribute("sizeX").as_int();
-	int sizeY = node.attribute("sizeY").as_int();
-	int posX = node.attribute("posX").as_float();
-	int posY = node.attribute("posY").as_float();
+	float sizeX = node.attribute("sizeX").as_float();
+	float sizeY = node.attribute("sizeY").as_float();
+	float posX = node.attribute("posX").as_float();
+	float posY = node.attribute("posY").as_float();
 
 	tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, -sizeY);
@@ -226,6 +226,7 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 int XMLManager::GetLevelNumber(std::string filename) {
 	if (LoadFile(filename))
 		return doc.child("level").attribute("currentLevel").as_int();
+	return 0;
 }
 
 void XMLManager::LoadFromSave(std::string filename) {
@@ -244,7 +245,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 			for (int i = 0; i < itr->second->objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					door->lock = doc.child("level").child("doors").child(door->object_name.c_str()).attribute("lock").as_bool();
+					door->used = doc.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool();
 					door->SetCurrentDialogue(doc.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
@@ -264,8 +265,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 		// load player and inventory
 		pugi::xml_node playerNode = doc.child("level").child("Player");
 		Player* player = game->GetPlayer();
-		float px = playerNode.attribute("posX").as_int();
-		float py = playerNode.attribute("posY").as_int();
+		float px = playerNode.attribute("posX").as_float();
+		float py = playerNode.attribute("posY").as_float();
 		glm::vec3 playerPos(px, py, 1.0f);
 		player->SetPosition(playerPos);
 		player->next_position = playerPos;
@@ -281,6 +282,16 @@ void XMLManager::LoadFromSave(std::string filename) {
 		}
 
 		// load infoPhone
+		pugi::xml_node phoneNode = doc.child("level").child("Phone");
+		Phone* phone = Phone::GetInstance();
+		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
+			phone->AddPage(NOTE, itr->attribute("name").as_string());
+		}
+		int count = 0;
+		for (pugi::xml_node_iterator itr = phoneNode.child("Chats").begin(); itr != phoneNode.child("Chats").end(); itr++) {
+			phone->AddPage(CHAT, itr->attribute("name").as_string());
+			phone->app->chats[count++]->currentMsgIndex = itr->attribute("index").as_int();
+		}
 	}
 }
 
@@ -297,6 +308,9 @@ void XMLManager::SaveGame(std::string filename) {
 	save.child("level").append_child("puzzles");
 	save.child("level").append_child("Player");
 	save.child("level").child("Player").append_child("inventory");
+	save.child("level").append_child("Phone");
+	save.child("level").child("Phone").append_child("Notes");
+	save.child("level").child("Phone").append_child("Chats");;
 
 	pugi::xml_node saveLevel = save.child("level");
 
@@ -309,7 +323,7 @@ void XMLManager::SaveGame(std::string filename) {
 			// save
 
 			if (Door * door = dynamic_cast<Door*>(objects[i])) {
-				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("lock").set_value(door->lock);
+				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
 				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
@@ -339,6 +353,20 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	// save infoPhone
+	Phone* phone = Phone::GetInstance();
+	int noteSize = (int)phone->app->notes.size();
+	int chatSize = (int)phone->app->chats.size();
+
+	for (int i = 0; i < noteSize; i++) {
+		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
+		node.append_attribute("name").set_value(phone->app->notes[i]->object_name.c_str());
+	}
+
+	for (int i = 0; i < chatSize; i++) {
+		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
+		node.append_attribute("name").set_value(phone->app->chats[i]->name.c_str());
+		node.append_attribute("index").set_value(phone->app->chats[i]->currentMsgIndex);
+	}
 
 	save.save_file(filename.c_str());
 }
@@ -353,6 +381,14 @@ std::string XMLManager::GetMessage(std::string name, int index) {
 		itr++;
 	}
 	return itr->attribute("value").as_string();
+}
+
+void XMLManager::SaveGameOptions() {
+	Game* game = Game::GetInstance();
+	pugi::xml_document gameOption;
+
+	gameOption.append_child("Options").append_child("BG_music").append_attribute("mute").set_value(game->muteBG);
+	gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
 }
 
 XMLManager::~XMLManager() {

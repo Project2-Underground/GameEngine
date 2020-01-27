@@ -99,12 +99,6 @@
     <ClInclude Include="TextObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="xmlFileManager.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelGenerator.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\resource\pugixml-1.10\src\pugiconfig.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
@@ -123,9 +117,6 @@
     <ClInclude Include="Camera.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
@@ -140,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="GameViewWindow.h">
       <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLManager.h">
+      <Filter>GameUtilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,12 +194,6 @@
     <ClCompile Include="TextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="xmlFileManager.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelGenerator.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -253,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="GameViewWindow.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLManager.cpp">
+      <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayer.cpp">
+      <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

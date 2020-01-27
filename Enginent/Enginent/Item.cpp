@@ -6,7 +6,11 @@ Item::Item(std::string name) {
 }
 
 void Item::SetInventoryTexture(std::string path) {
-	inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
+	iTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
+}
+
+void Item::SetViewTexture(std::string path) {
+	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
 SeparatableItem::SeparatableItem(std::string name, std::vector<Item*> items) :Item(name) {

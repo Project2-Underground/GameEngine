@@ -1,21 +1,17 @@
-#include "Door.h"
+#include "InteractObj.h"
 #include "Game.h"
 #include "Camera.h"
 
 Door::Door(std::string next_room, std::string next_door) {
+	interactType = DOOR;
 	this->nextRoom = next_room;
 	this->nextDoor = next_door;
-	lock = false;
-}
-
-void Door::SetKey(std::string item_to_unlock) {
-	this->item_to_unlock = item_to_unlock;
-	lock = true;
+	used = true;
 }
 
 void Door::action() {
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
-	if (!lock) {
+	if (used) {
 		// load next room and next door position;
 		((GameScreen*)Game::GetInstance()->GetScreen())->ChangeRoom(nextRoom, nextDoor);
 	}
@@ -25,9 +21,9 @@ void Door::action() {
 	}
 }
 
-void Door::Unlock(Item* item) {
-	if (item->name == item_to_unlock) {
-		lock = false;
+void Door::UseItem(Item* item) {
+	if (item->name == item_to_use) {
+		used = true;
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->inventory->removeItem((Item*)item);
 	}
 }

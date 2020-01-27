@@ -1,6 +1,7 @@
 #include "InteractObj.h"
 #include "Game.h"
 #include "GameViewWindow.h"
+#include "InfoPhone.h"
 
 InteractableObj::InteractableObj(vector<std::string> s) {
 	interactType = NORMAL;
@@ -24,8 +25,17 @@ void InteractableObj::action() {
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
+	if (takePic) {
+		Phone::GetInstance()->AddPage(NOTE, picName);
+		takePic = false;
+	}
 	//ANIMATION
 	//UPDATE TEXT
+}
+
+void InteractableObj::SetTakePic(std::string pic) {
+	picName = pic;
+	takePic = true;
 }
 
 bool InteractableObj::CheckCollider(float x, float y) {
@@ -99,4 +109,9 @@ void ViewObj::action() {
 	vw->SetDisplay(true);
 	vw->SetViewItem(viewTexture);
 	// set description
+}
+
+void UseItemObj::SetItemToUse(std::string item_to_unlock) {
+	this->item_to_use = item_to_unlock;
+	used = false;
 }

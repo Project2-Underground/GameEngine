@@ -35,7 +35,7 @@ void CursorUI::updateCursor()
 	int mouseX;
 	int mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
-	glm::vec3 realPos = game->FindMousePosition(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
+	glm::vec3 realPos = game->FindMousePosition((int)(mouseX + (this->getSize().x / 2)), (int)(mouseY - (this->getSize().y / 2)));
 	this->SetPosition(realPos);
 	setCursor(game->GetScreen()->GetPointedObject(realPos));
 }

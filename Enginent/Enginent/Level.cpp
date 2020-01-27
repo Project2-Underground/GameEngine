@@ -1,7 +1,7 @@
 #include <algorithm>
 
 #include "Level.h"
-#include "LevelGenerator.h"
+#include "XMLManager.h"
 #include "Game.h"
 
 void Room::Render() {

@@ -10,13 +10,16 @@ enum ItemType {
 };
 
 class Item {
-	unsigned int inventory_texture;
+	unsigned int iTexture;
+	unsigned int viewTexture;
 public:
 	std::string name;
 
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);
-	unsigned int GetInventoryTexture() { return inventory_texture; }
+	void SetViewTexture(std::string path);
+	unsigned int GetInventoryTexture() { return iTexture; }
+	unsigned int GetViewTexture() { return viewTexture; }
 
 	bool operator==(const Item& item);
 	virtual void action() {};

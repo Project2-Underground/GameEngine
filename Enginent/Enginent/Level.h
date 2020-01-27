@@ -1,8 +1,7 @@
 #pragma once
 
-#include "DrawableObject.h"
+#include "InteractObj.h"
 #include "Collider.h"
-#include "Door.h"
 #include "Item.h"
 #include <map>
 #include <vector>

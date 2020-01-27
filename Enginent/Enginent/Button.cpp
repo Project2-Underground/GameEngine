@@ -16,7 +16,7 @@ Button::Button(std::string normal, std::string hover, std::string press)
 
 void Button::updateButton(int x, int y)
 {
-	if (this->col->isClicked(x, y))
+	if (this->col->isClicked((float)x, (float)y))
 	{
 		SetTexture(this->hoverTexture->GetTexture());
 	}
@@ -32,7 +32,7 @@ void Button::action(int x, int y)
 
 void Button::checkCollider(int x, int y)
 {
-	if (this->col->isClicked(x, y))
+	if (this->col->isClicked((float)x, (float)y))
 	{
 		SetTexture(this->pressTexture->GetTexture());
 		action(x, y);
@@ -70,7 +70,7 @@ void PhoneAppsButton::action(int x, int y) {
 }
 
 void PhoneAppsButton::checkCollider(int x, int y) {
-	if (this->col->isClicked(x, y)) {
+	if (this->col->isClicked((float)x, (float)y)) {
 		action(x, y);
 	}
 }
@@ -80,7 +80,7 @@ void ActionButton::action(int x, int y) {
 }
 
 void ActionButton::checkCollider(int x, int y) {
-	if (this->col->isClicked(x, y)) {
+	if (this->col->isClicked((float)x, (float)y)) {
 		action(x, y);
 	}
 }

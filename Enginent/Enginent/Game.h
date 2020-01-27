@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "Cursor.h"
 #include "Button.h"
-#include "LevelGenerator.h"
+#include "XMLManager.h"
 #include "Screen.h"
 
 enum objectType {
@@ -33,6 +33,7 @@ class Game
 	CursorUI* cursorGame;
 	bool quit = false;
 	bool changeScreen;
+
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -57,4 +58,6 @@ public:
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
 	CursorUI* getCursor() { return cursorGame; };
+	bool muteBG;
+	bool muteSFX;
 };

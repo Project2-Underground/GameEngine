@@ -44,7 +44,7 @@ void MenuScreen::LeftClick(int x, int y) {
 	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
 		{
-			button->checkCollider(tmp.x, tmp.y);
+			button->checkCollider((int)tmp.x, (int)tmp.y);
 		}
 	}
 }
@@ -52,9 +52,9 @@ void MenuScreen::LeftClick(int x, int y) {
 void MenuScreen::UpdateMouseState(int x, int y) {
 	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
 
-	play->updateButton(realPos.x, realPos.y);
+	play->updateButton((int)realPos.x, (int)realPos.y);
 	//setting->updateButton(realPos.x, realPos.y);
-	quit->updateButton(realPos.x, realPos.y);
+	quit->updateButton((int)realPos.x, (int)realPos.y);
 }
 
 void MenuScreen::HandleKey(SDL_Keycode key) {
@@ -135,7 +135,7 @@ void GameScreen::RightClick(int x, int y) {
 void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
 		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-		phone->LeftClick(tmp.x, tmp.y);
+		phone->LeftClick((int)tmp.x, (int)tmp.y);
 	}
 	else {
 		currentLevel->LeftClick(x, y);
@@ -153,13 +153,14 @@ void GameScreen::ChangeRoom(std::string room, std::string door) {
 
 int GameScreen::GetPointedObject(glm::vec3 pos) {
 	std::vector<DrawableObject*>* objects = currentLevel->Getobjects();
-	for (int i = objects->size() - 1; i >= 0; i--)
+	for (int i = (int)objects->size() - 1; i >= 0; i--)
 	{
 		if (dynamic_cast<InteractableObj*>((*objects)[i]) && dynamic_cast<InteractableObj*>((*objects)[i])->CheckPointing(pos.x, pos.y))
 		{
 			return dynamic_cast<InteractableObj*>((*objects)[i])->getType();
 		}
 	}
+	return (int)NORMAL;
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
@@ -167,9 +168,9 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	{
 	case SDLK_d: {
 		// unlock door
-		Item* item = player->inventory->GetInventoryBox(1)->GetItem();
+		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr)
-			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->Unlock(item);
+			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->UseItem(item);
 	}break;
 	case SDLK_w: {
 		Item* item = player->inventory->GetInventoryBox(0)->GetItem();

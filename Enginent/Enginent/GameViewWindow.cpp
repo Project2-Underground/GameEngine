@@ -10,7 +10,7 @@ ViewWindow* ViewWindow::GetInstance() {
 ViewWindow::ViewWindow() {
 	display = false;
 	closeButton = new ViewWindowClose("texture");
-	//set size, pos of this and viewItem
+	//set size, pos of this, description box and viewItem
 }
 
 void ViewWindow::SetViewItem(unsigned int texture) {

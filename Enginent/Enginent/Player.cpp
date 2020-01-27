@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "SquareMeshVbo.h"
 #include "Game.h"
-#include "Door.h"
 #include <iostream>
 
 Player::Player()
@@ -109,7 +108,7 @@ void Player::CheckWalkLimit() {
 		}
 		// left limit
 		else if (pos.x - size.x * 0.5 <= walkLimit->getMinBound().x) {
-			pos.x = walkLimit->getMinBound().x + size.x * 0.5;
+			pos.x = walkLimit->getMinBound().x + size.x * 0.5f;
 			StopWalking();
 		}
 	}
