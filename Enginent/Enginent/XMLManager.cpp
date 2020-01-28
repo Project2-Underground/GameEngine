@@ -89,6 +89,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case VIEW: {
 			ViewObj* obj = new ViewObj();
 			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
+			// set description
 			interactObj = obj;
 		}break;
 		case OPEN: {

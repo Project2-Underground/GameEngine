@@ -106,7 +106,7 @@ void ViewObj::SetViewTexture(std::string view) {
 void ViewObj::action() {
 	ViewWindow* vw = ViewWindow::GetInstance();
 
-	vw->SetDisplay(true);
+	vw->Open();
 	vw->SetViewItem(viewTexture);
 	// set description
 }

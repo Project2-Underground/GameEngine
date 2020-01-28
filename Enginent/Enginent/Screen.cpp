@@ -92,6 +92,10 @@ GameScreen::GameScreen() {
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 
+	Game* g = Game::GetInstance();
+	viewWin = ViewWindow::GetInstance();
+	viewWin->Init(g->winWidth, g->winHeight);
+
 	// inventory
 	const int inventoryNum = 5;
 	float start_x = -550;
@@ -118,6 +122,7 @@ void GameScreen::Render() {
 	renderer->Render(player->dialogueText);
 	renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	renderer->Render(UI);
+	viewWin->Render();
 	if (phone->open)
 		phone->Render();
 }
@@ -136,6 +141,9 @@ void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
 		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
 		phone->LeftClick((int)tmp.x, (int)tmp.y);
+	}
+	else if (viewWin->IsOpen()) {
+		viewWin->LeftClick(x, y);
 	}
 	else {
 		currentLevel->LeftClick(x, y);

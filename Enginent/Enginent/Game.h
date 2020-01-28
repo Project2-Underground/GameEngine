@@ -27,6 +27,7 @@ class Game
 	Screen* currentScreen;
 	ScreenState currentState;
 
+	ViewWindow* viewWin;
 	GLRenderer* renderer;
 	Camera* camera;
 	Game();

@@ -102,5 +102,5 @@ void PhoneHomeButton::action(int x, int y) {
 }
 
 void ViewWindowClose::action(int x, int y) {
-	ViewWindow::GetInstance()->SetDisplay(false);
+	ViewWindow::GetInstance()->Close();
 }
