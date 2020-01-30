@@ -37,7 +37,6 @@ public:
 	Collider* col;
 	TextObject* createDialogueText();
 	TextObject* dialogueText;
-	Inventory* inventory;
 	glm::vec3 next_position;
 private:
 	Collider* walkLimit;

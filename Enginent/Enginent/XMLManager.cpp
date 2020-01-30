@@ -273,11 +273,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 		player->next_position = playerPos;
 
 		pugi::xml_node item = playerNode.child("inventory").first_child();
-		for (int i = 0; i < player->inventory->GetSize(); i++) {
+		for (int i = 0; i < gs->GetInventory()->GetSize(); i++) {
 			// has attribute named "name"
 			if (item.attribute("name").as_string() != "") {
 				// put that item in the inventory
-				player->inventory->GetInventoryBox(i)->SetItem((Item*)level->FindObject(item.attribute("name").as_string()));
+				gs->GetInventory()->GetInventoryBox(i)->SetItem((Item*)level->FindObject(item.attribute("name").as_string()));
 			}
 			item = item.next_sibling();
 		}
@@ -298,6 +298,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 void XMLManager::SaveGame(std::string filename) {
 	Game* game = Game::GetInstance();
+	GameScreen* gs = (GameScreen*)game->GetScreen();
 	pugi::xml_document save;
 	Level* level = game->GetCurrentLevel();
 	save.append_child("level").append_attribute("currentLevel").set_value(level->levelNo);
@@ -346,9 +347,9 @@ void XMLManager::SaveGame(std::string filename) {
 	saveLevel.child("Player").append_attribute("posX").set_value(player->getPos().x);
 	saveLevel.child("Player").append_attribute("posY").set_value(player->getPos().y);
 
-	for (int i = 0; i < player->inventory->GetSize(); i++) {
+	for (int i = 0; i < gs->GetInventory()->GetSize(); i++) {
 		pugi::xml_node node = saveLevel.child("Player").child("inventory").append_child("item");
-		Item* item = player->inventory->GetInventoryBox(i)->GetItem();
+		Item* item = gs->GetInventory()->GetInventoryBox(i)->GetItem();
 		if (item != nullptr)
 			node.append_attribute("name").set_value(item->name.c_str());
 	}

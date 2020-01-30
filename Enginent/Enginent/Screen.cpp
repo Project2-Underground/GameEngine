@@ -96,18 +96,10 @@ GameScreen::GameScreen() {
 	viewWin = ViewWindow::GetInstance();
 	viewWin->Init(g->winWidth, g->winHeight);
 
-	// inventory
-	const int inventoryNum = 5;
-	float start_x = -550;
-	float start_y = -300;
-	float space = 20;
-	int size = 100;
+	inventory = new Inventory();
 
-	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
-	player->inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
-
-	for (int i = 0; i < inventoryNum; i++)
-		UI.push_back(player->inventory->GetInventoryBox(i));
+	for (int i = 0; i < inventory->GetSize(); i++)
+		UI.push_back(inventory->GetInventoryBox(i));
 	phone = Phone::GetInstance();
 }
 
@@ -130,6 +122,7 @@ void GameScreen::Render() {
 void GameScreen::Update() {
 	currentLevel->Update();
 	player->Update();
+	inventory->Update();
 }
 
 void GameScreen::RightClick(int x, int y) {
@@ -176,12 +169,12 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	{
 	case SDLK_d: {
 		// unlock door
-		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
+		Item* item = inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr)
 			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->UseItem(item);
 	}break;
 	case SDLK_w: {
-		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
+		Item* item = inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
 			((SeparatableItem*)item)->action();
 	}break;

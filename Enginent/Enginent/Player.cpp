@@ -173,8 +173,6 @@ void Player::SetDialogue(string dialogue)
 Player::~Player() {
 	if (col != nullptr)
 		delete col;
-	if (inventory != nullptr)
-		delete inventory;
 	if (dialogueText != nullptr)
 		delete dialogueText;
 }

@@ -81,13 +81,11 @@ void OpenObj::action() {
 		open = true;
 		SetTexture(openTexture);
 		if (item)interactType = PICKUP;
-		std::cout << "open\n";
 	}
 	else {
 		if (item) {
-			std::cout << "take\n";
 			SetTexture(nextTexture);
-			Game::GetInstance()->GetPlayer()->inventory->addItem(item);
+			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->addItem(item);
 			item = nullptr;
 			interactType = NORMAL;
 		}
