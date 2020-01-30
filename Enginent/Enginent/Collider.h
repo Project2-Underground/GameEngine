@@ -20,6 +20,7 @@ public:
 
 	glm::vec3 getMinBound();
 	glm::vec3 getMaxBound();
+	glm::vec3 getPosition() { return pos; }
 	void setRefObject(DrawableObject* ref);
 	void setNewPos(glm::vec3 newPos);
 	void setNewPos(float x, float y);
@@ -31,3 +32,5 @@ public:
 	bool isClicked(float x, float y);
 	void CalNewBound();
 };
+
+bool IsMouseCollide(Collider* c, float x, float y);

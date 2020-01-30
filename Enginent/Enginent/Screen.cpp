@@ -97,9 +97,6 @@ GameScreen::GameScreen() {
 	viewWin->Init(g->winWidth, g->winHeight);
 
 	inventory = new Inventory();
-
-	for (int i = 0; i < inventory->GetSize(); i++)
-		UI.push_back(inventory->GetInventoryBox(i));
 	phone = Phone::GetInstance();
 }
 
@@ -114,6 +111,7 @@ void GameScreen::Render() {
 	renderer->Render(player->dialogueText);
 	renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	renderer->Render(UI);
+	inventory->Render();
 	viewWin->Render();
 	if (phone->open)
 		phone->Render();
