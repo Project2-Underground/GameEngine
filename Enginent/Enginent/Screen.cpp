@@ -124,7 +124,7 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(int x, int y) {
-	if (!phone->open)
+	if (!phone->open && !viewWin->IsOpen())
 		currentLevel->RightClick(x, y);
 }
 
@@ -139,6 +139,8 @@ void GameScreen::LeftClick(int x, int y) {
 	else {
 		currentLevel->LeftClick(x, y);
 	}
+	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+	inventory->LeftClick((int)tmp.x, (int)tmp.y);
 }
 
 void GameScreen::ChangeLevel(int level) {

@@ -85,7 +85,7 @@ void OpenObj::action() {
 	else {
 		if (item) {
 			SetTexture(nextTexture);
-			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->addItem(item);
+			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->AddItem(item);
 			item = nullptr;
 			interactType = NORMAL;
 		}

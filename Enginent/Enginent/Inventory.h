@@ -1,30 +1,31 @@
 #pragma once
 
-#include "InventoryBox.h"
+#include "Button.h"
 
 #define INVENTORY_SIZE 9
-#define POPUP_SPEED 10
+#define POPUP_SPEED 10.0f
 
 class Inventory {
 	UIObject* tab;
 	Collider* popArea;
-	vector<InventoryBox*> InventoryBoxes;
+	vector<InventoryBoxButton*> InventoryBoxes;
 
 	float boxOffset;
 	bool move;
 	int direction;
-	int minHeight;
-	int maxHeight;
+	float minHeight;
+	float maxHeight;
 public:
 	Inventory();
 	void Update();
 	void Render();
 	
-	void addItem(Item *item);
-	void removeItem(Item *item);
+	void LeftClick(int x, int y);
+	void AddItem(Item *item);
+	void RemoveItem(Item *item);
 	void SetAllBoxesPos(float);
 	int GetSize() { return INVENTORY_SIZE; }
 	//void displayItem();
 	~Inventory();
-	InventoryBox* GetInventoryBox(int index);
+	InventoryBoxButton* GetInventoryBox(int index);
 };

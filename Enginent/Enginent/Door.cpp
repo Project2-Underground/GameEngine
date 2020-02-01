@@ -24,6 +24,6 @@ void Door::action() {
 void Door::UseItem(Item* item) {
 	if (item->name == item_to_use) {
 		used = true;
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->removeItem((Item*)item);
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem((Item*)item);
 	}
 }

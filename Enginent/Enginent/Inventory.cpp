@@ -23,13 +23,15 @@ Inventory::Inventory() {
 	float boxSize = 75.0f;
 	float space = width / (float)INVENTORY_SIZE;
 	float x = space * 0.5f - width * 0.5f;
-	float y = tab->getPos().y + tab->getSize().y * -0.25;
+	float y = tab->getPos().y + tab->getSize().y * -0.35f;
 	boxOffset = tab->getPos().y - y;
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
-		InventoryBox *tmpObj =  new InventoryBox();
+		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_inventoryBox.png");
 		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y - boxOffset, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
+		tmpObj->SetCollder(new Collider(tmpObj));
+		tmpObj->SetAllPosition(tmpObj->getPos());
 		InventoryBoxes.push_back(tmpObj);
 		x += space;
 	}
@@ -58,7 +60,7 @@ void Inventory::Update() {
 			tab->SetPosition(glm::vec3(tab->getPos().x, minHeight, 1.0f));
 		}
 		else {
-			float vel = POPUP_SPEED * direction;
+			float vel = POPUP_SPEED * (float)direction;
 			tab->SetPosition(glm::vec3(tab->getPos().x, tab->getPos().y + vel, 1.0f));
 		}
 		SetAllBoxesPos(tab->getPos().y - boxOffset);
@@ -68,16 +70,24 @@ void Inventory::Update() {
 
 void Inventory::Render() {
 	Game::GetInstance()->GetRenderer()->Render(tab);
-	for(UIObject* ib:InventoryBoxes)
+	for (UIObject* ib : InventoryBoxes) {
 		Game::GetInstance()->GetRenderer()->Render(ib);
+		((InventoryBoxButton*)ib)->RenderItem();
+	}
 }
 
-InventoryBox* Inventory::GetInventoryBox(int index) {
+InventoryBoxButton* Inventory::GetInventoryBox(int index) {
 	return InventoryBoxes[index];
 }
 
-void Inventory::addItem(Item* item) {
-	for (InventoryBox *ib : InventoryBoxes) {
+void Inventory::LeftClick(int x, int y) {
+	for (auto *ib : InventoryBoxes) {
+		ib->checkCollider(x, y);
+	}
+}
+
+void Inventory::AddItem(Item* item) {
+	for (InventoryBoxButton *ib : InventoryBoxes) {
 		if (ib->GetItem() == nullptr) {
 			ib->SetItem(item);
 			break;
@@ -85,8 +95,8 @@ void Inventory::addItem(Item* item) {
 	}
 }
 
-void Inventory::removeItem(Item* item) {
-	for (InventoryBox *ib : InventoryBoxes) {
+void Inventory::RemoveItem(Item* item) {
+	for (InventoryBoxButton *ib : InventoryBoxes) {
 		if (ib->GetItem() != nullptr && *(ib->GetItem()) == *item) {
 			ib->RemoveItem();
 			break;
@@ -95,13 +105,13 @@ void Inventory::removeItem(Item* item) {
 }
 
 void Inventory::SetAllBoxesPos(float y) {
-	for (InventoryBox* ib : InventoryBoxes) {
-		ib->SetPosition(glm::vec3(ib->getPos().x, y, 1.0f));
+	for (InventoryBoxButton* ib : InventoryBoxes) {
+		ib->SetAllPosition(glm::vec3(ib->getPos().x, y, 1.0f));
 	}
 }
 
 Inventory::~Inventory() {
-	for (InventoryBox *ib : InventoryBoxes) {
+	for (InventoryBoxButton *ib : InventoryBoxes) {
 		delete ib;
 	}
 	delete tab;

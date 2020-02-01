@@ -22,10 +22,10 @@ void SeparatableItem::action() {
 	// add the new items to the inventory
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	for (Item* i : items) {
-		inventory->addItem(i);
+		inventory->AddItem(i);
 	}
 	// remove *this from the inventory
-	inventory->removeItem(this);
+	inventory->RemoveItem(this);
 }
 
 CombinableItem::CombinableItem(std::string name, std::string itc, Item* ci) :Item(name) {
@@ -38,9 +38,9 @@ void CombinableItem::action() {
 		Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 		// add combinedItem to the inventory
 		// remove item and *this from the inventory
-		inventory->removeItem(selectedItem);
-		inventory->removeItem(this);
-		inventory->addItem(combinedItem);
+		inventory->RemoveItem(selectedItem);
+		inventory->RemoveItem(this);
+		inventory->AddItem(combinedItem);
 	}
 }
 

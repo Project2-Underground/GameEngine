@@ -38,7 +38,6 @@
     <ClInclude Include="InfoPhone.h" />
     <ClInclude Include="InteractObj.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="XMLManager.h" />
