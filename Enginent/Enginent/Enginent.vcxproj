@@ -23,6 +23,8 @@
     <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="MouseInput.h" />
+    <ClInclude Include="Puzzle.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
@@ -83,6 +85,7 @@
     <ClCompile Include="XMLManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
+    <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />

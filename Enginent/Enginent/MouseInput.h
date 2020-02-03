@@ -1,13 +1,27 @@
 #pragma once
+#include "Game.h"
+
+int winWidth = 1280;
+int winHeight = 720;
+
+enum MouseEvent{
+	RightClick = 0,
+	LeftClick,
+	Hover,
+	Drag
+};
 
 class MouseInput {
+	MouseInput* _instance = nullptr;
+	glm::vec3 position;
+	int eventType;
+	bool trigger = false;
+protected:
+	MouseInput();
+public:
+	~MouseInput();
+	MouseInput* GetInstance();
+	glm::vec3 FindMousePosition(float x, float y);
+	void UpdateMouseInput(int, float, float);
 
-
-	glm::vec3 FindMousePosition(int x, int y)
-	{
-		float realX, realY;
-		realX = -(winWidth * 0.5) + x;
-		realY = -(winHeight * 0.5) + (winHeight - y);
-		return glm::vec3(realX, realY, 1);
-	}
 };

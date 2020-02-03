@@ -10,6 +10,7 @@
 #include "Button.h"
 #include "XMLManager.h"
 #include "Screen.h"
+#include "TextBox.h"
 
 enum objectType {
 	IMAGE_OBJ = 0,

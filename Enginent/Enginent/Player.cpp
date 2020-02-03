@@ -124,11 +124,14 @@ void Player::CheckTarget(InteractableObj* target) {
 
 void Player::SetNextPosition(float x, float y)
 {
+	if (walk == false)
+	{
+		SoundManager::GetInstance()->playSound("Walking", true);
+	}
 	if (display)
 	{
 		next_position = glm::vec3(x, y, 1);
 		walk = true;
-		SoundManager::GetInstance()->playSound("Walking", true);
 		SetDialogue(" ");
 		if (!(anim->currentAnimation->animationName == "Move"))
 			anim->Play("Move", true);
@@ -141,8 +144,10 @@ void Player::SetNextPosition(glm::vec3 realPos)
 	{
 		next_position = realPos;
 	}
-
-	SoundManager::GetInstance()->playSound("Walking", true);
+	if (walk == false)
+	{
+		SoundManager::GetInstance()->playSound("Walking", true);
+	}
 	walk = true;
 	SetDialogue(" ");
 	if (!(anim->currentAnimation->animationName == "Move"))
