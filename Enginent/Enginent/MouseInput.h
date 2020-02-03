@@ -8,11 +8,18 @@ enum MouseEvent{
 	Drag
 };
 
+enum ActionEvent {
+	NORMAL_ACTION = 0,
+	SEPARATE_ACTION,
+	COMBINE_ACTION
+};
+
 class MouseInput {
 	static MouseInput* _instance;
 	glm::vec3 position_Screen;
 	glm::vec3 position_World;
-	int eventType;
+	MouseEvent eventType;
+	ActionEvent actionType;
 	bool trigger = false;
 	int winWidth, winHeight;
 	Game* game;
@@ -23,8 +30,10 @@ public:
 	static MouseInput* GetInstance();
 	void Init(int width, int height);
 	void FindMousePosition(float x, float y);
-	void UpdateMouseInput(int, float, float);
+	void UpdateMouseInput(MouseEvent, float, float);
+	void SetActionEventType(ActionEvent a) { actionType = a; }
 	int GetEvent();
-	void ClearInput();
-
+	void ResetActionType() { actionType = NORMAL_ACTION; }
+	ActionEvent GetActionEvent() { return actionType; }
+	
 };

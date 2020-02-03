@@ -71,35 +71,15 @@ public:
 	void action();
 };
 
-class SeparateButton : public ActionButton {
-public:
-	SeparateButton(std::string texture) :ActionButton(texture) {};
-	void action();
-};
-
-class CombineButton : public ActionButton {
-public:
-	CombineButton(std::string texture) :ActionButton(texture) {};
-	void action();
-};
-
 class ViewWindowClose :public ActionButton {
 public:
 	ViewWindowClose(std::string texture) :ActionButton(texture) {}
 	void action();
 };
 
-class InventoryBoxButton : public ActionButton {
-protected:
-	Item* item;
-	UIObject itemDisplay;
+class ChangeMouseActionTypeButton : public ActionButton {
+	int type;
 public:
-	InventoryBoxButton(std::string texture);
+	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type; };
 	void action();
-	void RemoveItem();
-	void RenderItem(); 
-	void SetAllPosition(glm::vec3);
-	Item* GetItem();
-	void SetItem(Item* item);
-	~InventoryBoxButton();
 };

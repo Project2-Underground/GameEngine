@@ -133,8 +133,7 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (phone->open) {
-		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(screen.x, screen.y);
-		phone->LeftClick((int)tmp.x, (int)tmp.y);
+		phone->LeftClick(screen.x, screen.y);
 	}
 	else if (viewWin->IsOpen()) {
 		viewWin->LeftClick(screen.x, screen.y);

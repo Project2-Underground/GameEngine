@@ -1,5 +1,6 @@
-#include "Button.h"
+#include "InventoryBox.h"
 #include "Game.h"
+#include "MouseInput.h"
 
 InventoryBoxButton::InventoryBoxButton(std::string texture):ActionButton(texture) {
 	item = nullptr;
@@ -12,8 +13,18 @@ void InventoryBoxButton::SetItem(Item* item) {
 }
 
 void InventoryBoxButton::action() {
-	std::cout << "this box is clicked\n";
-	// set this item to selected
+	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	switch (MouseInput::GetInstance()->GetActionEvent())
+	{
+	case SEPARATE_ACTION:
+		inventory->SeparateItem(item);
+		break;
+	case COMBINE_ACTION:
+		inventory->CombineItem(item);
+		break;
+	default:
+		break;
+	}
 }
 
 Item* InventoryBoxButton::GetItem() {
@@ -37,4 +48,8 @@ void InventoryBoxButton::SetAllPosition(glm::vec3 pos) {
 
 InventoryBoxButton::~InventoryBoxButton() {
 	delete item;
+}
+
+void ChangeMouseActionTypeButton::action() {
+	MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
 }

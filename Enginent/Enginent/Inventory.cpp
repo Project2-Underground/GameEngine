@@ -1,9 +1,11 @@
 #include "Inventory.h"
 #include "Game.h"
+#include "MouseInput.h"
 
 Inventory::Inventory() {
 	move = false;
 	direction = 1;
+	itemHolder = nullptr;
 
 	float width = (float)Game::GetInstance()->winWidth;
 	float height = (float)Game::GetInstance()->winHeight;
@@ -73,6 +75,33 @@ void Inventory::Render() {
 	for (UIObject* ib : InventoryBoxes) {
 		Game::GetInstance()->GetRenderer()->Render(ib);
 		((InventoryBoxButton*)ib)->RenderItem();
+	}
+}
+
+void Inventory::SeparateItem(Item* item) {
+	if (item && dynamic_cast<SeparatableItem*>(item)) {
+		dynamic_cast<SeparatableItem*>(item)->action();
+		MouseInput::GetInstance()->ResetActionType();
+	}
+	else {
+		std::cout << "Separate fail\n";
+	}
+}
+
+void Inventory::CombineItem(Item* item) {
+	if (item && dynamic_cast<CombinableItem*>(item)) {
+		if (itemHolder) {
+			itemHolder->selectedItem = item;
+			itemHolder->action();
+			itemHolder = nullptr;
+			MouseInput::GetInstance()->ResetActionType();
+		}
+		else {
+			itemHolder = dynamic_cast<CombinableItem*>(item);
+		}
+	}
+	else {
+		std::cout << "Combine fail\n";
 	}
 }
 

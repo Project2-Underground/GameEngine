@@ -41,7 +41,7 @@ void MouseInput::FindMousePosition(float x, float y)
 
 }
 
-void MouseInput::UpdateMouseInput(int type, float posX, float posY)
+void MouseInput::UpdateMouseInput(MouseEvent type, float posX, float posY)
 {
 	FindMousePosition(posX, posY);
 
@@ -50,6 +50,7 @@ void MouseInput::UpdateMouseInput(int type, float posX, float posY)
 		case RightClick:
 		{
 			game->GetScreen()->RightClick(position_Screen, position_World);
+			ResetActionType();
 			break;
 		}
 		case LeftClick:
@@ -74,9 +75,4 @@ void MouseInput::UpdateMouseInput(int type, float posX, float posY)
 int MouseInput::GetEvent()
 {
 	return this->eventType;
-}
-
-void MouseInput::ClearInput()
-{
-	trigger = false;
 }

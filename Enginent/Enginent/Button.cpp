@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "InfoPhone.h"
 #include "GameViewWindow.h"
+#include "MouseInput.h"
 
 Button::Button(std::string normal, std::string hover, std::string press)
 {
@@ -98,12 +99,4 @@ void PhoneHomeButton::action() {
 
 void ViewWindowClose::action() {
 	ViewWindow::GetInstance()->Close();
-}
-
-void SeparateButton::action() {
-
-}
-
-void CombineButton::action() {
-
 }

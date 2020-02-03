@@ -52,8 +52,7 @@ void ViewWindow::Render() {
 }
 
 void ViewWindow::LeftClick(int x, int y) {
-	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-	closeButton->checkCollider((int)tmp.x, (int)tmp.y);
+	closeButton->checkCollider(x, y);
 }
 
 void ViewWindow::Close() {
