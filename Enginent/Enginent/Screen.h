@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "InfoPhone.h"
 #include "TextBox.h"
+#include "Inventory.h"
+#include "GameViewWindow.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,
@@ -55,6 +57,9 @@ class GameScreen :public Screen {
 	Level* currentLevel;
 	TextBox* dialogueText;
 
+	Inventory* inventory;
+	ViewWindow* viewWin;
+
 public:
 	vector<std::string> levels;
 
@@ -72,6 +77,7 @@ public:
 	Level* GetCurrentLevel() { return currentLevel; }
 	int GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };
+	Inventory* GetInventory() { return inventory; };
 
 	~GameScreen();
 };

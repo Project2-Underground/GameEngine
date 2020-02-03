@@ -38,23 +38,26 @@ void MenuScreen::Update() {
 
 }
 
-void MenuScreen::LeftClick(int x, int y) {
-	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	for (int j = 0; j < UI.size(); j++)
 	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
 		{
-			button->checkCollider((int)tmp.x, (int)tmp.y);
+			button->checkCollider(screen.x, screen.y);
 		}
 	}
 }
 
-void MenuScreen::UpdateMouseState(int x, int y) {
-	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
+void MenuScreen::RightClick(glm::vec3, glm::vec3)
+{
 
-	play->updateButton((int)realPos.x, (int)realPos.y);
+}
+
+void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
+
+	play->updateButton(screen.x, screen.y);
 	//setting->updateButton(realPos.x, realPos.y);
-	quit->updateButton((int)realPos.x, (int)realPos.y);
+	quit->updateButton(screen.x, screen.y);
 }
 
 void MenuScreen::HandleKey(SDL_Keycode key) {
@@ -123,24 +126,28 @@ void GameScreen::Update() {
 	inventory->Update();
 }
 
-void GameScreen::RightClick(int x, int y) {
-	if (!phone->open && !viewWin->IsOpen())
-		currentLevel->RightClick(x, y);
+void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
+	if (!phone->open)
+		currentLevel->RightClick(world.x, world.y);
 }
 
-void GameScreen::LeftClick(int x, int y) {
+void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (phone->open) {
-		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(screen.x, screen.y);
 		phone->LeftClick((int)tmp.x, (int)tmp.y);
 	}
 	else if (viewWin->IsOpen()) {
-		viewWin->LeftClick(x, y);
+		viewWin->LeftClick(screen.x, screen.y);
 	}
 	else {
-		currentLevel->LeftClick(x, y);
+		currentLevel->LeftClick(world.x, world.y);
 	}
-	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-	inventory->LeftClick((int)tmp.x, (int)tmp.y);
+	inventory->LeftClick(screen.x, screen.y);
+}
+
+void GameScreen::UpdateMouseState(glm::vec3, glm::vec3)
+{
+
 }
 
 void GameScreen::ChangeLevel(int level) {
@@ -216,7 +223,12 @@ void CutsceneScreen::Update() {
 	// eg. 2 clicks to skip a cutscene
 }
 
-void CutsceneScreen::LeftClick(int x, int y) {
+void CutsceneScreen::LeftClick(glm::vec3, glm::vec3) {
+
+}
+
+void CutsceneScreen::UpdateMouseState(glm::vec3, glm::vec3)
+{
 
 }
 

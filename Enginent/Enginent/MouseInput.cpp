@@ -38,6 +38,7 @@ void MouseInput::FindMousePosition(float x, float y)
 	position_Screen = glm::vec3(realX, realY, 1);
 
 	position_World = glm::vec3(realX - Game::GetInstance()->GetCamera()->GetPosition().x, realY - Game::GetInstance()->GetCamera()->GetPosition().y, 1);
+
 }
 
 void MouseInput::UpdateMouseInput(int type, float posX, float posY)
