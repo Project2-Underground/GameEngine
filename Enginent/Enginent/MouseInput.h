@@ -10,17 +10,21 @@ enum MouseEvent{
 
 class MouseInput {
 	static MouseInput* _instance;
-	glm::vec3 position;
+	glm::vec3 position_Screen;
+	glm::vec3 position_World;
 	int eventType;
 	bool trigger = false;
 	int winWidth, winHeight;
+	Game* game;
 protected:
 	MouseInput();
 public:
 	~MouseInput();
 	static MouseInput* GetInstance();
 	void Init(int width, int height);
-	glm::vec3 FindMousePosition(float x, float y);
+	void FindMousePosition(float x, float y);
 	void UpdateMouseInput(int, float, float);
+	int GetEvent();
+	void ClearInput();
 
 };

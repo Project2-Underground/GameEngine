@@ -45,7 +45,7 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	currentState = GAMESCREEN;
+	currentState = MENUSCREEN;
 	UpdateScreenState();
 	cursorGame = new CursorUI();
 	
@@ -87,23 +87,23 @@ void Game::UpdateScreenState() {
 	}
 }
 
-void Game::RightClick(int x, int y) {
-	currentScreen->RightClick(x, y);
-}
-
-void Game::LeftClick(int x, int y) {
-	currentScreen->LeftClick(x, y);
-}
+//void Game::RightClick(int x, int y) {
+//	currentScreen->RightClick(x, y);
+//}
+//
+//void Game::LeftClick(int x, int y) {
+//	currentScreen->LeftClick(x, y);
+//}
 
 void Game::HandleKey(SDL_Keycode key) {
 	currentScreen->HandleKey(key);
 }
 
-void Game::UpdateMouseState(int x, int y) {
-	if (currentState == MENUSCREEN) {
-		((MenuScreen*)currentScreen)->UpdateMouseState(x, y);
-	}
-}
+//void Game::UpdateMouseState(int x, int y) {
+//	if (currentState == MENUSCREEN) {
+//		currentScreen->UpdateMouseState(x, y);
+//	}
+//}
 
 void Game::ChangeScreenState(ScreenState newState) {
 	currentState = newState;

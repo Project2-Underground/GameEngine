@@ -27,18 +27,55 @@ void MouseInput::Init(int width, int height)
 {
 	this->winHeight = height;
 	this->winWidth = width;
+	game = Game::GetInstance();
 }
 
-glm::vec3 MouseInput::FindMousePosition(float x, float y)
+void MouseInput::FindMousePosition(float x, float y)
 {
-	float realX, realY; 
-	realX = -(winWidth * 0.5f) + x - Game::GetInstance()->GetCamera()->GetPosition().x;
-	realY = -(winHeight * 0.5f) + (winHeight - y) - Game::GetInstance()->GetCamera()->GetPosition().y;
-	return glm::vec3(realX, realY, 1);
+	float realX, realY;
+	realX = -(winWidth * 0.5) + x;
+	realY = -(winHeight * 0.5) + (winHeight - y);
+	position_Screen = glm::vec3(realX, realY, 1);
+
+	position_World = glm::vec3(realX - Game::GetInstance()->GetCamera()->GetPosition().x, realY - Game::GetInstance()->GetCamera()->GetPosition().y, 1);
 }
 
 void MouseInput::UpdateMouseInput(int type, float posX, float posY)
 {
-	this->position = FindMousePosition(posX, posY);
-	this->eventType = type;
+	FindMousePosition(posX, posY);
+
+	switch (type)
+	{
+		case RightClick:
+		{
+			game->GetScreen()->RightClick(position_Screen, position_World);
+			break;
+		}
+		case LeftClick:
+		{
+			game->GetScreen()->LeftClick(position_Screen, position_World);
+			break;
+		}
+		case Hover:
+		{
+			game->GetScreen()->UpdateMouseState(position_Screen, position_World);
+			break;
+		}
+		case Drag:
+		{
+			break;
+		}
+
+	}
+}
+
+
+int MouseInput::GetEvent()
+{
+	return this->eventType;
+}
+
+void MouseInput::ClearInput()
+{
+	trigger = false;
 }

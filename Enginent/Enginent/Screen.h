@@ -20,9 +20,10 @@ class Screen {
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
-	virtual void RightClick(int, int) = 0;
-	virtual void LeftClick(int, int) = 0;
+	virtual void RightClick(glm::vec3, glm::vec3) = 0;
+	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
 	virtual void HandleKey(SDL_Keycode) = 0;
+	virtual void UpdateMouseState(glm::vec3 x, glm::vec3 y) = 0;
 	virtual int GetPointedObject(glm::vec3 pos) { return 1; };
 };
 
@@ -37,11 +38,10 @@ public:
 	MenuScreen();
 	void Render();
 	void Update();
-	void RightClick(int, int) {};
-	void LeftClick(int, int);
+	void RightClick(glm::vec3, glm::vec3);
+	void LeftClick(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
-	void UpdateMouseState(int x, int y);
-
+	void UpdateMouseState(glm::vec3, glm::vec3);
 	~MenuScreen();
 };
 
@@ -61,9 +61,10 @@ public:
 	GameScreen();
 	void Render();
 	void Update();
-	void RightClick(int, int);
-	void LeftClick(int, int);
+	void RightClick(glm::vec3, glm::vec3);
+	void LeftClick(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
+	void UpdateMouseState(glm::vec3, glm::vec3);
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void LoadGame(std::string);
@@ -80,7 +81,8 @@ public:
 	CutsceneScreen();
 	void Render();
 	void Update();
-	void RightClick(int, int) {};
-	void LeftClick(int, int);
+	void RightClick(glm::vec3, glm::vec3) {};
+	void LeftClick(glm::vec3, glm::vec3);
+	void UpdateMouseState(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
 };
