@@ -22,7 +22,12 @@ ImageObject::ImageObject()
 
 ImageObject::~ImageObject()
 {
+	if (col)
+		delete col;
+	if (anim)
+		delete anim;
 }
+
 
 void ImageObject::SetCollder(Collider* n_col) {
 	col = n_col;

@@ -6,7 +6,6 @@
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
-#include "Door.h"
 
 
 Game* Game::instance = nullptr;
@@ -26,6 +25,8 @@ GLRenderer* Game::GetRenderer()
 
 void Game::Init(int width, int height)
 {
+	muteBG = false;
+	muteSFX = false;
 	winWidth = width;
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
@@ -132,8 +133,8 @@ Game::~Game()
 glm::vec3 Game::FindMousePosition(int x, int y)
 {
 	float realX, realY;
-	realX = -(winWidth * 0.5) + x;
-	realY = -(winHeight * 0.5) + (winHeight - y);
+	realX = -(winWidth * 0.5f) + x;
+	realY = -(winHeight * 0.5f) + (winHeight - y);
 	return glm::vec3(realX, realY, 1);
 }
 

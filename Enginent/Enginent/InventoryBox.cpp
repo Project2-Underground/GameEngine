@@ -1,52 +1,40 @@
-#include "InventoryBox.h"
-#include "SquareMeshVbo.h"
+#include "Button.h"
 #include "Game.h"
 
-InventoryBox::InventoryBox() {
+InventoryBoxButton::InventoryBoxButton(std::string texture):ActionButton(texture) {
 	item = nullptr;
+	itemDisplay.SetSize(25.0f, 25.0f);
 }
 
-void InventoryBox::SetItem(Item* item) {
+void InventoryBoxButton::SetItem(Item* item) {
 	this->item = item;
+	itemDisplay.SetTexture(item->GetInventoryTexture());
 }
 
-Item* InventoryBox::GetItem() {
+void InventoryBoxButton::action() {
+	std::cout << "this box is clicked\n";
+	// set this item to selected
+}
+
+Item* InventoryBoxButton::GetItem() {
 	return item;
 }
 
-void InventoryBox::RemoveItem() {
+void InventoryBoxButton::RemoveItem() {
 	item = nullptr;
 }
 
-void InventoryBox::Render() {
-	if (item != nullptr) {
-		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
-
-		GLuint modelMatixId = Game::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
-		GLuint modeId = Game::GetInstance()->GetRenderer()->GetModeUniformId();
-
-		if (modelMatixId == -1) {
-			cout << "Error: Can't perform transformation " << endl;
-			return;
-		}
-		if (modeId == -1) {
-			cout << "Error: Can't set mode in ImageObject " << endl;
-			return;
-		}
-
-		vector <glm::mat4> matrixStack;
-
-		glm::mat4 currentMatrix = this->getTransform();
-
-		if (squareMesh != nullptr) {
-			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-			glUniform1i(modeId, 1);
-			glBindTexture(GL_TEXTURE_2D, item->GetInventoryTexture());
-			squareMesh->Render();
-		}
-	}
+void InventoryBoxButton::RenderItem() {
+	if (item)
+		Game::GetInstance()->GetRenderer()->Render(&itemDisplay);
 }
 
-InventoryBox::~InventoryBox() {
+void InventoryBoxButton::SetAllPosition(glm::vec3 pos) {
+	SetPosition(pos);
+	col->setNewPos(pos);
+	itemDisplay.SetPosition(pos);
+}
 
+InventoryBoxButton::~InventoryBoxButton() {
+	delete item;
 }

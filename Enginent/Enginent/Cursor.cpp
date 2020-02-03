@@ -35,7 +35,7 @@ void CursorUI::updateCursor()
 	int mouseX;
 	int mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
-	glm::vec3 realPos = game->FindMousePosition(mouseX + (this->getSize().x / 2), mouseY - (this->getSize().y / 2));
+	glm::vec3 realPos = game->FindMousePosition((int)(mouseX + (this->getSize().x / 2)), (int)(mouseY - (this->getSize().y / 2)));
 	this->SetPosition(realPos);
 	setCursor(game->GetScreen()->GetPointedObject(realPos));
 }
@@ -46,22 +46,22 @@ void CursorUI::setCursor(int type)
 	{
 		switch (type)
 		{
-			case IneractTypeList::NORMAL:
+			case InteractTypeList::NORMAL:
 				this->SetTexture(((CursorUI*)CS_View)->texture);
 				break;
-			case IneractTypeList::TALK:
+			case InteractTypeList::TALK:
 				this->SetTexture(((CursorUI*)CS_Chat)->texture);
 				break;
-			case IneractTypeList::CHANGESCENE:
+			case InteractTypeList::CHANGESCENE:
 				this->SetTexture(((CursorUI*)CS_Door)->texture);
 				break;
-			case IneractTypeList::PICKUP:
+			case InteractTypeList::PICKUP:
 				this->SetTexture(((CursorUI*)CS_Pick)->texture);
 				break;
-			case IneractTypeList::VIEW:
+			case InteractTypeList::VIEW:
 				this->SetTexture(((CursorUI*)CS_View)->texture);
 				break;
-			case IneractTypeList::SAVE:
+			case InteractTypeList::SAVE:
 				this->SetTexture(((CursorUI*)CS_Save)->texture);
 				break;
 			default:

@@ -124,3 +124,10 @@ bool Collider::isClicked(float x, float y) {
 	}
 	return false;
 }
+
+bool IsMouseCollide(Collider* c, float x, float y) {
+	if (c->getMaxBound().x >= x && c->getMinBound().x <= x &&
+		c->getMaxBound().y >= y && c->getMinBound().y <= y)
+		return true;
+	return false;
+}

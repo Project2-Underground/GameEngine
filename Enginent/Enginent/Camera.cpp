@@ -49,19 +49,19 @@ glm::mat4 Camera::GetViewMatrix() {
 			// left bound
 			//std::cout << (-next_pos.x - cam_width * 0.5) << ", " << limit->getMinBound().x << std::endl;
 			if ((-next_pos.x - cam_width * 0.5) < limit->getMinBound().x) {
-				next_pos.x = -(limit->getMinBound().x + cam_width * 0.5);
+				next_pos.x = -(limit->getMinBound().x + (float)cam_width * 0.5f);
 			}
 			// right bound
 			else if ((-next_pos.x + cam_width * 0.5) > limit->getMaxBound().x) {
-				next_pos.x = -(limit->getMaxBound().x - cam_width * 0.5);
+				next_pos.x = -(limit->getMaxBound().x - (float)cam_width * 0.5f);
 			}
 			// upper bound
 			else if ((-next_pos.y - cam_height * 0.5) < limit->getMinBound().y) {
-				next_pos.y = -(limit->getMinBound().y - cam_height * 0.5);
+				next_pos.y = -(limit->getMinBound().y - (float)cam_height * 0.5f);
 			}
 			// lower bound
 			else if ((-next_pos.y + cam_height * 0.5) > limit->getMaxBound().y) {
-				next_pos.y = -(limit->getMaxBound().y + cam_height * 0.5);
+				next_pos.y = -(limit->getMaxBound().y + (float)cam_height * 0.5f);
 			}
 		}
 		currrent_cam_pos = next_pos;

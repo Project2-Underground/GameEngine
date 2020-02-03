@@ -156,10 +156,12 @@ void GLRenderer::Render(DrawableObject* obj) {
 	glUseProgram(NULL);
 }
 
-void GLRenderer::Render(vector <DrawableObject*> & objList)
+void GLRenderer::Render(vector <DrawableObject*> & objList, bool clear)
 {
-	// Clear color buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	if (clear) {
+		// Clear color buffer
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
 
 	// Update window with OpenGL rendering
 

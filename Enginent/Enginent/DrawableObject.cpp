@@ -15,6 +15,10 @@ glm::mat4 DrawableObject::getTransform()
 	return transform;
 }
 
+bool DrawableObject::operator<(const DrawableObject& obj)const {
+	return (this->layer < obj.layer);
+}
+
 DrawableObject::DrawableObject()
 {
 	pos = glm::vec3(0.0, 0.0, 0.0);

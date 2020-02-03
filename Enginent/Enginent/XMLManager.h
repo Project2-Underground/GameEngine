@@ -2,9 +2,8 @@
 
 #include <pugixml.hpp>
 #include <string>
-#include "ImageObject.h"
-#include "Door.h"
 #include "Level.h"
+#include "ImageObject.h"
 
 class XMLManager {
 	static XMLManager* _instance;
@@ -18,12 +17,12 @@ public:
 
 	// doc
 	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms);
-	void GenerateImage(pugi::xml_node, std::vector<DrawableObject*>&, std::string);
-	void GenerateInteractObj(pugi::xml_node, std::vector<DrawableObject*>&);
-	void GenerateDoor(pugi::xml_node, std::vector<DrawableObject*>&, std::map<std::string, Door*>&);
-	void GenerateItem(pugi::xml_node, std::vector<DrawableObject*>&);
-	void GenerateNPC(pugi::xml_node, std::vector<DrawableObject*>&);
-	void GeneratePuzzle(pugi::xml_node, std::vector<DrawableObject*>&);
+	void GenerateImage(pugi::xml_node, Room*, std::string);
+	void GenerateInteractObj(pugi::xml_node, Room*);
+	void GenerateDoor(pugi::xml_node, Room*);
+	//void GenerateItem(pugi::xml_node, Room*);
+	void GenerateNPC(pugi::xml_node, Room*);
+	void GeneratePuzzle(pugi::xml_node, Room*);
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
 
 	int GetLevelNumber(std::string);
@@ -33,6 +32,9 @@ public:
 	// chat doc
 	void GetChat(std::string, ImageObject*);
 	std::string GetMessage(std::string, int);
+
+	// save game option
+	void SaveGameOptions();
 
 	~XMLManager();
 };

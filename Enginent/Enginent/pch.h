@@ -17,7 +17,7 @@
 #include "CombineObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
-#include "LevelGenerator.h"
+#include "XMLManager.h"
 #include "Cursor.h"
 #include "Button.h"
 #include "Item.h"

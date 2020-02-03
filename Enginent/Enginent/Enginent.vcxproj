@@ -30,20 +30,19 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CombineObject.h" />
     <ClInclude Include="Cursor.h" />
-    <ClInclude Include="Door.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameUtilities.h" />
+    <ClInclude Include="GameViewWindow.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="InfoPhone.h" />
     <ClInclude Include="InteractObj.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelGenerator.h" />
+    <ClInclude Include="XMLManager.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -57,7 +56,6 @@
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="ViewWin.h" />
-    <ClInclude Include="xmlFileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
@@ -74,6 +72,7 @@
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameViewWindow.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="InfoPhone.cpp" />
@@ -82,7 +81,8 @@
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelGenerator.cpp" />
+    <ClCompile Include="NonPlayer.cpp" />
+    <ClCompile Include="XMLManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="MouseInput.cpp" />
@@ -98,7 +98,6 @@
     <ClCompile Include="TriangleMeshVbo.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="xmlFileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd" />

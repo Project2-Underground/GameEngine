@@ -34,7 +34,7 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	appBG = new UIObject();
 
 	// init buttons
-	int iconSize = phoneSize.x*0.25f;
+	float iconSize = phoneSize.x*0.25f;
 	next = new PhoneNextButton("Texture/EliasRoom/Elias_Room_Door.png");
 	next->SetSize(iconSize, -iconSize);
 	next->SetPosition(glm::vec3(phoneSize.x * 0.25 - phonePos.x, phonePos.y + phoneSize.y * -0.25, 1));
@@ -111,6 +111,19 @@ void Application::AddChat(std::string name) {
 	chats.push_back(new Chat(name));
 }
 
+Application::~Application() {
+	for (auto c : chats)
+		if (c)
+			delete c;
+
+	for (auto b : buttons)
+		if (b)
+			delete b;
+
+	if (appBG)
+		delete appBG;
+}
+
 Phone* Phone::_instance = nullptr;
 
 Phone* Phone::GetInstance() {
@@ -122,25 +135,25 @@ Phone* Phone::GetInstance() {
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/EliasRoom/Elias_Room_DoorAni.png"); //phone image
-	int sizeX = 200;
-	int sizeY = 400;
+	float sizeX = 200.0f;
+	float sizeY = 400.0f;
 	phone->SetSize(sizeX, -sizeY);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
 	UIObject* tmp_note = new UIObject();
-	tmp_note->SetSize(sizeX, -sizeY*0.5);
-	app->AddNote(tmp_note);
+	tmp_note->SetSize(sizeX, -sizeY*0.5f);
 	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_i.png");
+	app->AddNote(tmp_note);
 	tmp_note = new UIObject();
-	tmp_note->SetSize(sizeX, -sizeY*0.5);
+	tmp_note->SetSize(sizeX, -sizeY*0.5f);
 	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_r.png");
 	app->AddNote(tmp_note);
 	notiChat = false;
 	notiNote = false;
 	open = false;
 
-	int size = 100;
+	float size = 100.0f;
 	// init all buttons
 	noteIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
 	noteIcon->SetSize(size, -size);
@@ -162,6 +175,14 @@ Phone::Phone() {
 	icons.push_back(noteIcon);
 	icons.push_back(chatIcon);
 	icons.push_back(exitButton);
+}
+
+Phone::~Phone() {
+	for (auto ui : icons)
+		if (ui)
+			delete ui;
+	if (phone)
+		delete phone;
 }
 
 void Phone::Render() {
@@ -201,11 +222,11 @@ void Phone::CloseApp() {
 	app->open = false;
 }
 
-void Phone::AddPage(AppType apptype, UIObject* page = nullptr, std::string name = "") {
+void Phone::AddPage(AppType apptype, std::string name) {
 	switch (apptype)
 	{
 	case NOTE:
-		app->AddNote(page);
+		app->AddNote(loadNotes[name]);
 		notiNote = false;
 		break;
 	case CHAT:

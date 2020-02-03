@@ -38,26 +38,23 @@ void MenuScreen::Update() {
 
 }
 
-void MenuScreen::RightClick(glm::vec3, glm::vec3)
-{
-
-}
-
-void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
+void MenuScreen::LeftClick(int x, int y) {
+	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
 	for (int j = 0; j < UI.size(); j++)
 	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
 		{
-			button->checkCollider(screen.x, screen.y);
+			button->checkCollider((int)tmp.x, (int)tmp.y);
 		}
 	}
 }
 
-void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
+void MenuScreen::UpdateMouseState(int x, int y) {
+	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
 
-	play->updateButton(screen.x, screen.y);
+	play->updateButton((int)realPos.x, (int)realPos.y);
 	//setting->updateButton(realPos.x, realPos.y);
-	quit->updateButton(screen.x, screen.y);
+	quit->updateButton((int)realPos.x, (int)realPos.y);
 }
 
 void MenuScreen::HandleKey(SDL_Keycode key) {
@@ -94,23 +91,13 @@ GameScreen::GameScreen() {
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-	
-	// inventory
-	const int inventoryNum = 5;
-	float start_x = -550;
-	float start_y = -300;
-	float space = 20;
-	int size = 100;
 
-	glm::vec3 inventoryBoxPos[inventoryNum] = { glm::vec3(start_x,start_y,1), glm::vec3(start_x + size + space,start_y,1), glm::vec3(start_x + (size + space) * 2,start_y,1), glm::vec3(start_x + (size + space) * 3  ,start_y,1), glm::vec3(start_x + (size + space) * 4  ,start_y,1) };
-	player->inventory = new Inventory(inventoryNum, inventoryBoxPos, 100);
+	Game* g = Game::GetInstance();
+	viewWin = ViewWindow::GetInstance();
+	viewWin->Init(g->winWidth, g->winHeight);
 
-	for (int i = 0; i < inventoryNum; i++)
-		UI.push_back(player->inventory->GetInventoryBox(i));
+	inventory = new Inventory();
 	phone = Phone::GetInstance();
-
-	dialogueText = new TextBox(200, 100, 0, 0);
-	UI.push_back(dialogueText);
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -122,7 +109,10 @@ void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(player);
 	renderer->Render(player->dialogueText);
+	renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	renderer->Render(UI);
+	inventory->Render();
+	viewWin->Render();
 	if (phone->open)
 		phone->Render();
 }
@@ -130,28 +120,30 @@ void GameScreen::Render() {
 void GameScreen::Update() {
 	currentLevel->Update();
 	player->Update();
+	inventory->Update();
 }
 
-void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
-	if (!phone->open)
-		currentLevel->RightClick(world.x, world.y);
+void GameScreen::RightClick(int x, int y) {
+	if (!phone->open && !viewWin->IsOpen())
+		currentLevel->RightClick(x, y);
 }
 
-void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
+void GameScreen::LeftClick(int x, int y) {
 	if (phone->open) {
-		phone->LeftClick(screen.x, screen.y);
+		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+		phone->LeftClick((int)tmp.x, (int)tmp.y);
+	}
+	else if (viewWin->IsOpen()) {
+		viewWin->LeftClick(x, y);
 	}
 	else {
-		currentLevel->LeftClick(world.x, world.y);
+		currentLevel->LeftClick(x, y);
 	}
-}
-
-void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
-
+	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
+	inventory->LeftClick((int)tmp.x, (int)tmp.y);
 }
 
 void GameScreen::ChangeLevel(int level) {
-	// save current level to xml
 	delete currentLevel;
 	currentLevel = new Level(levels[level]);
 }
@@ -162,13 +154,14 @@ void GameScreen::ChangeRoom(std::string room, std::string door) {
 
 int GameScreen::GetPointedObject(glm::vec3 pos) {
 	std::vector<DrawableObject*>* objects = currentLevel->Getobjects();
-	for (int i = objects->size() - 1; i >= 0; i--)
+	for (int i = (int)objects->size() - 1; i >= 0; i--)
 	{
 		if (dynamic_cast<InteractableObj*>((*objects)[i]) && dynamic_cast<InteractableObj*>((*objects)[i])->CheckPointing(pos.x, pos.y))
 		{
 			return dynamic_cast<InteractableObj*>((*objects)[i])->getType();
 		}
 	}
+	return (int)NORMAL;
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
@@ -176,14 +169,14 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	{
 	case SDLK_d: {
 		// unlock door
-		Item* item = player->inventory->GetInventoryBox(1)->GetItem();
+		Item* item = inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr)
-			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->Unlock(item);
+			currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->UseItem(item);
 	}break;
 	case SDLK_w: {
-		Item* item = player->inventory->GetInventoryBox(0)->GetItem();
+		Item* item = inventory->GetInventoryBox(0)->GetItem();
 		if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
-			((SeparatableItem*)item)->Separate();
+			((SeparatableItem*)item)->action();
 	}break;
 	case SDLK_s:
 		// save current game
@@ -223,14 +216,10 @@ void CutsceneScreen::Update() {
 	// eg. 2 clicks to skip a cutscene
 }
 
-void CutsceneScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
+void CutsceneScreen::LeftClick(int x, int y) {
 
 }
 
 void CutsceneScreen::HandleKey(SDL_Keycode key) {
-
-}
-
-void CutsceneScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
 
 }

@@ -1,16 +1,26 @@
 #pragma once
 
-#include "DrawableObject.h"
+#include "InteractObj.h"
 #include "Collider.h"
-#include "Door.h"
+#include "Item.h"
 #include <map>
 #include <vector>
+
+enum Layers {
+	BACKGROUND_LAYER = 0,
+	OBJECT_LAYER,
+	NPC_LAYER,
+	PLAYER_LAYER,
+	FOREGROUND_LAYER
+};
 
 class Room {
 	Collider* playerWalkLimit;
 	Collider* cameraLimit;
 public:
+	std::vector<Item*> items;
 	std::vector<DrawableObject*> objects;
+	std::vector<DrawableObject*> foreground;
 	std::map<std::string, Door*> doors;
 	std::string name;
 
@@ -23,6 +33,8 @@ public:
 	DrawableObject* FindObject(std::string);
 	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
 	Collider* GetCameraLimit() { return cameraLimit; };
+
+	void SortObjLayer();
 
 	~Room();
 };
@@ -47,7 +59,7 @@ public:
 	void RightClick(int, int);
 	void LeftClick(int, int);
 
-	void ChangeRoom(std::string roomName, std::string door =" ");
+	void ChangeRoom(std::string roomName, std::string door = " ");
 	void OpenPuzzle(std::string puzzleName);
 
 	std::vector<DrawableObject*>* Getobjects();

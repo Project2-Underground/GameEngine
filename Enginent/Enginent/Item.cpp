@@ -2,53 +2,50 @@
 #include "Game.h"
 
 Item::Item(std::string name) {
-	interactType = PICKUP;
-	object_name = name;
-}
-
-void Item::action() {
-	// to be picked up by the player
-	if (display) {
-		Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
-		player->anim->Play("Pickup", false);
-		player->inventory->addItem(this);
-		this->col->enable = false;
-	}
-	display = false;
+	this->name = name;
 }
 
 void Item::SetInventoryTexture(std::string path) {
-	inventory_texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
+	iTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-SeparatableItem::SeparatableItem(std::vector<Item*> items) :Item() {
+void Item::SetViewTexture(std::string path) {
+	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
+}
+
+SeparatableItem::SeparatableItem(std::string name, std::vector<Item*> items) :Item(name) {
 	for (Item* i : items)
 		this->items.push_back(i);
 }
 
-void SeparatableItem::Separate() {
+void SeparatableItem::action() {
 	// add the new items to the inventory
-	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
+	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	for (Item* i : items) {
-		player->inventory->addItem(i);
+		inventory->AddItem(i);
 	}
 	// remove *this from the inventory
-	player->inventory->removeItem(this);
+	inventory->RemoveItem(this);
 }
 
-CombinableItem::CombinableItem(std::string itc, Item* ci) :Item() {
+CombinableItem::CombinableItem(std::string name, std::string itc, Item* ci) :Item(name) {
 	itemToCombine = itc;
 	combinedItem = ci;
 }
 
-bool CombinableItem::Combine(Item* item) {
-	if (item->object_name == itemToCombine) {
-		Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
+void CombinableItem::action() {
+	if (selectedItem->name == itemToCombine) {
+		Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 		// add combinedItem to the inventory
-		player->inventory->addItem(combinedItem);
 		// remove item and *this from the inventory
-		player->inventory->removeItem(item);
-		player->inventory->removeItem(this);
+		inventory->RemoveItem(selectedItem);
+		inventory->RemoveItem(this);
+		inventory->AddItem(combinedItem);
+	}
+}
+
+bool Item::operator==(const Item& item) {
+	if (this->name == item.name) {
 		return true;
 	}
 	return false;
