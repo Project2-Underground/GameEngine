@@ -33,27 +33,15 @@ void Room::SetCameraLimit(Collider* col) {
 
 void Room::RightClick(int x, int y) {
 	Game* game = Game::GetInstance();
-	float realX, realY;
-	// temporary while waiting for handle mouse
-	int winWidth = 1280;
-	int winHeight = 720;
-	realX = -(winWidth * 0.5f) + x - game->GetCamera()->GetPosition().x;
-	realY = -(winHeight * 0.5f) + (winHeight - y) - game->GetCamera()->GetPosition().y;
-	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition(realX, realY);
+	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition(x, y);
 }
 
 void Room::LeftClick(int x, int y) {
 	Game* game = Game::GetInstance();
-	float realX, realY;
-	// temporary while waiting for handle mouse
-	int winWidth = 1280;
-	int winHeight = 720;
-	realX = -(winWidth * 0.5f) + x - game->GetCamera()->GetPosition().x;
-	realY = -(winHeight * 0.5f) + (winHeight - y) - game->GetCamera()->GetPosition().y;
 
 	for (int i = 0; i < objects.size(); i++)
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
-			if (ib->CheckCollider(realX, realY)) 
+			if (ib->CheckCollider(x, y)) 
 				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
 }
 
