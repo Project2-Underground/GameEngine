@@ -138,6 +138,12 @@
     <ClInclude Include="ViewWin.h">
       <Filter>GameUI</Filter>
     </ClInclude>
+    <ClInclude Include="Puzzle.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseInput.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CombineObject.cpp">
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="TextBox.cpp">
       <Filter>GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseInput.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

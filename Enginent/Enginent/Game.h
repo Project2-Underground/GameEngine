@@ -10,6 +10,7 @@
 #include "Button.h"
 #include "LevelGenerator.h"
 #include "Screen.h"
+#include "TextBox.h"
 
 enum objectType {
 	IMAGE_OBJ = 0,

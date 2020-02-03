@@ -5,18 +5,20 @@
 #include "UIObject.h"
 #include "TextObject.h"
 
-class TextBox : UIObject {
+class TextBox : public UIObject {
 	private:
 		ImageObject* background;
 		TextObject* dialogue;
 		TextObject* name;
-		SDL_Color textColor;
-		bool display = false;
+		SDL_Color textColor = {0, 0, 0, 0};
+		bool display = true;
 	public:
 		TextBox(int sizeX, int sizeY, int posX, int posY);
+		~TextBox();
 		void setText(std::string name, std::string text);
-		void setColor(SDL_Color color);
+		void setTextColor(SDL_Color color) { textColor = color; }
 		void Render();
+		void toggleDisplay();
 };
 
 class ChoiceBox : UIObject {

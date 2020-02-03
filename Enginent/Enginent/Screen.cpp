@@ -91,9 +91,7 @@ GameScreen::GameScreen() {
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-
 	
-
 	// inventory
 	const int inventoryNum = 5;
 	float start_x = -550;
@@ -107,6 +105,9 @@ GameScreen::GameScreen() {
 	for (int i = 0; i < inventoryNum; i++)
 		UI.push_back(player->inventory->GetInventoryBox(i));
 	phone = Phone::GetInstance();
+
+	dialogueText = new TextBox(200, 100, 0, 0);
+	UI.push_back(dialogueText);
 }
 
 void GameScreen::LoadGame(std::string filename) {

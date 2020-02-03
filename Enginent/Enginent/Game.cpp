@@ -48,6 +48,7 @@ void Game::Init(int width, int height)
 	currentState = GAMESCREEN;
 	UpdateScreenState();
 	cursorGame = new CursorUI();
+	
 }
 
 void Game::Update()

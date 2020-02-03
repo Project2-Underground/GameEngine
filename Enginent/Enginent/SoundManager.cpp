@@ -21,7 +21,8 @@ ISoundSource* SoundManager::createSound(const char* filename)
 	return soundEngine->addSoundSourceFromFile(filename);
 }
 
-void SoundManager::playSound(std::string sound, bool loop) {
+void SoundManager::playSound(std::string sound, bool loop) 
+{
 	soundEngine->play2D(sounds[sound], loop);
 }
 
