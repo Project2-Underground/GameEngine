@@ -4,14 +4,16 @@
 #include "GameViewWindow.h"
 #include "MouseInput.h"
 
-Button::Button(std::string normal, std::string hover, std::string press)
+Button::Button(std::string texture)
 {
-	SetActionTexture(normal, hover, press);
+	SetTexture(texture);
+	normalTexture = GetTexture();
+	hoverTexture = normalTexture;
+	pressTexture = normalTexture;
 }
 
-void Button::SetActionTexture(std::string normal, std::string hover, std::string press) {
+void Button::SetActionTexture( std::string hover, std::string press) {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
-	normalTexture = renderer->LoadTexture(normal);
 	hoverTexture = renderer->LoadTexture(hover);
 	pressTexture = renderer->LoadTexture(press);
 }
@@ -65,20 +67,9 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
-void PhoneAppsButton::checkCollider(float x, float y) {
-	if (this->col->isClicked(x, y)) {
-		action();
-	}
-}
 
 void ActionButton::action() {
 	Phone::GetInstance()->Open();
-}
-
-void ActionButton::checkCollider(float x, float y) {
-	if (this->col->isClicked(x, y)) {
-		action();
-	}
 }
 
 void PhoneExitButton::action() {

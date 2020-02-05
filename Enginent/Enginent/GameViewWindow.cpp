@@ -9,13 +9,12 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new ViewWindowClose("texture");
+	closeButton = new ViewWindowClose("Texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	viewWindow = new UIObject();
 	display = false;
 
 	viewWindow->SetTexture("Texture/tmp_inventoryBox.png");
-	closeButton->SetTexture("Texture/tmp_closeButton.png");
 }
 
 void ViewWindow::Init(int width, int height) {
