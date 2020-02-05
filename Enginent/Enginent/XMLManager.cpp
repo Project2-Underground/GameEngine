@@ -108,6 +108,10 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		}break;
 		}
 
+		if (child->child("picture"))
+			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
+
+
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
@@ -119,7 +123,9 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			}
 		}
 
-
+		if (child->child("key")) 
+			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
+		
 		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;

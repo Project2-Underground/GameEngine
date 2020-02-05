@@ -28,7 +28,7 @@ public:
 	Application(glm::vec3 phoneSize, glm::vec3 phonePos);
 	void Render();
 
-	void LeftClick(int, int);
+	void LeftClick(float, float);
 	void Next();
 	void Back();
 	void AddNote(UIObject*);
@@ -55,8 +55,8 @@ public:
 	static Phone* GetInstance();
 
 	void Render();
-	void LeftClick(int, int);
-	void UpdateButton(int, int);
+	void LeftClick(float, float);
+	void UpdateButton(float, float);
 
 	void OpenApp(AppType);
 	void CloseApp();
@@ -70,7 +70,7 @@ public:
 
 	~Phone();
 
-	std::map<std::string, UIObject*> loadNotes;
+	std::map<std::string, UIObject*> notes;
 private:
 	Phone();
 	std::vector<UIObject*> icons;

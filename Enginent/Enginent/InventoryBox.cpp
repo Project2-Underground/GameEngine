@@ -13,6 +13,7 @@ void InventoryBoxButton::SetItem(Item* item) {
 }
 
 void InventoryBoxButton::action() {
+	std::cout << "item selected\n";
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	switch (MouseInput::GetInstance()->GetActionEvent())
 	{
@@ -23,6 +24,10 @@ void InventoryBoxButton::action() {
 		inventory->CombineItem(item);
 		break;
 	default:
+		if (item != nullptr) {
+			MouseInput::GetInstance()->SetActionEventType(ITEM_SELECTED_ACTION);
+			inventory->SelectItem(item);
+		}
 		break;
 	}
 }
@@ -42,7 +47,6 @@ void InventoryBoxButton::RenderItem() {
 
 void InventoryBoxButton::SetAllPosition(glm::vec3 pos) {
 	SetPosition(pos);
-	col->setNewPos(pos);
 	itemDisplay.SetPosition(pos);
 }
 
@@ -51,5 +55,6 @@ InventoryBoxButton::~InventoryBoxButton() {
 }
 
 void ChangeMouseActionTypeButton::action() {
+	std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
 	MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
 }

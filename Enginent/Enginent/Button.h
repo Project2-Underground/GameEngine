@@ -12,9 +12,9 @@ class Button : public UIObject {
 	public:
 		Button() {};
 		Button(std::string, std::string, std::string);
-		void updateButton(int, int);
+		void updateButton(float, float);
 		virtual void action() = 0;
-		virtual void checkCollider(int x, int y);
+		virtual void checkCollider(float x, float y);
 
 		void SetActionTexture(std::string, std::string, std::string);
 };
@@ -37,14 +37,14 @@ public:
 	PhoneAppsButton(std::string texture) { SetTexture(texture); }
 	void action();
 	void SetApp(int type) { appType = type; }
-	void checkCollider(int x, int y);
+	void checkCollider(float x, float y);
 };
 
 class ActionButton :public Button {
 public:
 	ActionButton(std::string texture) { SetTexture(texture); }
 	void action();
-	void checkCollider(int x, int y);
+	void checkCollider(float x, float y);
 };
 
 class PhoneExitButton : public ActionButton {

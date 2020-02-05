@@ -56,7 +56,7 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	// init first note/chat or add later
 }
 
-void Application::LeftClick(int x, int y) {
+void Application::LeftClick(float x, float y) {
 	next->checkCollider(x, y);
 	back->checkCollider(x, y);
 	home->checkCollider(x, y);
@@ -195,7 +195,7 @@ void Phone::Render() {
 	}
 }
 
-void Phone::LeftClick(int x, int y) {
+void Phone::LeftClick(float x, float y) {
 	if (app->open) {
 		app->LeftClick(x, y);
 	}
@@ -206,7 +206,7 @@ void Phone::LeftClick(int x, int y) {
 	}
 }
 
-void Phone::UpdateButton(int x, int y) {
+void Phone::UpdateButton(float x, float y) {
 	noteIcon->updateButton(x, y);
 	chatIcon->updateButton(x, y);
 	exitButton->updateButton(x, y);
@@ -226,7 +226,7 @@ void Phone::AddPage(AppType apptype, std::string name) {
 	switch (apptype)
 	{
 	case NOTE:
-		app->AddNote(loadNotes[name]);
+		app->AddNote(notes[name]);
 		notiNote = false;
 		break;
 	case CHAT:

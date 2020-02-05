@@ -14,8 +14,8 @@ ViewWindow::ViewWindow() {
 	viewWindow = new UIObject();
 	display = false;
 
-	viewWindow->SetTexture("Texture/EliasRoom/Elias_Room_Door1.png");
-	closeButton->SetTexture("Texture/EliasRoom/Elias_Room_Bin.png");
+	viewWindow->SetTexture("Texture/tmp_inventoryBox.png");
+	closeButton->SetTexture("Texture/tmp_closeButton.png");
 }
 
 void ViewWindow::Init(int width, int height) {
@@ -51,7 +51,7 @@ void ViewWindow::Render() {
 	}
 }
 
-void ViewWindow::LeftClick(int x, int y) {
+void ViewWindow::LeftClick(float x, float y) {
 	closeButton->checkCollider(x, y);
 }
 

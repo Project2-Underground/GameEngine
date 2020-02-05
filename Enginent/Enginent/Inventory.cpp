@@ -5,7 +5,7 @@
 Inventory::Inventory() {
 	move = false;
 	direction = 1;
-	itemHolder = nullptr;
+	selectedItem = nullptr;
 
 	float width = (float)Game::GetInstance()->winWidth;
 	float height = (float)Game::GetInstance()->winHeight;
@@ -37,6 +37,15 @@ Inventory::Inventory() {
 		InventoryBoxes.push_back(tmpObj);
 		x += space;
 	}
+
+	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_separateButton.png", SEPARATE_ACTION);
+	separateButton->SetPosition(glm::vec3(100.0f, 0, 0));
+	separateButton->SetSize(100.0f, -50.0f);
+	separateButton->SetCollder(new Collider(separateButton));
+	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_combineButton.png", COMBINE_ACTION);
+	combineButton->SetPosition(glm::vec3(-100.0f, 0, 0));
+	combineButton->SetSize(100.0f, -50.0f);
+	combineButton->SetCollder(new Collider(combineButton));
 }
 
 void Inventory::Update() {
@@ -70,49 +79,68 @@ void Inventory::Update() {
 	}
 }
 
+void Inventory::UnselectItem() { 
+	std::cout << "unselected item\n";
+	selectedItem = nullptr; 
+	MouseInput::GetInstance()->ResetActionType();
+}
 void Inventory::Render() {
-	Game::GetInstance()->GetRenderer()->Render(tab);
+	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+	renderer->Render(tab);
 	for (UIObject* ib : InventoryBoxes) {
-		Game::GetInstance()->GetRenderer()->Render(ib);
+		renderer->Render(ib);
 		((InventoryBoxButton*)ib)->RenderItem();
 	}
+	renderer->Render(separateButton);
+	renderer->Render(combineButton);
 }
 
 void Inventory::SeparateItem(Item* item) {
 	if (item && dynamic_cast<SeparatableItem*>(item)) {
 		dynamic_cast<SeparatableItem*>(item)->action();
-		MouseInput::GetInstance()->ResetActionType();
 	}
 	else {
 		std::cout << "Separate fail\n";
 	}
+	MouseInput::GetInstance()->ResetActionType();
 }
 
 void Inventory::CombineItem(Item* item) {
-	if (item && dynamic_cast<CombinableItem*>(item)) {
-		if (itemHolder) {
-			itemHolder->selectedItem = item;
-			itemHolder->action();
-			itemHolder = nullptr;
+	if (item) {
+		if (selectedItem) {
+			if (dynamic_cast<CombinableItem*>(selectedItem)) {
+				std::cout << "try combine\n";
+				CombinableItem* c = ((CombinableItem*)selectedItem);
+				c->selectedItem = item;
+				c->action();
+				UnselectItem();
+			}
+			else {
+				std::cout << "items cannot be combine\n";
+			}
 			MouseInput::GetInstance()->ResetActionType();
 		}
 		else {
-			itemHolder = dynamic_cast<CombinableItem*>(item);
+			selectedItem = item;
+			std::cout << "selected item to combine\n";
 		}
 	}
-	else {
-		std::cout << "Combine fail\n";
-	}
+}
+
+void Inventory::SelectItem(Item* item) {
+	selectedItem = item;
 }
 
 InventoryBoxButton* Inventory::GetInventoryBox(int index) {
 	return InventoryBoxes[index];
 }
 
-void Inventory::LeftClick(int x, int y) {
+void Inventory::LeftClick(float x, float y) {
 	for (auto *ib : InventoryBoxes) {
 		ib->checkCollider(x, y);
 	}
+	separateButton->checkCollider(x, y);
+	combineButton->checkCollider(x, y);
 }
 
 void Inventory::AddItem(Item* item) {
@@ -137,6 +165,8 @@ void Inventory::SetAllBoxesPos(float y) {
 	for (InventoryBoxButton* ib : InventoryBoxes) {
 		ib->SetAllPosition(glm::vec3(ib->getPos().x, y, 1.0f));
 	}
+	separateButton->SetPosition(glm::vec3(separateButton->getPos().x, y + 50.0f, 1.0f));
+	combineButton->SetPosition(glm::vec3(combineButton->getPos().x, y + 50.0f, 1.0f));
 }
 
 Inventory::~Inventory() {

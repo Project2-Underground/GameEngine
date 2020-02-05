@@ -16,9 +16,9 @@ void Button::SetActionTexture(std::string normal, std::string hover, std::string
 	pressTexture = renderer->LoadTexture(press);
 }
 
-void Button::updateButton(int x, int y)
+void Button::updateButton(float x, float y)
 {
-	if (this->col->isClicked((float)x, (float)y))
+	if (this->col->isClicked(x, y))
 	{
 		SetTexture(hoverTexture);
 	}
@@ -33,9 +33,9 @@ void Button::action()
 	//does something
 }
 
-void Button::checkCollider(int x, int y)
+void Button::checkCollider(float x, float y)
 {
-	if (this->col->isClicked((float)x, (float)y))
+	if (this->col->isClicked(x, y))
 	{
 		SetTexture(pressTexture);
 		action();
@@ -65,8 +65,8 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
-void PhoneAppsButton::checkCollider(int x, int y) {
-	if (this->col->isClicked((float)x, (float)y)) {
+void PhoneAppsButton::checkCollider(float x, float y) {
+	if (this->col->isClicked(x, y)) {
 		action();
 	}
 }
@@ -75,8 +75,8 @@ void ActionButton::action() {
 	Phone::GetInstance()->Open();
 }
 
-void ActionButton::checkCollider(int x, int y) {
-	if (this->col->isClicked((float)x, (float)y)) {
+void ActionButton::checkCollider(float x, float y) {
+	if (this->col->isClicked(x, y)) {
 		action();
 	}
 }
