@@ -9,25 +9,29 @@ class Button : public UIObject {
 		unsigned int normalTexture;
 		unsigned int hoverTexture;
 		unsigned int pressTexture;
+		bool togglePressed;
+		bool pressAvailable;
 	public:
 		Button() {};
 		Button(std::string);
 		void updateButton(float, float);
 		virtual void action() = 0;
 		void checkCollider(float x, float y);
+		void SetTogglePress(bool b) { togglePressed = b; }
 
-		void SetActionTexture(std::string, std::string);
+		void SetHoverTexture(std::string);
+		void SetPressTexture(std::string);
 };
 
 class Exit_Button : public Button {
 	public:
-		Exit_Button(std::string normal, ::string hover, std::string press) : Button(normal) { SetActionTexture(hover, press); }
+		Exit_Button(std::string normal, ::string hover, std::string press) : Button(normal) { SetHoverTexture(hover); SetPressTexture(press); }
 		void action();
 };
 
 class SwitchScene_Button : public Button {
 public:
-	SwitchScene_Button(std::string normal, std::string hover, std::string press) : Button(normal) { SetActionTexture(hover, press); }
+	SwitchScene_Button(std::string normal, std::string hover, std::string press) : Button(normal) { SetHoverTexture(hover); SetPressTexture(press); }
 	void action();
 };
 
@@ -78,6 +82,7 @@ public:
 class ChangeMouseActionTypeButton : public ActionButton {
 	int type;
 public:
-	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type; };
+	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type; pressAvailable = false; };
+	void ResetTexture() { SetTexture(normalTexture); }
 	void action();
 };

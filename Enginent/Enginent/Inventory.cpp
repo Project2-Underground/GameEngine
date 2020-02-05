@@ -14,7 +14,6 @@ Inventory::Inventory() {
 	tab->SetSize(width, -height * 0.5f);
 	minHeight = -height * 0.5f - tab->getSize().y * -0.5f;
 	maxHeight = minHeight + tab->getSize().y * -0.3f;
-	std::cout << maxHeight << std::endl;
 
 	tab->SetPosition(glm::vec3(0.0f, minHeight, 1.0f));
 	tab->SetTexture("Texture/tmp_inventoryBox.png");
@@ -30,6 +29,7 @@ Inventory::Inventory() {
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
 		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_inventoryBox.png");
+		tmpObj->SetPressTexture("Texture/tmp_inventoryBoxSelected.png");
 		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y - boxOffset, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
 		tmpObj->SetCollder(new Collider(tmpObj));
@@ -39,10 +39,12 @@ Inventory::Inventory() {
 	}
 
 	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_separateButton.png", SEPARATE_ACTION);
+	separateButton->SetPressTexture("Texture/tmp_separateButtonPress.png");
 	separateButton->SetPosition(glm::vec3(100.0f, 0, 0));
 	separateButton->SetSize(100.0f, -50.0f);
 	separateButton->SetCollder(new Collider(separateButton));
 	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_combineButton.png", COMBINE_ACTION);
+	combineButton->SetPressTexture("Texture/tmp_combineButtonPress.png");
 	combineButton->SetPosition(glm::vec3(-100.0f, 0, 0));
 	combineButton->SetSize(100.0f, -50.0f);
 	combineButton->SetCollder(new Collider(combineButton));
@@ -81,6 +83,9 @@ void Inventory::Update() {
 
 void Inventory::UnselectItem() { 
 	std::cout << "unselected item\n";
+	for (auto* ib : InventoryBoxes) {
+		ib->SetTogglePress(false);
+	}
 	selectedItem = nullptr; 
 	MouseInput::GetInstance()->ResetActionType();
 }
@@ -102,7 +107,8 @@ void Inventory::SeparateItem(Item* item) {
 	else {
 		std::cout << "Separate fail\n";
 	}
-	MouseInput::GetInstance()->ResetActionType();
+	MouseInput::GetInstance()->ResetActionType(); 
+	UnselectItem();
 }
 
 void Inventory::CombineItem(Item* item) {
@@ -113,12 +119,12 @@ void Inventory::CombineItem(Item* item) {
 				CombinableItem* c = ((CombinableItem*)selectedItem);
 				c->selectedItem = item;
 				c->action();
-				UnselectItem();
 			}
 			else {
 				std::cout << "items cannot be combine\n";
 			}
 			MouseInput::GetInstance()->ResetActionType();
+			UnselectItem();
 		}
 		else {
 			selectedItem = item;
@@ -128,7 +134,10 @@ void Inventory::CombineItem(Item* item) {
 }
 
 void Inventory::SelectItem(Item* item) {
-	selectedItem = item;
+	if (item) {
+		std::cout << "selected an item\n";
+		selectedItem = item;
+	}
 }
 
 InventoryBoxButton* Inventory::GetInventoryBox(int index) {

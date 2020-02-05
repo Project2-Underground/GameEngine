@@ -3,6 +3,7 @@
 #include "MouseInput.h"
 
 InventoryBoxButton::InventoryBoxButton(std::string texture):ActionButton(texture) {
+	pressAvailable = false;
 	item = nullptr;
 	itemDisplay.SetSize(25.0f, 25.0f);
 }
@@ -13,7 +14,6 @@ void InventoryBoxButton::SetItem(Item* item) {
 }
 
 void InventoryBoxButton::action() {
-	std::cout << "item selected\n";
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	switch (MouseInput::GetInstance()->GetActionEvent())
 	{
@@ -21,13 +21,13 @@ void InventoryBoxButton::action() {
 		inventory->SeparateItem(item);
 		break;
 	case COMBINE_ACTION:
+		SetTogglePress(true);
 		inventory->CombineItem(item);
 		break;
 	default:
-		if (item != nullptr) {
-			MouseInput::GetInstance()->SetActionEventType(ITEM_SELECTED_ACTION);
-			inventory->SelectItem(item);
-		}
+		SetTogglePress(true);
+		MouseInput::GetInstance()->SetActionEventType(ITEM_SELECTED_ACTION);
+		inventory->SelectItem(item);
 		break;
 	}
 }
@@ -57,4 +57,5 @@ InventoryBoxButton::~InventoryBoxButton() {
 void ChangeMouseActionTypeButton::action() {
 	std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
 	MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
+	SetTogglePress(true);
 }

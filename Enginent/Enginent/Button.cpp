@@ -6,21 +6,27 @@
 
 Button::Button(std::string texture)
 {
+	pressAvailable = true;
+	togglePressed = false;
 	SetTexture(texture);
 	normalTexture = GetTexture();
 	hoverTexture = normalTexture;
 	pressTexture = normalTexture;
 }
+void Button::SetHoverTexture(std::string texture) {
+	hoverTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
 
-void Button::SetActionTexture( std::string hover, std::string press) {
-	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
-	hoverTexture = renderer->LoadTexture(hover);
-	pressTexture = renderer->LoadTexture(press);
+void Button::SetPressTexture(std::string texture) {
+	pressTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
 void Button::updateButton(float x, float y)
 {
-	if (this->col->isClicked(x, y))
+	if (togglePressed) {
+		SetTexture(pressTexture);
+	}
+	else if (this->col->isClicked(x, y))
 	{
 		SetTexture(hoverTexture);
 	}

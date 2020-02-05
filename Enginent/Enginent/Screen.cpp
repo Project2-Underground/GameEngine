@@ -127,6 +127,7 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
+	inventory->UnselectItem();
 	if (!phone->open)
 		currentLevel->RightClick(world.x, world.y);
 }
