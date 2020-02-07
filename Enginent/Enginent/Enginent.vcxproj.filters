@@ -87,9 +87,6 @@
     <ClInclude Include="UIObject.h">
       <Filter>GameUI</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryBox.h">
-      <Filter>GameUI</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
@@ -98,12 +95,6 @@
     </ClInclude>
     <ClInclude Include="TextObject.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="xmlFileManager.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelGenerator.h">
-      <Filter>GameUtilities</Filter>
     </ClInclude>
     <ClInclude Include="..\resource\pugixml-1.10\src\pugiconfig.hpp">
       <Filter>Resource Files</Filter>
@@ -123,9 +114,6 @@
     <ClInclude Include="Camera.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>GameObj\interactable</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
@@ -138,11 +126,14 @@
     <ClInclude Include="ViewWin.h">
       <Filter>GameUI</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="MouseInput.h">
       <Filter>GameUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameViewWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,12 +194,6 @@
     <ClCompile Include="TextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="xmlFileManager.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelGenerator.cpp">
-      <Filter>GameUtilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -256,6 +241,15 @@
     </ClCompile>
     <ClCompile Include="MouseInput.cpp">
       <Filter>GameUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameViewWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

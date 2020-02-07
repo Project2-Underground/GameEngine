@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "SquareMeshVbo.h"
 #include "Game.h"
+#include "TimeSystem.h"
 #include <iostream>
 
 Player::Player()
@@ -56,17 +57,18 @@ void Player::Update()
 
 void Player::Move()
 {
+	float walk_sp = WALK_SPEED * (1/TimeSystem::instance()->GetTimeBetweenFrame());
 	// walk left
 	if (this->pos.x > next_position.x)
 	{
-		if (pos.x - next_position.x > WALK_SPEED)
+		if (pos.x - next_position.x > walk_sp)
 		{
 			if (!faceLeft)
 			{
 				this->SetScale(-1, 1);
 				faceLeft = true;
 			}
-			this->Translate(glm::vec3(-WALK_SPEED, 0, 0));
+			this->Translate(glm::vec3(-walk_sp, 0, 0));
 		}
 		else
 		{
@@ -76,14 +78,14 @@ void Player::Move()
 	// walk right
 	else if (this->pos.x < next_position.x)
 	{
-		if (next_position.x - pos.x > WALK_SPEED)
+		if (next_position.x - pos.x > walk_sp)
 		{
 			if (faceLeft)
 			{
 				this->SetScale(-1, 1);
 				faceLeft = false;
 			}
-			this->Translate(glm::vec3(WALK_SPEED, 0, 0));
+			this->Translate(glm::vec3(walk_sp, 0, 0));
 		}
 		else
 		{

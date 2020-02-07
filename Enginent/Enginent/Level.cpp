@@ -96,12 +96,164 @@ void Puzzle::Update() {
 
 }
 
-void Puzzle::RightClick() {
+void Puzzle::RightClick(glm::vec3 screen, glm::vec3 world) {
 
 }
 
-void Puzzle::LeftClick() {
+void Puzzle::LeftClick(glm::vec3 screen, glm::vec3 world) {
 
+}
+
+
+
+Book::Book(int id, std::string texture, int sizeX, int sizeY, int posX, int posY)
+{
+	this->id = id;
+	SetTexture(texture);
+	SetSize(sizeX, sizeY);
+	SetPosition(glm::vec3(posX, posY, 1));
+	prevPos = this->pos;
+	this->col = new Collider(this);
+}
+
+Book::~Book()
+{
+	if (col != nullptr)
+		delete col;
+}
+
+int Book::GetId()
+{
+	return this->id;
+}
+
+void Book::SetPos(glm::vec3 pos)
+{
+	this->SetPosition(pos);
+}
+
+bool Book::CheckCollider(int x, int y)
+{
+	if (this->col->isClicked(x, y))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Space::CheckCollide(Collider* col)
+{
+	if (this->collider->isCollide(col))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+BookshelfPuzzle::BookshelfPuzzle(std::string texture, int posX, int posY, int sizeX, int sizeY)
+{
+	this->texture = new ImageObject();
+	this->texture->SetTexture(texture);
+	this->texture->SetPosition(glm::vec3(posX, posY, 1));
+	this->texture->SetSize(sizeX, sizeY);
+	this->win = new ImageObject();
+	this->win->SetTexture("Texture/Test/Win.png");
+	this->win->SetPosition(glm::vec3(0, 0, 1));
+	this->win->SetSize(1080, -720);
+}
+
+void BookshelfPuzzle::Init(std::vector<Book*> books, std::vector<Space*> spaces)
+{
+	this->books = books;
+	this->log = spaces;
+}
+
+void BookshelfPuzzle::Render()
+{
+	if (display)
+	{
+		Game::GetInstance()->GetRenderer()->Render(this->texture);
+		for (int j = 0; j < log.size(); j++)
+		{
+			Game::GetInstance()->GetRenderer()->Render(log[j]->colTemp);
+		}
+		for (int i = 0; i < books.size(); i++)
+		{
+			Game::GetInstance()->GetRenderer()->Render(books[i]);
+		}
+		if (pass == true) {
+			Game::GetInstance()->GetRenderer()->Render(win);
+		}
+	}
+}
+
+void BookshelfPuzzle::RightClick(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
+void BookshelfPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world)
+{
+	if (select == nullptr)
+	{
+		for (int i = 0; i < books.size(); i++)
+		{
+			if (books[i]->col->isClicked(screen.x, screen.y))
+			{
+				select = books[i];
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < log.size(); i++)
+		{
+			if (log[i]->collider->isClicked(screen.x, screen.y))
+			{
+				Book* tmp = nullptr;
+				if (log[i]->book != nullptr)
+				{
+					tmp = log[i]->book;
+				}
+				log[i]->book = select;
+				select->SetPosition(log[i]->collider->getPosition());
+				select->col->setNewPos(log[i]->collider->getPosition());
+				select = tmp;
+			}
+		}
+	}
+	if (pass == true)
+	{
+		display = false;
+	}
+}
+
+void BookshelfPuzzle::Update(glm::vec3 screen, glm::vec3 world)
+{
+	if (select != nullptr)
+	{
+		select->SetPosition(screen);
+		select->col->setNewPos(screen);
+	}
+	pass = true;
+	for (int i = 0; i < log.size(); i++)
+	{
+		if (log[i]->book == nullptr){
+			pass = false;
+			break;
+		}
+		else if (log[i]->id != log[i]->book->GetId())
+		{
+			pass = false;
+			break;
+		}
+	}
 }
 
 //level
