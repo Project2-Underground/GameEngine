@@ -14,10 +14,11 @@ class Button : public UIObject {
 	public:
 		Button() {};
 		Button(std::string);
-		void updateButton(float, float);
+		virtual void updateButton(float, float);
 		virtual void action() = 0;
-		void checkCollider(float x, float y);
-		void SetTogglePress(bool b) { togglePressed = b; }
+		virtual void checkCollider(float x, float y);
+		void SetTogglePress(bool b) { togglePressed = b; pressAvailable = !b; }
+		bool IsSelected() { return togglePressed; }
 
 		void SetHoverTexture(std::string);
 		void SetPressTexture(std::string);
@@ -82,7 +83,9 @@ public:
 class ChangeMouseActionTypeButton : public ActionButton {
 	int type;
 public:
-	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type; pressAvailable = false; };
-	void ResetTexture() { SetTexture(normalTexture); }
+	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type;};
+	void checkCollider(float x, float y);
+	void updateButton(float x, float y);
+	void Reset();
 	void action();
 };

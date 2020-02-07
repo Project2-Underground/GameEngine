@@ -84,8 +84,10 @@ void Inventory::Update() {
 void Inventory::UnselectItem() { 
 	std::cout << "unselected item\n";
 	for (auto* ib : InventoryBoxes) {
-		ib->SetTogglePress(false);
+		ib->Reset();
 	}
+	separateButton->Reset();
+	combineButton->Reset();
 	selectedItem = nullptr; 
 	MouseInput::GetInstance()->ResetActionType();
 }

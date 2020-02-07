@@ -23,10 +23,7 @@ void Button::SetPressTexture(std::string texture) {
 
 void Button::updateButton(float x, float y)
 {
-	if (togglePressed) {
-		SetTexture(pressTexture);
-	}
-	else if (this->col->isClicked(x, y))
+	if (this->col->isClicked(x, y))
 	{
 		SetTexture(hoverTexture);
 	}
@@ -50,7 +47,7 @@ void Button::checkCollider(float x, float y)
 	}
 	else
 	{
-		this->SetTexture(normalTexture);
+		SetTexture(normalTexture);
 	}
 }
 

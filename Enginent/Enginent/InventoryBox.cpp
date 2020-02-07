@@ -3,7 +3,6 @@
 #include "MouseInput.h"
 
 InventoryBoxButton::InventoryBoxButton(std::string texture):ActionButton(texture) {
-	pressAvailable = false;
 	item = nullptr;
 	itemDisplay.SetSize(25.0f, 25.0f);
 }
@@ -15,20 +14,25 @@ void InventoryBoxButton::SetItem(Item* item) {
 
 void InventoryBoxButton::action() {
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-	switch (MouseInput::GetInstance()->GetActionEvent())
-	{
-	case SEPARATE_ACTION:
-		inventory->SeparateItem(item);
-		break;
-	case COMBINE_ACTION:
-		SetTogglePress(true);
-		inventory->CombineItem(item);
-		break;
-	default:
-		SetTogglePress(true);
-		MouseInput::GetInstance()->SetActionEventType(ITEM_SELECTED_ACTION);
-		inventory->SelectItem(item);
-		break;
+	if (!IsSelected()) {
+		switch (MouseInput::GetInstance()->GetActionEvent())
+		{
+		case SEPARATE_ACTION:
+			inventory->SeparateItem(item);
+			break;
+		case COMBINE_ACTION:
+			SetTogglePress(true);
+			inventory->CombineItem(item);
+			break;
+		default:
+			SetTogglePress(true);
+			MouseInput::GetInstance()->SetActionEventType(ITEM_SELECTED_ACTION);
+			inventory->SelectItem(item);
+			break;
+		}
+	}
+	else {
+		inventory->UnselectItem();
 	}
 }
 
@@ -54,8 +58,80 @@ InventoryBoxButton::~InventoryBoxButton() {
 	delete item;
 }
 
+void InventoryBoxButton::Reset() {
+	pressAvailable = true;
+	SetTogglePress(false);
+	SetTexture(normalTexture);
+}
+
+void InventoryBoxButton::checkCollider(float x, float y) {
+	if (pressAvailable) {
+		if (this->col->isClicked(x, y)) {
+			if (item) {
+				SetTexture(pressTexture);
+				action();
+			}
+			else
+			{
+				SetTexture(normalTexture);
+			}
+		}
+	}
+	else {
+		if (this->col->isClicked(x, y))
+			action();
+	}
+}
+
 void ChangeMouseActionTypeButton::action() {
-	std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
-	MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
-	SetTogglePress(true);
+	if (!IsSelected()) {
+		std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
+		MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
+		SetTogglePress(true);
+	}
+	else {
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->UnselectItem();
+	}
+}
+
+void ChangeMouseActionTypeButton::Reset() {
+	pressAvailable = true;
+	SetTogglePress(false); 
+	SetTexture(normalTexture);
+}
+
+void ChangeMouseActionTypeButton::updateButton(float x, float y)
+{
+	if (togglePressed) {
+		SetTexture(pressTexture);
+	}
+	else if (this->col->isClicked(x, y))
+	{
+		SetTexture(hoverTexture);
+	}
+	else
+	{
+		SetTexture(normalTexture);
+	}
+}
+
+void ChangeMouseActionTypeButton::checkCollider(float x, float y)
+{
+	if (pressAvailable) {
+		if (this->col->isClicked(x, y))
+		{
+			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->UnselectItem();
+			SetTexture(pressTexture);
+			action();
+		}
+		else
+		{
+			SetTexture(normalTexture);
+		}
+	}
+	else {
+		if (col->isClicked(x, y)) {
+			action();
+		}
+	}
 }
