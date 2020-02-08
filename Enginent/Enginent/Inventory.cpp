@@ -3,6 +3,7 @@
 #include "MouseInput.h"
 
 Inventory::Inventory() {
+	triggeredOpen = false;
 	move = false;
 	direction = 1;
 	selectedItem = nullptr;
@@ -58,6 +59,7 @@ void Inventory::Update() {
 
 	move = true;
 	if (IsMouseCollide(popArea, realPos.x, realPos.y)) {
+		triggeredOpen = true;
 		direction = 1;
 	}
 	else {
@@ -81,15 +83,17 @@ void Inventory::Update() {
 	}
 }
 
-void Inventory::UnselectItem() { 
-	std::cout << "unselected item\n";
-	for (auto* ib : InventoryBoxes) {
-		ib->Reset();
+void Inventory::UnselectItem() {
+	if (triggeredOpen) {
+		for (auto* ib : InventoryBoxes) {
+			ib->Reset();
+		}
+		separateButton->Reset();
+		combineButton->Reset();
+		selectedItem = nullptr;
+		MouseInput::GetInstance()->ResetActionType();
+		triggeredOpen = false;
 	}
-	separateButton->Reset();
-	combineButton->Reset();
-	selectedItem = nullptr; 
-	MouseInput::GetInstance()->ResetActionType();
 }
 void Inventory::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();

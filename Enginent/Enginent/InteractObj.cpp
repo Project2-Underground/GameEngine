@@ -80,7 +80,9 @@ void InteractableObj::UseItem(Item* item) {
 
 void InteractableObj::PickUpItem() {
 	if (item) {
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->AddItem(item);
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		gs->GetInventory()->AddItem(item);
+		gs->GetPlayer()->anim->Play("Pickup", false);
 
 		ViewWindow* vw = ViewWindow::GetInstance();
 		vw->Open();

@@ -19,6 +19,7 @@ class Inventory {
 	int direction;
 	float minHeight;
 	float maxHeight;
+	bool triggeredOpen;
 public:
 	Inventory();
 	void Update();

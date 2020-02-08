@@ -28,6 +28,7 @@ Player::Player()
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
 	anim->AddAnimation(pickup);
+	anim->AddAnimation(panic);
 	anim->SetDefaultAnimation("Idle");
 	anim->Play("Idle", true);
 
@@ -48,7 +49,8 @@ void Player::Update()
 		Move();
 		if (!walk)
 		{
-			anim->Play("Idle", true);
+			if(anim->currentAnimation->animationName != "Idle")
+				anim->Play("Idle", true);
 			SoundManager::GetInstance()->stop("Walking");
 			dialogueText->loadText(dialogue, dialogueColor, 18);
 			//dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
@@ -94,8 +96,8 @@ void Player::Move()
 			StopWalking();
 		}
 	}
-	CheckWalkLimit();
 	col->Update();
+	CheckWalkLimit();
 }
 
 void Player::StopWalking() {
