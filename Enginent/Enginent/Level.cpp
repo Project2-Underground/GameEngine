@@ -204,7 +204,6 @@ void BookshelfPuzzle::Render()
 
 void BookshelfPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
-	if(select != nullptr)
 	if (select == nullptr)
 	{
 		for (int i = 0; i < books.size(); i++)
