@@ -85,7 +85,7 @@ GameScreen::GameScreen() {
 	currentLevel = new Level(levels[0]);
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias_idle.png");
-	player->SetSize(230.0f, -350.0f);
+	player->SetSize(337.5f, -834.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());

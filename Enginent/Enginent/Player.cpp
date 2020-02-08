@@ -12,14 +12,18 @@ Player::Player()
 	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
 	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
 	Animation* pickup = new Animation("Pickup", "Texture/Character/Elias_pick.png", true);
+	Animation* panic = new Animation("Panic", "Texture/Character/Elias_panic.png", true);
 	move->SetFrame(4);
 	move->SetFramePeriod(0.25f);
 
-	idle->SetFrame(1);
-	idle->SetFramePeriod(0.0f);
+	idle->SetFrame(2);
+	idle->SetFramePeriod(0.25f);
 	
-	pickup->SetFrame(3);
+	pickup->SetFrame(4);
 	pickup->SetFramePeriod(0.25f);
+
+	panic->SetFrame(3);
+	panic->SetFramePeriod(0.25f);
 
 	anim->AddAnimation(idle);
 	anim->AddAnimation(move);
@@ -28,7 +32,7 @@ Player::Player()
 	anim->Play("Idle", true);
 
 	walk = false;
-	faceLeft = true;
+	faceLeft = false;
 	dialogueText = new TextObject();
 	dialogueColor.r = 255;
 	dialogueColor.b = 255;

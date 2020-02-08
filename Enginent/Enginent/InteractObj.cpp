@@ -99,6 +99,7 @@ OpenObj::OpenObj() {
 
 void OpenObj::SetOpenTexture(std::string openT) {
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
+	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
 }
 
 void OpenObj::SetNextTexture(std::string next) {
