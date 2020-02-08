@@ -54,8 +54,9 @@ public:
 	Collider* col = nullptr;
 	Book(int id, std::string texture, int sizeX, int sizeY, int posX, int posY);
 	~Book();
-	void SetPos(glm::vec3);
+	void UpdatePrevPos();
 	int GetId();
+	glm::vec3 GetPrevPos();
 	bool CheckCollider(int x, int y);
 };
 
@@ -65,20 +66,21 @@ struct Space {
 	Collider* collider;
 	int sizeX = 10;
 	int sizeY = 10;
+	int posX = 0;
+	int posY = 0;
 	int id;
 	bool CheckCollide(Collider*);
-	Space(int id)
+	Space(int id, glm::vec3 pos, int sizeX, int sizeY)
 	{
 		this->id = id;
 		collider = new Collider();
-		collider->setNewPos(glm::vec3(-200, 0, 0));
-		collider->setNewSize(200, -200);
+		collider->setNewPos(pos);
+		collider->setNewSize(sizeX, sizeY);
 		colTemp = new UIObject();
 		colTemp->SetTexture("Texture/Test/white.png");
 		colTemp->SetPosition(collider->getPosition());
-		colTemp->SetSize(100,-100);
+		colTemp->SetSize(sizeX, sizeY);
 	}
-
 	~Space()
 	{
 		delete colTemp;
@@ -88,6 +90,7 @@ struct Space {
 class BookshelfPuzzle : public Puzzle {
 	ImageObject* texture;
 	ImageObject* win;
+	std::vector<ImageObject*> images;
 	std::vector<Space*> log;
 	std::vector<Book*> books;
 	Book* select = nullptr;
@@ -95,11 +98,11 @@ class BookshelfPuzzle : public Puzzle {
 	bool display = true;
 public:
 	BookshelfPuzzle(std::string, int posX, int posY, int sizeX, int sizeY);
-	void Init(std::vector<Book*>, std::vector<Space*>);
+	void Init(std::vector<Book*>, std::vector<Space*>, std::vector<ImageObject*>);
 	void Render();
 	void Update(glm::vec3, glm::vec3);
-	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);
+	~BookshelfPuzzle();
 };
 
 
