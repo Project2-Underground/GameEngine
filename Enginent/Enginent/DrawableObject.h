@@ -25,7 +25,7 @@ public:
 	glm::vec3 getPos();
 	glm::vec3 getSize();
 	void SetSize(float sizeX, float sizeY);
-	void SetPosition(glm::vec3 newPosition);
+	virtual void SetPosition(glm::vec3 newPosition);
 	void Translate(glm::vec3 moveDistance);
 	void SetName(std::string);
 	bool operator<(const DrawableObject& obj)const;

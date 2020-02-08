@@ -42,6 +42,9 @@ void CombinableItem::action() {
 		inventory->RemoveItem(this);
 		inventory->AddItem(combinedItem);
 	}
+	else {
+		std::cout << "Combine fail\n";
+	}
 }
 
 bool Item::operator==(const Item& item) {

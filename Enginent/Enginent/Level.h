@@ -27,8 +27,8 @@ public:
 
 	void Render();
 	virtual void Update();
-	virtual void RightClick(int, int);
-	virtual void LeftClick(int, int);
+	virtual void RightClick(float, float);
+	virtual void LeftClick(float, float);
 	void SetPlayerWalkLimit(Collider*);
 	void SetCameraLimit(Collider*);
 	DrawableObject* FindObject(std::string);
@@ -115,8 +115,8 @@ public:
 	Level(std::string);
 	void Render();
 	void Update();
-	void RightClick(int, int);
-	void LeftClick(int, int);
+	void RightClick(float, float);
+	void LeftClick(float, float);
 
 	void ChangeRoom(std::string roomName, std::string door = " ");
 	void OpenPuzzle(std::string puzzleName);

@@ -26,6 +26,8 @@ protected:
 
 	bool takePic;
 	std::string picName;
+	std::string item_to_use;
+	Item* item;
 public:
 	InteractableObj() {};
 	InteractableObj(vector<std::string> s);
@@ -40,25 +42,29 @@ public:
 	bool CheckPointing(float x, float y);
 	int GetCurrentDialogue() { return currDialogue; }
 	void SetCurrentDialogue(int num) { currDialogue = num; }
+	void SetItemToUse(std::string item_to_unlock);
+	void SetItem(Item* item) { this->item = item; }
+	Item* GetItem() { return item; }
+	void TakePic();
+	void PickUpItem();
+	void UseItem(Item* item);
 
 	InteractTypeList getType() { return interactType; };
 
 	~InteractableObj();
 	bool operator==(const InteractableObj& obj);
+	bool used;
 };
 
 class OpenObj : public InteractableObj {
 	bool open;
 	unsigned int openTexture;
 	unsigned int nextTexture; // after picking up an item
-	Item* item;
 public:
 	OpenObj();
 
 	void SetOpenTexture(std::string);
 	void SetNextTexture(std::string);
-	void SetItem(Item* item) { this->item = item; }
-	Item* GetItem() { return item; }
 	void action();
 
 	~OpenObj();
@@ -75,26 +81,16 @@ public:
 	void action();
 };
 
-class UseItemObj :public InteractableObj {
-protected:
-	std::string item_to_use;
-public:
-	bool used;
-	void SetItemToUse(std::string item_to_unlock);
-};
-
 class NonPlayer : public InteractableObj {
 public:
 	NonPlayer();
 	void action();
 };
 
-class Door : public UseItemObj {
+class Door : public InteractableObj {
 	std::string nextRoom;
 	std::string nextDoor;
 public:
 	Door(std::string, std::string);
-	//Door() {};
 	void action();
-	void UseItem(Item* item);
 };

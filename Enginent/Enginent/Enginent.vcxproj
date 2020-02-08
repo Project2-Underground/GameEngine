@@ -23,11 +23,11 @@
     <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="CombineObject.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Game.h" />
@@ -54,7 +54,6 @@
     <ClInclude Include="TimeSystem.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
     <ClInclude Include="UIObject.h" />
-    <ClInclude Include="ViewWin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\resource\pugixml-1.10\src\pugixml.cpp">
@@ -65,7 +64,6 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="CombineObject.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawableObject.cpp" />

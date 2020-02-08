@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CombineObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DrawableObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,8 +120,8 @@
     <ClInclude Include="TextBox.h">
       <Filter>GameUI</Filter>
     </ClInclude>
-    <ClInclude Include="ViewWin.h">
-      <Filter>GameUI</Filter>
+    <ClInclude Include="Puzzle.h">
+      <Filter>GameUtilities</Filter>
     </ClInclude>
     <ClInclude Include="MouseInput.h">
       <Filter>GameUtilities</Filter>
@@ -135,11 +132,11 @@
     <ClInclude Include="XMLManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InventoryBox.h">
+      <Filter>GameUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CombineObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DrawableObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -21,6 +21,7 @@ public:
 	~ImageObject();
 	void SetTexture(string path);
 	void SetTexture(unsigned int texture);
+	void SetPosition(glm::vec3 newPosition);
 	unsigned int GetTexture();
 	bool IsDisplay() { return display; }
 	void SetDisplay(bool d) { display = d; }

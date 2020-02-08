@@ -2,22 +2,28 @@
 #include "Game.h"
 #include "InfoPhone.h"
 #include "GameViewWindow.h"
+#include "MouseInput.h"
 
-Button::Button(std::string normal, std::string hover, std::string press)
+Button::Button(std::string texture)
 {
-	SetActionTexture(normal, hover, press);
+	pressAvailable = true;
+	togglePressed = false;
+	SetTexture(texture);
+	normalTexture = GetTexture();
+	hoverTexture = normalTexture;
+	pressTexture = normalTexture;
+}
+void Button::SetHoverTexture(std::string texture) {
+	hoverTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
-void Button::SetActionTexture(std::string normal, std::string hover, std::string press) {
-	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
-	normalTexture = renderer->LoadTexture(normal);
-	hoverTexture = renderer->LoadTexture(hover);
-	pressTexture = renderer->LoadTexture(press);
+void Button::SetPressTexture(std::string texture) {
+	pressTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
-void Button::updateButton(int x, int y)
+void Button::updateButton(float x, float y)
 {
-	if (this->col->isClicked((float)x, (float)y))
+	if (this->col->isClicked(x, y))
 	{
 		SetTexture(hoverTexture);
 	}
@@ -32,16 +38,16 @@ void Button::action()
 	//does something
 }
 
-void Button::checkCollider(int x, int y)
+void Button::checkCollider(float x, float y)
 {
-	if (this->col->isClicked((float)x, (float)y))
+	if (this->col->isClicked(x, y))
 	{
 		SetTexture(pressTexture);
 		action();
 	}
 	else
 	{
-		this->SetTexture(normalTexture);
+		SetTexture(normalTexture);
 	}
 }
 
@@ -64,20 +70,9 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
-void PhoneAppsButton::checkCollider(int x, int y) {
-	if (this->col->isClicked((float)x, (float)y)) {
-		action();
-	}
-}
 
 void ActionButton::action() {
 	Phone::GetInstance()->Open();
-}
-
-void ActionButton::checkCollider(int x, int y) {
-	if (this->col->isClicked((float)x, (float)y)) {
-		action();
-	}
 }
 
 void PhoneExitButton::action() {
@@ -98,12 +93,4 @@ void PhoneHomeButton::action() {
 
 void ViewWindowClose::action() {
 	ViewWindow::GetInstance()->Close();
-}
-
-void SeparateButton::action() {
-
-}
-
-void CombineButton::action() {
-
 }

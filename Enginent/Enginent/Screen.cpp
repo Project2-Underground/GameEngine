@@ -87,7 +87,7 @@ GameScreen::GameScreen() {
 	currentLevel = new Level(levels[0]);
 	player = new Player();
 	player->SetTexture("Texture/Character/Elias_idle.png");
-	player->SetSize(230.0f, -350.0f);
+	player->SetSize(337.5f, -834.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
@@ -129,14 +129,14 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
+	inventory->UnselectItem();
 	if (!phone->open)
 		currentLevel->RightClick(world.x, world.y);
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (phone->open) {
-		glm::vec3 tmp = Game::GetInstance()->FindMousePosition(screen.x, screen.y);
-		phone->LeftClick((int)tmp.x, (int)tmp.y);
+		phone->LeftClick(screen.x, screen.y);
 	}
 	else if (viewWin->IsOpen()) {
 		viewWin->LeftClick(screen.x, screen.y);

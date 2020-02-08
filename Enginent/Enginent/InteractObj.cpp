@@ -19,18 +19,21 @@ void InteractableObj::SetDialogue(vector<std::string> s) {
 	dialogue = s;
 }
 
+void InteractableObj::TakePic() {
+	if (takePic) {
+		Phone::GetInstance()->AddPage(NOTE, picName);
+		takePic = false;
+	}
+}
+
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
-	if (takePic) {
-		Phone::GetInstance()->AddPage(NOTE, picName);
-		takePic = false;
-	}
-	//ANIMATION
-	//UPDATE TEXT
+	PickUpItem();
+	TakePic();
 }
 
 void InteractableObj::SetTakePic(std::string pic) {
@@ -62,6 +65,32 @@ bool InteractableObj::operator==(const InteractableObj& obj) {
 	return false;
 }
 
+void InteractableObj::SetItemToUse(std::string item_to_unlock) {
+	this->item_to_use = item_to_unlock;
+	used = false;
+}
+
+void InteractableObj::UseItem(Item* item) {
+	if (item != nullptr && item_to_use == item->name) {
+		std::cout << "item is used and removed from the inventory\n";
+		used = true;
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem(item);
+	}
+}
+
+void InteractableObj::PickUpItem() {
+	if (item) {
+		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->AddItem(item);
+
+		ViewWindow* vw = ViewWindow::GetInstance();
+		vw->Open();
+		vw->SetViewItem(item->GetInventoryTexture());
+
+		item = nullptr;
+		interactType = NORMAL;
+	}
+}
+
 OpenObj::OpenObj() { 
 	interactType = OPEN;
 	open = false; 
@@ -70,6 +99,7 @@ OpenObj::OpenObj() {
 
 void OpenObj::SetOpenTexture(std::string openT) {
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
+	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
 }
 
 void OpenObj::SetNextTexture(std::string next) {
@@ -83,13 +113,10 @@ void OpenObj::action() {
 		if (item)interactType = PICKUP;
 	}
 	else {
-		if (item) {
-			SetTexture(nextTexture);
-			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->AddItem(item);
-			item = nullptr;
-			interactType = NORMAL;
-		}
+		PickUpItem();
+		SetTexture(nextTexture);
 	}
+	TakePic();
 }
 
 OpenObj::~OpenObj() {
@@ -106,10 +133,6 @@ void ViewObj::action() {
 
 	vw->Open();
 	vw->SetViewItem(viewTexture);
+	TakePic();
 	// set description
-}
-
-void UseItemObj::SetItemToUse(std::string item_to_unlock) {
-	this->item_to_use = item_to_unlock;
-	used = false;
 }

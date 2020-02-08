@@ -17,7 +17,7 @@ public:
 
 	void Init(int width, int height);
 	void Render();
-	void LeftClick(int, int);
+	void LeftClick(float, float);
 
 	void SetViewItem(unsigned int texture);
 	void SetText();

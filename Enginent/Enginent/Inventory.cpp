@@ -1,9 +1,11 @@
 #include "Inventory.h"
 #include "Game.h"
+#include "MouseInput.h"
 
 Inventory::Inventory() {
 	move = false;
 	direction = 1;
+	selectedItem = nullptr;
 
 	float width = (float)Game::GetInstance()->winWidth;
 	float height = (float)Game::GetInstance()->winHeight;
@@ -12,7 +14,6 @@ Inventory::Inventory() {
 	tab->SetSize(width, -height * 0.5f);
 	minHeight = -height * 0.5f - tab->getSize().y * -0.5f;
 	maxHeight = minHeight + tab->getSize().y * -0.3f;
-	std::cout << maxHeight << std::endl;
 
 	tab->SetPosition(glm::vec3(0.0f, minHeight, 1.0f));
 	tab->SetTexture("Texture/tmp_inventoryBox.png");
@@ -28,6 +29,7 @@ Inventory::Inventory() {
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
 		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_inventoryBox.png");
+		tmpObj->SetPressTexture("Texture/tmp_inventoryBoxSelected.png");
 		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y - boxOffset, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
 		tmpObj->SetCollder(new Collider(tmpObj));
@@ -35,6 +37,17 @@ Inventory::Inventory() {
 		InventoryBoxes.push_back(tmpObj);
 		x += space;
 	}
+
+	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_separateButton.png", SEPARATE_ACTION);
+	separateButton->SetPressTexture("Texture/tmp_separateButtonPress.png");
+	separateButton->SetPosition(glm::vec3(100.0f, 0, 0));
+	separateButton->SetSize(100.0f, -50.0f);
+	separateButton->SetCollder(new Collider(separateButton));
+	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_combineButton.png", COMBINE_ACTION);
+	combineButton->SetPressTexture("Texture/tmp_combineButtonPress.png");
+	combineButton->SetPosition(glm::vec3(-100.0f, 0, 0));
+	combineButton->SetSize(100.0f, -50.0f);
+	combineButton->SetCollder(new Collider(combineButton));
 }
 
 void Inventory::Update() {
@@ -50,7 +63,7 @@ void Inventory::Update() {
 	else {
 		direction = -1;
 	}
-	if (move) {
+	if (move && !selectedItem) {
 		if (tab->getPos().y >= maxHeight && direction == 1) {
 			move = false;
 			tab->SetPosition(glm::vec3(tab->getPos().x, maxHeight, 1.0f));
@@ -68,11 +81,64 @@ void Inventory::Update() {
 	}
 }
 
+void Inventory::UnselectItem() { 
+	std::cout << "unselected item\n";
+	for (auto* ib : InventoryBoxes) {
+		ib->Reset();
+	}
+	separateButton->Reset();
+	combineButton->Reset();
+	selectedItem = nullptr; 
+	MouseInput::GetInstance()->ResetActionType();
+}
 void Inventory::Render() {
-	Game::GetInstance()->GetRenderer()->Render(tab);
+	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+	renderer->Render(tab);
 	for (UIObject* ib : InventoryBoxes) {
-		Game::GetInstance()->GetRenderer()->Render(ib);
+		renderer->Render(ib);
 		((InventoryBoxButton*)ib)->RenderItem();
+	}
+	renderer->Render(separateButton);
+	renderer->Render(combineButton);
+}
+
+void Inventory::SeparateItem(Item* item) {
+	if (item && dynamic_cast<SeparatableItem*>(item)) {
+		dynamic_cast<SeparatableItem*>(item)->action();
+	}
+	else {
+		std::cout << "Separate fail\n";
+	}
+	MouseInput::GetInstance()->ResetActionType(); 
+	UnselectItem();
+}
+
+void Inventory::CombineItem(Item* item) {
+	if (item) {
+		if (selectedItem) {
+			if (dynamic_cast<CombinableItem*>(selectedItem)) {
+				std::cout << "try combine\n";
+				CombinableItem* c = ((CombinableItem*)selectedItem);
+				c->selectedItem = item;
+				c->action();
+			}
+			else {
+				std::cout << "items cannot be combine\n";
+			}
+			MouseInput::GetInstance()->ResetActionType();
+			UnselectItem();
+		}
+		else {
+			selectedItem = item;
+			std::cout << "selected item to combine\n";
+		}
+	}
+}
+
+void Inventory::SelectItem(Item* item) {
+	if (item) {
+		std::cout << "selected an item\n";
+		selectedItem = item;
 	}
 }
 
@@ -80,10 +146,12 @@ InventoryBoxButton* Inventory::GetInventoryBox(int index) {
 	return InventoryBoxes[index];
 }
 
-void Inventory::LeftClick(int x, int y) {
+void Inventory::LeftClick(float x, float y) {
 	for (auto *ib : InventoryBoxes) {
 		ib->checkCollider(x, y);
 	}
+	separateButton->checkCollider(x, y);
+	combineButton->checkCollider(x, y);
 }
 
 void Inventory::AddItem(Item* item) {
@@ -99,6 +167,7 @@ void Inventory::RemoveItem(Item* item) {
 	for (InventoryBoxButton *ib : InventoryBoxes) {
 		if (ib->GetItem() != nullptr && *(ib->GetItem()) == *item) {
 			ib->RemoveItem();
+			UnselectItem();
 			break;
 		}
 	}
@@ -108,6 +177,8 @@ void Inventory::SetAllBoxesPos(float y) {
 	for (InventoryBoxButton* ib : InventoryBoxes) {
 		ib->SetAllPosition(glm::vec3(ib->getPos().x, y, 1.0f));
 	}
+	separateButton->SetPosition(glm::vec3(separateButton->getPos().x, y + 50.0f, 1.0f));
+	combineButton->SetPosition(glm::vec3(combineButton->getPos().x, y + 50.0f, 1.0f));
 }
 
 Inventory::~Inventory() {

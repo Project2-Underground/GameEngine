@@ -31,17 +31,17 @@ void Room::SetCameraLimit(Collider* col) {
 	cameraLimit = col;
 }
 
-void Room::RightClick(int x, int y) {
+void Room::RightClick(float x, float y) {
 	Game* game = Game::GetInstance();
-	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition(x, y);
+	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition((float)x, (float)y);
 }
 
-void Room::LeftClick(int x, int y) {
+void Room::LeftClick(float x, float y) {
 	Game* game = Game::GetInstance();
 
 	for (int i = 0; i < objects.size(); i++)
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
-			if (ib->CheckCollider(x, y)) 
+			if (ib->CheckCollider((float)x, (float)y))
 				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
 }
 
@@ -311,11 +311,11 @@ void Level::Render() {
 	currentRoom->Render();
 }
 
-void Level::RightClick(int x, int y) {
+void Level::RightClick(float x, float y) {
 	currentRoom->RightClick(x, y);
 }
 
-void Level::LeftClick(int x, int y) {
+void Level::LeftClick(float x, float y) {
 	currentRoom->LeftClick(x, y);
 }
 

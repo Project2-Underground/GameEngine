@@ -17,7 +17,7 @@
 			</Table>
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="448" sizeY="488" posX="-441" posY="-18" type="8" layer="1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
-				<item name="keyCard" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
+				<item name="keyCard" i_texture="Texture/tmp_keyCard.png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png"/>

@@ -9,13 +9,12 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new ViewWindowClose("texture");
+	closeButton = new ViewWindowClose("Texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	viewWindow = new UIObject();
 	display = false;
 
-	viewWindow->SetTexture("Texture/EliasRoom/Elias_Room_Door1.png");
-	closeButton->SetTexture("Texture/EliasRoom/Elias_Room_Bin.png");
+	viewWindow->SetTexture("Texture/tmp_inventoryBox.png");
 }
 
 void ViewWindow::Init(int width, int height) {
@@ -51,9 +50,8 @@ void ViewWindow::Render() {
 	}
 }
 
-void ViewWindow::LeftClick(int x, int y) {
-	glm::vec3 tmp = Game::GetInstance()->FindMousePosition(x, y);
-	closeButton->checkCollider((int)tmp.x, (int)tmp.y);
+void ViewWindow::LeftClick(float x, float y) {
+	closeButton->checkCollider(x, y);
 }
 
 void ViewWindow::Close() {

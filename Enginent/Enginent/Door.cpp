@@ -1,6 +1,7 @@
 #include "InteractObj.h"
 #include "Game.h"
 #include "Camera.h"
+#include "MouseInput.h"
 
 Door::Door(std::string next_room, std::string next_door) {
 	interactType = DOOR;
@@ -10,20 +11,16 @@ Door::Door(std::string next_room, std::string next_door) {
 }
 
 void Door::action() {
-	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
 		// load next room and next door position;
-		((GameScreen*)Game::GetInstance()->GetScreen())->ChangeRoom(nextRoom, nextDoor);
+		gs->ChangeRoom(nextRoom, nextDoor);
+	}
+	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		UseItem(gs->GetInventory()->GetSelectedItem());
 	}
 	else {
 		SoundManager::GetInstance()->playSFX("Locked");
 		this->InteractableObj::action();
-	}
-}
-
-void Door::UseItem(Item* item) {
-	if (item->name == item_to_use) {
-		used = true;
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem((Item*)item);
 	}
 }

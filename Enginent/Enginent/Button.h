@@ -9,42 +9,45 @@ class Button : public UIObject {
 		unsigned int normalTexture;
 		unsigned int hoverTexture;
 		unsigned int pressTexture;
+		bool togglePressed;
+		bool pressAvailable;
 	public:
 		Button() {};
-		Button(std::string, std::string, std::string);
-		void updateButton(int, int);
+		Button(std::string);
+		virtual void updateButton(float, float);
 		virtual void action() = 0;
-		virtual void checkCollider(int x, int y);
+		virtual void checkCollider(float x, float y);
+		void SetTogglePress(bool b) { togglePressed = b; pressAvailable = !b; }
+		bool IsSelected() { return togglePressed; }
 
-		void SetActionTexture(std::string, std::string, std::string);
+		void SetHoverTexture(std::string);
+		void SetPressTexture(std::string);
 };
 
 class Exit_Button : public Button {
 	public:
-		Exit_Button(std::string normal, ::string hover, std::string press) : Button(normal, hover, press) {};
+		Exit_Button(std::string normal, ::string hover, std::string press) : Button(normal) { SetHoverTexture(hover); SetPressTexture(press); }
 		void action();
 };
 
 class SwitchScene_Button : public Button {
 public:
-	SwitchScene_Button(std::string normal, std::string hover, std::string press) : Button(normal, hover, press) {};
+	SwitchScene_Button(std::string normal, std::string hover, std::string press) : Button(normal) { SetHoverTexture(hover); SetPressTexture(press); }
 	void action();
 };
 
 class PhoneAppsButton :public Button {
 	int appType;
 public:
-	PhoneAppsButton(std::string texture) { SetTexture(texture); }
+	PhoneAppsButton(std::string texture) : Button(texture) {}
 	void action();
 	void SetApp(int type) { appType = type; }
-	void checkCollider(int x, int y);
 };
 
 class ActionButton :public Button {
 public:
-	ActionButton(std::string texture) { SetTexture(texture); }
+	ActionButton(std::string texture) : Button(texture) {}
 	void action();
-	void checkCollider(int x, int y);
 };
 
 class PhoneExitButton : public ActionButton {
@@ -71,35 +74,18 @@ public:
 	void action();
 };
 
-class SeparateButton : public ActionButton {
-public:
-	SeparateButton(std::string texture) :ActionButton(texture) {};
-	void action();
-};
-
-class CombineButton : public ActionButton {
-public:
-	CombineButton(std::string texture) :ActionButton(texture) {};
-	void action();
-};
-
 class ViewWindowClose :public ActionButton {
 public:
 	ViewWindowClose(std::string texture) :ActionButton(texture) {}
 	void action();
 };
 
-class InventoryBoxButton : public ActionButton {
-protected:
-	Item* item;
-	UIObject itemDisplay;
+class ChangeMouseActionTypeButton : public ActionButton {
+	int type;
 public:
-	InventoryBoxButton(std::string texture);
+	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type;};
+	void checkCollider(float x, float y);
+	void updateButton(float x, float y);
+	void Reset();
 	void action();
-	void RemoveItem();
-	void RenderItem(); 
-	void SetAllPosition(glm::vec3);
-	Item* GetItem();
-	void SetItem(Item* item);
-	~InventoryBoxButton();
 };
