@@ -68,11 +68,12 @@ void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {
 		if (type == "background") {
 			bg->layer = BACKGROUND_LAYER;
 			r->objects.push_back(bg);
-		}else if (type == "foreground") {
+		}
+		else if (type == "foreground") {
 			bg->layer = FOREGROUND_LAYER;
 			r->foreground.push_back(bg);
 		}
-		
+
 	}
 }
 
@@ -123,9 +124,9 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			}
 		}
 
-		if (child->child("key")) 
+		if (child->child("key"))
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
-		
+
 		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
@@ -225,7 +226,10 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	float posX = node.attribute("posX").as_float();
 	float posY = node.attribute("posY").as_float();
 
-	tmp->SetTexture(texture);
+	if (texture == "NONE")
+		tmp->SetDisplay(false);
+	else
+		tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, -sizeY);
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
 }
