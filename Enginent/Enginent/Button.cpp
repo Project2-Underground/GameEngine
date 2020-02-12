@@ -71,7 +71,7 @@ void PhoneAppsButton::action() {
 }
 
 
-void ActionButton::action() {
+void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
 }
 

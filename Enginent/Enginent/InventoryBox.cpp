@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "MouseInput.h"
 
-InventoryBoxButton::InventoryBoxButton(std::string texture):ActionButton(texture) {
+InventoryBoxButton::InventoryBoxButton(std::string texture):Button(texture) {
 	item = nullptr;
 	itemDisplay.SetSize(25.0f, 25.0f);
 }

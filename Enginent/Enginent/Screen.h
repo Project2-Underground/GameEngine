@@ -53,6 +53,7 @@ class GameScreen :public Screen {
 	Player* player;
 	Phone* phone;
 
+	PhoneOpenButton* phoneIcon;
 	Button* pause;
 	Level* currentLevel;
 	TextBox* dialogueText;
@@ -73,6 +74,7 @@ public:
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void LoadGame(std::string);
+	void UILeftClick();
 
 	Level* GetCurrentLevel() { return currentLevel; }
 	int GetPointedObject(glm::vec3 pos);

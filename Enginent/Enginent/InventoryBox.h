@@ -1,7 +1,7 @@
 #pragma once
 #include "Button.h"
 
-class InventoryBoxButton : public ActionButton {
+class InventoryBoxButton : public Button {
 protected:
 	Item* item;
 	UIObject itemDisplay;

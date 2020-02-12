@@ -35,17 +35,17 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 
 	// init buttons
 	float iconSize = phoneSize.x*0.25f;
-	next = new PhoneNextButton("Texture/EliasRoom/Elias_Room_Door.png");
+	next = new PhoneNextButton("Texture/tmp_inventoryBox.png");
 	next->SetSize(iconSize, -iconSize);
 	next->SetPosition(glm::vec3(phoneSize.x * 0.25 - phonePos.x, phonePos.y + phoneSize.y * -0.25, 1));
 	next->SetCollder(new Collider(next));
 
-	back = new PhoneBackButton("Texture/EliasRoom/Elias_Room_Door.png");
+	back = new PhoneBackButton("Texture/tmp_inventoryBox.png");
 	back->SetPosition(glm::vec3(-phoneSize.x * 0.25 - phonePos.x, phonePos.y + phoneSize.y * -0.25, 1));
 	back->SetSize(iconSize, -iconSize);
 	back->SetCollder(new Collider(back));
 
-	home = new PhoneHomeButton("Texture/EliasRoom/Elias_Room_Door.png");
+	home = new PhoneHomeButton("Texture/tmp_inventoryBox.png");
 	home->SetPosition(glm::vec3(phonePos.x, phonePos.y - phoneSize.y * 0.25, 1));
 	home->SetSize(iconSize, -iconSize);
 	home->SetCollder(new Collider(home));
@@ -134,7 +134,7 @@ Phone* Phone::GetInstance() {
 
 Phone::Phone() {
 	phone = new UIObject();
-	phone->SetTexture("Texture/EliasRoom/Elias_Room_DoorAni.png"); //phone image
+	phone->SetTexture("Texture/tmp_phoneScreen.png"); //phone image
 	float sizeX = 200.0f;
 	float sizeY = 400.0f;
 	phone->SetSize(sizeX, -sizeY);
@@ -143,11 +143,11 @@ Phone::Phone() {
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
 	UIObject* tmp_note = new UIObject();
 	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_i.png");
+	tmp_note->SetTexture("Texture/idle_test.png");
 	app->AddNote(tmp_note);
 	tmp_note = new UIObject();
 	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/EliasRoom/iqpaper_r.png");
+	tmp_note->SetTexture("Texture/idle_test2.png");
 	app->AddNote(tmp_note);
 	notiChat = false;
 	notiNote = false;
@@ -155,19 +155,19 @@ Phone::Phone() {
 
 	float size = 100.0f;
 	// init all buttons
-	noteIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	noteIcon = new PhoneAppsButton("Texture/tmp_inventoryBox.png");
 	noteIcon->SetSize(size, -size);
 	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25, 1));
 	noteIcon->SetApp(NOTE);
 	noteIcon->SetCollder(new Collider(noteIcon));
 	
-	chatIcon = new PhoneAppsButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	chatIcon = new PhoneAppsButton("Texture/tmp_inventoryBox.png");
 	chatIcon->SetSize(size, -size);
 	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25 - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25, 1));
 	chatIcon->SetApp(CHAT);
 	chatIcon->SetCollder(new Collider(chatIcon));
 	
-	exitButton = new PhoneExitButton("Texture/EliasRoom/Elias_Room_DoorAni.png");
+	exitButton = new PhoneExitButton("Texture/tmp_inventoryBox.png");
 	exitButton->SetSize(size, -size);
 	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * -0.25, 1));
 	exitButton->SetCollder(new Collider(exitButton));

@@ -36,6 +36,12 @@ public:
 	void action();
 };
 
+class PhoneOpenButton : public Button {
+public:
+	PhoneOpenButton(std::string texture) : Button(texture) {}
+	void action();
+};
+
 class PhoneAppsButton :public Button {
 	int appType;
 public:
@@ -44,46 +50,40 @@ public:
 	void SetApp(int type) { appType = type; }
 };
 
-class ActionButton :public Button {
+class PhoneExitButton : public Button {
 public:
-	ActionButton(std::string texture) : Button(texture) {}
+	PhoneExitButton(std::string texture) :Button(texture) {};
 	void action();
 };
 
-class PhoneExitButton : public ActionButton {
+class PhoneNextButton : public Button {
 public:
-	PhoneExitButton(std::string texture) :ActionButton(texture) {};
+	PhoneNextButton(std::string texture) :Button(texture) {};
 	void action();
 };
 
-class PhoneNextButton : public ActionButton {
+class PhoneBackButton : public Button {
 public:
-	PhoneNextButton(std::string texture) :ActionButton(texture) {};
+	PhoneBackButton(std::string texture) :Button(texture) {};
 	void action();
 };
 
-class PhoneBackButton : public ActionButton {
+class PhoneHomeButton : public Button {
 public:
-	PhoneBackButton(std::string texture) :ActionButton(texture) {};
+	PhoneHomeButton(std::string texture) :Button(texture) {};
 	void action();
 };
 
-class PhoneHomeButton : public ActionButton {
+class ViewWindowClose :public Button {
 public:
-	PhoneHomeButton(std::string texture) :ActionButton(texture) {};
+	ViewWindowClose(std::string texture) :Button(texture) {}
 	void action();
 };
 
-class ViewWindowClose :public ActionButton {
-public:
-	ViewWindowClose(std::string texture) :ActionButton(texture) {}
-	void action();
-};
-
-class ChangeMouseActionTypeButton : public ActionButton {
+class ChangeMouseActionTypeButton : public Button {
 	int type;
 public:
-	ChangeMouseActionTypeButton(std::string texture, int type) :ActionButton(texture) { this->type = type;};
+	ChangeMouseActionTypeButton(std::string texture, int type) :Button(texture) { this->type = type;};
 	void checkCollider(float x, float y);
 	void updateButton(float x, float y);
 	void Reset();

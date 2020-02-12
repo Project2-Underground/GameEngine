@@ -101,6 +101,12 @@ GameScreen::GameScreen() {
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
+	phoneIcon = new PhoneOpenButton("Texture/tmp_phone.png");
+	phoneIcon->SetSize(100.0f, -100.0f);
+	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
+	phoneIcon->SetCollder(new Collider(phoneIcon));
+
+	UI.push_back(phoneIcon);
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -141,8 +147,15 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	}
 	else {
 		currentLevel->LeftClick(world.x, world.y);
+		inventory->LeftClick(screen.x, screen.y);
+		for (int j = 0; j < UI.size(); j++)
+		{
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+			{
+				button->checkCollider(screen.x, screen.y);
+			}
+		}
 	}
-	inventory->LeftClick(screen.x, screen.y);
 }
 
 void GameScreen::UpdateMouseState(glm::vec3, glm::vec3)
