@@ -104,6 +104,12 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			}
 			interactObj = obj;
 		}break;
+		case PUZZLE: {
+			PuzzleObj* obj = new PuzzleObj();
+			obj->SetPuzzleName(child->child("puzzle").attribute("name").as_string());
+
+			interactObj = obj;
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;

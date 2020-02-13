@@ -50,18 +50,23 @@ public:
 
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
+	map<std::string, Puzzle*> puzzles;
 
 	Player* player;
 	Phone* phone;
 
 	PhoneOpenButton* phoneIcon;
 	Button* pause;
-	Level* currentLevel;
 	TextBox* dialogueText;
+
+	Level* currentLevel;
+	Puzzle* currentPuzzle;
 
 	Inventory* inventory;
 	ViewWindow* viewWin;
 
+	bool PuzzleTime;
+	bool InventoryEnable;
 public:
 	vector<std::string> levels;
 
@@ -75,7 +80,8 @@ public:
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void LoadGame(std::string);
-	void UILeftClick();
+	void OpenPuzzle(std::string);
+	void ClosePuzzle();
 
 	Level* GetCurrentLevel() { return currentLevel; }
 	int GetPointedObject(glm::vec3 pos);
@@ -96,18 +102,17 @@ public:
 	void HandleKey(SDL_Keycode);
 };
 
-class TestScreen : public Screen {
-public:
-	std::vector<UIObject*> UI;
-	UIObject* background;
-	Puzzle* puzzle;
-public:
-	TestScreen();
-	void Render();
-	void Update();
-	void RightClick(glm::vec3, glm::vec3);
-	void LeftClick(glm::vec3, glm::vec3);
-	void HandleKey(SDL_Keycode);
-	void UpdateMouseState(glm::vec3, glm::vec3);
-	~TestScreen();
-};
+//class TestScreen : public Screen {
+//public:
+//	std::vector<UIObject*> UI;
+//	UIObject* background;
+//	PuzzleTemplate* puzzle;
+//public:
+//	TestScreen();
+//	void Render();
+//	void Update();
+//	void RightClick(glm::vec3, glm::vec3);
+//	void LeftClick(glm::vec3, glm::vec3);
+//	void UpdateMouseState(glm::vec3, glm::vec3);
+//	~TestScreen();
+//};

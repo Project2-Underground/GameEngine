@@ -41,6 +41,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Puzzles.h" />
     <ClInclude Include="XMLManager.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
@@ -61,6 +62,7 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="BookshelfPuzzle.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />

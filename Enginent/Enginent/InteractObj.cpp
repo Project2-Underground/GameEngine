@@ -138,3 +138,11 @@ void ViewObj::action() {
 	TakePic();
 	// set description
 }
+
+void PuzzleObj::SetPuzzleName(std::string name) {
+	puzzleName = name;
+}
+
+void PuzzleObj::action() {
+	((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+}

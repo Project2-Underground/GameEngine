@@ -52,7 +52,6 @@ void Player::Update()
 		{
 			if(anim->currentAnimation->animationName != "Idle")
 				anim->Play("Idle", true);
-			SoundManager::GetInstance()->stop("Walking");
 			dialogueText->loadText(dialogue, dialogueColor, 18);
 			//dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 		}
@@ -63,7 +62,7 @@ void Player::Update()
 
 void Player::Move()
 {
-	float walk_sp = WALK_SPEED * (1/TimeSystem::instance()->GetTimeBetweenFrame());
+	float walk_sp = WALK_SPEED * (float)(1/TimeSystem::instance()->GetTimeBetweenFrame());
 	// walk left
 	if (this->pos.x > next_position.x)
 	{
@@ -105,6 +104,7 @@ void Player::Move()
 void Player::StopWalking() {
 	walk = false;
 	next_position = getPos();
+	SoundManager::GetInstance()->stop("Walking");
 }
 
 void Player::CheckWalkLimit() {

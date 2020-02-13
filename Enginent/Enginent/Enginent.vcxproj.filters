@@ -25,6 +25,9 @@
     <Filter Include="GameUI">
       <UniqueIdentifier>{fd4910da-1bfc-4dac-94df-1e96ecf03a6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Puzzles">
+      <UniqueIdentifier>{cd468cde-2ce0-4280-9e42-e6d9b2cb2f91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawableObject.h">
@@ -120,9 +123,6 @@
     <ClInclude Include="TextBox.h">
       <Filter>GameUI</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle.h">
-      <Filter>GameUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="MouseInput.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
@@ -134,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="InventoryBox.h">
       <Filter>GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzles.h">
+      <Filter>Puzzles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="XMLManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BookshelfPuzzle.cpp">
+      <Filter>Puzzles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
-		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: change scene-->
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle-->
 		<interactObj>
 			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4">
 				<dialogue>
@@ -68,7 +68,9 @@
 		</background>
 		<interactObj>
 			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="169" sizeY="308" posX="-1133" posY="139" type="1" layer="2"/>
-			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="395" sizeY="340" posX="1090" posY="113" type="1" layer="2"/>
+			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="395" sizeY="340" posX="1090" posY="113" type="9" layer="2">
+				<puzzle name="BookshelfPuzzle"/>
+			</Bookshelf2>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="171" sizeY="188" posX="-441" posY="76" type="2" layer="2">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png"/>
 			</Gramophone>

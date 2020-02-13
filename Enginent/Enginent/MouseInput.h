@@ -33,6 +33,8 @@ public:
 	void FindMousePosition(float x, float y);
 	void UpdateMouseInput(MouseEvent, int, int);
 	void SetActionEventType(ActionEvent a) { actionType = a; }
+	glm::vec3 GetMouseScreenPosition() { return position_Screen; }
+	glm::vec3 GetMouseWorldPosition() { return position_World; }
 	int GetEvent();
 	void ResetActionType() { actionType = NORMAL_ACTION; }
 	ActionEvent GetActionEvent() { return actionType; }

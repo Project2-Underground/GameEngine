@@ -13,7 +13,8 @@ enum InteractTypeList
 	TALK,
 	CHANGESCENE,
 	SAVE,
-	OPEN
+	OPEN,
+	PUZZLE
 };
 
 class InteractableObj : public ImageObject {
@@ -78,6 +79,14 @@ public:
 	ViewObj() { interactType = VIEW; }
 
 	void SetViewTexture(std::string);
+	void action();
+};
+
+class PuzzleObj : public InteractableObj {
+	std::string puzzleName;
+public:
+	PuzzleObj() { interactType = PUZZLE; }
+	void SetPuzzleName(std::string);
 	void action();
 };
 
