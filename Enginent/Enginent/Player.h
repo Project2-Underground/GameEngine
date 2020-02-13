@@ -8,7 +8,7 @@
 #include "SoundManager.h"
 #include "InteractObj.h"
 
-#define WALK_SPEED 3
+#define WALK_SPEED 40
 #define ACTION_DISTANCE 10.0f
 
 class Player : public ImageObject

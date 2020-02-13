@@ -8,8 +8,8 @@ MenuScreen::MenuScreen() {
 	play->SetSize(300, -120);
 	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
 	Collider* col = new Collider(play);
-	play->SetCollder(col);
 
+	play->SetCollder(col);
 	// setting button
 	setting;
 	// load button
@@ -28,6 +28,8 @@ MenuScreen::MenuScreen() {
 	UI.push_back(background);
 	UI.push_back(play);
 	UI.push_back(quit);
+
+
 }
 
 void MenuScreen::Render() {
@@ -247,4 +249,110 @@ void CutsceneScreen::UpdateMouseState(glm::vec3, glm::vec3)
 
 void CutsceneScreen::HandleKey(SDL_Keycode key) {
 
+}
+
+TestScreen::TestScreen()
+{
+	std::vector<Book*> books1;
+	std::vector<Space*> space1;
+	std::vector<ImageObject* > images;
+
+	background = new UIObject();
+	background->SetTexture("Texture/Puzzle/Puzzle1_Background.png");
+	background->SetSize(1280, -720);
+	UI.push_back(background);
+
+	ImageObject* bg = new ImageObject();
+	bg->SetTexture("Texture/Puzzle/Puzzle1_Background.png");
+	bg->SetSize(1280, -720);
+	images.push_back(bg);
+
+	ImageObject* shelf = new ImageObject();
+	shelf->SetTexture("Texture/Puzzle/Puzzle1_BookShelf.png");
+	shelf->SetPosition(glm::vec3(-213, 0, 1));
+	shelf->SetSize(455, -736);
+	images.push_back(shelf);
+
+	ImageObject* block = new ImageObject();
+	block->SetTexture("Texture/Puzzle/Puzzle1_Boxes.png");
+	block->SetPosition(glm::vec3(358, 8, 1));
+	block->SetSize(358, -417);
+	images.push_back(block);
+
+	Book* book1 = new Book(1, "Texture/Puzzle/Puzzle1_Book1.png", 56, -154, 252, 87);
+	Book* book2 = new Book(2, "Texture/Puzzle/Puzzle1_Book2.png", 56, -154, 352, 87);
+	Book* book3 = new Book(3, "Texture/Puzzle/Puzzle1_Book3.png", 56, -154, 448, 87);
+	Book* book4 = new Book(4, "Texture/Puzzle/Puzzle1_Book4.png", 56, -154, 252, -88);
+	Book* book5 = new Book(5, "Texture/Puzzle/Puzzle1_Book5.png", 56, -154, 448, -88);
+	Book* book6 = new Book(6, "Texture/Puzzle/Puzzle1_Book6.png", 56, -154, 352, -88);
+	Space* s1 = new Space(1, glm::vec3(-185, 93, 0), 57, -155);
+	Space* s2 = new Space(2, glm::vec3(-303, 93, 0), 57, -155);
+	Space* s3 = new Space(3, glm::vec3(-243, 267, 0), 57, -155);
+	Space* s4 = new Space(4, glm::vec3(-242, -85, 0), 57, -155);
+	Space* s5 = new Space(5, glm::vec3(-124, -85, 0), 57, -155);
+	Space* s6 = new Space(6, glm::vec3(-303, -266, 0), 57, -155);
+
+	books1.push_back(book1);
+	books1.push_back(book2);
+	books1.push_back(book3);
+	books1.push_back(book4);
+	books1.push_back(book5);
+	books1.push_back(book6);
+	space1.push_back(s3);
+	space1.push_back(s2);
+	space1.push_back(s4);
+	space1.push_back(s1);
+	space1.push_back(s5);
+	space1.push_back(s6);
+
+	puzzle = new BookshelfPuzzle("Texture/Puzzle/Puzzle1_BookShelf.png", -300, 0, 200, -400);
+	((BookshelfPuzzle* )puzzle)->Init(books1, space1, images);
+	UI.push_back(puzzle);
+
+}
+
+void TestScreen::Render()
+{
+	Game::GetInstance()->GetRenderer()->Render(UI);
+}
+
+void TestScreen::Update()
+{
+
+}
+
+void TestScreen::RightClick(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
+void TestScreen::LeftClick(glm::vec3 screen, glm::vec3 world)
+{
+	if (puzzle->IsDisplay()) {
+		puzzle->LeftClick(screen, world);
+	}
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkCollider(screen.x, screen.y);
+		}
+	}
+}
+
+void TestScreen::HandleKey(SDL_Keycode)
+{
+
+}
+
+void TestScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
+{
+	if(puzzle->IsDisplay())
+	((BookshelfPuzzle*)puzzle)->Update(screen, world);
+}
+
+TestScreen::~TestScreen()
+{
+	for (auto ui : UI)
+		delete ui;
 }

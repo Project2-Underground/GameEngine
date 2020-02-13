@@ -46,10 +46,9 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	currentState = MENUSCREEN;
+	currentState = TESTSCENE;
 	UpdateScreenState();
 	cursorGame = new CursorUI();
-	
 }
 
 void Game::Update()
@@ -83,6 +82,8 @@ void Game::UpdateScreenState() {
 		break;
 	case ENDSCENE:
 		break;
+	case TESTSCENE:
+		currentScreen = new TestScreen();
 	default:
 		break;
 	}
