@@ -29,6 +29,7 @@
 		</interactObj>
 		<doors>
 			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0">
+				<openDoor texture="Texture/EliasRoom/Elias_Room_Door1.png"/>
 				<key name="keyCard"/>
 				<dialogue>
 					<n>Elias</n>
@@ -63,7 +64,7 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="-280" layer="0"/>
+			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallUpper>
 	<MainHallLower left_limit="-1580" right_limit="1580" top_limit="360" bottom_limit="-360">
@@ -84,13 +85,16 @@
 		<!-- separatable = 0; combinable = 1; -->
 		</item>
 		<doors>
+			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="172" sizeY="188" posX="-5" posY="262" next_room="" next_door="" layer="0">
+				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
+			</StairDoor>
 			<LowerStair1 texture="NONE" sizeX="90" sizeY="90" posX="-163" posY="-283" next_room="MainHallUpper" next_door="UpperStair1" layer="0"/>
 			<LowerStair2 texture="NONE" sizeX="90" sizeY="90" posX="149" posY="-283" next_room="MainHallUpper" next_door="UpperStair2" layer="0"/>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="-20" posY="-269" layer="0"/>
+			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallLower>
 </level>

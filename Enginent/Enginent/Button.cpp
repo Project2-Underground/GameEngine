@@ -94,3 +94,7 @@ void PhoneHomeButton::action() {
 void ViewWindowClose::action() {
 	ViewWindow::GetInstance()->Close();
 }
+
+void ClosePuzzleButton::action() {
+	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
+}

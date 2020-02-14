@@ -78,73 +78,66 @@ void Bookshelf::Init(std::vector<Book*> books, std::vector<Space*> spaces, std::
 
 void Bookshelf::Render()
 {
-	if (display)
+	for (int i = 0; i < images.size(); i++)
 	{
-		for (int i = 0; i < images.size(); i++)
-		{
-			Game::GetInstance()->GetRenderer()->Render(images[i]);
-		}
-		for (int j = 0; j < log.size(); j++)
-		{
-			Game::GetInstance()->GetRenderer()->Render(log[j]->colTemp);
-		}
-		for (int i = 0; i < books.size(); i++)
-		{
-			Game::GetInstance()->GetRenderer()->Render(books[i]);
-		}
-		if (pass == true) {
-			Game::GetInstance()->GetRenderer()->Render(win);
-		}
+		Game::GetInstance()->GetRenderer()->Render(images[i]);
 	}
+	for (int i = 0; i < books.size(); i++)
+	{
+		Game::GetInstance()->GetRenderer()->Render(books[i]);
+	}
+	
 }
 
 void Bookshelf::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
-	if (select == nullptr)
-	{
-		for (int i = 0; i < books.size(); i++)
+	if (!pass) {
+		if (select == nullptr)
 		{
-			if (books[i]->col->isClicked(screen.x, screen.y))
+			for (int i = 0; i < books.size(); i++)
 			{
-				select = books[i];
+				if (books[i]->col->isClicked(screen.x, screen.y))
+				{
+					select = books[i];
+				}
+			}
+			for (int j = 0; j < log.size(); j++)
+			{
+				if (log[j]->collider->isClicked(screen.x, screen.y))
+				{
+					select = log[j]->book;
+					log[j]->book = nullptr;
+				}
 			}
 		}
-		for (int j = 0; j < log.size(); j++)
+		else
 		{
-			if (log[j]->collider->isClicked(screen.x, screen.y))
+			bool placed = false;
+			for (int i = 0; i < log.size(); i++)
 			{
-				select = log[j]->book;
-				log[j]->book = nullptr;
+				if (log[i]->collider->isClicked(screen.x, screen.y))
+				{
+					Book* tmp = log[i]->book;
+					log[i]->book = select;
+					select->SetPosition(log[i]->collider->getPosition());
+					select->col->setNewPos(log[i]->collider->getPosition());
+					select->UpdatePrevPos();
+					select = tmp;
+					placed = true;
+					break;
+				}
+			}
+			if (!placed)
+			{
+				select->SetPosition(select->GetPrevPos());
+				select->col->setNewPos(select->GetPrevPos());
+				select = nullptr;
 			}
 		}
 	}
 	else
 	{
-		bool placed = false;
-		for (int i = 0; i < log.size(); i++)
-		{
-			if (log[i]->collider->isClicked(screen.x, screen.y))
-			{
-				Book* tmp = log[i]->book;
-				log[i]->book = select;
-				select->SetPosition(log[i]->collider->getPosition());
-				select->col->setNewPos(log[i]->collider->getPosition());
-				select->UpdatePrevPos();
-				select = tmp;
-				placed = true;
-				break;
-			}
-		}
-		if (!placed)
-		{
-			select->SetPosition(select->GetPrevPos());
-			select->col->setNewPos(select->GetPrevPos());
-			select = nullptr;
-		}
-	}
-	if (pass == true)
-	{
-		display = false;
+		ActionAfterPuzzle();
 	}
 }
 
@@ -168,6 +161,10 @@ void Bookshelf::Update()
 			break;
 		}
 	}
+}
+
+void Bookshelf::ActionAfterPuzzle() {
+	Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->doors["StairDoor"]->Open();
 }
 
 Bookshelf::~Bookshelf()
@@ -241,8 +238,14 @@ BookshelfPuzzle::BookshelfPuzzle()
 	space1.push_back(s5);
 	space1.push_back(s6);
 
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
+	closeButton->SetPosition(glm::vec3(505.0f, 181.0f, 1.0f));
+	closeButton->SetSize(46.0f, -44.0f);
+	closeButton->SetCollder(new Collider(closeButton));
+
 	puzzle = new Bookshelf("Texture/Puzzle/Puzzle1_BookShelf.png", -300, 0, 200, -400);
 	((Bookshelf*)puzzle)->Init(books1, space1, images);
+	UI.push_back(closeButton);
 	UI.push_back(puzzle);
 }
 

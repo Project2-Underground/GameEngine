@@ -17,9 +17,9 @@ Player::Player()
 	move->SetFrame(4);
 	move->SetFramePeriod(0.25f);
 
-	idle->SetFrame(2);
+	idle->SetFrame(4);
 	idle->SetFramePeriod(0.25f);
-	
+
 	pickup->SetFrame(4);
 	pickup->SetFramePeriod(0.25f);
 
@@ -44,7 +44,7 @@ void Player::Update()
 		Move();
 		if (!walk)
 		{
-			if(anim->currentAnimation->animationName != "Idle")
+			if (anim->currentAnimation->animationName != "Idle")
 				anim->Play("Idle", true);
 		}
 	}
@@ -54,7 +54,7 @@ void Player::Update()
 
 void Player::Move()
 {
-	float walk_sp = WALK_SPEED * (float)(1/TimeSystem::instance()->GetTimeBetweenFrame());
+	float walk_sp = WALK_SPEED * (float)(1 / TimeSystem::instance()->GetTimeBetweenFrame());
 	// walk left
 	if (this->pos.x > next_position.x)
 	{

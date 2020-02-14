@@ -95,10 +95,10 @@ void InteractableObj::PickUpItem() {
 	}
 }
 
-OpenObj::OpenObj() { 
+OpenObj::OpenObj() {
 	interactType = OPEN;
-	open = false; 
-	item = nullptr; 
+	open = false;
+	item = nullptr;
 }
 
 void OpenObj::SetOpenTexture(std::string openT) {

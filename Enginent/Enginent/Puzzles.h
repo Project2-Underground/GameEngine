@@ -5,10 +5,11 @@
 
 class PuzzleTemplate : public UIObject {
 public:
+	virtual void Render() {};
 	virtual void Update() {};
 	virtual void LeftClick(glm::vec3, glm::vec3) {};
 	virtual void FinishedPuzzle() {};
-	virtual void Action() {};
+	virtual void ActionAfterPuzzle() {};
 };
 
 class Book : public UIObject {
@@ -65,6 +66,7 @@ public:
 	void Render();
 	void Update();
 	void LeftClick(glm::vec3, glm::vec3);
+	void ActionAfterPuzzle();
 	~Bookshelf();
 };
 

@@ -2,9 +2,9 @@
 #include "Game.h"
 #include "MouseInput.h"
 
-InventoryBoxButton::InventoryBoxButton(std::string texture):Button(texture) {
+InventoryBoxButton::InventoryBoxButton(std::string texture) :Button(texture) {
 	item = nullptr;
-	itemDisplay.SetSize(25.0f, 25.0f);
+	itemDisplay.SetSize(50.0f, -50.0f);
 }
 
 void InventoryBoxButton::SetItem(Item* item) {
@@ -96,7 +96,7 @@ void ChangeMouseActionTypeButton::action() {
 
 void ChangeMouseActionTypeButton::Reset() {
 	pressAvailable = true;
-	SetTogglePress(false); 
+	SetTogglePress(false);
 	SetTexture(normalTexture);
 }
 

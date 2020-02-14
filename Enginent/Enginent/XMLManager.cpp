@@ -171,9 +171,11 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->SetDialogue(dialogues);
 		door->SetCollder(new Collider(door));
 
-		if (child->child("key")) {
+		if (child->child("key"))
 			door->SetItemToUse(child->child("key").attribute("name").as_string());
-		}
+
+		if (child->child("openDoor"))
+			door->SetOpenTexture(child->child("openDoor").attribute("texture").as_string());
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
@@ -182,44 +184,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		r->doors.insert(std::pair<std::string, Door*>(child->name(), door));
 	}
 }
-
-//void XMLManager::GenerateItem(pugi::xml_node room, Room* r) {
-//	pugi::xml_node items = room.child("item");
-//
-//	for (pugi::xml_node_iterator child = items.begin(); child != items.end(); child++) {
-//		Item* item;
-//		//std::cout << "in GenerateItem\n";
-//		std::vector<Item*> resultItems;
-//		// if the item can be separate or combine
-//		if (child->first_child()) {
-//			for (pugi::xml_node_iterator cChild = child->begin(); cChild != child->end(); cChild++) {
-//				Item* tmp = new Item(cChild->name());
-//				tmp->SetInventoryTexture(cChild->attribute("i_texture").as_string());
-//				resultItems.push_back(tmp);
-//			}
-//		}
-//
-//		std::string itemName = child->name();
-//
-//		switch (child->attribute("type").as_int())
-//		{
-//		case SEPARATABLE:
-//			item = new SeparatableItem(itemName, resultItems);
-//			break;
-//		case COMBINABLE:
-//			item = new CombinableItem(itemName, resultItems[0]->name, resultItems[1]);
-//			break;
-//		default:
-//			item = new Item(itemName);
-//			break;
-//		}
-//
-//		std::string i_texture = child->attribute("i_texture").as_string();
-//		item->SetInventoryTexture(i_texture);
-//
-//		r->items.push_back(item);
-//	}
-//}
 
 void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 

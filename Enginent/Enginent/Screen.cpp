@@ -90,7 +90,7 @@ GameScreen::GameScreen() {
 	currentLevel = new Level(levels[0]);
 	player = new Player();
 	//player->SetTexture("Texture/Character/Elias_idle.png");
-	player->SetSize(140.0f, -430.0f);
+	player->SetSize(205.0f, -430.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
@@ -127,7 +127,8 @@ void GameScreen::Render() {
 
 	if (PuzzleTime) {
 		currentPuzzle->Render();
-	}else{
+	}
+	else {
 		currentLevel->Render();
 		renderer->Render(player);
 		renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
@@ -149,7 +150,7 @@ void GameScreen::Update() {
 		currentLevel->Update();
 		player->Update();
 	}
-	if(InventoryEnable)
+	if (InventoryEnable)
 		inventory->Update();
 }
 
@@ -166,9 +167,9 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 		phone->LeftClick(screen.x, screen.y);
 	else if (dialogueText->IsDisplay() == true)
 		dialogueText->SetDisplay(false);
-	else if (PuzzleTime) 
+	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
-	else if (viewWin->IsOpen()) 
+	else if (viewWin->IsOpen())
 		viewWin->LeftClick(screen.x, screen.y);
 	else {
 		currentLevel->LeftClick(world.x, world.y);

@@ -13,7 +13,6 @@ Door::Door(std::string next_room, std::string next_door) {
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
-		// load next room and next door position;
 		gs->ChangeRoom(nextRoom, nextDoor);
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
@@ -23,4 +22,14 @@ void Door::action() {
 		SoundManager::GetInstance()->playSFX("Locked");
 		this->InteractableObj::action();
 	}
+}
+
+void Door::SetOpenTexture(std::string texture) {
+	used = false;
+	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+
+void Door::Open() {
+	used = true;
+	SetTexture(openTexture);
 }
