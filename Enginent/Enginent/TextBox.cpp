@@ -1,21 +1,39 @@
 #include "TextBox.h"
 #include "Game.h"
 
-TextBox::TextBox(int sizeX, int sizeY, int posX, int posY)
-{
-	background = new ImageObject();
-	background->SetTexture("Texture/EliasRoom/Elias_Room_Door1.png");
-	background->SetSize(1280.0f, 200.0f);
-	background->SetPosition(glm::vec3(0.0f, -260.0f, 1.0f));
-	dialogue = new TextObject();
-	dialogue->loadText("Test", textColor, 20);
-	dialogue->SetPosition(glm::vec3(0.0f, -260.0f, 1.0f));
+TextBox* TextBox::_instance = nullptr;
+
+TextBox* TextBox::GetInstance() {
+	if (_instance == nullptr)
+		_instance = new TextBox();
+	return _instance;
 }
 
-void TextBox::setText(std::string name, std::string text)
+TextBox::TextBox()
 {
-	this->name->loadText(name, textColor, 24);
-	this->dialogue->loadText(text, textColor, 20);
+	background = new ImageObject();
+	background->SetTexture("Texture/UI/Textbox.png");
+	background->SetSize(1280, -720);
+	background->SetPosition(glm::vec3(0, 0, 1.0f));
+	name = new TextObject();
+	name->loadText("Elias", nameColor, 30);
+	name->SetPosition(glm::vec3(-400.0f, -115.0f, 1.0f));
+	dialogue = new TextObject();
+	dialogue->loadText("Test", textColor, 24);
+	dialogue->SetPosition(glm::vec3(0.0f, -180.0f, 1.0f));
+}
+
+void TextBox::setText(std::vector<Dialogue> d)
+{
+	this->dialogues = d;
+}
+
+void TextBox::setText(Dialogue d)
+{
+	this->name->loadText(d.name, nameColor, 30);
+	this->dialogue->loadText(d.dialogue, textColor, 24);
+	dialogue->SetPosition(glm::vec3(0, -180, 0));
+	std::cout << d.name << std::endl;
 }
 
 void TextBox::Render()
@@ -23,19 +41,30 @@ void TextBox::Render()
 	if (display)
 	{
 		Game::GetInstance()->GetRenderer()->Render(background);
+		Game::GetInstance()->GetRenderer()->Render(name);
 		Game::GetInstance()->GetRenderer()->Render(dialogue);
 	}
 }
 
-void TextBox::toggleDisplay()
+void TextBox::setTextboxDisplay(bool b)
 {
-	display = !display;
+	display = b;
 }
 
 TextBox::~TextBox()
 {
 	delete dialogue;
 	delete background;
+}
+
+std::vector<Dialogue> TextBox::GetDialogueList()
+{
+	return dialogues;
+}
+
+void TextBox::clickLeft(glm::vec3 pos)
+{
+	
 }
 
 ChoiceBox::ChoiceBox()

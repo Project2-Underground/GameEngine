@@ -11,6 +11,7 @@
 		<interactObj>
 			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4">
 				<dialogue>
+					<n>Elias</n>
 					<d>Guess it is time to do the laundry.</d>
 				</dialogue>
 			</bed>
@@ -30,8 +31,11 @@
 			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0">
 				<key name="keyCard"/>
 				<dialogue>
+					<n>Elias</n>
 					<d>Lock.</d>
+					<n>Elias</n>
 					<d>Seems like it needs a key card to unlock.</d>
+					<n>Elias</n>
 					<d>I need to find a key card.</d>
 				</dialogue>
 			</EliasRoomInnerDoor>

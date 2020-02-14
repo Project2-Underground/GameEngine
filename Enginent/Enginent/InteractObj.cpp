@@ -3,7 +3,7 @@
 #include "GameViewWindow.h"
 #include "InfoPhone.h"
 
-InteractableObj::InteractableObj(vector<std::string> s) {
+InteractableObj::InteractableObj(vector<Dialogue> s) {
 	interactType = NORMAL;
 	dialogue = s;
 }
@@ -15,7 +15,7 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
-void InteractableObj::SetDialogue(vector<std::string> s) {
+void InteractableObj::SetDialogue(vector<Dialogue> s) {
 	dialogue = s;
 }
 
@@ -29,7 +29,8 @@ void InteractableObj::TakePic() {
 void InteractableObj::action() {
 	if (dialogue.size() > 0)
 	{
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
+		//((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
+		TextBox::GetInstance()->setText(dialogue[currDialogue]);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	PickUpItem();

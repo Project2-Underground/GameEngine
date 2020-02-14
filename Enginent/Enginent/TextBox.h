@@ -5,20 +5,44 @@
 #include "UIObject.h"
 #include "TextObject.h"
 
+struct Dialogue
+{
+	std::string name;
+	std::string dialogue;
+	Dialogue(std::string n, std::string d)
+	{
+		name = n;
+		dialogue = d;
+	}
+	Dialogue() 
+	{ 
+		name = " "; 
+		dialogue = " "; 
+	};
+};
+
 class TextBox : public UIObject {
 	private:
 		ImageObject* background;
 		TextObject* dialogue;
 		TextObject* name;
-		SDL_Color textColor = {0, 0, 0, 0};
+		SDL_Color textColor = {255, 255, 255, 0};
+		SDL_Color nameColor = {0, 0, 0, 0 };
 		bool display = true;
+		static TextBox* _instance;
+		std::vector<Dialogue> dialogues;
+	protected:
+		TextBox();
 	public:
-		TextBox(int sizeX, int sizeY, int posX, int posY);
+		static TextBox* GetInstance();
 		~TextBox();
-		void setText(std::string name, std::string text);
-		void setTextColor(SDL_Color color) { textColor = color; }
+		void setText(std::vector<Dialogue>);
+		void setText(Dialogue);
+		void setTextColor(SDL_Color colorN, SDL_Color colorS) { nameColor = colorN; textColor = colorS; }
 		void Render();
-		void toggleDisplay();
+		void setTextboxDisplay(bool b);
+		void clickLeft(glm::vec3);
+		std::vector<Dialogue> GetDialogueList();
 };
 
 class ChoiceBox : UIObject {
