@@ -1,6 +1,7 @@
 #include "XMLManager.h"
 #include "Item.h"
 #include "Game.h"
+#include "TextBox.h"
 
 #include <iostream>
 
@@ -86,52 +87,55 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 		switch (type)
 		{
-		case VIEW: {
-			ViewObj* obj = new ViewObj();
-			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
-			// set description
-			interactObj = obj;
-		}break;
-		case OPEN: {
-			OpenObj* obj = new OpenObj();
-			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
-			if (child->child("item")) {
-				obj->SetNextTexture(child->child("item").attribute("texture").as_string());
-				Item* item = new Item(child->child("item").attribute("name").as_string());
-				item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
-				obj->SetItem(item);
-			}
-			interactObj = obj;
-		}break;
-		default: {
-			interactObj = new InteractableObj();
-		}break;
+			case VIEW: {
+				ViewObj* obj = new ViewObj();
+				obj->SetViewTexture(child->child("view").attribute("texture").as_string());
+				// set description
+				interactObj = obj;
+			}break;
+			case OPEN: {
+				OpenObj* obj = new OpenObj();
+				obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
+				if (child->child("item")) {
+					obj->SetNextTexture(child->child("item").attribute("texture").as_string());
+					Item* item = new Item(child->child("item").attribute("name").as_string());
+					item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
+					obj->SetItem(item);
+				}
+				interactObj = obj;
+			}break;
+			default: {
+				interactObj = new InteractableObj();
+			}break;
 		}
 
-		if (child->child("picture"))
-			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
+			if (child->child("picture"))
+				interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
 
 
-		interactObj->object_name = child->name();
-		CreateObject(interactObj, *child);
+			interactObj->object_name = child->name();
+			CreateObject(interactObj, *child);
 
-		std::vector<std::string> dialogues;
+			std::vector<Dialogue> dialogues;
+			pugi::xml_node_iterator n;
 
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				dialogues.push_back(d->child_value());
+			if (pugi::xml_node dialogue = child->child("dialogue")) {
+				for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+					n = d;
+					d++;
+					dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+				}
 			}
-		}
 
-		if (child->child("key")) 
-			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
+			if (child->child("key")) 
+				interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 		
-		interactObj->SetDialogue(dialogues);
-		interactObj->SetCollder(new Collider(interactObj));
-		interactObj->layer = OBJECT_LAYER;
-		interactObj->subLayer = child->attribute("layer").as_int();
+			interactObj->SetDialogue(dialogues);
+			interactObj->SetCollder(new Collider(interactObj));
+			interactObj->layer = OBJECT_LAYER;
+			interactObj->subLayer = child->attribute("layer").as_int();
 
-		r->objects.push_back(interactObj);
+			r->objects.push_back(interactObj);
 	}
 }
 
@@ -147,11 +151,13 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
-		std::vector<std::string> dialogues;
-
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
 		if (pugi::xml_node dialogue = child->child("dialogue")) {
 			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				dialogues.push_back(d->child_value());
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
 			}
 		}
 

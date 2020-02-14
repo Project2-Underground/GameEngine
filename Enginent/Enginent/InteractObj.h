@@ -3,6 +3,7 @@
 #include "ImageObject.h"
 #include "Collider.h"
 #include "Item.h"
+#include "TextBox.h"
 
 enum InteractTypeList
 {
@@ -19,7 +20,7 @@ enum InteractTypeList
 class InteractableObj : public ImageObject {
 protected:
 	InteractTypeList interactType = NORMAL;
-	vector<std::string> dialogue;
+	vector<Dialogue> dialogue;
 	int currDialogue = 0;
 	Collider* col;
 	std::string interact_sound = "";
@@ -30,11 +31,11 @@ protected:
 	Item* item;
 public:
 	InteractableObj() {};
-	InteractableObj(vector<std::string> s);
+	InteractableObj(vector<Dialogue> s);
 
 	virtual void action();
 	void SetSound(std::string);
-	void SetDialogue(vector<std::string> s);
+	void SetDialogue(vector<Dialogue> s);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);

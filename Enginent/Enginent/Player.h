@@ -26,7 +26,6 @@ public:
 	void SetNextPosition(float x, float y);
 	void SetCollder(Collider* n_col);
 	void SetWalkLimit(Collider* limit);
-	void SetDialogue(string dialogue);
 
 	void Move();
 	void StopWalking();
@@ -35,13 +34,9 @@ public:
 	void CheckWalkLimit();
 
 	Collider* col;
-	TextObject* createDialogueText();
-	TextObject* dialogueText;
 	glm::vec3 next_position;
 private:
 	Collider* walkLimit;
 	InteractableObj* target;
-	SDL_Color dialogueColor;
-	string dialogue;
 };
 
