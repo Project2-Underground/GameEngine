@@ -30,6 +30,7 @@ protected:
 	std::string picName;
 	std::string item_to_use;
 	Item* item;
+
 public:
 	InteractableObj() {};
 	InteractableObj(vector<Dialogue> s);

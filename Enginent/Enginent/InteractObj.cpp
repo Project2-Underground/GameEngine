@@ -31,6 +31,7 @@ void InteractableObj::action() {
 	{
 		//((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
 		TextBox::GetInstance()->setText(dialogue[currDialogue]);
+		TextBox::GetInstance()->SetDisplay(true);
 		currDialogue = (++currDialogue) % dialogue.size();
 	}
 	PickUpItem();

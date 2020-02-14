@@ -25,15 +25,16 @@ TextBox::TextBox()
 
 void TextBox::setText(std::vector<Dialogue> d)
 {
+	this->display = true;
 	this->dialogues = d;
 }
 
 void TextBox::setText(Dialogue d)
 {
+	this->display = true;
 	this->name->loadText(d.name, nameColor, 30);
 	this->dialogue->loadText(d.dialogue, textColor, 24);
 	dialogue->SetPosition(glm::vec3(0, -180, 0));
-	std::cout << d.name << std::endl;
 }
 
 void TextBox::Render()

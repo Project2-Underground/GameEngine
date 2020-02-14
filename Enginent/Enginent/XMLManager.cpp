@@ -122,11 +122,14 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
-		std::vector<std::string> dialogues;
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
 
 		if (pugi::xml_node dialogue = child->child("dialogue")) {
 			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				dialogues.push_back(d->child_value());
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
 			}
 		}
 
@@ -154,11 +157,14 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
-		std::vector<std::string> dialogues;
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
 
 		if (pugi::xml_node dialogue = child->child("dialogue")) {
 			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				dialogues.push_back(d->child_value());
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
 			}
 		}
 

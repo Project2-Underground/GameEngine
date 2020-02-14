@@ -35,12 +35,6 @@ Player::Player()
 
 	walk = false;
 	faceLeft = false;
-	dialogueText = new TextObject();
-	dialogueColor.r = 255;
-	dialogueColor.b = 255;
-	dialogueColor.g = 255;
-	dialogueColor.a = 0;
-	dialogue = " ";
 }
 
 void Player::Update()
@@ -52,8 +46,6 @@ void Player::Update()
 		{
 			if(anim->currentAnimation->animationName != "Idle")
 				anim->Play("Idle", true);
-			dialogueText->loadText(dialogue, dialogueColor, 18);
-			//dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
 		}
 	}
 	anim->Update();
@@ -140,7 +132,6 @@ void Player::SetNextPosition(float x, float y)
 	{
 		next_position = glm::vec3(x, y, 1);
 		walk = true;
-		SetDialogue(" ");
 		if (!(anim->currentAnimation->animationName == "Move"))
 			anim->Play("Move", true);
 	}
@@ -157,7 +148,6 @@ void Player::SetNextPosition(glm::vec3 realPos)
 		SoundManager::GetInstance()->playSound("Walking", true);
 	}
 	walk = true;
-	SetDialogue(" ");
 	if (!(anim->currentAnimation->animationName == "Move"))
 		anim->Play("Move", true);
 }
@@ -171,21 +161,7 @@ void Player::SetWalkLimit(Collider* limit) {
 	walkLimit = limit;
 }
 
-TextObject* Player::createDialogueText()
-{
-	dialogueText->loadText(dialogue, dialogueColor, 18);
-	dialogueText->SetPosition(glm::vec3(0.0f, -220.0f, 1.0f));
-	return dialogueText;
-}
-
-void Player::SetDialogue(string dialogue)
-{
-	this->dialogue = dialogue;
-}
-
 Player::~Player() {
 	if (col != nullptr)
 		delete col;
-	if (dialogueText != nullptr)
-		delete dialogueText;
 }
