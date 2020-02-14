@@ -34,7 +34,7 @@ void TextBox::setText(Dialogue d)
 	this->display = true;
 	this->name->loadText(d.name, nameColor, 30);
 	this->dialogue->loadText(d.dialogue, textColor, 24);
-	dialogue->SetPosition(glm::vec3(0, -180, 0));
+	dialogue->SetPosition(glm::vec3((-450 + (float)((d.dialogue.size() * 10) / 2)), -180, 0));
 }
 
 void TextBox::Render()
