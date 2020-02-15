@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "XMLManager.h"
 #include "Game.h"
+#include "TextBox.h"
 
 void Room::Render() {
 	// render objects
@@ -32,7 +33,11 @@ void Room::SetCameraLimit(Collider* col) {
 
 void Room::RightClick(float x, float y) {
 	Game* game = Game::GetInstance();
-	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition((float)x, (float)y);
+	TextBox* textbox = TextBox::GetInstance();
+	if (textbox->IsDisplay())
+		textbox->SetDisplay(false);
+	else
+		((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition((float)x, (float)y);
 }
 
 void Room::LeftClick(float x, float y) {
