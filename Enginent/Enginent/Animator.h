@@ -11,6 +11,7 @@ private:
 	bool loop;
 public:
 	Animation* currentAnimation;
+	bool IsPlaying(std::string);
 	void SetDefaultAnimation(std::string animationName);		// usually idle animation
 	void Play(std::string animationName, bool loop);
 	void Update();

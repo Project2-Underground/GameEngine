@@ -42,6 +42,11 @@ void Animator::AddAnimation(Animation* animation) {
 	animations[animation->animationName] = animation;
 }
 
+bool Animator::IsPlaying(std::string name) {
+	if (!currentAnimation)
+		return false;
+	return (currentAnimation->animationName == name);
+}
 
 Animator::~Animator() {
 	std::map<std::string, Animation*>::iterator it;
