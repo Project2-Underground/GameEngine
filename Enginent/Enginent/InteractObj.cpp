@@ -88,7 +88,7 @@ void InteractableObj::PickUpItem() {
 
 		ViewWindow* vw = ViewWindow::GetInstance();
 		vw->Open();
-		vw->SetViewItem(item->GetInventoryTexture());
+		vw->SetViewItem(item->GetViewTexture());
 
 		item = nullptr;
 		interactType = NORMAL;

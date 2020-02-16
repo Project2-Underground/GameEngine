@@ -135,8 +135,8 @@ Phone* Phone::GetInstance() {
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/tmp_phoneScreen.png"); //phone image
-	float sizeX = 200.0f;
-	float sizeY = 400.0f;
+	float sizeX = 300.0f;
+	float sizeY = 600.0f;
 	phone->SetSize(sizeX, -sizeY);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
@@ -153,7 +153,7 @@ Phone::Phone() {
 	notiNote = false;
 	open = false;
 
-	float size = 50.0f;
+	float size = sizeX*.25f;
 	// init all buttons
 	noteIcon = new PhoneAppsButton("Texture/tmp_noteIcon.png");
 	noteIcon->SetSize(size, -size);

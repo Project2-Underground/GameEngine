@@ -20,7 +20,7 @@ ViewWindow::ViewWindow() {
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
 	viewWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
-	viewItem->SetSize(viewWindow->getSize().x * 0.5f, viewWindow->getSize().y * 0.6f);
+	viewItem->SetSize(540, -540);
 	viewItem->SetPosition(glm::vec3(viewWindow->getPos().x, viewWindow->getPos().y + -viewItem->getSize().y * 0.2f, 0.0f));
 	closeButton->SetSize(viewWindow->getSize().x * 0.5f, viewWindow->getSize().y * 0.1f);
 	closeButton->SetPosition(glm::vec3(viewWindow->getPos().x, viewWindow->getPos().y - -viewWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));

@@ -115,7 +115,13 @@ GameScreen::GameScreen() {
 
 	dialogueText = TextBox::GetInstance();
 
+	Button* exitButton = new Exit_Button("Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png");
+	exitButton->SetSize(60, -60);
+	exitButton->SetPosition(glm::vec3(600, 300, 1));
+	exitButton->SetCollder(new Collider(exitButton));
+
 	UI.push_back(phoneIcon);
+	UI.push_back(exitButton);
 }
 
 void GameScreen::LoadGame(std::string filename) {

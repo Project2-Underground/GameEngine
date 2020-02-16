@@ -100,6 +100,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 				obj->SetNextTexture(child->child("item").attribute("texture").as_string());
 				Item* item = new Item(child->child("item").attribute("name").as_string());
 				item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
+				item->SetViewTexture(child->child("item").attribute("v_texture").as_string());
 				obj->SetItem(item);
 			}
 			interactObj = obj;
