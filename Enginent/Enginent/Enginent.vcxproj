@@ -42,6 +42,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Puzzles.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="XMLManager.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />

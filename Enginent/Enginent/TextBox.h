@@ -4,22 +4,7 @@
 #include <vector>
 #include "UIObject.h"
 #include "TextObject.h"
-
-struct Dialogue
-{
-	std::string name;
-	std::string dialogue;
-	Dialogue(std::string n, std::string d)
-	{
-		name = n;
-		dialogue = d;
-	}
-	Dialogue() 
-	{ 
-		name = " "; 
-		dialogue = " "; 
-	};
-};
+#include "Script.h"
 
 class TextBox : public UIObject {
 	private:
@@ -36,13 +21,12 @@ class TextBox : public UIObject {
 	public:
 		static TextBox* GetInstance();
 		~TextBox();
-		void setText(std::vector<Dialogue>);
+		void setDialogue_vec(std::vector<Dialogue>);
 		void setText(Dialogue);
 		void setTextColor(SDL_Color colorN, SDL_Color colorS) { nameColor = colorN; textColor = colorS; }
 		void Render();
 		void setTextboxDisplay(bool b);
 		void clickLeft(glm::vec3);
-		std::vector<Dialogue> GetDialogueList();
 };
 
 class ChoiceBox : UIObject {

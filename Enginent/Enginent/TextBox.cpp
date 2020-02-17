@@ -23,7 +23,7 @@ TextBox::TextBox()
 	dialogue->SetPosition(glm::vec3(0.0f, -180.0f, 1.0f));
 }
 
-void TextBox::setText(std::vector<Dialogue> d)
+void TextBox::setDialogue_vec(std::vector<Dialogue> d)
 {
 	this->display = true;
 	this->dialogues = d;
@@ -56,11 +56,6 @@ TextBox::~TextBox()
 {
 	delete dialogue;
 	delete background;
-}
-
-std::vector<Dialogue> TextBox::GetDialogueList()
-{
-	return dialogues;
 }
 
 void TextBox::clickLeft(glm::vec3 pos)

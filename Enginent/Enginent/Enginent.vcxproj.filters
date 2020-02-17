@@ -138,6 +138,9 @@
     <ClInclude Include="Puzzles.h">
       <Filter>Puzzles</Filter>
     </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp">
