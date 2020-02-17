@@ -1,21 +1,22 @@
 #pragma once
-#include "ImageObject.h"
+#include "InteractObj.h"
 #include "UIObject.h"
 
 class CursorUI : public UIObject {
 	private:
-		ImageObject* CS_Normal;
-		ImageObject* CS_Chat;
-		ImageObject* CS_Pick;
-		ImageObject* CS_Door;
-		ImageObject* CS_View;
-		ImageObject* CS_Save;
-		bool enable = false;
+		unsigned int CS_Normal;
+		unsigned int CS_Chat;
+		unsigned int CS_Pick;
+		unsigned int CS_Door;
+		unsigned int CS_View;
+		unsigned int CS_Save;
+		unsigned int CS_Stair;
+		bool enable;
 
 	public:
 		CursorUI();
 		~CursorUI();
 		void updateCursor();
-		void setCursor(int type);
+		void setCursor(InteractTypeList);
 		void enableChange(bool);
 };

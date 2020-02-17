@@ -1,75 +1,74 @@
 #include "Cursor.h"
 #include "Game.h"
+#include "MouseInput.h"
 
 CursorUI::CursorUI() {
-	CS_Normal = new ImageObject();
-	CS_Normal->SetTexture("Texture/UI/Cursor/Normal_Cursor.png");
-	CS_Chat = new ImageObject();
-	CS_Chat->SetTexture("Texture/UI/Cursor/Chat_cursor.png");
-	CS_Door = new ImageObject();
-	CS_Door->SetTexture("Texture/UI/Cursor/Move_cursor.png");
-	CS_Pick = new ImageObject();
-	CS_Pick->SetTexture("Texture/UI/Cursor/Pickup_cursor.png");
-	CS_View = new ImageObject();
-	CS_View->SetTexture("Texture/UI/Cursor/View_cursor.png");
-	CS_Save = new ImageObject();
-	CS_Save->SetTexture("Texture/UI/Cursor/Save_cursor.png");
+	GLRenderer *renderer = Game::GetInstance()->GetRenderer();
+	CS_Normal = renderer->LoadTexture("Texture/UI/Cursor/Normal_Cursor.png");
+	CS_Chat = renderer->LoadTexture("Texture/UI/Cursor/Chat_cursor.png");
+	CS_Door = renderer->LoadTexture("Texture/UI/Cursor/Move_cursor.png");
+	CS_Pick = renderer->LoadTexture("Texture/UI/Cursor/Pickup_cursor.png");
+	CS_View = renderer->LoadTexture("Texture/UI/Cursor/View_cursor.png");
+	CS_Save = renderer->LoadTexture("Texture/UI/Cursor/Save_cursor.png");
+	CS_Stair = renderer->LoadTexture("Texture/tmp_stairsSign.png");
+	enable = true;
 
-	this->SetTexture(((CursorUI*)CS_Normal)->texture);
+	this->SetTexture(CS_Normal);
 	this->SetSize(25, -25);
 	this->SetPosition(glm::vec3(0, 0, 1));
 }
 
 CursorUI::~CursorUI() {
-	delete CS_Normal;
-	delete CS_Chat;
-	delete CS_Pick;
-	delete CS_Door;
-	delete CS_View;
-	delete CS_Save;
+
 }
 
 void CursorUI::updateCursor()
 {
 	Game* game = Game::GetInstance();
-	int mouseX;
-	int mouseY;
-	SDL_GetMouseState(&mouseX, &mouseY);
-	glm::vec3 realPos = game->FindMousePosition((int)(mouseX + (this->getSize().x / 2)), (int)(mouseY - (this->getSize().y / 2)));
-	this->SetPosition(realPos);
-	setCursor(game->GetScreen()->GetPointedObject(realPos));
+	MouseInput* m = MouseInput::GetInstance();
+	//int mouseX, mouseY;
+	//SDL_GetMouseState(&mouseX, &mouseY);
+	//glm::vec3 realPos = game->FindMousePosition((int)(mouseX + (this->getSize().x / 2)), (int)(mouseY - (this->getSize().y / 2)));
+	glm::vec3 mousePosition = m->GetMouseScreenPosition();
+	this->SetPosition(mousePosition);
+	//std::cout << "Update Cursor\n";
+	glm::vec3 mouseSpacePosition = m->GetMouseWorldPosition();
+	setCursor(game->GetScreen()->GetPointedObject(mouseSpacePosition));
 }
 
-void CursorUI::setCursor(int type)
+void CursorUI::setCursor(InteractTypeList type)
 {
 	if (enable)
 	{
+		//std::cout << "in\n";
 		switch (type)
 		{
 			case InteractTypeList::NORMAL:
-				this->SetTexture(((CursorUI*)CS_View)->texture);
+				this->SetTexture(CS_Normal);
 				break;
 			case InteractTypeList::TALK:
-				this->SetTexture(((CursorUI*)CS_Chat)->texture);
+				this->SetTexture(CS_Chat);
 				break;
-			case InteractTypeList::CHANGESCENE:
-				this->SetTexture(((CursorUI*)CS_Door)->texture);
+			case InteractTypeList::DOOR:
+				this->SetTexture(CS_Door);
 				break;
 			case InteractTypeList::PICKUP:
-				this->SetTexture(((CursorUI*)CS_Pick)->texture);
+				this->SetTexture(CS_Pick);
 				break;
 			case InteractTypeList::VIEW:
-				this->SetTexture(((CursorUI*)CS_View)->texture);
+				this->SetTexture(CS_View);
 				break;
 			case InteractTypeList::SAVE:
-				this->SetTexture(((CursorUI*)CS_Save)->texture);
+				this->SetTexture(CS_Save);
+				break;
+			case InteractTypeList::STAIR:
+				this->SetTexture(CS_Stair);
 				break;
 			default:
-				this->SetTexture(((CursorUI*)CS_Normal)->texture);
+				this->SetTexture(CS_Normal);
 				break;
 		}
 	}
-
 }
 
 void CursorUI::enableChange(bool e)

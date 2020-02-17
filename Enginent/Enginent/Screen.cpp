@@ -164,7 +164,7 @@ void GameScreen::Update() {
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 	if (!PuzzleTime) {
 		inventory->UnselectItem();
-		if (!phone->open && !player->anim->IsPlaying("Pickup"))
+		if (!phone->open && !player->anim->IsPlaying("Pickup") && !viewWin->IsOpen())
 			currentLevel->RightClick(world.x, world.y);
 		else if (dialogueText->IsDisplay())
 		{
@@ -212,16 +212,18 @@ void GameScreen::ChangeRoom(std::string room, std::string door) {
 	currentLevel->ChangeRoom(room, door);
 }
 
-int GameScreen::GetPointedObject(glm::vec3 pos) {
+InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
 	std::vector<DrawableObject*>* objects = currentLevel->Getobjects();
 	for (int i = (int)objects->size() - 1; i >= 0; i--)
 	{
-		if (dynamic_cast<InteractableObj*>((*objects)[i]) && dynamic_cast<InteractableObj*>((*objects)[i])->CheckPointing(pos.x, pos.y))
-		{
-			return dynamic_cast<InteractableObj*>((*objects)[i])->getType();
-		}
+		if (InteractableObj* obj = dynamic_cast<InteractableObj*>((*objects)[i]))
+			if(obj->CheckPointing(pos.x, pos.y))
+			{
+				//std::cout << obj->object_name << ", " << obj->getType() <<  std::endl;
+				return obj->getType();
+			}
 	}
-	return (int)NORMAL;
+	return NORMAL;
 }
 
 void GameScreen::OpenPuzzle(std::string name) {
@@ -277,6 +279,9 @@ GameScreen::~GameScreen() {
 
 	for (auto ui : UI)
 		delete ui;
+
+	delete inventory;
+	delete viewWin;
 }
 
 /*CUTSCENE*/

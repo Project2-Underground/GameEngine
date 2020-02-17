@@ -45,7 +45,7 @@ void Room::LeftClick(float x, float y) {
 
 	for (int i = 0; i < objects.size(); i++)
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
-			if (ib->CheckCollider((float)x, (float)y))
+			if (ib->CheckCollider((float)x, (float)y)) 
 				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
 }
 

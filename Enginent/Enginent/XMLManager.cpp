@@ -111,6 +111,9 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 			interactObj = obj;
 		}break;
+		case SAVE: {
+			interactObj = new SaveObj();
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
@@ -180,6 +183,9 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
+
+		if (child->attribute("stair"))
+			door->SetInteractType(STAIR);
 
 		r->objects.push_back(door);
 		r->doors.insert(std::pair<std::string, Door*>(child->name(), door));
@@ -376,10 +382,10 @@ void XMLManager::SaveGameOptions() {
 	Game* game = Game::GetInstance();
 	pugi::xml_document gameOption;
 
-	gameOption.append_child("Options").append_child("BG_music").append_attribute("mute").set_value(game->muteBG);
-	gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
+	//gameOption.append_child("Options").append_child("BG_music").append_attribute("mute").set_value(game->muteBG);
+	//gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
 }
 
 XMLManager::~XMLManager() {
-	delete _instance;
+
 }

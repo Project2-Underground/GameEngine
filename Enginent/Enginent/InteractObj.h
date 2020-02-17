@@ -15,7 +15,8 @@ enum InteractTypeList
 	CHANGESCENE,
 	SAVE,
 	OPEN,
-	PUZZLE
+	PUZZLE,
+	STAIR
 };
 
 class InteractableObj : public ImageObject {
@@ -44,13 +45,14 @@ public:
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
 	int GetCurrentDialogue() { return currDialogue; }
+	void SetInteractType(InteractTypeList type) { interactType = type; }
 	void SetCurrentDialogue(int num) { currDialogue = num; }
 	void SetItemToUse(std::string item_to_unlock);
 	void SetItem(Item* item) { this->item = item; }
 	Item* GetItem() { return item; }
 	void TakePic();
 	void PickUpItem();
-	void UseItem(Item* item);
+	virtual void UseItem(Item* item);
 
 	InteractTypeList getType() { return interactType; };
 
@@ -106,5 +108,11 @@ public:
 	Door(std::string, std::string);
 	void SetOpenTexture(std::string texture);
 	void Open();
+	void action();
+};
+
+class SaveObj : public InteractableObj {
+public:
+	SaveObj() { interactType = SAVE; }
 	void action();
 };
