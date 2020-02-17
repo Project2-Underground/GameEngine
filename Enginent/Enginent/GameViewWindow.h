@@ -4,6 +4,7 @@
 
 class ViewWindow {
 	bool display;
+	bool trigger;
 	static ViewWindow* instance;
 	UIObject* viewItem;
 	UIObject* viewWindow;
@@ -15,6 +16,7 @@ public:
 	ViewWindow();
 	~ViewWindow();
 
+	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);

@@ -25,8 +25,6 @@ GLRenderer* Game::GetRenderer()
 
 void Game::Init(int width, int height)
 {
-	muteBG = false;
-	muteSFX = false;
 	winWidth = width;
 	winHeight = height;
 	renderer = new GLRenderer(width, height);

@@ -49,9 +49,7 @@ bool InteractableObj::CheckCollider(float x, float y) {
 bool InteractableObj::CheckPointing(float x, float y)
 {
 	if (this->col->isClicked(x, y))
-	{
 		return true;
-	}
 	return false;
 }
 
@@ -96,7 +94,7 @@ void InteractableObj::PickUpItem() {
 }
 
 OpenObj::OpenObj() {
-	interactType = OPEN;
+	interactType = PICKUP;
 	open = false;
 	item = nullptr;
 }
@@ -115,6 +113,7 @@ void OpenObj::action() {
 		open = true;
 		SetTexture(openTexture);
 		if (item)interactType = PICKUP;
+		else interactType = NORMAL;
 	}
 	else {
 		PickUpItem();
@@ -147,4 +146,8 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 
 void PuzzleObj::action() {
 	((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+}
+
+void SaveObj::action() {
+	// open save window
 }

@@ -111,7 +111,7 @@ void Inventory::SeparateItem(Item* item) {
 		dynamic_cast<SeparatableItem*>(item)->action();
 	}
 	else {
-		std::cout << "Separate fail\n";
+		//std::cout << "Separate fail\n";
 	}
 	MouseInput::GetInstance()->ResetActionType(); 
 	UnselectItem();
@@ -121,27 +121,27 @@ void Inventory::CombineItem(Item* item) {
 	if (item) {
 		if (selectedItem) {
 			if (dynamic_cast<CombinableItem*>(selectedItem)) {
-				std::cout << "try combine\n";
+				//std::cout << "try combine\n";
 				CombinableItem* c = ((CombinableItem*)selectedItem);
 				c->selectedItem = item;
 				c->action();
 			}
 			else {
-				std::cout << "items cannot be combine\n";
+				//std::cout << "items cannot be combine\n";
 			}
 			MouseInput::GetInstance()->ResetActionType();
 			UnselectItem();
 		}
 		else {
 			selectedItem = item;
-			std::cout << "selected item to combine\n";
+			//std::cout << "selected item to combine\n";
 		}
 	}
 }
 
 void Inventory::SelectItem(Item* item) {
 	if (item) {
-		std::cout << "selected an item\n";
+		//std::cout << "selected an item\n";
 		selectedItem = item;
 	}
 }
@@ -191,4 +191,6 @@ Inventory::~Inventory() {
 	}
 	delete tab;
 	delete popArea;
+	delete separateButton;
+	delete combineButton;
 }

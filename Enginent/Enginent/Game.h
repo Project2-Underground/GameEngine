@@ -49,10 +49,10 @@ public:
 	void UpdateScreenState();
 	void ChangeScreenState(ScreenState newState);
 	int GetScreenState();
-//	void RightClick(int, int);
-//	void LeftClick(int, int);
+	//void RightClick(int, int);
+	//void LeftClick(int, int);
 	void HandleKey(SDL_Keycode);
-//	void UpdateMouseState(int, int);
+	//void UpdateMouseState(int, int);
 	void quitGame() { quit = true; };
 	bool getQuitState() { return quit; };
 
@@ -60,6 +60,4 @@ public:
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
 	CursorUI* getCursor() { return cursorGame; };
-	bool muteBG;
-	bool muteSFX;
 };

@@ -58,8 +58,8 @@
 		</item>
 		<doors>
 			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="202" sizeY="350" posX="-1434" posY="67" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0"/>
-			<UpperStair1 texture="NONE" sizeX="90" sizeY="90" posX="-402" posY="-245" next_room="MainHallLower" next_door="LowerStair1" layer="0"/>
-			<UpperStair2 texture="NONE" sizeX="90" sizeY="90" posX="387" posY="-245" next_room="MainHallLower" next_door="LowerStair2" layer="0"/>
+			<UpperStair1 texture="NONE" sizeX="90" sizeY="90" posX="-402" posY="-245" next_room="MainHallLower" next_door="LowerStair1" stair="" layer="0"/>
+			<UpperStair2 texture="NONE" sizeX="90" sizeY="90" posX="387" posY="-245" next_room="MainHallLower" next_door="LowerStair2" stair="" layer="0"/>
 		</doors>
 		<NPCs>
 		</NPCs>
@@ -88,8 +88,8 @@
 			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="172" sizeY="188" posX="-5" posY="262" next_room="" next_door="" layer="0">
 				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
 			</StairDoor>
-			<LowerStair1 texture="NONE" sizeX="90" sizeY="90" posX="-163" posY="-283" next_room="MainHallUpper" next_door="UpperStair1" layer="0"/>
-			<LowerStair2 texture="NONE" sizeX="90" sizeY="90" posX="149" posY="-283" next_room="MainHallUpper" next_door="UpperStair2" layer="0"/>
+			<LowerStair1 texture="NONE" sizeX="90" sizeY="90" posX="-163" posY="-283" next_room="MainHallUpper" next_door="UpperStair1" stair="" layer="0"/>
+			<LowerStair2 texture="NONE" sizeX="90" sizeY="90" posX="149" posY="-283" next_room="MainHallUpper" next_door="UpperStair2" stair="" layer="0"/>
 		</doors>
 		<NPCs>
 		</NPCs>

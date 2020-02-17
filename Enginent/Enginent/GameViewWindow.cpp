@@ -13,8 +13,17 @@ ViewWindow::ViewWindow() {
 	viewItem = new UIObject();
 	viewWindow = new UIObject();
 	display = false;
+	trigger = false;
 
 	viewWindow->SetTexture("Texture/tmp_inventoryBox.png");
+}
+
+void ViewWindow::Update() {
+	if(trigger)
+		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
+			display = true;
+			trigger = false;
+		}
 }
 
 void ViewWindow::Init(int width, int height) {
@@ -59,5 +68,5 @@ void ViewWindow::Close() {
 }
 
 void ViewWindow::Open() {
-	display = true;
+	trigger = true;
 }

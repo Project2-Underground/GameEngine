@@ -27,7 +27,7 @@ public:
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
 	virtual void HandleKey(SDL_Keycode) = 0;
 	virtual void UpdateMouseState(glm::vec3 x, glm::vec3 y) = 0;
-	virtual int GetPointedObject(glm::vec3 pos) { return 1; };
+	virtual InteractTypeList GetPointedObject(glm::vec3 pos) { return NORMAL; std::cout << "menu\n"; };
 };
 
 class MenuScreen :public Screen {
@@ -84,7 +84,7 @@ public:
 	void ClosePuzzle();
 
 	Level* GetCurrentLevel() { return currentLevel; }
-	int GetPointedObject(glm::vec3 pos);
+	InteractTypeList GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };
 	Inventory* GetInventory() { return inventory; };
 
