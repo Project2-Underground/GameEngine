@@ -18,7 +18,7 @@
 			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2">
 				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
 			</Table>
-			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="448" sizeY="488" posX="-441" posY="-18" type="8" layer="1">
+			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
 				<item name="keyCard" v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 			</Closet>

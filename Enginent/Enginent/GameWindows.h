@@ -2,13 +2,26 @@
 
 #include "Button.h"
 
-class ViewWindow {
+class GameWindow {
+protected:
 	bool display;
 	bool trigger;
+	WindowClose* closeButton;
+public:
+	virtual void Update() = 0;
+	virtual void Init(int width, int height) = 0;
+	virtual void Render() = 0;
+	virtual void LeftClick(float, float) = 0;
+
+	void Close();
+	void Open();
+	bool IsOpen() { return display; }
+};
+
+class ViewWindow :public GameWindow{
 	static ViewWindow* instance;
 	UIObject* viewItem;
 	UIObject* viewWindow;
-	ViewWindowClose* closeButton;
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();
@@ -23,7 +36,8 @@ public:
 
 	void SetViewItem(unsigned int texture);
 	void SetText();
-	void Close();
-	void Open();
-	bool IsOpen() { return display; }
+};
+
+class LoadWindow: public GameWindow {
+
 };

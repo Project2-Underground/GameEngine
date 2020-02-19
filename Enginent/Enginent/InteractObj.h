@@ -95,8 +95,10 @@ public:
 };
 
 class NonPlayer : public InteractableObj {
+	Item* item;
+	bool giveItem;
 public:
-	NonPlayer();
+	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
 	void action();
 };
 

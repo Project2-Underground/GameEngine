@@ -8,7 +8,7 @@
 #include "InfoPhone.h"
 #include "TextBox.h"
 #include "Inventory.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,

@@ -13,7 +13,7 @@ MenuScreen::MenuScreen() {
 	// setting button
 	setting;
 	// load button
-	load;
+	load = new LoadButton("");
 
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
@@ -137,6 +137,7 @@ void GameScreen::Render() {
 	else {
 		currentLevel->Render();
 		renderer->Render(player);
+		renderer->Render(currentLevel->GetCurrentRoom()->npcs, false);
 		renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	}
 	renderer->Render(UI);
@@ -167,16 +168,14 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !viewWin->IsOpen())
 			currentLevel->RightClick(world.x, world.y);
 		else if (dialogueText->IsDisplay())
-		{
 			dialogueText->SetDisplay(false);
-		}
 	}
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay() == true)
+	else if (dialogueText->IsDisplay() == true) 
 		dialogueText->SetDisplay(false);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);

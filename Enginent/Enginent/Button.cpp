@@ -1,7 +1,7 @@
 #include "Button.h"
 #include "Game.h"
 #include "InfoPhone.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 #include "MouseInput.h"
 
 Button::Button(std::string texture)
@@ -91,10 +91,15 @@ void PhoneHomeButton::action() {
 	Phone::GetInstance()->CloseApp();
 }
 
-void ViewWindowClose::action() {
+void WindowClose::action() {
 	ViewWindow::GetInstance()->Close();
 }
 
 void ClosePuzzleButton::action() {
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
+}
+
+void LoadGameButton::action() {
+	if(savefile != "")
+		XMLManager::GetInstance()->LoadFromSave(savefile);
 }

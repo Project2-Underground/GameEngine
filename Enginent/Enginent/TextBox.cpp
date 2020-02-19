@@ -11,6 +11,7 @@ TextBox* TextBox::GetInstance() {
 
 TextBox::TextBox()
 {
+	display = false;
 	background = new ImageObject();
 	background->SetTexture("Texture/UI/Textbox.png");
 	background->SetSize(1280, -720);

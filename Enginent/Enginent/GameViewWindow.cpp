@@ -1,5 +1,7 @@
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 #include "Game.h"
+
+
 
 ViewWindow* ViewWindow::instance = nullptr;
 
@@ -9,7 +11,7 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new ViewWindowClose("Texture/tmp_closeButton.png");
+	closeButton = new WindowClose("Texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	viewWindow = new UIObject();
 	display = false;
@@ -63,10 +65,10 @@ void ViewWindow::LeftClick(float x, float y) {
 	closeButton->checkCollider(x, y);
 }
 
-void ViewWindow::Close() {
+void GameWindow::Close() {
 	display = false;
 }
 
-void ViewWindow::Open() {
+void GameWindow::Open() {
 	trigger = true;
 }

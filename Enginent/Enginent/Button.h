@@ -36,6 +36,12 @@ public:
 	void action();
 };
 
+class LoadButton :public Button {
+public:
+	LoadButton(std::string texture) : Button(texture) {}
+	void action();
+};
+
 class PhoneOpenButton : public Button {
 public:
 	PhoneOpenButton(std::string texture) : Button(texture) {}
@@ -74,9 +80,9 @@ public:
 	void action();
 };
 
-class ViewWindowClose :public Button {
+class WindowClose :public Button {
 public:
-	ViewWindowClose(std::string texture) :Button(texture) {}
+	WindowClose(std::string texture) :Button(texture) {}
 	void action();
 };
 
@@ -93,5 +99,13 @@ public:
 class ClosePuzzleButton :public Button {
 public:
 	ClosePuzzleButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class LoadGameButton : public Button {
+	std::string savefile;
+public:
+	LoadGameButton(std::string texture) :Button(texture) { savefile = " "; }
+	void SetSavefile(std::string sf) { savefile = sf; }
 	void action();
 };

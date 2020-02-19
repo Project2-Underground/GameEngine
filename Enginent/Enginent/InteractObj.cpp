@@ -1,6 +1,6 @@
 #include "InteractObj.h"
 #include "Game.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 #include "InfoPhone.h"
 
 InteractableObj::InteractableObj(vector<Dialogue> s) {
@@ -72,7 +72,7 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 
 void InteractableObj::UseItem(Item* item) {
 	if (item != nullptr && item_to_use == item->name) {
-		std::cout << "item is used and removed from the inventory\n";
+		//std::cout << "item is used and removed from the inventory\n";
 		used = true;
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem(item);
 	}

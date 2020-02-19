@@ -126,9 +126,6 @@
     <ClInclude Include="MouseInput.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameViewWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XMLManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -137,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="Puzzles.h">
       <Filter>Puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindows.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,9 +243,6 @@
       <Filter>GameUtilities</Filter>
     </ClCompile>
     <ClCompile Include="GameViewWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NonPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="XMLManager.cpp">
