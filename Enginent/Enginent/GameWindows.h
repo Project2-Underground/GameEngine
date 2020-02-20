@@ -4,6 +4,7 @@
 
 class GameWindow {
 protected:
+	UIObject* bgWindow;
 	bool display;
 	bool trigger;
 	WindowClose* closeButton;
@@ -21,12 +22,11 @@ public:
 class ViewWindow :public GameWindow{
 	static ViewWindow* instance;
 	UIObject* viewItem;
-	UIObject* viewWindow;
+	ViewWindow();
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();
 
-	ViewWindow();
 	~ViewWindow();
 
 	void Update();
@@ -38,6 +38,28 @@ public:
 	void SetText();
 };
 
-class LoadWindow: public GameWindow {
+class SaveLoadWindow :public GameWindow {
+	SaveLoadGameButton* save;
+	static SaveLoadWindow* instance;
 
+	SaveLoadWindow();
+public:
+	static SaveLoadWindow* GetInstance();
+
+	~SaveLoadWindow();
+
+	void Update();
+	void Init(int width, int height);
+	void Render();
+	void LeftClick(float, float);
+	void SetSaveFile(int fileno, std::string);
+};
+
+class PauseWindow: public GameWindow {
+	// buttons
+public:
+	void Update();
+	void Init(int width, int height);
+	void Render();
+	void LeftClick(float, float);
 };

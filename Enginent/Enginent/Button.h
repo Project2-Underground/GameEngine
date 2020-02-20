@@ -102,10 +102,17 @@ public:
 	void action();
 };
 
-class LoadGameButton : public Button {
-	std::string savefile;
+class SaveLoadGameButton :public Button {
+	std::string filename;
+	std::string saveLevel;		// text telling player has saved here
 public:
-	LoadGameButton(std::string texture) :Button(texture) { savefile = " "; }
-	void SetSavefile(std::string sf) { savefile = sf; }
+	SaveLoadGameButton(std::string texture, std::string f) :Button(texture) { filename = f; }
+	void SetSaveLevel(std::string s) { saveLevel = s; }
+	void action();
+};
+
+class OpenPauseWindowButton :public Button {
+public:
+	OpenPauseWindowButton(std::string texture) :Button(texture) {}
 	void action();
 };

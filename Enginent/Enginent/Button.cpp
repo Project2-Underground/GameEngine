@@ -92,14 +92,13 @@ void PhoneHomeButton::action() {
 }
 
 void WindowClose::action() {
-	ViewWindow::GetInstance()->Close();
+	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
 }
 
 void ClosePuzzleButton::action() {
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
 
-void LoadGameButton::action() {
-	if(savefile != "")
-		XMLManager::GetInstance()->LoadFromSave(savefile);
+void SaveLoadGameButton::action() {
+	Game::GetInstance()->SaveLoad(filename);
 }

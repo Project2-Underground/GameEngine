@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameWindows.h"
 #include "InfoPhone.h"
+#include "GameWindows.h"
 
 InteractableObj::InteractableObj(vector<Dialogue> s) {
 	interactType = NORMAL;
@@ -149,5 +150,6 @@ void PuzzleObj::action() {
 }
 
 void SaveObj::action() {
-	// open save window
+	Game::GetInstance()->SetSaveGame(true);
+	SaveLoadWindow::GetInstance()->Open();
 }

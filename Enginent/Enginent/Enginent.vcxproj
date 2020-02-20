@@ -80,6 +80,7 @@
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="SaveLoadWindow.cpp" />
     <ClCompile Include="XMLManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />

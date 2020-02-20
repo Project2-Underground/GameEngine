@@ -28,14 +28,17 @@ class Game
 	Screen* currentScreen;
 	ScreenState currentState;
 
-	ViewWindow* viewWin;
 	GLRenderer* renderer;
 	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
+
 	bool quit = false;
 	bool changeScreen;
+	bool save;
 
+	void SaveGame(std::string);
+	void LoadGame(std::string);
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -43,6 +46,7 @@ public:
 	GLRenderer* GetRenderer();
 	Screen* GetScreen() { return currentScreen; };
 	Camera* GetCamera() { return camera; };
+	CursorUI* GetCursor() { return cursorGame; }
 	void Init(int width, int height);
 	void Update();
 	void Render();
@@ -56,8 +60,10 @@ public:
 	void quitGame() { quit = true; };
 	bool getQuitState() { return quit; };
 
+	void SetSaveGame(bool b) { save = b; }
+	void SaveLoad(std::string);
+
 	Level* GetCurrentLevel();
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
-	CursorUI* getCursor() { return cursorGame; };
 };

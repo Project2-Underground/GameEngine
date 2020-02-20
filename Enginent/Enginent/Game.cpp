@@ -144,3 +144,19 @@ Level* Game::GetCurrentLevel() {
 Player* Game::GetPlayer() {
 	return ((GameScreen*)currentScreen)->GetPlayer();
 }
+
+
+void Game::SaveLoad(std::string filename) {
+	if (save)
+		SaveGame(filename);
+	else
+		LoadGame(filename);
+}
+
+void Game::SaveGame(std::string filename) {
+	XMLManager::GetInstance()->SaveGame(filename);
+}
+
+void Game::LoadGame(std::string filename) {
+	XMLManager::GetInstance()->LoadFromSave(filename);
+}

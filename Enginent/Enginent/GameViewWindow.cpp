@@ -2,7 +2,6 @@
 #include "Game.h"
 
 
-
 ViewWindow* ViewWindow::instance = nullptr;
 
 ViewWindow* ViewWindow::GetInstance() {
@@ -13,11 +12,11 @@ ViewWindow* ViewWindow::GetInstance() {
 ViewWindow::ViewWindow() {
 	closeButton = new WindowClose("Texture/tmp_closeButton.png");
 	viewItem = new UIObject();
-	viewWindow = new UIObject();
+	bgWindow = new UIObject();
 	display = false;
 	trigger = false;
 
-	viewWindow->SetTexture("Texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_inventoryBox.png");
 }
 
 void ViewWindow::Update() {
@@ -30,11 +29,11 @@ void ViewWindow::Update() {
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
-	viewWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
+	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
 	viewItem->SetSize(540, -540);
-	viewItem->SetPosition(glm::vec3(viewWindow->getPos().x, viewWindow->getPos().y + -viewItem->getSize().y * 0.2f, 0.0f));
-	closeButton->SetSize(viewWindow->getSize().x * 0.5f, viewWindow->getSize().y * 0.1f);
-	closeButton->SetPosition(glm::vec3(viewWindow->getPos().x, viewWindow->getPos().y - -viewWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
+	viewItem->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y + -viewItem->getSize().y * 0.2f, 0.0f));
+	closeButton->SetSize(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f);
+	closeButton->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
 	closeButton->SetCollder(new Collider(closeButton));
 }
 
@@ -49,13 +48,13 @@ void ViewWindow::SetText() {
 ViewWindow::~ViewWindow() {
 	delete viewItem;
 	delete closeButton;
-	delete viewWindow;
+	delete bgWindow;
 }
 
 void ViewWindow::Render() {
 	if (display) {
 		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
-		renderer->Render(viewWindow);
+		renderer->Render(bgWindow);
 		renderer->Render(viewItem);
 		renderer->Render(closeButton);
 	}
@@ -66,9 +65,11 @@ void ViewWindow::LeftClick(float x, float y) {
 }
 
 void GameWindow::Close() {
+	Game::GetInstance()->GetCursor()->enableChange(true);
 	display = false;
 }
 
 void GameWindow::Open() {
+	Game::GetInstance()->GetCursor()->enableChange(false);
 	trigger = true;
 }
