@@ -224,47 +224,55 @@ int XMLManager::GetLevelNumber(std::string filename) {
 }
 
 void XMLManager::LoadFromSave(std::string filename) {
-	if (LoadFile(filename)) {
+	pugi::xml_document file;
+	pugi::xml_parse_result result = file.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
+	if (result) {
 		Game* game = Game::GetInstance();
 		GameScreen* gs = (GameScreen*)game->GetScreen();
+
+		int l = file.child("level").attribute("currentLevel").as_int();
+		gs->ChangeLevel(l - 1);
+
 		Level* level = gs->GetCurrentLevel();
 
-		// check saved level
-		// if not the same level, reload the saved level
-		if (int l = doc.child("level").attribute("currentLevel").as_int() != level->levelNo)
-			gs->ChangeLevel(l - 1);
 		std::map<std::string, Room*>::iterator itr;
 		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 			std::vector<DrawableObject*> objects = itr->second->objects;
-			for (int i = 0; i < itr->second->objects.size(); i++) {
+			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					door->used = doc.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool();
-					door->SetCurrentDialogue(doc.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
+					door->used = file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool();
+					door->SetCurrentDialogue(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
-					obj->SetCurrentDialogue(doc.child("level").child("interactObj").child(obj->object_name.c_str()).attribute("current_dialogue").as_int());
-				}
-				/*else if (dynamic_cast<NonPlayer*>(objects[i])) {
+					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
+					obj->SetCurrentDialogue(node.attribute("current_dialogue").as_int());
 
-				}*/
+					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
+						if (node.attribute("open").as_bool()) {
+							o->Open();
+							if (!node.attribute("has_item").as_bool())
+								o->ClearItem();
+						}
+					}
+				}
 			}
 		}
 
-		level->ChangeRoom(doc.child("level").attribute("currentRoom").as_string());
+
+		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
 
 		// load puzzles
 
 
 		// load player and inventory
-		pugi::xml_node playerNode = doc.child("level").child("Player");
+		pugi::xml_node playerNode = file.child("level").child("Player");
 		Player* player = game->GetPlayer();
 		float px = playerNode.attribute("posX").as_float();
 		float py = playerNode.attribute("posY").as_float();
 		glm::vec3 playerPos(px, py, 1.0f);
 		player->SetPosition(playerPos);
 		player->next_position = playerPos;
-
 		pugi::xml_node item = playerNode.child("inventory").first_child();
 		for (int i = 0; i < gs->GetInventory()->GetSize(); i++) {
 			// has attribute named "name"
@@ -274,10 +282,10 @@ void XMLManager::LoadFromSave(std::string filename) {
 			}
 			item = item.next_sibling();
 		}
-
 		// load infoPhone
-		pugi::xml_node phoneNode = doc.child("level").child("Phone");
+		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
+		phone->app->Clear();
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
 			phone->AddPage(NOTE, itr->attribute("name").as_string());
 		}
@@ -323,17 +331,22 @@ void XMLManager::SaveGame(std::string filename) {
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
+				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
 				// current dialogue
-				saveLevel.child("interactObj").child(obj->object_name.c_str()).append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+				
+				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
+					node.append_attribute("open").set_value(o->IsOpen());
+					bool hasItem = false;
+					if (o->GetItem())
+						hasItem = true;
+					node.append_attribute("has_item").set_value(hasItem);
+				}
 			}
-			/*else if (dynamic_cast<NonPlayer*>(objects[i])) {
-
-			}*/
 		}
 	}
 
 	// saving puzzles 
-
 
 	// saving player and inventory
 	Player* player = game->GetPlayer();
@@ -352,11 +365,13 @@ void XMLManager::SaveGame(std::string filename) {
 	int noteSize = (int)phone->app->notes.size();
 	int chatSize = (int)phone->app->chats.size();
 
+	std::cout << noteSize << std::endl;
+
 	for (int i = 0; i < noteSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
 		node.append_attribute("name").set_value(phone->app->notes[i]->object_name.c_str());
+		std::cout << "helo\n";
 	}
-
 	for (int i = 0; i < chatSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
 		node.append_attribute("name").set_value(phone->app->chats[i]->name.c_str());

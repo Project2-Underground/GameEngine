@@ -115,9 +115,16 @@ void Player::CheckWalkLimit() {
 }
 
 void Player::CheckTarget(InteractableObj* target) {
-	float distance = (abs(target->getPos().x - pos.x) - (abs(size.x) * 0.5f + abs(target->getSize().x) * 0.5f));
+	float distance = abs(target->getPos().x - pos.x) - abs(target->getSize().x * 0.5f);
+	//std::cout << distance << std::endl;
 	if (distance <= ACTION_DISTANCE) {
 		target->action();
+		StopWalking();
+	}
+	else {
+		Dialogue d("Elias", "It's too far away");
+		TextBox::GetInstance()->setText(d);
+		TextBox::GetInstance()->SetDisplay(true);
 		StopWalking();
 	}
 }

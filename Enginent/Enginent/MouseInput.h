@@ -21,7 +21,6 @@ class MouseInput {
 	glm::vec3 position_World;
 	MouseEvent eventType;
 	ActionEvent actionType;
-	bool trigger = false;
 	int winWidth, winHeight;
 	Game* game;
 protected:

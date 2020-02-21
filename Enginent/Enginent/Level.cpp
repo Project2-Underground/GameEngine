@@ -104,8 +104,6 @@ Level::Level(std::string filename) {
 
 	// assign first room as current room
 	currentRoom = rooms.begin()->second;
-
-	GameScreen* game = ((GameScreen*)Game::GetInstance());
 }
 
 void Level::Update() {

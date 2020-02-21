@@ -28,6 +28,9 @@
     <Filter Include="Puzzles">
       <UniqueIdentifier>{cd468cde-2ce0-4280-9e42-e6d9b2cb2f91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameWindows">
+      <UniqueIdentifier>{700d0d09-c3ae-49ee-9c65-0ac20f59e47e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawableObject.h">
@@ -126,9 +129,6 @@
     <ClInclude Include="MouseInput.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameViewWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XMLManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -138,8 +138,8 @@
     <ClInclude Include="Puzzles.h">
       <Filter>Puzzles</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptManager.h">
-      <Filter>GameUtilities</Filter>
+    <ClInclude Include="GameWindows.h">
+      <Filter>GameWindows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,20 +245,17 @@
     <ClCompile Include="MouseInput.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
-    <ClCompile Include="GameViewWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NonPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="XMLManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BookshelfPuzzle.cpp">
       <Filter>Puzzles</Filter>
     </ClCompile>
-    <ClCompile Include="ScriptManager.cpp">
-      <Filter>GameUtilities</Filter>
+    <ClCompile Include="GameViewWindow.cpp">
+      <Filter>GameWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLoadWindow.cpp">
+      <Filter>GameWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

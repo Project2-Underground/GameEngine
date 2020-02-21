@@ -35,17 +35,17 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 
 	// init buttons
 	float iconSize = phoneSize.x*0.25f;
-	next = new PhoneNextButton("Texture/tmp_arrowIcon.png");
+	next = new PhoneNextButton("Texture/tmp_texture/tmp_arrowIcon.png");
 	next->SetSize(iconSize, -iconSize);
 	next->SetPosition(glm::vec3(phoneSize.x * 0.25f - phonePos.x, phonePos.y + phoneSize.y * -0.25f, 1));
 	next->SetCollder(new Collider(next));
 
-	back = new PhoneBackButton("Texture/tmp_arrowIcon2.png");
+	back = new PhoneBackButton("Texture/tmp_texture/tmp_arrowIcon2.png");
 	back->SetPosition(glm::vec3(-phoneSize.x * 0.25f - phonePos.x, phonePos.y + phoneSize.y * -0.25f, 1));
 	back->SetSize(iconSize, -iconSize);
 	back->SetCollder(new Collider(back));
 
-	home = new PhoneHomeButton("Texture/tmp_homeIcon.png");
+	home = new PhoneHomeButton("Texture/tmp_texture/tmp_homeIcon.png");
 	home->SetPosition(glm::vec3(phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
 	home->SetSize(iconSize, -iconSize);
 	home->SetCollder(new Collider(home));
@@ -54,6 +54,18 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	buttons.push_back(back);
 	buttons.push_back(home);
 	// init first note/chat or add later
+}
+
+void Application::Clear() {
+	for (auto n : notes)
+		delete n;
+
+	notes.clear();
+
+	for (auto c : chats)
+		delete c;
+
+	chats.clear();
 }
 
 void Application::LeftClick(float x, float y) {
@@ -134,7 +146,7 @@ Phone* Phone::GetInstance() {
 
 Phone::Phone() {
 	phone = new UIObject();
-	phone->SetTexture("Texture/tmp_phoneScreen.png"); //phone image
+	phone->SetTexture("Texture/tmp_texture/tmp_phoneScreen.png"); //phone image
 	float sizeX = 300.0f;
 	float sizeY = 600.0f;
 	phone->SetSize(sizeX, -sizeY);
@@ -143,11 +155,11 @@ Phone::Phone() {
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
 	UIObject* tmp_note = new UIObject();
 	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/tmp_noteIcon.png");
+	tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon.png");
 	app->AddNote(tmp_note);
 	tmp_note = new UIObject();
 	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/tmp_noteIcon2.png");
+	tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon2.png");
 	app->AddNote(tmp_note);
 	notiChat = false;
 	notiNote = false;
@@ -155,19 +167,19 @@ Phone::Phone() {
 
 	float size = sizeX*.25f;
 	// init all buttons
-	noteIcon = new PhoneAppsButton("Texture/tmp_noteIcon.png");
+	noteIcon = new PhoneAppsButton("Texture/tmp_texture/tmp_noteIcon.png");
 	noteIcon->SetSize(size, -size);
 	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
 	noteIcon->SetApp(NOTE);
 	noteIcon->SetCollder(new Collider(noteIcon));
 	
-	chatIcon = new PhoneAppsButton("Texture/tmp_chatIcon.png");
+	chatIcon = new PhoneAppsButton("Texture/tmp_texture/tmp_chatIcon.png");
 	chatIcon->SetSize(size, -size);
 	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
 	chatIcon->SetApp(CHAT);
 	chatIcon->SetCollder(new Collider(chatIcon));
 	
-	exitButton = new PhoneExitButton("Texture/tmp_homeIcon.png");
+	exitButton = new PhoneExitButton("Texture/tmp_texture/tmp_homeIcon.png");
 	exitButton->SetSize(size, -size);
 	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * -0.4f, 1));
 	exitButton->SetCollder(new Collider(exitButton));
@@ -225,10 +237,16 @@ void Phone::CloseApp() {
 void Phone::AddPage(AppType apptype, std::string name) {
 	switch (apptype)
 	{
-	case NOTE:
-		app->AddNote(notes[name]);
+	case NOTE: {
+		//app->AddNote(notes[name]);tmp_note = new UIObject();
+		float sizeX = 300.0f;
+		float sizeY = 600.0f;
+		UIObject* tmp_note = new UIObject();
+		tmp_note->SetSize(sizeX, -sizeY * 0.5f);
+		tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon2.png");
+		app->AddNote(tmp_note);
 		notiNote = false;
-		break;
+	}break;
 	case CHAT:
 		app->AddChat(name);
 		notiChat = false;

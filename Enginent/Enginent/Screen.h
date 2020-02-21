@@ -8,7 +8,7 @@
 #include "InfoPhone.h"
 #include "TextBox.h"
 #include "Inventory.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,
@@ -20,6 +20,8 @@ enum ScreenState {
 };
 
 class Screen {
+protected:
+	std::vector<GameWindow*> windows;
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
@@ -28,6 +30,8 @@ public:
 	virtual void HandleKey(SDL_Keycode) = 0;
 	virtual void UpdateMouseState(glm::vec3 x, glm::vec3 y) = 0;
 	virtual InteractTypeList GetPointedObject(glm::vec3 pos) { return NORMAL; std::cout << "menu\n"; };
+	bool GameWindowOpen();
+	void CloseGameAllWindow();
 };
 
 class MenuScreen :public Screen {
@@ -63,7 +67,6 @@ class GameScreen :public Screen {
 	Puzzle* currentPuzzle;
 
 	Inventory* inventory;
-	ViewWindow* viewWin;
 
 	bool PuzzleTime;
 	bool InventoryEnable;

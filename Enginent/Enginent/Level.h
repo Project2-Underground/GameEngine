@@ -24,6 +24,7 @@ public:
 	std::vector<Item*> items;
 	std::vector<DrawableObject*> objects;
 	std::vector<DrawableObject*> foreground;
+	std::vector<DrawableObject*> npcs;
 	std::map<std::string, Door*> doors;
 	std::string name;
 

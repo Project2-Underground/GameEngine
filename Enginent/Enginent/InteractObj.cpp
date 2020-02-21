@@ -1,7 +1,8 @@
 #include "InteractObj.h"
 #include "Game.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 #include "InfoPhone.h"
+#include "GameWindows.h"
 
 InteractableObj::InteractableObj(vector<Dialogue> s) {
 	interactType = NORMAL;
@@ -72,7 +73,7 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 
 void InteractableObj::UseItem(Item* item) {
 	if (item != nullptr && item_to_use == item->name) {
-		std::cout << "item is used and removed from the inventory\n";
+		//std::cout << "item is used and removed from the inventory\n";
 		used = true;
 		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem(item);
 	}
@@ -110,16 +111,26 @@ void OpenObj::SetNextTexture(std::string next) {
 
 void OpenObj::action() {
 	if (!open) {
-		open = true;
-		SetTexture(openTexture);
-		if (item)interactType = PICKUP;
-		else interactType = NORMAL;
+		Open();
 	}
 	else {
 		PickUpItem();
 		SetTexture(nextTexture);
 	}
 	TakePic();
+}
+
+void OpenObj::Open() {
+	open = true;
+	SetTexture(openTexture);
+	if (item)interactType = PICKUP;
+	else interactType = NORMAL;
+}
+
+void OpenObj::ClearItem() {
+	item = nullptr;
+	interactType = NORMAL;
+	SetTexture(nextTexture);
 }
 
 OpenObj::~OpenObj() {
@@ -149,5 +160,6 @@ void PuzzleObj::action() {
 }
 
 void SaveObj::action() {
-	// open save window
+	Game::GetInstance()->SetSaveGame(true);
+	SaveLoadWindow::GetInstance()->Open();
 }

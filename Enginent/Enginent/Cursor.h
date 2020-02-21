@@ -19,4 +19,5 @@ class CursorUI : public UIObject {
 		void updateCursor();
 		void setCursor(InteractTypeList);
 		void enableChange(bool);
+		void ResetCursor() { SetTexture(CS_Normal); }
 };

@@ -1,7 +1,7 @@
 #include "Button.h"
 #include "Game.h"
 #include "InfoPhone.h"
-#include "GameViewWindow.h"
+#include "GameWindows.h"
 #include "MouseInput.h"
 
 Button::Button(std::string texture)
@@ -65,6 +65,12 @@ void SwitchScene_Button::action()
 	SoundManager::GetInstance()->stop("MainScreen");
 }
 
+
+void OpenLoadSaveWindow::action() {
+	Game::GetInstance()->SetSaveGame(false);
+	SaveLoadWindow::GetInstance()->Open();
+}
+
 ////////////// PhoneAppsButton
 void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
@@ -91,10 +97,14 @@ void PhoneHomeButton::action() {
 	Phone::GetInstance()->CloseApp();
 }
 
-void ViewWindowClose::action() {
-	ViewWindow::GetInstance()->Close();
+void WindowClose::action() {
+	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
 }
 
 void ClosePuzzleButton::action() {
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
+}
+
+void SaveLoadGameButton::action() {
+	Game::GetInstance()->SaveLoad(filename);
 }

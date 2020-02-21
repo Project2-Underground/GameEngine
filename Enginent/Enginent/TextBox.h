@@ -4,7 +4,6 @@
 #include <vector>
 #include "UIObject.h"
 #include "TextObject.h"
-#include "ScriptManager.h"
 
 struct Dialogue
 {
@@ -15,22 +14,21 @@ struct Dialogue
 		name = n;
 		dialogue = d;
 	}
-	Dialogue()
-	{
-		name = " ";
-		dialogue = " ";
+	Dialogue() 
+	{ 
+		name = " "; 
+		dialogue = " "; 
 	};
 };
 
 class TextBox : public UIObject {
 	private:
-		UIObject* background;
+		ImageObject* background;
 		TextObject* dialogue;
 		TextObject* name;
 		SDL_Color textColor = {255, 255, 255, 0};
 		SDL_Color nameColor = {0, 0, 0, 0 };
-		bool display = true;
-		int dialogueSize = 0;
+		bool display;
 		static TextBox* _instance;
 		std::vector<Dialogue> dialogues;
 	protected:
@@ -38,13 +36,13 @@ class TextBox : public UIObject {
 	public:
 		static TextBox* GetInstance();
 		~TextBox();
-		void setDialogue_vec(std::vector<Dialogue>);
+		void setText(std::vector<Dialogue>);
 		void setText(Dialogue);
 		void setTextColor(SDL_Color colorN, SDL_Color colorS) { nameColor = colorN; textColor = colorS; }
 		void Render();
 		void setTextboxDisplay(bool b);
 		void clickLeft(glm::vec3);
-		void SetTextboxPosition(glm::vec3);
+		std::vector<Dialogue> GetDialogueList();
 };
 
 class ChoiceBox : UIObject {

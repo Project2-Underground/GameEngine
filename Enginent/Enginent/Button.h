@@ -36,6 +36,12 @@ public:
 	void action();
 };
 
+class OpenLoadSaveWindow :public Button {
+public:
+	OpenLoadSaveWindow(std::string texture) : Button(texture) {}
+	void action();
+};
+
 class PhoneOpenButton : public Button {
 public:
 	PhoneOpenButton(std::string texture) : Button(texture) {}
@@ -74,9 +80,9 @@ public:
 	void action();
 };
 
-class ViewWindowClose :public Button {
+class WindowClose :public Button {
 public:
-	ViewWindowClose(std::string texture) :Button(texture) {}
+	WindowClose(std::string texture) :Button(texture) {}
 	void action();
 };
 
@@ -93,5 +99,20 @@ public:
 class ClosePuzzleButton :public Button {
 public:
 	ClosePuzzleButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class SaveLoadGameButton :public Button {
+	std::string filename;
+	std::string saveLevel;		// text telling player has saved here
+public:
+	SaveLoadGameButton(std::string texture, std::string f) :Button(texture) { filename = f; }
+	void SetSaveLevel(std::string s) { saveLevel = s; }
+	void action();
+};
+
+class OpenPauseWindowButton :public Button {
+public:
+	OpenPauseWindowButton(std::string texture) :Button(texture) {}
 	void action();
 };

@@ -9,7 +9,7 @@
 #include "InteractObj.h"
 
 #define WALK_SPEED 40
-#define ACTION_DISTANCE 10.0f
+#define ACTION_DISTANCE 70.0f
 
 class Player : public ImageObject
 {

@@ -1,19 +1,33 @@
 #include "Screen.h"
 #include "Game.h"
 
-/*MAIN MENU*/
+bool Screen::GameWindowOpen() {
+	for (auto w : windows)
+		if (w->IsOpen())
+			return true;
+	return false;
+}
 
+void Screen::CloseGameAllWindow() {
+	for (auto w : windows)
+		w->Close();
+}
+
+/*MAIN MENU*/
 MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->SetSize(300, -120);
 	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
-	Collider* col = new Collider(play);
+	play->SetCollder(new Collider(play));
 
-	play->SetCollder(col);
 	// setting button
 	setting;
-	// load button
-	load;
+
+	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_loadButton.png");
+	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
+	load->SetSize(300, -120);
+	load->SetPosition(glm::vec3(170.0f, -50.0f, 1.0f));
+	load->SetCollder(new Collider(load));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
@@ -28,24 +42,32 @@ MenuScreen::MenuScreen() {
 	UI.push_back(background);
 	UI.push_back(play);
 	UI.push_back(quit);
-
-
+	UI.push_back(load);
+	windows.push_back(SaveLoadWindow::GetInstance());
 }
 
 void MenuScreen::Render() {
 	Game::GetInstance()->GetRenderer()->Render(UI);
+	for (auto w : windows)
+		w->Render();
 }
 
 void MenuScreen::Update() {
-
+	for (auto w : windows)
+		w->Update();
 }
 
 void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	for (int j = 0; j < UI.size(); j++)
-	{
-		if (Button * button = dynamic_cast<Button*>(UI[j]))
+	if(GameWindowOpen())
+		for (auto w : windows)
+			w->LeftClick(screen.x, screen.y);
+	else {
+		for (int j = 0; j < UI.size(); j++)
 		{
-			button->checkCollider(screen.x, screen.y);
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+			{
+				button->checkCollider(screen.x, screen.y);
+			}
 		}
 	}
 }
@@ -56,7 +78,6 @@ void MenuScreen::RightClick(glm::vec3, glm::vec3)
 }
 
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
-
 	play->updateButton(screen.x, screen.y);
 	//setting->updateButton(realPos.x, realPos.y);
 	quit->updateButton(screen.x, screen.y);
@@ -100,12 +121,10 @@ GameScreen::GameScreen() {
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 
 	Game* g = Game::GetInstance();
-	viewWin = ViewWindow::GetInstance();
-	viewWin->Init(g->winWidth, g->winHeight);
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
-	phoneIcon = new PhoneOpenButton("Texture/tmp_phone.png");
+	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
 	phoneIcon->SetSize(100.0f, -100.0f);
 	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->SetCollder(new Collider(phoneIcon));
@@ -122,6 +141,11 @@ GameScreen::GameScreen() {
 
 	UI.push_back(phoneIcon);
 	UI.push_back(exitButton);
+
+	windows.push_back(SaveLoadWindow::GetInstance());
+	GameWindow * viewWin = ViewWindow::GetInstance();
+	viewWin->Init(g->winWidth, g->winHeight);
+	windows.push_back(viewWin);
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -131,26 +155,31 @@ void GameScreen::LoadGame(std::string filename) {
 void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 
-	if (PuzzleTime) {
+	if (PuzzleTime) 
 		currentPuzzle->Render();
-	}
 	else {
 		currentLevel->Render();
 		renderer->Render(player);
+		renderer->Render(currentLevel->GetCurrentRoom()->npcs, false);
 		renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	}
 	renderer->Render(UI);
 
 	inventory->Render();
-	viewWin->Render();
-	if (phone->open)
-		phone->Render();
-	if (dialogueText->IsDisplay())
-		dialogueText->Render();
+	if(GameWindowOpen())
+		for (auto w : windows)
+			w->Render();
+	else {
+		if (phone->open)
+			phone->Render();
+		if (dialogueText->IsDisplay())
+			dialogueText->Render();
+	}
 }
 
 void GameScreen::Update() {
-	viewWin->Update();
+	for (auto w : windows)
+		w->Update();
 	if (PuzzleTime)
 		currentPuzzle->Update();
 	else {
@@ -164,24 +193,23 @@ void GameScreen::Update() {
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 	if (!PuzzleTime) {
 		inventory->UnselectItem();
-		if (!phone->open && !player->anim->IsPlaying("Pickup") && !viewWin->IsOpen())
+		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen())
 			currentLevel->RightClick(world.x, world.y);
 		else if (dialogueText->IsDisplay())
-		{
 			dialogueText->SetDisplay(false);
-		}
 	}
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (phone->open)
+	if(GameWindowOpen())
+		for (auto w : windows)
+			w->LeftClick(screen.x, screen.y);
+	else if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
-	//else if (dialogueText->IsDisplay() == true)
-	//	dialogueText->SetDisplay(false);
+	else if (dialogueText->IsDisplay() == true) 
+		dialogueText->SetDisplay(false);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
-	else if (viewWin->IsOpen())
-		viewWin->LeftClick(screen.x, screen.y);
 	else {
 		if(!player->anim->IsPlaying("Pickup"))
 			currentLevel->LeftClick(world.x, world.y);
@@ -204,7 +232,8 @@ void GameScreen::UpdateMouseState(glm::vec3, glm::vec3)
 }
 
 void GameScreen::ChangeLevel(int level) {
-	delete currentLevel;
+	if(currentLevel)
+		delete currentLevel;
 	currentLevel = new Level(levels[level]);
 }
 
@@ -281,7 +310,6 @@ GameScreen::~GameScreen() {
 		delete ui;
 
 	delete inventory;
-	delete viewWin;
 }
 
 /*CUTSCENE*/

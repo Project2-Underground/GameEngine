@@ -71,6 +71,10 @@ public:
 	void SetOpenTexture(std::string);
 	void SetNextTexture(std::string);
 	void action();
+	bool IsOpen() { return open; }
+
+	void Open();
+	void ClearItem();
 
 	~OpenObj();
 };
@@ -95,8 +99,10 @@ public:
 };
 
 class NonPlayer : public InteractableObj {
+	Item* item;
+	bool giveItem;
 public:
-	NonPlayer();
+	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
 	void action();
 };
 
