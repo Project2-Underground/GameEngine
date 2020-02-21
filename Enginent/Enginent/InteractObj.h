@@ -22,7 +22,7 @@ enum InteractTypeList
 class InteractableObj : public ImageObject {
 protected:
 	InteractTypeList interactType = NORMAL;
-	vector<Dialogue> dialogue;
+	std::vector<Dialogue> dialogue;
 	int currDialogue = 0;
 	Collider* col;
 	std::string interact_sound = "";

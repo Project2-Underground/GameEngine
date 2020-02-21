@@ -141,6 +141,9 @@
     <ClInclude Include="GameWindows.h">
       <Filter>GameWindows</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptManager.h">
+      <Filter>GameUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="SaveLoadWindow.cpp">
       <Filter>GameWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
