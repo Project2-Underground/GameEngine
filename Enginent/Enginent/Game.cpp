@@ -44,7 +44,7 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
-	currentState = MENUSCREEN;
+	currentState = GAMESCREEN;
 	UpdateScreenState();
 	cursorGame = new CursorUI();
 }

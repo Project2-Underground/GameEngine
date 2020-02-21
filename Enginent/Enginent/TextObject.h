@@ -16,5 +16,5 @@ public:
 	void Render(glm::mat4 globalModelTransform);
 	void update(float deltaTime);
 	void loadText(string text, SDL_Color textColor, int fontSize);
-	
+	unsigned int GetTexture();
 };

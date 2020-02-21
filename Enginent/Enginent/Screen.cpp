@@ -176,8 +176,8 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay() == true)
-		dialogueText->SetDisplay(false);
+	//else if (dialogueText->IsDisplay() == true)
+	//	dialogueText->SetDisplay(false);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else if (viewWin->IsOpen())

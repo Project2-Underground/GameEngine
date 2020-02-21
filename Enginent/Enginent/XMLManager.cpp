@@ -386,6 +386,11 @@ void XMLManager::SaveGameOptions() {
 	//gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
 }
 
+//std::map<std::string, Script> XMLManager::GetScript(std::string filename)
+//{
+//	scriptDoc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
+//}
+
 XMLManager::~XMLManager() {
 
 }

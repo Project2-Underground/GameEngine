@@ -138,7 +138,7 @@
     <ClInclude Include="Puzzles.h">
       <Filter>Puzzles</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
+    <ClInclude Include="ScriptManager.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -256,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="BookshelfPuzzle.cpp">
       <Filter>Puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager.cpp">
+      <Filter>GameUtilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

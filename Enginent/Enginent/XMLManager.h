@@ -4,11 +4,13 @@
 #include <string>
 #include "Level.h"
 #include "ImageObject.h"
+#include "ScriptManager.h"
 
 class XMLManager {
 	static XMLManager* _instance;
 	pugi::xml_document doc;
 	pugi::xml_document chatDoc;
+	pugi::xml_document scriptDoc;
 
 	XMLManager();
 	bool LoadFile(std::string filename);
@@ -32,6 +34,9 @@ public:
 	// chat doc
 	void GetChat(std::string, ImageObject*);
 	std::string GetMessage(std::string, int);
+
+	// script doc
+	//std::map<std::string, Script> GetScript(std::string);
 
 	// save game option
 	void SaveGameOptions();
