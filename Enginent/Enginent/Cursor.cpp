@@ -10,7 +10,7 @@ CursorUI::CursorUI() {
 	CS_Pick = renderer->LoadTexture("Texture/UI/Cursor/Pickup_cursor.png");
 	CS_View = renderer->LoadTexture("Texture/UI/Cursor/View_cursor.png");
 	CS_Save = renderer->LoadTexture("Texture/UI/Cursor/Save_cursor.png");
-	CS_Stair = renderer->LoadTexture("Texture/tmp_stairsSign.png");
+	CS_Stair = renderer->LoadTexture("Texture/tmp_texture/tmp_stairsSign.png");
 	enable = true;
 
 	this->SetTexture(CS_Normal);

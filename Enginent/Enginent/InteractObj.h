@@ -71,6 +71,10 @@ public:
 	void SetOpenTexture(std::string);
 	void SetNextTexture(std::string);
 	void action();
+	bool IsOpen() { return open; }
+
+	void Open();
+	void ClearItem();
 
 	~OpenObj();
 };

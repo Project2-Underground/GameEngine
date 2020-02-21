@@ -10,13 +10,13 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new WindowClose("Texture/tmp_closeButton.png");
+	closeButton = new WindowClose("Texture/tmp_texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
 	trigger = false;
 
-	bgWindow->SetTexture("Texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
 void ViewWindow::Update() {
@@ -70,6 +70,8 @@ void GameWindow::Close() {
 }
 
 void GameWindow::Open() {
-	Game::GetInstance()->GetCursor()->enableChange(false);
+	CursorUI* cursor = Game::GetInstance()->GetCursor();
+	cursor->enableChange(false);
+	cursor->ResetCursor();
 	trigger = true;
 }

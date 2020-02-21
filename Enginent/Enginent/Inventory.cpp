@@ -17,7 +17,7 @@ Inventory::Inventory() {
 	maxHeight = minHeight + tab->getSize().y * -0.3f;
 
 	tab->SetPosition(glm::vec3(0.0f, minHeight, 1.0f));
-	tab->SetTexture("Texture/tmp_inventoryBox.png");
+	tab->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 
 	popArea = new Collider(tab);
 	popArea->setNewSize(glm::vec3(tab->getSize().x, tab->getSize().y * 1.25f, 1.0f));
@@ -29,8 +29,8 @@ Inventory::Inventory() {
 	boxOffset = tab->getPos().y - y;
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
-		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_inventoryBox.png");
-		tmpObj->SetPressTexture("Texture/tmp_inventoryBoxSelected.png");
+		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_texture/tmp_inventoryBox.png");
+		tmpObj->SetPressTexture("Texture/tmp_texture/tmp_inventoryBoxSelected.png");
 		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y - boxOffset, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
 		tmpObj->SetCollder(new Collider(tmpObj));
@@ -39,13 +39,13 @@ Inventory::Inventory() {
 		x += space;
 	}
 
-	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_separateButton.png", SEPARATE_ACTION);
-	separateButton->SetPressTexture("Texture/tmp_separateButtonPress.png");
+	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_separateButton.png", SEPARATE_ACTION);
+	separateButton->SetPressTexture("Texture/tmp_texture/tmp_separateButtonPress.png");
 	separateButton->SetPosition(glm::vec3(100.0f, 0, 0));
 	separateButton->SetSize(100.0f, -50.0f);
 	separateButton->SetCollder(new Collider(separateButton));
-	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_combineButton.png", COMBINE_ACTION);
-	combineButton->SetPressTexture("Texture/tmp_combineButtonPress.png");
+	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_combineButton.png", COMBINE_ACTION);
+	combineButton->SetPressTexture("Texture/tmp_texture/tmp_combineButtonPress.png");
 	combineButton->SetPosition(glm::vec3(-100.0f, 0, 0));
 	combineButton->SetSize(100.0f, -50.0f);
 	combineButton->SetCollder(new Collider(combineButton));

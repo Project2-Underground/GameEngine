@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
-		<Closet current_dialogue="0" />
-		<Table current_dialogue="0" />
+		<Closet current_dialogue="0" open="true" has_item="false" />
+		<Table current_dialogue="0" open="false" has_item="false" />
 		<Calendar current_dialogue="0" />
 		<bed current_dialogue="0" />
 		<Bookshelf1 current_dialogue="0" />
@@ -22,7 +22,7 @@
 	</doors>
 	<NPCs />
 	<puzzles />
-	<Player posX="421.49588" posY="-50">
+	<Player posX="426.236694" posY="-50">
 		<inventory>
 			<item />
 			<item />

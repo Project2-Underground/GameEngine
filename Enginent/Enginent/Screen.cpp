@@ -18,13 +18,16 @@ MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->SetSize(300, -120);
 	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
-	Collider* col = new Collider(play);
+	play->SetCollder(new Collider(play));
 
-	play->SetCollder(col);
 	// setting button
 	setting;
-	// load button
-	load;
+
+	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_loadButton.png");
+	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
+	load->SetSize(300, -120);
+	load->SetPosition(glm::vec3(170.0f, -50.0f, 1.0f));
+	load->SetCollder(new Collider(load));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
 	quit->SetSize(300, -120);
@@ -39,6 +42,7 @@ MenuScreen::MenuScreen() {
 	UI.push_back(background);
 	UI.push_back(play);
 	UI.push_back(quit);
+	UI.push_back(load);
 	windows.push_back(SaveLoadWindow::GetInstance());
 }
 
@@ -54,10 +58,9 @@ void MenuScreen::Update() {
 }
 
 void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if(GameWindowOpen()){
+	if(GameWindowOpen())
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
-	}
 	else {
 		for (int j = 0; j < UI.size(); j++)
 		{
@@ -121,7 +124,7 @@ GameScreen::GameScreen() {
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
-	phoneIcon = new PhoneOpenButton("Texture/tmp_phone.png");
+	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
 	phoneIcon->SetSize(100.0f, -100.0f);
 	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->SetCollder(new Collider(phoneIcon));
@@ -229,7 +232,8 @@ void GameScreen::UpdateMouseState(glm::vec3, glm::vec3)
 }
 
 void GameScreen::ChangeLevel(int level) {
-	delete currentLevel;
+	if(currentLevel)
+		delete currentLevel;
 	currentLevel = new Level(levels[level]);
 }
 

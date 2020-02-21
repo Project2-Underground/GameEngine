@@ -111,16 +111,26 @@ void OpenObj::SetNextTexture(std::string next) {
 
 void OpenObj::action() {
 	if (!open) {
-		open = true;
-		SetTexture(openTexture);
-		if (item)interactType = PICKUP;
-		else interactType = NORMAL;
+		Open();
 	}
 	else {
 		PickUpItem();
 		SetTexture(nextTexture);
 	}
 	TakePic();
+}
+
+void OpenObj::Open() {
+	open = true;
+	SetTexture(openTexture);
+	if (item)interactType = PICKUP;
+	else interactType = NORMAL;
+}
+
+void OpenObj::ClearItem() {
+	item = nullptr;
+	interactType = NORMAL;
+	SetTexture(nextTexture);
 }
 
 OpenObj::~OpenObj() {

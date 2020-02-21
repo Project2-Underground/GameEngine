@@ -33,6 +33,7 @@ public:
 	void Back();
 	void AddNote(UIObject*);
 	void AddChat(std::string);
+	void Clear();
 
 	bool open;
 	AppType currentAppType;

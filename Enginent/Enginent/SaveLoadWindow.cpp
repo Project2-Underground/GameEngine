@@ -2,9 +2,9 @@
 #include "Game.h"
 
 SaveLoadWindow::SaveLoadWindow() {
-	closeButton = new WindowClose("Texture/tmp_closeButton.png");
+	closeButton = new WindowClose("Texture/tmp_texture/tmp_closeButton.png");
 	bgWindow = new UIObject();
-	bgWindow->SetTexture("Texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
 SaveLoadWindow::~SaveLoadWindow() {
@@ -16,7 +16,7 @@ SaveLoadWindow::~SaveLoadWindow() {
 void SaveLoadWindow::Init(int width, int height) {
 	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
 
-	save = new SaveLoadGameButton("Texture/tmp_inventoryBox.png", "save/save1.xml");
+	save = new SaveLoadGameButton("Texture/tmp_texture/tmp_inventoryBox.png", "save/save1.xml");
 	save->SetSize((float)width * 0.5f, -(float)height * 0.25f);
 	save->SetCollder(new Collider(save));
 
@@ -52,8 +52,7 @@ void SaveLoadWindow::LeftClick(float x, float y) {
 
 void SaveLoadWindow::Update() {
 	if (trigger)
-		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
-			display = true;
-			trigger = false;
-		}
+		display = true;
+		trigger = false;
+		
 }

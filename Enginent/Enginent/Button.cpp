@@ -65,6 +65,12 @@ void SwitchScene_Button::action()
 	SoundManager::GetInstance()->stop("MainScreen");
 }
 
+
+void OpenLoadSaveWindow::action() {
+	Game::GetInstance()->SetSaveGame(false);
+	SaveLoadWindow::GetInstance()->Open();
+}
+
 ////////////// PhoneAppsButton
 void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);

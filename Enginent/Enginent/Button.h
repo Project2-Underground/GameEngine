@@ -36,9 +36,9 @@ public:
 	void action();
 };
 
-class LoadButton :public Button {
+class OpenLoadSaveWindow :public Button {
 public:
-	LoadButton(std::string texture) : Button(texture) {}
+	OpenLoadSaveWindow(std::string texture) : Button(texture) {}
 	void action();
 };
 
