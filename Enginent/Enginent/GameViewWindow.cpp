@@ -64,6 +64,10 @@ void ViewWindow::LeftClick(float x, float y) {
 	closeButton->checkCollider(x, y);
 }
 
+void ViewWindow::UpdateMouseButton(glm::vec3 screen) {
+	closeButton->updateButton(screen.x, screen.y);
+}
+
 void GameWindow::Close() {
 	Game::GetInstance()->GetCursor()->enableChange(true);
 	display = false;

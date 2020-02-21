@@ -365,12 +365,9 @@ void XMLManager::SaveGame(std::string filename) {
 	int noteSize = (int)phone->app->notes.size();
 	int chatSize = (int)phone->app->chats.size();
 
-	std::cout << noteSize << std::endl;
-
 	for (int i = 0; i < noteSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
 		node.append_attribute("name").set_value(phone->app->notes[i]->object_name.c_str());
-		std::cout << "helo\n";
 	}
 	for (int i = 0; i < chatSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");

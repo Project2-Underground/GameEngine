@@ -13,6 +13,7 @@ public:
 	virtual void Init(int width, int height) = 0;
 	virtual void Render() = 0;
 	virtual void LeftClick(float, float) = 0;
+	virtual void UpdateMouseButton(glm::vec3) = 0;
 
 	void Close();
 	void Open();
@@ -33,6 +34,7 @@ public:
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
+	void UpdateMouseButton(glm::vec3);
 
 	void SetViewItem(unsigned int texture);
 	void SetText();
@@ -52,7 +54,7 @@ public:
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
-	void SetSaveFile(int fileno, std::string);
+	void UpdateMouseButton(glm::vec3);
 };
 
 class PauseWindow: public GameWindow {

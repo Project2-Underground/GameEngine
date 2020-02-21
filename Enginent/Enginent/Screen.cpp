@@ -81,6 +81,12 @@ void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
 	play->updateButton(screen.x, screen.y);
 	//setting->updateButton(realPos.x, realPos.y);
 	quit->updateButton(screen.x, screen.y);
+	if(GameWindowOpen())
+		for(auto w:windows)
+			if (w->IsOpen()) {
+				w->UpdateMouseButton(screen);
+				break;
+			}
 }
 
 void MenuScreen::HandleKey(SDL_Keycode key) {
@@ -226,9 +232,14 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	}
 }
 
-void GameScreen::UpdateMouseState(glm::vec3, glm::vec3)
+void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 {
-
+	if (GameWindowOpen())
+		for (auto w : windows)
+			if (w->IsOpen()) {
+				w->UpdateMouseButton(screen);
+				break;
+			}
 }
 
 void GameScreen::ChangeLevel(int level) {

@@ -16,8 +16,10 @@ SaveLoadWindow::~SaveLoadWindow() {
 void SaveLoadWindow::Init(int width, int height) {
 	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
 
-	save = new SaveLoadGameButton("Texture/tmp_texture/tmp_inventoryBox.png", "save/save1.xml");
-	save->SetSize((float)width * 0.5f, -(float)height * 0.25f);
+	save = new SaveLoadGameButton("Texture/tmp_texture/tmp_savefile.png", "save/save1.xml");
+	save->SetPressTexture("Texture/tmp_texture/tmp_savefilePress.png");
+	save->SetHoverTexture("Texture/tmp_texture/tmp_savefileHover.png");
+	save->SetSize((float)width * 0.25f, -(float)height * 0.125f);
 	save->SetCollder(new Collider(save));
 
 	closeButton->SetSize(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f);
@@ -51,8 +53,13 @@ void SaveLoadWindow::LeftClick(float x, float y) {
 }
 
 void SaveLoadWindow::Update() {
-	if (trigger)
+	if (trigger) {
 		display = true;
 		trigger = false;
-		
+	}	
+}
+
+void SaveLoadWindow::UpdateMouseButton(glm::vec3 screen) {
+	closeButton->updateButton(screen.x, screen.y);
+	save->updateButton(screen.x, screen.y);
 }
