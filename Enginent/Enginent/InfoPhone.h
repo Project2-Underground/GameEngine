@@ -8,6 +8,12 @@ enum AppType {
 	CHAT
 };
 
+struct Note {
+	std::string name;
+	unsigned int texture;
+	Note(std::string n, unsigned int text);
+};
+
 class Chat{
 	UIObject* pic;						// profile picture (?)
 	std::vector<std::string> texts;		// store all messages from the chat
@@ -39,12 +45,13 @@ public:
 	AppType currentAppType;
 	int currentPage;
 
-	std::vector<UIObject*> notes;
+	std::vector<Note*> notes;
 	std::vector<Chat*> chats;
 	std::vector<UIObject*> buttons;
 
 	~Application();
 private:
+	UIObject* currentNote;
 	UIObject* appBG;
 	PhoneNextButton* next;
 	PhoneBackButton* back;
@@ -63,8 +70,8 @@ public:
 	void CloseApp();
 	void AddPage(AppType, std::string);
 	void SetNotification(AppType);
-	void Open() { open = true; }
-	void Close() { open = false; }
+	void Open();
+	void Close();
 
 	bool open;
 	Application* app;

@@ -76,6 +76,5 @@ void GameWindow::Close() {
 void GameWindow::Open() {
 	CursorUI* cursor = Game::GetInstance()->GetCursor();
 	cursor->enableChange(false);
-	cursor->ResetCursor();
 	trigger = true;
 }

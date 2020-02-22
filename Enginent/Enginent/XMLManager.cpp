@@ -367,7 +367,7 @@ void XMLManager::SaveGame(std::string filename) {
 
 	for (int i = 0; i < noteSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
-		node.append_attribute("name").set_value(phone->app->notes[i]->object_name.c_str());
+		node.append_attribute("name").set_value(phone->app->notes[i]->name.c_str());
 	}
 	for (int i = 0; i < chatSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
@@ -400,4 +400,18 @@ void XMLManager::SaveGameOptions() {
 
 XMLManager::~XMLManager() {
 
+}
+
+void XMLManager::LoadNotes(std::string filename, std::map<std::string, UIObject*>& notes) {
+	if (LoadFile(filename)) {
+		pugi::xml_node allNotes = doc.child("notes");
+
+		// generate all the rooms in that level
+		for (pugi::xml_node_iterator note = allNotes.begin(); note != allNotes.end(); note++) {
+			UIObject* tmp = new UIObject();
+			tmp->SetTexture(note->attribute("texture").as_string());
+			tmp->SetName(note->name());
+			notes.insert(std::pair<std::string, UIObject*>(tmp->object_name, tmp));
+		}
+	}
 }

@@ -22,7 +22,7 @@
 	</doors>
 	<NPCs />
 	<puzzles />
-	<Player posX="426.236694" posY="-50">
+	<Player posX="405.015289" posY="-50">
 		<inventory>
 			<item />
 			<item />
@@ -37,8 +37,8 @@
 	</Player>
 	<Phone>
 		<Notes>
-			<n name="" />
-			<n name="" />
+			<n name="tmp_note1" />
+			<n name="tmp_note2" />
 		</Notes>
 		<Chats />
 	</Phone>

@@ -134,6 +134,9 @@ GameScreen::GameScreen() {
 	phoneIcon->SetSize(100.0f, -100.0f);
 	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->SetCollder(new Collider(phoneIcon));
+	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
+	phone->AddPage(NOTE, "tmp_note1");
+	phone->AddPage(NOTE, "tmp_note2");
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
@@ -192,7 +195,7 @@ void GameScreen::Update() {
 		currentLevel->Update();
 		player->Update();
 	}
-	if (InventoryEnable)
+	if (InventoryEnable && !phone->open)
 		inventory->Update();
 }
 

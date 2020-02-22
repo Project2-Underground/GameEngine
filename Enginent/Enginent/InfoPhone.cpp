@@ -1,6 +1,11 @@
 #include "InfoPhone.h"
 #include "Game.h"
 
+Note::Note(std::string n, unsigned int text) {
+	name = n;
+	texture = text;
+}
+
 Chat::Chat(std::string name) {
 	// load chat from xml
 	this->name = name;
@@ -53,6 +58,10 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	buttons.push_back(next);
 	buttons.push_back(back);
 	buttons.push_back(home);
+
+	currentNote = new UIObject();
+	currentNote->SetDisplay(false);
+	currentNote->SetSize(phoneSize.x, -phoneSize.y * 0.5f);
 	// init first note/chat or add later
 }
 
@@ -103,7 +112,8 @@ void Application::Render() {
 	{
 	case NOTE:
 		if (notes.size() != 0)
-			game->GetRenderer()->Render(notes.at(currentPage));
+			currentNote->SetTexture(notes[currentPage]->texture);
+			game->GetRenderer()->Render(currentNote);
 		break;
 	case CHAT:
 		if (chats.size() != 0)
@@ -115,7 +125,8 @@ void Application::Render() {
 }
 
 void Application::AddNote(UIObject* obj) {
-	notes.push_back(obj);
+	currentNote->SetDisplay(true);
+	notes.push_back(new Note(obj->object_name, obj->GetTexture()));
 }
 
 void Application::AddChat(std::string name) {
@@ -147,20 +158,12 @@ Phone* Phone::GetInstance() {
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/tmp_texture/tmp_phoneScreen.png"); //phone image
-	float sizeX = 300.0f;
-	float sizeY = 600.0f;
+	float sizeX = 400.0f;
+	float sizeY = 800.0f;
 	phone->SetSize(sizeX, -sizeY);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
-	UIObject* tmp_note = new UIObject();
-	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon.png");
-	app->AddNote(tmp_note);
-	tmp_note = new UIObject();
-	tmp_note->SetSize(sizeX, -sizeY*0.5f);
-	tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon2.png");
-	app->AddNote(tmp_note);
 	notiChat = false;
 	notiNote = false;
 	open = false;
@@ -195,6 +198,10 @@ Phone::~Phone() {
 			delete ui;
 	if (phone)
 		delete phone;
+
+	for (std::map<std::string, UIObject*>::iterator itr = notes.begin(); itr != notes.end(); itr++)
+		if (itr->second)
+			delete itr->second;
 }
 
 void Phone::Render() {
@@ -238,13 +245,7 @@ void Phone::AddPage(AppType apptype, std::string name) {
 	switch (apptype)
 	{
 	case NOTE: {
-		//app->AddNote(notes[name]);tmp_note = new UIObject();
-		float sizeX = 300.0f;
-		float sizeY = 600.0f;
-		UIObject* tmp_note = new UIObject();
-		tmp_note->SetSize(sizeX, -sizeY * 0.5f);
-		tmp_note->SetTexture("Texture/tmp_texture/tmp_noteIcon2.png");
-		app->AddNote(tmp_note);
+		app->AddNote(notes[name]);
 		notiNote = false;
 	}break;
 	case CHAT:
@@ -266,4 +267,13 @@ void Phone::SetNotification(AppType apptype) {
 	default:
 		break;
 	}
+}
+
+void Phone::Open() { 
+	open = true; 
+	Game::GetInstance()->GetCursor()->enableChange(false);
+}
+void Phone::Close() { 
+	open = false; 
+	Game::GetInstance()->GetCursor()->enableChange(true);
 }

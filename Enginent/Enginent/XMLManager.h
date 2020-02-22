@@ -32,6 +32,8 @@ public:
 	// chat doc
 	void GetChat(std::string, ImageObject*);
 	std::string GetMessage(std::string, int);
+	// note doc
+	void LoadNotes(std::string, std::map<std::string, UIObject*>&);
 
 	// save game option
 	void SaveGameOptions();
