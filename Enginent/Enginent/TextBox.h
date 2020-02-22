@@ -9,7 +9,7 @@
 
 class TextBox : public UIObject {
 	private:
-		ImageObject* background;
+		UIObject* background;
 		TextObject* dialogue;
 		TextObject* name;
 		SDL_Color textColor = {255, 255, 255, 0};

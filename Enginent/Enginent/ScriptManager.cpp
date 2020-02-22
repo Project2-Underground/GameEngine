@@ -16,7 +16,8 @@ ScriptManager* ScriptManager::_instance = nullptr;
 
 ScriptManager::ScriptManager()
 {
-
+	std::string filename = "save/script.xml";
+	scriptDoc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 }
 
 ScriptManager* ScriptManager::GetInstance()

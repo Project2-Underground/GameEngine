@@ -1,7 +1,6 @@
 #include "XMLManager.h"
 #include "Item.h"
 #include "Game.h"
-
 #include <iostream>
 
 XMLManager* XMLManager::_instance = nullptr;
@@ -400,11 +399,6 @@ void XMLManager::SaveGameOptions() {
 	//gameOption.append_child("Options").append_child("BG_music").append_attribute("mute").set_value(game->muteBG);
 	//gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
 }
-
-//std::map<std::string, Script> XMLManager::GetScript(std::string filename)
-//{
-//	scriptDoc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
-//}
 
 XMLManager::~XMLManager() {
 

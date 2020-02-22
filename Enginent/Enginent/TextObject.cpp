@@ -17,7 +17,7 @@ TextObject::~TextObject()
 
 }
 
-void TextObject::Render(glm::mat4 globalModelTransform)
+void TextObject::Render()
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
@@ -42,9 +42,8 @@ void TextObject::Render(glm::mat4 globalModelTransform)
 
 	glm::mat4 currentMatrix = this->getTransform();
 
-	if (squareMesh != nullptr) {
-
-		currentMatrix = globalModelTransform * currentMatrix;
+	if (squareMesh != nullptr) 
+	{
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, 1);
 		//squareMesh->resetTexcoord();
@@ -79,4 +78,9 @@ void TextObject::loadText(string text, SDL_Color textColor, int fontSize)
 		return;
 	}
 	
+}
+
+unsigned int TextObject::GetTexture()
+{
+	return this->texture;
 }

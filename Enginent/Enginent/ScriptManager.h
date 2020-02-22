@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <pugixml.hpp>
 
 struct Dialogue
 {
@@ -27,6 +28,7 @@ struct Script {
 class ScriptManager {
 	static ScriptManager* _instance;
 	std::map<std::string, Script>* scripts;
+	pugi::xml_document scriptDoc;
 protected:
 	ScriptManager();
 public:

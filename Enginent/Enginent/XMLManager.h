@@ -4,13 +4,11 @@
 #include <string>
 #include "Level.h"
 #include "ImageObject.h"
-#include "ScriptManager.h"
 
 class XMLManager {
 	static XMLManager* _instance;
 	pugi::xml_document doc;
 	pugi::xml_document chatDoc;
-	pugi::xml_document scriptDoc;
 
 	XMLManager();
 	bool LoadFile(std::string filename);
