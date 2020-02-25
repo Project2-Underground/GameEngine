@@ -14,17 +14,25 @@ struct Note {
 	Note(std::string n, unsigned int text);
 };
 
-class Chat{
-	UIObject* pic;						// profile picture (?)
-	std::vector<std::string> texts;		// store all messages from the chat
-	// bubble message
-public:
-	std::string name;					// name of the chat
-	int currentMsgIndex;				// show up to this message
+struct ChatInfo {
+	unsigned int picTexture;
+	std::string name;
+	std::vector<std::string> texts;
+	std::vector<glm::vec3> textPosition;
 
+	void AddText(std::string);
+};
+
+class Chat{
+	SDL_Color textColor = { 255, 255, 255, 0 };
+	UIObject* profilePic;
+	TextObject* name;
+	std::vector<TextObject*> allMsg;
+public:				
+	
 	~Chat();
-	Chat(std::string);
-	void LoadMessages(int index);
+	Chat();
+	void OpenChat(const ChatInfo);
 	void Render();
 	// OnScroller
 };
@@ -46,11 +54,13 @@ public:
 	int currentPage;
 
 	std::vector<Note*> notes;
-	std::vector<Chat*> chats;
+	std::map<std::string, ChatInfo*> chats;
+	//std::vector<ChatInfo*> chats;
 	std::vector<UIObject*> buttons;
 
 	~Application();
 private:
+	Chat* currentChat;
 	UIObject* currentNote;
 	UIObject* appBG;
 	PhoneNextButton* next;

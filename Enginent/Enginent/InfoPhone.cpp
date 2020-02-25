@@ -6,31 +6,39 @@ Note::Note(std::string n, unsigned int text) {
 	texture = text;
 }
 
-Chat::Chat(std::string name) {
-	// load chat from xml
-	this->name = name;
-	currentMsgIndex = 0;
-	pic = new UIObject();
-	XMLManager::GetInstance()->GetChat(name,pic);
+void ChatInfo::AddText(std::string text) {
+	texts.push_back(text);
+	// calculate size of text and set position relative to the previous text
+}
+
+Chat::Chat() {
+	profilePic = new UIObject();
+	profilePic->SetSize(50.0f, -50.0f);
+	profilePic->SetPosition(glm::vec3(-100.0f, 200.0f, 1));
+	name = new TextObject();
 }
 
 Chat::~Chat() {
-	delete pic;
-}
-
-void Chat::LoadMessages(int number) {
-	// load next number of messages
-	XMLManager* lg = XMLManager::GetInstance();
-	for (int i = currentMsgIndex; i < currentMsgIndex + number; i++) {
-		// store messages in texts
-		texts.push_back(lg->GetMessage(name, i));
-	}
-	currentMsgIndex += number;
+	delete profilePic;
 }
 
 void Chat::Render() {
-	Game::GetInstance()->GetRenderer()->Render(pic);
-	// render text bubble
+	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+
+}
+
+void Chat::OpenChat(const ChatInfo c) {
+	profilePic->SetTexture(c.picTexture);
+
+	name->loadText(c.name, textColor, 24);
+	name->SetPosition(glm::vec3(-100.0f + name->getSize.x * 0.5f, 200.0f, 1.0f));
+
+	for (int i = 0; i < c.texts.size(); i++) {
+		TextObject* tmpText = new TextObject();
+		tmpText->loadText(c.texts[i], textColor, 24);
+		tmpText->SetPosition(c.textPosition[i]);
+		allMsg.push_back(tmpText);
+	}
 }
 
 Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
@@ -72,7 +80,7 @@ void Application::Clear() {
 	notes.clear();
 
 	for (auto c : chats)
-		delete c;
+		delete c.second;
 
 	chats.clear();
 }
@@ -117,7 +125,7 @@ void Application::Render() {
 		break;
 	case CHAT:
 		if (chats.size() != 0)
-			chats.at(currentPage)->Render();
+			currentChat->Render();
 		break;
 	}
 
@@ -130,14 +138,12 @@ void Application::AddNote(UIObject* obj) {
 }
 
 void Application::AddChat(std::string name) {
-	// pull chat info from xml file
-	chats.push_back(new Chat(name));
 }
 
 Application::~Application() {
 	for (auto c : chats)
-		if (c)
-			delete c;
+		if (c.second)
+			delete c.second;
 
 	for (auto b : buttons)
 		if (b)
