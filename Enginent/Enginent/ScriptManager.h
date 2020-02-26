@@ -27,13 +27,13 @@ struct Script {
 
 class ScriptManager {
 	static ScriptManager* _instance;
-	std::map<std::string, Script>* scripts;
+	std::map<std::string, Script*>* scripts;
 	pugi::xml_document scriptDoc;
 protected:
 	ScriptManager();
 public:
 	~ScriptManager();
-	ScriptManager* GetInstance();
-	void LoadScript(std::string);
-	std::vector<Dialogue> GetDialogue();
+	static ScriptManager* GetInstance();
+	void LoadScript();
+	Dialogue GetDialogue(std::string);
 };

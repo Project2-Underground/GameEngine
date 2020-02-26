@@ -64,7 +64,7 @@ void TextObject::loadText(string text, SDL_Color textColor, int fontSize)
 	TTF_Font * font = TTF_OpenFont("Roboto-Black.ttf", fontSize);
 	if (font)
 	{
-		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, text.c_str(), textColor);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended_Wrapped(font, text.c_str(), textColor, 950);
 		if (surfaceMessage) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surfaceMessage->w, surfaceMessage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surfaceMessage->pixels);
 			this->SetSize((float)surfaceMessage->w, (float)-surfaceMessage->h);

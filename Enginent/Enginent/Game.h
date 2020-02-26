@@ -11,6 +11,7 @@
 #include "XMLManager.h"
 #include "Screen.h"
 #include "TextBox.h"
+#include "ScriptManager.h"
 
 enum objectType {
 	IMAGE_OBJ = 0,
@@ -32,6 +33,8 @@ class Game
 	Camera* camera;
 	Game();
 	CursorUI* cursorGame;
+	ScriptManager* script;
+	SoundManager* sound;
 
 	bool quit = false;
 	bool changeScreen;

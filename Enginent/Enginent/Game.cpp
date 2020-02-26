@@ -34,7 +34,9 @@ void Game::Init(int width, int height)
 
 	SDL_ShowCursor(SDL_DISABLE);
 	camera = Camera::GetInstance();
-	SoundManager::GetInstance()->Init();
+	sound = SoundManager::GetInstance();
+	sound->Init();
+	script = ScriptManager::GetInstance();
 
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
