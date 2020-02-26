@@ -1,7 +1,6 @@
 #include "XMLManager.h"
 #include "Item.h"
 #include "Game.h"
-
 #include <iostream>
 
 XMLManager* XMLManager::_instance = nullptr;

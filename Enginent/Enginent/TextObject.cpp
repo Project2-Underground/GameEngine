@@ -17,7 +17,7 @@ TextObject::~TextObject()
 
 }
 
-void TextObject::Render(glm::mat4 globalModelTransform)
+void TextObject::Render()
 {
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (Game::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
@@ -42,9 +42,8 @@ void TextObject::Render(glm::mat4 globalModelTransform)
 
 	glm::mat4 currentMatrix = this->getTransform();
 
-	if (squareMesh != nullptr) {
-
-		currentMatrix = globalModelTransform * currentMatrix;
+	if (squareMesh != nullptr) 
+	{
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, 1);
 		//squareMesh->resetTexcoord();
@@ -65,7 +64,7 @@ void TextObject::loadText(string text, SDL_Color textColor, int fontSize)
 	TTF_Font * font = TTF_OpenFont("Roboto-Black.ttf", fontSize);
 	if (font)
 	{
-		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, text.c_str(), textColor);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended_Wrapped(font, text.c_str(), textColor, 950);
 		if (surfaceMessage) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surfaceMessage->w, surfaceMessage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surfaceMessage->pixels);
 			this->SetSize((float)surfaceMessage->w, (float)-surfaceMessage->h);
@@ -79,4 +78,9 @@ void TextObject::loadText(string text, SDL_Color textColor, int fontSize)
 		return;
 	}
 	
+}
+
+unsigned int TextObject::GetTexture()
+{
+	return this->texture;
 }

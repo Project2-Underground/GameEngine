@@ -4,8 +4,9 @@
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 #include <SDL_ttf.h>
+#include "UIObject.h"
 
-class TextObject :public DrawableObject
+class TextObject :public UIObject
 {
 private:
 	unsigned int texture;
@@ -13,8 +14,8 @@ private:
 public:
 	TextObject();
 	~TextObject();
-	void Render(glm::mat4 globalModelTransform);
+	void Render();
 	void update(float deltaTime);
 	void loadText(string text, SDL_Color textColor, int fontSize);
-	
+	unsigned int GetTexture();
 };

@@ -4,26 +4,12 @@
 #include <vector>
 #include "UIObject.h"
 #include "TextObject.h"
+#include "ScriptManager.h"
 
-struct Dialogue
-{
-	std::string name;
-	std::string dialogue;
-	Dialogue(std::string n, std::string d)
-	{
-		name = n;
-		dialogue = d;
-	}
-	Dialogue() 
-	{ 
-		name = " "; 
-		dialogue = " "; 
-	};
-};
 
 class TextBox : public UIObject {
 	private:
-		ImageObject* background;
+		UIObject* background;
 		TextObject* dialogue;
 		TextObject* name;
 		SDL_Color textColor = {255, 255, 255, 0};

@@ -35,6 +35,9 @@ public:
 	// note doc
 	void LoadNotes(std::string, std::map<std::string, UIObject*>&);
 
+	// script doc
+	//std::map<std::string, Script> GetScript(std::string);
+
 	// save game option
 	void SaveGameOptions();
 
