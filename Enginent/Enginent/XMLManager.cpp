@@ -379,8 +379,8 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 	for (auto c:phone->app->chats) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
-		node.append_attribute("name").set_value(c.first.c_str());
-		node.append_attribute("msgNo").set_value(c.second->texts.size());
+		node.append_attribute("name").set_value(c.name.c_str());
+		node.append_attribute("msgNo").set_value(c.texts.size());
 	}
 
 	save.save_file(filename.c_str());

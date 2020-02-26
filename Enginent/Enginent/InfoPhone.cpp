@@ -24,14 +24,22 @@ Chat::~Chat() {
 
 void Chat::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+	renderer->Render(profilePic);
+	//name->Render();
+	for (auto m : allMsg)
+		m->Render();
+}
 
+void Chat::CloseChat() {
+	for (auto m : allMsg)
+		delete m;
 }
 
 void Chat::OpenChat(const ChatInfo c) {
 	profilePic->SetTexture(c.picTexture);
 
 	name->loadText(c.name, textColor, 24);
-	name->SetPosition(glm::vec3(-100.0f + name->getSize.x * 0.5f, 200.0f, 1.0f));
+	name->SetPosition(glm::vec3(-100.0f + name->getSize().x * 0.5f, 200.0f, 1.0f));
 
 	for (int i = 0; i < c.texts.size(); i++) {
 		TextObject* tmpText = new TextObject();
@@ -70,7 +78,25 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	currentNote = new UIObject();
 	currentNote->SetDisplay(false);
 	currentNote->SetSize(phoneSize.x, -phoneSize.y * 0.5f);
-	// init first note/chat or add later
+
+	currentChat = new Chat();
+	// tmp chat
+	ChatInfo tmpChat;
+	float x = -100.0f;
+	float y = 300.0f;
+	tmpChat.name = "tmp_person";
+	tmpChat.picTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/blankHeart.png");
+	for (int i = 0; i < 5; i++) {
+		tmpChat.texts.push_back(std::string(1,i));
+		tmpChat.textPosition.push_back(glm::vec3(x, y, 1));
+		y -= 50;
+	}
+
+	chats.push_back(tmpChat);
+}
+
+void Application::OpenChat() {
+	currentChat->OpenChat(chats[currentPage]);
 }
 
 void Application::Clear() {
@@ -79,8 +105,8 @@ void Application::Clear() {
 
 	notes.clear();
 
-	for (auto c : chats)
-		delete c.second;
+	//for (auto c : chats)
+	//	delete c.second;
 
 	chats.clear();
 }
@@ -100,8 +126,10 @@ void Application::Next() {
 			currentPage--;
 		break;
 	case CHAT:
-		if (currentPage == chats.size())
+		if (currentPage == chats.size()) {
 			currentPage--;
+			OpenChat();
+		}
 		break;
 	}
 }
@@ -110,6 +138,8 @@ void Application::Back() {
 	currentPage--;
 	if (currentPage < 0)
 		currentPage = 0;
+	if(currentAppType == CHAT)
+		OpenChat();
 }
 
 void Application::Render() {
@@ -141,9 +171,9 @@ void Application::AddChat(std::string name) {
 }
 
 Application::~Application() {
-	for (auto c : chats)
-		if (c.second)
-			delete c.second;
+	//for (auto c : chats)
+	//	if (c.second)
+	//		delete c.second;
 
 	for (auto b : buttons)
 		if (b)
@@ -151,6 +181,9 @@ Application::~Application() {
 
 	if (appBG)
 		delete appBG;
+
+	delete currentChat;
+	delete currentNote;
 }
 
 Phone* Phone::_instance = nullptr;
@@ -241,6 +274,8 @@ void Phone::OpenApp(AppType apptype) {
 	app->currentPage = 0;
 	app->open = true;
 	app->currentAppType = apptype;
+	if (apptype == CHAT)
+		app->OpenChat();
 }
 
 void Phone::CloseApp() {

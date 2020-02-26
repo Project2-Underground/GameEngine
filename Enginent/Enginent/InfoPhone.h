@@ -24,7 +24,7 @@ struct ChatInfo {
 };
 
 class Chat{
-	SDL_Color textColor = { 255, 255, 255, 0 };
+	SDL_Color textColor = { 0, 0, 0, 0 };
 	UIObject* profilePic;
 	TextObject* name;
 	std::vector<TextObject*> allMsg;
@@ -33,6 +33,7 @@ public:
 	~Chat();
 	Chat();
 	void OpenChat(const ChatInfo);
+	void CloseChat();
 	void Render();
 	// OnScroller
 };
@@ -47,6 +48,7 @@ public:
 	void Back();
 	void AddNote(UIObject*);
 	void AddChat(std::string);
+	void OpenChat();
 	void Clear();
 
 	bool open;
@@ -54,7 +56,7 @@ public:
 	int currentPage;
 
 	std::vector<Note*> notes;
-	std::map<std::string, ChatInfo*> chats;
+	std::vector<ChatInfo> chats;
 	//std::vector<ChatInfo*> chats;
 	std::vector<UIObject*> buttons;
 

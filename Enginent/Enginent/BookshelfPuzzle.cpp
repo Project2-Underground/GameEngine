@@ -285,3 +285,7 @@ BookshelfPuzzle::~BookshelfPuzzle()
 	for (auto ui : UI)
 		delete ui;
 }
+
+void BookshelfPuzzle::CompletePuzzle() {
+
+}
