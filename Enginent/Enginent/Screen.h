@@ -54,7 +54,6 @@ public:
 
 class GameScreen :public Screen {
 	vector<UIObject*> UI;
-	map<std::string, Puzzle*> puzzles;
 
 	Player* player;
 	Phone* phone;
@@ -72,6 +71,7 @@ class GameScreen :public Screen {
 	bool InventoryEnable;
 public:
 	vector<std::string> levels;
+	map<std::string, Puzzle*> puzzles;
 
 	GameScreen();
 	void Render();

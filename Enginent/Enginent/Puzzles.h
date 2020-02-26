@@ -4,6 +4,7 @@
 #include "UIObject.h"
 
 class PuzzleTemplate : public UIObject {
+	bool done;
 public:
 	virtual void Render() {};
 	virtual void Update() {};
@@ -76,13 +77,16 @@ protected:
 	UIObject* background;
 	Bookshelf* puzzle;
 	bool enableInventory;
+	bool pass;
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
+	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
+	bool Passed() { return pass; }
 };
 
 class BookshelfPuzzle : public Puzzle {
@@ -93,5 +97,6 @@ public:
 	void RightClick(glm::vec3, glm::vec3) {};
 	void LeftClick(glm::vec3, glm::vec3);
 	void UpdateMouseState(glm::vec3, glm::vec3);
+	void CompletePuzzle();
 	~BookshelfPuzzle();
 };

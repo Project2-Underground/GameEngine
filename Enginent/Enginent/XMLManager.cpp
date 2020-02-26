@@ -263,7 +263,12 @@ void XMLManager::LoadFromSave(std::string filename) {
 		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
 
 		// load puzzles
-
+		pugi::xml_node puzzles = file.child("level").child("puzzles");
+		pugi::xml_node_iterator p;
+		for (p = puzzles.begin(); p != puzzles.end(); p++) {
+			if (p->attribute("done").as_bool())
+				gs->puzzles[p->name()]->CompletePuzzle();
+		}
 
 		// load player and inventory
 		pugi::xml_node playerNode = file.child("level").child("Player");
@@ -292,7 +297,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		int count = 0;
 		for (pugi::xml_node_iterator itr = phoneNode.child("Chats").begin(); itr != phoneNode.child("Chats").end(); itr++) {
 			phone->AddPage(CHAT, itr->attribute("name").as_string());
-			phone->app->chats[count++]->currentMsgIndex = itr->attribute("index").as_int();
+			//phone->app->chats[count++]->currentMsgIndex = itr->attribute("index").as_int();
 		}
 	}
 }
@@ -347,6 +352,10 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	// saving puzzles 
+	for (auto p : gs->puzzles) {
+		saveLevel.child("puzzles").append_child(p.first.c_str());
+		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("done").set_value(p.second->Passed());
+	}
 
 	// saving player and inventory
 	Player* player = game->GetPlayer();
@@ -369,10 +378,10 @@ void XMLManager::SaveGame(std::string filename) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
 		node.append_attribute("name").set_value(phone->app->notes[i]->name.c_str());
 	}
-	for (int i = 0; i < chatSize; i++) {
+	for (auto c:phone->app->chats) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
-		node.append_attribute("name").set_value(phone->app->chats[i]->name.c_str());
-		node.append_attribute("index").set_value(phone->app->chats[i]->currentMsgIndex);
+		node.append_attribute("name").set_value(c.first.c_str());
+		node.append_attribute("msgNo").set_value(c.second->texts.size());
 	}
 
 	save.save_file(filename.c_str());
