@@ -25,9 +25,9 @@ Chat::~Chat() {
 void Chat::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(profilePic);
-	//name->Render();
+	renderer->Render(name);
 	for (auto m : allMsg)
-		m->Render();
+		renderer->Render(m);
 }
 
 void Chat::CloseChat() {

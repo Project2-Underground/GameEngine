@@ -27,6 +27,8 @@ public:
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
+	virtual void RightRelease(glm::vec3, glm::vec3) = 0;
+	virtual void LeftRelease(glm::vec3, glm::vec3) = 0;
 	virtual void HandleKey(SDL_Keycode) = 0;
 	virtual void UpdateMouseState(glm::vec3 x, glm::vec3 y) = 0;
 	virtual InteractTypeList GetPointedObject(glm::vec3 pos) { return NORMAL; std::cout << "menu\n"; };
@@ -47,6 +49,8 @@ public:
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	~MenuScreen();
@@ -78,6 +82,8 @@ public:
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void ChangeLevel(int level);
@@ -99,8 +105,10 @@ public:
 	CutsceneScreen();
 	void Render();
 	void Update();
-	void RightClick(glm::vec3, glm::vec3) {};
+	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void HandleKey(SDL_Keycode);
 };

@@ -5,7 +5,8 @@ enum MouseEvent{
 	RightClick = 0,
 	LeftClick,
 	Hover,
-	Drag
+	RightRelease,
+	LeftRelease
 };
 
 enum ActionEvent {

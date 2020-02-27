@@ -77,6 +77,16 @@ void MenuScreen::RightClick(glm::vec3, glm::vec3)
 
 }
 
+void MenuScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
+void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
 	play->updateButton(screen.x, screen.y);
 	//setting->updateButton(realPos.x, realPos.y);
@@ -235,6 +245,16 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	}
 }
 
+void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
+void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
 void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 {
 	if (GameWindowOpen())
@@ -340,6 +360,21 @@ void CutsceneScreen::Update() {
 }
 
 void CutsceneScreen::LeftClick(glm::vec3, glm::vec3) {
+
+}
+
+void CutsceneScreen::RightClick(glm::vec3, glm::vec3)
+{
+
+}
+
+void CutsceneScreen::RightRelease(glm::vec3, glm::vec3)
+{
+
+}
+
+void CutsceneScreen::LeftRelease(glm::vec3, glm::vec3)
+{
 
 }
 

@@ -44,34 +44,36 @@ void MouseInput::FindMousePosition(float x, float y)
 void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY)
 {
 	FindMousePosition((float)posX, (float)posY);
-
 	switch (type)
 	{
-	case RightClick:
-	{
-		game->GetScreen()->RightClick(position_Screen, position_World);
-		ResetActionType();
-		break;
+		case RightClick:
+		{
+			game->GetScreen()->RightClick(position_Screen, position_World);
+			ResetActionType();
+			break;
+		}
+		case LeftClick:
+		{
+			game->GetScreen()->LeftClick(position_Screen, position_World);
+			break;
+		}
+		case Hover:
+		{
+			game->GetScreen()->UpdateMouseState(position_Screen, position_World);
+			break;
+		}
+		case RightRelease:
+		{
+			game->GetScreen()->RightRelease(position_Screen, position_World);
+			break;
+		}
+		case LeftRelease:
+		{
+			game->GetScreen()->LeftRelease(position_Screen, position_World);
+			break;
+		}
 	}
-	case LeftClick:
-	{
-		game->GetScreen()->LeftClick(position_Screen, position_World);
-		break;
-	}
-	case Hover:
-	{
-		game->GetScreen()->UpdateMouseState(position_Screen, position_World);
-		break;
-	}
-	case Drag:
-	{
-		break;
-	}
-
-	}
-	
 }
-
 
 int MouseInput::GetEvent()
 {
