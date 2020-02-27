@@ -14,7 +14,7 @@ void ChatInfo::AddText(std::string text) {
 Chat::Chat() {
 	profilePic = new UIObject();
 	profilePic->SetSize(50.0f, -50.0f);
-	profilePic->SetPosition(glm::vec3(-100.0f, 200.0f, 1));
+	profilePic->SetPosition(glm::vec3(-130.0f, 250.0f, 1));
 	name = new TextObject();
 }
 
@@ -39,13 +39,30 @@ void Chat::OpenChat(const ChatInfo c) {
 	profilePic->SetTexture(c.picTexture);
 
 	name->loadText(c.name, textColor, 24);
-	name->SetPosition(glm::vec3(-100.0f + name->getSize().x * 0.5f, 200.0f, 1.0f));
+	name->SetPosition(glm::vec3(-100.0f + name->getSize().x * 0.5f, 250.0f, 1.0f));
 
 	for (int i = 0; i < c.texts.size(); i++) {
 		TextObject* tmpText = new TextObject();
 		tmpText->loadText(c.texts[i], textColor, 24);
 		tmpText->SetPosition(c.textPosition[i]);
 		allMsg.push_back(tmpText);
+	}
+	upperBound = allMsg.at(0)->getPos().y;
+	lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y + -250.0f;
+}
+
+void Chat::Scroll(int direction) {
+	if (direction > 0) {
+		// scroll up
+		if(allMsg.at(allMsg.size() - 1)->getPos().y < lowerBound)
+			for (auto m : allMsg)
+				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y + SCROLL_SPEED, 1));
+	}
+	else {
+		// scroll down
+		if (allMsg.at(0)->getPos().y > upperBound)
+			for (auto m : allMsg)
+				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y - SCROLL_SPEED, 1));
 	}
 }
 
@@ -83,11 +100,11 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	// tmp chat
 	ChatInfo tmpChat;
 	float x = -100.0f;
-	float y = 300.0f;
+	float y = 200.0f;
 	tmpChat.name = "tmp_person";
 	tmpChat.picTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/blankHeart.png");
-	for (int i = 0; i < 5; i++) {
-		tmpChat.texts.push_back(std::string(1,i));
+	for (int i = 0; i < 15; i++) {
+		tmpChat.texts.push_back("hello");
 		tmpChat.textPosition.push_back(glm::vec3(x, y, 1));
 		y -= 50;
 	}
@@ -97,6 +114,11 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 
 void Application::OpenChat() {
 	currentChat->OpenChat(chats[currentPage]);
+}
+
+void Application::Scroll(int direction) {
+	if(currentAppType == CHAT)
+		currentChat->Scroll(direction);
 }
 
 void Application::Clear() {
@@ -251,6 +273,11 @@ void Phone::Render() {
 	else {
 		Game::GetInstance()->GetRenderer()->Render(icons);
 	}
+}
+
+void Phone::Scroll(glm::vec3 screen, int direction) {
+	// check if mouse is within the phone screen
+	app->Scroll(direction);
 }
 
 void Phone::LeftClick(float x, float y) {

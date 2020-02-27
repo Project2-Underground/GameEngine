@@ -3,6 +3,8 @@
 #include "UIObject.h"
 #include "Button.h"
 
+#define SCROLL_SPEED 20
+
 enum AppType {
 	NOTE = 0,
 	CHAT
@@ -28,11 +30,13 @@ class Chat{
 	UIObject* profilePic;
 	TextObject* name;
 	std::vector<TextObject*> allMsg;
+	float upperBound;
+	float lowerBound;
 public:				
-	
 	~Chat();
 	Chat();
 	void OpenChat(const ChatInfo);
+	void Scroll(int direction);
 	void CloseChat();
 	void Render();
 	// OnScroller
@@ -44,6 +48,7 @@ public:
 	void Render();
 
 	void LeftClick(float, float);
+	void Scroll(int direction);
 	void Next();
 	void Back();
 	void AddNote(UIObject*);
@@ -84,6 +89,7 @@ public:
 	void SetNotification(AppType);
 	void Open();
 	void Close();
+	void Scroll(glm::vec3, int);
 
 	bool open;
 	Application* app;

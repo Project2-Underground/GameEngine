@@ -6,7 +6,8 @@ enum MouseEvent{
 	LeftClick,
 	Hover,
 	RightRelease,
-	LeftRelease
+	LeftRelease,
+	Scroll
 };
 
 enum ActionEvent {
@@ -31,7 +32,7 @@ public:
 	static MouseInput* GetInstance();
 	void Init(int width, int height);
 	void FindMousePosition(float x, float y);
-	void UpdateMouseInput(MouseEvent, int, int);
+	void UpdateMouseInput(MouseEvent, int, int, int direction = 0);
 	void SetActionEventType(ActionEvent a) { actionType = a; }
 	glm::vec3 GetMouseScreenPosition() { return position_Screen; }
 	glm::vec3 GetMouseWorldPosition() { return position_World; }

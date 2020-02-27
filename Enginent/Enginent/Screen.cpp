@@ -255,6 +255,11 @@ void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 
 }
 
+void GameScreen::Scroll(glm::vec3 screen, int direction) {
+	if (phone->open)
+		phone->Scroll(screen, direction);
+}
+
 void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 {
 	if (GameWindowOpen())
