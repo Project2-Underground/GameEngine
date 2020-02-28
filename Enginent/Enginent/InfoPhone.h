@@ -5,6 +5,12 @@
 
 #define SCROLL_SPEED 20
 
+#define TEXT_SPACE 50
+#define TEXT_TOP_Y 200.0f
+#define TEXT_BOTTOM_Y -250.0f
+#define TEXT_START_X -150.0f
+#define FONT_SIZE 24
+
 enum AppType {
 	NOTE = 0,
 	CHAT
@@ -21,6 +27,7 @@ struct ChatInfo {
 	std::string name;
 	std::vector<std::string> texts;
 	std::vector<glm::vec3> textPosition;
+	int currentMsgIndex = 0;
 
 	void AddText(std::string);
 };
@@ -35,6 +42,7 @@ class Chat{
 public:				
 	~Chat();
 	Chat();
+	void ClearText();
 	void OpenChat(const ChatInfo);
 	void Scroll(int direction);
 	void CloseChat();
@@ -52,7 +60,7 @@ public:
 	void Next();
 	void Back();
 	void AddNote(UIObject*);
-	void AddChat(std::string);
+	void AddChat(ChatInfo*);
 	void OpenChat();
 	void Clear();
 
@@ -61,8 +69,7 @@ public:
 	int currentPage;
 
 	std::vector<Note*> notes;
-	std::vector<ChatInfo> chats;
-	//std::vector<ChatInfo*> chats;
+	std::vector<ChatInfo*> chats;
 	std::vector<UIObject*> buttons;
 
 	~Application();
@@ -87,9 +94,12 @@ public:
 	void CloseApp();
 	void AddPage(AppType, std::string);
 	void SetNotification(AppType);
+	void ResetNotification(AppType);
+	void Message(std::string, int);
 	void Open();
 	void Close();
 	void Scroll(glm::vec3, int);
+	void PrintAllChat();
 
 	bool open;
 	Application* app;
@@ -97,6 +107,7 @@ public:
 	~Phone();
 
 	std::map<std::string, UIObject*> notes;
+	std::map<std::string, ChatInfo> chats;
 private:
 	Phone();
 	std::vector<UIObject*> icons;

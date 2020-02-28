@@ -293,10 +293,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
 			phone->AddPage(NOTE, itr->attribute("name").as_string());
 		}
-		int count = 0;
+
 		for (pugi::xml_node_iterator itr = phoneNode.child("Chats").begin(); itr != phoneNode.child("Chats").end(); itr++) {
-			phone->AddPage(CHAT, itr->attribute("name").as_string());
-			//phone->app->chats[count++]->currentMsgIndex = itr->attribute("index").as_int();
+			std::string name = itr->attribute("name").as_string();
+			phone->AddPage(CHAT, name);
+			phone->chats[name].currentMsgIndex = itr->attribute("msgNo").as_int();
 		}
 	}
 }
@@ -377,17 +378,14 @@ void XMLManager::SaveGame(std::string filename) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
 		node.append_attribute("name").set_value(phone->app->notes[i]->name.c_str());
 	}
-	for (auto c:phone->app->chats) {
+
+	for (auto c:phone->chats) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
-		node.append_attribute("name").set_value(c.name.c_str());
-		node.append_attribute("msgNo").set_value(c.texts.size());
+		node.append_attribute("name").set_value(c.second.name.c_str());
+		node.append_attribute("msgNo").set_value(c.second.texts.size());
 	}
 
 	save.save_file(filename.c_str());
-}
-
-void XMLManager::GetChat(std::string name, ImageObject* obj) {
-	obj->SetTexture(chatDoc.child("chats").child(name.c_str()).attribute("pic").as_string());
 }
 
 std::string XMLManager::GetMessage(std::string name, int index) {
@@ -420,6 +418,23 @@ void XMLManager::LoadNotes(std::string filename, std::map<std::string, UIObject*
 			tmp->SetTexture(note->attribute("texture").as_string());
 			tmp->SetName(note->name());
 			notes.insert(std::pair<std::string, UIObject*>(tmp->object_name, tmp));
+		}
+	}
+}
+
+void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>& chats) {
+	if (LoadFile(filename)) {
+		pugi::xml_node allChats = doc.child("chats");
+
+		for (pugi::xml_node_iterator chat = allChats.begin(); chat != allChats.end(); chat++) {
+			ChatInfo c;
+			c.name = chat->name();
+			c.picTexture = Game::GetInstance()->GetRenderer()->LoadTexture(chat->attribute("pic").as_string());
+			if (chat->first_child()) 
+				for (pugi::xml_node_iterator msg = chat->begin(); msg != chat->end(); msg++) {
+					c.AddText(msg->child_value());
+				}
+			chats.insert(std::pair<std::string, ChatInfo>(c.name, c));
 		}
 	}
 }

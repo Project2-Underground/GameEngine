@@ -22,7 +22,9 @@ void InteractableObj::SetDialogue(vector<Dialogue> s) {
 
 void InteractableObj::TakePic() {
 	if (takePic) {
-		Phone::GetInstance()->AddPage(NOTE, picName);
+		Phone* phone = Phone::GetInstance();
+		phone->AddPage(NOTE, picName);
+		phone->SetNotification(NOTE);
 		takePic = false;
 	}
 }

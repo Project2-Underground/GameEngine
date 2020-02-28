@@ -7,6 +7,9 @@ Note::Note(std::string n, unsigned int text) {
 }
 
 void ChatInfo::AddText(std::string text) {
+	// also need to calculate x
+	float padding = text.size() * 0.25f * FONT_SIZE;
+	textPosition.push_back(glm::vec3(TEXT_START_X + padding, TEXT_TOP_Y - TEXT_SPACE * texts.size(), 0));
 	texts.push_back(text);
 	// calculate size of text and set position relative to the previous text
 }
@@ -35,20 +38,29 @@ void Chat::CloseChat() {
 		delete m;
 }
 
+void Chat::ClearText() {
+	for (auto t : allMsg)
+		delete t;
+	allMsg.clear();
+}
+
 void Chat::OpenChat(const ChatInfo c) {
+	ClearText();
 	profilePic->SetTexture(c.picTexture);
 
-	name->loadText(c.name, textColor, 24);
+	name->loadText(c.name, textColor, FONT_SIZE);
 	name->SetPosition(glm::vec3(-100.0f + name->getSize().x * 0.5f, 250.0f, 1.0f));
 
-	for (int i = 0; i < c.texts.size(); i++) {
+	for (int i = 0; i < c.currentMsgIndex; i++) {
 		TextObject* tmpText = new TextObject();
-		tmpText->loadText(c.texts[i], textColor, 24);
+		tmpText->loadText(c.texts[i], textColor, FONT_SIZE);
 		tmpText->SetPosition(c.textPosition[i]);
 		allMsg.push_back(tmpText);
 	}
-	upperBound = allMsg.at(0)->getPos().y;
-	lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y + -250.0f;
+	if (c.currentMsgIndex > 0) {
+		upperBound = allMsg.at(0)->getPos().y;
+		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y + TEXT_BOTTOM_Y;
+	}
 }
 
 void Chat::Scroll(int direction) {
@@ -97,27 +109,15 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	currentNote->SetSize(phoneSize.x, -phoneSize.y * 0.5f);
 
 	currentChat = new Chat();
-	// tmp chat
-	ChatInfo tmpChat;
-	float x = -100.0f;
-	float y = 200.0f;
-	tmpChat.name = "tmp_person";
-	tmpChat.picTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/blankHeart.png");
-	for (int i = 0; i < 15; i++) {
-		tmpChat.texts.push_back("hello");
-		tmpChat.textPosition.push_back(glm::vec3(x, y, 1));
-		y -= 50;
-	}
-
-	chats.push_back(tmpChat);
 }
 
 void Application::OpenChat() {
-	currentChat->OpenChat(chats[currentPage]);
+	if(chats.size() > 0)
+		currentChat->OpenChat(*chats[currentPage]);
 }
 
 void Application::Scroll(int direction) {
-	if(currentAppType == CHAT)
+	if (currentAppType == CHAT && chats.size() > 0)
 		currentChat->Scroll(direction);
 }
 
@@ -150,6 +150,8 @@ void Application::Next() {
 	case CHAT:
 		if (currentPage == chats.size()) {
 			currentPage--;
+		}
+		else {
 			OpenChat();
 		}
 		break;
@@ -158,10 +160,13 @@ void Application::Next() {
 
 void Application::Back() {
 	currentPage--;
-	if (currentPage < 0)
+	if (currentPage < 0) {
 		currentPage = 0;
-	if(currentAppType == CHAT)
-		OpenChat();
+	}
+	else {
+		if (currentAppType == CHAT)
+			OpenChat();
+	}
 }
 
 void Application::Render() {
@@ -189,7 +194,8 @@ void Application::AddNote(UIObject* obj) {
 	notes.push_back(new Note(obj->object_name, obj->GetTexture()));
 }
 
-void Application::AddChat(std::string name) {
+void Application::AddChat(ChatInfo* chat) {
+	chats.push_back(chat);
 }
 
 Application::~Application() {
@@ -298,6 +304,7 @@ void Phone::UpdateButton(float x, float y) {
 }
 
 void Phone::OpenApp(AppType apptype) {
+	ResetNotification(apptype);
 	app->currentPage = 0;
 	app->open = true;
 	app->currentAppType = apptype;
@@ -317,11 +324,16 @@ void Phone::AddPage(AppType apptype, std::string name) {
 		notiNote = false;
 	}break;
 	case CHAT:
-		app->AddChat(name);
+		app->AddChat(&chats[name]);
 		notiChat = false;
 	default:
 		break;
 	}
+}
+
+void Phone::Message(std::string name, int msgIndex) {
+	chats[name].currentMsgIndex = msgIndex;
+	SetNotification(CHAT);
 }
 
 void Phone::SetNotification(AppType apptype) {
@@ -337,6 +349,19 @@ void Phone::SetNotification(AppType apptype) {
 	}
 }
 
+void Phone::ResetNotification(AppType apptype) {
+	switch (apptype)
+	{
+	case NOTE:
+		notiNote = false;
+		break;
+	case CHAT: 
+		notiChat = false;
+	default:
+		break;
+	}
+}
+
 void Phone::Open() { 
 	open = true; 
 	Game::GetInstance()->GetCursor()->enableChange(false);
@@ -344,4 +369,14 @@ void Phone::Open() {
 void Phone::Close() { 
 	open = false; 
 	Game::GetInstance()->GetCursor()->enableChange(true);
+}
+
+void Phone::PrintAllChat() {
+	std::cout << chats.size();
+	for (auto c : chats) {
+		std::cout << c.first << ":\n";
+		for (auto text : c.second.texts)
+			std::cout << text;
+		std::cout << std::endl;
+	}
 }

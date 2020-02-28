@@ -145,8 +145,12 @@ GameScreen::GameScreen() {
 	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->SetCollder(new Collider(phoneIcon));
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
+	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
+	// test
 	phone->AddPage(NOTE, "tmp_note1");
 	phone->AddPage(NOTE, "tmp_note2");
+	phone->AddPage(CHAT, "person_name");
+	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;

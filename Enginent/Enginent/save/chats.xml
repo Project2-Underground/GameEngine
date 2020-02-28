@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <chats>
-	<person_name pic="path_to_texture">
-		<message value="This is a message in one text bubble"/>
-		<message value="This is a message in one text bubble"/>
-		<message value="This is a message in one text bubble"/>
+	<person_name pic="Texture/tmp_texture/person1.png">
+		<m>this is a message in one</m>
+		<m>yes</m>
+		<m>another one</m>
 	</person_name>
-	<another_person_name pic="path_to_texture">
-		<message value="This is a message in one text bubble"/>
-		<message value="This is a message in one text bubble"/>
-		<message value="This is a message in one text bubble"/>
+	<another_person_name pic="Texture/tmp_texture/person2.png">
+		<m>this is a message in one text bubble</m>
+		<m>this is a message in one text bubble</m>
+		<m>this is a message in one text bubble</m>
 	</another_person_name>
 </chats>
