@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 #include <vector>
 #include <map>
 #include <pugixml.hpp>
@@ -14,12 +15,10 @@ struct Dialogue
 
 struct Script {
 	std::vector<Dialogue> dialogue;
-	int type;
 	int loopIndex;
 	int currIndex;
-	Script(int type, int index)
+	Script(int index)
 	{
-		this->type = type;
 		this->loopIndex = index;
 		this->currIndex = 0;
 	}
@@ -27,7 +26,7 @@ struct Script {
 
 class ScriptManager {
 	static ScriptManager* _instance;
-	std::map<std::string, Script*>* scripts;
+	std::map<std::string, Script*> scripts;
 	pugi::xml_document scriptDoc;
 protected:
 	ScriptManager();

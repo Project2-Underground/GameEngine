@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scripts>
+	<script key = "test" loopIndex = "0"/>
+		<Dialogue name = "Elias" text = "What?"/>
+		<Dialogue name = "Emma" text = "Help"/>
+	</script>
+</scripts>
