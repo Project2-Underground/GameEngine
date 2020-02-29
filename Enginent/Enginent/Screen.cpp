@@ -150,6 +150,9 @@ GameScreen::GameScreen() {
 	phone->AddPage(NOTE, "tmp_note1");
 	phone->AddPage(NOTE, "tmp_note2");
 	phone->AddPage(CHAT, "person_name");
+	phone->Message("person_name", 2);
+	phone->SetNotification(NOTE);
+	phone->SetNotification(CHAT);
 	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));

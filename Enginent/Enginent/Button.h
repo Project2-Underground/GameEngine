@@ -50,8 +50,13 @@ public:
 
 class PhoneAppsButton :public Button {
 	int appType;
+	unsigned int notiTexture;
+	bool notice;
 public:
 	PhoneAppsButton(std::string texture) : Button(texture) {}
+	void checkCollider(float x, float y);
+	void SetNotiTexture(std::string);
+	void Notice(bool b) { if (b) SetTexture(notiTexture); notice = b; }
 	void action();
 	void SetApp(int type) { appType = type; }
 };

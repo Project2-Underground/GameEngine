@@ -7,10 +7,17 @@ Note::Note(std::string n, unsigned int text) {
 }
 
 void ChatInfo::AddText(std::string text) {
-	// also need to calculate x
-	float padding = text.size() * 0.25f * FONT_SIZE;
-	textPosition.push_back(glm::vec3(TEXT_START_X + padding, TEXT_TOP_Y - TEXT_SPACE * texts.size(), 0));
+	int nextLine = MAX_FONT_PER_LINE;
+	int lineCount = 1;
+	while (text.size() > nextLine) {
+		for (; text[nextLine] != ' '; nextLine--);
+		text[nextLine] = '\n';
+		lineCount++;
+		nextLine += MAX_FONT_PER_LINE;
+	}
+	textPosition.push_back(glm::vec3(TEXT_START_X, TEXT_TOP_Y, 0));
 	texts.push_back(text);
+	lineCounts.push_back(lineCount);
 	// calculate size of text and set position relative to the previous text
 }
 
@@ -54,12 +61,29 @@ void Chat::OpenChat(const ChatInfo c) {
 	for (int i = 0; i < c.currentMsgIndex; i++) {
 		TextObject* tmpText = new TextObject();
 		tmpText->loadText(c.texts[i], textColor, FONT_SIZE);
-		tmpText->SetPosition(c.textPosition[i]);
+
+		// calculate starting x of the msg
+		float paddingx = tmpText->getSize().x * 0.5f;
+
+		// calculate starting y of the msg
+		float yPos = TEXT_TOP_Y;
+		if (i > 0) {
+			//if (c.lineCounts[i] > 1) {
+				yPos = allMsg[i - 1]->getPos().y - -allMsg[i - 1]->getSize().y*0.5f - -tmpText->getSize().y*0.5f - TEXT_SPACE;
+			/*}
+			else {
+				yPos = allMsg[i - 1]->getPos().y - TEXT_SPACE;
+			}*/
+		}
+
+		glm::vec3 newPos = glm::vec3(c.textPosition[i].x + paddingx, yPos, 0);
+
+		tmpText->SetPosition(newPos);
 		allMsg.push_back(tmpText);
 	}
 	if (c.currentMsgIndex > 0) {
 		upperBound = allMsg.at(0)->getPos().y;
-		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y + TEXT_BOTTOM_Y;
+		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y*0.25f + TEXT_BOTTOM_Y;
 	}
 }
 
@@ -84,14 +108,14 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	appBG = new UIObject();
 
 	// init buttons
-	float iconSize = phoneSize.x*0.25f;
+	float iconSize = phoneSize.x*0.125f;
 	next = new PhoneNextButton("Texture/tmp_texture/tmp_arrowIcon.png");
 	next->SetSize(iconSize, -iconSize);
-	next->SetPosition(glm::vec3(phoneSize.x * 0.25f - phonePos.x, phonePos.y + phoneSize.y * -0.25f, 1));
+	next->SetPosition(glm::vec3(phoneSize.x * 0.25f - phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
 	next->SetCollder(new Collider(next));
 
 	back = new PhoneBackButton("Texture/tmp_texture/tmp_arrowIcon2.png");
-	back->SetPosition(glm::vec3(-phoneSize.x * 0.25f - phonePos.x, phonePos.y + phoneSize.y * -0.25f, 1));
+	back->SetPosition(glm::vec3(-phoneSize.x * 0.25f - phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
 	back->SetSize(iconSize, -iconSize);
 	back->SetCollder(new Collider(back));
 
@@ -231,8 +255,6 @@ Phone::Phone() {
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
-	notiChat = false;
-	notiNote = false;
 	open = false;
 
 	float size = sizeX*.25f;
@@ -241,16 +263,18 @@ Phone::Phone() {
 	noteIcon->SetSize(size, -size);
 	noteIcon->SetPosition(glm::vec3(phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
 	noteIcon->SetApp(NOTE);
+	noteIcon->SetNotiTexture("Texture/tmp_texture/tmp_noteIconNoti.png");
 	noteIcon->SetCollder(new Collider(noteIcon));
 	
 	chatIcon = new PhoneAppsButton("Texture/tmp_texture/tmp_chatIcon.png");
 	chatIcon->SetSize(size, -size);
 	chatIcon->SetPosition(glm::vec3(-phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
 	chatIcon->SetApp(CHAT);
+	chatIcon->SetNotiTexture("Texture/tmp_texture/tmp_chatIconNoti.png");
 	chatIcon->SetCollder(new Collider(chatIcon));
 	
 	exitButton = new PhoneExitButton("Texture/tmp_texture/tmp_homeIcon.png");
-	exitButton->SetSize(size, -size);
+	exitButton->SetSize(size*0.5f, -size * 0.5f);
 	exitButton->SetPosition(glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * -0.4f, 1));
 	exitButton->SetCollder(new Collider(exitButton));
 
@@ -321,11 +345,9 @@ void Phone::AddPage(AppType apptype, std::string name) {
 	{
 	case NOTE: {
 		app->AddNote(notes[name]);
-		notiNote = false;
 	}break;
 	case CHAT:
 		app->AddChat(&chats[name]);
-		notiChat = false;
 	default:
 		break;
 	}
@@ -337,13 +359,14 @@ void Phone::Message(std::string name, int msgIndex) {
 }
 
 void Phone::SetNotification(AppType apptype) {
+	std::cout << apptype << std::endl;
 	switch (apptype)
 	{
 	case NOTE:
-		notiNote = true;
+		noteIcon->Notice(true);
 		break;
 	case CHAT: 
-		notiChat = true;
+		chatIcon->Notice(true);
 	default:
 		break;
 	}
@@ -353,13 +376,17 @@ void Phone::ResetNotification(AppType apptype) {
 	switch (apptype)
 	{
 	case NOTE:
-		notiNote = false;
+		noteIcon->Notice(false);
 		break;
-	case CHAT: 
-		notiChat = false;
+	case CHAT:
+		chatIcon->Notice(false);
 	default:
 		break;
 	}
+}
+
+void Phone::Clear() {
+	app->Clear();
 }
 
 void Phone::Open() { 

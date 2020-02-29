@@ -76,6 +76,26 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
+void PhoneAppsButton::SetNotiTexture(std::string texture) {
+	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+
+void PhoneAppsButton::checkCollider(float x, float y)
+{
+	if (this->col->isClicked(x, y))
+	{
+		if (notice)
+			SetTexture(normalTexture);
+		action();
+	}
+	else
+	{
+		if (notice)
+			SetTexture(notiTexture);
+		else
+			SetTexture(normalTexture);
+	}
+}
 
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();

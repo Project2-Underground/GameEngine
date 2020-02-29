@@ -5,10 +5,19 @@
 		<m>this is a message in one</m>
 		<m>yes</m>
 		<m>another one</m>
+		<m>henlo</m>
+		<m>how are you</m>
+		<m>my name is person_name</m>
+		<m>yes</m>
+		<m>wait</m>
+		<m>no</m>
+		<m>I'm not suppose to be here</m>
+		<m>take care</m>
 	</person_name>
 	<another_person_name pic="Texture/tmp_texture/person2.png">
 		<m>this is a message in one text bubble</m>
 		<m>this is a message in one text bubble</m>
+		<m>this is a message in one text bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble </m>
 		<m>this is a message in one text bubble</m>
 	</another_person_name>
 </chats>

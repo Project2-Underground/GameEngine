@@ -3,13 +3,14 @@
 #include "UIObject.h"
 #include "Button.h"
 
-#define SCROLL_SPEED 20
+constexpr auto SCROLL_SPEED = 20;
 
-#define TEXT_SPACE 50
-#define TEXT_TOP_Y 200.0f
-#define TEXT_BOTTOM_Y -250.0f
-#define TEXT_START_X -150.0f
-#define FONT_SIZE 24
+constexpr auto TEXT_SPACE = 30;
+constexpr auto TEXT_TOP_Y = 180.0f;
+constexpr auto TEXT_BOTTOM_Y = -250.0f;
+constexpr auto TEXT_START_X = -150.0f;
+constexpr auto FONT_SIZE = 24;
+constexpr auto MAX_FONT_PER_LINE = 29;
 
 enum AppType {
 	NOTE = 0,
@@ -27,6 +28,7 @@ struct ChatInfo {
 	std::string name;
 	std::vector<std::string> texts;
 	std::vector<glm::vec3> textPosition;
+	std::vector<int> lineCounts;
 	int currentMsgIndex = 0;
 
 	void AddText(std::string);
@@ -100,8 +102,11 @@ public:
 	void Close();
 	void Scroll(glm::vec3, int);
 	void PrintAllChat();
+	void Clear();
 
 	bool open;
+	bool notiNote;
+	bool notiChat;
 	Application* app;
 
 	~Phone();
@@ -111,9 +116,6 @@ public:
 private:
 	Phone();
 	std::vector<UIObject*> icons;
-
-	bool notiChat;
-	bool notiNote;
 
 	UIObject* phone;
 	PhoneAppsButton* noteIcon;

@@ -38,13 +38,13 @@
 		</inventory>
 	</Player>
 	<Phone>
-		<Notes>
+		<Notes noti="1">
 			<n name="tmp_note1" />
 			<n name="tmp_note2" />
 		</Notes>
-		<Chats>
-			<c name="person_name" msgNo="3" />
-			<c name="another_person_name" msgNo="3" />
+		<Chats noti="0">
+			<c name="person_name" msgNo="11" />
+			<c name="another_person_name" msgNo="4" />
 		</Chats>
 	</Phone>
 </level>
