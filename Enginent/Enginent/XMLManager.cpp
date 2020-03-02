@@ -132,7 +132,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
 				n = d;
 				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value(), nullptr));
 			}
 		}
 
@@ -167,7 +167,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
 				n = d;
 				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value(), nullptr));
 			}
 		}
 

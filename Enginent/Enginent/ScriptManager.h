@@ -4,13 +4,26 @@
 #include <vector>
 #include <map>
 #include <pugixml.hpp>
+#include "Item.h"
 
 struct Dialogue
 {
 	std::string name;
 	std::string dialogue;
-	Dialogue(std::string n, std::string d);
+	Item* item;
+	Dialogue(std::string n, std::string d, Item* item);
 	Dialogue();
+};
+
+struct Choice {
+	std::string text;
+	std::string nextScript;
+	Choice(std::string& t, std::string& next)
+	{
+		text = t;
+		nextScript = next;
+	}
+	Choice() {};
 };
 
 struct Script {

@@ -1,15 +1,17 @@
 #include "ScriptManager.h"
 
-Dialogue::Dialogue(std::string n, std::string d)
+Dialogue::Dialogue(std::string n, std::string d, Item* i)
 {
 	name = n;
 	dialogue = d;
+	item = i;
 }
 
 Dialogue::Dialogue()
 {
 	name = " ";
 	dialogue = " ";
+	item = nullptr;
 };
 
 ScriptManager* ScriptManager::_instance = nullptr;
@@ -17,7 +19,6 @@ ScriptManager* ScriptManager::_instance = nullptr;
 ScriptManager::ScriptManager()
 {
 	pugi::xml_parse_result result = scriptDoc.load_file("save/scripts.xml" , pugi::parse_default | pugi::parse_declaration);
-	std::cout << result << std::endl;
 	if (result)
 		LoadScript();
 	else
@@ -42,13 +43,21 @@ void ScriptManager::LoadScript()
 		Script* s = new Script(scripts->attribute("loopIndex").as_int());
 
 		pugi::xml_node dialogue = (scripts)->child("Dialogue");
-		for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++)
+		for (pugi::xml_node_iterator dialogue = scripts->begin(); dialogue != scripts->end(); dialogue++)
 		{
-			std::string name = d->attribute("name").as_string();
-			std::string text = d->attribute("text").as_string();
-			Dialogue tmp(name, text);
+			std::string name = dialogue->attribute("name").as_string();
+			std::string text = dialogue->attribute("text").as_string();
+			Item* item = nullptr;
+			if (dialogue->child("item"))
+			{
+				//create item
+				item = new Item(dialogue->child("item").attribute("name").as_string());
+				item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
+				item->SetViewTexture(dialogue->child("item").attribute("v_texture").as_string());
+			}
+			Dialogue tmp(name, text, item);
 			s->dialogue.push_back(tmp);
-			std::cout << name << ": " << text << std::endl;
+
 		}
 		this->scripts[key] = s;
 	}
@@ -56,10 +65,16 @@ void ScriptManager::LoadScript()
 
 Dialogue ScriptManager::GetDialogue(std::string key)
 {
-	Script* tmp = scripts[key];
+	Script* tmp = scripts.at(key);
+	if (tmp == nullptr)
+	{
+		std::cout << "Cannot find dialogue " << key << std::endl;
+		return Dialogue();
+	}
+
 	int index = tmp->currIndex;
 	tmp->currIndex++;
-	if (tmp->currIndex > tmp->dialogue.size())
+	if (tmp->currIndex >= tmp->dialogue.size())
 	{
 		tmp->currIndex = tmp->loopIndex;
 	}

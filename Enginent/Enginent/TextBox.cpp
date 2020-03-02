@@ -12,6 +12,7 @@ TextBox* TextBox::GetInstance() {
 TextBox::TextBox()
 {
 	display = false;
+	scriptManager = ScriptManager::GetInstance();
 	background = new UIObject();
 	background->SetTexture("Texture/UI/Textbox.png");
 	background->SetSize(1280, -720);
@@ -31,15 +32,11 @@ TextBox::TextBox()
 
 }
 
-void TextBox::setText(std::vector<Dialogue> d)
+void TextBox::setText(std::string key)
 {
-	this->display = true;
-	this->dialogues = d;
-}
-
-void TextBox::setText(Dialogue d)
-{
-	this->display = true;
+	Dialogue d = scriptManager->GetDialogue(key);
+	display = true;
+	std::cout << d.name << " here\n";
 	name->loadText(d.name, nameColor, 30);
 	dialogue->loadText(d.dialogue, textColor, 24);
 	dialogue->SetPosition(glm::vec3((-450 + (float)((d.dialogue.size() * 10) / 2)), -180, 1.0f));
@@ -66,14 +63,9 @@ TextBox::~TextBox()
 	delete background;
 }
 
-std::vector<Dialogue> TextBox::GetDialogueList()
-{
-	return dialogues;
-}
-
 void TextBox::clickLeft(glm::vec3 pos)
 {
-	
+	display = true;
 }
 
 ChoiceBox::ChoiceBox()

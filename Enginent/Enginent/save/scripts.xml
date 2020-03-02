@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <scripts>
-	<script key = "test" loopIndex = "0"/>
-		<Dialogue name = "Elias" text = "What?"/>
-		<Dialogue name = "Emma" text = "Help"/>
+	<script key = "too far" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "It's too far away."/>
+		</sub>
+	</script>
+	<script key = "door1" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "The door is lock."/>
+			<Dialogue name = "Elias" text = "Seem like it need a keycard to unlock."/>
+		</sub>
+		<sub>
+			<Dialogue name = "Elias" text = "Why I need a keycard to unlock it from inside?."/>
+		</sub>
+	</script>
+	<script key = "test2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "emmmm who?"/>
+			<Dialogue name = "Emma" text = "me ofcuz"/>
+		</sub>
 	</script>
 </scripts>

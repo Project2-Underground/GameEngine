@@ -16,19 +16,17 @@ class TextBox : public UIObject {
 		SDL_Color nameColor = {0, 0, 0, 0 };
 		bool display;
 		static TextBox* _instance;
-		std::vector<Dialogue> dialogues;
+		ScriptManager* scriptManager;
 	protected:
 		TextBox();
 	public:
 		static TextBox* GetInstance();
 		~TextBox();
-		void setText(std::vector<Dialogue>);
-		void setText(Dialogue);
+		void setText(std::string);
 		void setTextColor(SDL_Color colorN, SDL_Color colorS) { nameColor = colorN; textColor = colorS; }
 		void Render();
 		void setTextboxDisplay(bool b);
 		void clickLeft(glm::vec3);
-		std::vector<Dialogue> GetDialogueList();
 };
 
 class ChoiceBox : UIObject {
