@@ -150,17 +150,19 @@ void Application::Clear() {
 		delete n;
 
 	notes.clear();
-
-	//for (auto c : chats)
-	//	delete c.second;
-
 	chats.clear();
 }
 
 void Application::LeftClick(float x, float y) {
-	next->checkCollider(x, y);
-	back->checkCollider(x, y);
-	home->checkCollider(x, y);
+	next->checkColliderPressed(x, y);
+	back->checkColliderPressed(x, y);
+	home->checkColliderPressed(x, y);
+}
+
+void Application::LeftRelease(float x, float y) {
+	next->checkColliderReleased(x, y);
+	back->checkColliderReleased(x, y);
+	home->checkColliderReleased(x, y);
 }
 
 void Application::Next() {
@@ -223,10 +225,6 @@ void Application::AddChat(ChatInfo* chat) {
 }
 
 Application::~Application() {
-	//for (auto c : chats)
-	//	if (c.second)
-	//		delete c.second;
-
 	for (auto b : buttons)
 		if (b)
 			delete b;
@@ -311,13 +309,22 @@ void Phone::Scroll(glm::vec3 screen, int direction) {
 }
 
 void Phone::LeftClick(float x, float y) {
-	if (app->open) {
+	if (app->open) 
 		app->LeftClick(x, y);
-	}
 	else {
-		noteIcon->checkCollider(x, y);
-		chatIcon->checkCollider(x, y);
-		exitButton->checkCollider(x, y);
+		noteIcon->checkColliderPressed(x, y);
+		chatIcon->checkColliderPressed(x, y);
+		exitButton->checkColliderPressed(x, y);
+	}
+}
+
+void Phone::LeftRelease(float x, float y) {
+	if (app->open)
+		app->LeftClick(x, y);
+	else {
+		noteIcon->checkColliderReleased(x, y);
+		chatIcon->checkColliderReleased(x, y);
+		exitButton->checkColliderReleased(x, y);
 	}
 }
 

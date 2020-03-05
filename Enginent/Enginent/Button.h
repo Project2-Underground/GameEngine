@@ -16,7 +16,8 @@ public:
 	Button(std::string);
 	virtual void updateButton(float, float);
 	virtual void action() = 0;
-	virtual void checkCollider(float x, float y);
+	virtual void checkColliderPressed(float x, float y);
+	virtual void checkColliderReleased(float x, float y);
 	void SetTogglePress(bool b) { togglePressed = b; pressAvailable = !b; }
 	bool IsSelected() { return togglePressed; }
 
@@ -54,7 +55,8 @@ class PhoneAppsButton :public Button {
 	bool notice;
 public:
 	PhoneAppsButton(std::string texture) : Button(texture) {}
-	void checkCollider(float x, float y);
+	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
 	void SetNotiTexture(std::string);
 	void Notice(bool b) { if (b) SetTexture(notiTexture); notice = b; }
 	void action();
@@ -95,7 +97,8 @@ class ChangeMouseActionTypeButton : public Button {
 	int type;
 public:
 	ChangeMouseActionTypeButton(std::string texture, int type) :Button(texture) { this->type = type; };
-	void checkCollider(float x, float y);
+	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
 	void updateButton(float x, float y);
 	void Reset();
 	void action();

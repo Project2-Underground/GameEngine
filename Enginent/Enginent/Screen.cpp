@@ -61,15 +61,10 @@ void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if(GameWindowOpen())
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
-	else {
+	else 
 		for (int j = 0; j < UI.size(); j++)
-		{
 			if (Button * button = dynamic_cast<Button*>(UI[j]))
-			{
-				button->checkCollider(screen.x, screen.y);
-			}
-		}
-	}
+				button->checkColliderPressed(screen.x, screen.y);
 }
 
 void MenuScreen::RightClick(glm::vec3, glm::vec3)
@@ -84,7 +79,13 @@ void MenuScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
-
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->LeftRelease(screen.x, screen.y);
+	else
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->checkColliderReleased(screen.x, screen.y);
 }
 
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
@@ -221,8 +222,6 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 		inventory->UnselectItem();
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen())
 			currentLevel->RightClick(world.x, world.y);
-		else if (dialogueText->IsDisplay())
-			dialogueText->SetDisplay(false);
 	}
 }
 
@@ -232,7 +231,7 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 			w->LeftClick(screen.x, screen.y);
 	else if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay() == true) 
+	else if (dialogueText->IsDisplay() == true)
 		dialogueText->SetDisplay(false);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
@@ -244,12 +243,8 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 		inventory->LeftClick(screen.x, screen.y);
 	}
 	for (int j = 0; j < UI.size(); j++)
-	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
-		{
-			button->checkCollider(screen.x, screen.y);
-		}
-	}
+			button->checkColliderPressed(screen.x, screen.y);
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -259,7 +254,19 @@ void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
-
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->LeftRelease(screen.x, screen.y);
+	else if (phone->open)
+		phone->LeftRelease(screen.x, screen.y);
+	else if (PuzzleTime)
+		currentPuzzle->LeftRelease(screen, world);
+	if (InventoryEnable) {
+		inventory->LeftRelease(screen.x, screen.y);
+	}
+	for (int j = 0; j < UI.size(); j++)
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+			button->checkColliderReleased(screen.x, screen.y);
 }
 
 void GameScreen::Scroll(glm::vec3 screen, int direction) {
@@ -366,7 +373,6 @@ CutsceneScreen::CutsceneScreen() {
 void CutsceneScreen::Render() {
 	// play the cutscene
 }
-
 void CutsceneScreen::Update() {
 	// eg. 2 clicks to skip a cutscene
 }

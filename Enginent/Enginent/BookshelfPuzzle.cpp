@@ -110,7 +110,7 @@ void Bookshelf::LeftClick(glm::vec3 screen, glm::vec3 world)
 				}
 			}
 		}
-		else
+		/*else
 		{
 			bool placed = false;
 			for (int i = 0; i < log.size(); i++)
@@ -133,11 +133,37 @@ void Bookshelf::LeftClick(glm::vec3 screen, glm::vec3 world)
 				select->col->setNewPos(select->GetPrevPos());
 				select = nullptr;
 			}
-		}
+		}*/
 	}
-	else
+	/*else
 	{
 		ActionAfterPuzzle();
+	}*/
+}
+
+void Bookshelf::LeftRelease(glm::vec3 screen, glm::vec3 world) {
+	if (select) {
+		bool placed = false;
+		for (int i = 0; i < log.size(); i++)
+		{
+			if (log[i]->collider->isClicked(screen.x, screen.y))
+			{
+				Book* tmp = log[i]->book;
+				log[i]->book = select;
+				select->SetPosition(log[i]->collider->getPosition());
+				select->col->setNewPos(log[i]->collider->getPosition());
+				select->UpdatePrevPos();
+				select = tmp;
+				placed = true;
+				break;
+			}
+		}
+		if (!placed)
+		{
+			select->SetPosition(select->GetPrevPos());
+			select->col->setNewPos(select->GetPrevPos());
+			select = nullptr;
+		}
 	}
 }
 
@@ -160,6 +186,10 @@ void Bookshelf::Update()
 			pass = false;
 			break;
 		}
+	}
+	if (pass && !doneAction) {
+		ActionAfterPuzzle();
+		doneAction = true;
 	}
 }
 
@@ -263,7 +293,20 @@ void BookshelfPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world)
 	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
 		{
-			button->checkCollider(screen.x, screen.y);
+			button->checkColliderPressed(screen.x, screen.y);
+		}
+	}
+}
+
+void BookshelfPuzzle::LeftRelease(glm::vec3 screen, glm::vec3 world) {
+	if (puzzle->IsDisplay()) {
+		puzzle->LeftRelease(screen, world);
+	}
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderReleased(screen.x, screen.y);
 		}
 	}
 }

@@ -79,8 +79,3 @@ void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY, int direc
 		}
 	}
 }
-
-int MouseInput::GetEvent()
-{
-	return this->eventType;
-}

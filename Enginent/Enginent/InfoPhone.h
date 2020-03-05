@@ -58,6 +58,7 @@ public:
 	void Render();
 
 	void LeftClick(float, float);
+	void LeftRelease(float, float);
 	void Scroll(int direction);
 	void Next();
 	void Back();
@@ -89,6 +90,7 @@ public:
 	static Phone* GetInstance();
 
 	void Render();
+	void LeftRelease(float, float);
 	void LeftClick(float, float);
 	void UpdateButton(float, float);
 

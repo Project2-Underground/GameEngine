@@ -152,10 +152,18 @@ InventoryBoxButton* Inventory::GetInventoryBox(int index) {
 
 void Inventory::LeftClick(float x, float y) {
 	for (auto *ib : InventoryBoxes) {
-		ib->checkCollider(x, y);
+		ib->checkColliderPressed(x, y);
 	}
-	separateButton->checkCollider(x, y);
-	combineButton->checkCollider(x, y);
+	separateButton->checkColliderPressed(x, y);
+	combineButton->checkColliderPressed(x, y);
+}
+
+void Inventory::LeftRelease(float x, float y) {
+	for (auto* ib : InventoryBoxes) {
+		ib->checkColliderReleased(x, y);
+	}
+	separateButton->checkColliderReleased(x, y);
+	combineButton->checkColliderReleased(x, y);
 }
 
 void Inventory::AddItem(Item* item) {

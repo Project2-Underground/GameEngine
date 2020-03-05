@@ -26,6 +26,7 @@ public:
 	void Render();
 	
 	void LeftClick(float x, float y);
+	void LeftRelease(float x, float y);
 	void AddItem(Item *item);
 	void RemoveItem(Item *item);
 	void SetAllBoxesPos(float);

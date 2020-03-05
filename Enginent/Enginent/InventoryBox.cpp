@@ -64,22 +64,29 @@ void InventoryBoxButton::Reset() {
 	SetTexture(normalTexture);
 }
 
-void InventoryBoxButton::checkCollider(float x, float y) {
+void InventoryBoxButton::checkColliderPressed(float x, float y) {
+	if (pressAvailable)
+		if (this->col->isClicked(x, y))
+			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+}
+
+void InventoryBoxButton::checkColliderReleased(float x, float y) {
 	if (pressAvailable) {
 		if (this->col->isClicked(x, y)) {
-			if (item) {
-				SetTexture(pressTexture);
-				action();
-			}
-			else
-			{
-				SetTexture(normalTexture);
+			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+				if (item) {
+					SetTexture(pressTexture);
+					action();
+				}
+				else
+					SetTexture(normalTexture);
 			}
 		}
 	}
 	else {
 		if (this->col->isClicked(x, y))
-			action();
+			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this)
+				action();
 	}
 }
 
@@ -115,23 +122,28 @@ void ChangeMouseActionTypeButton::updateButton(float x, float y)
 	}
 }
 
-void ChangeMouseActionTypeButton::checkCollider(float x, float y)
+void ChangeMouseActionTypeButton::checkColliderPressed(float x, float y)
 {
+	if (pressAvailable) 
+		if (this->col->isClicked(x, y))
+			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+}
+
+void ChangeMouseActionTypeButton::checkColliderReleased(float x, float y) {
 	if (pressAvailable) {
 		if (this->col->isClicked(x, y))
-		{
-			((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->UnselectItem();
-			SetTexture(pressTexture);
-			action();
-		}
+			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+				((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->UnselectItem();
+				SetTexture(pressTexture);
+				action();
+			}
 		else
 		{
 			SetTexture(normalTexture);
 		}
 	}
-	else {
-		if (col->isClicked(x, y)) {
-			action();
-		}
-	}
+	else 
+		if (col->isClicked(x, y)) 
+			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) 
+				action();
 }

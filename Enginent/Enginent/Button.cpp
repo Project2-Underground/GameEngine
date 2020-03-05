@@ -38,17 +38,22 @@ void Button::action()
 	//does something
 }
 
-void Button::checkCollider(float x, float y)
+void Button::checkColliderPressed(float x, float y)
 {
-	if (this->col->isClicked(x, y))
-	{
+	if (this->col->isClicked(x, y)) {
 		SetTexture(pressTexture);
-		action();
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 	}
 	else
-	{
 		SetTexture(normalTexture);
-	}
+}
+
+void Button::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y)) 
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			action();
+		}
 }
 
 //////////////Exit Button
@@ -80,21 +85,19 @@ void PhoneAppsButton::SetNotiTexture(std::string texture) {
 	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
-void PhoneAppsButton::checkCollider(float x, float y)
+void PhoneAppsButton::checkColliderPressed(float x, float y)
 {
 	if (this->col->isClicked(x, y))
-	{
-		if (notice)
-			SetTexture(normalTexture);
-		action();
-	}
-	else
-	{
-		if (notice)
-			SetTexture(notiTexture);
-		else
-			SetTexture(normalTexture);
-	}
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+}
+
+void PhoneAppsButton::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y))
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			if (notice)
+				SetTexture(normalTexture);
+			action();
+		}
 }
 
 void PhoneOpenButton::action() {
