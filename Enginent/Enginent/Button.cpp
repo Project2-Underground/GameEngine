@@ -49,11 +49,12 @@ void Button::checkColliderPressed(float x, float y)
 }
 
 void Button::checkColliderReleased(float x, float y) {
-	if (this->col->isClicked(x, y)) 
+	if (this->col->isClicked(x, y)) {
 		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
 			action();
 		}
+	}
 }
 
 //////////////Exit Button
@@ -120,7 +121,7 @@ void PhoneHomeButton::action() {
 	Phone::GetInstance()->CloseApp();
 }
 
-void WindowClose::action() {
+void WindowCloseButton::action() {
 	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
 }
 
@@ -130,4 +131,20 @@ void ClosePuzzleButton::action() {
 
 void SaveLoadGameButton::action() {
 	Game::GetInstance()->SaveLoad(filename);
+}
+
+void OpenPauseWindowButton::action() {
+	PauseWindow::GetInstance()->Open();
+	Game::GetInstance()->GetCursor()->enableChange(false);
+	// pause sfx
+}
+
+void MainMenuButton::action() {
+	Game* game = Game::GetInstance();
+	game->GetScreen()->CloseGameAllWindow();
+	game->ChangeScreenState(MENUSCREEN);
+}
+
+void SettingButton::action(){
+
 }

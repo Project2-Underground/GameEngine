@@ -87,9 +87,9 @@ public:
 	void action();
 };
 
-class WindowClose :public Button {
+class WindowCloseButton :public Button {
 public:
-	WindowClose(std::string texture) :Button(texture) {}
+	WindowCloseButton(std::string texture) :Button(texture) {}
 	void action();
 };
 
@@ -122,5 +122,17 @@ public:
 class OpenPauseWindowButton :public Button {
 public:
 	OpenPauseWindowButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class SettingButton :public Button {
+public:
+	SettingButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class MainMenuButton :public Button {
+public:
+	MainMenuButton(std::string texture) : Button(texture) {}
 	void action();
 };

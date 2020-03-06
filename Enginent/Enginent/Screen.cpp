@@ -161,18 +161,23 @@ GameScreen::GameScreen() {
 
 	dialogueText = TextBox::GetInstance();
 
-	Button* exitButton = new Exit_Button("Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png");
-	exitButton->SetSize(60, -60);
-	exitButton->SetPosition(glm::vec3(600, 300, 1));
-	exitButton->SetCollder(new Collider(exitButton));
+	pause = new OpenPauseWindowButton("");
+	pause->SetSize(60, -60);
+	pause->SetPosition(glm::vec3(600, 300, 1));
+	pause->SetCollder(new Collider(pause));
 
 	UI.push_back(phoneIcon);
-	UI.push_back(exitButton);
+	UI.push_back(pause);
 
-	windows.push_back(SaveLoadWindow::GetInstance());
 	GameWindow * viewWin = ViewWindow::GetInstance();
 	viewWin->Init(g->winWidth, g->winHeight);
+
+	GameWindow* pauseWindow = PauseWindow::GetInstance();
+	pauseWindow->Init(g->winWidth, g->winHeight);
+
 	windows.push_back(viewWin);
+	windows.push_back(pauseWindow);
+	windows.push_back(SaveLoadWindow::GetInstance());
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -207,14 +212,16 @@ void GameScreen::Render() {
 void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
-	if (PuzzleTime)
-		currentPuzzle->Update();
-	else {
-		currentLevel->Update();
-		player->Update();
+	if (!Pause) {
+		if (PuzzleTime)
+			currentPuzzle->Update();
+		else {
+			currentLevel->Update();
+			player->Update();
+		}
+		if (InventoryEnable && !phone->open)
+			inventory->Update();
 	}
-	if (InventoryEnable && !phone->open)
-		inventory->Update();
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {

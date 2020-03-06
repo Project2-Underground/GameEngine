@@ -23,6 +23,7 @@ class Screen {
 protected:
 	std::vector<GameWindow*> windows;
 public:
+	bool Pause;
 	virtual void Render() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;

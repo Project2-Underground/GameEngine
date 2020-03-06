@@ -10,7 +10,7 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new WindowClose("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;

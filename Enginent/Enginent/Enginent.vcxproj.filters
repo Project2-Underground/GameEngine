@@ -263,6 +263,12 @@
     <ClCompile Include="ScriptManager.cpp">
       <Filter>GameUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="PauseWindow.cpp">
+      <Filter>GameWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingWindow.cpp">
+      <Filter>GameWindows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">
