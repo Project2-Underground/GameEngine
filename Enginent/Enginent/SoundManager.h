@@ -5,6 +5,11 @@
 
 using namespace irrklang;
 
+enum SoundType {
+	BGM = 0,
+	SOUNDFX
+};
+
 class SoundManager {
 private:
 	ISoundEngine *soundEngine;

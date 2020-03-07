@@ -3,6 +3,7 @@
 #include "InfoPhone.h"
 #include "GameWindows.h"
 #include "MouseInput.h"
+#include "SoundManager.h"
 
 Button::Button(std::string texture)
 {
@@ -44,8 +45,6 @@ void Button::checkColliderPressed(float x, float y)
 		SetTexture(pressTexture);
 		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 	}
-	else
-		SetTexture(normalTexture);
 }
 
 void Button::checkColliderReleased(float x, float y) {
@@ -135,7 +134,6 @@ void SaveLoadGameButton::action() {
 
 void OpenPauseWindowButton::action() {
 	PauseWindow::GetInstance()->Open();
-	Game::GetInstance()->GetCursor()->enableChange(false);
 	// pause sfx
 }
 
@@ -146,5 +144,47 @@ void MainMenuButton::action() {
 }
 
 void SettingButton::action(){
+	SettingWindow::GetInstance()->Open();
+}
 
+void SoundVolumeButton::action() {
+	switch (type)
+	{
+	case BGM:
+		if (direction >= 0)
+			SoundManager::GetInstance()->upVolume();
+		else
+			SoundManager::GetInstance()->downVolume();
+		break;
+	case SOUNDFX:
+		if (direction >= 0)
+			SoundManager::GetInstance()->upVolume();
+		else
+			SoundManager::GetInstance()->downVolume();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundMuteButton::SetMuteTexture(std::string texture){
+	muteTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+void SoundMuteButton::action() {
+	if (GetTexture() != muteTexture)
+		SetTexture(muteTexture);
+	else
+		SetTexture(normalTexture);
+
+	switch (type)
+	{
+	case BGM:
+		SoundManager::GetInstance()->toggleMute();
+		break;
+	case SOUNDFX:
+		SoundManager::GetInstance()->toggleMute();
+		break;
+	default:
+		break;
+	}
 }

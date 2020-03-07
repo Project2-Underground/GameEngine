@@ -136,3 +136,20 @@ public:
 	MainMenuButton(std::string texture) : Button(texture) {}
 	void action();
 };
+
+class SoundVolumeButton : public Button {
+	int type;
+	int direction;
+public:
+	SoundVolumeButton(std::string texture, int t, int d) : Button(texture) { type = t; direction = d; }
+	void action();
+};
+
+class SoundMuteButton : public Button {
+	int type;
+	unsigned int muteTexture;
+public:
+	SoundMuteButton(std::string texture, int t) : Button(texture) { type = t; }
+	void SetMuteTexture(std::string);
+	void action();
+};

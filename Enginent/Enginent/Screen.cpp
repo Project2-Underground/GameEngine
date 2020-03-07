@@ -43,7 +43,12 @@ MenuScreen::MenuScreen() {
 	UI.push_back(play);
 	UI.push_back(quit);
 	UI.push_back(load);
+
+	SettingWindow* s = SettingWindow::GetInstance();
+	s->Init(Game::GetInstance()->winWidth, Game::GetInstance()->winHeight);
+
 	windows.push_back(SaveLoadWindow::GetInstance());
+	windows.push_back(s);
 }
 
 void MenuScreen::Render() {
@@ -178,6 +183,7 @@ GameScreen::GameScreen() {
 	windows.push_back(viewWin);
 	windows.push_back(pauseWindow);
 	windows.push_back(SaveLoadWindow::GetInstance());
+	windows.push_back(SettingWindow::GetInstance());
 }
 
 void GameScreen::LoadGame(std::string filename) {
