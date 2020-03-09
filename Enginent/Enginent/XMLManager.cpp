@@ -265,7 +265,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
-			if (p->attribute("done").as_bool())
+			if (p->attribute("done").as_bool());
 				gs->puzzles[p->name()]->CompletePuzzle();
 		}
 

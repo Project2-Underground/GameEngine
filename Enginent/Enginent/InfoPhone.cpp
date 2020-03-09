@@ -366,7 +366,6 @@ void Phone::Message(std::string name, int msgIndex) {
 }
 
 void Phone::SetNotification(AppType apptype) {
-	std::cout << apptype << std::endl;
 	switch (apptype)
 	{
 	case NOTE:

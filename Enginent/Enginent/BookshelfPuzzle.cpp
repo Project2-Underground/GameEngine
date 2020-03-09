@@ -169,7 +169,7 @@ void Bookshelf::ActionAfterPuzzle() {
 }
 
 void Bookshelf::CompletePuzzle() {
-	int solveLog[6] = { 3,2,4,1,5,6 };
+	int solveLog[6] = { 2,1,3,0,4,5 };
 
 	for (int i = 0; i < 6; i++) {
 		log[i]->book = books[solveLog[i]];
@@ -314,5 +314,4 @@ BookshelfPuzzle::~BookshelfPuzzle()
 
 void BookshelfPuzzle::CompletePuzzle() {
 	puzzle->CompletePuzzle();
-	pass = true;
 }

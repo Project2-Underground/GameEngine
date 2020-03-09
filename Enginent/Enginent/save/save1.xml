@@ -12,7 +12,7 @@
 	</interactObj>
 	<item />
 	<doors>
-		<EliasRoomInnerDoor used="true" current_dialogue="0" />
+		<EliasRoomInnerDoor used="true" current_dialogue="1" />
 		<StairDoor used="true" current_dialogue="0" />
 		<LowerStair1 used="true" current_dialogue="0" />
 		<LowerStair2 used="true" current_dialogue="0" />
@@ -22,9 +22,9 @@
 	</doors>
 	<NPCs />
 	<puzzles>
-		<BookshelfPuzzle done="false" />
+		<BookshelfPuzzle done="true" />
 	</puzzles>
-	<Player posX="469.426147" posY="-50">
+	<Player posX="463.414215" posY="-50">
 		<inventory>
 			<item />
 			<item />

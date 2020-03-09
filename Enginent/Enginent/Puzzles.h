@@ -15,6 +15,7 @@ public:
 	virtual void FinishedPuzzle() {};
 	virtual void ActionAfterPuzzle() {};
 	virtual void CompletePuzzle() {};
+	bool Passed() { return pass; }
 };
 
 class Book : public UIObject {
@@ -79,8 +80,8 @@ class Puzzle {
 protected:
 	std::vector<UIObject*> UI;
 	UIObject* background;
+	PuzzleTemplate* puzzle;
 	bool enableInventory;
-	bool pass;
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
@@ -90,11 +91,10 @@ public:
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
 	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
-	bool Passed() { return pass; }
+	bool Passed() { return puzzle->Passed(); }
 };
 
 class BookshelfPuzzle : public Puzzle {
-	Bookshelf* puzzle;
 public:
 	BookshelfPuzzle();
 	void Render();
