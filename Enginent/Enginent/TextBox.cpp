@@ -18,9 +18,9 @@ TextBox::TextBox()
 	background->SetSize(1280, -720);
 	background->SetPosition(glm::vec3(0, 0, 1.0f));
 	name = new TextObject();
-	name->loadText("Elias", nameColor, 30);
+	name->loadText("", nameColor, 30);
 	dialogue = new TextObject();
-	std::string text = "Test* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
+	std::string text = "";
 	dialogue->loadText(text, textColor, 24);
 	name->SetPosition(glm::vec3(-400.0f, -115.0f, 1.0f));
 
@@ -34,12 +34,13 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key)
 {
-	Dialogue d = scriptManager->GetDialogue(key);
 	display = true;
-	std::cout << d.name << " here\n";
-	name->loadText(d.name, nameColor, 30);
-	dialogue->loadText(d.dialogue, textColor, 24);
-	dialogue->SetPosition(glm::vec3((-450 + (float)((d.dialogue.size() * 10) / 2)), -180, 1.0f));
+	d_text = scriptManager->GetDialogue(key);
+	d_index = 0;
+	std::cout << key << " here\n";
+	name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
+	dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
+	dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 }
 
 void TextBox::Render()
@@ -65,7 +66,17 @@ TextBox::~TextBox()
 
 void TextBox::clickLeft(glm::vec3 pos)
 {
-	display = true;
+	if (d_index < d_text.dialogue.size() - 1)
+	{
+		d_index++;
+		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
+		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
+		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+	}
+	else
+	{
+		display = false;
+	}
 }
 
 ChoiceBox::ChoiceBox()

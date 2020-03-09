@@ -17,6 +17,8 @@ class TextBox : public UIObject {
 		//bool display;
 		static TextBox* _instance;
 		ScriptManager* scriptManager;
+		Dialogue d_text;
+		int d_index;
 	protected:
 		TextBox();
 	public:

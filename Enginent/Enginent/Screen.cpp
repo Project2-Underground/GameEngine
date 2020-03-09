@@ -231,7 +231,7 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
-	if (!PuzzleTime) {
+	if (!PuzzleTime && !dialogueText->IsDisplay()) {
 		inventory->UnselectItem();
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen())
 			currentLevel->RightClick(world.x, world.y);
@@ -245,7 +245,7 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	else if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
 	else if (dialogueText->IsDisplay() == true)
-		dialogueText->SetDisplay(false);
+		dialogueText->clickLeft(screen);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {

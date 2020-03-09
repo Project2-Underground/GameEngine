@@ -21,8 +21,10 @@ struct s_Dialogue
 {
 	std::string name;
 	std::string text;
+	std::string chatName;
+	int chatIndex;
 	Item* item;
-	s_Dialogue(std::string n, std::string d, Item* item, );
+	s_Dialogue(std::string n, std::string d, Item* item, std::string chatName, int chatIndex);
 	s_Dialogue();
 };
 

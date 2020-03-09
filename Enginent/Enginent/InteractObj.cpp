@@ -4,9 +4,8 @@
 #include "InfoPhone.h"
 #include "GameWindows.h"
 
-InteractableObj::InteractableObj(vector<Dialogue> s) {
+InteractableObj::InteractableObj() {
 	interactType = NORMAL;
-	dialogue = s;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -14,10 +13,6 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	col->setRefObject(this);
 	/*std::cout << "collider min bound: " << col->getMinBound().x << ", " << col->getMinBound().y << std::endl;
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
-}
-
-void InteractableObj::SetDialogue(vector<Dialogue> s) {
-	dialogue = s;
 }
 
 void InteractableObj::TakePic() {
@@ -30,13 +25,8 @@ void InteractableObj::TakePic() {
 }
 
 void InteractableObj::action() {
-	if (dialogue.size() > 0)
-	{
-		//((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer()->SetDialogue(dialogue[currDialogue]);
-		TextBox::GetInstance()->setText(this->object_name);
-		TextBox::GetInstance()->SetDisplay(true);
-		currDialogue = (++currDialogue) % dialogue.size();
-	}
+	TextBox::GetInstance()->setText(this->object_name);
+	TextBox::GetInstance()->SetDisplay(true);
 	PickUpItem();
 	TakePic();
 }

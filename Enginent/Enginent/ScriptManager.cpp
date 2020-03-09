@@ -1,17 +1,21 @@
 #include "ScriptManager.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i)
+s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i, std::string chatName, int chatIndex)
 {
 	name = n;
 	text = d;
 	item = i;
+	this->chatName = chatName;
+	this->chatIndex = chatIndex;
 }
 
 s_Dialogue::s_Dialogue()
 {
-	name = " ";
-	text = " ";
+	name = "";
+	text = "";
 	item = nullptr;
+	chatName = "";
+	chatIndex = -1;
 };
 
 ScriptManager* ScriptManager::_instance = nullptr;
@@ -51,6 +55,10 @@ void ScriptManager::LoadScript()
 			{
 				d.choice = s_dialogue->attribute("choice").as_string();
 			}
+			else
+			{
+				d.choice = "";
+			}
 
 			pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
 			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
@@ -58,6 +66,8 @@ void ScriptManager::LoadScript()
 				std::string name = dialogue->attribute("name").as_string();
 				std::string text = dialogue->attribute("text").as_string();
 				Item* item = nullptr;
+				int chatIndex = -1;
+				std::string chatName = "";
 				if (dialogue->child("item"))
 				{
 					//create item
@@ -65,10 +75,18 @@ void ScriptManager::LoadScript()
 					item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
 					item->SetViewTexture(dialogue->child("item").attribute("v_texture").as_string());
 				}
-				s_Dialogue tmp(name, text, item);
+				if (dialogue->child("chat"))
+				{
+					//save chat info
+					chatName = dialogue->child("chat").attribute("name").as_string();
+					chatIndex = dialogue->child("chat").attribute("index").as_int();
+				}
+				s_Dialogue tmp(name, text, item, chatName, chatIndex);
 				d.dialogue.push_back(tmp);
+				std::cout << name << ": " << text << std::endl;
 			}
 			s->script.push_back(d);
+			std::cout << std::endl << "--------------------------------------" << std::endl;
 		}
 		this->scripts[key] = s;
 	}
