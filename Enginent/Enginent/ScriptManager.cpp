@@ -1,16 +1,16 @@
 #include "ScriptManager.h"
 
-Dialogue::Dialogue(std::string n, std::string d, Item* i)
+s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i)
 {
 	name = n;
-	dialogue = d;
+	text = d;
 	item = i;
 }
 
-Dialogue::Dialogue()
+s_Dialogue::s_Dialogue()
 {
 	name = " ";
-	dialogue = " ";
+	text = " ";
 	item = nullptr;
 };
 
@@ -41,23 +41,34 @@ void ScriptManager::LoadScript()
 	{
 		std::string key = scripts->attribute("key").as_string();
 		Script* s = new Script(scripts->attribute("loopIndex").as_int());
-
-		pugi::xml_node dialogue = (scripts)->child("Dialogue");
-		for (pugi::xml_node_iterator dialogue = scripts->begin(); dialogue != scripts->end(); dialogue++)
+		
+		pugi::xml_node s_dialogue = (scripts)->child("sub");
+		for (pugi::xml_node_iterator s_dialogue = scripts->begin(); s_dialogue != scripts->end(); s_dialogue++)
 		{
-			std::string name = dialogue->attribute("name").as_string();
-			std::string text = dialogue->attribute("text").as_string();
-			Item* item = nullptr;
-			if (dialogue->child("item"))
+			//get choice
+			Dialogue d;
+			if (s_dialogue->attribute("choice"))
 			{
-				//create item
-				item = new Item(dialogue->child("item").attribute("name").as_string());
-				item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
-				item->SetViewTexture(dialogue->child("item").attribute("v_texture").as_string());
+				d.choice = s_dialogue->attribute("choice").as_string();
 			}
-			Dialogue tmp(name, text, item);
-			s->dialogue.push_back(tmp);
 
+			pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
+			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			{
+				std::string name = dialogue->attribute("name").as_string();
+				std::string text = dialogue->attribute("text").as_string();
+				Item* item = nullptr;
+				if (dialogue->child("item"))
+				{
+					//create item
+					item = new Item(dialogue->child("item").attribute("name").as_string());
+					item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
+					item->SetViewTexture(dialogue->child("item").attribute("v_texture").as_string());
+				}
+				s_Dialogue tmp(name, text, item);
+				d.dialogue.push_back(tmp);
+			}
+			s->script.push_back(d);
 		}
 		this->scripts[key] = s;
 	}
@@ -65,7 +76,7 @@ void ScriptManager::LoadScript()
 
 Dialogue ScriptManager::GetDialogue(std::string key)
 {
-	Script* tmp = scripts.at(key);
+	Script* tmp = scripts[key];
 	if (tmp == nullptr)
 	{
 		std::cout << "Cannot find dialogue " << key << std::endl;
@@ -74,11 +85,11 @@ Dialogue ScriptManager::GetDialogue(std::string key)
 
 	int index = tmp->currIndex;
 	tmp->currIndex++;
-	if (tmp->currIndex >= tmp->dialogue.size())
+	if (tmp->currIndex >= tmp->script.size())
 	{
 		tmp->currIndex = tmp->loopIndex;
 	}
-	return tmp->dialogue[index];
+	return tmp->script[index];
 }
 
 ScriptManager::~ScriptManager()

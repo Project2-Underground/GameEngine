@@ -122,8 +122,7 @@ void Player::CheckTarget(InteractableObj* target) {
 		StopWalking();
 	}
 	else {
-		Dialogue d("Elias", "It's too far away");
-		TextBox::GetInstance()->setText(d);
+		TextBox::GetInstance()->setText("tooFar");
 		TextBox::GetInstance()->SetDisplay(true);
 		StopWalking();
 	}

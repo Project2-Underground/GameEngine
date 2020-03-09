@@ -6,15 +6,6 @@
 #include <pugixml.hpp>
 #include "Item.h"
 
-struct Dialogue
-{
-	std::string name;
-	std::string dialogue;
-	Item* item;
-	Dialogue(std::string n, std::string d, Item* item);
-	Dialogue();
-};
-
 struct Choice {
 	std::string text;
 	std::string nextScript;
@@ -26,14 +17,28 @@ struct Choice {
 	Choice() {};
 };
 
+struct s_Dialogue
+{
+	std::string name;
+	std::string text;
+	Item* item;
+	s_Dialogue(std::string n, std::string d, Item* item, );
+	s_Dialogue();
+};
+
+struct Dialogue {
+	std::vector<s_Dialogue> dialogue;
+	std::string choice;
+};
+
 struct Script {
-	std::vector<Dialogue> dialogue;
+	std::vector<Dialogue> script;
 	int loopIndex;
 	int currIndex;
 	Script(int index)
 	{
-		this->loopIndex = index;
-		this->currIndex = 0;
+		loopIndex = index;
+		currIndex = 0;
 	}
 };
 
@@ -41,6 +46,7 @@ class ScriptManager {
 	static ScriptManager* _instance;
 	std::map<std::string, Script*> scripts;
 	pugi::xml_document scriptDoc;
+	Dialogue* displayText;
 protected:
 	ScriptManager();
 public:

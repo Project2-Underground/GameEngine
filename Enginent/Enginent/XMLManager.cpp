@@ -125,7 +125,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
-		std::vector<Dialogue> dialogues;
+		/*std::vector<Dialogue> dialogues;
 		pugi::xml_node_iterator n;
 
 		if (pugi::xml_node dialogue = child->child("dialogue")) {
@@ -134,12 +134,12 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 				d++;
 				dialogues.push_back(Dialogue(n->child_value(), d->child_value(), nullptr));
 			}
-		}
+		}*/
 
 		if (child->child("key"))
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
-		interactObj->SetDialogue(dialogues);
+		//interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
@@ -160,18 +160,18 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
-		std::vector<Dialogue> dialogues;
-		pugi::xml_node_iterator n;
+		//std::vector<Dialogue> dialogues;
+		//pugi::xml_node_iterator n;
 
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				n = d;
-				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value(), nullptr));
-			}
-		}
+		//if (pugi::xml_node dialogue = child->child("dialogue")) {
+		//	for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+		//		n = d;
+		//		d++;
+		//		dialogues.push_back(Dialogue(n->child_value(), d->child_value(), nullptr));
+		//	}
+		//}
 
-		door->SetDialogue(dialogues);
+		//door->SetDialogue(dialogues);
 		door->SetCollder(new Collider(door));
 
 		if (child->child("key"))
