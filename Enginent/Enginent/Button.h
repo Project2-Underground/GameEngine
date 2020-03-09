@@ -16,7 +16,8 @@ public:
 	Button(std::string);
 	virtual void updateButton(float, float);
 	virtual void action() = 0;
-	virtual void checkCollider(float x, float y);
+	virtual void checkColliderPressed(float x, float y);
+	virtual void checkColliderReleased(float x, float y);
 	void SetTogglePress(bool b) { togglePressed = b; pressAvailable = !b; }
 	bool IsSelected() { return togglePressed; }
 
@@ -50,8 +51,14 @@ public:
 
 class PhoneAppsButton :public Button {
 	int appType;
+	unsigned int notiTexture;
+	bool notice;
 public:
 	PhoneAppsButton(std::string texture) : Button(texture) {}
+	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
+	void SetNotiTexture(std::string);
+	void Notice(bool b) { if (b) SetTexture(notiTexture); notice = b; }
 	void action();
 	void SetApp(int type) { appType = type; }
 };
@@ -80,9 +87,9 @@ public:
 	void action();
 };
 
-class WindowClose :public Button {
+class WindowCloseButton :public Button {
 public:
-	WindowClose(std::string texture) :Button(texture) {}
+	WindowCloseButton(std::string texture) :Button(texture) {}
 	void action();
 };
 
@@ -90,7 +97,8 @@ class ChangeMouseActionTypeButton : public Button {
 	int type;
 public:
 	ChangeMouseActionTypeButton(std::string texture, int type) :Button(texture) { this->type = type; };
-	void checkCollider(float x, float y);
+	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
 	void updateButton(float x, float y);
 	void Reset();
 	void action();
@@ -114,5 +122,34 @@ public:
 class OpenPauseWindowButton :public Button {
 public:
 	OpenPauseWindowButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class SettingButton :public Button {
+public:
+	SettingButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class MainMenuButton :public Button {
+public:
+	MainMenuButton(std::string texture) : Button(texture) {}
+	void action();
+};
+
+class SoundVolumeButton : public Button {
+	int type;
+	int direction;
+public:
+	SoundVolumeButton(std::string texture, int t, int d) : Button(texture) { type = t; direction = d; }
+	void action();
+};
+
+class SoundMuteButton : public Button {
+	int type;
+	unsigned int muteTexture;
+public:
+	SoundMuteButton(std::string texture, int t) : Button(texture) { type = t; }
+	void SetMuteTexture(std::string);
 	void action();
 };

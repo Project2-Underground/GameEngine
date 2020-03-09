@@ -14,7 +14,7 @@ class TextBox : public UIObject {
 		TextObject* name;
 		SDL_Color textColor = {255, 255, 255, 0};
 		SDL_Color nameColor = {0, 0, 0, 0 };
-		bool display;
+		//bool display;
 		static TextBox* _instance;
 		ScriptManager* scriptManager;
 	protected:

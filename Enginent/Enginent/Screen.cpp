@@ -43,7 +43,12 @@ MenuScreen::MenuScreen() {
 	UI.push_back(play);
 	UI.push_back(quit);
 	UI.push_back(load);
+
+	SettingWindow* s = SettingWindow::GetInstance();
+	s->Init(Game::GetInstance()->winWidth, Game::GetInstance()->winHeight);
+
 	windows.push_back(SaveLoadWindow::GetInstance());
+	windows.push_back(s);
 }
 
 void MenuScreen::Render() {
@@ -61,15 +66,10 @@ void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if(GameWindowOpen())
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
-	else {
+	else 
 		for (int j = 0; j < UI.size(); j++)
-		{
 			if (Button * button = dynamic_cast<Button*>(UI[j]))
-			{
-				button->checkCollider(screen.x, screen.y);
-			}
-		}
-	}
+				button->checkColliderPressed(screen.x, screen.y);
 }
 
 void MenuScreen::RightClick(glm::vec3, glm::vec3)
@@ -84,7 +84,13 @@ void MenuScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
-
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->LeftRelease(screen.x, screen.y);
+	else
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->checkColliderReleased(screen.x, screen.y);
 }
 
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
@@ -145,26 +151,39 @@ GameScreen::GameScreen() {
 	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->SetCollder(new Collider(phoneIcon));
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
+	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
+	// test
 	phone->AddPage(NOTE, "tmp_note1");
 	phone->AddPage(NOTE, "tmp_note2");
+	phone->AddPage(CHAT, "person_name");
+	phone->Message("person_name", 2);
+	phone->SetNotification(NOTE);
+	phone->SetNotification(CHAT);
+	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
 
 	dialogueText = TextBox::GetInstance();
 
-	Button* exitButton = new Exit_Button("Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png", "Texture/Puzzle/CloseButton.png");
-	exitButton->SetSize(60, -60);
-	exitButton->SetPosition(glm::vec3(600, 300, 1));
-	exitButton->SetCollder(new Collider(exitButton));
+	pause = new OpenPauseWindowButton("");
+	pause->SetSize(60, -60);
+	pause->SetPosition(glm::vec3(600, 300, 1));
+	pause->SetCollder(new Collider(pause));
 
 	UI.push_back(phoneIcon);
-	UI.push_back(exitButton);
+	UI.push_back(pause);
 
-	windows.push_back(SaveLoadWindow::GetInstance());
 	GameWindow * viewWin = ViewWindow::GetInstance();
 	viewWin->Init(g->winWidth, g->winHeight);
+
+	GameWindow* pauseWindow = PauseWindow::GetInstance();
+	pauseWindow->Init(g->winWidth, g->winHeight);
+
 	windows.push_back(viewWin);
+	windows.push_back(pauseWindow);
+	windows.push_back(SaveLoadWindow::GetInstance());
+	windows.push_back(SettingWindow::GetInstance());
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -199,14 +218,16 @@ void GameScreen::Render() {
 void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
-	if (PuzzleTime)
-		currentPuzzle->Update();
-	else {
-		currentLevel->Update();
-		player->Update();
+	if (!Pause) {
+		if (PuzzleTime)
+			currentPuzzle->Update();
+		else {
+			currentLevel->Update();
+			player->Update();
+		}
+		if (InventoryEnable && !phone->open)
+			inventory->Update();
 	}
-	if (InventoryEnable && !phone->open)
-		inventory->Update();
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
@@ -214,8 +235,6 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 		inventory->UnselectItem();
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen())
 			currentLevel->RightClick(world.x, world.y);
-		else if (dialogueText->IsDisplay())
-			dialogueText->SetDisplay(false);
 	}
 }
 
@@ -225,7 +244,7 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 			w->LeftClick(screen.x, screen.y);
 	else if (phone->open)
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay() == true) 
+	else if (dialogueText->IsDisplay() == true)
 		dialogueText->SetDisplay(false);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
@@ -237,12 +256,8 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 		inventory->LeftClick(screen.x, screen.y);
 	}
 	for (int j = 0; j < UI.size(); j++)
-	{
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
-		{
-			button->checkCollider(screen.x, screen.y);
-		}
-	}
+			button->checkColliderPressed(screen.x, screen.y);
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -252,7 +267,24 @@ void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->LeftRelease(screen.x, screen.y);
+	else if (phone->open)
+		phone->LeftRelease(screen.x, screen.y);
+	else if (PuzzleTime)
+		currentPuzzle->LeftRelease(screen, world);
+	if (InventoryEnable) {
+		inventory->LeftRelease(screen.x, screen.y);
+	}
+	for (int j = 0; j < UI.size(); j++)
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+			button->checkColliderReleased(screen.x, screen.y);
+}
 
+void GameScreen::Scroll(glm::vec3 screen, int direction) {
+	if (phone->open)
+		phone->Scroll(screen, direction);
 }
 
 void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
@@ -354,7 +386,6 @@ CutsceneScreen::CutsceneScreen() {
 void CutsceneScreen::Render() {
 	// play the cutscene
 }
-
 void CutsceneScreen::Update() {
 	// eg. 2 clicks to skip a cutscene
 }

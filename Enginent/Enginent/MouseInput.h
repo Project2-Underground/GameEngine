@@ -6,7 +6,8 @@ enum MouseEvent{
 	LeftClick,
 	Hover,
 	RightRelease,
-	LeftRelease
+	LeftRelease,
+	Scroll
 };
 
 enum ActionEvent {
@@ -24,6 +25,7 @@ class MouseInput {
 	ActionEvent actionType;
 	int winWidth, winHeight;
 	Game* game;
+	Button* currentButton;
 protected:
 	MouseInput();
 public:
@@ -31,12 +33,14 @@ public:
 	static MouseInput* GetInstance();
 	void Init(int width, int height);
 	void FindMousePosition(float x, float y);
-	void UpdateMouseInput(MouseEvent, int, int);
+	void UpdateMouseInput(MouseEvent, int, int, int direction = 0);
 	void SetActionEventType(ActionEvent a) { actionType = a; }
 	glm::vec3 GetMouseScreenPosition() { return position_Screen; }
 	glm::vec3 GetMouseWorldPosition() { return position_World; }
-	int GetEvent();
 	void ResetActionType() { actionType = NORMAL_ACTION; }
 	ActionEvent GetActionEvent() { return actionType; }
-	
+	MouseEvent GetEvent() { return eventType; }
+
+	void SetCurrentButtonPressed(Button* b) { currentButton = b; }
+	Button* GetCurrentButtonPressed() { return currentButton; };
 };

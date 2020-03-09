@@ -23,6 +23,7 @@ class Screen {
 protected:
 	std::vector<GameWindow*> windows;
 public:
+	bool Pause;
 	virtual void Render() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
@@ -31,6 +32,7 @@ public:
 	virtual void LeftRelease(glm::vec3, glm::vec3) = 0;
 	virtual void HandleKey(SDL_Keycode) = 0;
 	virtual void UpdateMouseState(glm::vec3 x, glm::vec3 y) = 0;
+	virtual void Scroll(glm::vec3, int) {};
 	virtual InteractTypeList GetPointedObject(glm::vec3 pos) { return NORMAL; std::cout << "menu\n"; };
 	bool GameWindowOpen();
 	void CloseGameAllWindow();
@@ -84,6 +86,7 @@ public:
 	void LeftClick(glm::vec3, glm::vec3);
 	void RightRelease(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
+	void Scroll(glm::vec3, int);
 	void HandleKey(SDL_Keycode);
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void ChangeLevel(int level);

@@ -10,7 +10,7 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new WindowClose("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
@@ -61,7 +61,11 @@ void ViewWindow::Render() {
 }
 
 void ViewWindow::LeftClick(float x, float y) {
-	closeButton->checkCollider(x, y);
+	closeButton->checkColliderPressed(x, y);
+}
+
+void ViewWindow::LeftRelease(float x, float y) {
+	closeButton->checkColliderReleased(x, y);
 }
 
 void ViewWindow::UpdateMouseButton(glm::vec3 screen) {

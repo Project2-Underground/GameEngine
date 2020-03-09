@@ -21,8 +21,10 @@
 		<UpperStair2 used="true" current_dialogue="0" />
 	</doors>
 	<NPCs />
-	<puzzles />
-	<Player posX="405.015289" posY="-50">
+	<puzzles>
+		<BookshelfPuzzle done="false" />
+	</puzzles>
+	<Player posX="418.744385" posY="-50">
 		<inventory>
 			<item />
 			<item />
@@ -36,10 +38,13 @@
 		</inventory>
 	</Player>
 	<Phone>
-		<Notes>
+		<Notes noti="false">
 			<n name="tmp_note1" />
 			<n name="tmp_note2" />
 		</Notes>
-		<Chats />
+		<Chats noti="false">
+			<c name="another_person_name" msgNo="4" />
+			<c name="person_name" msgNo="11" />
+		</Chats>
 	</Phone>
 </level>

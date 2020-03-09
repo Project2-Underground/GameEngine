@@ -2,7 +2,7 @@
 #include "Game.h"
 
 SaveLoadWindow::SaveLoadWindow() {
-	closeButton = new WindowClose("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	bgWindow = new UIObject();
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
@@ -48,8 +48,13 @@ SaveLoadWindow* SaveLoadWindow::GetInstance() {
 }
 
 void SaveLoadWindow::LeftClick(float x, float y) {
-	closeButton->checkCollider(x, y);
-	save->checkCollider(x, y);
+	closeButton->checkColliderPressed(x, y);
+	save->checkColliderPressed(x, y);
+}
+
+void SaveLoadWindow::LeftRelease(float x, float y) {
+	closeButton->checkColliderReleased(x, y);
+	save->checkColliderReleased(x, y);
 }
 
 void SaveLoadWindow::Update() {

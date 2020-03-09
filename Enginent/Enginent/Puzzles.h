@@ -4,11 +4,14 @@
 #include "UIObject.h"
 
 class PuzzleTemplate : public UIObject {
-	bool done;
+protected:
+	bool pass;
+	bool doneAction;
 public:
 	virtual void Render() {};
 	virtual void Update() {};
 	virtual void LeftClick(glm::vec3, glm::vec3) {};
+	virtual void LeftRelease(glm::vec3, glm::vec3) {};
 	virtual void FinishedPuzzle() {};
 	virtual void ActionAfterPuzzle() {};
 };
@@ -59,14 +62,13 @@ class Bookshelf : public PuzzleTemplate {
 	std::vector<Space*> log;
 	std::vector<Book*> books;
 	Book* select = nullptr;
-	bool pass = false;
-	bool display = true;
 public:
 	Bookshelf(std::string, int posX, int posY, int sizeX, int sizeY);
 	void Init(std::vector<Book*>, std::vector<Space*>, std::vector<UIObject*>);
 	void Render();
 	void Update();
 	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
 	void ActionAfterPuzzle();
 	~Bookshelf();
 };
@@ -83,6 +85,7 @@ public:
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
+	virtual void LeftRelease(glm::vec3, glm::vec3) = 0;
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
 	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
@@ -96,6 +99,7 @@ public:
 	void Update();
 	void RightClick(glm::vec3, glm::vec3) {};
 	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~BookshelfPuzzle();

@@ -41,7 +41,7 @@ void MouseInput::FindMousePosition(float x, float y)
 
 }
 
-void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY)
+void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY, int direction)
 {
 	FindMousePosition((float)posX, (float)posY);
 	switch (type)
@@ -72,10 +72,10 @@ void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY)
 			game->GetScreen()->LeftRelease(position_Screen, position_World);
 			break;
 		}
+		case Scroll: 
+		{
+			game->GetScreen()->Scroll(position_Screen, direction);
+			break;
+		}
 	}
-}
-
-int MouseInput::GetEvent()
-{
-	return this->eventType;
 }

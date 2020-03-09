@@ -3,6 +3,7 @@
 #include "InfoPhone.h"
 #include "GameWindows.h"
 #include "MouseInput.h"
+#include "SoundManager.h"
 
 Button::Button(std::string texture)
 {
@@ -38,16 +39,20 @@ void Button::action()
 	//does something
 }
 
-void Button::checkCollider(float x, float y)
+void Button::checkColliderPressed(float x, float y)
 {
-	if (this->col->isClicked(x, y))
-	{
+	if (this->col->isClicked(x, y)) {
 		SetTexture(pressTexture);
-		action();
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 	}
-	else
-	{
-		SetTexture(normalTexture);
+}
+
+void Button::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y)) {
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			action();
+		}
 	}
 }
 
@@ -76,6 +81,24 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
+void PhoneAppsButton::SetNotiTexture(std::string texture) {
+	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+
+void PhoneAppsButton::checkColliderPressed(float x, float y)
+{
+	if (this->col->isClicked(x, y))
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+}
+
+void PhoneAppsButton::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y))
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			if (notice)
+				SetTexture(normalTexture);
+			action();
+		}
+}
 
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
@@ -97,7 +120,7 @@ void PhoneHomeButton::action() {
 	Phone::GetInstance()->CloseApp();
 }
 
-void WindowClose::action() {
+void WindowCloseButton::action() {
 	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
 }
 
@@ -107,4 +130,61 @@ void ClosePuzzleButton::action() {
 
 void SaveLoadGameButton::action() {
 	Game::GetInstance()->SaveLoad(filename);
+}
+
+void OpenPauseWindowButton::action() {
+	PauseWindow::GetInstance()->Open();
+	// pause sfx
+}
+
+void MainMenuButton::action() {
+	Game* game = Game::GetInstance();
+	game->GetScreen()->CloseGameAllWindow();
+	game->ChangeScreenState(MENUSCREEN);
+}
+
+void SettingButton::action(){
+	SettingWindow::GetInstance()->Open();
+}
+
+void SoundVolumeButton::action() {
+	switch (type)
+	{
+	case BGM:
+		if (direction >= 0)
+			SoundManager::GetInstance()->upVolume();
+		else
+			SoundManager::GetInstance()->downVolume();
+		break;
+	case SOUNDFX:
+		if (direction >= 0)
+			SoundManager::GetInstance()->upVolume();
+		else
+			SoundManager::GetInstance()->downVolume();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundMuteButton::SetMuteTexture(std::string texture){
+	muteTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+void SoundMuteButton::action() {
+	if (GetTexture() != muteTexture)
+		SetTexture(muteTexture);
+	else
+		SetTexture(normalTexture);
+
+	switch (type)
+	{
+	case BGM:
+		SoundManager::GetInstance()->toggleMute();
+		break;
+	case SOUNDFX:
+		SoundManager::GetInstance()->toggleMute();
+		break;
+	default:
+		break;
+	}
 }

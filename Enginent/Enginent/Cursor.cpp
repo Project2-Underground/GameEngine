@@ -73,7 +73,7 @@ void CursorUI::setCursor(InteractTypeList type)
 
 void CursorUI::enableChange(bool e)
 {
-	if (e)
+	if (!e)
 		this->SetTexture(CS_Normal);
 	enable = e;
 }

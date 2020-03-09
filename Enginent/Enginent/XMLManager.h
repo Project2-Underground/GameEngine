@@ -4,6 +4,7 @@
 #include <string>
 #include "Level.h"
 #include "ImageObject.h"
+#include "InfoPhone.h"
 
 class XMLManager {
 	static XMLManager* _instance;
@@ -30,7 +31,7 @@ public:
 	void LoadFromSave(std::string);
 
 	// chat doc
-	void GetChat(std::string, ImageObject*);
+	void LoadChats(std::string, std::map<std::string, ChatInfo>&);
 	std::string GetMessage(std::string, int);
 	// note doc
 	void LoadNotes(std::string, std::map<std::string, UIObject*>&);
