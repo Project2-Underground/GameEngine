@@ -4,8 +4,11 @@
 SettingWindow* SettingWindow::instance = nullptr;
 
 SettingWindow* SettingWindow::GetInstance() {
-	if (!instance)
+	if (!instance){
 		instance = new SettingWindow();
+		Game* g = Game::GetInstance();
+		instance->Init(g->winWidth, g->winHeight);
+	}
 	return instance;
 }
 SettingWindow::SettingWindow() {

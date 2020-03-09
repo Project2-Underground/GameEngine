@@ -13,7 +13,7 @@
 	<item />
 	<doors>
 		<EliasRoomInnerDoor used="true" current_dialogue="0" />
-		<StairDoor used="false" current_dialogue="0" />
+		<StairDoor used="true" current_dialogue="0" />
 		<LowerStair1 used="true" current_dialogue="0" />
 		<LowerStair2 used="true" current_dialogue="0" />
 		<EliasRoomOuterDoor used="true" current_dialogue="0" />
@@ -24,7 +24,7 @@
 	<puzzles>
 		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="418.744385" posY="-50">
+	<Player posX="469.426147" posY="-50">
 		<inventory>
 			<item />
 			<item />

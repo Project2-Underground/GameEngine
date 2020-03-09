@@ -320,7 +320,7 @@ void Phone::LeftClick(float x, float y) {
 
 void Phone::LeftRelease(float x, float y) {
 	if (app->open)
-		app->LeftClick(x, y);
+		app->LeftRelease(x, y);
 	else {
 		noteIcon->checkColliderReleased(x, y);
 		chatIcon->checkColliderReleased(x, y);

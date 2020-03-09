@@ -290,10 +290,6 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
-		/*if (phoneNode.child("Notes").attribute("noti").as_bool()) 
-			phone->SetNotification(NOTE);
-		if (phoneNode.child("Chats").attribute("noti").as_bool()) 
-			phone->SetNotification(CHAT);*/
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
 			phone->AddPage(NOTE, itr->attribute("name").as_string());
 		}

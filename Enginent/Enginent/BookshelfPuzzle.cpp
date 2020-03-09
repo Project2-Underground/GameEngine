@@ -110,35 +110,7 @@ void Bookshelf::LeftClick(glm::vec3 screen, glm::vec3 world)
 				}
 			}
 		}
-		/*else
-		{
-			bool placed = false;
-			for (int i = 0; i < log.size(); i++)
-			{
-				if (log[i]->collider->isClicked(screen.x, screen.y))
-				{
-					Book* tmp = log[i]->book;
-					log[i]->book = select;
-					select->SetPosition(log[i]->collider->getPosition());
-					select->col->setNewPos(log[i]->collider->getPosition());
-					select->UpdatePrevPos();
-					select = tmp;
-					placed = true;
-					break;
-				}
-			}
-			if (!placed)
-			{
-				select->SetPosition(select->GetPrevPos());
-				select->col->setNewPos(select->GetPrevPos());
-				select = nullptr;
-			}
-		}*/
 	}
-	/*else
-	{
-		ActionAfterPuzzle();
-	}*/
 }
 
 void Bookshelf::LeftRelease(glm::vec3 screen, glm::vec3 world) {
@@ -152,7 +124,6 @@ void Bookshelf::LeftRelease(glm::vec3 screen, glm::vec3 world) {
 				log[i]->book = select;
 				select->SetPosition(log[i]->collider->getPosition());
 				select->col->setNewPos(log[i]->collider->getPosition());
-				select->UpdatePrevPos();
 				select = tmp;
 				placed = true;
 				break;
@@ -195,6 +166,18 @@ void Bookshelf::Update()
 
 void Bookshelf::ActionAfterPuzzle() {
 	Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->doors["StairDoor"]->Open();
+}
+
+void Bookshelf::CompletePuzzle() {
+	int solveLog[6] = { 3,2,4,1,5,6 };
+
+	for (int i = 0; i < 6; i++) {
+		log[i]->book = books[solveLog[i]];
+		books[solveLog[i]]->SetPosition(log[i]->collider->getPosition());
+		books[solveLog[i]]->col->setNewPos(log[i]->collider->getPosition());
+	}
+
+	pass = true;
 }
 
 Bookshelf::~Bookshelf()
@@ -330,5 +313,6 @@ BookshelfPuzzle::~BookshelfPuzzle()
 }
 
 void BookshelfPuzzle::CompletePuzzle() {
-
+	puzzle->CompletePuzzle();
+	pass = true;
 }

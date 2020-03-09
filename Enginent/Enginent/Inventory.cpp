@@ -107,7 +107,7 @@ void Inventory::Render() {
 }
 
 void Inventory::SeparateItem(Item* item) {
-	if (item && dynamic_cast<SeparatableItem*>(item)) {
+	if (dynamic_cast<SeparatableItem*>(item)) {
 		dynamic_cast<SeparatableItem*>(item)->action();
 	}
 	else {
@@ -118,32 +118,27 @@ void Inventory::SeparateItem(Item* item) {
 }
 
 void Inventory::CombineItem(Item* item) {
-	if (item) {
-		if (selectedItem) {
-			if (dynamic_cast<CombinableItem*>(selectedItem)) {
-				//std::cout << "try combine\n";
-				CombinableItem* c = ((CombinableItem*)selectedItem);
-				c->selectedItem = item;
-				c->action();
-			}
-			else {
-				//std::cout << "items cannot be combine\n";
-			}
-			MouseInput::GetInstance()->ResetActionType();
-			UnselectItem();
+	if (selectedItem) {
+		if (dynamic_cast<CombinableItem*>(selectedItem)) {
+			//std::cout << "try combine\n";
+			CombinableItem* c = ((CombinableItem*)selectedItem);
+			c->selectedItem = item;
+			c->action();
 		}
 		else {
-			selectedItem = item;
-			//std::cout << "selected item to combine\n";
+			//std::cout << "items cannot be combine\n";
 		}
+		MouseInput::GetInstance()->ResetActionType();
+		UnselectItem();
+	}
+	else {
+		selectedItem = item;
+		//std::cout << "selected item to combine\n";
 	}
 }
 
 void Inventory::SelectItem(Item* item) {
-	if (item) {
-		//std::cout << "selected an item\n";
-		selectedItem = item;
-	}
+	selectedItem = item;
 }
 
 InventoryBoxButton* Inventory::GetInventoryBox(int index) {

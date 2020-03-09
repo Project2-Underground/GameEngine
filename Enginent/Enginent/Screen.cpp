@@ -1,6 +1,8 @@
 #include "Screen.h"
 #include "Game.h"
 
+
+
 bool Screen::GameWindowOpen() {
 	for (auto w : windows)
 		if (w->IsOpen())
@@ -44,11 +46,8 @@ MenuScreen::MenuScreen() {
 	UI.push_back(quit);
 	UI.push_back(load);
 
-	SettingWindow* s = SettingWindow::GetInstance();
-	s->Init(Game::GetInstance()->winWidth, Game::GetInstance()->winHeight);
-
+	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
-	windows.push_back(s);
 }
 
 void MenuScreen::Render() {
@@ -174,16 +173,10 @@ GameScreen::GameScreen() {
 	UI.push_back(phoneIcon);
 	UI.push_back(pause);
 
-	GameWindow * viewWin = ViewWindow::GetInstance();
-	viewWin->Init(g->winWidth, g->winHeight);
-
-	GameWindow* pauseWindow = PauseWindow::GetInstance();
-	pauseWindow->Init(g->winWidth, g->winHeight);
-
-	windows.push_back(viewWin);
-	windows.push_back(pauseWindow);
+	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	windows.push_back(SettingWindow::GetInstance());
+	windows.push_back(PauseWindow::GetInstance());
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -251,13 +244,13 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	else {
 		if(!player->anim->IsPlaying("Pickup"))
 			currentLevel->LeftClick(world.x, world.y);
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->checkColliderPressed(screen.x, screen.y);
 	}
 	if (InventoryEnable) {
 		inventory->LeftClick(screen.x, screen.y);
 	}
-	for (int j = 0; j < UI.size(); j++)
-		if (Button * button = dynamic_cast<Button*>(UI[j]))
-			button->checkColliderPressed(screen.x, screen.y);
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
