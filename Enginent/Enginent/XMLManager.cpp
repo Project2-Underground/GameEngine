@@ -33,6 +33,8 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			Room* newRoom = new Room();
 			newRoom->name = room->name();
 
+			//std::cout << newRoom->name << std::endl;
+
 			// player walking limit
 			glm::vec3 minLimit = glm::vec3(room->attribute("left_limit").as_int(), room->attribute("bottom_limit").as_int(), 1);
 			glm::vec3 maxLimit = glm::vec3(room->attribute("right_limit").as_int(), room->attribute("top_limit").as_int(), 1);
@@ -170,7 +172,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
 			}
 		}
-
 		door->SetDialogue(dialogues);
 		door->SetCollder(new Collider(door));
 
@@ -179,6 +180,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		if (child->child("openDoor"))
 			door->SetOpenTexture(child->child("openDoor").attribute("texture").as_string());
+		else
+			door->SetOpenTexture(door->GetTexture());
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
@@ -240,7 +243,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					door->used = file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool();
+					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
+						door->Open();
 					door->SetCurrentDialogue(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
@@ -265,7 +269,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
-			if (p->attribute("done").as_bool());
+			if (p->attribute("done").as_bool())
 				gs->puzzles[p->name()]->CompletePuzzle();
 		}
 

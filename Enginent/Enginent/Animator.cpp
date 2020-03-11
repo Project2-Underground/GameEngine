@@ -40,6 +40,20 @@ void Animator::Update() {
 
 void Animator::AddAnimation(Animation* animation) {
 	animations[animation->animationName] = animation;
+
+	if (animations.size() == 1)
+		SetDefaultAnimation(animation->animationName);
+}
+
+void Animator::AddAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop) {
+	Animation* animation = new Animation(name, texture, loop);
+	animation->SetFrame(frameNo);
+	animation->SetFramePeriod(frameRate);
+
+	animations[animation->animationName] = animation;
+
+	if (animations.size() == 1)
+		SetDefaultAnimation(name);
 }
 
 bool Animator::IsPlaying(std::string name) {
