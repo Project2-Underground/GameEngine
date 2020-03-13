@@ -149,14 +149,14 @@ Player* Game::GetPlayer() {
 
 
 void Game::SaveLoad(std::string filename) {
-	if (save)
+	if (save) 
 		SaveGame(filename);
 	else {
 		if(!dynamic_cast<GameScreen*>(currentScreen)){
 			currentState = GAMESCREEN;
 			UpdateScreenState();
-			LoadGame(filename);
 		}
+		LoadGame(filename);
 	}
 }
 

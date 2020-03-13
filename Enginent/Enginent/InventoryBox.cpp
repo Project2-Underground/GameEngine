@@ -14,7 +14,7 @@ void InventoryBoxButton::SetItem(Item* item) {
 
 void InventoryBoxButton::action() {
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-	if (!IsSelected()) {
+	if (!IsSelected() && item) {
 		switch (MouseInput::GetInstance()->GetActionEvent())
 		{
 		case SEPARATE_ACTION:
@@ -59,27 +59,22 @@ InventoryBoxButton::~InventoryBoxButton() {
 }
 
 void InventoryBoxButton::Reset() {
-	pressAvailable = true;
 	SetTogglePress(false);
 	SetTexture(normalTexture);
 }
 
 void InventoryBoxButton::checkColliderPressed(float x, float y) {
-	if (pressAvailable)
+	if (pressAvailable && item)
 		if (this->col->isClicked(x, y))
 			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 }
 
 void InventoryBoxButton::checkColliderReleased(float x, float y) {
-	if (pressAvailable) {
+	if (pressAvailable && item) {
 		if (this->col->isClicked(x, y)) {
 			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
-				if (item) {
-					SetTexture(pressTexture);
-					action();
-				}
-				else
-					SetTexture(normalTexture);
+				SetTexture(pressTexture);
+				action();
 			}
 		}
 	}
@@ -92,7 +87,7 @@ void InventoryBoxButton::checkColliderReleased(float x, float y) {
 
 void ChangeMouseActionTypeButton::action() {
 	if (!IsSelected()) {
-		std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
+		//std::cout << (type == SEPARATE_ACTION ? "separate" : "combine") << " clicked\n";
 		MouseInput::GetInstance()->SetActionEventType((ActionEvent)type);
 		SetTogglePress(true);
 	}
@@ -102,7 +97,6 @@ void ChangeMouseActionTypeButton::action() {
 }
 
 void ChangeMouseActionTypeButton::Reset() {
-	pressAvailable = true;
 	SetTogglePress(false);
 	SetTexture(normalTexture);
 }

@@ -320,7 +320,7 @@ void Phone::LeftClick(float x, float y) {
 
 void Phone::LeftRelease(float x, float y) {
 	if (app->open)
-		app->LeftClick(x, y);
+		app->LeftRelease(x, y);
 	else {
 		noteIcon->checkColliderReleased(x, y);
 		chatIcon->checkColliderReleased(x, y);
@@ -366,7 +366,6 @@ void Phone::Message(std::string name, int msgIndex) {
 }
 
 void Phone::SetNotification(AppType apptype) {
-	std::cout << apptype << std::endl;
 	switch (apptype)
 	{
 	case NOTE:

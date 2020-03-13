@@ -22,7 +22,8 @@ enum InteractTypeList
 class InteractableObj : public ImageObject {
 protected:
 	InteractTypeList interactType = NORMAL;
-	Collider* col;
+	std::vector<Dialogue> dialogue;
+	int currDialogue = 0;
 	std::string interact_sound = "";
 
 	bool takePic;
@@ -31,17 +32,20 @@ protected:
 	Item* item;
 
 public:
-	//InteractableObj() {};
-	InteractableObj();
+	InteractableObj() {};
+	InteractableObj(vector<Dialogue> s);
 
 	virtual void action();
 	void SetSound(std::string);
+	void SetDialogue(vector<Dialogue> s);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
+	int GetCurrentDialogue() { return currDialogue; }
 	void SetInteractType(InteractTypeList type) { interactType = type; }
+	void SetCurrentDialogue(int num) { currDialogue = num; }
 	void SetItemToUse(std::string item_to_unlock);
 	void SetItem(Item* item) { this->item = item; }
 	Item* GetItem() { return item; }
@@ -98,6 +102,7 @@ class NonPlayer : public InteractableObj {
 	bool giveItem;
 public:
 	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
+	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void action();
 };
 
@@ -108,6 +113,7 @@ class Door : public InteractableObj {
 public:
 	Door(std::string, std::string);
 	void SetOpenTexture(std::string texture);
+	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
 	void Open();
 	void action();
 };

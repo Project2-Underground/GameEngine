@@ -33,6 +33,8 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			Room* newRoom = new Room();
 			newRoom->name = room->name();
 
+			//std::cout << newRoom->name << std::endl;
+
 			// player walking limit
 			glm::vec3 minLimit = glm::vec3(room->attribute("left_limit").as_int(), room->attribute("bottom_limit").as_int(), 1);
 			glm::vec3 maxLimit = glm::vec3(room->attribute("right_limit").as_int(), room->attribute("top_limit").as_int(), 1);
@@ -125,9 +127,21 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
+
+		if (pugi::xml_node dialogue = child->child("dialogue")) {
+			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+			}
+		}
+
 		if (child->child("key"))
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
+		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
@@ -148,7 +162,17 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
 
+		if (pugi::xml_node dialogue = child->child("dialogue")) {
+			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+			}
+		}
+		door->SetDialogue(dialogues);
 		door->SetCollder(new Collider(door));
 
 		if (child->child("key"))
@@ -156,6 +180,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		if (child->child("openDoor"))
 			door->SetOpenTexture(child->child("openDoor").attribute("texture").as_string());
+		else
+			door->SetOpenTexture(door->GetTexture());
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
@@ -217,10 +243,13 @@ void XMLManager::LoadFromSave(std::string filename) {
 			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					door->used = file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool();
-			}
+					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
+						door->Open();
+					door->SetCurrentDialogue(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
+				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
+					obj->SetCurrentDialogue(node.attribute("current_dialogue").as_int());
 
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 						if (node.attribute("open").as_bool()) {
@@ -265,10 +294,6 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
-		/*if (phoneNode.child("Notes").attribute("noti").as_bool()) 
-			phone->SetNotification(NOTE);
-		if (phoneNode.child("Chats").attribute("noti").as_bool()) 
-			phone->SetNotification(CHAT);*/
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
 			phone->AddPage(NOTE, itr->attribute("name").as_string());
 		}
@@ -311,11 +336,13 @@ void XMLManager::SaveGame(std::string filename) {
 
 			if (Door * door = dynamic_cast<Door*>(objects[i])) {
 				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
+				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
 				// current dialogue
+				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());

@@ -4,8 +4,11 @@
 PauseWindow* PauseWindow::instance = nullptr;
 
 PauseWindow* PauseWindow::GetInstance() {
-	if (!instance)
+	if (!instance) {
 		instance = new PauseWindow();
+		Game* g = Game::GetInstance();
+		instance->Init(g->winWidth, g->winHeight);
+	}
 	return instance;
 }
 PauseWindow::PauseWindow() {
@@ -94,6 +97,7 @@ void PauseWindow::Close() {
 	game->GetCursor()->enableChange(true);
 	game->GetScreen()->Pause = false;
 	display = false;
+	trigger = false;
 }
 PauseWindow::~PauseWindow() {
 	delete setting;

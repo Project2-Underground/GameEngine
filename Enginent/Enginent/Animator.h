@@ -16,5 +16,6 @@ public:
 	void Play(std::string animationName, bool loop);
 	void Update();
 	void AddAnimation(Animation* animation);
+	void AddAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	~Animator();
 };

@@ -10,27 +10,10 @@ Player::Player()
 	next_position = glm::vec3(this->pos);
 	anim = new Animator();
 
-	Animation* move = new Animation("Move", "Texture/Character/Elias_walk.png");
-	Animation* idle = new Animation("Idle", "Texture/Character/Elias_idle.png");
-	Animation* pickup = new Animation("Pickup", "Texture/Character/Elias_pick.png", true);
-	Animation* panic = new Animation("Panic", "Texture/Character/Elias_panic.png", true);
-	move->SetFrame(4);
-	move->SetFramePeriod(0.25f);
-
-	idle->SetFrame(4);
-	idle->SetFramePeriod(0.25f);
-
-	pickup->SetFrame(4);
-	pickup->SetFramePeriod(0.25f);
-
-	panic->SetFrame(3);
-	panic->SetFramePeriod(0.25f);
-
-	anim->AddAnimation(idle);
-	anim->AddAnimation(move);
-	anim->AddAnimation(pickup);
-	anim->AddAnimation(panic);
-	anim->SetDefaultAnimation("Idle");
+	anim->AddAnimation("Idle", "Texture/Character/Elias_idle.png",4,0.25f);
+	anim->AddAnimation("Move", "Texture/Character/Elias_walk.png",4,0.25f);
+	anim->AddAnimation("Pickup", "Texture/Character/Elias_pick.png",4,0.25f,true);
+	anim->AddAnimation("Panic", "Texture/Character/Elias_pick.png",3,0.25f,true);
 	anim->Play("Idle", true);
 
 	walk = false;

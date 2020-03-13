@@ -14,6 +14,8 @@ public:
 	virtual void LeftRelease(glm::vec3, glm::vec3) {};
 	virtual void FinishedPuzzle() {};
 	virtual void ActionAfterPuzzle() {};
+	virtual void CompletePuzzle() {};
+	bool Passed() { return pass; }
 };
 
 class Book : public UIObject {
@@ -70,6 +72,7 @@ public:
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void ActionAfterPuzzle();
+	void CompletePuzzle();
 	~Bookshelf();
 };
 
@@ -77,9 +80,8 @@ class Puzzle {
 protected:
 	std::vector<UIObject*> UI;
 	UIObject* background;
-	Bookshelf* puzzle;
+	PuzzleTemplate* puzzle;
 	bool enableInventory;
-	bool pass;
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
@@ -89,7 +91,7 @@ public:
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
 	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
-	bool Passed() { return pass; }
+	bool Passed() { return puzzle->Passed(); }
 };
 
 class BookshelfPuzzle : public Puzzle {

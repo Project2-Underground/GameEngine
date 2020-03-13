@@ -5,8 +5,11 @@
 ViewWindow* ViewWindow::instance = nullptr;
 
 ViewWindow* ViewWindow::GetInstance() {
-	if (instance == nullptr)
+	if (instance == nullptr) {
 		instance = new ViewWindow();
+		Game* g = Game::GetInstance();
+		instance->Init(g->winWidth, g->winHeight);
+	}
 	return instance;
 }
 ViewWindow::ViewWindow() {
