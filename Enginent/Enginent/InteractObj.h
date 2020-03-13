@@ -22,8 +22,6 @@ enum InteractTypeList
 class InteractableObj : public ImageObject {
 protected:
 	InteractTypeList interactType = NORMAL;
-	std::vector<Dialogue> dialogue;
-	int currDialogue = 0;
 	std::string interact_sound = "";
 
 	bool takePic;
@@ -32,20 +30,16 @@ protected:
 	Item* item;
 
 public:
-	InteractableObj() {};
-	InteractableObj(vector<Dialogue> s);
+	InteractableObj();
 
 	virtual void action();
 	void SetSound(std::string);
-	void SetDialogue(vector<Dialogue> s);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
-	int GetCurrentDialogue() { return currDialogue; }
 	void SetInteractType(InteractTypeList type) { interactType = type; }
-	void SetCurrentDialogue(int num) { currDialogue = num; }
 	void SetItemToUse(std::string item_to_unlock);
 	void SetItem(Item* item) { this->item = item; }
 	Item* GetItem() { return item; }
