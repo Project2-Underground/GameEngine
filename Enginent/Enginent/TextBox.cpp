@@ -29,7 +29,7 @@ TextBox::TextBox()
 		dialogue->SetPosition(glm::vec3((-450 + (float)((text.size() * 24) / 2)), -180, 1.0f));
 	else
 		dialogue->SetPosition(glm::vec3((-450 + (float)(1000 / 2)), -180.0f, 1.0f));
-
+	setText("start");
 }
 
 void TextBox::setText(std::string key)
@@ -79,12 +79,20 @@ void TextBox::clickLeft(glm::vec3 pos)
 	}
 }
 
-ChoiceBox::ChoiceBox()
+ChoiceBox::ChoiceBox(Choice c)
 {
-
+	this->choice = c;
+	text->loadText(choice.text, choiceColor, 24);
+	text->SetPosition(glm::vec3(0, 0, 0));
 }
 
-void ChoiceBox::setText(std::string text)
+void ChoiceBox::SetPos(glm::vec3 pos)
+{
+	SetPosition(pos);
+	text->SetPosition(pos);
+}
+
+void ChoiceBox::Render()
 {
 
 }
@@ -92,4 +100,17 @@ void ChoiceBox::setText(std::string text)
 ChoiceUI::ChoiceUI()
 {
 
+}
+
+void ChoiceUI::addChoice(ChoiceBox* c)
+{
+
+}
+
+void ChoiceUI::Render()
+{
+	if (display)
+	{
+
+	}
 }

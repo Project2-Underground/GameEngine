@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<c>
+	<choices key = "gimmeBook">
+		<choice text = "This red book." nextDialogue = "redbook"/>
+		<choice text = "That blue book." nextDialogue = "bluebook"/>
+		<choice text = "I don't want." nextDialogue = ""/>
+		<choice text = "Anything but you!" nextDialogue = "WTH"/>
+	</choices>
+</c>

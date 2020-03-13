@@ -5,6 +5,7 @@
 #include <map>
 #include <pugixml.hpp>
 #include "Item.h"
+#include "ImageObject.h"
 
 struct Choice {
 	std::string text;

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <scripts>
+	<script key = "" loopIndex = "">
+		<sub>
+		<Dialogue name = "" text = ""/>
+		</sub>
+	</script>
+	<script key = "start" loopIndex = "0">
+		<sub>
+			<Dialogue name = "??" text = "Ughhhhh... So dizzy."/>
+			<Dialogue name = "??" text = "Am I... hangover?"/>
+			<Dialogue name = "??" text = "Maybe I drank too much."/>
+			<Dialogue name = "??" text = "..."/>
+			<Dialogue name = "??" text = "I cannot remember anything. Seem like I drank quite a lot huh?"/>
+			<Dialogue name = "??" text = "Should walk a bit to make the dizzines go away."/>
+			<Dialogue name = "System" text = "Right click to walk.\n Left click to Interact with object."/>
+		</sub>
+	</script>
 	<script key = "tooFar" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "It's too far away."/>

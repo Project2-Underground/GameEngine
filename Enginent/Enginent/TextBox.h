@@ -32,17 +32,22 @@ class TextBox : public UIObject {
 };
 
 class ChoiceBox : UIObject {
-	int choiceID;
-	std::string text;
+	Choice choice;
 	ImageObject* background;
+	TextObject* text;
+	SDL_Color choiceColor = { 0, 0, 0, 0 };
 public:
-	ChoiceBox();
+	ChoiceBox(Choice c);
 	void setText(std::string text);
+	void SetPos(glm::vec3);
+	void Render();
 };
 
-class ChoiceUI {
-	std::vector<ChoiceBox*> list;
+class ChoiceUI : public UIObject {
+	std::vector<ChoiceBox*> choiceList;
+	int choiceNum;
 public:
 	ChoiceUI();
 	void addChoice(ChoiceBox* c);
+	void Render();
 };
