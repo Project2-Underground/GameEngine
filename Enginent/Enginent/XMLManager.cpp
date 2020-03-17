@@ -44,7 +44,6 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			GenerateImage(*room, newRoom, "background");
 			GenerateInteractObj(*room, newRoom);
 			GenerateDoor(*room, newRoom);
-			//GenerateItem(*room, newRoom);
 			GenerateNPC(*room, newRoom);
 			GenerateImage(*room, newRoom, "foreground");
 
@@ -74,7 +73,6 @@ void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {
 			bg->layer = FOREGROUND_LAYER;
 			r->foreground.push_back(bg);
 		}
-
 	}
 }
 
@@ -195,11 +193,37 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 }
 
 void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
+	pugi::xml_node npcs = room.child("NPCs");
 
-}
+	for (pugi::xml_node_iterator child = npcs.begin(); child != npcs.end(); child++) {
+		NonPlayer* npc = new NonPlayer(child->name());
+		CreateObject(npc, *child);
 
-void XMLManager::GeneratePuzzle(pugi::xml_node room, Room* r) {
+		if (child->child("item")) {
+			Item* item = new Item(child->child("item").attribute("name").as_string());
+			item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
+			item->SetViewTexture(child->child("item").attribute("v_texture").as_string());
+			npc->SetItem(item);
+		}
 
+		std::vector<Dialogue> dialogues;
+		pugi::xml_node_iterator n;
+
+		if (pugi::xml_node dialogue = child->child("dialogue")) {
+			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+				n = d;
+				d++;
+				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+			}
+		}
+
+		npc->SetDialogue(dialogues);
+		npc->SetCollder(new Collider(npc));
+		npc->layer = NPC_LAYER;
+		npc->subLayer = child->attribute("layer").as_int();
+
+		r->npcs.push_back(npc);
+	}
 }
 
 void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {

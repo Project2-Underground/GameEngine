@@ -7,7 +7,11 @@
 
 void Room::Render() {
 	// render objects
-	Game::GetInstance()->GetRenderer()->Render(objects, true);
+	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+	renderer->Render(objects, true);
+	renderer->Render(Game::GetInstance()->GetPlayer());
+	renderer->Render(npcs, false);
+	renderer->Render(foreground, false);
 }
 
 Room::~Room() {

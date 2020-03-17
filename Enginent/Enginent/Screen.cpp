@@ -190,9 +190,6 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
-		renderer->Render(player);
-		renderer->Render(currentLevel->GetCurrentRoom()->npcs, false);
-		renderer->Render(currentLevel->GetCurrentRoom()->foreground, false);
 	}
 	renderer->Render(UI);
 

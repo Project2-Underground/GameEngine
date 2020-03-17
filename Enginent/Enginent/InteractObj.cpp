@@ -96,6 +96,13 @@ void InteractableObj::PickUpItem() {
 	}
 }
 
+void InteractableObj::SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop) {
+	if (anim == nullptr)
+		anim = new Animator();
+
+	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
+}
+
 OpenObj::OpenObj() {
 	interactType = PICKUP;
 	open = false;
@@ -164,11 +171,4 @@ void PuzzleObj::action() {
 void SaveObj::action() {
 	Game::GetInstance()->SetSaveGame(true);
 	SaveLoadWindow::GetInstance()->Open();
-}
-
-void NonPlayer::SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop){
-	if (anim == nullptr) 
-		anim = new Animator();
-
-	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
 }
