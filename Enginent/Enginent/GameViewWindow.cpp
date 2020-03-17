@@ -40,6 +40,10 @@ void ViewWindow::Init(int width, int height) {
 	closeButton->SetCollder(new Collider(closeButton));
 }
 
+void ViewWindow::SetViewItem(Item* item) {
+	viewItem->SetTexture(item->GetViewTexture());
+}
+
 void ViewWindow::SetViewItem(unsigned int texture) {
 	viewItem->SetTexture(texture);
 }

@@ -1,6 +1,7 @@
 #pragma once    
 
 #include "Button.h"
+#include "Item.h"
 
 class GameWindow {
 protected:
@@ -38,6 +39,7 @@ public:
 	void LeftRelease(float, float);
 	void UpdateMouseButton(glm::vec3);
 
+	void SetViewItem(Item* item);
 	void SetViewItem(unsigned int texture);
 	void SetText();
 };
