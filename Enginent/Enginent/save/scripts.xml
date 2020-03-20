@@ -7,7 +7,7 @@
 		</sub>
 	</script>
 	<script key = "start" loopIndex = "0">
-		<sub>
+		<sub choice = "gimmeBook">
 			<Dialogue name = "??" text = "Ughhhhh... So dizzy."/>
 			<Dialogue name = "??" text = "Am I... hangover?"/>
 			<Dialogue name = "??" text = "Maybe I drank too much."/>

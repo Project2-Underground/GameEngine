@@ -6,5 +6,7 @@
 		<choice text = "That blue book." nextDialogue = "bluebook"/>
 		<choice text = "I don't want." nextDialogue = ""/>
 		<choice text = "Anything but you!" nextDialogue = "WTH"/>
+		<choice text = "Anything but you!" nextDialogue = "WTH"/>
+		<choice text = "Anything but you!" nextDialogue = "WTH"/>
 	</choices>
 </c>

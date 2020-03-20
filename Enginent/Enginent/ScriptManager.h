@@ -48,7 +48,9 @@ struct Script {
 class ScriptManager {
 	static ScriptManager* _instance;
 	std::map<std::string, Script*> scripts;
+	std::map<std::string, std::vector<Choice>*> choices;
 	pugi::xml_document scriptDoc;
+	pugi::xml_document choiceDoc;
 	Dialogue* displayText;
 protected:
 	ScriptManager();
@@ -57,4 +59,5 @@ public:
 	static ScriptManager* GetInstance();
 	void LoadScript();
 	Dialogue GetDialogue(std::string);
+	std::vector<Choice>* GetChoice(std::string);
 };

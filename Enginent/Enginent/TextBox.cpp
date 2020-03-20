@@ -23,6 +23,7 @@ TextBox::TextBox()
 	std::string text = "";
 	dialogue->loadText(text, textColor, 24);
 	name->SetPosition(glm::vec3(-400.0f, -115.0f, 1.0f));
+	choice_UI = new ChoiceUI();
 
 	//use TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
 	if(text.size() * 24 < 1000)
@@ -51,66 +52,107 @@ void TextBox::Render()
 		Game::GetInstance()->GetRenderer()->Render(name);
 		Game::GetInstance()->GetRenderer()->Render(dialogue);
 	}
-}
-
-void TextBox::setTextboxDisplay(bool b)
-{
-	display = b;
+	if (choice_UI->IsDisplay())
+	{
+		choice_UI->Render();
+	}
 }
 
 TextBox::~TextBox()
 {
 	delete dialogue;
 	delete background;
+	delete choice_UI;
 }
 
 void TextBox::clickLeft(glm::vec3 pos)
 {
-	if (d_index < d_text.dialogue.size() - 1)
+	if (d_index < d_text.dialogue.size() - 1 && choice_UI->IsDisplay() == false)
 	{
 		d_index++;
 		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
 		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
 		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 	}
-	else
+	else if (choice_UI->IsDisplay())
+	{
+		choice_UI->clickLeft(pos);
+	}
+	else if (d_text.choice == "")
 	{
 		display = false;
 	}
+	else
+	{
+		choice_UI->setChoice(d_text.choice);
+	}
 }
 
-ChoiceBox::ChoiceBox(Choice c)
+ChoiceBox::ChoiceBox()
+{
+	text = new TextObject();
+	background = new UIObject();
+	background->SetTexture("Texture/UI/ChoiceBox.PNG");
+	background->SetSize(180, -50);
+	SetPos(glm::vec3(0, 80, 1));
+}
+
+void ChoiceBox::setChoice(Choice c)
 {
 	this->choice = c;
 	text->loadText(choice.text, choiceColor, 24);
-	text->SetPosition(glm::vec3(0, 0, 0));
 }
 
 void ChoiceBox::SetPos(glm::vec3 pos)
 {
-	SetPosition(pos);
+	std::cout << "set";
+	background->SetPosition(pos);
 	text->SetPosition(pos);
 }
 
 void ChoiceBox::Render()
 {
-
+	Game::GetInstance()->GetRenderer()->Render(background);
+	Game::GetInstance()->GetRenderer()->Render(text);
 }
 
 ChoiceUI::ChoiceUI()
 {
-
+	display = false;
+	scriptManager = ScriptManager::GetInstance();
+	this->SetPosition(glm::vec3(0, 80, 1));
 }
 
-void ChoiceUI::addChoice(ChoiceBox* c)
+void ChoiceUI::setChoice(std::string key)
 {
-
+	std::cout << "setChoice\n";
+	std::vector<Choice>* choices = scriptManager->GetChoice(key);
+	choiceNum = choices->size();
+	float first_Ypos = 50 + ((choiceNum / 2) * 60);
+	if (choiceNum % 2 == 0)
+	{
+		first_Ypos += 0;
+	}
+	for (int i = 0; i < choiceNum; i++)
+	{
+		choiceList[i].setChoice((*choices)[i]);
+		choiceList[i].SetPos(glm::vec3(0, first_Ypos - (i * 60), 0));
+	}
+	display = true;
 }
 
 void ChoiceUI::Render()
 {
 	if (display)
 	{
-
+		for (int i = 0; i < choiceNum; i++)
+		{
+			choiceList[i].Render();
+		}
 	}
+}
+
+void ChoiceUI::clickLeft(glm::vec3)
+{
+
 }

@@ -23,6 +23,7 @@ ScriptManager* ScriptManager::_instance = nullptr;
 ScriptManager::ScriptManager()
 {
 	pugi::xml_parse_result result = scriptDoc.load_file("save/scripts.xml" , pugi::parse_default | pugi::parse_declaration);
+	choiceDoc.load_file("save/choice.xml", pugi::parse_default | pugi::parse_declaration);
 	if (result)
 		LoadScript();
 	else
@@ -83,12 +84,29 @@ void ScriptManager::LoadScript()
 				}
 				s_Dialogue tmp(name, text, item, chatName, chatIndex);
 				d.dialogue.push_back(tmp);
-				std::cout << name << ": " << text << std::endl;
 			}
 			s->script.push_back(d);
-			std::cout << std::endl << "--------------------------------------" << std::endl;
 		}
 		this->scripts[key] = s;
+	}
+
+	std::cout << "load choice\n";
+	pugi::xml_node choice_script = choiceDoc.child("c");
+	for (pugi::xml_node_iterator choices = choice_script.begin(); choices != choice_script.end(); choices++)
+	{
+		std::string key = choices->attribute("key").as_string();
+		std::vector<Choice>* v_choice = new std::vector<Choice>();
+
+		pugi::xml_node s_choice = (choices)->child("choice");
+		for (pugi::xml_node_iterator s_choice = choices->begin(); s_choice != choices->end(); s_choice++)
+		{
+			//get choice
+			std::string text, next_d;
+			text = s_choice->attribute("text").as_string();
+			next_d = s_choice->attribute("nextDialogue").as_string();
+			v_choice->push_back(Choice(text, next_d));
+		}
+		this->choices[key] = v_choice;
 	}
 }
 
@@ -110,9 +128,23 @@ Dialogue ScriptManager::GetDialogue(std::string key)
 	return tmp->script[index];
 }
 
+std::vector<Choice>* ScriptManager::GetChoice(std::string key)
+{
+	std::vector<Choice>* tmp = choices[key];
+	if (tmp == nullptr)
+	{
+		std::cout << "Cannot find dialogue " << key << std::endl;
+	}
+	return tmp;
+}
+
 ScriptManager::~ScriptManager()
 {
 	for (std::map<std::string, Script*>::iterator itr = scripts.begin(); itr != scripts.end(); ++itr)
+	{
+		delete itr->second;
+	}
+	for (std::map<std::string, std::vector<Choice>*>::iterator itr = choices.begin(); itr != choices.end(); ++itr)
 	{
 		delete itr->second;
 	}
