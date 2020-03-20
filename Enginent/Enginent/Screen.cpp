@@ -164,7 +164,7 @@ GameScreen::GameScreen() {
 
 	dialogueText = TextBox::GetInstance();
 
-	pause = new OpenPauseWindowButton("");
+	pause = new OpenPauseWindowButton("Texture/tmp_texture/tmp_pause.png");
 	pause->SetSize(60, -60);
 	pause->SetPosition(glm::vec3(600, 300, 1));
 	pause->SetCollder(new Collider(pause));

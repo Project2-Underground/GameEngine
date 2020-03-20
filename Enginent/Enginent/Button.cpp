@@ -173,3 +173,17 @@ void SoundMuteButton::action() {
 
 	SoundManager::GetInstance()->toggleMute((SoundType)type);
 }
+
+void SoundMuteButton::updateButton(float x, float y) {
+	if (this->col->isClicked(x, y))
+	{
+		SetTexture(hoverTexture);
+	}
+	else
+	{
+		if(SoundManager::GetInstance()->getMute((SoundType)type))
+			SetTexture(muteTexture);
+		else 
+			SetTexture(normalTexture);
+	}
+}

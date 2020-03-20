@@ -14,10 +14,17 @@ PauseWindow* PauseWindow::GetInstance() {
 PauseWindow::PauseWindow() {
 	bgWindow = new UIObject();
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
-	setting = new SettingButton("");
-	load = new OpenLoadSaveWindow("");
-	menu = new MainMenuButton("");
-	closeButton = new WindowCloseButton("");
+
+	setting = new SettingButton("Texture/tmp_texture/tmp_setting.png");
+	setting->SetPressTexture("Texture/tmp_texture/tmp_setting_pressed.png");
+
+	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_load.png");
+	load->SetPressTexture("Texture/tmp_texture/tmp_load_pressed.png");
+
+	menu = new MainMenuButton("Texture/tmp_texture/tmp_mainmenu.png");
+	menu->SetPressTexture("Texture/tmp_texture/tmp_mainmenu_pressed.png");
+
+	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_resume.png");
 }
 bool PauseWindow::OtherWindowOpens() {
 	if (SettingWindow::GetInstance()->IsOpen() || SaveLoadWindow::GetInstance()->IsOpen())
