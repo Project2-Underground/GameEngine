@@ -93,8 +93,8 @@ ChoiceBox::ChoiceBox()
 	text = new TextObject();
 	background = new UIObject();
 	background->SetTexture("Texture/UI/ChoiceBox.PNG");
-	background->SetSize(180, -50);
-	SetPos(glm::vec3(0, 80, 1));
+	background->SetSize(700, -50);
+	background->SetCollder(new Collider(background));
 }
 
 void ChoiceBox::setChoice(Choice c)
@@ -105,9 +105,9 @@ void ChoiceBox::setChoice(Choice c)
 
 void ChoiceBox::SetPos(glm::vec3 pos)
 {
-	std::cout << "set";
 	background->SetPosition(pos);
 	text->SetPosition(pos);
+	background->col->setRefObject(background);
 }
 
 void ChoiceBox::Render()
@@ -116,16 +116,31 @@ void ChoiceBox::Render()
 	Game::GetInstance()->GetRenderer()->Render(text);
 }
 
+bool ChoiceBox::CheckClick(glm::vec3 pos)
+{
+	std::cout << background->col->isClicked(pos.x, pos.y) << ", " << pos.y << std::endl;
+	if (background->col->isClicked(pos.x, pos.y))
+	{
+		if(choice.nextScript != "")
+			TextBox::GetInstance()->setText(choice.nextScript);
+		else
+		{
+			TextBox::GetInstance()->SetDisplay(false);
+		}
+		return true;
+	}
+	return false;
+}
+
 ChoiceUI::ChoiceUI()
 {
 	display = false;
 	scriptManager = ScriptManager::GetInstance();
-	this->SetPosition(glm::vec3(0, 80, 1));
+	choiceNum = 0;
 }
 
 void ChoiceUI::setChoice(std::string key)
 {
-	std::cout << "setChoice\n";
 	std::vector<Choice>* choices = scriptManager->GetChoice(key);
 	choiceNum = choices->size();
 	float first_Ypos = 50 + ((choiceNum / 2) * 60);
@@ -152,7 +167,15 @@ void ChoiceUI::Render()
 	}
 }
 
-void ChoiceUI::clickLeft(glm::vec3)
+void ChoiceUI::clickLeft(glm::vec3 pos)
 {
-
+	for (int i = 0; i < choiceNum; i++)
+	{
+		if (choiceList[i].CheckClick(pos))
+		{
+			std::cout << "choice click\n";
+			display = false;
+			break;
+		}
+	}
 }

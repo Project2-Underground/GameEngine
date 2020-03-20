@@ -16,6 +16,7 @@ public:
 	void setChoice(Choice);
 	void SetPos(glm::vec3);
 	void Render();
+	bool CheckClick(glm::vec3);
 };
 
 class ChoiceUI : public UIObject {

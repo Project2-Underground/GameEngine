@@ -7,14 +7,13 @@
 		</sub>
 	</script>
 	<script key = "start" loopIndex = "0">
-		<sub choice = "gimmeBook">
+		<sub>
 			<Dialogue name = "??" text = "Ughhhhh... So dizzy."/>
 			<Dialogue name = "??" text = "Am I... hangover?"/>
 			<Dialogue name = "??" text = "Maybe I drank too much."/>
 			<Dialogue name = "??" text = "..."/>
 			<Dialogue name = "??" text = "I cannot remember anything. Seem like I drank quite a lot huh?"/>
 			<Dialogue name = "??" text = "Should walk a bit to make the dizzines go away."/>
-			<Dialogue name = "System" text = "Right click to walk.\n Left click to Interact with object."/>
 		</sub>
 	</script>
 	<script key = "tooFar" loopIndex = "0">
@@ -23,7 +22,7 @@
 		</sub>
 	</script>
 	<script key = "EliasRoomInnerDoor" loopIndex = "0">
-		<sub choice = "2">
+		<sub>
 			<Dialogue name = "Elias" text = "The door is lock."/>
 			<Dialogue name = "Elias" text = "Seem like it need a keycard to unlock."/>
 		</sub>

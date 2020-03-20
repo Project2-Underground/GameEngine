@@ -184,18 +184,18 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 			npc->SetItem(item);
 		}
 
-		std::vector<Dialogue> dialogues;
-		pugi::xml_node_iterator n;
+		//std::vector<Dialogue> dialogues;
+		//pugi::xml_node_iterator n;
 
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				n = d;
-				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
-			}
-		}
+		//if (pugi::xml_node dialogue = child->child("dialogue")) {
+		//	for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+		//		n = d;
+		//		d++;
+		//		dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+		//	}
+		//}
 
-		npc->SetDialogue(dialogues);
+		//npc->SetDialogue(dialogues);
 		npc->SetCollder(new Collider(npc));
 		npc->layer = NPC_LAYER;
 		npc->subLayer = child->attribute("layer").as_int();
