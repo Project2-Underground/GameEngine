@@ -35,13 +35,16 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key)
 {
-	display = true;
-	d_text = scriptManager->GetDialogue(key);
-	d_index = 0;
-	std::cout << key << " here\n";
-	name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
-	dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
-	dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+	Dialogue tmp = scriptManager->GetDialogue(key);
+	if (tmp.dialogue.size() != 0)
+	{
+		display = true;
+		d_text = tmp;
+		d_index = 0;
+		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
+		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
+		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+	}
 }
 
 void TextBox::Render()

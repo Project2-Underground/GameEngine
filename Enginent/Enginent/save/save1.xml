@@ -2,7 +2,7 @@
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
 		<Closet open="true" has_item="false" />
-		<Table open="true" has_item="false" />
+		<Table open="false" has_item="false" />
 		<Calendar />
 		<bed />
 		<Bookshelf1 />
@@ -14,7 +14,7 @@
 	<item />
 	<doors>
 		<EliasRoomInnerDoor used="true" />
-		<StairDoor used="true" />
+		<StairDoor used="false" />
 		<LowerStair1 used="true" />
 		<LowerStair2 used="true" />
 		<EliasRoomOuterDoor used="true" />
@@ -24,9 +24,9 @@
 	</doors>
 	<NPCs />
 	<puzzles>
-		<BookshelfPuzzle done="true" />
+		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="402.65741" posY="-50">
+	<Player posX="440.569183" posY="-50">
 		<inventory>
 			<item />
 			<item />
