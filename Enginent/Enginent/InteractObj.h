@@ -33,6 +33,7 @@ public:
 	InteractableObj();
 
 	virtual void action();
+	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetSound(std::string);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
@@ -41,7 +42,7 @@ public:
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }
 	void SetItemToUse(std::string item_to_unlock);
-	void SetItem(Item* item) { this->item = item; }
+	virtual void SetItem(Item* item) { this->item = item; }
 	Item* GetItem() { return item; }
 	void TakePic();
 	void PickUpItem();
@@ -92,12 +93,10 @@ public:
 };
 
 class NonPlayer : public InteractableObj {
-	Item* item;
 	bool giveItem;
 public:
 	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
-	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
-	void action();
+	void action() {};
 };
 
 class Door : public InteractableObj {

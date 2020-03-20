@@ -69,28 +69,35 @@ void PauseWindow::Render() {
 	}
 }
 void PauseWindow::LeftClick(float x, float y) {
-	setting->checkColliderPressed(x, y);
-	load->checkColliderPressed(x, y);
-	menu->checkColliderPressed(x, y);
-	closeButton->checkColliderPressed(x, y);
+	if (display) {
+		setting->checkColliderPressed(x, y);
+		load->checkColliderPressed(x, y);
+		menu->checkColliderPressed(x, y);
+		closeButton->checkColliderPressed(x, y);
+	}
 }
 void PauseWindow::LeftRelease(float x, float y) {
-	setting->checkColliderReleased(x, y);
-	load->checkColliderReleased(x, y);
-	menu->checkColliderReleased(x, y);
-	closeButton->checkColliderReleased(x, y);
+	if (display) {
+		setting->checkColliderReleased(x, y);
+		load->checkColliderReleased(x, y);
+		menu->checkColliderReleased(x, y);
+		closeButton->checkColliderReleased(x, y);
+	}
 }
 void PauseWindow::UpdateMouseButton(glm::vec3 screen) {
-	setting->updateButton(screen.x, screen.y);
-	load->updateButton(screen.x, screen.y);
-	menu->updateButton(screen.x, screen.y);
-	closeButton->updateButton(screen.x, screen.y);
+	if (display) {
+		setting->updateButton(screen.x, screen.y);
+		load->updateButton(screen.x, screen.y);
+		menu->updateButton(screen.x, screen.y);
+		closeButton->updateButton(screen.x, screen.y);
+	}
 }
 void PauseWindow::Open() {
 	Game* game = Game::GetInstance();
 	game->GetCursor()->enableChange(false);
 	game->GetScreen()->Pause = true;
 	trigger = true;
+	SoundManager::GetInstance()->pause(true);
 }
 void PauseWindow::Close() {
 	Game* game = Game::GetInstance();
@@ -98,6 +105,7 @@ void PauseWindow::Close() {
 	game->GetScreen()->Pause = false;
 	display = false;
 	trigger = false;
+	SoundManager::GetInstance()->pause(false);
 }
 PauseWindow::~PauseWindow() {
 	delete setting;

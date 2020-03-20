@@ -14,6 +14,7 @@ protected:
 public:
 	Button() {};
 	Button(std::string);
+	virtual void Init(float sizex, float sizey, glm::vec3 position);
 	virtual void updateButton(float, float);
 	virtual void action() = 0;
 	virtual void checkColliderPressed(float x, float y);

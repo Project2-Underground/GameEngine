@@ -19,7 +19,7 @@ void Door::action() {
 		UseItem(gs->GetInventory()->GetSelectedItem());
 	}
 	else {
-		SoundManager::GetInstance()->playSFX("Locked");
+		SoundManager::GetInstance()->playSound(SFX, "Locked");
 		this->InteractableObj::action();
 	}
 }

@@ -81,6 +81,8 @@ void Inventory::Update() {
 		SetAllBoxesPos(tab->getPos().y - boxOffset);
 		popArea->setNewPos(glm::vec3(popArea->getPosition().x, tab->getPos().y, 1.0f));
 	}
+	for (auto ib : InventoryBoxes)
+		ib->updateButton(0, 0);
 }
 
 void Inventory::UnselectItem() {

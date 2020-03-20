@@ -79,7 +79,7 @@ void Player::Move()
 void Player::StopWalking() {
 	walk = false;
 	next_position = getPos();
-	SoundManager::GetInstance()->stop("Walking");
+	SoundManager::GetInstance()->stop(SFX, "Walking");
 }
 
 void Player::CheckWalkLimit() {
@@ -114,28 +114,18 @@ void Player::CheckTarget(InteractableObj* target) {
 void Player::SetNextPosition(float x, float y)
 {
 	if (walk == false)
-	{
-		SoundManager::GetInstance()->playSound("Walking", true);
-	}
-	if (display)
-	{
-		next_position = glm::vec3(x, y, 1);
-		walk = true;
-		if (!(anim->currentAnimation->animationName == "Move"))
-			anim->Play("Move", true);
-	}
+		SoundManager::GetInstance()->playSound(SFX, "Walking", true);
+	next_position = glm::vec3(x, y, 1);
+	walk = true;
+	if (!(anim->currentAnimation->animationName == "Move"))
+		anim->Play("Move", true);
 }
 
 void Player::SetNextPosition(glm::vec3 realPos)
 {
-	if (this->display)
-	{
-		next_position = realPos;
-	}
+	next_position = realPos;
 	if (walk == false)
-	{
-		SoundManager::GetInstance()->playSound("Walking", true);
-	}
+		SoundManager::GetInstance()->playSound(SFX, "Walking", true);
 	walk = true;
 	if (!(anim->currentAnimation->animationName == "Move"))
 		anim->Play("Move", true);

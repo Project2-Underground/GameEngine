@@ -14,6 +14,13 @@ Button::Button(std::string texture)
 	hoverTexture = normalTexture;
 	pressTexture = normalTexture;
 }
+
+void Button::Init(float sizex, float sizey, glm::vec3 position) {
+	SetSize(sizex, sizey);
+	SetPosition(position);
+	SetCollder(new Collider(this));
+}
+
 void Button::SetHoverTexture(std::string texture) {
 	hoverTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
@@ -67,7 +74,7 @@ void Exit_Button::action()
 void SwitchScene_Button::action()
 {
 	Game::GetInstance()->ChangeScreenState(GAMESCREEN);
-	SoundManager::GetInstance()->stop("MainScreen");
+	SoundManager::GetInstance()->stop(BGM, "MainScreen");
 }
 
 
@@ -148,23 +155,11 @@ void SettingButton::action(){
 }
 
 void SoundVolumeButton::action() {
-	switch (type)
-	{
-	case BGM:
-		if (direction >= 0)
-			SoundManager::GetInstance()->upVolume();
-		else
-			SoundManager::GetInstance()->downVolume();
-		break;
-	case SOUNDFX:
-		if (direction >= 0)
-			SoundManager::GetInstance()->upVolume();
-		else
-			SoundManager::GetInstance()->downVolume();
-		break;
-	default:
-		break;
-	}
+	if (direction >= 0)
+		SoundManager::GetInstance()->upVolume((SoundType)type);
+	else
+		SoundManager::GetInstance()->downVolume((SoundType)type);
+	
 }
 
 void SoundMuteButton::SetMuteTexture(std::string texture){
@@ -176,15 +171,5 @@ void SoundMuteButton::action() {
 	else
 		SetTexture(normalTexture);
 
-	switch (type)
-	{
-	case BGM:
-		SoundManager::GetInstance()->toggleMute();
-		break;
-	case SOUNDFX:
-		SoundManager::GetInstance()->toggleMute();
-		break;
-	default:
-		break;
-	}
+	SoundManager::GetInstance()->toggleMute((SoundType)type);
 }

@@ -1,10 +1,12 @@
 #include "InventoryBox.h"
 #include "Game.h"
 #include "MouseInput.h"
+#include "TimeSystem.h"
 
 InventoryBoxButton::InventoryBoxButton(std::string texture) :Button(texture) {
 	item = nullptr;
 	itemDisplay.SetSize(50.0f, -50.0f);
+	clickIntervalTime = DOUBLE_CLICK_TIME;
 }
 
 void InventoryBoxButton::SetItem(Item* item) {
@@ -32,6 +34,7 @@ void InventoryBoxButton::action() {
 		}
 	}
 	else {
+		SetTogglePress(false);
 		inventory->UnselectItem();
 	}
 }
@@ -64,9 +67,25 @@ void InventoryBoxButton::Reset() {
 }
 
 void InventoryBoxButton::checkColliderPressed(float x, float y) {
-	if (pressAvailable && item)
-		if (this->col->isClicked(x, y))
+	if (pressAvailable && item) {
+		if (this->col->isClicked(x, y)) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+		}
+	}
+	else if (item) {
+		std::cout << clickIntervalTime << std::endl;
+		if (clickIntervalTime < DOUBLE_CLICK_TIME) {
+			clickIntervalTime = DOUBLE_CLICK_TIME;
+			ViewWindow* vw = ViewWindow::GetInstance();
+			vw->Open();
+			vw->SetViewItem(item);
+			action();
+		}
+	}
+}
+void InventoryBoxButton::updateButton(float x, float y) {
+	if(!pressAvailable)
+		clickIntervalTime += TimeSystem::instance()->GetTimeBetweenFrame();
 }
 
 void InventoryBoxButton::checkColliderReleased(float x, float y) {
@@ -74,6 +93,7 @@ void InventoryBoxButton::checkColliderReleased(float x, float y) {
 		if (this->col->isClicked(x, y)) {
 			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 				SetTexture(pressTexture);
+				clickIntervalTime = 0;
 				action();
 			}
 		}
@@ -119,7 +139,7 @@ void ChangeMouseActionTypeButton::updateButton(float x, float y)
 void ChangeMouseActionTypeButton::checkColliderPressed(float x, float y)
 {
 	if (pressAvailable) 
-		if (this->col->isClicked(x, y))
+		if (this->col->isClicked(x, y)) 
 			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 }
 
@@ -140,4 +160,5 @@ void ChangeMouseActionTypeButton::checkColliderReleased(float x, float y) {
 		if (col->isClicked(x, y)) 
 			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) 
 				action();
+
 }
