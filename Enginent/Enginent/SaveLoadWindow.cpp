@@ -48,13 +48,17 @@ SaveLoadWindow* SaveLoadWindow::GetInstance() {
 }
 
 void SaveLoadWindow::LeftClick(float x, float y) {
-	closeButton->checkColliderPressed(x, y);
-	save->checkColliderPressed(x, y);
+	if (display) {
+		closeButton->checkColliderPressed(x, y);
+		save->checkColliderPressed(x, y);
+	}
 }
 
 void SaveLoadWindow::LeftRelease(float x, float y) {
-	closeButton->checkColliderReleased(x, y);
-	save->checkColliderReleased(x, y);
+	if (display) {
+		closeButton->checkColliderReleased(x, y);
+		save->checkColliderReleased(x, y);
+	}
 }
 
 void SaveLoadWindow::Update() {
@@ -65,6 +69,8 @@ void SaveLoadWindow::Update() {
 }
 
 void SaveLoadWindow::UpdateMouseButton(glm::vec3 screen) {
-	closeButton->updateButton(screen.x, screen.y);
-	save->updateButton(screen.x, screen.y);
+	if (display) {
+		closeButton->updateButton(screen.x, screen.y);
+		save->updateButton(screen.x, screen.y);
+	}
 }

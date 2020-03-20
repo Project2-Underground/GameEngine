@@ -152,5 +152,6 @@ class SoundMuteButton : public Button {
 public:
 	SoundMuteButton(std::string texture, int t) : Button(texture) { type = t; }
 	void SetMuteTexture(std::string);
+	void updateButton(float, float);
 	void action();
 };

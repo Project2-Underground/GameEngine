@@ -68,15 +68,21 @@ void ViewWindow::Render() {
 }
 
 void ViewWindow::LeftClick(float x, float y) {
-	closeButton->checkColliderPressed(x, y);
+	if (display) {
+		closeButton->checkColliderPressed(x, y);
+	}
 }
 
 void ViewWindow::LeftRelease(float x, float y) {
-	closeButton->checkColliderReleased(x, y);
+	if (display) {
+		closeButton->checkColliderReleased(x, y);
+	}
 }
 
 void ViewWindow::UpdateMouseButton(glm::vec3 screen) {
-	closeButton->updateButton(screen.x, screen.y);
+	if (display) {
+		closeButton->updateButton(screen.x, screen.y);
+	}
 }
 
 void GameWindow::Close() {

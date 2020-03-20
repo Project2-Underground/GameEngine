@@ -17,15 +17,18 @@ SettingWindow::SettingWindow() {
 	display = false;
 	trigger = false;
 
-	masterVolUp = new SoundVolumeButton("", MASTER,1);
-	masterVolDown = new SoundVolumeButton("", MASTER,-1);
-	bgmVolUp = new SoundVolumeButton("",BGM,1);
-	bgmVolDown = new SoundVolumeButton("",BGM,-1);
-	sfxVolUp = new SoundVolumeButton("", SFX, 1);
-	sfxVolDown = new SoundVolumeButton("", SFX, -1);
+	masterVolUp = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon.png", MASTER,1);
+	masterVolDown = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon2.png", MASTER,-1);
+	bgmVolUp = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon.png",BGM,1);
+	bgmVolDown = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon2.png",BGM,-1);
+	sfxVolUp = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon.png", SFX, 1);
+	sfxVolDown = new SoundVolumeButton("Texture/tmp_texture/tmp_arrowIcon2.png", SFX, -1);
 	masterMute = new SoundMuteButton("Texture/tmp_texture/m.png", MASTER);
+	masterMute->SetMuteTexture("Texture/tmp_texture/mMute.png");
 	bgmMute = new SoundMuteButton("Texture/tmp_texture/b.png", BGM);
+	bgmMute->SetMuteTexture("Texture/tmp_texture/bMute.png");
 	sfxMute = new SoundMuteButton("Texture/tmp_texture/s.png", SFX);
+	sfxMute->SetMuteTexture("Texture/tmp_texture/sMute.png");
 
 	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 }
@@ -39,45 +42,18 @@ void SettingWindow::Init(int width, int height) {
 	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
 
 	masterVolUp->Init(50.0f, -50.0f, glm::vec3(width * 0.125f, 200.0f, 1));
-	/*masterVolUp->SetSize(50.0f, -50.0f);
-	masterVolUp->SetPosition(glm::vec3(width * 0.125f, 200.0f, 1));
-	masterVolUp->SetCollder(new Collider(masterVolUp));*/
+	masterVolDown->Init(50.0f, -50.0f, glm::vec3(-width * 0.125f, 200.0f, 1));
+	bgmVolUp->Init(50.0f, -50.0f, glm::vec3(width * 0.125f, 100.0f, 1));
+	bgmVolDown->Init(50.0f, -50.0f, glm::vec3(-width * 0.125f, 100.0f, 1));
+	sfxVolUp->Init(50.0f, -50.0f, glm::vec3(width * 0.125f, 0.0f, 1));
+	sfxVolDown->Init(50.0f, -50.0f, glm::vec3(-width * 0.125f, 0.0f, 1));
+	masterMute->Init(50.0f, -50.0f, glm::vec3(60.0f, -50.0f, 1));
+	bgmMute->Init(50.0f, -50.0f, glm::vec3(0.0f, -50.0f, 1));
+	sfxMute->Init(50.0f, -50.0f, glm::vec3(-60.0f, -50.0f, 1));
+	closeButton->Init(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f, 
+		glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
 
-	masterVolDown->SetSize(50.0f, -50.0f);
-	masterVolDown->SetPosition(glm::vec3(-width * 0.125f, 200.0f, 1));
-	masterVolDown->SetCollder(new Collider(masterVolDown));
 
-	bgmVolUp->SetSize(50.0f, -50.0f);
-	bgmVolUp->SetPosition(glm::vec3(width * 0.125f, 100.0f, 1));
-	bgmVolUp->SetCollder(new Collider(bgmVolUp));
-
-	bgmVolDown->SetSize(50.0f, -50.0f);
-	bgmVolDown->SetPosition(glm::vec3(-width * 0.125f, 100.0f, 1));
-	bgmVolDown->SetCollder(new Collider(bgmVolUp));
-
-	sfxVolUp->SetSize(50.0f, -50.0f);
-	sfxVolUp->SetPosition(glm::vec3(width * 0.125f, 0.0f, 1));
-	sfxVolUp->SetCollder(new Collider(sfxVolUp));
-
-	sfxVolDown->SetSize(50.0f, -50.0f);
-	sfxVolDown->SetPosition(glm::vec3(-width * 0.125f, 0.0f, 1));
-	sfxVolDown->SetCollder(new Collider(sfxVolDown));
-
-	masterMute->SetSize(50.0f, -50.0f);
-	masterMute->SetPosition(glm::vec3(60.0f, -50.0f, 1));
-	masterMute->SetCollder(new Collider(masterMute));
-
-	bgmMute->SetSize(50.0f, -50.0f);
-	bgmMute->SetPosition(glm::vec3(0.0f, -50.0f, 1));
-	bgmMute->SetCollder(new Collider(bgmMute));
-
-	sfxMute->SetSize(50.0f, -50.0f);
-	sfxMute->SetPosition(glm::vec3(-60.0f, -50.0f, 1));
-	sfxMute->SetCollder(new Collider(sfxMute));
-
-	closeButton->SetSize(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f);
-	closeButton->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
-	closeButton->SetCollder(new Collider(closeButton));
 }
 void SettingWindow::Render() {
 	if (display) {
@@ -97,40 +73,46 @@ void SettingWindow::Render() {
 	}
 }
 void SettingWindow::LeftClick(float x, float y) {
-	masterVolUp->checkColliderPressed(x, y);
-	masterVolDown->checkColliderPressed(x, y);
-	bgmVolUp->checkColliderPressed(x, y);
-	bgmVolDown->checkColliderPressed(x, y);
-	sfxVolUp->checkColliderPressed(x, y);
-	sfxVolDown->checkColliderPressed(x, y);
-	masterMute->checkColliderPressed(x, y);
-	bgmMute->checkColliderPressed(x, y);
-	sfxMute->checkColliderPressed(x, y);
-	closeButton->checkColliderPressed(x, y);
+	if (display) {
+		masterVolUp->checkColliderPressed(x, y);
+		masterVolDown->checkColliderPressed(x, y);
+		bgmVolUp->checkColliderPressed(x, y);
+		bgmVolDown->checkColliderPressed(x, y);
+		sfxVolUp->checkColliderPressed(x, y);
+		sfxVolDown->checkColliderPressed(x, y);
+		masterMute->checkColliderPressed(x, y);
+		bgmMute->checkColliderPressed(x, y);
+		sfxMute->checkColliderPressed(x, y);
+		closeButton->checkColliderPressed(x, y);
+	}
 }
 void SettingWindow::LeftRelease(float x , float y) {
-	masterVolUp->checkColliderReleased(x, y);
-	masterVolDown->checkColliderReleased(x, y);
-	bgmVolUp->checkColliderReleased(x, y);
-	bgmVolDown->checkColliderReleased(x, y);
-	sfxVolUp->checkColliderReleased(x, y);
-	sfxVolDown->checkColliderReleased(x, y);
-	masterMute->checkColliderReleased(x, y);
-	bgmMute->checkColliderReleased(x, y);
-	sfxMute->checkColliderReleased(x, y);
-	closeButton->checkColliderReleased(x, y);
+	if (display) {
+		masterVolUp->checkColliderReleased(x, y);
+		masterVolDown->checkColliderReleased(x, y);
+		bgmVolUp->checkColliderReleased(x, y);
+		bgmVolDown->checkColliderReleased(x, y);
+		sfxVolUp->checkColliderReleased(x, y);
+		sfxVolDown->checkColliderReleased(x, y);
+		masterMute->checkColliderReleased(x, y);
+		bgmMute->checkColliderReleased(x, y);
+		sfxMute->checkColliderReleased(x, y);
+		closeButton->checkColliderReleased(x, y);
+	}
 }
 void SettingWindow::UpdateMouseButton(glm::vec3 screen) {
-	masterVolUp->updateButton(screen.x, screen.y);
-	masterVolDown->updateButton(screen.x, screen.y);
-	bgmVolUp->updateButton(screen.x, screen.y);
-	bgmVolDown->updateButton(screen.x, screen.y);
-	sfxVolUp->updateButton(screen.x, screen.y);
-	sfxVolDown->updateButton(screen.x, screen.y);
-	masterMute->updateButton(screen.x, screen.y);
-	bgmMute->updateButton(screen.x, screen.y);
-	sfxMute->updateButton(screen.x, screen.y);
-	closeButton->updateButton(screen.x, screen.y);
+	if (display) {
+		masterVolUp->updateButton(screen.x, screen.y);
+		masterVolDown->updateButton(screen.x, screen.y);
+		bgmVolUp->updateButton(screen.x, screen.y);
+		bgmVolDown->updateButton(screen.x, screen.y);
+		sfxVolUp->updateButton(screen.x, screen.y);
+		sfxVolDown->updateButton(screen.x, screen.y);
+		masterMute->updateButton(screen.x, screen.y);
+		bgmMute->updateButton(screen.x, screen.y);
+		sfxMute->updateButton(screen.x, screen.y);
+		closeButton->updateButton(screen.x, screen.y);
+	}
 }
 SettingWindow::~SettingWindow() {
 	delete masterVolUp;
