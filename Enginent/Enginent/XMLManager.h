@@ -39,6 +39,7 @@ public:
 
 	// save game option
 	void SaveGameOptions();
+	void LoadGameOptions();
 
 	~XMLManager();
 };

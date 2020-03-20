@@ -35,8 +35,8 @@ void Game::Init(int width, int height)
 	SDL_ShowCursor(SDL_DISABLE);
 	camera = Camera::GetInstance();
 	sound = SoundManager::GetInstance();
-	sound->Init();
 	script = ScriptManager::GetInstance();
+	XMLManager::GetInstance()->LoadGameOptions();
 
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
@@ -126,6 +126,8 @@ Game::Game()
 
 Game::~Game()
 {
+	XMLManager::GetInstance()->SaveGameOptions();
+
 	delete renderer;
 	delete currentScreen;
 	delete cursorGame;

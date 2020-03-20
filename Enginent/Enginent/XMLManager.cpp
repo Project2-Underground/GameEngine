@@ -430,8 +430,36 @@ void XMLManager::SaveGameOptions() {
 	Game* game = Game::GetInstance();
 	pugi::xml_document gameOption;
 
-	//gameOption.append_child("Options").append_child("BG_music").append_attribute("mute").set_value(game->muteBG);
-	//gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(game->muteSFX);
+	SoundManager* soundManager = SoundManager::GetInstance();
+
+	gameOption.append_child("Options");
+	gameOption.child("Options").append_child("Master").append_attribute("mute").set_value(soundManager->getMute(MASTER));
+	gameOption.child("Options").child("Master").append_attribute("volume").set_value(soundManager->getVolume(MASTER));
+
+	gameOption.child("Options").append_child("BGM").append_attribute("mute").set_value(soundManager->getMute(BGM));
+	gameOption.child("Options").child("BGM").append_attribute("volume").set_value(soundManager->getVolume(BGM));
+
+	gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(soundManager->getMute(SFX));
+	gameOption.child("Options").child("SFX").append_attribute("volume").set_value(soundManager->getVolume(SFX));
+
+	gameOption.save_file("save/settings.xml");
+}
+
+void XMLManager::LoadGameOptions() {
+	std::cout << "load game options\n";
+	if (LoadFile("save/settings.xml")) {
+		SoundManager* soundManager = SoundManager::GetInstance();
+
+		pugi::xml_node options = doc.child("Options");
+
+		soundManager->setVolume(MASTER, options.child("Master").attribute("volume").as_float());
+		soundManager->setVolume(BGM, options.child("BGM").attribute("volume").as_float());
+		soundManager->setVolume(SFX, options.child("SFX").attribute("volume").as_float());
+
+		soundManager->setMute(MASTER, options.child("Master").attribute("mute").as_bool());
+		soundManager->setMute(BGM, options.child("BGM").attribute("mute").as_bool());
+		soundManager->setMute(SFX, options.child("SFX").attribute("mute").as_bool());
+	}
 }
 
 XMLManager::~XMLManager() {

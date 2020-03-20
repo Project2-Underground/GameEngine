@@ -91,13 +91,16 @@ public:
 class SettingWindow : public GameWindow {
 	static SettingWindow* instance;
 
+	SoundVolumeButton* masterVolUp;
+	SoundVolumeButton* masterVolDown;
 	SoundVolumeButton* bgmVolUp;
 	SoundVolumeButton* bgmVolDown;
 	SoundVolumeButton* sfxVolUp;
 	SoundVolumeButton* sfxVolDown;
 
-	SoundMuteButton* bgmmute;
-	SoundMuteButton* sfxmute;
+	SoundMuteButton* masterMute;
+	SoundMuteButton* bgmMute;
+	SoundMuteButton* sfxMute;
 public:
 	static SettingWindow* GetInstance();
 

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Options>
+	<Master mute="0" volume="1" />
+	<BGM mute="0" volume="1" />
+	<SFX mute="0" volume="1" />
+</Options>

@@ -1,8 +1,6 @@
 #include "Screen.h"
 #include "Game.h"
 
-
-
 bool Screen::GameWindowOpen() {
 	for (auto w : windows)
 		if (w->IsOpen())
@@ -48,6 +46,7 @@ MenuScreen::MenuScreen() {
 
 	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
+	SoundManager::GetInstance()->playSound(BGM, "MainScreen", true);
 }
 
 void MenuScreen::Render() {
