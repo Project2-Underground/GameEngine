@@ -6,6 +6,7 @@
 
 class Button : public UIObject {
 protected:
+	SDL_Color textColor = { 0, 0, 0, 0 };
 	unsigned int normalTexture;
 	unsigned int hoverTexture;
 	unsigned int pressTexture;
@@ -14,7 +15,6 @@ protected:
 public:
 	Button() {};
 	Button(std::string);
-	virtual void Init(float sizex, float sizey, glm::vec3 position);
 	virtual void updateButton(float, float);
 	virtual void action() = 0;
 	virtual void checkColliderPressed(float x, float y);
@@ -52,14 +52,8 @@ public:
 
 class PhoneAppsButton :public Button {
 	int appType;
-	unsigned int notiTexture;
-	bool notice;
 public:
 	PhoneAppsButton(std::string texture) : Button(texture) {}
-	void checkColliderPressed(float x, float y);
-	void checkColliderReleased(float x, float y);
-	void SetNotiTexture(std::string);
-	void Notice(bool b) { if (b) SetTexture(notiTexture); notice = b; }
 	void action();
 	void SetApp(int type) { appType = type; }
 };
@@ -70,11 +64,11 @@ public:
 	void action();
 };
 
-class PhoneNextButton : public Button {
-public:
-	PhoneNextButton(std::string texture) :Button(texture) {};
-	void action();
-};
+//class PhoneNextButton : public Button {
+//public:
+//	PhoneNextButton(std::string texture) :Button(texture) {};
+//	void action();
+//};
 
 class PhoneBackButton : public Button {
 public:
@@ -86,6 +80,16 @@ class PhoneHomeButton : public Button {
 public:
 	PhoneHomeButton(std::string texture) :Button(texture) {};
 	void action();
+};
+
+class ChatNoteInfoButton : public Button {
+	int index;
+public:
+	TextObject* title;
+	ChatNoteInfoButton(std::string texture, std::string _title, int _index, bool noti);
+	void action();
+
+	bool hasNewInfo;
 };
 
 class WindowCloseButton :public Button {

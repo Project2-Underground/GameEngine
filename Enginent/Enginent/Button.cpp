@@ -15,12 +15,6 @@ Button::Button(std::string texture)
 	pressTexture = normalTexture;
 }
 
-void Button::Init(float sizex, float sizey, glm::vec3 position) {
-	SetSize(sizex, sizey);
-	SetPosition(position);
-	SetCollder(new Collider(this));
-}
-
 void Button::SetHoverTexture(std::string texture) {
 	hoverTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
@@ -51,6 +45,7 @@ void Button::checkColliderPressed(float x, float y)
 	if (this->col->isClicked(x, y)) {
 		SetTexture(pressTexture);
 		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+		Game::GetInstance()->GetScreen()->buttonClicked = true;
 	}
 }
 
@@ -88,25 +83,6 @@ void PhoneAppsButton::action() {
 	Phone::GetInstance()->OpenApp((AppType)appType);
 }
 
-void PhoneAppsButton::SetNotiTexture(std::string texture) {
-	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
-}
-
-void PhoneAppsButton::checkColliderPressed(float x, float y)
-{
-	if (this->col->isClicked(x, y))
-		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
-}
-
-void PhoneAppsButton::checkColliderReleased(float x, float y) {
-	if (this->col->isClicked(x, y))
-		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
-			if (notice)
-				SetTexture(normalTexture);
-			action();
-		}
-}
-
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
 }
@@ -114,10 +90,10 @@ void PhoneOpenButton::action() {
 void PhoneExitButton::action() {
 	Phone::GetInstance()->Close();
 }
-
-void PhoneNextButton::action() {
-	Phone::GetInstance()->app->Next();
-}
+//
+//void PhoneNextButton::action() {
+//	Phone::GetInstance()->app->Next();
+//}
 
 void PhoneBackButton::action() {
 	Phone::GetInstance()->app->Back();
@@ -136,6 +112,7 @@ void ClosePuzzleButton::action() {
 }
 
 void SaveLoadGameButton::action() {
+	SoundManager::GetInstance()->stopAllSounds();
 	Game::GetInstance()->SaveLoad(filename);
 }
 
@@ -186,4 +163,16 @@ void SoundMuteButton::updateButton(float x, float y) {
 		else 
 			SetTexture(normalTexture);
 	}
+}
+
+ChatNoteInfoButton::ChatNoteInfoButton(std::string texture, std::string _title, int _index, bool noti) :Button(texture) {
+	hasNewInfo = noti;
+	index = _index;
+	title = new TextObject();
+	title->loadText(_title, textColor, 18); 
+}
+
+void ChatNoteInfoButton::action() {
+	hasNewInfo = false;
+	Phone::GetInstance()->app->SelectItem(index);
 }

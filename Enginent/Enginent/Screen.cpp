@@ -1,3 +1,4 @@
+
 #include "Screen.h"
 #include "Game.h"
 
@@ -155,8 +156,6 @@ GameScreen::GameScreen() {
 	phone->AddPage(NOTE, "tmp_note2");
 	phone->AddPage(CHAT, "person_name");
 	phone->Message("person_name", 2);
-	phone->SetNotification(NOTE);
-	phone->SetNotification(CHAT);
 	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
@@ -240,11 +239,12 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {
-		if(!player->anim->IsPlaying("Pickup"))
-			currentLevel->LeftClick(world.x, world.y);
+		buttonClicked = false;
 		for (int j = 0; j < UI.size(); j++)
 			if (Button * button = dynamic_cast<Button*>(UI[j]))
 				button->checkColliderPressed(screen.x, screen.y);
+		if(!buttonClicked && !player->anim->IsPlaying("Pickup"))
+			currentLevel->LeftClick(world.x, world.y);
 	}
 	if (InventoryEnable) {
 		inventory->LeftClick(screen.x, screen.y);

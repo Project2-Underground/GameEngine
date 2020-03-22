@@ -26,5 +26,6 @@ public:
 	bool IsDisplay() { return display; }
 	void SetDisplay(bool d) { display = d; }
 	virtual void Render(glm::mat4 globalModelTransform);
+	virtual void Init(float sizex, float sizey, glm::vec3 position);
 	void SetCollder(Collider* n_col);
 };

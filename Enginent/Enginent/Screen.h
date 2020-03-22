@@ -23,6 +23,7 @@ class Screen {
 protected:
 	std::vector<GameWindow*> windows;
 public:
+	bool buttonClicked;
 	bool Pause;
 	virtual void Render() = 0;
 	virtual void Update() = 0;

@@ -20,12 +20,13 @@
 		<EliasRoomOuterDoor used="true" current_dialogue="0" />
 		<UpperStair1 used="true" current_dialogue="0" />
 		<UpperStair2 used="true" current_dialogue="0" />
+		<tmpDoor used="true" current_dialogue="0" />
 	</doors>
 	<NPCs />
 	<puzzles>
 		<BookshelfPuzzle done="true" />
 	</puzzles>
-	<Player posX="520.141785" posY="-50">
+	<Player posX="404.69281" posY="-50">
 		<inventory>
 			<item />
 			<item />
@@ -39,11 +40,11 @@
 		</inventory>
 	</Player>
 	<Phone>
-		<Notes noti="false">
+		<Notes>
 			<n name="tmp_note1" />
 			<n name="tmp_note2" />
 		</Notes>
-		<Chats noti="false">
+		<Chats>
 			<c name="another_person_name" msgNo="4" />
 			<c name="person_name" msgNo="11" />
 		</Chats>
