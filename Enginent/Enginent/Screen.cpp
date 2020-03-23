@@ -207,14 +207,16 @@ void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
 	if (!Pause) {
-		if (PuzzleTime)
-			currentPuzzle->Update();
-		else {
-			currentLevel->Update();
-			player->Update();
+		if (!dialogueText->IsDisplay()) {
+			if (PuzzleTime)
+				currentPuzzle->Update();
+			else {
+				currentLevel->Update();
+				player->Update();
+			}
+			if (InventoryEnable && !phone->open)
+				inventory->Update();
 		}
-		if (InventoryEnable && !phone->open)
-			inventory->Update();
 	}
 }
 
@@ -310,6 +312,15 @@ InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
 			}
 	}
 	return NORMAL;
+}
+
+Door* GameScreen::GetDoor(std::string doorNam) {
+	for (auto room : currentLevel->rooms) {
+		for (auto door : room.second->doors)
+			if (door.second->object_name == doorNam)
+				return door.second;
+	}
+	return nullptr;
 }
 
 void GameScreen::OpenPuzzle(std::string name) {

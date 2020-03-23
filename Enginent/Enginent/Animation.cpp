@@ -5,7 +5,12 @@
 
 Animation::Animation(std::string name, std::string TexturePath, bool leaveTime) {
 	this->animationName = name;
-	this->texture = Game::GetInstance()->GetRenderer()->LoadTexture(TexturePath);;
+	this->texture = Game::GetInstance()->GetRenderer()->LoadTexture(TexturePath);
+	this->hasLeaveTime = leaveTime;
+}
+Animation::Animation(std::string name, unsigned int Texture, bool leaveTime) {
+	this->animationName = name;
+	this->texture = Texture;
 	this->hasLeaveTime = leaveTime;
 }
 

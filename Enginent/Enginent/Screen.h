@@ -9,6 +9,7 @@
 #include "TextBox.h"
 #include "Inventory.h"
 #include "GameWindows.h"
+#include "Door.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,
@@ -96,6 +97,7 @@ public:
 	void OpenPuzzle(std::string);
 	void ClosePuzzle();
 
+	Door* GetDoor(std::string);
 	Level* GetCurrentLevel() { return currentLevel; }
 	InteractTypeList GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };

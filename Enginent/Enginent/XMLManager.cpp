@@ -156,7 +156,12 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		std::string next_room = child->attribute("next_room").as_string();
 		std::string next_door = child->attribute("next_door").as_string();
 
-		Door* door = new Door(next_room, next_door);
+		Door* door;
+		if (child->child("wall_door"))
+			door = new WallDoor();
+		else
+			door = new Door(next_room, next_door);
+
 		door->object_name = child->name();
 
 		CreateObject(door, *child);

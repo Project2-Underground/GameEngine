@@ -105,18 +105,6 @@ public:
 	void action() {};
 };
 
-class Door : public InteractableObj {
-	std::string nextRoom;
-	std::string nextDoor;
-	unsigned int openTexture;
-public:
-	Door(std::string, std::string);
-	void SetOpenTexture(std::string texture);
-	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
-	void Open();
-	void action();
-};
-
 class SaveObj : public InteractableObj {
 public:
 	SaveObj() { interactType = SAVE; }
