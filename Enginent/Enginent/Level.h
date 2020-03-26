@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InteractObj.h"
+#include "Door.h"
 #include "UIObject.h"
 #include "Collider.h"
 #include "Item.h"

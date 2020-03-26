@@ -12,7 +12,6 @@ private:
 public:
 	Animation* currentAnimation;
 	bool IsPlaying(std::string);
-	void SetDefaultAnimation(std::string animationName);		// usually idle animation
 	void SetDefaultAnimation(std::string animationName);		
 	void Play(std::string animationName, bool loop);
 	void Play(bool loop);										// plays default animation

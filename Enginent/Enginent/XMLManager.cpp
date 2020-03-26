@@ -158,7 +158,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		Door* door;
 		if (child->child("wall_door"))
-			door = new WallDoor();
+			door = new WallDoor(next_room, next_door);
 		else
 			door = new Door(next_room, next_door);
 
