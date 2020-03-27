@@ -145,8 +145,8 @@ ChoiceUI::ChoiceUI()
 void ChoiceUI::setChoice(std::string key)
 {
 	std::vector<Choice>* choices = scriptManager->GetChoice(key);
-	choiceNum = choices->size();
-	float first_Ypos = 50 + ((choiceNum / 2) * 60);
+	choiceNum = (int)choices->size();
+	float first_Ypos = 50.0f + (((float)choiceNum / 2.0f) * 60.0f);
 	if (choiceNum % 2 == 0)
 	{
 		first_Ypos += 0;

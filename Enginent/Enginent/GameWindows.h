@@ -8,7 +8,7 @@ protected:
 	UIObject* bgWindow;
 	bool display;
 	bool trigger;
-	WindowCloseButton* closeButton;
+	Button* closeButton;
 public:
 	virtual void Update() = 0;
 	virtual void Init(int width, int height) = 0;
@@ -66,13 +66,14 @@ class PauseWindow: public GameWindow {
 	// buttons
 	static PauseWindow* instance;
 
+	// windows
+	std::vector<GameWindow*> otherWindows;
+
+	// buttons
 	SettingButton* setting;
 	OpenLoadSaveWindow* load;
 	MainMenuButton* menu;
 	PauseWindow();
-
-	bool otherWindowTrigger;
-	bool OtherWindowOpens();
 public:
 	static PauseWindow* GetInstance();
 
@@ -83,6 +84,7 @@ public:
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
 	void UpdateMouseButton(glm::vec3);
+	void CloseSubWindow();
 
 	void Close();
 	void Open();

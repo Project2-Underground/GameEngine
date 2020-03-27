@@ -173,7 +173,7 @@ GameScreen::GameScreen() {
 
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
-	windows.push_back(SettingWindow::GetInstance());
+	//windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(PauseWindow::GetInstance());
 }
 
@@ -194,13 +194,15 @@ void GameScreen::Render() {
 	inventory->Render();
 	if(GameWindowOpen())
 		for (auto w : windows)
-			w->Render();
+				w->Render();
 	else {
 		if (phone->open)
 			phone->Render();
 		if (dialogueText->IsDisplay())
 			dialogueText->Render();
 	}
+
+	dialogueText->Render();
 }
 
 void GameScreen::Update() {
@@ -226,15 +228,18 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
 			currentLevel->RightClick(world.x, world.y);
 	}
+	else if (dialogueText->IsDisplay())
+		dialogueText->clickLeft(screen);
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if(GameWindowOpen())
+	if (GameWindowOpen()) {
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
-	else if (phone->open)
+	}
+	else if (phone->open) 
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay())
+	else if (dialogueText->IsDisplay()) 
 		dialogueText->clickLeft(screen);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);

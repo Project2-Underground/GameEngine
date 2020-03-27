@@ -1,7 +1,6 @@
 #include "GameWindows.h"
 #include "Game.h"
 
-
 ViewWindow* ViewWindow::instance = nullptr;
 
 ViewWindow* ViewWindow::GetInstance() {
@@ -13,7 +12,7 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new ViewWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
@@ -23,12 +22,13 @@ ViewWindow::ViewWindow() {
 }
 
 void ViewWindow::Update() {
-	if(trigger)
+	/*if(trigger)
 		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
 			display = true;
 			trigger = false;
-		}
+		}*/
 }
+
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
@@ -93,5 +93,5 @@ void GameWindow::Close() {
 void GameWindow::Open() {
 	CursorUI* cursor = Game::GetInstance()->GetCursor();
 	cursor->enableChange(false);
-	trigger = true;
+	display = true;
 }

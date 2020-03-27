@@ -1,4 +1,4 @@
-#include "GameWindows.h"
+#include "Windows.h"
 #include "Game.h"
 
 PauseWindow* PauseWindow::instance = nullptr;
@@ -12,6 +12,9 @@ PauseWindow* PauseWindow::GetInstance() {
 	return instance;
 }
 PauseWindow::PauseWindow() {
+	otherWindows.push_back(SettingWindow::GetInstance());
+	otherWindows.push_back(SaveLoadWindow::GetInstance());
+
 	bgWindow = new UIObject();
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 
@@ -24,26 +27,12 @@ PauseWindow::PauseWindow() {
 	menu = new MainMenuButton("Texture/tmp_texture/tmp_mainmenu.png");
 	menu->SetPressTexture("Texture/tmp_texture/tmp_mainmenu_pressed.png");
 
-	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_resume.png");
-}
-bool PauseWindow::OtherWindowOpens() {
-	if (SettingWindow::GetInstance()->IsOpen() || SaveLoadWindow::GetInstance()->IsOpen())
-		return true;
-	return false;
+	closeButton = new PauseWindowCloseButton("Texture/tmp_texture/tmp_resume.png");
 }
 void PauseWindow::Update() {
 	if (trigger) {
 		display = true;
 		trigger = false;
-	}
-
-	if (OtherWindowOpens() && display) {
-		display = false;
-		otherWindowTrigger = true;
-	}
-	else if (!OtherWindowOpens() && otherWindowTrigger) {
-		display = true;
-		otherWindowTrigger = false;
 	}
 }
 void PauseWindow::Init(int width, int height) {
@@ -66,7 +55,14 @@ void PauseWindow::Init(int width, int height) {
 	closeButton->SetCollder(new Collider(closeButton));
 }
 void PauseWindow::Render() {
-	if (display) {
+	bool otherWinOpen = false;
+	for(auto win:otherWindows)
+		if (win->IsOpen()) {
+			win->Render();
+			otherWinOpen = true;
+			break;
+		}
+	if (display && !otherWinOpen) {
 		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 		renderer->Render(bgWindow);
 		renderer->Render(setting);
@@ -76,7 +72,14 @@ void PauseWindow::Render() {
 	}
 }
 void PauseWindow::LeftClick(float x, float y) {
-	if (display) {
+	bool otherWinOpen = false;
+	for (auto win : otherWindows)
+		if (win->IsOpen()) {
+			win->LeftClick(x, y);
+			otherWinOpen = true;
+			break;
+		}
+	if (display && !otherWinOpen) {
 		setting->checkColliderPressed(x, y);
 		load->checkColliderPressed(x, y);
 		menu->checkColliderPressed(x, y);
@@ -84,7 +87,14 @@ void PauseWindow::LeftClick(float x, float y) {
 	}
 }
 void PauseWindow::LeftRelease(float x, float y) {
-	if (display) {
+	bool otherWinOpen = false;
+	for (auto win : otherWindows)
+		if (win->IsOpen()) {
+			win->LeftRelease(x, y);
+			otherWinOpen = true;
+			break;
+		}
+	if (display && !otherWinOpen) {
 		setting->checkColliderReleased(x, y);
 		load->checkColliderReleased(x, y);
 		menu->checkColliderReleased(x, y);
@@ -92,6 +102,13 @@ void PauseWindow::LeftRelease(float x, float y) {
 	}
 }
 void PauseWindow::UpdateMouseButton(glm::vec3 screen) {
+	bool otherWinOpen = false;
+	for (auto win : otherWindows)
+		if (win->IsOpen()) {
+			win->UpdateMouseButton(screen);
+			otherWinOpen = true;
+			break;
+		}
 	if (display) {
 		setting->updateButton(screen.x, screen.y);
 		load->updateButton(screen.x, screen.y);

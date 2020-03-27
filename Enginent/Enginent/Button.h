@@ -92,9 +92,27 @@ public:
 	bool hasNewInfo;
 };
 
-class WindowCloseButton :public Button {
+class ViewWindowCloseButton :public Button {
 public:
-	WindowCloseButton(std::string texture) :Button(texture) {}
+	ViewWindowCloseButton(std::string texture) :Button(texture) { }
+	void action();
+};
+
+class SaveLoadWindowCloseButton :public Button {
+public:
+	SaveLoadWindowCloseButton(std::string texture) :Button(texture) { }
+	void action();
+};
+
+class PauseWindowCloseButton :public Button {
+public:
+	PauseWindowCloseButton(std::string texture) :Button(texture) { }
+	void action();
+};
+
+class SettingWindowCloseButton :public Button {
+public:
+	SettingWindowCloseButton(std::string texture) :Button(texture) { }
 	void action();
 };
 

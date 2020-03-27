@@ -30,7 +30,7 @@ SettingWindow::SettingWindow() {
 	sfxMute = new SoundMuteButton("Texture/tmp_texture/s.png", SFX);
 	sfxMute->SetMuteTexture("Texture/tmp_texture/sMute.png");
 
-	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new SettingWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 }
 void SettingWindow::Update() {
 	if (trigger) {

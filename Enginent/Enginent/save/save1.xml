@@ -5,6 +5,10 @@
 		<Table open="false" has_item="false" />
 		<Calendar />
 		<bed />
+		<EmmaRoom_Book />
+		<EmmaRoom_Drawing />
+		<EmmaRoom_Note1 />
+		<EmmaRoom_Window />
 		<Bookshelf1 />
 		<Bookshelf2 />
 		<Gramophone />
@@ -14,19 +18,21 @@
 	<item />
 	<doors>
 		<EliasRoomInnerDoor used="true" />
+		<EmmaRoom_Door used="true" />
 		<StairDoor used="false" />
-		<LowerStair1 used="true" />
-		<LowerStair2 used="true" />
+		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
-		<UpperStair1 used="true" />
-		<UpperStair2 used="true" />
+		<Door2 used="true" />
+		<Door3 used="true" />
+		<HallRoomLowerFloor_Door used="false" />
+		<UpperStair used="true" />
 		<tmpDoor used="true" />
 	</doors>
 	<NPCs />
 	<puzzles>
 		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="339.493866" posY="-50">
+	<Player posX="312.722473" posY="-50">
 		<inventory>
 			<item />
 			<item />

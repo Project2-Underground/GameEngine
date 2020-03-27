@@ -69,6 +69,7 @@ void Exit_Button::action()
 void SwitchScene_Button::action()
 {
 	Game::GetInstance()->ChangeScreenState(GAMESCREEN);
+	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
 	SoundManager::GetInstance()->stop(BGM, "MainScreen");
 }
 
@@ -103,8 +104,17 @@ void PhoneHomeButton::action() {
 	Phone::GetInstance()->CloseApp();
 }
 
-void WindowCloseButton::action() {
-	Game::GetInstance()->GetScreen()->CloseGameAllWindow();
+void ViewWindowCloseButton::action() {
+	ViewWindow::GetInstance()->Close();
+}
+void SaveLoadWindowCloseButton::action() {
+	SaveLoadWindow::GetInstance()->Close();
+}
+void PauseWindowCloseButton::action() {
+	PauseWindow::GetInstance()->Close();
+}
+void SettingWindowCloseButton::action() {
+	SettingWindow::GetInstance()->Close();
 }
 
 void ClosePuzzleButton::action() {
@@ -125,6 +135,8 @@ void MainMenuButton::action() {
 	Game* game = Game::GetInstance();
 	game->GetScreen()->CloseGameAllWindow();
 	game->ChangeScreenState(MENUSCREEN);
+	SoundManager::GetInstance()->stopAllSounds();
+
 }
 
 void SettingButton::action(){
