@@ -34,7 +34,6 @@ public:
 
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
-	void SetSound(std::string);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);

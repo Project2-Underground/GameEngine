@@ -30,4 +30,5 @@ public:
 	virtual void Render(glm::mat4 globalModelTransform);
 	virtual void Init(float sizex, float sizey, glm::vec3 position);
 	void SetCollder(Collider* n_col);
+	void Update() { if (anim) anim->Update(); }
 };

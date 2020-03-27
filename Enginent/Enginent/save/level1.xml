@@ -50,16 +50,23 @@
 			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" next_room="" next_door="" layer="0">
 			</Door3>
 			<HallRoomLowerFloor_Door texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" next_room="" next_door="" layer="0">
-				<openDoor texture="Texture/EliasRoom/HallRoomUpperFloor_Door1Open.png"/>
+				<wall_door/>
+				<openDoor texture="Texture/MainHall/HallRoomUpperFloor_Door1Open.png"/>
 			</HallRoomLowerFloor_Door>
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<NPC1 texture="" sizeX="0" sizeY="0" posX="-499" posY="-50" layer="0">
+			<NPC1 sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0">
 				<item name="0" v_texture="0" i_texture="0"/>
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
 			</NPC1>
-			<NPC3 texture="" sizeX="0" sizeY="0" posX="1144" posY="50" layer="0">
+			<NPC3 sizeX="253" sizeY="500" posX="1144" posY="-50" layer="0">
 				<item name="0" v_texture="0" i_texture="0"/>
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
 			</NPC3>
 		</NPCs>
 		<foreground>
@@ -87,11 +94,17 @@
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Ann texture="" sizeX="0" sizeY="0" posX="-808" posY="-97" layer="0">
+			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0">
 				<item name="0" v_texture="0" i_texture="0"/>
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
 			</Ann>
-			<Dann texture="" sizeX="0" sizeY="0" posX="739" posY="-90" layer="0">
+			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0">
 				<item name="0" v_texture="0" i_texture="0"/>
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
 			</Dann>
 		</NPCs>
 		<foreground>
@@ -120,10 +133,15 @@
 		</doors>
 		
 		<NPCs>
+			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Emma/Emma_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Emma>
 		</NPCs>
 		
 		<foreground>
-			<EmmaRoom_Light texture="Texture/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
+			<EmmaRoom_Light texture="Texture/EmmaRoom/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
 		</foreground>
 		
 	</EmmaRoom>

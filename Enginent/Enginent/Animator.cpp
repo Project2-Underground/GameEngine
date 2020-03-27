@@ -57,10 +57,12 @@ void Animator::AddAnimation(std::string name, std::string texture, int frameNo, 
 	animation->SetFrame(frameNo);
 	animation->SetFramePeriod(frameRate);
 
-	animations[animation->animationName] = animation;
+	animations[name] = animation;
 
-	if (animations.size() == 1)
+	if (animations.size() == 1) {
 		SetDefaultAnimation(name);
+		currentAnimation = animations[name];
+	}
 }
 
 void Animator::AddAnimation(std::string name, unsigned int texture, int frameNo, float frameRate, bool loop) {
@@ -68,10 +70,12 @@ void Animator::AddAnimation(std::string name, unsigned int texture, int frameNo,
 	animation->SetFrame(frameNo);
 	animation->SetFramePeriod(frameRate);
 
-	animations[animation->animationName] = animation;
+	animations[name] = animation;
 
-	if (animations.size() == 1)
+	if (animations.size() == 1) {
 		SetDefaultAnimation(name);
+		currentAnimation = animations[name];
+	}
 }
 
 bool Animator::IsPlaying(std::string name) {

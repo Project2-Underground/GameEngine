@@ -180,13 +180,30 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 
 	for (pugi::xml_node_iterator child = npcs.begin(); child != npcs.end(); child++) {
 		NonPlayer* npc = new NonPlayer(child->name());
-		CreateObject(npc, *child);
+
+		float sizeX = child->attribute("sizeX").as_float();
+		float sizeY = child->attribute("sizeY").as_float();
+		float posX = child->attribute("posX").as_float();
+		float posY = child->attribute("posY").as_float();
+		npc->SetSize(sizeX, -sizeY);
+		npc->SetPosition(glm::vec3(posX, posY, 1.0));
+		npc->SetCollder(new Collider(npc));
 
 		if (child->child("item")) {
 			Item* item = new Item(child->child("item").attribute("name").as_string());
 			item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
 			item->SetViewTexture(child->child("item").attribute("v_texture").as_string());
 			npc->SetItem(item);
+		}
+
+		npc->InitAnimator();
+		pugi::xml_node animaions = child->child("Animations");
+		for (pugi::xml_node_iterator anim = animaions.begin(); anim != animaions.end(); anim++) {
+			npc->anim->AddAnimation(anim->name(), 
+									anim->attribute("texture").as_string(), 
+									anim->attribute("frame").as_int(), 
+									anim->attribute("time_per_frame").as_float(), 
+									anim->attribute("loop").as_bool());
 		}
 
 		//std::vector<Dialogue> dialogues;
