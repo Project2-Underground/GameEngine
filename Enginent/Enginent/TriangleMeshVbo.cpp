@@ -29,8 +29,6 @@ void TriangleMeshVbo::LoadData()
 	glGenBuffers(1, &(this->texVboId));
 	glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
 	glBufferData(GL_ARRAY_BUFFER, 3 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
-
-
 }
 
 TriangleMeshVbo::TriangleMeshVbo()

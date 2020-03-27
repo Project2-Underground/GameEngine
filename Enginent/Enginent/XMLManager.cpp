@@ -125,21 +125,9 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
-		std::vector<Dialogue> dialogues;
-		pugi::xml_node_iterator n;
-
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				n = d;
-				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
-			}
-		}
-
 		if (child->child("key"))
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
-		interactObj->SetDialogue(dialogues);
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
@@ -165,17 +153,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
-		std::vector<Dialogue> dialogues;
-		pugi::xml_node_iterator n;
 
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				n = d;
-				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
-			}
-		}
-		door->SetDialogue(dialogues);
 		door->SetCollder(new Collider(door));
 
 		if (child->child("key"))
@@ -211,18 +189,18 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 			npc->SetItem(item);
 		}
 
-		std::vector<Dialogue> dialogues;
-		pugi::xml_node_iterator n;
+		//std::vector<Dialogue> dialogues;
+		//pugi::xml_node_iterator n;
 
-		if (pugi::xml_node dialogue = child->child("dialogue")) {
-			for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-				n = d;
-				d++;
-				dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
-			}
-		}
+		//if (pugi::xml_node dialogue = child->child("dialogue")) {
+		//	for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
+		//		n = d;
+		//		d++;
+		//		dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
+		//	}
+		//}
 
-		npc->SetDialogue(dialogues);
+		//npc->SetDialogue(dialogues);
 		npc->SetCollder(new Collider(npc));
 		npc->layer = NPC_LAYER;
 		npc->subLayer = child->attribute("layer").as_int();
@@ -274,11 +252,9 @@ void XMLManager::LoadFromSave(std::string filename) {
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
 					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
 						door->Open();
-					door->SetCurrentDialogue(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_int());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
-					obj->SetCurrentDialogue(node.attribute("current_dialogue").as_int());
 
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 						if (node.attribute("open").as_bool()) {
@@ -366,13 +342,13 @@ void XMLManager::SaveGame(std::string filename) {
 
 			if (Door * door = dynamic_cast<Door*>(objects[i])) {
 				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
-				saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
+				//saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
-				// current dialogue
-				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+				/// current dialogue
+				//node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());

@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
-		<Closet current_dialogue="0" open="true" has_item="false" />
-		<Table current_dialogue="0" open="true" has_item="false" />
-		<Calendar current_dialogue="0" />
-		<bed current_dialogue="0" />
-		<Bookshelf1 current_dialogue="0" />
-		<Bookshelf2 current_dialogue="0" />
-		<Gramophone current_dialogue="0" />
-		<RabbitCage current_dialogue="0" />
-		<sign current_dialogue="0" />
+		<Closet open="true" has_item="false" />
+		<Table open="false" has_item="false" />
+		<Calendar />
+		<bed />
+		<Bookshelf1 />
+		<Bookshelf2 />
+		<Gramophone />
+		<RabbitCage />
+		<sign />
 	</interactObj>
 	<item />
 	<doors>
-		<EliasRoomInnerDoor used="true" current_dialogue="0" />
-		<StairDoor used="true" current_dialogue="0" />
-		<LowerStair1 used="true" current_dialogue="0" />
-		<LowerStair2 used="true" current_dialogue="0" />
-		<EliasRoomOuterDoor used="true" current_dialogue="0" />
-		<UpperStair1 used="true" current_dialogue="0" />
-		<UpperStair2 used="true" current_dialogue="0" />
-		<tmpDoor used="true" current_dialogue="0" />
+		<EliasRoomInnerDoor used="true" />
+		<StairDoor used="false" />
+		<LowerStair1 used="true" />
+		<LowerStair2 used="true" />
+		<EliasRoomOuterDoor used="false" />
+		<UpperStair1 used="true" />
+		<UpperStair2 used="true" />
+		<tmpDoor used="true" />
 	</doors>
 	<NPCs />
 	<puzzles>
-		<BookshelfPuzzle done="true" />
+		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="404.69281" posY="-50">
+	<Player posX="339.493866" posY="-50">
 		<inventory>
 			<item />
 			<item />

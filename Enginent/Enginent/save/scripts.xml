@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scripts>
+	<script key = "" loopIndex = "">
+		<sub>
+		<Dialogue name = "" text = ""/>
+		</sub>
+	</script>
+	<script key = "start" loopIndex = "0">
+		<sub>
+			<Dialogue name = "??" text = "Ughhhhh... So dizzy."/>
+			<Dialogue name = "??" text = "Am I... hangover?"/>
+			<Dialogue name = "??" text = "Maybe I drank too much."/>
+			<Dialogue name = "??" text = "..."/>
+			<Dialogue name = "??" text = "I cannot remember anything. Seem like I drank quite a lot huh?"/>
+			<Dialogue name = "??" text = "Should walk a bit to make the dizzines go away."/>
+		</sub>
+	</script>
+	<script key = "tooFar" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "It's too far away."/>
+		</sub>
+	</script>
+	<script key = "EliasRoomInnerDoor" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "The door is lock."/>
+			<Dialogue name = "Elias" text = "Seem like it need a keycard to unlock."/>
+		</sub>
+		<sub>
+			<Dialogue name = "Elias" text = "Why I need a keycard to unlock it from inside?."/>
+		</sub>
+	</script>
+		<script key = "bed" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Guess it is time to do the laundry."/>
+		</sub>
+	</script>
+	<script key = "test2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "emmmm who?"/>
+			<Dialogue name = "Emma" text = "me ofcuz"/>
+		</sub>
+	</script>
+</scripts>

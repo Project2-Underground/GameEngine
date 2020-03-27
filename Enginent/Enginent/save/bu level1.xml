@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- texture = NONE toset display false-->
+
+<level currentLevel="1" startPosX="0" startPosY="-50">
+	<EliasRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">
+		<background>
+			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle-->
+		<interactObj>
+			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4">
+			</bed>
+			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2">
+				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
+			</Table>
+			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
+				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
+				<item name="keyCard" v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
+			</Closet>
+			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3">
+				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png"/>
+				<description>this is a calendar</description>
+			</Calendar>
+		</interactObj>
+		<doors>
+			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0">
+				<openDoor texture="Texture/EliasRoom/Elias_Room_Door1.png"/>
+				<key name="keyCard"/>
+			</EliasRoomInnerDoor>
+		</doors>
+		<NPCs>
+			<npcName texture="NONE" sizeX="0" sizeY="0" posX="0" posY="0" layer="0">
+				<item name="0" texture="0" v_texture="0" i_texture="0"/>
+				<dialogue>
+					<n>npcName</n>
+					<d>hello</d>
+					<n>npcName</n>
+					<d>how are you</d>
+					<n>npcName</n>
+					<d>me is gud</d>
+				</dialogue>
+			</npcName>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+		</foreground>
+	</EliasRoom>
+	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360">
+		<background>
+			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<interactObj>
+		</interactObj>
+		<doors>
+			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="202" sizeY="350" posX="-1434" posY="67" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0"/>
+			<UpperStair1 texture="NONE" sizeX="90" sizeY="90" posX="-402" posY="-245" next_room="MainHallLower" next_door="LowerStair1" stair="" layer="0"/>
+			<UpperStair2 texture="NONE" sizeX="90" sizeY="90" posX="387" posY="-245" next_room="MainHallLower" next_door="LowerStair2" stair="" layer="0"/>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
+		</foreground>
+	</MainHallUpper>
+	<MainHallLower left_limit="-1580" right_limit="1580" top_limit="360" bottom_limit="-360">
+		<background>
+			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<interactObj>
+			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="169" sizeY="308" posX="-1133" posY="139" type="1" layer="2"/>
+			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="395" sizeY="340" posX="1090" posY="113" type="9" layer="2">
+				<puzzle name="BookshelfPuzzle"/>
+			</Bookshelf2>
+			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="171" sizeY="188" posX="-441" posY="76" type="2" layer="2">
+				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png"/>
+			</Gramophone>
+			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="144" sizeY="143" posX="454" posY="60" type="7" layer="2"/>
+		</interactObj>
+		<doors>
+			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="172" sizeY="188" posX="-5" posY="262" next_room="congrat" next_door="tmpDoor" layer="0">
+				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
+			</StairDoor>
+			<LowerStair1 texture="NONE" sizeX="90" sizeY="90" posX="-163" posY="-283" next_room="MainHallUpper" next_door="UpperStair1" stair="" layer="0"/>
+			<LowerStair2 texture="NONE" sizeX="90" sizeY="90" posX="149" posY="-283" next_room="MainHallUpper" next_door="UpperStair2" stair="" layer="0"/>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
+		</foreground>
+	</MainHallLower>
+	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">
+		<background>
+			<bg texture="" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<interactObj>
+			<sign texture="Texture/Test/Win.png" sizeX="584" sizeY="138" posX="0" posY="0" type="1" layer="4"/>
+		</interactObj>
+		<doors>
+			<tmpDoor texture="NONE" sizeX="172" sizeY="188" posX="0" posY="0" next_room="MainHallLower" next_door="StairDoor" layer="0"/>
+		</doors>
+		<!-- not unique npcs-->
+		<NPCs>
+		</NPCs>
+		<foreground>
+		</foreground>
+	</congrat>
+</level>
