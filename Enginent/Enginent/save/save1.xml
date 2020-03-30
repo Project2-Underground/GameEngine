@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
+		<BackDoorRoom_FlowerClue />
+		<BackDoorRoom_Computer />
 		<Closet open="true" has_item="false" />
 		<Table open="false" has_item="false" />
 		<Calendar />
@@ -13,26 +15,30 @@
 		<Bookshelf2 />
 		<Gramophone />
 		<RabbitCage />
+		<Door2 />
+		<Door3 />
 		<sign />
 	</interactObj>
 	<item />
 	<doors>
+		<BackDoorRoom_Foreground_Door used="true" />
+		<BackDoorRoom_BasementDoor used="true" />
+		<BackDoorRoom_EmmaDoor used="false" />
+		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
-		<StairDoor used="false" />
+		<StairDoor used="true" />
 		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
-		<Door2 used="true" />
-		<Door3 used="true" />
 		<HallRoomLowerFloor_Door used="false" />
 		<UpperStair used="true" />
 		<tmpDoor used="true" />
 	</doors>
 	<NPCs />
 	<puzzles>
-		<BookshelfPuzzle done="false" />
+		<BookshelfPuzzle done="true" />
 	</puzzles>
-	<Player posX="312.722473" posY="-50">
+	<Player posX="553.513123" posY="-50">
 		<inventory>
 			<item />
 			<item />

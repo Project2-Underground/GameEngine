@@ -17,14 +17,15 @@ public:
 	static XMLManager* GetInstance();
 
 	// doc
-	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms);
+	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms, bool &isLoading);
 	void GenerateImage(pugi::xml_node, Room*, std::string);
 	void GenerateInteractObj(pugi::xml_node, Room*);
 	void GenerateDoor(pugi::xml_node, Room*);
 	void GenerateNPC(pugi::xml_node, Room*);
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
 
-	int GetLevelNumber(std::string);
+	int GetLevelNumber(std::string); 
+	std::string GetFirstRoomName();
 	void SaveGame(std::string);
 	void LoadFromSave(std::string);
 

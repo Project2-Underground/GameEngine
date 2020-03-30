@@ -130,6 +130,7 @@ GameScreen::GameScreen() {
 	//levels.push_back("save/level3.xml");
 
 	currentLevel = new Level(levels[0]);
+
 	player = new Player();
 	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
@@ -151,12 +152,6 @@ GameScreen::GameScreen() {
 	phoneIcon->SetCollder(new Collider(phoneIcon));
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
-	// test
-	phone->AddPage(NOTE, "tmp_note1");
-	phone->AddPage(NOTE, "tmp_note2");
-	phone->AddPage(CHAT, "person_name");
-	phone->Message("person_name", 2);
-	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
@@ -296,7 +291,7 @@ void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
-	currentLevel = new Level(levels[level]);
+	currentLevel = new Level(levels[0]);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {

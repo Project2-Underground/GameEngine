@@ -32,3 +32,8 @@ public:
 	void SetCollder(Collider* n_col);
 	void Update() { if (anim) anim->Update(); }
 };
+
+class LoadingScreen :public ImageObject {
+public:
+	void Init();
+};

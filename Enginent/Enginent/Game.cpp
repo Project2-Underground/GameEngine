@@ -49,6 +49,8 @@ void Game::Init(int width, int height)
 	currentState = MENUSCREEN;
 	cursorGame = new CursorUI();
 	UpdateScreenState();
+	loadingScreen = new LoadingScreen();
+	loadingScreen->Init();
 }
 
 void Game::Update()
@@ -122,6 +124,7 @@ Game::Game()
 	currentState = MENUSCREEN;
 	changeScreen = false;
 	renderer = nullptr;
+	loadingThread = nullptr;
 }
 
 Game::~Game()
@@ -131,6 +134,7 @@ Game::~Game()
 	delete renderer;
 	delete currentScreen;
 	delete cursorGame;
+	delete loadingScreen;
 }
 
 glm::vec3 Game::FindMousePosition(int x, int y)

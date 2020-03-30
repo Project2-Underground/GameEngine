@@ -54,6 +54,12 @@ void Room::LeftClick(float x, float y) {
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 			if (ib->CheckCollider((float)x, (float)y)) 
 				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
+
+	for (int i = 0; i < npcs.size(); i++) {
+		InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]);
+		if (npc->CheckCollider((float)x, (float)y))
+			((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(npc);
+	}
 }
 
 void Room::SortObjLayer() {
@@ -106,11 +112,11 @@ DrawableObject* Room::FindObject(std::string name) {
 
 Level::Level(std::string filename) {
 	XMLManager* lg = XMLManager::GetInstance();
-	lg->GenerateRoom(filename, rooms);
+	lg->GenerateRoom(filename, rooms, Game::GetInstance()->isLoading);
 	levelNo = lg->GetLevelNumber(filename);
 
 	// assign first room as current room
-	currentRoom = rooms.begin()->second;
+	currentRoom = rooms[lg->GetFirstRoomName()];
 }
 
 void Level::Update() {
