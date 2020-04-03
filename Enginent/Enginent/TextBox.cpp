@@ -44,6 +44,7 @@ void TextBox::setText(std::string key)
 		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
 		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
 		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+		Game::GetInstance()->GetCursor()->enableChange(false);
 	}
 }
 
@@ -83,6 +84,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 	}
 	else if (d_text.choice == "")
 	{
+		Game::GetInstance()->GetCursor()->enableChange(true);
 		display = false;
 	}
 	else

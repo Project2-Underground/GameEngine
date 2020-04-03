@@ -22,11 +22,11 @@ ViewWindow::ViewWindow() {
 }
 
 void ViewWindow::Update() {
-	/*if(trigger)
+	if(trigger)
 		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
 			display = true;
 			trigger = false;
-		}*/
+		}
 }
 
 
@@ -93,5 +93,5 @@ void GameWindow::Close() {
 void GameWindow::Open() {
 	CursorUI* cursor = Game::GetInstance()->GetCursor();
 	cursor->enableChange(false);
-	display = true;
+	trigger = true;
 }

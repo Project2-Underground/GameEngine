@@ -16,32 +16,41 @@ void Screen::CloseGameAllWindow() {
 
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
-	play = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->SetSize(300, -120);
-	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
+	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
+	play->SetSize(248, -70);
+	play->SetPosition(glm::vec3(-270, 170, 1));
 	play->SetCollder(new Collider(play));
 
-	// setting button
-	setting;
-
-	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_loadButton.png");
+	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->SetSize(300, -120);
-	load->SetPosition(glm::vec3(170.0f, -50.0f, 1.0f));
+	load->SetSize(213, -74);
+	load->SetPosition(glm::vec3(-270, 20, 1));
 	load->SetCollder(new Collider(load));
 
-	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->SetSize(300, -120);
-	quit->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
+	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
+	setting->SetSize(264, -81);
+	setting->SetPosition(glm::vec3(-270.0f, 20, 1.0f));
+	setting->SetCollder(new Collider(setting));
+
+	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
+	quit->SetSize(186, -86);
+	quit->SetPosition(glm::vec3(-270.0f, -50.0f, 1.0f));
 	quit->SetCollder(new Collider(quit));
 
 	background = new UIObject();
-	background->SetTexture("Texture/UI/MainScreen/MainScreen_Click.png");
+	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
 	background->SetSize(1280, -720);
 	background->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 
+	UIObject* title = new UIObject();
+	title->SetTexture("Texture/UI/MainScreen/MainScreen_Undergroung.png");
+	title->SetSize(756.0f, -94.0f);
+	title->SetPosition(glm::vec3(-270.0f, 250.0f, 1.0f));
+
 	UI.push_back(background);
+	UI.push_back(title);
 	UI.push_back(play);
+	UI.push_back(setting);
 	UI.push_back(quit);
 	UI.push_back(load);
 

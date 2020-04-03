@@ -143,44 +143,44 @@
 		</foreground>
 		
 	</EmmaRoom>
-	<BackDoorRoom left_limit="-1807.5" right_limit="1807.5" top_limit="770" bottom_limit="-770">
+	<BackDoorRoom left_limit="-903.75" right_limit="903.75" top_limit="385" bottom_limit="-385">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="3615" sizeY="1440" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1807.5" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="287" sizeY="515" posX="-508.5" posY="-135" type="3" layer="1">
+			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="143.5" sizeY="257.5" posX="-508.5" posY="-135" type="3" layer="1">
 				<item name="clue" v_texture="Texture/ViewItem/.png" i_texture="Texture/.png" texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="323" sizeY="1116" posX="-1615.5" posY="-104" next_room="MainHallLower" next_door="StairDoor" layer="0"/>
-			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="583" sizeY="807" posX="1277" posY="17.5" next_room="BackDoorUndergroundRoom" next_door="BackDoorRoom_BasementStair" layer="0"/>
-			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="444" sizeY="799" posX="-137" posY="9.5" next_room="EmmaRoom" next_door="EmmaRoom_Door" layer="0">
+			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="161.5" sizeY="558" posX="-1615.5" posY="-104" next_room="MainHallLower" next_door="StairDoor" layer="0"/>
+			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="291.5" sizeY="403.5" posX="1277" posY="17.5" next_room="BackDoorUndergroundRoom" next_door="BackDoorRoom_BasementStair" layer="0"/>
+			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="222" sizeY="399.5" posX="-137" posY="9.5" next_room="EmmaRoom" next_door="EmmaRoom_Door" layer="0">
 				<!-- <openDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png"/> -->
 			</BackDoorRoom_EmmaDoor>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="3615" sizeY="1440" posX="-388" posY="-142" layer="0"/>
+			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1807.5" sizeY="770" posX="-388" posY="-142" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
-	<BackDoorUndergroundRoom left_limit="-1280" right_limit="1280" top_limit="770" bottom_limit="-770">
+	<BackDoorUndergroundRoom left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="2560" sizeY="1440" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="495" sizeY="561" posX="-119" posY="45.5" type="9" layer="4">
+			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="247.5" sizeY="280.5" posX="-119" posY="45.5" type="9" layer="4">
 				<puzzle name="Numpad_Backdoor"/>
 			</BackDoorRoom_Computer>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_BasementStair texture="NONE" sizeX="1005" sizeY="311" posX="-52" posY="560" next_room="BackDoorRoom" next_door="BackDoorRoom_BasementDoor" stair="" layer="0"/>
+			<BackDoorRoom_BasementStair texture="NONE" sizeX="502.5" sizeY="155.5" posX="-52" posY="560" next_room="BackDoorRoom" next_door="BackDoorRoom_BasementDoor" stair="" layer="0"/>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="2560" sizeY="1440" posX="0" posY="-304.5" layer="0"/>
+			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="770" posX="0" posY="-304.5" layer="0"/>
 		</foreground>
 	</BackDoorUndergroundRoom>
 	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">

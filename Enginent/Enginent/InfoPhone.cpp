@@ -103,20 +103,21 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	appBG = new UIObject();
 
 	// init buttons
-	float iconSize = phoneSize.x*0.125f;
+	float iconSize = 100.0f;
 
 	back = new PhoneBackButton("Texture/tmp_texture/tmp_arrowIcon2.png");
 	back->Init(iconSize, -iconSize, glm::vec3(-phoneSize.x * 0.25f - phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
 
-	home = new PhoneHomeButton("Texture/tmp_texture/tmp_homeIcon.png");
-	home->Init(iconSize, -iconSize, glm::vec3(phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
+	home = new PhoneHomeButton("");
+	home->SetDisplay(false);
+	home->Init(iconSize, -iconSize, glm::vec3(350, 0, 1));
 
 	buttons.push_back(back);
 	buttons.push_back(home);
 
 	currentNote = new UIObject();
 	currentNote->SetDisplay(false);
-	currentNote->SetSize(phoneSize.x, -phoneSize.y * 0.5f);
+	currentNote->SetSize(phoneSize.x * 0.5f, -phoneSize.y);
 
 	currentChat = new Chat();
 
@@ -189,18 +190,20 @@ bool Application::Unread(AppType apptype) {
 
 void Application::Scroll(int direction) {
 	if (!openNoteChat) {
-		if (direction > 0)
-			if (itemTabs.at(itemTabs.size() - 1)->getPos().y < lowerBound)
-				for (auto i : itemTabs) {
-					i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
-					i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
-				}
-			else
-				if (itemTabs.at(0)->getPos().y > upperBound)
+		if (itemTabs.size() > 0) {
+			if (direction > 0)
+				if (itemTabs.at(itemTabs.size() - 1)->getPos().y < lowerBound)
 					for (auto i : itemTabs) {
-						i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
-						i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
+						i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
+						i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
 					}
+				else
+					if (itemTabs.at(0)->getPos().y > upperBound)
+						for (auto i : itemTabs) {
+							i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
+							i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
+						}
+		}
 	}
 	else if (currentAppType == CHAT && chats.size() > 0)
 		currentChat->Scroll(direction);
@@ -316,32 +319,33 @@ Phone* Phone::GetInstance() {
 
 Phone::Phone() {
 	phone = new UIObject();
-	phone->SetTexture("Texture/tmp_texture/tmp_phoneScreen.png"); //phone image
+	phone->SetTexture("Texture/UI/InfoPhone/Tablet.png");
 	float sizeX = 400.0f;
 	float sizeY = 800.0f;
-	phone->SetSize(sizeX, -sizeY);
+	phone->SetSize(825.0f, -500.5f);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
 	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
 	open = false;
 
-	float size = sizeX*.25f;
+	float iconSize = 100.0f;
 	// init all buttons
-	noteIcon = new PhoneAppsButton("Texture/tmp_texture/tmp_noteIcon.png");
-	noteIcon->Init(size, -size, glm::vec3(phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
+	noteIcon = new PhoneAppsButton("Texture/UI/InfoPhone/Note_app.png");
+	noteIcon->Init(iconSize, -iconSize, glm::vec3(-250.0f, 150.0f, 1));
 	noteIcon->SetApp(NOTE);
 	
-	chatIcon = new PhoneAppsButton("Texture/tmp_texture/tmp_chatIcon.png");
-	chatIcon->Init(size, -size, glm::vec3(-phone->getSize().x * 0.25f - phone->getPos().x, phone->getPos().y + phone->getSize().y * -0.25f, 1));
+	chatIcon = new PhoneAppsButton("Texture/UI/InfoPhone/Chat_app.png");
+	chatIcon->Init(iconSize, -iconSize, glm::vec3(-100.0f, 150.0f, 1));
 	chatIcon->SetApp(CHAT);
 	
-	exitButton = new PhoneExitButton("Texture/tmp_texture/tmp_homeIcon.png");
-	exitButton->Init(size * 0.5f, -size * 0.5f, glm::vec3(phone->getPos().x, phone->getPos().y - phone->getSize().y * -0.4f, 1));
+	exitButton = new PhoneExitButton("");
+	exitButton->SetDisplay(false);
+	exitButton->Init(iconSize, -iconSize, glm::vec3(350, 0, 1));
 
 	notifyPopup = new UIObject();
 	notifyPopup->SetTexture("Texture/tmp_texture/exclamationMark.png");
 	notifyPopup->SetPosition(glm::vec3(0, chatIcon->getPos().y + -chatIcon->getSize().y * 0.5f, 0));
-	notifyPopup->SetSize(25.0f, -25.0f);
+	notifyPopup->SetSize(iconSize*0.5f, -iconSize*0.5f);
 
 	icons.push_back(noteIcon);
 	icons.push_back(chatIcon);
