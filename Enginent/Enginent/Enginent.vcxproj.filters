@@ -269,6 +269,9 @@
     <ClCompile Include="SettingWindow.cpp">
       <Filter>GameWindows</Filter>
     </ClCompile>
+    <ClCompile Include="NumpadPuzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">

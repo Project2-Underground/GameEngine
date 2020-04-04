@@ -32,16 +32,18 @@ struct s_Dialogue
 struct Dialogue {
 	std::vector<s_Dialogue> dialogue;
 	std::string choice;
+	Dialogue() {
+		choice = "";
+	}
 };
 
 struct Script {
 	std::vector<Dialogue> script;
-	int loopIndex;
-	int currIndex;
+	int loopIndex = 0;
+	int currIndex = 0;
 	Script(int index)
 	{
 		loopIndex = index;
-		currIndex = 0;
 	}
 };
 

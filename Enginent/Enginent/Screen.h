@@ -116,17 +116,20 @@ public:
 	void HandleKey(SDL_Keycode);
 };
 
-//class TestScreen : public Screen {
-//public:
-//	std::vector<UIObject*> UI;
-//	UIObject* background;
-//	PuzzleTemplate* puzzle;
-//public:
-//	TestScreen();
-//	void Render();
-//	void Update();
-//	void RightClick(glm::vec3, glm::vec3);
-//	void LeftClick(glm::vec3, glm::vec3);
-//	void UpdateMouseState(glm::vec3, glm::vec3);
-//	~TestScreen();
-//};
+class TestScreen : public Screen {
+public:
+	std::vector<UIObject*> UI;
+	UIObject* background;
+	PuzzleTemplate* puzzle;
+public:
+	TestScreen();
+	void Render();
+	void Update();
+	void RightClick(glm::vec3, glm::vec3);
+	void LeftClick(glm::vec3, glm::vec3);
+	void UpdateMouseState(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void HandleKey(SDL_Keycode);
+	~TestScreen();
+};

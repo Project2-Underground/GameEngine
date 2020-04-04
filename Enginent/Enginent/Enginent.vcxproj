@@ -81,6 +81,7 @@
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="NumpadPuzzle.cpp" />
     <ClCompile Include="PauseWindow.cpp" />
     <ClCompile Include="SaveLoadWindow.cpp" />
     <ClCompile Include="ScriptManager.cpp" />
