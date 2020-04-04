@@ -21,6 +21,13 @@ void Animator::Play(std::string animationName, bool loop) {
 	}
 }
 
+void Animator::Play(bool loop) {
+	currentAnimation = animations[defaultAnimation];
+	this->loop = loop;
+	currentAnimation->ResetAnimation();
+	currentAnimation->NextFrame();
+}
+
 void Animator::SetDefaultAnimation(std::string animationName) {
 	// check if animation is added in map
 	if (animations.find(animationName) == animations.end()) {
@@ -50,10 +57,25 @@ void Animator::AddAnimation(std::string name, std::string texture, int frameNo, 
 	animation->SetFrame(frameNo);
 	animation->SetFramePeriod(frameRate);
 
-	animations[animation->animationName] = animation;
+	animations[name] = animation;
 
-	if (animations.size() == 1)
+	if (animations.size() == 1) {
 		SetDefaultAnimation(name);
+		currentAnimation = animations[name];
+	}
+}
+
+void Animator::AddAnimation(std::string name, unsigned int texture, int frameNo, float frameRate, bool loop) {
+	Animation* animation = new Animation(name, texture, loop);
+	animation->SetFrame(frameNo);
+	animation->SetFramePeriod(frameRate);
+
+	animations[name] = animation;
+
+	if (animations.size() == 1) {
+		SetDefaultAnimation(name);
+		currentAnimation = animations[name];
+	}
 }
 
 bool Animator::IsPlaying(std::string name) {

@@ -21,6 +21,7 @@ public:
 
 	DrawableObject();
 	~DrawableObject();
+	virtual void Update() {}
 	virtual void Render(glm::mat4 globalModelTransform) = 0;
 	glm::vec3 getPos();
 	glm::vec3 getSize();

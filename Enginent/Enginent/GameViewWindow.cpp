@@ -1,7 +1,6 @@
 #include "GameWindows.h"
 #include "Game.h"
 
-
 ViewWindow* ViewWindow::instance = nullptr;
 
 ViewWindow* ViewWindow::GetInstance() {
@@ -13,7 +12,7 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new ViewWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
@@ -29,6 +28,7 @@ void ViewWindow::Update() {
 			trigger = false;
 		}
 }
+
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem

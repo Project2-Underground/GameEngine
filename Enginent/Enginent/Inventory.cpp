@@ -41,12 +41,12 @@ Inventory::Inventory() {
 
 	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_separateButton.png", SEPARATE_ACTION);
 	separateButton->SetPressTexture("Texture/tmp_texture/tmp_separateButtonPress.png");
-	separateButton->SetPosition(glm::vec3(100.0f, 0, 0));
+	separateButton->SetPosition(glm::vec3(100.0f, -500.0f, 0));
 	separateButton->SetSize(100.0f, -50.0f);
 	separateButton->SetCollder(new Collider(separateButton));
 	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_combineButton.png", COMBINE_ACTION);
 	combineButton->SetPressTexture("Texture/tmp_texture/tmp_combineButtonPress.png");
-	combineButton->SetPosition(glm::vec3(-100.0f, 0, 0));
+	combineButton->SetPosition(glm::vec3(-100.0f, -500.0f, 0));
 	combineButton->SetSize(100.0f, -50.0f);
 	combineButton->SetCollder(new Collider(combineButton));
 }

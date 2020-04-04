@@ -54,7 +54,6 @@ bool GLRenderer::Initialize(string vertexShaderFile, string fragmentShaderFile)
 	glAttachShader(gProgramId, vertexShader->getShaderId());
 	glAttachShader(gProgramId, fragmentShader->getShaderId());
 
-
 	//Link program
 	glLinkProgram(gProgramId);
 

@@ -2,7 +2,7 @@
 #include "Game.h"
 
 SaveLoadWindow::SaveLoadWindow() {
-	closeButton = new WindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new SaveLoadWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	bgWindow = new UIObject();
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }

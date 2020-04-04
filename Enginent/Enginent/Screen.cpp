@@ -1,3 +1,4 @@
+
 #include "Screen.h"
 #include "Game.h"
 
@@ -15,32 +16,41 @@ void Screen::CloseGameAllWindow() {
 
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
-	play = new SwitchScene_Button("Texture/UI/MainScreen/StartBotton_Normal.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->SetSize(300, -120);
-	play->SetPosition(glm::vec3(-170.0f, 70.0f, 1.0f));
+	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
+	play->SetSize(248, -70);
+	play->SetPosition(glm::vec3(-270, 170, 1));
 	play->SetCollder(new Collider(play));
 
-	// setting button
-	setting;
-
-	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_loadButton.png");
+	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->SetSize(300, -120);
-	load->SetPosition(glm::vec3(170.0f, -50.0f, 1.0f));
+	load->SetSize(213, -74);
+	load->SetPosition(glm::vec3(-270, 20, 1));
 	load->SetCollder(new Collider(load));
 
-	quit = new Exit_Button("Texture/UI/MainScreen/ExitBotton_Normal.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->SetSize(300, -120);
-	quit->SetPosition(glm::vec3(-170.0f, -50.0f, 1.0f));
+	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
+	setting->SetSize(264, -81);
+	setting->SetPosition(glm::vec3(-270.0f, 20, 1.0f));
+	setting->SetCollder(new Collider(setting));
+
+	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
+	quit->SetSize(186, -86);
+	quit->SetPosition(glm::vec3(-270.0f, -50.0f, 1.0f));
 	quit->SetCollder(new Collider(quit));
 
 	background = new UIObject();
-	background->SetTexture("Texture/UI/MainScreen/MainScreen_Click.png");
+	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
 	background->SetSize(1280, -720);
 	background->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 
+	UIObject* title = new UIObject();
+	title->SetTexture("Texture/UI/MainScreen/MainScreen_Undergroung.png");
+	title->SetSize(756.0f, -94.0f);
+	title->SetPosition(glm::vec3(-270.0f, 250.0f, 1.0f));
+
 	UI.push_back(background);
+	UI.push_back(title);
 	UI.push_back(play);
+	UI.push_back(setting);
 	UI.push_back(quit);
 	UI.push_back(load);
 
@@ -129,6 +139,7 @@ GameScreen::GameScreen() {
 	//levels.push_back("save/level3.xml");
 
 	currentLevel = new Level(levels[0]);
+
 	player = new Player();
 	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
@@ -150,14 +161,6 @@ GameScreen::GameScreen() {
 	phoneIcon->SetCollder(new Collider(phoneIcon));
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
-	// test
-	phone->AddPage(NOTE, "tmp_note1");
-	phone->AddPage(NOTE, "tmp_note2");
-	phone->AddPage(CHAT, "person_name");
-	phone->Message("person_name", 2);
-	phone->SetNotification(NOTE);
-	phone->SetNotification(CHAT);
-	// test
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
@@ -174,7 +177,7 @@ GameScreen::GameScreen() {
 
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
-	windows.push_back(SettingWindow::GetInstance());
+	//windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(PauseWindow::GetInstance());
 }
 
@@ -195,27 +198,31 @@ void GameScreen::Render() {
 	inventory->Render();
 	if(GameWindowOpen())
 		for (auto w : windows)
-			w->Render();
+				w->Render();
 	else {
 		if (phone->open)
 			phone->Render();
 		if (dialogueText->IsDisplay())
 			dialogueText->Render();
 	}
+
+	dialogueText->Render();
 }
 
 void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
 	if (!Pause) {
-		if (PuzzleTime)
-			currentPuzzle->Update();
-		else {
-			currentLevel->Update();
-			player->Update();
+		if (!dialogueText->IsDisplay()) {
+			if (PuzzleTime)
+				currentPuzzle->Update();
+			else {
+				currentLevel->Update();
+				player->Update();
+			}
+			if (InventoryEnable && !phone->open)
+				inventory->Update();
 		}
-		if (InventoryEnable && !phone->open)
-			inventory->Update();
 	}
 }
 
@@ -225,24 +232,28 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
 			currentLevel->RightClick(world.x, world.y);
 	}
+	else if (dialogueText->IsDisplay())
+		dialogueText->clickLeft(screen);
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if(GameWindowOpen())
+	if (GameWindowOpen()) {
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
-	else if (phone->open)
+	}
+	else if (phone->open) 
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay())
+	else if (dialogueText->IsDisplay()) 
 		dialogueText->clickLeft(screen);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {
-		if(!player->anim->IsPlaying("Pickup"))
-			currentLevel->LeftClick(world.x, world.y);
+		buttonClicked = false;
 		for (int j = 0; j < UI.size(); j++)
 			if (Button * button = dynamic_cast<Button*>(UI[j]))
 				button->checkColliderPressed(screen.x, screen.y);
+		if(!buttonClicked && !player->anim->IsPlaying("Pickup"))
+			currentLevel->LeftClick(world.x, world.y);
 	}
 	if (InventoryEnable) {
 		inventory->LeftClick(screen.x, screen.y);
@@ -289,7 +300,7 @@ void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
-	currentLevel = new Level(levels[level]);
+	currentLevel = new Level(levels[0]);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
@@ -308,6 +319,15 @@ InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
 			}
 	}
 	return NORMAL;
+}
+
+Door* GameScreen::GetDoor(std::string doorNam) {
+	for (auto room : currentLevel->rooms) {
+		for (auto door : room.second->doors)
+			if (door.second->object_name == doorNam)
+				return door.second;
+	}
+	return nullptr;
 }
 
 void GameScreen::OpenPuzzle(std::string name) {

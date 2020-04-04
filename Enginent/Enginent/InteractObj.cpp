@@ -19,7 +19,6 @@ void InteractableObj::TakePic() {
 	if (takePic) {
 		Phone* phone = Phone::GetInstance();
 		phone->AddPage(NOTE, picName);
-		phone->SetNotification(NOTE);
 		takePic = false;
 	}
 }

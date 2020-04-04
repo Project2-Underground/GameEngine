@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InteractObj.h"
+#include "Door.h"
 #include "UIObject.h"
 #include "Collider.h"
 #include "Item.h"
@@ -29,9 +29,9 @@ public:
 	std::string name;
 
 	void Render();
-	virtual void Update();
-	virtual void RightClick(float, float);
-	virtual void LeftClick(float, float);
+	void Update();
+	void RightClick(float, float);
+	void LeftClick(float, float);
 	void SetPlayerWalkLimit(Collider*);
 	void SetCameraLimit(Collider*);
 	DrawableObject* FindObject(std::string);

@@ -6,6 +6,8 @@
 #include <SDL_ttf.h>
 #include "UIObject.h"
 
+#define BLACK_COLOR SDL_Color(0,0,0,0)
+
 class TextObject :public UIObject
 {
 private:

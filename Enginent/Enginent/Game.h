@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <thread>
+
 #include "Player.h"
 #include "DrawableObject.h"
 #include "GLRenderer.h"
@@ -35,6 +37,7 @@ class Game
 	CursorUI* cursorGame;
 	ScriptManager* script;
 	SoundManager* sound;
+	LoadingScreen* loadingScreen;
 
 	bool quit = false;
 	bool changeScreen;
@@ -42,6 +45,8 @@ class Game
 
 	void SaveGame(std::string);
 	void LoadGame(std::string);
+
+	std::thread* loadingThread;
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -69,4 +74,7 @@ public:
 	Level* GetCurrentLevel();
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
+
+	void LoadingGame();
+	bool isLoading;
 };

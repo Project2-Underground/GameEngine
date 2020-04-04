@@ -23,6 +23,7 @@
     <ClInclude Include="..\resource\pugixml-1.10\src\pugixml.hpp" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="Button.h" />

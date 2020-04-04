@@ -28,6 +28,11 @@ ImageObject::~ImageObject()
 		delete anim;
 }
 
+void ImageObject::Init(float sizex, float sizey, glm::vec3 position) {
+	SetSize(sizex, sizey);
+	SetPosition(position);
+	SetCollder(new Collider(this));
+}
 
 void ImageObject::SetCollder(Collider* n_col) {
 	col = n_col;
@@ -90,4 +95,9 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 			squareMesh->ResetTexData();
 		}
 	}
+}
+
+void LoadingScreen::Init() {
+	anim = new Animator();
+	anim->AddAnimation("loading", "texture", 3, 0.5f, true);
 }

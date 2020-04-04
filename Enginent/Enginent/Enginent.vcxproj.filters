@@ -144,6 +144,9 @@
     <ClInclude Include="ScriptManager.h">
       <Filter>GameUtilities</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp">

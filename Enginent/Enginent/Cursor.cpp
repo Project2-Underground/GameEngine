@@ -14,7 +14,7 @@ CursorUI::CursorUI() {
 	enable = true;
 
 	this->SetTexture(CS_Normal);
-	this->SetSize(25, -25);
+	this->SetSize(40.0f, -40.0f);
 	this->SetPosition(glm::vec3(0, 0, 1));
 }
 

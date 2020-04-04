@@ -17,6 +17,7 @@ public:
 	bool hasLeaveTime;
 	std::string animationName;
 	Animation(std::string name, std::string TexturePath, bool leaveTime = false);
+	Animation(std::string name, unsigned int Texture, bool leaveTime = false);
 	bool Finished();
 	void SetFrame(int frame);
 	void SetFramePeriod(double time);

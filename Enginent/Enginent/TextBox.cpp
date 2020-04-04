@@ -44,6 +44,7 @@ void TextBox::setText(std::string key)
 		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
 		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
 		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+		Game::GetInstance()->GetCursor()->enableChange(false);
 	}
 }
 
@@ -83,6 +84,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 	}
 	else if (d_text.choice == "")
 	{
+		Game::GetInstance()->GetCursor()->enableChange(true);
 		display = false;
 	}
 	else
@@ -145,8 +147,8 @@ ChoiceUI::ChoiceUI()
 void ChoiceUI::setChoice(std::string key)
 {
 	std::vector<Choice>* choices = scriptManager->GetChoice(key);
-	choiceNum = choices->size();
-	float first_Ypos = 50 + ((choiceNum / 2) * 60);
+	choiceNum = (int)choices->size();
+	float first_Ypos = 50.0f + (((float)choiceNum / 2.0f) * 60.0f);
 	if (choiceNum % 2 == 0)
 	{
 		first_Ypos += 0;

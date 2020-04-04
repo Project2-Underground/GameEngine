@@ -34,7 +34,6 @@ public:
 
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
-	void SetSound(std::string);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
@@ -97,18 +96,6 @@ class NonPlayer : public InteractableObj {
 public:
 	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
 	void action() {};
-};
-
-class Door : public InteractableObj {
-	std::string nextRoom;
-	std::string nextDoor;
-	unsigned int openTexture;
-public:
-	Door(std::string, std::string);
-	void SetOpenTexture(std::string texture);
-	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
-	void Open();
-	void action();
 };
 
 class SaveObj : public InteractableObj {

@@ -24,7 +24,11 @@ bool XMLManager::LoadFile(std::string filename) {
 	return false;
 }
 
-void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms) {
+std::string XMLManager::GetFirstRoomName() {
+	return doc.child("level").attribute("Start").as_string();
+}
+
+void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms, bool& isLoading) {
 	if (LoadFile(filename)) {
 		pugi::xml_node xmlRooms = doc.child("level");
 
@@ -54,6 +58,7 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
 		}
 	}
+	isLoading = false;
 }
 
 void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {
@@ -144,7 +149,12 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		std::string next_room = child->attribute("next_room").as_string();
 		std::string next_door = child->attribute("next_door").as_string();
 
-		Door* door = new Door(next_room, next_door);
+		Door* door;
+		if (child->child("wall_door"))
+			door = new WallDoor(next_room, next_door);
+		else
+			door = new Door(next_room, next_door);
+
 		door->object_name = child->name();
 
 		CreateObject(door, *child);
@@ -175,13 +185,30 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 
 	for (pugi::xml_node_iterator child = npcs.begin(); child != npcs.end(); child++) {
 		NonPlayer* npc = new NonPlayer(child->name());
-		CreateObject(npc, *child);
+
+		float sizeX = child->attribute("sizeX").as_float();
+		float sizeY = child->attribute("sizeY").as_float();
+		float posX = child->attribute("posX").as_float();
+		float posY = child->attribute("posY").as_float();
+		npc->SetSize(sizeX, -sizeY);
+		npc->SetPosition(glm::vec3(posX, posY, 1.0));
+		npc->SetCollder(new Collider(npc));
 
 		if (child->child("item")) {
 			Item* item = new Item(child->child("item").attribute("name").as_string());
 			item->SetInventoryTexture(child->child("item").attribute("i_texture").as_string());
 			item->SetViewTexture(child->child("item").attribute("v_texture").as_string());
 			npc->SetItem(item);
+		}
+
+		npc->InitAnimator();
+		pugi::xml_node animaions = child->child("Animations");
+		for (pugi::xml_node_iterator anim = animaions.begin(); anim != animaions.end(); anim++) {
+			npc->anim->AddAnimation(anim->name(), 
+									anim->attribute("texture").as_string(), 
+									anim->attribute("frame").as_int(), 
+									anim->attribute("time_per_frame").as_float(), 
+									anim->attribute("loop").as_bool());
 		}
 
 		//std::vector<Dialogue> dialogues;
@@ -290,17 +317,18 @@ void XMLManager::LoadFromSave(std::string filename) {
 			}
 			item = item.next_sibling();
 		}
+
 		// load infoPhone
 		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
-			phone->AddPage(NOTE, itr->attribute("name").as_string());
+			phone->SetPage(NOTE, itr->attribute("name").as_string());
 		}
 
 		for (pugi::xml_node_iterator itr = phoneNode.child("Chats").begin(); itr != phoneNode.child("Chats").end(); itr++) {
 			std::string name = itr->attribute("name").as_string();
-			phone->AddPage(CHAT, name);
+			phone->SetPage(CHAT, name);
 			phone->chats[name].currentMsgIndex = itr->attribute("msgNo").as_int();
 		}
 	}
@@ -375,8 +403,6 @@ void XMLManager::SaveGame(std::string filename) {
 
 	// save infoPhone
 	Phone* phone = Phone::GetInstance();
-	saveLevel.child("Phone").child("Notes").append_attribute("noti").set_value(phone->notiNote);
-	saveLevel.child("Phone").child("Chats").append_attribute("noti").set_value(phone->notiChat);
 	int noteSize = (int)phone->app->notes.size();
 	int chatSize = (int)phone->app->chats.size();
 

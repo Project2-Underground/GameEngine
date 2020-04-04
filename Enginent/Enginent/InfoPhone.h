@@ -6,11 +6,14 @@
 constexpr auto SCROLL_SPEED = 20;
 
 constexpr auto TEXT_SPACE = 30;
-constexpr auto TEXT_TOP_Y = 180.0f;
-constexpr auto TEXT_BOTTOM_Y = -250.0f;
-constexpr auto TEXT_START_X = -150.0f;
+constexpr auto TAB_SPACE = 80;
+constexpr auto TAB_SIZE_X = 200.0f;
+constexpr auto TAB_TEXT_PADDING = 20.0f;
+constexpr auto TEXT_TOP_Y = 150.0f;
+constexpr auto TEXT_BOTTOM_Y = -150.0f;
+constexpr auto TEXT_START_X = -250.0f;
 constexpr auto FONT_SIZE = 24;
-constexpr auto MAX_FONT_PER_LINE = 29;
+constexpr auto MAX_FONT_PER_LINE = 87;
 
 enum AppType {
 	NOTE = 0,
@@ -20,6 +23,7 @@ enum AppType {
 struct Note {
 	std::string name;
 	unsigned int texture;
+	bool noti = true;
 	Note(std::string n, unsigned int text);
 };
 
@@ -30,6 +34,7 @@ struct ChatInfo {
 	std::vector<glm::vec3> textPosition;
 	std::vector<int> lineCounts;
 	int currentMsgIndex = 0;
+	bool noti = true;
 
 	void AddText(std::string);
 };
@@ -60,29 +65,42 @@ public:
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
 	void Scroll(int direction);
-	void Next();
 	void Back();
 	void AddNote(UIObject*);
 	void AddChat(ChatInfo*);
+	void SetNote(UIObject*);
+	void SetChat(ChatInfo*);
 	void OpenChat();
+	void OpenNote();
+	void SelectItem(int);
 	void Clear();
+	bool Unread(AppType);
+
+	void Open(AppType);
+	void Close();
 
 	bool open;
+	bool openNoteChat;
 	AppType currentAppType;
 	int currentPage;
 
+	std::vector<ChatNoteInfoButton*> itemTabs;
 	std::vector<Note*> notes;
 	std::vector<ChatInfo*> chats;
 	std::vector<UIObject*> buttons;
 
 	~Application();
 private:
+	UIObject* notifyPopup;
 	Chat* currentChat;
 	UIObject* currentNote;
 	UIObject* appBG;
-	PhoneNextButton* next;
+	// PhoneNextButton* next;
 	PhoneBackButton* back;
 	PhoneHomeButton* home;
+
+	float upperBound;
+	float lowerBound;
 };
 
 class Phone{
@@ -97,8 +115,7 @@ public:
 	void OpenApp(AppType);
 	void CloseApp();
 	void AddPage(AppType, std::string);
-	void SetNotification(AppType);
-	void ResetNotification(AppType);
+	void SetPage(AppType, std::string);
 	void Message(std::string, int);
 	void Open();
 	void Close();
@@ -118,6 +135,7 @@ public:
 private:
 	Phone();
 	std::vector<UIObject*> icons;
+	UIObject* notifyPopup;
 
 	UIObject* phone;
 	PhoneAppsButton* noteIcon;
