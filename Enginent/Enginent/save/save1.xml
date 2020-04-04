@@ -4,7 +4,7 @@
 		<BackDoorRoom_FlowerClue />
 		<BackDoorRoom_Computer />
 		<Closet open="true" has_item="false" />
-		<Table open="false" has_item="false" />
+		<Table open="true" has_item="false" />
 		<Calendar />
 		<bed />
 		<EmmaRoom_Book />
@@ -23,7 +23,7 @@
 	<doors>
 		<BackDoorRoom_Foreground_Door used="true" />
 		<BackDoorRoom_BasementDoor used="true" />
-		<BackDoorRoom_EmmaDoor used="false" />
+		<BackDoorRoom_EmmaDoor used="true" />
 		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
@@ -38,7 +38,7 @@
 	<puzzles>
 		<BookshelfPuzzle done="true" />
 	</puzzles>
-	<Player posX="553.513123" posY="-50">
+	<Player posX="555.770569" posY="-50">
 		<inventory>
 			<item />
 			<item />
@@ -52,10 +52,7 @@
 		</inventory>
 	</Player>
 	<Phone>
-		<Notes>
-			<n name="tmp_note1" />
-			<n name="tmp_note2" />
-		</Notes>
+		<Notes />
 		<Chats>
 			<c name="another_person_name" msgNo="4" />
 			<c name="person_name" msgNo="11" />

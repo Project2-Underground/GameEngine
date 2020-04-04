@@ -192,10 +192,10 @@ NumpadPuzzle::NumpadPuzzle()
 	images.push_back(space);
 
 	int* c = new int[4];
-	c[0] = 1;
-	c[1] = 1;
-	c[2] = 1;
-	c[3] = 1;
+	c[0] = 2;
+	c[1] = 0;
+	c[2] = 4;
+	c[3] = 6;
 	std::vector<int>* input = new std::vector<int>();
 
 	NumberButton* n1 = new NumberButton("Texture/Puzzle2/button1.png", "Texture/Puzzle2/button1press.png", 1, -126, 118, 118, -118, input);
