@@ -46,7 +46,7 @@ class Game
 	void SaveGame(std::string);
 	void LoadGame(std::string);
 
-	std::thread* loadingThread;
+	std::thread loadingThread;
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -75,6 +75,5 @@ public:
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
 
-	void LoadingGame();
 	bool isLoading;
 };

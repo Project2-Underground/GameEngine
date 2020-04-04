@@ -12,12 +12,12 @@ Inventory::Inventory() {
 	float height = (float)Game::GetInstance()->winHeight;
 
 	tab = new UIObject();
-	tab->SetSize(width, -height * 0.5f);
-	minHeight = -height * 0.5f - tab->getSize().y * -0.5f;
-	maxHeight = minHeight + tab->getSize().y * -0.3f;
+	tab->SetSize(width, -156.3f);
+	minHeight = -height * 0.5f - (-tab->getSize().y * 0.5f);
+	maxHeight = minHeight + -tab->getSize().y;
 
 	tab->SetPosition(glm::vec3(0.0f, minHeight, 1.0f));
-	tab->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
+	tab->SetTexture("Texture/UI/Inventory/Item_scoll.png");
 
 	popArea = new Collider(tab);
 	popArea->setNewSize(glm::vec3(tab->getSize().x, tab->getSize().y * 1.25f, 1.0f));
@@ -26,12 +26,11 @@ Inventory::Inventory() {
 	float space = width / (float)INVENTORY_SIZE;
 	float x = space * 0.5f - width * 0.5f;
 	float y = tab->getPos().y + tab->getSize().y * -0.35f;
-	boxOffset = tab->getPos().y - y;
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
 		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_texture/tmp_inventoryBox.png");
 		tmpObj->SetPressTexture("Texture/tmp_texture/tmp_inventoryBoxSelected.png");
-		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y - boxOffset, 1.0f));
+		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
 		tmpObj->SetCollder(new Collider(tmpObj));
 		tmpObj->SetAllPosition(tmpObj->getPos());
@@ -78,7 +77,7 @@ void Inventory::Update() {
 			float vel = POPUP_SPEED * (float)direction;
 			tab->SetPosition(glm::vec3(tab->getPos().x, tab->getPos().y + vel, 1.0f));
 		}
-		SetAllBoxesPos(tab->getPos().y - boxOffset);
+		SetAllBoxesPos(tab->getPos().y);
 		popArea->setNewPos(glm::vec3(popArea->getPosition().x, tab->getPos().y, 1.0f));
 	}
 	for (auto ib : InventoryBoxes)

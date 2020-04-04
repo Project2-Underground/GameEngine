@@ -15,7 +15,7 @@ void Screen::CloseGameAllWindow() {
 }
 
 /*MAIN MENU*/
-MenuScreen::MenuScreen() {
+void MenuScreen::Init(bool& isLoading) {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->SetSize(248, -70);
 	play->SetPosition(glm::vec3(-270, 170, 1));
@@ -24,7 +24,7 @@ MenuScreen::MenuScreen() {
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
 	load->SetSize(213, -74);
-	load->SetPosition(glm::vec3(-270, 20, 1));
+	load->SetPosition(glm::vec3(-270, 90, 1));
 	load->SetCollder(new Collider(load));
 
 	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
@@ -57,6 +57,7 @@ MenuScreen::MenuScreen() {
 	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	SoundManager::GetInstance()->playSound(BGM, "MainScreen", true);
+	isLoading = false;
 }
 
 void MenuScreen::Render() {
@@ -132,7 +133,9 @@ MenuScreen::~MenuScreen() {
 GameScreen::GameScreen() {
 	InventoryEnable = true;
 	PuzzleTime = false;
+}
 
+void GameScreen::Init(bool& isLoading) {
 	// filepath of levels
 	levels.push_back("save/level1.xml");
 	//levels.push_back("save/level2.xml");
@@ -179,6 +182,7 @@ GameScreen::GameScreen() {
 	windows.push_back(SaveLoadWindow::GetInstance());
 	//windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(PauseWindow::GetInstance());
+	isLoading = false;
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -390,6 +394,11 @@ GameScreen::~GameScreen() {
 /*CUTSCENE*/
 CutsceneScreen::CutsceneScreen() {
 
+}
+
+void CutsceneScreen::Init(bool& isLoading) {
+
+	isLoading = false;
 }
 
 void CutsceneScreen::Render() {

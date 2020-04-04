@@ -59,28 +59,45 @@ void Game::Update()
 		UpdateScreenState();
 		changeScreen = false;
 	}
-	currentScreen->Update();
-	cursorGame->updateCursor();
+	if (!isLoading) {
+		if (loadingThread.joinable()) {
+			loadingThread.join();
+		}
+		currentScreen->Update();
+		cursorGame->updateCursor();
+	}
+	else {
+		//loadingScreen->Update();
+	}
 }
 
 void Game::Render()
 {
-	currentScreen->Render();
-	GetRenderer()->Render(cursorGame);
+	if (!isLoading) {
+		currentScreen->Render();
+		GetRenderer()->Render(cursorGame);
+	}
+	else {
+		GetRenderer()->Render(loadingScreen);
+	}
 }
 
 void Game::UpdateScreenState() {
 	delete currentScreen;
+	isLoading = true;
 	switch (currentState)
 	{
 	case MENUSCREEN:
 		currentScreen = new MenuScreen();
+		loadingThread = std::thread(&MenuScreen::Init, (MenuScreen*)currentScreen, std::ref(isLoading));
 		break;
 	case GAMESCREEN:
 		currentScreen = new GameScreen();
+		//loadingThread = std::thread(&GameScreen::Init, (GameScreen*)currentScreen, std::ref(isLoading));
 		break;
 	case CUTSCENE:
 		currentScreen = new CutsceneScreen();
+		//loadingThread = std::thread(&CutsceneScreen::Init, currentScreen, std::ref(isLoading));
 		break;
 	case ENDSCENE:
 		break;
@@ -100,7 +117,8 @@ void Game::UpdateScreenState() {
 //}
 
 void Game::HandleKey(SDL_Keycode key) {
-	currentScreen->HandleKey(key);
+	if(!isLoading)
+		currentScreen->HandleKey(key);
 }
 
 //void Game::UpdateMouseState(int x, int y) {
@@ -124,7 +142,6 @@ Game::Game()
 	currentState = MENUSCREEN;
 	changeScreen = false;
 	renderer = nullptr;
-	loadingThread = nullptr;
 }
 
 Game::~Game()

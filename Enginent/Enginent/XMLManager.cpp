@@ -137,6 +137,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
 
+		if(child->child("ForeGround"))
+			r->foreground.push_back(interactObj);
 		r->objects.push_back(interactObj);
 	}
 }
