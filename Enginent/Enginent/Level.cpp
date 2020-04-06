@@ -112,7 +112,7 @@ DrawableObject* Room::FindObject(std::string name) {
 
 Level::Level(std::string filename) {
 	XMLManager* lg = XMLManager::GetInstance();
-	lg->GenerateRoom(filename, rooms, Game::GetInstance()->isLoading);
+	lg->GenerateRoom(filename, rooms);
 	levelNo = lg->GetLevelNumber(filename);
 
 	// assign first room as current room

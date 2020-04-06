@@ -28,7 +28,7 @@ std::string XMLManager::GetFirstRoomName() {
 	return doc.child("level").attribute("Start").as_string();
 }
 
-void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms, bool& isLoading) {
+void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>& rooms) {
 	if (LoadFile(filename)) {
 		pugi::xml_node xmlRooms = doc.child("level");
 
@@ -58,7 +58,6 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
 		}
 	}
-	isLoading = false;
 }
 
 void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {

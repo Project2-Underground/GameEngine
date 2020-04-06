@@ -43,10 +43,9 @@ void MouseInput::FindMousePosition(float x, float y)
 
 void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY, int direction)
 {
-	if (!Game::GetInstance()->isLoading) {
-		FindMousePosition((float)posX, (float)posY);
-		switch (type)
-		{
+	FindMousePosition((float)posX, (float)posY);
+	switch (type)
+	{
 		case RightClick:
 		{
 			game->GetScreen()->RightClick(position_Screen, position_World);
@@ -78,6 +77,6 @@ void MouseInput::UpdateMouseInput(MouseEvent type, int posX, int posY, int direc
 			game->GetScreen()->Scroll(position_Screen, direction);
 			break;
 		}
-		}
 	}
+	
 }

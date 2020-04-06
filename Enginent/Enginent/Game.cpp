@@ -3,7 +3,7 @@
 #include "TriangleMeshVbo.h"
 #include "InfoPhone.h"
 #include "Item.h"
-#include "ImageObject.h"
+#include "UIObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
 
@@ -46,58 +46,56 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
+	// test static loading image
+	loadingImage = new UIObject();
+	loadingImage->SetSize((float)width, -(float)height);
+	loadingImage->SetTexture("Texture/tmp_texture/loading.png");
+
 	currentState = MENUSCREEN;
 	cursorGame = new CursorUI();
 	UpdateScreenState();
-	loadingScreen = new LoadingScreen();
-	loadingScreen->Init();
 }
 
 void Game::Update()
 {
-	if (changeScreen) {
-		UpdateScreenState();
+	if (changeScreen && !isLoading) {
 		changeScreen = false;
+		UpdateScreenState();
 	}
-	if (!isLoading) {
-		if (loadingThread.joinable()) {
-			loadingThread.join();
-		}
-		currentScreen->Update();
-		cursorGame->updateCursor();
+	else if (loadGame && !isLoading) {
+		loadGame = false;
+		SaveLoad(filename);
 	}
-	else {
-		//loadingScreen->Update();
+	else if (loadLevel && !isLoading) {
+		loadLevel = false;
+		((GameScreen*)currentScreen)->ChangeLevel(nextLvl);
 	}
+	currentScreen->Update();
+	cursorGame->updateCursor();
 }
 
 void Game::Render()
 {
-	if (!isLoading) {
-		currentScreen->Render();
-		GetRenderer()->Render(cursorGame);
-	}
-	else {
-		GetRenderer()->Render(loadingScreen);
+	currentScreen->Render();
+	GetRenderer()->Render(cursorGame);
+	if (isLoading) {
+		renderer->Render(loadingImage);
+		isLoading = false;
 	}
 }
 
 void Game::UpdateScreenState() {
 	delete currentScreen;
-	isLoading = true;
 	switch (currentState)
 	{
 	case MENUSCREEN:
 		currentScreen = new MenuScreen();
-		loadingThread = std::thread(&MenuScreen::Init, (MenuScreen*)currentScreen, std::ref(isLoading));
 		break;
 	case GAMESCREEN:
 		currentScreen = new GameScreen();
-		//loadingThread = std::thread(&GameScreen::Init, (GameScreen*)currentScreen, std::ref(isLoading));
 		break;
 	case CUTSCENE:
 		currentScreen = new CutsceneScreen();
-		//loadingThread = std::thread(&CutsceneScreen::Init, currentScreen, std::ref(isLoading));
 		break;
 	case ENDSCENE:
 		break;
@@ -117,8 +115,7 @@ void Game::UpdateScreenState() {
 //}
 
 void Game::HandleKey(SDL_Keycode key) {
-	if(!isLoading)
-		currentScreen->HandleKey(key);
+	currentScreen->HandleKey(key);
 }
 
 //void Game::UpdateMouseState(int x, int y) {
@@ -128,8 +125,9 @@ void Game::HandleKey(SDL_Keycode key) {
 //}
 
 void Game::ChangeScreenState(ScreenState newState) {
-	currentState = newState;
 	changeScreen = true;
+	isLoading = true;
+	currentState = newState;
 }
 
 int Game::GetScreenState()
@@ -151,7 +149,6 @@ Game::~Game()
 	delete renderer;
 	delete currentScreen;
 	delete cursorGame;
-	delete loadingScreen;
 }
 
 glm::vec3 Game::FindMousePosition(int x, int y)
@@ -175,7 +172,7 @@ void Game::SaveLoad(std::string filename) {
 	if (save) 
 		SaveGame(filename);
 	else {
-		if(!dynamic_cast<GameScreen*>(currentScreen)){
+		if (!dynamic_cast<GameScreen*>(currentScreen)) {
 			currentState = GAMESCREEN;
 			UpdateScreenState();
 		}

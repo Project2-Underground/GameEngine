@@ -15,7 +15,7 @@ void Screen::CloseGameAllWindow() {
 }
 
 /*MAIN MENU*/
-void MenuScreen::Init(bool& isLoading) {
+MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->SetSize(248, -70);
 	play->SetPosition(glm::vec3(-270, 170, 1));
@@ -57,7 +57,6 @@ void MenuScreen::Init(bool& isLoading) {
 	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	SoundManager::GetInstance()->playSound(BGM, "MainScreen", true);
-	isLoading = false;
 }
 
 void MenuScreen::Render() {
@@ -133,9 +132,6 @@ MenuScreen::~MenuScreen() {
 GameScreen::GameScreen() {
 	InventoryEnable = true;
 	PuzzleTime = false;
-}
-
-void GameScreen::Init(bool& isLoading) {
 	// filepath of levels
 	levels.push_back("save/level1.xml");
 	//levels.push_back("save/level2.xml");
@@ -153,8 +149,6 @@ void GameScreen::Init(bool& isLoading) {
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-
-	Game* g = Game::GetInstance();
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
@@ -182,7 +176,6 @@ void GameScreen::Init(bool& isLoading) {
 	windows.push_back(SaveLoadWindow::GetInstance());
 	//windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(PauseWindow::GetInstance());
-	isLoading = false;
 }
 
 void GameScreen::LoadGame(std::string filename) {
@@ -304,7 +297,7 @@ void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
-	currentLevel = new Level(levels[0]);
+	currentLevel = new Level(levels[level]);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
@@ -394,11 +387,6 @@ GameScreen::~GameScreen() {
 /*CUTSCENE*/
 CutsceneScreen::CutsceneScreen() {
 
-}
-
-void CutsceneScreen::Init(bool& isLoading) {
-
-	isLoading = false;
 }
 
 void CutsceneScreen::Render() {

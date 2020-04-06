@@ -17,7 +17,7 @@ public:
 	static XMLManager* GetInstance();
 
 	// doc
-	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms, bool &isLoading);
+	void GenerateRoom(std::string, std::map<std::string, Room*>& rooms);
 	void GenerateImage(pugi::xml_node, Room*, std::string);
 	void GenerateInteractObj(pugi::xml_node, Room*);
 	void GenerateDoor(pugi::xml_node, Room*);

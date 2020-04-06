@@ -96,8 +96,3 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 		}
 	}
 }
-
-void LoadingScreen::Init() {
-	anim = new Animator();
-	anim->AddAnimation("loading", "texture", 3, 0.5f, true);
-}

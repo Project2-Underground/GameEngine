@@ -26,7 +26,6 @@ protected:
 public:
 	bool buttonClicked;
 	bool Pause;
-	virtual void Init(bool &b) = 0;
 	virtual void Render() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
@@ -49,7 +48,7 @@ class MenuScreen :public Screen {
 	UIObject* background;
 	std::vector<UIObject*> UI;
 public:
-	void Init(bool& b);
+	MenuScreen();
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -83,7 +82,6 @@ public:
 	map<std::string, Puzzle*> puzzles;
 
 	GameScreen();
-	void Init(bool& b);
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -111,7 +109,6 @@ public:
 class CutsceneScreen :public Screen {
 public:
 	CutsceneScreen();
-	void Init(bool& b);
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
