@@ -124,7 +124,7 @@ void ClosePuzzleButton::action() {
 
 void SaveLoadGameButton::action() {
 	SoundManager::GetInstance()->stopAllSounds();
-	Game::GetInstance()->SaveLoad(filename);
+	Game::GetInstance()->TriggerLoadGame(filename);
 }
 
 void OpenPauseWindowButton::action() {

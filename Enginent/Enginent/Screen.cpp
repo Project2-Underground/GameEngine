@@ -24,7 +24,7 @@ MenuScreen::MenuScreen() {
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
 	load->SetSize(213, -74);
-	load->SetPosition(glm::vec3(-270, 20, 1));
+	load->SetPosition(glm::vec3(-270, 90, 1));
 	load->SetCollder(new Collider(load));
 
 	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
@@ -132,7 +132,6 @@ MenuScreen::~MenuScreen() {
 GameScreen::GameScreen() {
 	InventoryEnable = true;
 	PuzzleTime = false;
-
 	// filepath of levels
 	levels.push_back("save/level1.xml");
 	//levels.push_back("save/level2.xml");
@@ -150,8 +149,6 @@ GameScreen::GameScreen() {
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-
-	Game* g = Game::GetInstance();
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
@@ -300,7 +297,7 @@ void GameScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
-	currentLevel = new Level(levels[0]);
+	currentLevel = new Level(levels[level]);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {

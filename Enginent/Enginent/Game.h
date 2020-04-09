@@ -4,7 +4,7 @@
 #include <thread>
 
 #include "Player.h"
-#include "DrawableObject.h"
+#include "UIObject.h"
 #include "GLRenderer.h"
 #include "Collider.h"
 #include "Camera.h"
@@ -37,16 +37,20 @@ class Game
 	CursorUI* cursorGame;
 	ScriptManager* script;
 	SoundManager* sound;
-	LoadingScreen* loadingScreen;
 
-	bool quit = false;
+	bool quit;
 	bool changeScreen;
 	bool save;
+	bool isLoading;
+	bool loadGame;
+	bool loadLevel;
 
 	void SaveGame(std::string);
 	void LoadGame(std::string);
 
-	std::thread* loadingThread;
+	int nextLvl;
+	std::string filename;
+	UIObject* loadingImage;
 public:
 	int winWidth, winHeight;
 	~Game();
@@ -68,13 +72,12 @@ public:
 	void quitGame() { quit = true; };
 	bool getQuitState() { return quit; };
 
+	void TriggerChangeLevel(int level) { nextLvl = level; loadLevel = true; isLoading = true; }
+	void TriggerLoadGame(std::string file) { filename = file; loadGame = true; isLoading = true; }
 	void SetSaveGame(bool b) { save = b; }
 	void SaveLoad(std::string);
 
 	Level* GetCurrentLevel();
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
-
-	void LoadingGame();
-	bool isLoading;
 };

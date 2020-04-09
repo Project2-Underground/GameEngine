@@ -3,7 +3,7 @@
 #include "TriangleMeshVbo.h"
 #include "InfoPhone.h"
 #include "Item.h"
-#include "ImageObject.h"
+#include "UIObject.h"
 #include "TextObject.h"
 #include "InteractObj.h"
 
@@ -46,18 +46,29 @@ void Game::Init(int width, int height)
 	triangle->LoadData();
 	renderer->AddMesh(TriangleMeshVbo::MESH_NAME, triangle);
 
+	// test static loading image
+	loadingImage = new UIObject();
+	loadingImage->SetSize((float)width, -(float)height);
+	loadingImage->SetTexture("Texture/tmp_texture/loading.png");
+
 	currentState = MENUSCREEN;
 	cursorGame = new CursorUI();
 	UpdateScreenState();
-	loadingScreen = new LoadingScreen();
-	loadingScreen->Init();
 }
 
 void Game::Update()
 {
-	if (changeScreen) {
-		UpdateScreenState();
+	if (changeScreen && !isLoading) {
 		changeScreen = false;
+		UpdateScreenState();
+	}
+	else if (loadGame && !isLoading) {
+		loadGame = false;
+		SaveLoad(filename);
+	}
+	else if (loadLevel && !isLoading) {
+		loadLevel = false;
+		((GameScreen*)currentScreen)->ChangeLevel(nextLvl);
 	}
 	currentScreen->Update();
 	cursorGame->updateCursor();
@@ -67,6 +78,10 @@ void Game::Render()
 {
 	currentScreen->Render();
 	GetRenderer()->Render(cursorGame);
+	if (isLoading) {
+		renderer->Render(loadingImage);
+		isLoading = false;
+	}
 }
 
 void Game::UpdateScreenState() {
@@ -110,8 +125,9 @@ void Game::HandleKey(SDL_Keycode key) {
 //}
 
 void Game::ChangeScreenState(ScreenState newState) {
-	currentState = newState;
 	changeScreen = true;
+	isLoading = true;
+	currentState = newState;
 }
 
 int Game::GetScreenState()
@@ -124,7 +140,6 @@ Game::Game()
 	currentState = MENUSCREEN;
 	changeScreen = false;
 	renderer = nullptr;
-	loadingThread = nullptr;
 }
 
 Game::~Game()
@@ -134,7 +149,6 @@ Game::~Game()
 	delete renderer;
 	delete currentScreen;
 	delete cursorGame;
-	delete loadingScreen;
 }
 
 glm::vec3 Game::FindMousePosition(int x, int y)
@@ -158,7 +172,7 @@ void Game::SaveLoad(std::string filename) {
 	if (save) 
 		SaveGame(filename);
 	else {
-		if(!dynamic_cast<GameScreen*>(currentScreen)){
+		if (!dynamic_cast<GameScreen*>(currentScreen)) {
 			currentState = GAMESCREEN;
 			UpdateScreenState();
 		}

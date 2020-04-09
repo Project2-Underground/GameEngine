@@ -9,8 +9,8 @@ void Room::Render() {
 	// render objects
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(objects, true);
-	renderer->Render(Game::GetInstance()->GetPlayer());
 	renderer->Render(npcs, false);
+	renderer->Render(Game::GetInstance()->GetPlayer());
 	renderer->Render(foreground, false);
 }
 
@@ -112,7 +112,7 @@ DrawableObject* Room::FindObject(std::string name) {
 
 Level::Level(std::string filename) {
 	XMLManager* lg = XMLManager::GetInstance();
-	lg->GenerateRoom(filename, rooms, Game::GetInstance()->isLoading);
+	lg->GenerateRoom(filename, rooms);
 	levelNo = lg->GetLevelNumber(filename);
 
 	// assign first room as current room
