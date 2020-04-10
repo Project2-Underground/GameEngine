@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <c>
-	<choices key = "gimmeBook">
-		<choice text = "This red book." nextDialogue = "too far"/>
-		<choice text = "That blue book." nextDialogue = "bed"/>
-		<choice text = "I don't want." nextDialogue = ""/>
+	<choices key = "Hubert1">
+		<choice text = "What about everyone else?" nextDialogue = "Hubert1_A"/>
+		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
+	</choices>
+	<choices key = "Hubert2">
+		<choice text = "What about everyone else?" nextDialogue = "Hubert1_A"/>
+		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
+		<choice text = "Can you remember any order of the books?" nextDialogue = "Hubert1_C"/>
 	</choices>
 </c>

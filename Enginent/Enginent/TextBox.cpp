@@ -34,16 +34,19 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key)
 {
-	Dialogue tmp = scriptManager->GetDialogue(key);
-	if (tmp.dialogue.size() != 0)
+	if (key != "")
 	{
-		display = true;
-		d_text = tmp;
-		d_index = 0;
-		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
-		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
-		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
-		Game::GetInstance()->GetCursor()->enableChange(false);
+		Dialogue tmp = scriptManager->GetDialogue(key);
+		if (tmp.dialogue.size() != 0)
+		{
+			display = true;
+			d_text = tmp;
+			d_index = 0;
+			name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
+			dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
+			dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+			Game::GetInstance()->GetCursor()->enableChange(false);
+		}
 	}
 }
 

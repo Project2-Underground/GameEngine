@@ -23,17 +23,32 @@ struct s_Dialogue
 	std::string name;
 	std::string text;
 	std::string chatName;
+	std::string noteName;
 	int chatIndex;
 	Item* item;
-	s_Dialogue(std::string n, std::string d, Item* item, std::string chatName, int chatIndex);
+	s_Dialogue(std::string n, std::string d, Item* item, std::string chatName, int chatIndex, std::string note);
 	s_Dialogue();
 };
 
 struct Dialogue {
 	std::vector<s_Dialogue> dialogue;
+	std::vector<std::string>* nameObj_On;
+	std::vector<std::string>* nameObj_Off;
 	std::string choice;
 	Dialogue() {
 		choice = "";
+		nameObj_Off = nullptr;
+		nameObj_On = nullptr;
+	}
+	~Dialogue() {
+		if (nameObj_Off != nullptr)
+		{
+			delete nameObj_Off;
+		}
+		if (nameObj_On != nullptr)
+		{
+			delete nameObj_On;
+		}
 	}
 };
 

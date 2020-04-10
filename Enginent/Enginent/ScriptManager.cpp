@@ -1,12 +1,13 @@
 #include "ScriptManager.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i, std::string chatName, int chatIndex)
+s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i, std::string chatName, int chatIndex, std::string note)
 {
 	name = n;
 	text = d;
 	item = i;
 	this->chatName = chatName;
 	this->chatIndex = chatIndex;
+	this->noteName = note;
 }
 
 s_Dialogue::s_Dialogue()
@@ -60,15 +61,15 @@ void ScriptManager::LoadScript()
 			{
 				d.choice = "";
 			}
-
 			pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
-			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			for (pugi::xml_node_iterator dialogue = dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
 			{
 				std::string name = dialogue->attribute("name").as_string();
 				std::string text = dialogue->attribute("text").as_string();
 				Item* item = nullptr;
 				int chatIndex = -1;
 				std::string chatName = "";
+				std::string noteName = "";
 				if (dialogue->child("item"))
 				{
 					//create item
@@ -82,8 +83,24 @@ void ScriptManager::LoadScript()
 					chatName = dialogue->child("chat").attribute("name").as_string();
 					chatIndex = dialogue->child("chat").attribute("index").as_int();
 				}
-				s_Dialogue tmp(name, text, item, chatName, chatIndex);
+				if (dialogue->child("note"))
+				{
+					//save chat info
+					noteName = dialogue->child("note").attribute("name").as_string();
+				}
+				s_Dialogue tmp(name, text, item, chatName, chatIndex, noteName);
 				d.dialogue.push_back(tmp);
+			}
+
+			//on obj
+			pugi::xml_node e_Obj = (s_dialogue)->child("enable");
+			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			{
+			}
+			//off obj
+			pugi::xml_node d_Obj = (s_dialogue)->child("disable");
+			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			{
 			}
 			s->script.push_back(d);
 		}

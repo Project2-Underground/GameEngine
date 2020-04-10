@@ -135,6 +135,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
+		interactObj->SetDialogueName(child->attribute("dialogue").as_string());
 
 		if(child->child("ForeGround"))
 			r->foreground.push_back(interactObj);
@@ -172,6 +173,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
+		door->SetDialogueName(child->attribute("dialogue").as_string());
 
 		if (child->attribute("stair"))
 			door->SetInteractType(STAIR);
@@ -212,21 +214,10 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 									anim->attribute("loop").as_bool());
 		}
 
-		//std::vector<Dialogue> dialogues;
-		//pugi::xml_node_iterator n;
-
-		//if (pugi::xml_node dialogue = child->child("dialogue")) {
-		//	for (pugi::xml_node_iterator d = dialogue.begin(); d != dialogue.end(); d++) {
-		//		n = d;
-		//		d++;
-		//		dialogues.push_back(Dialogue(n->child_value(), d->child_value()));
-		//	}
-		//}
-
-		//npc->SetDialogue(dialogues);
 		npc->SetCollder(new Collider(npc));
 		npc->layer = NPC_LAYER;
 		npc->subLayer = child->attribute("layer").as_int();
+		npc->SetDialogueName(child->attribute("dialogue").as_string());
 
 		r->npcs.push_back(npc);
 	}

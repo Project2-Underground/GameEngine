@@ -33,6 +33,7 @@ protected:
 	bool takePic;
 	std::string picName;
 	std::string item_to_use;
+	std::string dialogue_name;
 	Item* item;
 	std::vector<std::map<std::string, std::string>> dialogueTriggers;
 	bool actionTriggerDialogue;
@@ -46,6 +47,7 @@ public:
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
+	void SetDialogueName(std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }

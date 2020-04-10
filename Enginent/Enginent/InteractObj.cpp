@@ -23,8 +23,13 @@ void InteractableObj::TakePic() {
 	}
 }
 
+void InteractableObj::SetDialogueName(std::string n)
+{
+	this->dialogue_name = n;
+}
+
 void InteractableObj::action() {
-	TextBox::GetInstance()->setText(this->object_name);
+	TextBox::GetInstance()->setText(this->dialogue_name);
 	TextBox::GetInstance()->SetDisplay(true);
 	if (actionTriggerDialogue) {
 		actionTriggerDialogue = false;
@@ -142,7 +147,7 @@ void OpenObj::action() {
 
 void OpenObj::Open() {
 	open = true;
-	TextBox::GetInstance()->setText(this->object_name);
+	TextBox::GetInstance()->setText(this->dialogue_name);
 	SetTexture(openTexture);
 	if (item)interactType = PICKUP;
 	else interactType = NORMAL;
@@ -165,8 +170,8 @@ void ViewObj::SetViewTexture(std::string view) {
 
 void ViewObj::action() {
 	ViewWindow* vw = ViewWindow::GetInstance();
-
 	vw->Open();
+	TextBox::GetInstance()->setText(this->dialogue_name);
 	vw->SetViewItem(viewTexture);
 	TakePic();
 	// set description
