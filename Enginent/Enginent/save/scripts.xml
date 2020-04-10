@@ -11,7 +11,7 @@
 			<Dialogue name = "Elias" text = "It's too far away."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_start" loopIndex = "0">
+	<script key = "EliasRoom" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "Hm... feeling a bit dizzy"/>
 			<Dialogue name = "??" text = "Am I... drunk?"/>
@@ -22,12 +22,12 @@
 			<Dialogue name = "(System)" text = " Right click to walk. Left click to interact with objects"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_bed1" loopIndex = "0">
+	<script key = "bed" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "The bed looks like a luandry basket. I need to clean it up sometimes"/>
 		</sub>
 	</script>	
-	<script key = "EliasRoom_carbinet1" loopIndex = "0">
+	<script key = "Table" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "1 Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
 		</sub>
@@ -37,7 +37,7 @@
 			<Dialogue name = "??" text = "I feel like throwing up just looking into the trash can."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_calendar" loopIndex = "-1">
+	<script key = "Calendar" loopIndex = "-1">
 		<sub>
 			<Dialogue name = "??" text = "It's almost time to go back to study."/>
 		</sub>
@@ -48,7 +48,7 @@
 			<Dialogue name = "??" text = "Should I go drink with them again on the 18th?"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_door" loopIndex = "1">
+	<script key = "EliasRoomInnerDoor" loopIndex = "1">
 		<sub>
 			<Dialogue name = "??" text = "It's time to go outside."/>
 			<Dialogue name = "??" text = "...Hm, It won't budge."/>
@@ -80,7 +80,7 @@ than I thought."/>
 			<Dialogue name = "??" text = "It probably won't be necessary to search in there."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_closet" loopIndex = "0">
+	<script key = "Closet" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "Maybe, it's in one of the jacket."/>
 		</sub>

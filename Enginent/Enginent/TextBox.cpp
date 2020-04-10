@@ -30,7 +30,6 @@ TextBox::TextBox()
 		dialogue->SetPosition(glm::vec3((-450 + (float)((text.size() * 24) / 2)), -180, 1.0f));
 	else
 		dialogue->SetPosition(glm::vec3((-450 + (float)(1000 / 2)), -180.0f, 1.0f));
-	setText("start");
 }
 
 void TextBox::setText(std::string key)

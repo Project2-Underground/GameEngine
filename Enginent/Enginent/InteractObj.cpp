@@ -120,6 +120,7 @@ void OpenObj::action() {
 
 void OpenObj::Open() {
 	open = true;
+	TextBox::GetInstance()->setText(this->object_name);
 	SetTexture(openTexture);
 	if (item)interactType = PICKUP;
 	else interactType = NORMAL;
