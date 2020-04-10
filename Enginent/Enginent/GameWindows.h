@@ -45,7 +45,7 @@ public:
 };
 
 class SaveLoadWindow :public GameWindow {
-	SaveLoadGameButton* save;
+	//SaveLoadGameButton* save;
 	static SaveLoadWindow* instance;
 
 	SaveLoadWindow();
@@ -60,6 +60,8 @@ public:
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
 	void UpdateMouseButton(glm::vec3);
+
+	std::vector<SaveLoadGameButton*> saveButtons;
 };
 
 class PauseWindow: public GameWindow {
@@ -84,7 +86,6 @@ public:
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
 	void UpdateMouseButton(glm::vec3);
-	void CloseSubWindow();
 
 	void Close();
 	void Open();

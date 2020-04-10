@@ -36,7 +36,6 @@ void Game::Init(int width, int height)
 	camera = Camera::GetInstance();
 	sound = SoundManager::GetInstance();
 	script = ScriptManager::GetInstance();
-	XMLManager::GetInstance()->LoadGameOptions();
 
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
@@ -79,7 +78,8 @@ void Game::Render()
 	currentScreen->Render();
 	GetRenderer()->Render(cursorGame);
 	if (isLoading) {
-		renderer->Render(loadingImage);
+		if(!save)
+			renderer->Render(loadingImage);
 		isLoading = false;
 	}
 }

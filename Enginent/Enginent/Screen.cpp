@@ -57,6 +57,7 @@ MenuScreen::MenuScreen() {
 	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	SoundManager::GetInstance()->playSound(BGM, "MainScreen", true);
+	XMLManager::GetInstance()->LoadGameOptions();
 }
 
 void MenuScreen::Render() {

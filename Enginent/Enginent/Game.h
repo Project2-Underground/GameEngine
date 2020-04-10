@@ -76,6 +76,7 @@ public:
 	void TriggerLoadGame(std::string file) { filename = file; loadGame = true; isLoading = true; }
 	void SetSaveGame(bool b) { save = b; }
 	void SaveLoad(std::string);
+	bool GetSaveState() { return save; }
 
 	Level* GetCurrentLevel();
 	Player* GetPlayer();

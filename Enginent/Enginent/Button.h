@@ -135,11 +135,19 @@ public:
 
 class SaveLoadGameButton :public Button {
 	std::string filename;
-	std::string saveLevel;		// text telling player has saved here
+	unsigned int noSaveTexture;
 public:
-	SaveLoadGameButton(std::string texture, std::string f) :Button(texture) { filename = f; }
-	void SetSaveLevel(std::string s) { saveLevel = s; }
+	SaveLoadGameButton(std::string texture, std::string f);
+	void InitSaveLoadButton();
+	void SetSaveLevel(std::string s);
+	void updateButton(float, float);
+	void checkColliderPressed(float x, float y);
 	void action();
+
+	bool hasSaved;
+	TextObject* name;
+	TextObject* details;
+	std::string saveLevel;		// text telling player has saved here
 };
 
 class OpenPauseWindowButton :public Button {

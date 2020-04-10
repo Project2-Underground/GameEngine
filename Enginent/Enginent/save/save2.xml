@@ -38,7 +38,7 @@
 	<puzzles>
 		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="386.984222" posY="-50">
+	<Player posX="379.115662" posY="-50">
 		<inventory>
 			<item />
 			<item />
