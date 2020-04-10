@@ -159,6 +159,13 @@ Level::~Level() {
 	}
 }
 
+void Level::TriggerChangeDialogue(std::string objName, std::string dName) {
+	InteractableObj* obj = dynamic_cast<InteractableObj*>(FindObject(objName));
+	if (obj != nullptr) {
+		// change dialogue of the obj here
+	}
+}
+
 DrawableObject* Level::FindObject(std::string name) {
 	std::map<std::string, Room*>::iterator itr;
 	for (itr = rooms.begin(); itr != rooms.end(); itr++) {

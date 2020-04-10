@@ -56,6 +56,7 @@ public:
 	void LeftClick(float, float);
 
 	void ChangeRoom(std::string roomName, std::string door = " ");
+	void TriggerChangeDialogue(std::string objName, std::string dName);
 
 	std::vector<DrawableObject*>* Getobjects();
 	Room* GetCurrentRoom() { return currentRoom; };

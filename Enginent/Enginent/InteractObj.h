@@ -19,6 +19,12 @@ enum InteractTypeList
 	STAIR
 };
 
+enum DialogueTrigger 
+{
+	ACTION_TRIGGER_DIALOGUE = 0,
+	USE_ITEM_TRIGGER_DIALOGUE
+};
+
 class InteractableObj : public ImageObject {
 protected:
 	InteractTypeList interactType = NORMAL;
@@ -28,6 +34,9 @@ protected:
 	std::string picName;
 	std::string item_to_use;
 	Item* item;
+	std::vector<std::map<std::string, std::string>> dialogueTriggers;
+	bool actionTriggerDialogue;
+	bool useItemTriggerDialogue;
 
 public:
 	InteractableObj();
@@ -46,6 +55,7 @@ public:
 	void TakePic();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
+	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
 
 	InteractTypeList getType() { return interactType; };
 

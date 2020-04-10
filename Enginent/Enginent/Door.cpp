@@ -82,3 +82,7 @@ void EliasDoor::Update() {
 		((GameScreen*)Game::GetInstance()->GetScreen())->ChangeRoom(nextRoom, nextDoor);
 
 }
+
+void ChangeLevelDoor::action() {
+	Game::GetInstance()->TriggerChangeLevel(nextLevel);
+}

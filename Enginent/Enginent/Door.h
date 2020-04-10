@@ -29,3 +29,10 @@ public:
 	void Update(); 
 	void Init();
 };
+
+class ChangeLevelDoor : public Door {
+	int nextLevel;
+public:
+	ChangeLevelDoor(int nextLvl) :Door("", "") { nextLevel = nextLvl; }
+	void action();
+};
