@@ -26,6 +26,12 @@ void InteractableObj::TakePic() {
 void InteractableObj::action() {
 	TextBox::GetInstance()->setText(this->object_name);
 	TextBox::GetInstance()->SetDisplay(true);
+	if (actionTriggerDialogue) {
+		actionTriggerDialogue = false;
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		for (auto obj : dialogueTriggers[ACTION_TRIGGER_DIALOGUE])
+			gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
+	}
 	PickUpItem();
 	TakePic();
 }
@@ -82,7 +88,13 @@ void InteractableObj::PickUpItem() {
 
 		item = nullptr;
 		interactType = NORMAL;
-	}
+		if (useItemTriggerDialogue) {
+			useItemTriggerDialogue = false;
+			actionTriggerDialogue = false;
+			for (auto obj : dialogueTriggers[USE_ITEM_TRIGGER_DIALOGUE])
+				gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
+		}
+	}	
 }
 
 void InteractableObj::SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop) {
@@ -90,6 +102,16 @@ void InteractableObj::SetAnimation(std::string name, std::string texture, int fr
 		anim = new Animator();
 
 	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
+}
+
+
+void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName) {
+	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
+	switch (type)
+	{
+	case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
+	case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
+	}
 }
 
 OpenObj::OpenObj() {
