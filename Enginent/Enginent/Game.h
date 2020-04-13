@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <thread>
 
 #include "Player.h"
 #include "UIObject.h"

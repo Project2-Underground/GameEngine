@@ -64,6 +64,7 @@ class GameScreen :public Screen {
 	vector<UIObject*> UI;
 
 	Player* player;
+	Butler* butler;
 	Phone* phone;
 
 	PhoneOpenButton* phoneIcon;

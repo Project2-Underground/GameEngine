@@ -5,7 +5,7 @@
 
 InventoryBoxButton::InventoryBoxButton(std::string texture) :Button(texture) {
 	item = nullptr;
-	itemDisplay.SetSize(50.0f, -50.0f);
+	itemDisplay.SetSize(100.0f, -100.0f);
 	clickIntervalTime = DOUBLE_CLICK_TIME;
 }
 

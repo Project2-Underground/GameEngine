@@ -16,7 +16,8 @@ enum InteractTypeList
 	SAVE,
 	OPEN,
 	PUZZLE,
-	STAIR
+	STAIR,
+	TRIGGER
 };
 
 enum DialogueTrigger 
@@ -44,7 +45,6 @@ public:
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
-	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
@@ -56,6 +56,7 @@ public:
 	void PickUpItem();
 	virtual void UseItem(Item* item);
 	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
+	void Update() {}
 
 	InteractTypeList getType() { return interactType; };
 
@@ -112,4 +113,18 @@ class SaveObj : public InteractableObj {
 public:
 	SaveObj() { interactType = SAVE; }
 	void action();
+};
+
+class TriggerObj : public InteractableObj {
+protected:
+	bool triggered;
+public:
+	void Update();
+};
+
+class Butler : public TriggerObj {
+public:
+	Butler();
+	void Appear(glm::vec3 pos, std::string dialogue);
+	void Update();
 };

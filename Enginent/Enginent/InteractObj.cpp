@@ -183,3 +183,28 @@ void SaveObj::action() {
 	Game::GetInstance()->SetSaveGame(true);
 	SaveLoadWindow::GetInstance()->Open();
 }
+void TriggerObj::Update() {
+	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
+		action();
+		triggered = true;
+	}
+}
+
+Butler::Butler() { 
+	object_name = "butler";
+	interactType = TALK; 
+	triggered = false; 
+	Init(100, 100, glm::vec3(-200, 0, 0));
+	InitAnimator();
+	anim->AddAnimation("Idle", "", 2, 0.25f, true);
+}
+void Butler::Appear(glm::vec3 pos, std::string dialogue) {
+	SetPosition(pos);
+	SetDisplay(true);
+	triggered = false;
+}
+void Butler::Update() {
+	if (triggered && display)
+		SetDisplay(false);
+	TriggerObj::Update();
+}

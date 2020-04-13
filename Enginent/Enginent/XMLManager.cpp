@@ -117,6 +117,12 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case SAVE: {
 			interactObj = new SaveObj();
 		}break;
+		case TRIGGER: {
+			TriggerObj* obj = new TriggerObj();
+			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
+			std::cout << "set trigger name: " << child->name() << "\n";
+			interactObj = obj;
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
@@ -124,7 +130,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 		if (child->child("picture"))
 			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
-
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
