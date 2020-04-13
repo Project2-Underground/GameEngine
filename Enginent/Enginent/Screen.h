@@ -64,7 +64,6 @@ class GameScreen :public Screen {
 	vector<UIObject*> UI;
 
 	Player* player;
-	Butler* butler;
 	Phone* phone;
 
 	PhoneOpenButton* phoneIcon;
@@ -105,6 +104,9 @@ public:
 	Inventory* GetInventory() { return inventory; };
 
 	~GameScreen();
+
+	// special npcs
+	Butler* butler;
 };
 
 class CutsceneScreen :public Screen {

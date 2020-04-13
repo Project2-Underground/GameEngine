@@ -120,6 +120,8 @@ protected:
 	bool triggered;
 public:
 	void Update();
+	bool IsTriggered() { return triggered; }
+	void SetTriggered(bool b) { triggered = b; }
 };
 
 class Butler : public TriggerObj {
