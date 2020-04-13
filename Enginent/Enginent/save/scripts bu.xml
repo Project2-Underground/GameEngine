@@ -50,8 +50,8 @@
 	</script>
 	<script key = "EliasRoom_InnerDoor" loopIndex = "1">
 		<sub  change = "2">
-			<ChangeName name = "bed" new = "EliasRoom_bed2"/>
-			<ChangeName name = "Table" new = "EliasRoom_carbinet2"/>
+			<ChangeName name = "bed" new = "EliasRoom_bed2">
+			<ChangeName name = "Table" new = "EliasRoom_carbinet2">
 			<Dialogue name = "??" text = "It's time to go outside."/>
 			<Dialogue name = "??" text = "...Hm, It won't budge."/>
 			<Dialogue name = "??" text = "Is that... a card scanner? Since when did I have this in my room?"/>

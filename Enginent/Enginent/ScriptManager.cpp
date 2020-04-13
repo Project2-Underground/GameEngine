@@ -61,8 +61,35 @@ void ScriptManager::LoadScript()
 			{
 				d.choice = "";
 			}
-			pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
-			for (pugi::xml_node_iterator dialogue = dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			int changeNameNum, itemDisplayNum;
+			if (s_dialogue->attribute("change"))
+				changeNameNum = s_dialogue->attribute("change").as_int();
+			else
+				changeNameNum = 0;
+			if (s_dialogue->attribute("display"))
+				itemDisplayNum = s_dialogue->attribute("display").as_int();
+			else
+				itemDisplayNum = 0;
+			pugi::xml_node_iterator dialogue = s_dialogue->begin();
+			////pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
+			for (int i = 0; i < changeNameNum; i++)
+			{
+				std::string objectName = dialogue->attribute("name").as_string();
+				std::string newName = dialogue->attribute("new").as_string();
+				d.changeNameObj[objectName] = newName;
+				dialogue++;
+			}
+			for (int j = 0; j < itemDisplayNum; j++)
+			{
+				std::string objectName = dialogue->attribute("name").as_string();
+				bool b_display = dialogue->attribute("display").as_bool();
+				bool c_pos = dialogue->attribute("changePos").as_bool();
+				float x = dialogue->attribute("posX").as_float();
+				float y = dialogue->attribute("posY").as_float();
+				d.displayObj.push_back(diaplayAfterAction(objectName, b_display, c_pos, x, y));
+				dialogue++;
+			}
+			while (dialogue != s_dialogue->end())
 			{
 				std::string name = dialogue->attribute("name").as_string();
 				std::string text = dialogue->attribute("text").as_string();
@@ -90,18 +117,15 @@ void ScriptManager::LoadScript()
 				}
 				s_Dialogue tmp(name, text, item, chatName, chatIndex, noteName);
 				d.dialogue.push_back(tmp);
+				dialogue++;
 			}
 
+			//for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			//{
+			//	
+			//}
+
 			//on obj
-			pugi::xml_node e_Obj = (s_dialogue)->child("enable");
-			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
-			{
-			}
-			//off obj
-			pugi::xml_node d_Obj = (s_dialogue)->child("disable");
-			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
-			{
-			}
 			s->script.push_back(d);
 		}
 		this->scripts[key] = s;

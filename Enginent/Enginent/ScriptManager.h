@@ -30,25 +30,31 @@ struct s_Dialogue
 	s_Dialogue();
 };
 
+struct diaplayAfterAction {
+	std::string objName;
+	bool display;
+	bool c_pos;
+	float posX;
+	float posY;
+	diaplayAfterAction(std::string n, bool d, bool c, float x, float y)
+	{
+		objName = n;
+		display = d;
+		c_pos = c;
+		posX = x;
+		posY = y;
+	}
+};
+
 struct Dialogue {
 	std::vector<s_Dialogue> dialogue;
-	std::vector<std::string>* nameObj_On;
-	std::vector<std::string>* nameObj_Off;
+	std::vector<diaplayAfterAction> displayObj;
+	std::map<std::string, std::string> changeNameObj;
 	std::string choice;
 	Dialogue() {
 		choice = "";
-		nameObj_Off = nullptr;
-		nameObj_On = nullptr;
 	}
 	~Dialogue() {
-		if (nameObj_Off != nullptr)
-		{
-			delete nameObj_Off;
-		}
-		if (nameObj_On != nullptr)
-		{
-			delete nameObj_On;
-		}
 	}
 };
 

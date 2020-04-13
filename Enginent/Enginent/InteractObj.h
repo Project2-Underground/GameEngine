@@ -58,6 +58,7 @@ public:
 	void PickUpItem();
 	virtual void UseItem(Item* item);
 	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
+	void ChangeDialogue(std::string n);
 
 	InteractTypeList getType() { return interactType; };
 

@@ -114,9 +114,14 @@ void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objNa
 	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
 	switch (type)
 	{
-	case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
-	case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
+		case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
+		case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
 	}
+}
+
+void InteractableObj::ChangeDialogue(std::string n)
+{
+	this->dialogue_name = n;
 }
 
 OpenObj::OpenObj() {
@@ -147,6 +152,7 @@ void OpenObj::action() {
 
 void OpenObj::Open() {
 	open = true;
+	std::cout << "open\n";
 	TextBox::GetInstance()->setText(this->dialogue_name);
 	SetTexture(openTexture);
 	if (item)interactType = PICKUP;

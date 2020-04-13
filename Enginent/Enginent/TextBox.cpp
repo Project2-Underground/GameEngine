@@ -47,6 +47,17 @@ void TextBox::setText(std::string key)
 			dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 			Game::GetInstance()->GetCursor()->enableChange(false);
 		}
+		if (tmp.changeNameObj.size() > 0)
+		{
+			for (std::map<std::string, std::string>::iterator it = tmp.changeNameObj.begin(); it != tmp.changeNameObj.end(); it++)
+			{
+				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(it->first));
+				if (obj != nullptr)
+				{
+					obj->ChangeDialogue(it->second);
+				}
+			}
+		}
 	}
 }
 
