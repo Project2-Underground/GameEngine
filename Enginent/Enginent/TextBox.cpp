@@ -90,6 +90,16 @@ void TextBox::clickLeft(glm::vec3 pos)
 		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
 		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
 		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+
+		if (d_text.dialogue[d_index].item != nullptr)
+		{
+			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			gs->GetInventory()->AddItem(d_text.dialogue[d_index].item);
+
+			ViewWindow* vw = ViewWindow::GetInstance();
+			vw->SetViewItem(d_text.dialogue[d_index].item->GetViewTexture());
+			vw->Open();
+		}
 	}
 	else if (choice_UI->IsDisplay())
 	{

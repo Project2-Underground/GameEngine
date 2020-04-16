@@ -1,109 +1,152 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+	
+	
+	
+	<script key = "HallRoom" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Wait a minute... Where is this place!?"/>
+			<Dialogue name = "Elias" text = "Is this... a mansion?"/>
+			<Dialogue name = "Elias" text = "What is happening?"/>
+			<Dialogue name = "Elias" text = "...Maybe I'm still drunk. I need to get back in my room and take more rest"/>
+			<Dialogue name = "Elias" text = "It's... locked"/>
+			<Dialogue name = "Elias" text = "No... the door... it turned into a wall"/>
+		</sub>
+	</script>
+	<script key = "Elias_hall_door" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
+		</sub>
+	</script>
+	<script key = "Butler_start" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Butler" text = "Congratulations for being able to come out"/>
+			<Dialogue name = "Elias" text = "(He can talk? This really is not a dream)"/>
+			<Dialogue name = "Butler" text = "Before you ask anything, this is a letter to you"/>
+			<Dialogue name = "Elias" text = "(A phone? There's an unread message. He wants me to read this?)"/>
+		</sub>
+	</script>
+	<script key = "Phone_start" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "The experiment? What the hell is this!?"/>
+			<Dialogue name = "Elias" text = "Mr butler... Where did he go?"/>
+			<Dialogue name = "Elias" text = "Darn it! I cannot send back a message from this phone"/>
+			<Dialogue name = "Elias" text = "Looks like I have to be a good lab rat for now"/>
+			<Dialogue name = "Elias" text = "At least it has a Note on this phone"/>
+		</sub>
+	</script>
+	<script key = "Hall_door" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Are the people in these rooms also going to be here?"/>
+		</sub>
+	</script>
+	<script key = "Big_door" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "It feels like I can walk through this wall"/>
+			<Dialogue name = "Elias" text = "Hm...This mansion is making me crazy"/>
+		</sub>
+	</script>
+	<script key = "Hubert1" loopIndex = "1">
+		<sub>
+			<Dialogue name = "Hubert" text = "Hi, you are new around here?"/>
+			<Dialogue name = "Elias" text = "My name is Elias Adams. Are you also stuck here?"/>
+			<Dialogue name = "Hubert" text = "Elias, you are finding the exit right? And this is the book you are finding, right?"/>
+			<Dialogue name = "Elias" text = "Yeah, did you also get the message?"/>
+			<Dialogue name = "Hubert" text = "Ha ha ha ha! There is no way out from here, kid."/>
+			<Dialogue name = "Hubert" text = "I'm telling you something."/>
+			<Dialogue name = "Hubert" text = "The books you are talking about, it's useless. everyone knows that."/>
+		</sub>
+		<sub>
+			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
+		</sub>
+	</script>
+	<script key = "Hubert2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
+		</sub>
+	</script>
+	<script key = "Hubert1_A" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Hubert" text = "You can go find the exit all you want. "/>
+			<Dialogue name = "Hubert" text = "No one here interested to go outside"/>
+			<Dialogue name = "Elias" text = "Why? y'all don't want to go outside?"/>
+			<Dialogue name = "Hubert" text = "At first, I was going to be my first day of work"/>
+			<Dialogue name = "Hubert" text = "But when I'm here, those works mean nothing"/>
+			<Dialogue name = "Hubert" text = "You know what? Go ask that short-hair lady down there, She's the first one to come out and has been mumbling something for a while now."/>
+			<Dialogue name = "Elias" text = "(working on a Sunday? Is this person still sane?)"/>
+		</sub>		
+	</script>
+	<script key = "Hubert1_B" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Hubert" text = "What? haven't given up yet?"/>
+			<Dialogue name = "Hubert" text = "I've tried what that longed-hair lady did"/>
+			<Dialogue name = "Hubert" text = "But how is just looking at the books will get you out of here?"/>
+			<Dialogue name = "Hubert" text = "What can some books do? they are just books."/>
+			<Dialogue name = "Elias" text = "What makes you so sure that you have done it correctly?"/>
+			<Dialogue name = "Hubert" text = "Are you saying I'm stupid?"/>
+			<Dialogue name = "Hubert" text = "You know what? You do as you please"/>
+			<Dialogue name = "Hubert" text = "And get this book back on the shelf for me. I'm just going to sit and watch"/>
+		</sub>
+	</script>
+	<script key = "Hubert1_C" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Not given up yet? Why are you asking about this anyway?"/>
+			<Dialogue name = "Elias" text = "When I went to take the book, it's as if the order of the books on the second row
+ is the opposite of the third row, that's it."/>
+			<Dialogue name = "Elias" text = "Hubert :  Let it go, kid. There's no way out of here"/>
+		</sub>
+	</script>
 
-<scripts>
-	<script key = "" loopIndex = "">
+
+
+
+
+	
+	<script key = "Ann" loopIndex = "1">
 		<sub>
-			<Dialogue name = "" text = ""/>
-		</sub>
-	</script>
-	<script key = "tooFar" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Elias" text = "It's too far away."/>
-		</sub>
-	</script>
-	<script key = "EliasRoom" loopIndex = "0">
-		<sub>
-			<Dialogue name = "??" text = "Hm... feeling a bit dizzy"/>
-			<Dialogue name = "??" text = "Am I... drunk?"/>
-			<Dialogue name = "??" text = "Ah... Maybe I drank a little too much last night"/>
-			<Dialogue name = "??" text = "..."/>
-			<Dialogue name = "??" text = "I can't remember anything from the last night! I really drank too much"/>
-			<Dialogue name = "??" text = "I should walk around to sober up"/>
-			<Dialogue name = "(System)" text = " Right click to walk. Left click to interact with objects"/>
-		</sub>
-	</script>
-	<script key = "EliasRoom_bed1" loopIndex = "0">
-		<sub>
-			<Dialogue name = "??" text = "The bed looks like a luandry basket. I need to clean it up sometimes"/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>	
-	<script key = "EliasRoom_carbinet1" loopIndex = "0">
+	<script key = "Dann" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "1 Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
+		</sub>
+	</script>	
+	<script key = "Dialy" loopIndex = "1">
+		<sub>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_bin1" loopIndex = "0">
+	<script key = "Bookshelf_1a" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "I feel like throwing up just looking into the trash can."/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_calendar" loopIndex = "-1">
+	<script key = "Bookshelf_1b" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "It's almost time to go back to study."/>
-		</sub>
-		<sub>
-			<Dialogue name = "??" text = "Tomorrow, It's time to go back to see my mom."/>
-		</sub>
-		<sub>
-			<Dialogue name = "??" text = "Should I go drink with them again on the 18th?"/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_InnerDoor" loopIndex = "1">
-		<sub  change = "2">
-			<ChangeName name = "bed" new = "EliasRoom_bed2">
-			<ChangeName name = "Table" new = "EliasRoom_carbinet2">
-			<Dialogue name = "??" text = "It's time to go outside."/>
-			<Dialogue name = "??" text = "...Hm, It won't budge."/>
-			<Dialogue name = "??" text = "Is that... a card scanner? Since when did I have this in my room?"/>
-			<Dialogue name = "??" text = "Anyway, let's try to find some kind of card to scan it"/>
-		</sub>
+	<script key = "Bookshelf_1c" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "I must have left some kind of cards in the room"/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-		<script key = "EliasRoom_bed2" loopIndex = "0">
+	<script key = "Recordplayer" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "Maybe it's in here."/>
-			<Dialogue name = "??" text = "...Nothing. Just some coins."/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_carbinet2" loopIndex = "1">
+	<script key = "Bookshelf_2a" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "Hm... no cards"/>
-			<Dialogue name = "??" text = "Come to think of it, there are many more military training books I own
-than I thought."/>
-		</sub>
-		<sub>
-			<Dialogue name = "??" text = "There are only military trainging books, body donation form and other documents in here"/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_bin2" loopIndex = "0">
+	<script key = "Bookshelf_2b" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "It probably won't be necessary to search in there."/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_closet" loopIndex = "0">
+	<script key = "Bookshelf_2c" loopIndex = "1">
 		<sub>
-			<Dialogue name = "??" text = "Maybe, it's in one of the jacket."/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_closet_open" loopIndex = "0">
-		<sub>
-			<Dialogue name = "??" text = "Found it. There is my identity card in the jacket."/>
-			<Dialogue name = "??" text = "Will this really work?"/>
-			<Dialogue name = "??" text = "Time to find out."/>
-		</sub>
-	</script>
-	<script key = "EliasRoom__door_useKey" loopIndex = "0">
-		<sub>
-			<Dialogue name = "" text = "beep beep beep"/>
-			<Dialogue name = "" text = "Identity confirmation: Elias Adams"/>
-			<Dialogue name = "Elias" text = "Looks like it's working!"/>
-		</sub>
-	</script>
-	<script key = "EliasRoom_door_unlock" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Elias" text = "Am I imagining things or the air outside is strangely chilling."/>
-		</sub>
-	</script>
-</scripts>

@@ -44,7 +44,7 @@
 			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0"/>
 		</interactObj>
 		<doors>
-			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0">
+			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door">
 				<wall_door/>
 			</EliasRoomOuterDoor>
 			<HallRoomLowerFloor_Door texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" next_room="" next_door="" layer="0">
@@ -54,8 +54,7 @@
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<NPC1 sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0">
-				<item name="0" v_texture="0" i_texture="0"/>
+			<NPC1 sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>

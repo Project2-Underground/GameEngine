@@ -56,6 +56,7 @@ void ScriptManager::LoadScript()
 			if (s_dialogue->attribute("choice"))
 			{
 				d.choice = s_dialogue->attribute("choice").as_string();
+				std::cout << "choice]b********************\n";
 			}
 			else
 			{

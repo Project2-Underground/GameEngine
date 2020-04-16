@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <c>
-	<choices key = "Hubert1">
+	<choices key = "c_Hubert1">
 		<choice text = "What about everyone else?" nextDialogue = "Hubert1_A"/>
 		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
 	</choices>
