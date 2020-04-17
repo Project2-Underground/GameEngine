@@ -208,6 +208,19 @@ void ViewObj::action() {
 	// set description
 }
 
+void NonPlayer::action()
+{
+	if (dialogue_name != "")
+	{
+		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->SetDisplay(true);
+	}
+	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	for (auto obj : triggerObjs)
+		obj->triggered = true;
+	TakePic();
+}
+
 void PuzzleObj::SetPuzzleName(std::string name) {
 	puzzleName = name;
 }

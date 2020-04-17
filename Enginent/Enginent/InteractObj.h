@@ -116,7 +116,7 @@ class NonPlayer : public InteractableObj {
 	bool giveItem;
 public:
 	NonPlayer(std::string name) { object_name = name; interactType = TALK; }
-	//void action();
+	void action();
 };
 
 class SaveObj : public InteractableObj {

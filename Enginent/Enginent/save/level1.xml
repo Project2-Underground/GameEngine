@@ -56,11 +56,13 @@
 		</doors>
 		<NPCs>
 			<Hubert sizeX="205" sizeY="430" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
+				<item name="Book1"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Hubert>
 			<Dialy sizeX="205" sizeY="430" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
+				<item name="Book2"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -93,11 +95,13 @@
 		</doors>
 		<NPCs>
 			<Ann sizeX="205" sizeY="430" posX="-808" posY="-97" layer="0" dialogue="Ann1">
+				<item name="Book4"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
 			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1">
+				<item name="Book3"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>

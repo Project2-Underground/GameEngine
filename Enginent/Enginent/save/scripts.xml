@@ -231,7 +231,7 @@
 			<Dialogue name = "Hubert" text = "Are you saying I'm stupid?"/>
 			<Dialogue name = "Hubert" text = "You know what? You do as you please"/>
 			<Dialogue name = "Hubert" text = "And get this book back on the shelf for me. I'm just going to sit and watch">
-				<item name = "Book1" i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/i_Book1.png"/>
+				<item name = "Book1"  NPC = "Hubert"/>
 			</Dialogue>
 		</sub>
 	</script>
@@ -282,7 +282,7 @@
 			<Dialogue name = "Dialy" text = "These people are messing up the room and I don't even care anymore"/>
 			<Dialogue name = "Dialy" text = "If you want it, just take it"/>
 			<Dialogue name = "Elias" text = "( is she really not going to do anything about this? )">
-				<item name = "Book2" i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/i_Book2.png"/>
+				<item name = "Book2" NPC = "Dialy"/>
 			</Dialogue>
 		</sub>		
 	</script>
@@ -323,7 +323,7 @@
 			<Dialogue name = "Ann" text = "...I took one of those weird books and read the pages, just like everyone else."/>
 			<Dialogue name = "Elias" text = "You also took a book from the bookshelf?"/>
 			<Dialogue name = "Ann" text = "Yeah... But it's not important anymore. You can take it">
-				<item name = "Book4" i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/i_Book4.png"/>
+				<item name = "Book4" NPC = "Ann"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Ah...Thank you. I'm going find a way to use it. And please, don't do something suicidal."/>
 			<Dialogue name = "Ann" text = "What gives you the thought?"/>
@@ -390,7 +390,7 @@
 			<Dialogue name = "Dann" text = "I think the way out has nothing to do with the books, even so I still don't care about it enough to be bother."/>
 			<Dialogue name = "Dann" text = "......"/>
 			<Dialogue name = "Elias" text = "( He is drifting off again )">
-				<item name = "Book3" i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/i_Book3.png"/>
+				<item name = "Book3" NPC = "Dann"/>
 			</Dialogue>
 		</sub>		
 	</script>

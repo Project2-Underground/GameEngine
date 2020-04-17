@@ -1,10 +1,11 @@
 #include "ScriptManager.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string chatName, int chatIndex, std::string note)
+s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note)
 {
 	name = n;
 	text = d;
 	itemName = item;
+	NPCName = npc;
 	this->chatName = chatName;
 	this->chatIndex = chatIndex;
 	this->noteName = note;
@@ -15,6 +16,7 @@ s_Dialogue::s_Dialogue()
 	name = "";
 	text = "";
 	itemName = "";
+	NPCName = "";
 	chatName = "";
 	chatIndex = -1;
 };
@@ -94,13 +96,15 @@ void ScriptManager::LoadScript()
 				std::string name = dialogue->attribute("name").as_string();
 				std::string text = dialogue->attribute("text").as_string();
 				//Item* item = nullptr;
-				std::string itemName;
+				std::string itemName = "";
+				std::string NPCName = "";
 				int chatIndex = -1;
 				std::string chatName = "";
 				std::string noteName = "";
 				if (dialogue->child("item"))
 				{
 					itemName = dialogue->child("item").attribute("name").as_string();
+					NPCName = dialogue->child("item").attribute("NPC").as_string();
 					//create item
 					/*item = new Item(dialogue->child("item").attribute("name").as_string());
 					item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
@@ -117,7 +121,7 @@ void ScriptManager::LoadScript()
 					//save chat info
 					noteName = dialogue->child("note").attribute("name").as_string();
 				}
-				s_Dialogue tmp(name, text, itemName, chatName, chatIndex, noteName);
+				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName);
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}

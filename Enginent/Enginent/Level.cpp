@@ -103,6 +103,9 @@ DrawableObject* Room::FindObject(std::string name) {
 	for (auto obj : objects)
 		if (obj->object_name == name)
 			return obj;
+	for (auto npc : npcs)
+		if (npc->object_name == name)
+			return npc;
 	return nullptr;
 }
 
