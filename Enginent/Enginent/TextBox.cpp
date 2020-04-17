@@ -69,14 +69,15 @@ void TextBox::setText(std::string key)
 			}
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-			if (item != nullptr)
+			InteractableObj* obj = dynamic_cast<NonPlayer*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			if (item != nullptr && obj != nullptr && obj->hasItem)
 			{
 				gs->GetInventory()->AddItem(item);
-
 
 				ViewWindow* vw = ViewWindow::GetInstance();
 				vw->SetViewItem(item->GetViewTexture());
 				vw->Open();
+				obj->hasItem = false;
 			}
 			//dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
 			//dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
@@ -171,14 +172,15 @@ void TextBox::clickLeft(glm::vec3 pos)
 		}
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-		if (item != nullptr)
+		InteractableObj* obj = dynamic_cast<NonPlayer*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+		if (item != nullptr && obj != nullptr && obj->hasItem)
 		{
 			gs->GetInventory()->AddItem(item);
-
 
 			ViewWindow* vw = ViewWindow::GetInstance();
 			vw->SetViewItem(item->GetViewTexture());
 			vw->Open();
+			obj->hasItem = false;
 		}
 	}
 	else if (choice_UI->IsDisplay())
