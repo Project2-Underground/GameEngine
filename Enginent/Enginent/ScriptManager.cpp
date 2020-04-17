@@ -56,7 +56,6 @@ void ScriptManager::LoadScript()
 			if (s_dialogue->attribute("choice"))
 			{
 				d.choice = s_dialogue->attribute("choice").as_string();
-				std::cout << "choice]b********************\n";
 			}
 			else
 			{
@@ -152,22 +151,26 @@ void ScriptManager::LoadScript()
 	}
 }
 
-Dialogue ScriptManager::GetDialogue(std::string key)
+Dialogue* ScriptManager::GetDialogue(std::string key)
 {
 	Script* tmp = scripts[key];
 	if (tmp == nullptr)
 	{
 		std::cout << "Cannot find dialogue " << key << std::endl;
-		return Dialogue();
+		return nullptr;
 	}
 
 	int index = tmp->currIndex;
 	tmp->currIndex++;
-	if (tmp->currIndex >= tmp->script.size())
+	if (index == -1)
+	{
+		index = rand() % tmp->script.size() - 1;
+	}
+	else if (tmp->currIndex >= tmp->script.size())
 	{
 		tmp->currIndex = tmp->loopIndex;
 	}
-	return tmp->script[index];
+	return &(tmp->script[index]);
 }
 
 std::vector<Choice>* ScriptManager::GetChoice(std::string key)

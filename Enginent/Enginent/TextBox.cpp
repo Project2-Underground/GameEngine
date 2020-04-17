@@ -26,30 +26,49 @@ TextBox::TextBox()
 	choice_UI = new ChoiceUI();
 
 	//use TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
-	if(text.size() * 24 < 1000)
-		dialogue->SetPosition(glm::vec3((-450 + (float)((text.size() * 24) / 2)), -180, 1.0f));
-	else
-		dialogue->SetPosition(glm::vec3((-450 + (float)(1000 / 2)), -180.0f, 1.0f));
 }
 
 void TextBox::setText(std::string key)
 {
 	if (key != "")
 	{
-		Dialogue tmp = scriptManager->GetDialogue(key);
-		if (tmp.dialogue.size() != 0)
+		Dialogue* tmp = scriptManager->GetDialogue(key);
+		if (tmp->dialogue.size() != 0)
 		{
 			display = true;
 			d_text = tmp;
 			d_index = 0;
-			name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
-			dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
-			dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+			name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
+			std::string tmp_text = d_text->dialogue[d_index].text;
+
+			int nextLine = MAX_CHAR;
+			int lineCount = 1;
+			while (tmp_text.size() > nextLine)
+			{
+				for (; tmp_text[nextLine] != ' '; nextLine--);
+				tmp_text[nextLine] = '\n';
+				lineCount++;
+				nextLine += MAX_CHAR;
+			}
+			dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
+			dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 			Game::GetInstance()->GetCursor()->enableChange(false);
+
+			//int nextLine = MAX_FONT_PER_LINE;
+			//int lineCount = 1;
+			//while (text.size() > nextLine) {
+			//	for (; text[nextLine] != ' '; nextLine--);
+			//	text[nextLine] = '\n';
+			//	lineCount++;
+			//	nextLine += MAX_FONT_PER_LINE;
+			//}
+			//textPosition.push_back(glm::vec3(TEXT_START_X, TEXT_TOP_Y, 0));
+			//texts.push_back(text);
+			//lineCounts.push_back(lineCount);
 		}
-		if (tmp.changeNameObj.size() > 0)
+		if (tmp->changeNameObj.size() > 0)
 		{
-			for (std::map<std::string, std::string>::iterator it = tmp.changeNameObj.begin(); it != tmp.changeNameObj.end(); it++)
+			for (std::map<std::string, std::string>::iterator it = tmp->changeNameObj.begin(); it != tmp->changeNameObj.end(); it++)
 			{
 				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(it->first));
 				if (obj != nullptr)
@@ -84,35 +103,38 @@ TextBox::~TextBox()
 
 void TextBox::clickLeft(glm::vec3 pos)
 {
-	if (d_index < d_text.dialogue.size() - 1 && choice_UI->IsDisplay() == false)
+	if (d_index < d_text->dialogue.size() - 1 && choice_UI->IsDisplay() == false)
 	{
 		d_index++;
-		name->loadText(d_text.dialogue[d_index].name, nameColor, 30);
-		dialogue->loadText(d_text.dialogue[d_index].text, textColor, 24);
-		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text.dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+		name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
+		dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
+		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 
-		if (d_text.dialogue[d_index].item != nullptr)
+		if (d_text->dialogue[d_index].item != nullptr)
 		{
+			std::cout << "Get item";
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-			gs->GetInventory()->AddItem(d_text.dialogue[d_index].item);
+			gs->GetInventory()->AddItem(d_text->dialogue[d_index].item);
+
 
 			ViewWindow* vw = ViewWindow::GetInstance();
-			vw->SetViewItem(d_text.dialogue[d_index].item->GetViewTexture());
+			vw->SetViewItem(d_text->dialogue[d_index].item->GetViewTexture());
 			vw->Open();
+			d_text->dialogue[d_index].item = nullptr;
 		}
 	}
 	else if (choice_UI->IsDisplay())
 	{
 		choice_UI->clickLeft(pos);
 	}
-	else if (d_text.choice == "")
+	else if (d_text->choice == "")
 	{
 		Game::GetInstance()->GetCursor()->enableChange(true);
 		display = false;
 	}
 	else
 	{
-		choice_UI->setChoice(d_text.choice);
+		choice_UI->setChoice(d_text->choice);
 	}
 }
 
@@ -146,7 +168,6 @@ void ChoiceBox::Render()
 
 bool ChoiceBox::CheckClick(glm::vec3 pos)
 {
-	std::cout << background->col->isClicked(pos.x, pos.y) << ", " << pos.y << std::endl;
 	if (background->col->isClicked(pos.x, pos.y))
 	{
 		if(choice.nextScript != "")
@@ -201,7 +222,6 @@ void ChoiceUI::clickLeft(glm::vec3 pos)
 	{
 		if (choiceList[i].CheckClick(pos))
 		{
-			std::cout << "choice click\n";
 			display = false;
 			break;
 		}

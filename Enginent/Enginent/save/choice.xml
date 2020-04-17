@@ -5,9 +5,17 @@
 		<choice text = "What about everyone else?" nextDialogue = "Hubert1_A"/>
 		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
 	</choices>
-	<choices key = "Hubert2">
+	<choices key = "c_Hubert2">
 		<choice text = "What about everyone else?" nextDialogue = "Hubert1_A"/>
 		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
 		<choice text = "Can you remember any order of the books?" nextDialogue = "Hubert1_C"/>
+	</choices>
+	
+	<choices key = "c_Dialy1">
+		<choice text = "How long have you been here?" nextDialogue = "Dialy1_A"/>
+	</choices>
+	<choices key = "c_Dialy2">
+		<choice text = "How long have you been here?" nextDialogue = "Dialy1_A"/>
+		<choice text = "Can you remember anything about the position of the books??" nextDialogue = "Dialy1_C"/>
 	</choices>
 </c>

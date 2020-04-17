@@ -54,17 +54,17 @@
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<NPC1 sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
+			<Hubert sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</NPC1>
-			<NPC3 sizeX="253" sizeY="500" posX="1144" posY="-50" layer="0">
+			</Hubert>
+			<Dialy sizeX="253" sizeY="500" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
 				<item name="0" v_texture="0" i_texture="0"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</NPC3>
+			</Dialy>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
@@ -75,7 +75,7 @@
 			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="1" layer="2"/>
+			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="1" layer="2" dialogue="Hall_Bookshelf_L1"/>
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="9" layer="2">
 				<puzzle name="BookshelfPuzzle"/>
 			</Bookshelf2>

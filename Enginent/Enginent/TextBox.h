@@ -6,6 +6,8 @@
 #include "TextObject.h"
 #include "ScriptManager.h"
 
+constexpr auto MAX_CHAR = 80;
+
 class ChoiceBox : UIObject {
 	Choice choice;
 	UIObject* background;
@@ -39,7 +41,7 @@ class TextBox : public UIObject {
 		SDL_Color nameColor = {0, 0, 0, 0 };
 		static TextBox* _instance;
 		ScriptManager* scriptManager;
-		Dialogue d_text;
+		Dialogue* d_text;
 		int d_index;
 		ChoiceUI* choice_UI;
 	protected:

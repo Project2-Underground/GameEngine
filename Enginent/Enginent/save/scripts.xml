@@ -153,7 +153,18 @@ than I thought."/>
 			<Dialogue name = "Elias" text = "Hm...This mansion is making me crazy"/>
 		</sub>
 	</script>
-	<script key = "Hubert1" loopIndex = "0">
+	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "It feels like I can walk through this wall"/>
+			<Dialogue name = "Elias" text = "Hm...This mansion is making me crazy"/>
+		</sub>
+	</script>
+	
+	
+	
+	
+	<!-- NPC dialogue -->
+	<script key = "Hubert1" loopIndex = "1">
 		<sub choice = "c_Hubert1">
 			<Dialogue name = "Hubert" text = "Hi, you are new around here?"/>
 			<Dialogue name = "Elias" text = "My name is Elias Adams. Are you also stuck here?"/>
@@ -163,12 +174,12 @@ than I thought."/>
 			<Dialogue name = "Hubert" text = "I'm telling you something."/>
 			<Dialogue name = "Hubert" text = "The books you are talking about, it's useless. everyone knows that."/>
 		</sub>
-		<sub>
+		<sub choice = "c_Hubert1">
 			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
 		</sub>
 	</script>
 	<script key = "Hubert2" loopIndex = "0">
-		<sub>
+		<sub choice = "c_Hubert2">
 			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
 		</sub>
 	</script>
@@ -193,7 +204,7 @@ than I thought."/>
 			<Dialogue name = "Hubert" text = "Are you saying I'm stupid?"/>
 			<Dialogue name = "Hubert" text = "You know what? You do as you please"/>
 			<Dialogue name = "Hubert" text = "And get this book back on the shelf for me. I'm just going to sit and watch">
-				<item name = "Book1" i_texture = "Texture/tmp_texture/tmp_savefileHover.png" v_texture = "Texture/tmp_texture/tmp_homeIcon.png"/>
+				<item name = "Book1" i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/i_Book1.png"/>
 			</Dialogue>
 		</sub>
 	</script>
@@ -205,4 +216,57 @@ than I thought."/>
 			<Dialogue name = "Elias" text = "Hubert :  Let it go, kid. There's no way out of here"/>
 		</sub>
 	</script>
+	<script key = "Dialy1" loopIndex = "1">
+		<sub choice = "c_Dialy1">
+			<Dialogue name = "Elias" text = "Excuse me, may I ask you something?"/>
+			<Dialogue name = "Dialy:" text = "Yeah?"/>
+			<Dialogue name = "Elias" text = "(She won't look away from her phone)"/>
+			<Dialogue name = "Elias" text = "(Wait! Can her phone send messages outside?)"/>
+			<Dialogue name = "Elias" text = "Your phone have a signal?"/>
+			<Dialogue name = "Dialy:" text = "Nope, not my phone doesn't have one either"/>
+			<Dialogue name = "Elias" text = "Then why..."/>
+			<Dialogue name = "Dialy:" text = "Am I always looking at my phone?"/>
+			<Dialogue name = "Dialy:" text = "Since I pickup this phone, I have a feeling that I cannot put it down"/>
+			<Dialogue name = "Dialy:" text = "I need to keep my eyes on it to make sure I won't miss any notifications"/>
+			<Dialogue name = "Dialy:" text = "I won't be putting this down, never."/>
+			<Dialogue name = "Elias" text = "(Did she said after she came here?)"/>
+		</sub>
+		<sub choice = "c_Dialy1">
+			<Dialogue name = "Elias" text = "Would you like to check out the bookcase together?"/>
+			<Dialogue name = "Dialy:" text = "Huh? Can't you see I'm busy right now? "/>
+		</sub>
+	</script>
+	<script key = "Dialy2" loopIndex = "0">
+		<sub choice = "c_Dialy2">
+			<Dialogue name = "Elias" text = "Would you like to check out the bookcase together?"/>
+			<Dialogue name = "Dialy:" text = "Huh? Can't you see I'm busy right now? "/>
+		</sub>
+	</script>
+	<script key = "Dialy1_A" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Dialy" text = "A while."/>
+			<Dialogue name = "Dialy" text = "There were people talking about something to do with doctrine and religionใ yada yada"/>
+			<Dialogue name = "Elias" text = "Hm? And had he gone out?"/>
+			<Dialogue name = "Dialy" text = "Yeah. He left the hint with the books"/>
+			<Dialogue name = "Dialy" text = "It has something to do with the position of the books in that bookcase over there"/>
+			<Dialogue name = "Dialy" text = "But when I went back to the bookcase, it has been searched throughout, a complete mess. The key book doesn't seem to be there anymore."/>
+			<Dialogue name = "Dialy" text = "After that the light flickered, and then I felt like something had changed. "/>
+			<Dialogue name = "Dialy" text = "Well, I still don't know what to do"/>
+			<Dialogue name = "Dialy" text = "These people are messing up the room and I don't even care anymore"/>
+			<Dialogue name = "Dialy" text = "If you want it, just take it"/>
+			<Dialogue name = "Elias" text = "( is she really not going to do anything about this? )"/>
+		</sub>		
+	</script>
+	
+	<script key = "Dialy1_C" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Dialy" text = "The books' position? "/>
+			<Dialogue name = "Dialy" text = "I remember the symbols of the books on the third row are ordered opposite from the first row"/>
+			<Dialogue name = "Dialy" text = "Other than that, I have no idea"/>
+			<Dialogue name = "Elias" text = "( The symbols of the books on the third row are ordered opposite from the first row )"/>
+			<Dialogue name = "Elias" text = " ( Let's hope she remembers it correctly )"/>
+		</sub>		
+	</script>
+	
+	
 </scripts>
