@@ -46,10 +46,10 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
 			GenerateImage(*room, newRoom, "background");
-			GenerateInteractObj(*room, newRoom);
 			GenerateDoor(*room, newRoom);
 			GenerateNPC(*room, newRoom);
 			GenerateImage(*room, newRoom, "foreground");
+			GenerateInteractObj(*room, newRoom);
 
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
@@ -181,6 +181,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		if (child->attribute("stair"))
 			door->SetInteractType(STAIR);
 
+		if (child->child("ForeGround"))
+			r->foreground.push_back(door);
 		r->objects.push_back(door);
 		r->doors.insert(std::pair<std::string, Door*>(child->name(), door));
 	}

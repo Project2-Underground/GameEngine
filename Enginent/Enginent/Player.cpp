@@ -52,6 +52,8 @@ void Player::Move()
 		}
 		else
 		{
+			if(pos.x < walkLimit->getMinBound().x)
+				SetPosition(glm::vec3(walkLimit->getMinBound().x + size.x * 0.5f, pos.y, pos.z));
 			StopWalking();
 		}
 	}
@@ -69,11 +71,13 @@ void Player::Move()
 		}
 		else
 		{
+			if (pos.x > walkLimit->getMaxBound().x)
+				SetPosition(glm::vec3(walkLimit->getMaxBound().x - size.x * 0.5f, pos.y, pos.z));
 			StopWalking();
 		}
 	}
 	col->Update();
-	CheckWalkLimit();
+	//CheckWalkLimit();
 }
 
 void Player::StopWalking() {
@@ -115,7 +119,12 @@ void Player::SetNextPosition(float x, float y)
 {
 	if (walk == false)
 		SoundManager::GetInstance()->playSound(SFX, "Walking", true);
-	next_position = glm::vec3(x, y, 1);
+	float newX = x;
+	if (x < walkLimit->getMinBound().x)
+		newX = walkLimit->getMinBound().x + size.x;
+	else if(x > walkLimit->getMaxBound().x)
+		newX = walkLimit->getMaxBound().x - size.x;
+	next_position = glm::vec3(newX, y, 1);
 	walk = true;
 	if (!(anim->currentAnimation->animationName == "Move"))
 		anim->Play("Move", true);

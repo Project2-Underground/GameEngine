@@ -107,7 +107,7 @@
 			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallLower>
-	<EmmaRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-20">
+	<EmmaRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-70">
 		<background>
 			<bg texture="Texture/EmmaRoom/EmmaRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -140,10 +140,11 @@
 		
 		<foreground>
 			<EmmaRoom_Light texture="Texture/EmmaRoom/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
+			<EmmaRoom_ForeGround texture="Texture/EmmaRoom/EmmaRoom_ForeGround.png" sizeX="1280" sizeY="99" posX="0" posY="-310" layer="0"/>
 		</foreground>
 		
 	</EmmaRoom>
-	<BackDoorRoom left_limit="-903.75" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-50">
+	<BackDoorRoom left_limit="-809" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-70">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1807.5" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
@@ -153,7 +154,9 @@
 			</BackDoorRoom_FlowerClue>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="161.5" sizeY="558" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="0"/>
+			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="161.5" sizeY="558" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="0">
+				<ForeGround/>
+			</BackDoorRoom_Foreground_Door>
 			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="291.5" sizeY="403.5" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0"/>
 			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="222" sizeY="399.5" posX="-66" posY="5" next_room="EmmaRoom" next_door="EmmaRoom_Door" layer="0">
 				<!-- <openDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png"/> -->
@@ -165,7 +168,7 @@
 			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1807.5" sizeY="770" posX="-196" posY="-72" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
-	<BackDoorRoomBasement left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385" y="-50">
+	<BackDoorRoomBasement left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385" y="-30">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
