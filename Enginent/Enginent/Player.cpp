@@ -37,7 +37,8 @@ void Player::Update()
 
 void Player::Move()
 {
-	float walk_sp = WALK_SPEED * (float)(1 / TimeSystem::instance()->GetTimeBetweenFrame());
+	//std::cout << TimeSystem::instance()->GetDT() << std::endl;
+	float walk_sp = WALK_SPEED * TimeSystem::instance()->GetDT();
 	// walk left
 	if (this->pos.x > next_position.x)
 	{
@@ -52,8 +53,6 @@ void Player::Move()
 		}
 		else
 		{
-			if(pos.x < walkLimit->getMinBound().x)
-				SetPosition(glm::vec3(walkLimit->getMinBound().x + size.x * 0.5f, pos.y, pos.z));
 			StopWalking();
 		}
 	}
@@ -71,13 +70,10 @@ void Player::Move()
 		}
 		else
 		{
-			if (pos.x > walkLimit->getMaxBound().x)
-				SetPosition(glm::vec3(walkLimit->getMaxBound().x - size.x * 0.5f, pos.y, pos.z));
 			StopWalking();
 		}
 	}
 	col->Update();
-	//CheckWalkLimit();
 }
 
 void Player::StopWalking() {
@@ -86,20 +82,20 @@ void Player::StopWalking() {
 	SoundManager::GetInstance()->stop(SFX, "Walking");
 }
 
-void Player::CheckWalkLimit() {
-	if (walkLimit != nullptr) {
-		// right limit
-		if (pos.x + size.x * -0.5 >= walkLimit->getMaxBound().x) {
-			pos.x = walkLimit->getMaxBound().x - size.x * -0.5f;
-			StopWalking();
-		}
-		// left limit
-		else if (pos.x - size.x * 0.5 <= walkLimit->getMinBound().x) {
-			pos.x = walkLimit->getMinBound().x + size.x * 0.5f;
-			StopWalking();
-		}
-	}
-}
+//void Player::CheckWalkLimit() {
+//	if (walkLimit != nullptr) {
+//		// right limit
+//		if (pos.x + size.x * -0.5 >= walkLimit->getMaxBound().x) {
+//			pos.x = walkLimit->getMaxBound().x - size.x * -0.5f;
+//			StopWalking();
+//		}
+//		// left limit
+//		else if (pos.x - size.x * 0.5 <= walkLimit->getMinBound().x) {
+//			pos.x = walkLimit->getMinBound().x + size.x * 0.5f;
+//			StopWalking();
+//		}
+//	}
+//}
 
 void Player::CheckTarget(InteractableObj* target) {
 	float distance = abs(target->getPos().x - pos.x) - abs(target->getSize().x * 0.5f);
@@ -121,9 +117,10 @@ void Player::SetNextPosition(float x, float y)
 		SoundManager::GetInstance()->playSound(SFX, "Walking", true);
 	float newX = x;
 	if (x < walkLimit->getMinBound().x)
-		newX = walkLimit->getMinBound().x + size.x;
-	else if(x > walkLimit->getMaxBound().x)
-		newX = walkLimit->getMaxBound().x - size.x;
+		newX = walkLimit->getMinBound().x;
+	else if (x > walkLimit->getMaxBound().x)
+		newX = walkLimit->getMaxBound().x;
+	//std::cout << x << " " << newX << std::endl;
 	next_position = glm::vec3(newX, y, 1);
 	walk = true;
 	if (!(anim->currentAnimation->animationName == "Move"))

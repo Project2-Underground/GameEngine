@@ -101,7 +101,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			OpenObj* obj = new OpenObj();
 			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
 			if (child->child("item")) {
-				obj->SetNextTexture(child->child("item").attribute("texture").as_string());
+				obj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 				obj->SetItem(child->child("item").attribute("name").as_string());
 			}
 			interactObj = obj;
@@ -333,6 +333,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 			phone->SetPage(CHAT, name);
 			phone->chats[name].currentMsgIndex = itr->attribute("msgNo").as_int();
 		}
+
+		TextBox::GetInstance()->SetDisplay(false);
 	}
 }
 
@@ -548,6 +550,10 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 	if (LoadFile("save/items.xml")) {
 		for (pugi::xml_node_iterator item = doc.child("Items").begin(); item != doc.child("Items").end(); item++) {
 			Item* i = new Item(item->name());
+			float x = item->attribute("sizeX").as_float();
+			float y = item->attribute("sizeY").as_float();
+			
+			i->aspect = x / y;
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);

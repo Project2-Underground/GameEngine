@@ -29,6 +29,7 @@ public:
 	void LeftRelease(float x, float y);
 	void AddItem(Item *item);
 	void RemoveItem(Item *item);
+	void RemoveItem(std::string);
 	void SetAllBoxesPos(float);
 
 	void SeparateItem(Item* item);

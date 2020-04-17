@@ -284,6 +284,9 @@ bool BookshelfPuzzle::CheckRequirements() {
 		if (!inventory->IsItemInInventory(requireBooks[i]))
 			return false;
 	}
+	for (int i = 0; i < 4; i++) {
+		inventory->RemoveItem(requireBooks[i]);
+	}
 	return true;
 }
 void BookshelfPuzzle::LeftRelease(glm::vec3 screen, glm::vec3 world) {

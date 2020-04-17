@@ -9,5 +9,6 @@ public:
 	void FrameInit();
 	void FrameStart();
 	double GetTimeBetweenFrame();
+	float GetDT();
 	void FrameEnd();
 };

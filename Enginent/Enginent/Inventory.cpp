@@ -180,6 +180,15 @@ void Inventory::AddItem(Item* item) {
 	}
 }
 
+void Inventory::RemoveItem(std::string itemName) {
+	for (InventoryBoxButton* ib : InventoryBoxes) {
+		if (ib->GetItem() != nullptr && (ib->GetItem()->name == itemName)) {
+			ib->RemoveItem();
+			UnselectItem();
+			break;
+		}
+	}
+}
 void Inventory::RemoveItem(Item* item) {
 	for (InventoryBoxButton *ib : InventoryBoxes) {
 		if (ib->GetItem() != nullptr && *(ib->GetItem()) == *item) {

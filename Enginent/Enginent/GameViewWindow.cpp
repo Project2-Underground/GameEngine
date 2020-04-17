@@ -44,6 +44,7 @@ void ViewWindow::Init(int width, int height) {
 }
 
 void ViewWindow::SetViewItem(Item* item) {
+	viewItem->SetSize(item->aspect * -viewItem->getSize().y, viewItem->getSize().y);
 	viewItem->SetTexture(item->GetViewTexture());
 }
 

@@ -3,7 +3,7 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="1" startPosX="0" startPosY="-50" Start="EliasRoom">
-	<EliasRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-50">
+	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -17,7 +17,7 @@
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
 				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
-				<item name="keyCard" v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
+				<item name="keyCard"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png"/>
@@ -111,7 +111,7 @@
 			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallLower>
-	<EmmaRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-70">
+	<EmmaRoom left_limit="-438" right_limit="563" top_limit="360" bottom_limit="-360" y="-70">
 		<background>
 			<bg texture="Texture/EmmaRoom/EmmaRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -148,7 +148,7 @@
 		</foreground>
 		
 	</EmmaRoom>
-	<BackDoorRoom left_limit="-809" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-70">
+	<BackDoorRoom left_limit="-800" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-70">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1807.5" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
@@ -172,7 +172,7 @@
 			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1807.5" sizeY="770" posX="-196" posY="-72" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
-	<BackDoorRoomBasement left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385" y="-30">
+	<BackDoorRoomBasement left_limit="-596" right_limit="588" top_limit="385" bottom_limit="-385" y="-30">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>

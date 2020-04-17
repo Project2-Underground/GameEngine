@@ -41,6 +41,7 @@ glm::vec3 DrawableObject::getSize() {
 
 void DrawableObject::SetSize(float sizeX, float sizeY)
 {
+	aspect = sizeX / sizeY;
 	size = glm::vec3(sizeX, sizeY, 1);
 }
 

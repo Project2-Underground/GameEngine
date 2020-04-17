@@ -75,7 +75,7 @@ void TextBox::setText(std::string key)
 				gs->GetInventory()->AddItem(item);
 
 				ViewWindow* vw = ViewWindow::GetInstance();
-				vw->SetViewItem(item->GetViewTexture());
+				vw->SetViewItem(item);
 				vw->Open();
 				obj->hasItem = false;
 			}
@@ -178,7 +178,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 			gs->GetInventory()->AddItem(item);
 
 			ViewWindow* vw = ViewWindow::GetInstance();
-			vw->SetViewItem(item->GetViewTexture());
+			vw->SetViewItem(item);
 			vw->Open();
 			obj->hasItem = false;
 		}

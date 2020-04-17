@@ -346,19 +346,18 @@ Door* GameScreen::GetDoor(std::string doorNam) {
 }
 
 void GameScreen::OpenPuzzle(std::string name) {
-	std::cout << "open puzzle\n";
 	player->StopWalking();
-	if (puzzles[name]->CheckRequirements()) {
-		currentPuzzle = puzzles[name];
-		PuzzleTime = true;
-		InventoryEnable = currentPuzzle->IsInventoryEnable();
-	}
+	currentPuzzle = puzzles[name];
+	PuzzleTime = true;
+	InventoryEnable = currentPuzzle->IsInventoryEnable();
+	Game::GetInstance()->GetCursor()->enableChange(false);
 }
 
 
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
+	Game::GetInstance()->GetCursor()->enableChange(false);
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {

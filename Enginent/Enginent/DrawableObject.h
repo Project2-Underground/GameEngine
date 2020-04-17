@@ -11,6 +11,7 @@ protected:
 	glm::vec3 size;
 	float rot;
 	float test;
+	float aspect;
 
 public:
 	std::string object_name;
@@ -30,6 +31,7 @@ public:
 	void Translate(glm::vec3 moveDistance);
 	void SetName(std::string);
 	bool operator<(const DrawableObject& obj)const;
+	float GetAspect() { return aspect; }
 
 	//Rotate, Scale ???
 	void SetRotate(float r);

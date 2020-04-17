@@ -226,8 +226,11 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	std::cout << "click puzzle\n";
-	((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+	//std::cout << "click puzzle\n";
+	if (((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
+		((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+	else
+		InteractableObj::action();
 }
 
 void SaveObj::action() {

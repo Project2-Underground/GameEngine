@@ -21,6 +21,10 @@ double TimeSystem::GetTimeBetweenFrame() {
 	return currTime - prevTime;
 }
 
+float TimeSystem::GetDT() {
+	return (currTime - prevTime) / 1000.0f;
+
+}
 void TimeSystem::FrameEnd() {
 	prevTime = currTime;
 }

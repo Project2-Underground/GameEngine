@@ -11,6 +11,7 @@ InventoryBoxButton::InventoryBoxButton(std::string texture) :Button(texture) {
 
 void InventoryBoxButton::SetItem(Item* item) {
 	this->item = item;
+	itemDisplay.SetSize(item->aspect * (-size.y), size.y);
 	itemDisplay.SetTexture(item->GetInventoryTexture());
 }
 
@@ -73,7 +74,7 @@ void InventoryBoxButton::checkColliderPressed(float x, float y) {
 		}
 	}
 	else if (item) {
-		std::cout << clickIntervalTime << std::endl;
+		//std::cout << clickIntervalTime << std::endl;
 		if (clickIntervalTime < DOUBLE_CLICK_TIME) {
 			clickIntervalTime = DOUBLE_CLICK_TIME;
 			ViewWindow* vw = ViewWindow::GetInstance();

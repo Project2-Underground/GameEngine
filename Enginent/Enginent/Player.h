@@ -8,12 +8,12 @@
 #include "SoundManager.h"
 #include "InteractObj.h"
 
-#define WALK_SPEED 65
-#define ACTION_DISTANCE 70.0f
 
 class Player : public ImageObject
 {
 public:
+	const int WALK_SPEED = 250;
+	const float ACTION_DISTANCE = 70.0f;
 	bool walk;
 	bool faceLeft;
 
@@ -31,7 +31,7 @@ public:
 	void StopWalking();
 
 	void CheckTarget(InteractableObj* target);
-	void CheckWalkLimit();
+	//void CheckWalkLimit();
 
 	Collider* col;
 	glm::vec3 next_position;
