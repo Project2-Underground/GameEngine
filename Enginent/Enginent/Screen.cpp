@@ -139,7 +139,7 @@ GameScreen::GameScreen() {
 	//levels.push_back("save/level3.xml");
 
 	player = new Player();
-	butler = new Butler();
+	//butler = new Butler();
 	currentLevel = new Level(levels[0]);
 
 	//player->SetTexture("Texture/Character/Elias_idle.png");
@@ -191,7 +191,7 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
-		renderer->Render(butler);
+		//renderer->Render(butler);
 	}
 	renderer->Render(UI);
 
@@ -219,7 +219,7 @@ void GameScreen::Update() {
 			else {
 				currentLevel->Update();
 				player->Update();
-				butler->Update();
+				//butler->Update();
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();

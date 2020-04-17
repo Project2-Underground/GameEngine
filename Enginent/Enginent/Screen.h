@@ -106,7 +106,7 @@ public:
 	~GameScreen();
 
 	// special npcs
-	Butler* butler;
+	//Butler* butler;
 };
 
 class CutsceneScreen :public Screen {

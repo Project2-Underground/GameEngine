@@ -16,7 +16,8 @@ enum InteractTypeList
 	SAVE,
 	OPEN,
 	PUZZLE,
-	STAIR
+	STAIR,
+	TRIGGER
 };
 
 enum DialogueTrigger 
@@ -59,6 +60,7 @@ public:
 	virtual void UseItem(Item* item);
 	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
 	void ChangeDialogue(std::string n);
+	std::string GetCurrentDialogueName() { return dialogue_name; }
 
 	InteractTypeList getType() { return interactType; };
 
@@ -115,4 +117,20 @@ class SaveObj : public InteractableObj {
 public:
 	SaveObj() { interactType = SAVE; }
 	void action();
+};
+
+class TriggerObj : public InteractableObj {
+protected:
+	bool triggered;
+public:
+	void Update();
+};
+
+class Butler : public TriggerObj {
+public:
+	Butler();
+	void Appear(glm::vec3 pos, std::string dialogue);
+	void SetTriggered(bool b);
+	bool IsTriggered();
+	void Update();
 };

@@ -274,6 +274,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
+					obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
 
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 						if (node.attribute("open").as_bool()) {
@@ -282,6 +283,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 								o->ClearItem();
 						}
 					}
+
 				}
 			}
 		}
@@ -374,7 +376,7 @@ void XMLManager::SaveGame(std::string filename) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
 				/// current dialogue
-				//node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogueName().c_str());
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());

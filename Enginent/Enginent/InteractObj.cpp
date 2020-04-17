@@ -220,3 +220,9 @@ void Butler::Update() {
 		SetDisplay(false);
 	TriggerObj::Update();
 }
+void Butler::SetTriggered(bool b) {
+	triggered = b;
+}
+bool Butler::IsTriggered() {
+	return triggered;
+}

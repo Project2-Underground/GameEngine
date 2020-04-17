@@ -70,8 +70,7 @@
 	<script key = "EliasRoom_carbinet2" loopIndex = "1">
 		<sub>
 			<Dialogue name = "??" text = "Hm... no cards"/>
-			<Dialogue name = "??" text = "Come to think of it, there are many more military training books I own
-than I thought."/>
+			<Dialogue name = "??" text = "Come to think of it, I own more military training books than I thought."/>
 		</sub>
 		<sub>
 			<Dialogue name = "??" text = "There are only military trainging books, body donation form and other documents in here"/>
