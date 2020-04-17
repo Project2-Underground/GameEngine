@@ -12,7 +12,7 @@ Inventory::Inventory() {
 	float height = (float)Game::GetInstance()->winHeight;
 
 	tab = new UIObject();
-	tab->SetSize(width, -156.3f);
+	tab->SetSize(width, -155);
 	minHeight = -height * 0.5f - (-tab->getSize().y * 0.5f);
 	maxHeight = minHeight + -tab->getSize().y;
 
@@ -22,14 +22,14 @@ Inventory::Inventory() {
 	popArea = new Collider(tab);
 	popArea->setNewSize(glm::vec3(tab->getSize().x, tab->getSize().y * 1.25f, 1.0f));
 
-	float boxSize = 75.0f;
+	float boxSize = 100.0f;
 	float space = width / (float)INVENTORY_SIZE;
 	float x = space * 0.5f - width * 0.5f;
 	float y = tab->getPos().y + tab->getSize().y * -0.35f;
 	// create UIObject and get position of each set from game.h
 	for (int i = 0; i < INVENTORY_SIZE; i++) {
-		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/tmp_texture/tmp_inventoryBox.png");
-		tmpObj->SetPressTexture("Texture/tmp_texture/tmp_inventoryBoxSelected.png");
+		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/UI/Inventory/Item_scoll_2.png");
+		tmpObj->SetPressTexture("Texture/UI/Inventory/Item_scoll_2_selected.png");
 		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y, 1.0f));
 		tmpObj->SetSize(boxSize, -boxSize);
 		tmpObj->SetCollder(new Collider(tmpObj));
@@ -50,6 +50,12 @@ Inventory::Inventory() {
 	combineButton->SetCollder(new Collider(combineButton));
 }
 
+bool Inventory::IsItemInInventory(std::string itemName) {
+	for (auto ib : InventoryBoxes)
+		if (ib->GetItem() && ib->GetItem()->name == itemName)
+			return true;
+	return false;
+}
 void Inventory::Update() {
 	// temporary mouse input
 	int x, y;

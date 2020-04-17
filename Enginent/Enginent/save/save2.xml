@@ -4,7 +4,7 @@
 		<BackDoorRoom_FlowerClue />
 		<BackDoorRoom_Computer />
 		<Closet open="true" has_item="false" />
-		<Table open="true" has_item="false" />
+		<Table open="false" has_item="false" />
 		<Calendar />
 		<bed />
 		<EmmaRoom_Book />
@@ -27,7 +27,7 @@
 		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
-		<StairDoor used="true" />
+		<StairDoor used="false" />
 		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
 		<HallRoomLowerFloor_Door used="false" />
@@ -36,9 +36,9 @@
 	</doors>
 	<NPCs />
 	<puzzles>
-		<BookshelfPuzzle done="true" />
+		<BookshelfPuzzle done="false" />
 	</puzzles>
-	<Player posX="555.770569" posY="-50">
+	<Player posX="379.115662" posY="-50">
 		<inventory>
 			<item />
 			<item />

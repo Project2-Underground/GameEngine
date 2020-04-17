@@ -22,10 +22,8 @@ Room::~Room() {
 }
 
 void Room::Update() {
-	for (auto door : doors)
-		door.second->Update();
-	for (auto npc : npcs)
-		npc->Update();
+	for (auto obj : objects)
+		obj->Update();
 }
 
 void Room::SetPlayerWalkLimit(Collider* col) {

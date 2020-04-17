@@ -57,6 +57,7 @@ MenuScreen::MenuScreen() {
 	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	SoundManager::GetInstance()->playSound(BGM, "MainScreen", true);
+	XMLManager::GetInstance()->LoadGameOptions();
 }
 
 void MenuScreen::Render() {
@@ -134,12 +135,17 @@ GameScreen::GameScreen() {
 	PuzzleTime = false;
 	// filepath of levels
 	levels.push_back("save/level1.xml");
-	//levels.push_back("save/level2.xml");
-	//levels.push_back("save/level3.xml");
-
-	currentLevel = new Level(levels[0]);
+	levels.push_back("save/level2.xml");
+	levels.push_back("save/level3.xml");
+	objActions.push_back("save/objSpecialAction1.xml");
+	objActions.push_back("save/objSpecialAction2.xml");
+	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
+	//butler = new Butler();
+	currentLevel = new Level(levels[0]);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
+
 	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
 	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
@@ -189,6 +195,7 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
+		//renderer->Render(butler);
 	}
 	renderer->Render(UI);
 
@@ -216,6 +223,7 @@ void GameScreen::Update() {
 			else {
 				currentLevel->Update();
 				player->Update();
+				//butler->Update();
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();
@@ -234,14 +242,14 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (GameWindowOpen()) {
+	if (dialogueText->IsDisplay())
+		dialogueText->clickLeft(screen);
+	else if (GameWindowOpen()) {
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
 	}
 	else if (phone->open) 
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay()) 
-		dialogueText->clickLeft(screen);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {
@@ -298,6 +306,7 @@ void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
@@ -329,9 +338,11 @@ Door* GameScreen::GetDoor(std::string doorNam) {
 
 void GameScreen::OpenPuzzle(std::string name) {
 	player->StopWalking();
-	currentPuzzle = puzzles[name];
-	PuzzleTime = true;
-	InventoryEnable = currentPuzzle->IsInventoryEnable();
+	if (puzzles[name]->CheckRequirements()) {
+		currentPuzzle = puzzles[name];
+		PuzzleTime = true;
+		InventoryEnable = currentPuzzle->IsInventoryEnable();
+	}
 }
 
 

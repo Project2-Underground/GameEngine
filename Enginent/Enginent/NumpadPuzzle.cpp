@@ -227,6 +227,10 @@ NumpadPuzzle::NumpadPuzzle()
 	((Numpad*)puzzle)->Init(images, buttons, c, 4, input);
 }
 
+bool NumpadPuzzle::CheckRequirements() {
+	return true;
+}
+
 void NumpadPuzzle::Render()
 {
 	puzzle->Render();

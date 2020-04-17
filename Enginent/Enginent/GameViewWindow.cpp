@@ -12,12 +12,13 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new ViewWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new ViewWindowCloseButton("Texture/Puzzle/CloseButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
 	trigger = false;
 
+	//bgWindow->SetDisplay(false);
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
@@ -32,12 +33,14 @@ void ViewWindow::Update() {
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
-	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
+	bgWindow->Init((float)width * 0.45f, -(float)height * 0.5f, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
 	viewItem->SetSize(540, -540);
-	viewItem->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y + -viewItem->getSize().y * 0.2f, 0.0f));
-	closeButton->SetSize(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f);
-	closeButton->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
-	closeButton->SetCollder(new Collider(closeButton));
+	viewItem->SetPosition(bgWindow->getPos());
+	float closeButtonSize = 40.0f;
+	closeButton->Init(closeButtonSize, -closeButtonSize,
+					  glm::vec3(bgWindow->col->getMaxBound().x - closeButtonSize * 0.75f,
+					  bgWindow->col->getMaxBound().y - closeButtonSize * 0.75f,
+					  0.0f));
 }
 
 void ViewWindow::SetViewItem(Item* item) {

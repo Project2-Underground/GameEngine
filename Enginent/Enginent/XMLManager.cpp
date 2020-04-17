@@ -117,6 +117,12 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case SAVE: {
 			interactObj = new SaveObj();
 		}break;
+		case PLAYER_TRIGGER: {
+			PlayerTriggerObj* obj = new PlayerTriggerObj();
+			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
+			std::cout << "set trigger name: " << child->name() << "\n";
+			interactObj = obj;
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
@@ -124,7 +130,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 		if (child->child("picture"))
 			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
-
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -269,6 +274,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
+					obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
 
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 						if (node.attribute("open").as_bool()) {
@@ -277,6 +283,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 								o->ClearItem();
 						}
 					}
+
 				}
 			}
 		}
@@ -291,6 +298,13 @@ void XMLManager::LoadFromSave(std::string filename) {
 			if (p->attribute("done").as_bool())
 				gs->puzzles[p->name()]->CompletePuzzle();
 		}
+
+		// load special npcs
+		pugi::xml_node butlerNode = file.child("level").child("Butler");
+		Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+		butler->SetDisplay(butlerNode.attribute("display").as_bool());
+		butler->SetPosition(glm::vec3(butlerNode.attribute("posX").as_float(), butlerNode.attribute("posY").as_float(), 1));
+		butler->SetTriggered(butlerNode.attribute("triggered").as_bool());
 
 		// load player and inventory
 		pugi::xml_node playerNode = file.child("level").child("Player");
@@ -362,7 +376,7 @@ void XMLManager::SaveGame(std::string filename) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
 				/// current dialogue
-				//node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogue());
+				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogueName().c_str());
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());
@@ -380,6 +394,15 @@ void XMLManager::SaveGame(std::string filename) {
 		saveLevel.child("puzzles").append_child(p.first.c_str());
 		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("done").set_value(p.second->Passed());
 	}
+
+	// saving special npcs
+	Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+	saveLevel.append_child("Butler").append_attribute("posX").set_value(butler->getPos().x);
+	saveLevel.child("Butler").append_attribute("posY").set_value(butler->getPos().y);
+	saveLevel.child("Butler").append_attribute("display").set_value(butler->IsDisplay());
+	saveLevel.child("Butler").append_attribute("triggered").set_value(butler->IsTriggered());
+	//saveLevel.child("butler").append_attribute("current_dialogue").set_value(butler->getPos().y);
+
 
 	// saving player and inventory
 	Player* player = game->GetPlayer();
@@ -426,15 +449,26 @@ void XMLManager::SaveGameOptions() {
 
 	SoundManager* soundManager = SoundManager::GetInstance();
 
-	gameOption.append_child("Options");
-	gameOption.child("Options").append_child("Master").append_attribute("mute").set_value(soundManager->getMute(MASTER));
-	gameOption.child("Options").child("Master").append_attribute("volume").set_value(soundManager->getVolume(MASTER));
+	pugi::xml_node options = gameOption.append_child("Options");
 
-	gameOption.child("Options").append_child("BGM").append_attribute("mute").set_value(soundManager->getMute(BGM));
-	gameOption.child("Options").child("BGM").append_attribute("volume").set_value(soundManager->getVolume(BGM));
+	options.append_child("Settings");
+	options.child("Settings").append_child("Master").append_attribute("mute").set_value(soundManager->getMute(MASTER));
+	options.child("Settings").child("Master").append_attribute("volume").set_value(soundManager->getVolume(MASTER));
 
-	gameOption.child("Options").append_child("SFX").append_attribute("mute").set_value(soundManager->getMute(SFX));
-	gameOption.child("Options").child("SFX").append_attribute("volume").set_value(soundManager->getVolume(SFX));
+	options.child("Settings").append_child("BGM").append_attribute("mute").set_value(soundManager->getMute(BGM));
+	options.child("Settings").child("BGM").append_attribute("volume").set_value(soundManager->getVolume(BGM));
+
+	options.child("Settings").append_child("SFX").append_attribute("mute").set_value(soundManager->getMute(SFX));
+	options.child("Settings").child("SFX").append_attribute("volume").set_value(soundManager->getVolume(SFX));
+
+	options.append_child("SaveSlots");
+	std::vector<SaveLoadGameButton*> &buttons = SaveLoadWindow::GetInstance()->saveButtons;
+	for (int i = 0; i < buttons.size(); i++) {
+		pugi::xml_node s = options.child("SaveSlots").append_child("s");
+		s.append_attribute("hasSaveFile").set_value(buttons[i]->hasSaved);
+		s.append_attribute("details").set_value(buttons[i]->saveLevel.c_str());
+
+	}
 
 	gameOption.save_file("save/settings.xml");
 }
@@ -444,15 +478,22 @@ void XMLManager::LoadGameOptions() {
 	if (LoadFile("save/settings.xml")) {
 		SoundManager* soundManager = SoundManager::GetInstance();
 
-		pugi::xml_node options = doc.child("Options");
+		pugi::xml_node settings = doc.child("Options").child("Settings");
 
-		soundManager->setVolume(MASTER, options.child("Master").attribute("volume").as_float());
-		soundManager->setVolume(BGM, options.child("BGM").attribute("volume").as_float());
-		soundManager->setVolume(SFX, options.child("SFX").attribute("volume").as_float());
+		soundManager->setVolume(MASTER, settings.child("Master").attribute("volume").as_float());
+		soundManager->setVolume(BGM, settings.child("BGM").attribute("volume").as_float());
+		soundManager->setVolume(SFX, settings.child("SFX").attribute("volume").as_float());
 
-		soundManager->setMute(MASTER, options.child("Master").attribute("mute").as_bool());
-		soundManager->setMute(BGM, options.child("BGM").attribute("mute").as_bool());
-		soundManager->setMute(SFX, options.child("SFX").attribute("mute").as_bool());
+		soundManager->setMute(MASTER, settings.child("Master").attribute("mute").as_bool());
+		soundManager->setMute(BGM, settings.child("BGM").attribute("mute").as_bool());
+		soundManager->setMute(SFX, settings.child("SFX").attribute("mute").as_bool());
+
+		std::vector<SaveLoadGameButton*>& buttons = SaveLoadWindow::GetInstance()->saveButtons;
+		pugi::xml_node save = doc.child("Options").child("SaveSlots").first_child();
+		for (int i = 0; i < buttons.size(); i++, save = save.next_sibling()) {
+			buttons[i]->hasSaved = save.attribute("hasSaveFile").as_bool();
+			buttons[i]->SetSaveLevel(save.attribute("details").as_string());
+		}
 	}
 }
 
@@ -487,6 +528,24 @@ void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>
 					c.AddText(msg->child_value());
 				}
 			chats.insert(std::pair<std::string, ChatInfo>(c.name, c));
+		}
+	}
+}
+
+void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
+	if (LoadFile(filename)) {
+		pugi::xml_node objs = doc.child("Objects");
+		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
+			Room* r = level->rooms[room->name()];
+			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
+				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
+				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
+					InteractableObj* o = ((InteractableObj*)(r->FindObject(triggerObj->name())));
+					interactObj->AddTriggerObj(o);
+					o->triggered = false;
+					std::cout << o->object_name << std::endl;
+				}
+			}
 		}
 	}
 }

@@ -137,6 +137,7 @@ protected:
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
+	virtual bool CheckRequirements() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftRelease(glm::vec3, glm::vec3) = 0;
@@ -151,6 +152,7 @@ public:
 	BookshelfPuzzle();
 	void Render();
 	void Update();
+	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
@@ -164,6 +166,7 @@ public:
 	NumpadPuzzle();
 	void Render();
 	void Update();
+	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}

@@ -24,7 +24,7 @@
 	</script>
 	<script key = "EliasRoom_bed1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "??" text = "The bed looks like a luandry basket. I need to clean it up sometimes"/>
+			<Dialogue name = "??" text = "The bed looks like a laundry basket. I need to clean it up sometimes"/>
 		</sub>
 	</script>	
 	<script key = "EliasRoom_carbinet1" loopIndex = "0">
@@ -37,7 +37,7 @@
 			<Dialogue name = "??" text = "I feel like throwing up just looking into the trash can."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_calendar" loopIndex = "-1">
+	<script key = "EliasRoom_calendar" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "It's almost time to go back to study."/>
 		</sub>
@@ -70,8 +70,7 @@
 	<script key = "EliasRoom_carbinet2" loopIndex = "1">
 		<sub>
 			<Dialogue name = "??" text = "Hm... no cards"/>
-			<Dialogue name = "??" text = "Come to think of it, there are many more military training books I own
-than I thought."/>
+			<Dialogue name = "??" text = "Come to think of it, I own more military training books than I thought."/>
 		</sub>
 		<sub>
 			<Dialogue name = "??" text = "There are only military trainging books, body donation form and other documents in here"/>
@@ -98,7 +97,7 @@ than I thought."/>
 		<sub>
 			<Dialogue name = "" text = "beep beep beep"/>
 			<Dialogue name = "" text = "Identity confirmation: Elias Adams"/>
-			<Dialogue name = "Elias" text = "Looks like it's working!"/>
+			<Dialogue name = "Elias" text = "Looks like it works!"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_door_unlock" loopIndex = "0">

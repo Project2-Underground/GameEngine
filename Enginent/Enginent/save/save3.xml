@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<level currentLevel="1" currentRoom="MainHallLower">
+	<interactObj>
+		<BackDoorRoom_FlowerClue />
+		<BackDoorRoom_Computer />
+		<Closet open="true" has_item="false" />
+		<Table open="false" has_item="false" />
+		<Calendar />
+		<bed />
+		<EmmaRoom_Book />
+		<EmmaRoom_Drawing />
+		<EmmaRoom_Note1 />
+		<EmmaRoom_Window />
+		<Bookshelf1 />
+		<Bookshelf2 />
+		<Gramophone />
+		<RabbitCage />
+		<Door2 />
+		<Door3 />
+		<sign />
+	</interactObj>
+	<item />
+	<doors>
+		<BackDoorRoom_Foreground_Door used="true" />
+		<BackDoorRoom_BasementDoor used="true" />
+		<BackDoorRoom_EmmaDoor used="true" />
+		<BackDoorRoom_BasementStair used="true" />
+		<EliasRoomInnerDoor used="true" />
+		<EmmaRoom_Door used="true" />
+		<StairDoor used="false" />
+		<LowerStair used="true" />
+		<EliasRoomOuterDoor used="false" />
+		<HallRoomLowerFloor_Door used="false" />
+		<UpperStair used="true" />
+		<tmpDoor used="true" />
+	</doors>
+	<NPCs />
+	<puzzles>
+		<BookshelfPuzzle done="false" />
+	</puzzles>
+	<Player posX="379.115662" posY="-50">
+		<inventory>
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+		</inventory>
+	</Player>
+	<Phone>
+		<Notes />
+		<Chats>
+			<c name="another_person_name" msgNo="4" />
+			<c name="person_name" msgNo="11" />
+		</Chats>
+	</Phone>
+</level>

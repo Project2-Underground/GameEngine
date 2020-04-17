@@ -16,7 +16,8 @@ enum InteractTypeList
 	SAVE,
 	OPEN,
 	PUZZLE,
-	STAIR
+	STAIR,
+	PLAYER_TRIGGER
 };
 
 enum DialogueTrigger 
@@ -35,9 +36,10 @@ protected:
 	std::string item_to_use;
 	std::string dialogue_name;
 	Item* item;
-	std::vector<std::map<std::string, std::string>> dialogueTriggers;
-	bool actionTriggerDialogue;
-	bool useItemTriggerDialogue;
+	std::vector<InteractableObj*> triggerObjs;
+	//std::vector<std::map<std::string, std::string>> dialogueTriggers;
+	//bool actionTriggerDialogue;
+	//bool useItemTriggerDialogue;
 
 public:
 	InteractableObj();
@@ -57,14 +59,17 @@ public:
 	void TakePic();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
-	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
+	//void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
+	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n);
+	std::string GetCurrentDialogueName() { return dialogue_name; }
 
 	InteractTypeList getType() { return interactType; };
 
 	~InteractableObj();
 	bool operator==(const InteractableObj& obj);
 	bool used;
+	bool triggered;
 };
 
 class OpenObj : public InteractableObj {
@@ -115,4 +120,18 @@ class SaveObj : public InteractableObj {
 public:
 	SaveObj() { interactType = SAVE; }
 	void action();
+};
+
+class PlayerTriggerObj : public InteractableObj {
+public:
+	void Update();
+};
+
+class Butler : public PlayerTriggerObj {
+public:
+	Butler();
+	void Appear(glm::vec3 pos, std::string dialogue);
+	void SetTriggered(bool b);
+	bool IsTriggered();
+	void Update();
 };

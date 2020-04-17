@@ -122,11 +122,6 @@ void ClosePuzzleButton::action() {
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
 
-void SaveLoadGameButton::action() {
-	SoundManager::GetInstance()->stopAllSounds();
-	Game::GetInstance()->TriggerLoadGame(filename);
-}
-
 void OpenPauseWindowButton::action() {
 	PauseWindow::GetInstance()->Open();
 	// pause sfx
@@ -188,4 +183,59 @@ ChatNoteInfoButton::ChatNoteInfoButton(std::string texture, std::string _title, 
 void ChatNoteInfoButton::action() {
 	hasNewInfo = false;
 	Phone::GetInstance()->app->SelectItem(index);
+}
+
+void SaveLoadGameButton::action() {
+	if (Game::GetInstance()->GetSaveState()) {
+		std::string savelevel = "Level " + std::to_string(Game::GetInstance()->GetCurrentLevel()->levelNo);
+		SetSaveLevel(savelevel);
+		hasSaved = true;
+	}
+	if (hasSaved) {
+		SoundManager::GetInstance()->stopAllSounds();
+		Game::GetInstance()->TriggerLoadGame(filename);
+	}
+}
+
+SaveLoadGameButton::SaveLoadGameButton(std::string texture, std::string f):Button(texture) {
+	filename = f; 
+	hasSaved = false;
+	name = new TextObject();
+	details = new TextObject();
+}
+
+void SaveLoadGameButton::InitSaveLoadButton() {
+	noSaveTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/tmp_texture/tmp_savefileNoSave.png");
+	std::string text = filename.substr(5, 5) + " : ";
+	name->loadText(text, {0,0,0,0}, 24);
+	name->SetPosition(glm::vec3(getPos().x - getSize().x * 0.5f + name->getSize().x * 0.5f + 10, getPos().y, 1));
+}
+
+void SaveLoadGameButton::SetSaveLevel(std::string s) {
+	saveLevel = s; 
+	details->loadText(saveLevel, { 0,0,0,0 }, 24);
+	details->SetPosition(glm::vec3(name->getPos().x + name->getSize().x * 0.5f + details->getSize().x * 0.5f, getPos().y, 1));
+}
+
+void SaveLoadGameButton::updateButton(float x, float y) {
+	if (this->col->isClicked(x, y))
+	{
+		if (hasSaved || Game::GetInstance()->GetSaveState()) {
+			SetTexture(hoverTexture);
+		}
+	}
+	else
+	{
+		if (hasSaved)
+			SetTexture(normalTexture);
+		else
+			SetTexture(noSaveTexture);
+	}
+}
+void SaveLoadGameButton::checkColliderPressed(float x, float y) {
+	if (this->col->isClicked(x, y) && (hasSaved || Game::GetInstance()->GetSaveState())) {
+		SetTexture(pressTexture);
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+		Game::GetInstance()->GetScreen()->buttonClicked = true;
+	}
 }
