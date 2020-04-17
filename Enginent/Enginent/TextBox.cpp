@@ -59,7 +59,6 @@ void TextBox::setText(std::string key)
 						break;
 					}
 					s_tmp << tmp_text[charCount];
-					std::cout << charCount << " " << tmp_text[charCount] << std::endl;
 					charCount++;
 				}
 				TextObject* textObj = new TextObject();
@@ -152,7 +151,6 @@ void TextBox::clickLeft(glm::vec3 pos)
 					break;
 				}
 				s_tmp << tmp_text[charCount];
-				std::cout << charCount << " " << tmp_text[charCount] << std::endl;
 				charCount++;
 			}
 			TextObject* textObj = new TextObject();

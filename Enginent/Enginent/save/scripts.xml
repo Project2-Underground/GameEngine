@@ -49,9 +49,10 @@
 		</sub>
 	</script>
 	<script key = "EliasRoom_InnerDoor" loopIndex = "1">
-		<sub  change = "2">
+		<sub  change = "3">
 			<ChangeName name = "bed" new = "EliasRoom_bed2"/>
 			<ChangeName name = "Table" new = "EliasRoom_carbinet2"/>
+			<ChangeName name = "Closet" new = "EliasRoom_closet"/>
 			<Dialogue name = "??" text = "It's time to go outside."/>
 			<Dialogue name = "??" text = "...Hm, It won't budge."/>
 			<Dialogue name = "??" text = "Is that... a card scanner? Since when did I have this in my room?"/>
@@ -153,7 +154,11 @@
 		</sub>
 	</script>
 	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
-		<sub>
+		<sub  change = "4">
+			<ChangeName name = "Hubert" new = "Hubert2"/>
+			<ChangeName name = "Dialy" new = "Dialy2"/>
+			<ChangeName name = "Ann" new = "Ann2"/>
+			<ChangeName name = "Dann" new = "Dann2"/>
 			<Dialogue name = "Elias" text = "I have to do something with the books"/>
 			<Dialogue name = "Elias" text = "( I have no idea what I'm doing. Let's just put these books back for now )"/>
 			<Dialogue name = "Elias" text = "( I should go gather some information and find all the missing books )"/>
@@ -346,7 +351,7 @@
 	
 	
 	<script key = "Dann1" loopIndex = "1">
-		<sub choice = "Dann1">
+		<sub choice = "c_Dann1">
 			<Dialogue name = "Elias" text = "Um... hello"/>
 			<Dialogue name = "Dann:" text = "Hm? Ah! hi there, you're the newcomer?"/>
 			<Dialogue name = "Elias" text = "Yes, I just want to ask you about this place. Do you know anything about here?"/>

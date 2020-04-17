@@ -30,8 +30,12 @@ void InteractableObj::SetDialogueName(std::string n)
 }
 
 void InteractableObj::action() {
-	TextBox::GetInstance()->setText(this->dialogue_name);
-	TextBox::GetInstance()->SetDisplay(true);
+	if (dialogue_name != "")
+	{
+		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->SetDisplay(true);
+	}
+
 	//if (actionTriggerDialogue) {
 	//	actionTriggerDialogue = false;
 	//	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
@@ -157,15 +161,22 @@ void OpenObj::action() {
 		SetTexture(nextTexture);
 	}
 	else {
-		TextBox::GetInstance()->setText(this->dialogue_name);
-		TextBox::GetInstance()->SetDisplay(true);
+		if (dialogue_name != "")
+		{
+			TextBox::GetInstance()->setText(this->dialogue_name);
+			TextBox::GetInstance()->SetDisplay(true);
+		}
 	}
 }
 
 void OpenObj::Open() {
 	open = true;
 	//std::cout << "open\n";
-	TextBox::GetInstance()->setText(this->dialogue_name);
+	if (dialogue_name != "")
+	{
+		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->SetDisplay(true);
+	}
 	SetTexture(openTexture);
 	if (item)interactType = PICKUP;
 	else interactType = NORMAL;

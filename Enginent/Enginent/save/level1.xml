@@ -14,7 +14,7 @@
 			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
 			</Table>
-			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="EliasRoom_closet">
+			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
 				<item name="keyCard" v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 			</Closet>
@@ -90,12 +90,12 @@
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0" dialogue="Hubert1">
+			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0" dialogue="Ann1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
-			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0" dialogue="Hubert1">
+			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0" dialogue="Dann1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
