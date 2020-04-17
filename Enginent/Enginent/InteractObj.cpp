@@ -6,6 +6,7 @@
 
 InteractableObj::InteractableObj() {
 	interactType = NORMAL;
+	triggered = true;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -31,12 +32,15 @@ void InteractableObj::SetDialogueName(std::string n)
 void InteractableObj::action() {
 	TextBox::GetInstance()->setText(this->dialogue_name);
 	TextBox::GetInstance()->SetDisplay(true);
-	if (actionTriggerDialogue) {
-		actionTriggerDialogue = false;
-		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-		for (auto obj : dialogueTriggers[ACTION_TRIGGER_DIALOGUE])
-			gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
-	}
+	//if (actionTriggerDialogue) {
+	//	actionTriggerDialogue = false;
+	//	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	//	for (auto obj : dialogueTriggers[ACTION_TRIGGER_DIALOGUE])
+	//		gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
+	//}
+	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	for (auto obj : triggerObjs)
+		obj->triggered = true;
 	PickUpItem();
 	TakePic();
 }
@@ -93,12 +97,12 @@ void InteractableObj::PickUpItem() {
 
 		item = nullptr;
 		interactType = NORMAL;
-		if (useItemTriggerDialogue) {
+		/*if (useItemTriggerDialogue) {
 			useItemTriggerDialogue = false;
 			actionTriggerDialogue = false;
 			for (auto obj : dialogueTriggers[USE_ITEM_TRIGGER_DIALOGUE])
 				gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
-		}
+		}*/
 	}	
 }
 
@@ -109,15 +113,19 @@ void InteractableObj::SetAnimation(std::string name, std::string texture, int fr
 	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
 }
 
-
-void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName) {
-	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
-	switch (type)
-	{
-		case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
-		case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
-	}
+void InteractableObj::AddTriggerObj(InteractableObj* obj) {
+	triggerObjs.push_back(obj);
 }
+
+//
+//void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName) {
+//	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
+//	switch (type)
+//	{
+//		case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
+//		case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
+//	}
+//}
 
 void InteractableObj::ChangeDialogue(std::string n)
 {
@@ -140,19 +148,23 @@ void OpenObj::SetNextTexture(std::string next) {
 }
 
 void OpenObj::action() {
-	if (!open) {
+	if (!open && triggered) {
+		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 		Open();
 	}
-	else {
+	else if (open) {
 		PickUpItem();
 		SetTexture(nextTexture);
 	}
-	TakePic();
+	else {
+		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->SetDisplay(true);
+	}
 }
 
 void OpenObj::Open() {
 	open = true;
-	std::cout << "open\n";
+	//std::cout << "open\n";
 	TextBox::GetInstance()->setText(this->dialogue_name);
 	SetTexture(openTexture);
 	if (item)interactType = PICKUP;
@@ -177,9 +189,10 @@ void ViewObj::SetViewTexture(std::string view) {
 void ViewObj::action() {
 	ViewWindow* vw = ViewWindow::GetInstance();
 	vw->Open();
-	TextBox::GetInstance()->setText(this->dialogue_name);
 	vw->SetViewItem(viewTexture);
-	TakePic();
+	InteractableObj::action();
+	/*TextBox::GetInstance()->setText(this->dialogue_name);
+	TakePic();*/
 	// set description
 }
 
@@ -195,7 +208,7 @@ void SaveObj::action() {
 	Game::GetInstance()->SetSaveGame(true);
 	SaveLoadWindow::GetInstance()->Open();
 }
-void TriggerObj::Update() {
+void PlayerTriggerObj::Update() {
 	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
 		action();
 		triggered = true;
@@ -218,7 +231,7 @@ void Butler::Appear(glm::vec3 pos, std::string dialogue) {
 void Butler::Update() {
 	if (triggered && display)
 		SetDisplay(false);
-	TriggerObj::Update();
+	PlayerTriggerObj::Update();
 }
 void Butler::SetTriggered(bool b) {
 	triggered = b;

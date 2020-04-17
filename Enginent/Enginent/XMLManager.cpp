@@ -117,8 +117,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case SAVE: {
 			interactObj = new SaveObj();
 		}break;
-		case TRIGGER: {
-			TriggerObj* obj = new TriggerObj();
+		case PLAYER_TRIGGER: {
+			PlayerTriggerObj* obj = new PlayerTriggerObj();
 			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
 			std::cout << "set trigger name: " << child->name() << "\n";
 			interactObj = obj;
@@ -528,6 +528,24 @@ void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>
 					c.AddText(msg->child_value());
 				}
 			chats.insert(std::pair<std::string, ChatInfo>(c.name, c));
+		}
+	}
+}
+
+void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
+	if (LoadFile(filename)) {
+		pugi::xml_node objs = doc.child("Objects");
+		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
+			Room* r = level->rooms[room->name()];
+			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
+				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
+				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
+					InteractableObj* o = ((InteractableObj*)(r->FindObject(triggerObj->name())));
+					interactObj->AddTriggerObj(o);
+					o->triggered = false;
+					std::cout << o->object_name << std::endl;
+				}
+			}
 		}
 	}
 }

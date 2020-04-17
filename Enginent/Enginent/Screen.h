@@ -79,6 +79,7 @@ class GameScreen :public Screen {
 	bool InventoryEnable;
 public:
 	vector<std::string> levels;
+	vector<std::string> objActions;
 	map<std::string, Puzzle*> puzzles;
 
 	GameScreen();
@@ -106,7 +107,7 @@ public:
 	~GameScreen();
 
 	// special npcs
-	//Butler* butler;
+	Butler* butler;
 };
 
 class CutsceneScreen :public Screen {

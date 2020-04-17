@@ -135,12 +135,16 @@ GameScreen::GameScreen() {
 	PuzzleTime = false;
 	// filepath of levels
 	levels.push_back("save/level1.xml");
-	//levels.push_back("save/level2.xml");
-	//levels.push_back("save/level3.xml");
+	levels.push_back("save/level2.xml");
+	levels.push_back("save/level3.xml");
+	objActions.push_back("save/objSpecialAction1.xml");
+	objActions.push_back("save/objSpecialAction2.xml");
+	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
 	//butler = new Butler();
 	currentLevel = new Level(levels[0]);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
@@ -238,14 +242,14 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (GameWindowOpen()) {
+	if (dialogueText->IsDisplay())
+		dialogueText->clickLeft(screen);
+	else if (GameWindowOpen()) {
 		for (auto w : windows)
 			w->LeftClick(screen.x, screen.y);
 	}
 	else if (phone->open) 
 		phone->LeftClick(screen.x, screen.y);
-	else if (dialogueText->IsDisplay()) 
-		dialogueText->clickLeft(screen);
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {
@@ -302,6 +306,7 @@ void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {

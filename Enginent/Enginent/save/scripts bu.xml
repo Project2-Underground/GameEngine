@@ -24,12 +24,12 @@
 	</script>
 	<script key = "EliasRoom_bed1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "??" text = "The bed looks like a luandry basket. I need to clean it up sometimes"/>
+			<Dialogue name = "??" text = "The bed looks like a laundry basket. I need to clean it up sometimes"/>
 		</sub>
 	</script>	
 	<script key = "EliasRoom_carbinet1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "??" text = "1 Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
+			<Dialogue name = "??" text = "Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_bin1" loopIndex = "0">
