@@ -144,6 +144,7 @@ GameScreen::GameScreen() {
 	player = new Player();
 	//butler = new Butler();
 	currentLevel = new Level(levels[0]);
+	XMLManager::GetInstance()->LoadItems(items);
 	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	//player->SetTexture("Texture/Character/Elias_idle.png");
@@ -186,6 +187,14 @@ GameScreen::GameScreen() {
 
 void GameScreen::LoadGame(std::string filename) {
 	XMLManager::GetInstance()->LoadFromSave(filename);
+}
+
+Item* GameScreen::FindItem(std::string name) {
+	std::cout << items.size();
+	for (auto i : items)
+		if (i->name == name)
+			return i;
+	return nullptr;
 }
 
 void GameScreen::Render() {
@@ -337,6 +346,7 @@ Door* GameScreen::GetDoor(std::string doorNam) {
 }
 
 void GameScreen::OpenPuzzle(std::string name) {
+	std::cout << "open puzzle\n";
 	player->StopWalking();
 	if (puzzles[name]->CheckRequirements()) {
 		currentPuzzle = puzzles[name];

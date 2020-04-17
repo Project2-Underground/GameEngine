@@ -24,9 +24,9 @@ struct s_Dialogue
 	std::string text;
 	std::string chatName;
 	std::string noteName;
+	std::string itemName;
 	int chatIndex;
-	Item* item;
-	s_Dialogue(std::string n, std::string d, Item* item, std::string chatName, int chatIndex, std::string note);
+	s_Dialogue(std::string n, std::string d, std::string item, std::string chatName, int chatIndex, std::string note);
 	s_Dialogue();
 };
 

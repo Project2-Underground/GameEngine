@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "ImageObject.h"
 #include "InfoPhone.h"
+#include "Item.h"
 
 class XMLManager {
 	static XMLManager* _instance;
@@ -25,6 +26,7 @@ public:
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
 
 	void LoadObjSpecialActions(std::string, Level*);
+	void LoadItems(std::vector<Item*>&);
 
 	int GetLevelNumber(std::string); 
 	std::string GetFirstRoomName();

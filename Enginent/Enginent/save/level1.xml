@@ -3,7 +3,7 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="1" startPosX="0" startPosY="-50" Start="EliasRoom">
-	<EliasRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">
+	<EliasRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-50">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -16,6 +16,7 @@
 			</Table>
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
+				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 				<item name="keyCard" v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar">
@@ -35,7 +36,7 @@
 			<fg texture="Texture/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</EliasRoom>
-	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360">
+	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70">
 		<background>
 			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -54,12 +55,12 @@
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Hubert sizeX="253" sizeY="500" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
+			<Hubert sizeX="205" sizeY="430" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Hubert>
-			<Dialy sizeX="253" sizeY="500" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
+			<Dialy sizeX="205" sizeY="430" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -69,14 +70,15 @@
 			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallUpper>
-	<MainHallLower left_limit="-1580" right_limit="1580" top_limit="360" bottom_limit="-360">
+	<MainHallLower left_limit="-1580" right_limit="1580" top_limit="360" bottom_limit="-360" y="-110">
 		<background>
 			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="1" layer="2" dialogue="Hall_Bookshelf_L1"/>
-			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="9" layer="2">
+			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1">
 				<puzzle name="BookshelfPuzzle"/>
+			</Bookshelf1>
+			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2">
 			</Bookshelf2>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png"/>
@@ -90,12 +92,12 @@
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0" dialogue="Ann1">
+			<Ann sizeX="205" sizeY="430" posX="-808" posY="-97" layer="0" dialogue="Ann1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
-			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0" dialogue="Dann1">
+			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -105,7 +107,7 @@
 			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallLower>
-	<EmmaRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">
+	<EmmaRoom left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-20">
 		<background>
 			<bg texture="Texture/EmmaRoom/EmmaRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -141,7 +143,7 @@
 		</foreground>
 		
 	</EmmaRoom>
-	<BackDoorRoom left_limit="-903.75" right_limit="903.75" top_limit="385" bottom_limit="-385">
+	<BackDoorRoom left_limit="-903.75" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-50">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1807.5" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
@@ -163,7 +165,7 @@
 			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1807.5" sizeY="770" posX="-196" posY="-72" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
-	<BackDoorRoomBasement left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385">
+	<BackDoorRoomBasement left_limit="-640" right_limit="640" top_limit="385" bottom_limit="-385" y="-50">
 		<background>
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="770" posX="0" posY="0" layer="0"/>
 		</background>
@@ -181,7 +183,7 @@
 			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="770" posX="0" posY="-152" layer="0"/>
 		</foreground>
 	</BackDoorRoomBasement>
-	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360">
+	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-50">
 		<background>
 			<bg texture="" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>

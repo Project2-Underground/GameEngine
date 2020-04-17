@@ -24,6 +24,9 @@ void InteractableObj::TakePic() {
 	}
 }
 
+Item* InteractableObj::GetItem() {
+	return ((GameScreen*)Game::GetInstance())->FindItem(itemName);
+}
 void InteractableObj::SetDialogueName(std::string n)
 {
 	this->dialogue_name = n;
@@ -90,8 +93,9 @@ void InteractableObj::UseItem(Item* item) {
 }
 
 void InteractableObj::PickUpItem() {
-	if (item) {
-		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	if (hasItem) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen()); 
+		Item* item = gs->FindItem(itemName);
 		gs->GetInventory()->AddItem(item);
 		gs->GetPlayer()->anim->Play("Pickup", false);
 
@@ -99,7 +103,7 @@ void InteractableObj::PickUpItem() {
 		vw->Open();
 		vw->SetViewItem(item->GetViewTexture());
 
-		item = nullptr;
+		hasItem = false;
 		interactType = NORMAL;
 		/*if (useItemTriggerDialogue) {
 			useItemTriggerDialogue = false;
@@ -139,7 +143,7 @@ void InteractableObj::ChangeDialogue(std::string n)
 OpenObj::OpenObj() {
 	interactType = PICKUP;
 	open = false;
-	item = nullptr;
+	//item = nullptr;
 }
 
 void OpenObj::SetOpenTexture(std::string openT) {
@@ -178,19 +182,16 @@ void OpenObj::Open() {
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	SetTexture(openTexture);
-	if (item)interactType = PICKUP;
+	if (hasItem)interactType = PICKUP;
 	else interactType = NORMAL;
 }
 
 void OpenObj::ClearItem() {
-	item = nullptr;
 	interactType = NORMAL;
 	SetTexture(nextTexture);
 }
 
 OpenObj::~OpenObj() {
-	if (item)
-		delete item;
 }
 
 void ViewObj::SetViewTexture(std::string view) {
@@ -212,6 +213,7 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
+	std::cout << "click puzzle\n";
 	((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
 }
 

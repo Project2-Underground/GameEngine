@@ -42,7 +42,7 @@ void Camera::SetPosition(glm::vec3 pos) {
 glm::mat4 Camera::GetViewMatrix() {
 	glm::mat4 view = glm::mat4(1.0);
 	if (target != nullptr) {
-		glm::vec3 next_pos = glm::vec3(-target->getPos().x, -target->getPos().y + -offset_y, 1.0);
+		glm::vec3 next_pos = glm::vec3(-target->getPos().x, 0, 1.0);
 
 		// check if out of game view
 		if (limit != nullptr) {

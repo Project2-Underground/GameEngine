@@ -35,7 +35,8 @@ protected:
 	std::string picName;
 	std::string item_to_use;
 	std::string dialogue_name;
-	Item* item;
+	//Item* item;
+	std::string itemName;
 	std::vector<InteractableObj*> triggerObjs;
 	//std::vector<std::map<std::string, std::string>> dialogueTriggers;
 	//bool actionTriggerDialogue;
@@ -54,8 +55,9 @@ public:
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }
 	void SetItemToUse(std::string item_to_unlock);
-	virtual void SetItem(Item* item) { this->item = item; }
-	Item* GetItem() { return item; }
+	//void SetItem(Item* item) { this->item = item; }
+	void SetItem(std::string item) { itemName = item; hasItem = true; }
+	Item* GetItem();
 	void TakePic();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
@@ -70,6 +72,7 @@ public:
 	bool operator==(const InteractableObj& obj);
 	bool used;
 	bool triggered;
+	bool hasItem;
 };
 
 class OpenObj : public InteractableObj {

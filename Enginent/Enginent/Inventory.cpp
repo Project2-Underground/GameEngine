@@ -51,9 +51,10 @@ Inventory::Inventory() {
 }
 
 bool Inventory::IsItemInInventory(std::string itemName) {
-	for (auto ib : InventoryBoxes)
+	for (auto ib : InventoryBoxes) {
 		if (ib->GetItem() && ib->GetItem()->name == itemName)
 			return true;
+	}
 	return false;
 }
 void Inventory::Update() {
@@ -86,8 +87,10 @@ void Inventory::Update() {
 		SetAllBoxesPos(tab->getPos().y);
 		popArea->setNewPos(glm::vec3(popArea->getPosition().x, tab->getPos().y, 1.0f));
 	}
+	//std::cout << "inventory: ";
 	for (auto ib : InventoryBoxes)
 		ib->updateButton(0, 0);
+	//std::cout << std::endl;
 }
 
 void Inventory::UnselectItem() {

@@ -103,6 +103,9 @@ public:
 	InteractTypeList GetPointedObject(glm::vec3 pos);
 	Player* GetPlayer() { return player; };
 	Inventory* GetInventory() { return inventory; };
+	Item* FindItem(std::string name);
+
+	std::vector<Item*> items;
 
 	~GameScreen();
 
@@ -110,6 +113,7 @@ public:
 	Butler* butler;
 };
 
+// may change to other thing
 class CutsceneScreen :public Screen {
 public:
 	CutsceneScreen();

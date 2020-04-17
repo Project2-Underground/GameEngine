@@ -84,6 +84,7 @@ void InventoryBoxButton::checkColliderPressed(float x, float y) {
 	}
 }
 void InventoryBoxButton::updateButton(float x, float y) {
+	//if (item)std::cout << item->name << " ";
 	if(!pressAvailable)
 		clickIntervalTime += TimeSystem::instance()->GetTimeBetweenFrame();
 }

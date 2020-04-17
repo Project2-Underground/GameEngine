@@ -138,7 +138,7 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 	if (door != " ") {
-		glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, player->getPos().y, 1);
+		glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, currentRoom->y, 1);
 		player->SetPosition(nextPlayerPosition);
 	}
 	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());

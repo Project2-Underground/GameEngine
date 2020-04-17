@@ -67,16 +67,16 @@ void TextBox::setText(std::string key)
 				dialogue.push_back(textObj);
 				lineCount++;
 			}
-			if (d_text->dialogue[d_index].item != nullptr)
+			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
+			if (item != nullptr)
 			{
-				GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-				gs->GetInventory()->AddItem(d_text->dialogue[d_index].item);
+				gs->GetInventory()->AddItem(item);
 
 
 				ViewWindow* vw = ViewWindow::GetInstance();
-				vw->SetViewItem(d_text->dialogue[d_index].item->GetViewTexture());
+				vw->SetViewItem(item->GetViewTexture());
 				vw->Open();
-				d_text->dialogue[d_index].item = nullptr;
 			}
 			//dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
 			//dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
@@ -169,16 +169,16 @@ void TextBox::clickLeft(glm::vec3 pos)
 			dialogue.push_back(textObj);
 			lineCount++;
 		}
-		if (d_text->dialogue[d_index].item != nullptr)
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
+		if (item != nullptr)
 		{
-			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-			gs->GetInventory()->AddItem(d_text->dialogue[d_index].item);
+			gs->GetInventory()->AddItem(item);
 
 
 			ViewWindow* vw = ViewWindow::GetInstance();
-			vw->SetViewItem(d_text->dialogue[d_index].item->GetViewTexture());
+			vw->SetViewItem(item->GetViewTexture());
 			vw->Open();
-			d_text->dialogue[d_index].item = nullptr;
 		}
 	}
 	else if (choice_UI->IsDisplay())

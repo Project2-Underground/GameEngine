@@ -38,6 +38,7 @@ public:
 	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
 	Collider* GetCameraLimit() { return cameraLimit; };
 
+	float y;
 	glm::vec3 playerNextPosition;
 	void SortObjLayer();
 
