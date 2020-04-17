@@ -29,7 +29,7 @@
 	</script>	
 	<script key = "EliasRoom_carbinet1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "??" text = "1 Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
+			<Dialogue name = "??" text = "Hm... Not so different from the bed, documents are everywhere.\nI'll clean this up later"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_bin1" loopIndex = "0">
@@ -155,8 +155,31 @@ than I thought."/>
 	</script>
 	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "It feels like I can walk through this wall"/>
-			<Dialogue name = "Elias" text = "Hm...This mansion is making me crazy"/>
+			<Dialogue name = "Elias" text = "I have to do something with the books"/>
+			<Dialogue name = "Elias" text = "( I have no idea what I'm doing. Let's just put these books back for now )"/>
+			<Dialogue name = "Elias" text = "( I should go gather some information and find all the missing books )"/>
+		</sub>
+	</script>
+	<script key = "Hall_Bookshelf_L2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "According to the people here, the ones that got out re-ordered the books to their correct position"/>
+			<Dialogue name = "Elias" text = "Let's hope they are right"/>
+		</sub>
+	</script>
+	<script key = "Hall_Bookshelf_L3" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "( Done )"/>
+			<Dialogue name = "Elias" text = "What is this experiment anyway?"/>
+			<Dialogue name = " " text = "* sound of a door unlocking *"/>
+			<Dialogue name = "Elias" text = "( From somewhere, a door has been unlocked )"/>
+		</sub>
+	</script>
+	<script key = "Hall_gramophone" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "This thing looks like the one at home"/>
+			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago"/>
+			<Dialogue name = "Elias" text = "Though It feels like I just listen to it not that long ago"/>
+			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk."/>
 		</sub>
 	</script>
 	
@@ -254,10 +277,11 @@ than I thought."/>
 			<Dialogue name = "Dialy" text = "Well, I still don't know what to do"/>
 			<Dialogue name = "Dialy" text = "These people are messing up the room and I don't even care anymore"/>
 			<Dialogue name = "Dialy" text = "If you want it, just take it"/>
-			<Dialogue name = "Elias" text = "( is she really not going to do anything about this? )"/>
+			<Dialogue name = "Elias" text = "( is she really not going to do anything about this? )">
+				<item name = "Book2" i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/i_Book2.png"/>
+			</Dialogue>
 		</sub>		
 	</script>
-	
 	<script key = "Dialy1_C" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Dialy" text = "The books' position? "/>
@@ -267,6 +291,116 @@ than I thought."/>
 			<Dialogue name = "Elias" text = " ( Let's hope she remembers it correctly )"/>
 		</sub>		
 	</script>
+	<script key = "Ann1" loopIndex = "1">
+		<sub choice = "c_Ann1">
+			<Dialogue name = "Elias" text = "Um... hello"/>
+			<Dialogue name = "Ann:" text = "... Hi... Who are you?"/>
+			<Dialogue name = "Elias" text = "My name is Elias. I just got out from the room on the upper floor"/>
+			<Dialogue name = "Ann" text = "... So, you are... the dreamer boy they are talking about?"/>
+			<Dialogue name = "Elias" text = "Wait wait wait. Who's talking about me like that!"/>
+			<Dialogue name = "Ann:" text = "... You are finding a way to leave this place, right? ... No one here's going to go with you."/>
+			<Dialogue name = "Ann" text = "That's why they are looking at you like a crazy person"/>
+			<Dialogue name = "Elias:" text = "(For god's sake, I hate being the gossip target)"/>
+		</sub>
+		<sub choice = "c_Ann1">
+			<Dialogue name = "Ann" text = "You're back... Are we ready for a mass suicide?"/>
+			<Dialogue name = "Elias:" text = "Ah... maybe later"/>
+		</sub>
+	</script>
+	<script key = "Ann2" loopIndex = "0">
+		<sub choice = "c_Ann2">
+			<Dialogue name = "Ann" text = "You're back... Are we ready for a mass suicide?"/>
+			<Dialogue name = "Elias:" text = "Ah... maybe later"/>
+		</sub>
+	</script>
+	<script key = "Ann1_A" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Ann" text = " ... There was a man, earlier, said that the books in the bookcase will help getting him out of here. So, I... I took one."/>
+			<Dialogue name = "Ann" text = "...I took one of those weird books and read the pages, just like everyone else."/>
+			<Dialogue name = "Elias" text = "You also took a book from the bookshelf?"/>
+			<Dialogue name = "Ann" text = "Yeah... But it's not important anymore. You can take it">
+				<item name = "Book4" i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/i_Book4.png"/>
+			</Dialogue>
+			<Dialogue name = "Elias" text = "Ah...Thank you. I'm going find a way to use it. And please, don't do something suicidal."/>
+			<Dialogue name = "Ann" text = "What gives you the thought?"/>
+			<Dialogue name = "Elias" text = "Hm... I might have met someone with depression disorder, kind of like you... But it was quite a long time ago."/>
+			<Dialogue name = "Ann" text = "........"/>
+		</sub>		
+	</script>
+	<script key = "Ann1_B" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Ann" text = "...After I got here, I don't want to go anywhere. No more."/>
+			<Dialogue name = "Elias" text = "But why...Don't you have anything to go back to?"/>
+			<Dialogue name = "Ann" text = "...Even if we got out, there's nothing waiting for us outside"/>
+			<Dialogue name = "Ann" text = "...Why do you want to go out?"/>
+			<Dialogue name = "Elias" text = "I have to... I have to go back to see my mother tomorrow"/>
+			<Dialogue name = "Ann" text = "Still, you can't get anywhere from here, mama's boy."/>
+		</sub>		
+	</script>
+	<script key = "Ann1_C" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Ann" text = "I took the book out from the third shelf... Hm... the third shelf... It looks different from what I remembered. The books that used to be on the third shelf, they are not there anymore, none of them."/>
+			<Dialogue name = "Ann" text = "That's all I can remember. I'm sorry... I'm sorry"/>
+			<Dialogue name = "Elias" text = "It's...It's okay! you're doing great!"/>
+		</sub>		
+	</script>
 	
 	
+	<script key = "Dann1" loopIndex = "1">
+		<sub choice = "Dann1">
+			<Dialogue name = "Elias" text = "Um... hello"/>
+			<Dialogue name = "Dann:" text = "Hm? Ah! hi there, you're the newcomer?"/>
+			<Dialogue name = "Elias" text = "Yes, I just want to ask you about this place. Do you know anything about here?"/>
+			<Dialogue name = "Dann" text = "Hm..."/>
+			<Dialogue name = "Elias" text = "...Sir?"/>
+			<Dialogue name = "Dann:" text = "Oh, pardon me, this place just makes me feel...at ease"/>
+			<Dialogue name = "Elias" text = "(How can he still drink in the situation like this)"/>
+			<Dialogue name = "Dann:" text = "Ah... right..."/>
+			<Dialogue name = "Dann:" text = "I should be sending my kids to school by now"/>
+		</sub>
+		<sub choice = "c_Dann1">
+			<Dialogue name = "Dann" text = "...the rabbit in the cage looks so fluffly"/>
+			<Dialogue name = "Elias:" text = "( He's gone again. Do these people want to get out at all? )"/>
+		</sub>
+	</script>
+	<script key = "Dann2" loopIndex = "0">
+		<sub choice = "c_Dann2">
+			<Dialogue name = "Dann" text = "...the rabbit in the cage looks so fluffly"/>
+			<Dialogue name = "Elias:" text = "( He's gone again. Do these people want to get out at all? )"/>
+		</sub>
+	</script>
+	<script key = "Dann1_A" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Dann" text = "It's time to go to work... no... I need to find a way out."/>
+			<Dialogue name = "Dann" text = "Hm...? What's that in the rabbit cage over there?"/>
+			<Dialogue name = "Dann" text = "Petting that rabbit must be so relaxing"/>
+			<Dialogue name = "Elias" text = "( He seems easily distracted )"/>
+		</sub>		
+	</script>
+	<script key = "Dann1_B" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Dann" text = "Hm...ah...oh the books"/>
+			<Dialogue name = "Dann" text = "I saw them took out the books to read and started yelling"/>
+			<Dialogue name = "Dann" text = "I took one of the books out to read. Nothing interesting."/>
+			<Dialogue name = "Dann" text = " ...Could you return this book for me?"/>
+			<Dialogue name = "Dann" text = "I think the way out has nothing to do with the books, even so I still don't care about it enough to be bother."/>
+			<Dialogue name = "Dann" text = "......"/>
+			<Dialogue name = "Elias" text = "( He is drifting off again )">
+				<item name = "Book3" i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/i_Book3.png"/>
+			</Dialogue>
+		</sub>		
+	</script>
+	<script key = "Dann1_C" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Ann" text = "Huh? The books? When I took it out?"/>
+			<Dialogue name = "Ann" text = "( Oh no, is he gone again? )"/>
+			<Dialogue name = "Elias" text = "Mister, can you remember anything, at all?"/>
+			<Dialogue name = "Elias" text = "Hm... Some books were already got taken out when I went to grab one"/>
+			<Dialogue name = "Elias" text = "Each row has only one color and the symbols do not repeat"/>
+			<Dialogue name = "Elias" text = "I switch the place around before taking the book. It was quite fun"/>
+			<Dialogue name = "Elias" text = "You mixed them all up?!"/>
+			<Dialogue name = "Elias" text = "Right? But, but, I re-ordered the symbols to their correct places, although the colors are not quite right"/>
+			<Dialogue name = "Elias" text = "( Hm... Atleast I can still use the symbols as the guideline. So, the symbols will not repeat on the same row... )"/>
+		</sub>		
+	</script>
 </scripts>

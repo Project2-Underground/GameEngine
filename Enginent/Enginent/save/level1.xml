@@ -60,7 +60,6 @@
 				</Animations>
 			</Hubert>
 			<Dialy sizeX="253" sizeY="500" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
-				<item name="0" v_texture="0" i_texture="0"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -91,14 +90,12 @@
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0">
-				<item name="0" v_texture="0" i_texture="0"/>
+			<Ann sizeX="253" sizeY="500" posX="-808" posY="-97" layer="0" dialogue="Hubert1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
-			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0">
-				<item name="0" v_texture="0" i_texture="0"/>
+			<Dann sizeX="253" sizeY="500" posX="739" posY="-90" layer="0" dialogue="Hubert1">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>

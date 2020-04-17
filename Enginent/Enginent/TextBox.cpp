@@ -19,9 +19,7 @@ TextBox::TextBox()
 	background->SetPosition(glm::vec3(0, 0, 1.0f));
 	name = new TextObject();
 	name->loadText("", nameColor, 30);
-	dialogue = new TextObject();
 	std::string text = "";
-	dialogue->loadText(text, textColor, 24);
 	name->SetPosition(glm::vec3(-400.0f, -115.0f, 1.0f));
 	choice_UI = new ChoiceUI();
 
@@ -41,17 +39,38 @@ void TextBox::setText(std::string key)
 			name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
 			std::string tmp_text = d_text->dialogue[d_index].text;
 
-			int nextLine = MAX_CHAR;
-			int lineCount = 1;
-			while (tmp_text.size() > nextLine)
+
+			
+			int charCount = 0;
+			int lineCount = 0;
+			for (int i = 0; i < dialogue.size(); i++)
 			{
-				for (; tmp_text[nextLine] != ' '; nextLine--);
-				tmp_text[nextLine] = '\n';
-				lineCount++;
-				nextLine += MAX_CHAR;
+				delete dialogue[i];
 			}
-			dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
-			dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+			dialogue.clear();
+			while (tmp_text.size() > charCount)
+			{
+				std::stringstream s_tmp;
+				for (int i = 0; i < MAX_CHAR && charCount < tmp_text.size(); i++)
+				{
+					if (tmp_text[charCount] == '\\')
+					{
+						charCount += 2;
+						break;
+					}
+					s_tmp << tmp_text[charCount];
+					std::cout << charCount << " " << tmp_text[charCount] << std::endl;
+					charCount++;
+				}
+				TextObject* textObj = new TextObject();
+				textObj->loadText(s_tmp.str(), textColor, 24);
+				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+				dialogue.push_back(textObj);
+				lineCount++;
+			}
+
+			//dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
+			//dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
 			Game::GetInstance()->GetCursor()->enableChange(false);
 
 			//int nextLine = MAX_FONT_PER_LINE;
@@ -86,7 +105,10 @@ void TextBox::Render()
 	{
 		Game::GetInstance()->GetRenderer()->Render(background);
 		Game::GetInstance()->GetRenderer()->Render(name);
-		Game::GetInstance()->GetRenderer()->Render(dialogue);
+		for (int i = 0; i < dialogue.size(); i++)
+		{
+			Game::GetInstance()->GetRenderer()->Render(dialogue[i]);
+		}
 	}
 	if (choice_UI->IsDisplay())
 	{
@@ -96,7 +118,10 @@ void TextBox::Render()
 
 TextBox::~TextBox()
 {
-	delete dialogue;
+	for (int i = 0; i < dialogue.size(); i++)
+	{
+		delete dialogue[i];
+	}
 	delete background;
 	delete choice_UI;
 }
@@ -107,12 +132,37 @@ void TextBox::clickLeft(glm::vec3 pos)
 	{
 		d_index++;
 		name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
-		dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
-		dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+		std::string tmp_text = d_text->dialogue[d_index].text;
 
+		int charCount = 0;
+		int lineCount = 0;
+		for (int i = 0; i < dialogue.size(); i++)
+		{
+			delete dialogue[i];
+		}
+		dialogue.clear();
+		while (tmp_text.size() > charCount)
+		{
+			std::stringstream s_tmp;
+			for (int i = 0; i < MAX_CHAR && charCount < tmp_text.size(); i++)
+			{
+				if (tmp_text[charCount] == '\\')
+				{
+					charCount += 2;
+					break;
+				}
+				s_tmp << tmp_text[charCount];
+				std::cout << charCount << " " << tmp_text[charCount] << std::endl;
+				charCount++;
+			}
+			TextObject* textObj = new TextObject();
+			textObj->loadText(s_tmp.str(), textColor, 24);
+			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+			dialogue.push_back(textObj);
+			lineCount++;
+		}
 		if (d_text->dialogue[d_index].item != nullptr)
 		{
-			std::cout << "Get item";
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 			gs->GetInventory()->AddItem(d_text->dialogue[d_index].item);
 

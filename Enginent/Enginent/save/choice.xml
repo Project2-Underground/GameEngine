@@ -10,12 +10,30 @@
 		<choice text = "Ask about the books" nextDialogue = "Hubert1_B"/>
 		<choice text = "Can you remember any order of the books?" nextDialogue = "Hubert1_C"/>
 	</choices>
-	
 	<choices key = "c_Dialy1">
 		<choice text = "How long have you been here?" nextDialogue = "Dialy1_A"/>
 	</choices>
 	<choices key = "c_Dialy2">
 		<choice text = "How long have you been here?" nextDialogue = "Dialy1_A"/>
 		<choice text = "Can you remember anything about the position of the books??" nextDialogue = "Dialy1_C"/>
+	</choices>
+	<choices key = "c_Ann1">
+		<choice text = "Do you happen to know anything about the books?" nextDialogue = "Ann1_A"/>
+		<choice text = "So, no one's really going to leave this place?" nextDialogue = "Ann1_B"/>
+	</choices>
+	<choices key = "c_Ann2">
+		<choice text = "Do you happen to know anything about the books?" nextDialogue = "Ann1_A"/>
+		<choice text = "So, no one's really going to leave this place?" nextDialogue = "Ann1_B"/>
+		<choice text = "Can you remember anything about the bookcase?" nextDialogue = "Ann1_C"/>
+	</choices>
+	
+	<choices key = "c_Dann1">
+		<choice text = "...." nextDialogue = "Dann1_A"/>
+		<choice text = "Mister... Do you know anything about the books?" nextDialogue = "Dann1_B"/>
+	</choices>
+	<choices key = "c_Dann2">
+		<choice text = "...." nextDialogue = "Dann1_A"/>
+		<choice text = "Mister... Do you know anything about the books?" nextDialogue = "Dann1_B"/>
+		<choice text = "Can you remember anything about the bookcase?" nextDialogue = "Dann1_C"/>
 	</choices>
 </c>
