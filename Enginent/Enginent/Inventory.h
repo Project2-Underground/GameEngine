@@ -35,6 +35,7 @@ public:
 	void CombineItem(Item* item);
 	void SelectItem(Item* item);
 	void UnselectItem();
+	bool IsItemInInventory(std::string);
 	Item* GetSelectedItem() { return selectedItem; }
 
 

@@ -37,7 +37,7 @@
 			<Dialogue name = "??" text = "I feel like throwing up just looking into the trash can."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom_calendar" loopIndex = "-1">
+	<script key = "EliasRoom_calendar" loopIndex = "0">
 		<sub>
 			<Dialogue name = "??" text = "It's almost time to go back to study."/>
 		</sub>

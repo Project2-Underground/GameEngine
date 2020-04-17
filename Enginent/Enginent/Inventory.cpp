@@ -50,6 +50,12 @@ Inventory::Inventory() {
 	combineButton->SetCollder(new Collider(combineButton));
 }
 
+bool Inventory::IsItemInInventory(std::string itemName) {
+	for (auto ib : InventoryBoxes)
+		if (ib->GetItem() && ib->GetItem()->name == itemName)
+			return true;
+	return false;
+}
 void Inventory::Update() {
 	// temporary mouse input
 	int x, y;

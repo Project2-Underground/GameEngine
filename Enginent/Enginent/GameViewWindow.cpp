@@ -18,6 +18,7 @@ ViewWindow::ViewWindow() {
 	display = false;
 	trigger = false;
 
+	//bgWindow->SetDisplay(false);
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
@@ -32,10 +33,10 @@ void ViewWindow::Update() {
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
-	bgWindow->Init((float)width * 0.5f, -(float)height * 0.5f, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
+	bgWindow->Init((float)width * 0.45f, -(float)height * 0.5f, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
 	viewItem->SetSize(540, -540);
 	viewItem->SetPosition(bgWindow->getPos());
-	float closeButtonSize = 50.0f;
+	float closeButtonSize = 40.0f;
 	closeButton->Init(closeButtonSize, -closeButtonSize,
 					  glm::vec3(bgWindow->col->getMaxBound().x - closeButtonSize * 0.75f,
 					  bgWindow->col->getMaxBound().y - closeButtonSize * 0.75f,

@@ -338,9 +338,11 @@ Door* GameScreen::GetDoor(std::string doorNam) {
 
 void GameScreen::OpenPuzzle(std::string name) {
 	player->StopWalking();
-	currentPuzzle = puzzles[name];
-	PuzzleTime = true;
-	InventoryEnable = currentPuzzle->IsInventoryEnable();
+	if (puzzles[name]->CheckRequirements()) {
+		currentPuzzle = puzzles[name];
+		PuzzleTime = true;
+		InventoryEnable = currentPuzzle->IsInventoryEnable();
+	}
 }
 
 
