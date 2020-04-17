@@ -1,12 +1,13 @@
 #include "ScriptManager.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i, std::string chatName, int chatIndex)
+s_Dialogue::s_Dialogue(std::string n, std::string d, Item* i, std::string chatName, int chatIndex, std::string note)
 {
 	name = n;
 	text = d;
 	item = i;
 	this->chatName = chatName;
 	this->chatIndex = chatIndex;
+	this->noteName = note;
 }
 
 s_Dialogue::s_Dialogue()
@@ -60,15 +61,42 @@ void ScriptManager::LoadScript()
 			{
 				d.choice = "";
 			}
-
-			pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
-			for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			int changeNameNum, itemDisplayNum;
+			if (s_dialogue->attribute("change"))
+				changeNameNum = s_dialogue->attribute("change").as_int();
+			else
+				changeNameNum = 0;
+			if (s_dialogue->attribute("display"))
+				itemDisplayNum = s_dialogue->attribute("display").as_int();
+			else
+				itemDisplayNum = 0;
+			pugi::xml_node_iterator dialogue = s_dialogue->begin();
+			////pugi::xml_node dialogue = (s_dialogue)->child("Dialogue");
+			for (int i = 0; i < changeNameNum; i++)
+			{
+				std::string objectName = dialogue->attribute("name").as_string();
+				std::string newName = dialogue->attribute("new").as_string();
+				d.changeNameObj[objectName] = newName;
+				dialogue++;
+			}
+			for (int j = 0; j < itemDisplayNum; j++)
+			{
+				std::string objectName = dialogue->attribute("name").as_string();
+				bool b_display = dialogue->attribute("display").as_bool();
+				bool c_pos = dialogue->attribute("changePos").as_bool();
+				float x = dialogue->attribute("posX").as_float();
+				float y = dialogue->attribute("posY").as_float();
+				d.displayObj.push_back(diaplayAfterAction(objectName, b_display, c_pos, x, y));
+				dialogue++;
+			}
+			while (dialogue != s_dialogue->end())
 			{
 				std::string name = dialogue->attribute("name").as_string();
 				std::string text = dialogue->attribute("text").as_string();
 				Item* item = nullptr;
 				int chatIndex = -1;
 				std::string chatName = "";
+				std::string noteName = "";
 				if (dialogue->child("item"))
 				{
 					//create item
@@ -82,9 +110,22 @@ void ScriptManager::LoadScript()
 					chatName = dialogue->child("chat").attribute("name").as_string();
 					chatIndex = dialogue->child("chat").attribute("index").as_int();
 				}
-				s_Dialogue tmp(name, text, item, chatName, chatIndex);
+				if (dialogue->child("note"))
+				{
+					//save chat info
+					noteName = dialogue->child("note").attribute("name").as_string();
+				}
+				s_Dialogue tmp(name, text, item, chatName, chatIndex, noteName);
 				d.dialogue.push_back(tmp);
+				dialogue++;
 			}
+
+			//for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
+			//{
+			//	
+			//}
+
+			//on obj
 			s->script.push_back(d);
 		}
 		this->scripts[key] = s;

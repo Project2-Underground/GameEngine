@@ -55,6 +55,7 @@ void Button::checkColliderReleased(float x, float y) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
 			action();
 		}
+		SetTexture(this->normalTexture);
 	}
 }
 

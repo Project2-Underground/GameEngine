@@ -63,10 +63,6 @@ Bookshelf::Bookshelf(std::string texture, int posX, int posY, int sizeX, int siz
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
 	this->texture->SetSize((float)sizeX, (float)sizeY);
-	this->win = new UIObject();
-	this->win->SetTexture("Texture/Test/Win.png");
-	this->win->SetPosition(glm::vec3(0, 0, 1));
-	this->win->SetSize(1080, -720);
 }
 
 void Bookshelf::Init(std::vector<Book*> books, std::vector<Space*> spaces, std::vector<UIObject*> image)

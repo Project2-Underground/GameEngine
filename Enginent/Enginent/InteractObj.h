@@ -16,8 +16,7 @@ enum InteractTypeList
 	SAVE,
 	OPEN,
 	PUZZLE,
-	STAIR,
-	TRIGGER
+	STAIR
 };
 
 enum DialogueTrigger 
@@ -34,6 +33,7 @@ protected:
 	bool takePic;
 	std::string picName;
 	std::string item_to_use;
+	std::string dialogue_name;
 	Item* item;
 	std::vector<std::map<std::string, std::string>> dialogueTriggers;
 	bool actionTriggerDialogue;
@@ -45,7 +45,9 @@ public:
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
+	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
+	void SetDialogueName(std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }
@@ -56,7 +58,7 @@ public:
 	void PickUpItem();
 	virtual void UseItem(Item* item);
 	void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
-	void Update() {}
+	void ChangeDialogue(std::string n);
 
 	InteractTypeList getType() { return interactType; };
 
@@ -113,20 +115,4 @@ class SaveObj : public InteractableObj {
 public:
 	SaveObj() { interactType = SAVE; }
 	void action();
-};
-
-class TriggerObj : public InteractableObj {
-protected:
-	bool triggered;
-public:
-	void Update();
-	bool IsTriggered() { return triggered; }
-	void SetTriggered(bool b) { triggered = b; }
-};
-
-class Butler : public TriggerObj {
-public:
-	Butler();
-	void Appear(glm::vec3 pos, std::string dialogue);
-	void Update();
 };

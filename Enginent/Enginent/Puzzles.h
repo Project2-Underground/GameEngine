@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
 #include "InteractObj.h"
 #include "UIObject.h"
+#include "Button.h"
+
 
 class PuzzleTemplate : public UIObject {
 protected:
@@ -59,7 +62,6 @@ struct Space {
 
 class Bookshelf : public PuzzleTemplate {
 	UIObject* texture;
-	UIObject* win;
 	std::vector<UIObject*> images;
 	std::vector<Space*> log;
 	std::vector<Book*> books;
@@ -74,6 +76,56 @@ public:
 	void ActionAfterPuzzle();
 	void CompletePuzzle();
 	~Bookshelf();
+};
+
+//////////////////////////////////////////////
+// Numpad Puzzle
+class Numpad;
+
+class NumberButton : public Button {
+	std::vector<int>* input;
+	int num;
+public:
+	NumberButton(std::string texture, std::string press, int n, float posX, float posY, float sizeX, float sizeY, std::vector<int>* input);
+	int GetNum() { return num; }
+	void action();
+};
+
+class EnterButton : public Button {
+	Numpad* numpad;
+public:
+	EnterButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n);
+	void action();
+};
+
+class DeleteButton : public Button {
+	Numpad* numpad;
+public:
+	DeleteButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n);
+	void action();
+};
+
+class Numpad : public PuzzleTemplate{
+	UIObject* texture;
+	std::vector<UIObject*> image;
+	std::vector<Button*> n_button; //0-9 and 10,11 for enter/delete 
+	int* cheat;
+	std::vector<int>* input;
+	int cheat_size;
+	SDL_Color numColor = { 0, 0, 0, 0 };
+	TextObject* numUI;
+public:
+	Numpad(std::string, int posX, int posY, int sizeX, int sizeY);
+	void Init(std::vector<UIObject*>, std::vector<Button*>, int* c, int c_size, std::vector<int>* input);
+	void Render();
+	void Update();
+	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3) {}
+	void ActionAfterPuzzle();
+	void CheckCheat();
+	void deleteInput();
+	~Numpad();
 };
 
 class Puzzle {
@@ -99,10 +151,23 @@ public:
 	BookshelfPuzzle();
 	void Render();
 	void Update();
-	void RightClick(glm::vec3, glm::vec3) {};
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3) {}
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~BookshelfPuzzle();
+};
+
+class NumpadPuzzle : public Puzzle {
+public:
+	NumpadPuzzle();
+	void Render();
+	void Update();
+	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3) {}
+	void UpdateMouseState(glm::vec3, glm::vec3);
+	void CompletePuzzle();
+	~NumpadPuzzle();
 };

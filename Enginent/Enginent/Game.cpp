@@ -99,8 +99,8 @@ void Game::UpdateScreenState() {
 		break;
 	case ENDSCENE:
 		break;
-	/*case TESTSCENE:
-		currentScreen = new TestScreen();*/
+	//case TESTSCENE:
+	//	currentScreen = new TestScreen();
 	default:
 		break;
 	}
