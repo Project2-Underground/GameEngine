@@ -53,6 +53,8 @@ void Game::Init(int width, int height)
 	currentState = MENUSCREEN;
 	cursorGame = new CursorUI();
 	UpdateScreenState();
+
+	XMLManager::GetInstance()->LoadGameOptions();
 }
 
 void Game::Update()

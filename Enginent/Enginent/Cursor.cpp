@@ -41,6 +41,7 @@ void CursorUI::setCursor(InteractTypeList type)
 	if (enable)
 	{
 		//std::cout << "in\n";
+		//std::cout << type << std::endl;
 		switch (type)
 		{
 			case InteractTypeList::NORMAL:

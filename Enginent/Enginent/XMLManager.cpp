@@ -263,6 +263,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		std::map<std::string, Room*>::iterator itr;
 		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 			std::vector<DrawableObject*> objects = itr->second->objects;
+			std::vector<DrawableObject*> npcs = itr->second->npcs;
 			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
@@ -282,6 +283,10 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 				}
 			}
+			for (int i = 0; i < npcs.size(); i++) {
+				NonPlayer* npc = (NonPlayer*)npcs[i];
+				npc->hasItem = file.child("level").child("NPCs").child(npc->object_name.c_str()).attribute("hasItem").as_bool();
+			}
 		}
 
 
@@ -293,6 +298,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
 			if (p->attribute("done").as_bool())
 				gs->puzzles[p->name()]->CompletePuzzle();
+			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
 		}
 
 		// load special npcs
@@ -362,6 +368,7 @@ void XMLManager::SaveGame(std::string filename) {
 	std::map<std::string, Room*>::iterator itr;
 	for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 		std::vector<DrawableObject*> objects = itr->second->objects;
+		std::vector<DrawableObject*> npcs = itr->second->npcs;
 		for (int i = 0; i < objects.size(); i++) {
 			// if object is an interactObj, NPC, door or items 
 			// save
@@ -383,12 +390,18 @@ void XMLManager::SaveGame(std::string filename) {
 
 			}
 		}
+		for (int i = 0; i < npcs.size(); i++) {
+			NonPlayer* npc = (NonPlayer*)npcs[i];
+			pugi::xml_node node = saveLevel.child("NPCs").append_child(npc->object_name.c_str());
+			node.append_attribute("hasItem").set_value(npc->hasItem);
+		}
 	}
 
 	// saving puzzles 
 	for (auto p : gs->puzzles) {
 		saveLevel.child("puzzles").append_child(p.first.c_str());
 		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("done").set_value(p.second->Passed());
+		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("passRequirements").set_value(p.second->passedReqiurements);
 	}
 
 	// saving special npcs

@@ -28,7 +28,7 @@ enum DialogueTrigger
 
 class InteractableObj : public ImageObject {
 protected:
-	InteractTypeList interactType = NORMAL;
+	InteractTypeList interactType;
 	std::string interact_sound = "";
 
 	bool takePic;

@@ -278,6 +278,9 @@ void BookshelfPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world)
 }
 
 bool BookshelfPuzzle::CheckRequirements() {
+	if (passedReqiurements)
+		return true;
+
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	std::string requireBooks[4] = { "Book1","Book2", "Book3", "Book4" };
 	for (int i = 0; i < 4; i++) {
@@ -287,6 +290,7 @@ bool BookshelfPuzzle::CheckRequirements() {
 	for (int i = 0; i < 4; i++) {
 		inventory->RemoveItem(requireBooks[i]);
 	}
+	passedReqiurements = true;
 	return true;
 }
 void BookshelfPuzzle::LeftRelease(glm::vec3 screen, glm::vec3 world) {

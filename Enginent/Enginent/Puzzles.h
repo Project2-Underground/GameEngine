@@ -145,6 +145,7 @@ public:
 	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
 	bool Passed() { return puzzle->Passed(); }
+	bool passedReqiurements;
 };
 
 class BookshelfPuzzle : public Puzzle {

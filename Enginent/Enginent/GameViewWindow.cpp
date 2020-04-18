@@ -49,6 +49,7 @@ void ViewWindow::SetViewItem(Item* item) {
 }
 
 void ViewWindow::SetViewItem(unsigned int texture) {
+	viewItem->SetSize(-viewItem->getSize().y, viewItem->getSize().y);
 	viewItem->SetTexture(texture);
 }
 
