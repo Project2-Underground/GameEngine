@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
-		<BackDoorRoom_FlowerClue />
-		<BackDoorRoom_Computer />
-		<Closet open="true" has_item="false" />
-		<Table open="false" has_item="false" />
-		<Calendar />
-		<bed />
-		<EmmaRoom_Book />
-		<EmmaRoom_Drawing />
-		<EmmaRoom_Note1 />
-		<EmmaRoom_Window />
-		<Bookshelf1 />
-		<Bookshelf2 />
-		<Gramophone />
-		<RabbitCage />
-		<Door2 />
-		<Door3 />
-		<sign />
+		<BackDoorRoom_FlowerClue current_dialogue="" has_item="false" />
+		<BackDoorRoom_Computer current_dialogue="" has_item="false" />
+		<Closet current_dialogue="EliasRoom_closet" has_item="false" open="true" />
+		<Table current_dialogue="EliasRoom_carbinet2" has_item="false" open="false" />
+		<Calendar current_dialogue="EliasRoom_calendar" has_item="false" />
+		<bed current_dialogue="EliasRoom_bed2" has_item="false" />
+		<EmmaRoom_Book current_dialogue="" has_item="false" />
+		<EmmaRoom_Drawing current_dialogue="" has_item="false" />
+		<EmmaRoom_Note1 current_dialogue="" has_item="false" />
+		<EmmaRoom_Window current_dialogue="" has_item="false" />
+		<Bookshelf1 current_dialogue="Hall_Bookshelf_L1" has_item="false" />
+		<Bookshelf2 current_dialogue="" has_item="false" />
+		<Gramophone current_dialogue="" has_item="false" />
+		<RabbitCage current_dialogue="" has_item="false" />
+		<Door2 current_dialogue="" has_item="false" />
+		<Door3 current_dialogue="" has_item="false" />
+		<sign current_dialogue="" has_item="false" />
 	</interactObj>
 	<item />
 	<doors>
@@ -27,18 +27,24 @@
 		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
-		<StairDoor used="false" />
+		<StairDoor used="true" />
 		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
 		<HallRoomLowerFloor_Door used="false" />
 		<UpperStair used="true" />
 		<tmpDoor used="true" />
 	</doors>
-	<NPCs />
+	<NPCs>
+		<Emma hasItem="false" />
+		<Ann hasItem="false" />
+		<Dann hasItem="false" />
+		<Hubert hasItem="false" />
+		<Dialy hasItem="false" />
+	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="false" />
+		<BookshelfPuzzle done="true" passRequirements="true" />
 	</puzzles>
-	<Player posX="379.115662" posY="-50">
+	<Player posX="441" posY="-110">
 		<inventory>
 			<item />
 			<item />

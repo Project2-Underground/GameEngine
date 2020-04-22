@@ -160,6 +160,15 @@ void Bookshelf::Update()
 	}
 }
 
+void Bookshelf::Reset() {
+	glm::vec3 originalPos[6] = { glm::vec3(252,87,1), glm::vec3(352, 87,1), glm::vec3(448, 87,1) ,
+								 glm::vec3(252, -88,1) ,glm::vec3(448, -88,1) ,glm::vec3(352, -88,1) };
+	for (int i = 0; i < books.size(); i++){
+		books[i]->SetPosition(originalPos[i]);
+		log[i]->book = nullptr;
+	}
+}
+
 void Bookshelf::ActionAfterPuzzle() {
 	Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->doors["StairDoor"]->Open();
 }
@@ -174,6 +183,7 @@ void Bookshelf::CompletePuzzle() {
 	}
 
 	pass = true;
+	ActionAfterPuzzle();
 }
 
 Bookshelf::~Bookshelf()
@@ -257,7 +267,9 @@ BookshelfPuzzle::BookshelfPuzzle()
 	UI.push_back(closeButton);
 	UI.push_back(puzzle);
 }
-
+void BookshelfPuzzle::Reset() {
+	puzzle->Reset();
+}
 void BookshelfPuzzle::Render()
 {
 	Game::GetInstance()->GetRenderer()->Render(UI);

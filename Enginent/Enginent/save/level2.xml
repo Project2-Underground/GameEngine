@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- texture = NONE toset display false-->
+
+<level currentLevel="1" startPosX="0" startPosY="-50" Start="MainFloor2">
+	<MainFloor2 left_limit="-5700" right_limit="5700" top_limit="360" bottom_limit="-360" y="-50">
+		<background>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Template.png" sizeX="11699" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Background1.png" sizeX="7091" sizeY="373" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Background2.png" sizeX="5370" sizeY="373" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Background3.png" sizeX="5720" sizeY="373" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Background4.png" sizeX="7029" sizeY="373" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Background5.png" sizeX="11699" sizeY="373" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building1.png" sizeX="893" sizeY="553" posX="0" posY="0" layer="1"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building2.png" sizeX="3231" sizeY="591" posX="0" posY="0" layer="1"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building3.png" sizeX="1333" sizeY="564" posX="0" posY="0" layer="1"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building4.png" sizeX="1443" sizeY="588" posX="0" posY="0" layer="1"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building5.png" sizeX="1682" sizeY="621" posX="0" posY="0" layer="1"/>
+			<bg texture="Texture/level2/MainFloor2/Mainfloor_Building6.png" sizeX="1335" sizeY="550" posX="0" posY="0" layer="1"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+		</interactObj>
+		<doors>
+			<Mainfloor_BlackAlley texture="Texture/level2/MainFloor2/Mainfloor_BlackAlley.png" sizeX="243" sizeY="570" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_BlackAlley>
+			<Mainfloor_Building1door texture="Texture/level2/MainFloor2/Mainfloor_Building1door.png" sizeX="486" sizeY="402" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building1door>
+			<Mainfloor_Building2door texture="Texture/level2/MainFloor2/Mainfloor_Building2door.png" sizeX="755" sizeY="449" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building2door>
+			<Mainfloor_Building3door texture="Texture/level2/MainFloor2/Mainfloor_Building3door.png" sizeX="347" sizeY="405" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building3door>
+			<Mainfloor_Building4door texture="Texture/level2/MainFloor2/Mainfloor_Building4door.png" sizeX="273" sizeY="423" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building4door>
+			<Mainfloor_Building5door texture="Texture/level2/MainFloor2/Mainfloor_Building5door.png" sizeX="379" sizeY="410" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building5door>
+			<Mainfloor_Building6door texture="Texture/level2/MainFloor2/Mainfloor_Building6door.png" sizeX="801" sizeY="381" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Mainfloor_Building6door>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+		</foreground>
+	</MainFloor2>
+	<Building1 left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
+		<background>
+			<bg texture="Texture/level2/Building1/Building1_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+		</interactObj>
+		<doors>
+			<Building1_Door texture="Texture/level2/Building1/Building1_Door.png" sizeX="214" sizeY="360" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Building1_Door>
+			<Building1_FloorDoorClose texture="Texture/level2/Building1/Building1_FloorDoorClose.png" sizeX="315" sizeY="115" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+				<openDoor texture="Texture/level2/Building1/Building1_FloorDoorOpen.png"/>
+			</Building1_FloorDoorClose>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building1/Building1_Foreground.png" sizeX="700" sizeY="141" posX="0" posY="0" layer="0"/>
+		</foreground>
+	</Building1>
+</level>

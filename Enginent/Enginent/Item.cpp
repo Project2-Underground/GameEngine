@@ -13,24 +13,24 @@ void Item::SetViewTexture(std::string path) {
 	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
-SeparatableItem::SeparatableItem(std::string name, std::vector<Item*> items) :Item(name) {
-	for (Item* i : items)
-		this->items.push_back(i);
+SeparatableItem::SeparatableItem(std::string name, std::vector<std::string> items) :Item(name) {
+	for (auto i : items)
+		this->sitems.push_back(i);
 }
 
 void SeparatableItem::action() {
 	// add the new items to the inventory
 	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-	for (Item* i : items) {
-		inventory->AddItem(i);
+	for (auto i : sitems) {
+		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(i));
 	}
 	// remove *this from the inventory
 	inventory->RemoveItem(this);
 }
 
-CombinableItem::CombinableItem(std::string name, std::string itc, Item* ci) :Item(name) {
+CombinableItem::CombinableItem(std::string name, std::string itc, std::string ci) :Item(name) {
 	itemToCombine = itc;
-	combinedItem = ci;
+	scombinedItem = ci;
 }
 
 void CombinableItem::action() {
@@ -40,7 +40,7 @@ void CombinableItem::action() {
 		// remove item and *this from the inventory
 		inventory->RemoveItem(selectedItem);
 		inventory->RemoveItem(this);
-		inventory->AddItem(combinedItem);
+		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(scombinedItem));
 	}
 	/*else {
 		std::cout << "Combine fail\n";

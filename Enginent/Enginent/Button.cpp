@@ -218,7 +218,7 @@ void SaveLoadGameButton::SetSaveLevel(std::string s) {
 }
 
 void SaveLoadGameButton::updateButton(float x, float y) {
-	std::cout << "hasSave: " << hasSaved << std::endl;
+	//std::cout << "hasSave: " << hasSaved << std::endl;
 	if (this->col->isClicked(x, y))
 	{
 		if (hasSaved || Game::GetInstance()->GetSaveState()) {

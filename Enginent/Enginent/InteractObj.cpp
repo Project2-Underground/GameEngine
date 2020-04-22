@@ -105,6 +105,8 @@ void InteractableObj::PickUpItem() {
 
 		hasItem = false;
 		interactType = NORMAL;
+		if(hasNextTexture)
+			SetTexture(nextTexture);
 		/*if (useItemTriggerDialogue) {
 			useItemTriggerDialogue = false;
 			actionTriggerDialogue = false;
@@ -140,6 +142,11 @@ void InteractableObj::ChangeDialogue(std::string n)
 	this->dialogue_name = n;
 }
 
+void InteractableObj::SetNextTexture(std::string next) {
+	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
+	hasNextTexture = true;
+}
+
 OpenObj::OpenObj() {
 	interactType = PICKUP;
 	open = false;
@@ -151,10 +158,6 @@ void OpenObj::SetOpenTexture(std::string openT) {
 	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(openT);
 }
 
-void OpenObj::SetNextTexture(std::string next) {
-	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
-}
-
 void OpenObj::action() {
 	if (!open && triggered) {
 		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
@@ -162,7 +165,6 @@ void OpenObj::action() {
 	}
 	else if (open) {
 		PickUpItem();
-		SetTexture(nextTexture);
 	}
 	else {
 		if (dialogue_name != "")
@@ -249,7 +251,7 @@ Butler::Butler() {
 	object_name = "butler";
 	interactType = TALK; 
 	triggered = false; 
-	Init(100, 100, glm::vec3(-200, 0, 0));
+	Init(100, 100, glm::vec3(-987, -102, 1));
 	InitAnimator();
 	anim->AddAnimation("Idle", "", 2, 0.25f, true);
 }

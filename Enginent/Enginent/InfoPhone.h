@@ -9,11 +9,12 @@ constexpr auto TEXT_SPACE = 30;
 constexpr auto TAB_SPACE = 80;
 constexpr auto TAB_SIZE_X = 200.0f;
 constexpr auto TAB_TEXT_PADDING = 20.0f;
-constexpr auto TEXT_TOP_Y = 150.0f;
+constexpr auto TAB_TOP_Y = 175;
+constexpr auto TEXT_TOP_Y = 100;
 constexpr auto TEXT_BOTTOM_Y = -150.0f;
-constexpr auto TEXT_START_X = -250.0f;
+constexpr auto TEXT_START_X = -300.0f;
 constexpr auto FONT_SIZE = 24;
-constexpr auto MAX_FONT_PER_LINE = 87;
+constexpr auto MAX_FONT_PER_LINE = 45;
 
 enum AppType {
 	NOTE = 0,
@@ -43,6 +44,7 @@ class Chat{
 	SDL_Color textColor = { 0, 0, 0, 0 };
 	UIObject* profilePic;
 	TextObject* name;
+	UIObject* textBubble;
 	std::vector<TextObject*> allMsg;
 	float upperBound;
 	float lowerBound;

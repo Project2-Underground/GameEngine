@@ -96,6 +96,7 @@ public:
 	void ChangeRoom(std::string, std::string);
 	void LoadGame(std::string);
 	void OpenPuzzle(std::string);
+	void ResetPuzzle();
 	void ClosePuzzle();
 
 	Door* GetDoor(std::string);

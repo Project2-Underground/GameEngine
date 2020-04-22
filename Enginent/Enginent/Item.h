@@ -29,18 +29,18 @@ public:
 
 class SeparatableItem :public Item {
 	// the items that will be separated into
-	std::vector<Item*> items;
+	std::vector<std::string> sitems;
 public:
-	SeparatableItem(std::string, std::vector<Item*>);
+	SeparatableItem(std::string, std::vector<std::string>);
 	void action();
 };
 
 class CombinableItem :public Item {
 	std::string itemToCombine;			// item that can be combined with
-	Item* combinedItem;			// item after combined
+	std::string scombinedItem;			// item after combined
 public:
 	Item* selectedItem;
 
-	CombinableItem(std::string, std::string itc, Item* ci);
+	CombinableItem(std::string, std::string itc, std::string ci);
 	void action();
 };

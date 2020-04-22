@@ -159,11 +159,10 @@ GameScreen::GameScreen() {
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
 	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
-	phoneIcon->SetSize(100.0f, -100.0f);
-	phoneIcon->SetPosition(glm::vec3(-500.0f, 300.0f, 1.0f));
-	phoneIcon->SetCollder(new Collider(phoneIcon));
+	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-500.0f, 300.0f, 1.0f));
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
+	phone->Message("person_name", 2);
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
@@ -352,16 +351,20 @@ void GameScreen::OpenPuzzle(std::string name) {
 	Game::GetInstance()->GetCursor()->enableChange(false);
 }
 
+void GameScreen::ResetPuzzle() {
+	for (auto puzzle : puzzles)
+		puzzle.second->Reset();
+}
 
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
-	Game::GetInstance()->GetCursor()->enableChange(false);
+	Game::GetInstance()->GetCursor()->enableChange(true);
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	//switch (key)
-	//{
+	switch (key)
+	{
 	//case SDLK_d: {
 	//	// unlock door
 	//	Item* item = inventory->GetInventoryBox(0)->GetItem();
@@ -380,12 +383,12 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	//case SDLK_l:
 	//	XMLManager::GetInstance()->LoadFromSave("save/test.xml");
 	//	break;
-	//case SDLK_p:
-	//	Phone::GetInstance()->open = !Phone::GetInstance()->open;
-	//	break;
-	//default:
-	//	break;
-	//}
+	case SDLK_1:
+		puzzles["BookshelfPuzzle"]->CompletePuzzle();
+		break;
+	default:
+		break;
+	}
 }
 
 GameScreen::~GameScreen() {

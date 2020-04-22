@@ -32,15 +32,13 @@ protected:
 	std::string interact_sound = "";
 
 	bool takePic;
+	bool hasNextTexture;
 	std::string picName;
 	std::string item_to_use;
 	std::string dialogue_name;
-	//Item* item;
 	std::string itemName;
 	std::vector<InteractableObj*> triggerObjs;
-	//std::vector<std::map<std::string, std::string>> dialogueTriggers;
-	//bool actionTriggerDialogue;
-	//bool useItemTriggerDialogue;
+	unsigned int nextTexture; // after picking up an item
 
 public:
 	InteractableObj();
@@ -55,13 +53,12 @@ public:
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }
 	void SetItemToUse(std::string item_to_unlock);
-	//void SetItem(Item* item) { this->item = item; }
+	void SetNextTexture(std::string);
 	void SetItem(std::string item) { itemName = item; hasItem = true; }
 	Item* GetItem();
 	void TakePic();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
-	//void AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName);
 	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
@@ -78,12 +75,10 @@ public:
 class OpenObj : public InteractableObj {
 	bool open;
 	unsigned int openTexture;
-	unsigned int nextTexture; // after picking up an item
 public:
 	OpenObj();
 
 	void SetOpenTexture(std::string);
-	void SetNextTexture(std::string);
 	void action();
 	bool IsOpen() { return open; }
 

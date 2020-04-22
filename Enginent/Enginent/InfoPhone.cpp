@@ -24,7 +24,9 @@ void ChatInfo::AddText(std::string text) {
 Chat::Chat() {
 	profilePic = new UIObject();
 	profilePic->SetSize(50.0f, -50.0f);
-	profilePic->SetPosition(glm::vec3(-130.0f, 250.0f, 1));
+	profilePic->SetPosition(glm::vec3(TEXT_START_X, 175.0f, 1));
+	textBubble = new UIObject();
+	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
 	name = new TextObject();
 }
 
@@ -36,8 +38,19 @@ void Chat::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(profilePic);
 	renderer->Render(name);
-	for (auto m : allMsg)
+	for (auto m : allMsg) {
+		float sizeX = m->getSize().x + 20;
+		float posX = m->getPos().x;
+		if (sizeX > 580) 
+			sizeX = 580;
+		if (posX > -20)
+			posX = -20;
+		
+		textBubble->SetSize(sizeX, m->getSize().y - 20);
+		textBubble->SetPosition(glm::vec3(posX, m->getPos().y, 1));
+		renderer->Render(textBubble);
 		renderer->Render(m);
+	}
 }
 
 void Chat::CloseChat() {
@@ -55,9 +68,10 @@ void Chat::OpenChat(const ChatInfo c) {
 	ClearText();
 	profilePic->SetTexture(c.picTexture);
 
-	name->loadText(c.name, textColor, FONT_SIZE);
-	name->SetPosition(glm::vec3(-100.0f + name->getSize().x * 0.5f, 250.0f, 1.0f));
+	name->loadText(c.name, { 255, 255, 255, 255 }, FONT_SIZE);
+	name->SetPosition(glm::vec3(profilePic->getPos().x + 50.0f + name->getSize().x * 0.5f, 160.0f, 1.0f));
 
+	float yPos = TEXT_TOP_Y;
 	for (int i = 0; i < c.currentMsgIndex; i++) {
 		TextObject* tmpText = new TextObject();
 		tmpText->loadText(c.texts[i], textColor, FONT_SIZE);
@@ -66,13 +80,15 @@ void Chat::OpenChat(const ChatInfo c) {
 		float paddingx = tmpText->getSize().x * 0.5f;
 
 		// calculate starting y of the msg
-		float yPos = TEXT_TOP_Y;
 		if (i > 0) {
-			yPos = allMsg[i - 1]->getPos().y - -allMsg[i - 1]->getSize().y*0.5f - -tmpText->getSize().y*0.5f - TEXT_SPACE;
+			yPos -= (-tmpText->getSize().y * 0.5f + TEXT_SPACE * i + -allMsg.at(i - 1)->getSize().y * 0.5f);
+		}
+		else {
+			yPos -= (-tmpText->getSize().y * 0.5f);
 		}
 
-		glm::vec3 newPos = glm::vec3(c.textPosition[i].x + paddingx, yPos, 0);
 
+		glm::vec3 newPos = glm::vec3(c.textPosition[i].x + paddingx, yPos, 0);
 		tmpText->SetPosition(newPos);
 		allMsg.push_back(tmpText);
 	}
@@ -144,7 +160,7 @@ void Application::Close() {
 }
 
 void Application::OpenChat() {
-	float y = TEXT_TOP_Y;
+	float y = TAB_TOP_Y;
 	for (int i = 0; i < chats.size(); i++) {
 		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", chats[i]->name, i, chats[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
@@ -320,8 +336,8 @@ Phone* Phone::GetInstance() {
 Phone::Phone() {
 	phone = new UIObject();
 	phone->SetTexture("Texture/UI/InfoPhone/Tablet.png");
-	float sizeX = 400.0f;
-	float sizeY = 800.0f;
+	float sizeX = 825.0f;
+	float sizeY = 500.5f;
 	phone->SetSize(825.0f, -500.5f);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
@@ -451,6 +467,7 @@ void Phone::SetPage(AppType apptype, std::string name) {
 void Phone::Message(std::string name, int msgIndex) {
 	chats[name].currentMsgIndex = msgIndex;
 	chats[name].noti = true;
+	SetPage(CHAT, name);
 }
 
 void Phone::Clear() {

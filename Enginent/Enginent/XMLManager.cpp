@@ -94,16 +94,11 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case VIEW: {
 			ViewObj* obj = new ViewObj();
 			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
-			// set description
 			interactObj = obj;
 		}break;
 		case OPEN: {
 			OpenObj* obj = new OpenObj();
 			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
-			if (child->child("item")) {
-				obj->SetNextTexture(child->child("picked").attribute("texture").as_string());
-				obj->SetItem(child->child("item").attribute("name").as_string());
-			}
 			interactObj = obj;
 		}break;
 		case PUZZLE: {
@@ -125,6 +120,12 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			interactObj = new InteractableObj();
 		}break;
 		}
+
+		if (child->child("item")) 
+			interactObj->SetItem(child->child("item").attribute("name").as_string());
+
+		if (child->child("picked"))
+			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
 		if (child->child("picture"))
 			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
@@ -562,7 +563,23 @@ void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
 void XMLManager::LoadItems(std::vector<Item*> &items) {
 	if (LoadFile("save/items.xml")) {
 		for (pugi::xml_node_iterator item = doc.child("Items").begin(); item != doc.child("Items").end(); item++) {
-			Item* i = new Item(item->name());
+			Item* i;
+			if (item->child("separate")) {
+				std::vector<std::string> separatedItems;
+				for (pugi::xml_node_iterator separatedItem = item->child("separate").begin(); separatedItem != item->child("separate").end(); separatedItem++) {
+					separatedItems.push_back(separatedItem->name());
+				}
+				i = new SeparatableItem(item->name(), separatedItems);
+			}
+			else if (item->child("combine")) {
+				std::string itemToCombine = item->child("combine").first_child().name();
+				std::string combinedItem = item->child("combine").first_child().next_sibling().name();
+				i = new CombinableItem(item->name(), itemToCombine, combinedItem);
+			}
+			else {
+				i = new Item(item->name());
+			}
+
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
 			

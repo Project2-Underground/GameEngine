@@ -178,6 +178,7 @@ void Game::SaveLoad(std::string filename) {
 			currentState = GAMESCREEN;
 			UpdateScreenState();
 		}
+		((GameScreen*)currentScreen)->ResetPuzzle();
 		LoadGame(filename);
 	}
 }

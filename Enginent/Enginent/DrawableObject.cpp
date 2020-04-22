@@ -45,6 +45,11 @@ void DrawableObject::SetSize(float sizeX, float sizeY)
 	size = glm::vec3(sizeX, sizeY, 1);
 }
 
+void DrawableObject::SetSize(glm::vec3 size)
+{
+	size = size;
+}
+
 void DrawableObject::SetPosition(glm::vec3 newPosition)
 {
 	pos = newPosition;

@@ -83,12 +83,13 @@
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2">
 			</Bookshelf2>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2">
-				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png"/>
+				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V)2.png"/>
+				<item name="Puzzle2_ColorCode1"/>
 			</Gramophone>
 			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
 		</interactObj>
 		<doors>
-			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="259" sizeY="364" posX="-5" posY="174" next_room="BackDoorRoom" next_door="BackDoorRoom_Foreground_Door" layer="0">
+			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="259" sizeY="364" posX="-7" posY="174" next_room="BackDoorRoom" next_door="BackDoorRoom_Foreground_Door" layer="0">
 				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
 			</StairDoor>
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
@@ -150,35 +151,36 @@
 	</EmmaRoom>
 	<BackDoorRoom left_limit="-800" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-70">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1807.5" sizeY="770" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="143.5" sizeY="257.5" posX="-253.5" posY="-72" type="3" layer="1">
-				<item name="clue" v_texture="Texture/ViewItem/.png" i_texture="Texture/.png" texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
+			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1">
+				<item name="Puzzle2_EmmaPaper1" />
+				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="161.5" sizeY="558" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="0">
+			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="0">
 				<ForeGround/>
 			</BackDoorRoom_Foreground_Door>
-			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="291.5" sizeY="403.5" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0"/>
-			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="222" sizeY="399.5" posX="-66" posY="5" next_room="EmmaRoom" next_door="EmmaRoom_Door" layer="0">
+			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0"/>
+			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" next_room="EmmaRoom" next_door="EmmaRoom_Door" layer="0">
 				<!-- <openDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png"/> -->
 			</BackDoorRoom_EmmaDoor>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1807.5" sizeY="770" posX="-196" posY="-72" layer="0"/>
+			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1379" sizeY="578" posX="-196" posY="-72" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
 	<BackDoorRoomBasement left_limit="-596" right_limit="588" top_limit="385" bottom_limit="-385" y="-30">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="770" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="247.5" sizeY="280.5" posX="-60" posY="19" type="9" layer="4">
-				<puzzle name="Numpad_Backdoor"/>
+			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4">
+				<!-- <puzzle name="Numpad_Backdoor"/> -->
 			</BackDoorRoom_Computer>
 		</interactObj>
 		<doors>
@@ -187,7 +189,7 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="770" posX="0" posY="-152" layer="0"/>
+			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="416" posX="0" posY="-152" layer="0"/>
 		</foreground>
 	</BackDoorRoomBasement>
 	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-50">

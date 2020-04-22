@@ -13,6 +13,7 @@ protected:
 public:
 	virtual void Render() {};
 	virtual void Update() {};
+	virtual void Reset() {};
 	virtual void LeftClick(glm::vec3, glm::vec3) {};
 	virtual void LeftRelease(glm::vec3, glm::vec3) {};
 	virtual void FinishedPuzzle() {};
@@ -70,7 +71,8 @@ public:
 	Bookshelf(std::string, int posX, int posY, int sizeX, int sizeY);
 	void Init(std::vector<Book*>, std::vector<Space*>, std::vector<UIObject*>);
 	void Render();
-	void Update();
+	void Update(); 
+	void Reset();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void ActionAfterPuzzle();
@@ -119,6 +121,7 @@ public:
 	void Init(std::vector<UIObject*>, std::vector<Button*>, int* c, int c_size, std::vector<int>* input);
 	void Render();
 	void Update();
+	void Reset() {};
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
@@ -137,6 +140,7 @@ protected:
 public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
+	virtual void Reset() = 0;
 	virtual bool CheckRequirements() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
@@ -153,6 +157,7 @@ public:
 	BookshelfPuzzle();
 	void Render();
 	void Update();
+	void Reset();
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
@@ -167,6 +172,7 @@ public:
 	NumpadPuzzle();
 	void Render();
 	void Update();
+	void Reset() {};
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
