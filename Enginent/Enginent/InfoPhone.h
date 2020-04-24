@@ -45,8 +45,8 @@ class Chat{
 	UIObject* profilePic;
 	TextObject* name;
 	UIObject* textBubble;
-	UIObject* scrollBarBG;
 	UIObject* scrollBar;
+	UIObject* thumb;
 	std::vector<TextObject*> allMsg;
 	float upperBound;
 	float lowerBound;

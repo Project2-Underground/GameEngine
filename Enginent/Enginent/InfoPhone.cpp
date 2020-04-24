@@ -27,13 +27,13 @@ Chat::Chat() {
 	profilePic->SetPosition(glm::vec3(TEXT_START_X, 175.0f, 1));
 	textBubble = new UIObject();
 	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
-	scrollBarBG = new UIObject();
 	scrollBar = new UIObject();
-	scrollBarBG->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
-	scrollBarBG->Init(10.0f, -(TEXT_TOP_Y - TEXT_BOTTOM_Y), glm::vec3(290, (TEXT_TOP_Y + TEXT_BOTTOM_Y) * 0.5f, 1));
-	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBar.PNG");
-	scrollBar->SetSize(10.0f, -10.0f);
-	scrollBar->SetPosition(glm::vec3(270, scrollBarBG->col->getMaxBound().y, 1));
+	thumb = new UIObject();
+	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
+	scrollBar->Init(10.0f, -(TEXT_TOP_Y - TEXT_BOTTOM_Y), glm::vec3(290, (TEXT_TOP_Y + TEXT_BOTTOM_Y) * 0.5f, 1));
+	thumb->SetTexture("Texture/tmp_texture/tmp_scrollBar.PNG");
+	thumb->SetSize(10.0f, -10.0f);
+	thumb->SetPosition(glm::vec3(270, scrollBar->col->getMaxBound().y, 1));
 	name = new TextObject();
 }
 
@@ -60,8 +60,8 @@ void Chat::Render() {
 			renderer->Render(m);
 		}
 	}
-	renderer->Render(scrollBarBG);
 	renderer->Render(scrollBar);
+	renderer->Render(thumb);
 }
 
 void Chat::CloseChat() {
@@ -105,27 +105,32 @@ void Chat::OpenChat(const ChatInfo c) {
 		upperBound = allMsg.at(0)->getPos().y;
 		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y*0.25f + TEXT_BOTTOM_Y;
 	}
-	float msgLength = (allMsg.at(0)->getPos().y - allMsg.at(allMsg.size() - 1)->getPos().y - TEXT_TOP_Y + TEXT_BOTTOM_Y);
-	float scrollNo = msgLength  / -scrollBar->getSize().y;
-	scrollBarSpeed = (scrollNo / msgLength) * -scrollBarBG->getSize().y;
-	scrollBar->SetPosition(glm::vec3(scrollBarBG->getPos().x, TEXT_TOP_Y - -scrollBar->getSize().y * 0.5, 1));
+	// calculate thumb height
+	float msgLength = (allMsg.at(0)->getPos().y - allMsg.at(allMsg.size() - 1)->getPos().y);
+	thumb->SetSize(thumb->getSize().x, -((scrollBar->getSize().y * scrollBar->getSize().y) / msgLength));
+	float space = -scrollBar->getSize().y - -thumb->getSize().y;
+
+	float scrollNo = (msgLength - (upperBound - lowerBound)) / SCROLL_SPEED;
+	std::cout << scrollNo << std::endl;
+	scrollBarSpeed = space / scrollNo;
+	thumb->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + space * 0.5f, 1));
 }
 
 void Chat::Scroll(int direction) {
 	if (direction < 0) {
 		// scroll up
-		if (allMsg.at(allMsg.size() - 1)->getPos().y < lowerBound) {
+		if (allMsg.at(allMsg.size() - 1)->getPos().y + allMsg.at(allMsg.size() - 1)->getSize().y*-0.5f < lowerBound) {
 			for (auto m : allMsg)
 				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y + SCROLL_SPEED, 1));
-			scrollBar->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y - scrollBarSpeed, 1));
+			thumb->SetPosition(glm::vec3(thumb->getPos().x, thumb->getPos().y - scrollBarSpeed, 1));
 		}
 	}
 	else {
 		// scroll down
-		if (allMsg.at(0)->getPos().y > upperBound) {
+		if (allMsg.at(0)->getPos().y - allMsg.at(0)->getSize().y*-0.5f > upperBound) {
 			for (auto m : allMsg)
 				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y - SCROLL_SPEED, 1));
-			scrollBar->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + scrollBarSpeed, 1));
+			thumb->SetPosition(glm::vec3(thumb->getPos().x, thumb->getPos().y + scrollBarSpeed, 1));
 		}
 	}
 }
