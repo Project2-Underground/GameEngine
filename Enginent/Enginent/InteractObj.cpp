@@ -38,13 +38,6 @@ void InteractableObj::action() {
 		TextBox::GetInstance()->setText(this->dialogue_name);
 		TextBox::GetInstance()->SetDisplay(true);
 	}
-
-	//if (actionTriggerDialogue) {
-	//	actionTriggerDialogue = false;
-	//	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	//	for (auto obj : dialogueTriggers[ACTION_TRIGGER_DIALOGUE])
-	//		gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
-	//}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
@@ -247,27 +240,3 @@ void PlayerTriggerObj::Update() {
 	}
 }
 
-Butler::Butler() { 
-	object_name = "butler";
-	interactType = TALK; 
-	triggered = false; 
-	Init(100, 100, glm::vec3(-987, -102, 1));
-	InitAnimator();
-	anim->AddAnimation("Idle", "", 2, 0.25f, true);
-}
-void Butler::Appear(glm::vec3 pos, std::string dialogue) {
-	SetPosition(pos);
-	SetDisplay(true);
-	triggered = false;
-}
-void Butler::Update() {
-	if (triggered && display)
-		SetDisplay(false);
-	PlayerTriggerObj::Update();
-}
-void Butler::SetTriggered(bool b) {
-	triggered = b;
-}
-bool Butler::IsTriggered() {
-	return triggered;
-}

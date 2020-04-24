@@ -124,12 +124,3 @@ class PlayerTriggerObj : public InteractableObj {
 public:
 	void Update();
 };
-
-class Butler : public PlayerTriggerObj {
-public:
-	Butler();
-	void Appear(glm::vec3 pos, std::string dialogue);
-	void SetTriggered(bool b);
-	bool IsTriggered();
-	void Update();
-};

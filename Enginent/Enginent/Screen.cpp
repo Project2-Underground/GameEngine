@@ -141,7 +141,7 @@ GameScreen::GameScreen() {
 	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
-	//butler = new Butler();
+	butler = new Butler();
 	currentLevel = new Level(levels[0]);
 	XMLManager::GetInstance()->LoadItems(items);
 	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
@@ -160,9 +160,9 @@ GameScreen::GameScreen() {
 	phone = Phone::GetInstance();
 	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
 	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-500.0f, 300.0f, 1.0f));
+	phoneIcon->Disappear();
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
-	phone->Message("person_name", 2);
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	PuzzleTime = false;
@@ -202,7 +202,7 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
-		//renderer->Render(butler);
+		renderer->Render(butler);
 	}
 	renderer->Render(UI);
 
@@ -230,7 +230,7 @@ void GameScreen::Update() {
 			else {
 				currentLevel->Update();
 				player->Update();
-				//butler->Update();
+				butler->Update();
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();

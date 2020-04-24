@@ -27,6 +27,13 @@ Chat::Chat() {
 	profilePic->SetPosition(glm::vec3(TEXT_START_X, 175.0f, 1));
 	textBubble = new UIObject();
 	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
+	scrollBarBG = new UIObject();
+	scrollBar = new UIObject();
+	scrollBarBG->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
+	scrollBarBG->Init(10.0f, -(TEXT_TOP_Y - TEXT_BOTTOM_Y), glm::vec3(290, (TEXT_TOP_Y + TEXT_BOTTOM_Y) * 0.5f, 1));
+	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBar.PNG");
+	scrollBar->SetSize(10.0f, -10.0f);
+	scrollBar->SetPosition(glm::vec3(270, scrollBarBG->col->getMaxBound().y, 1));
 	name = new TextObject();
 }
 
@@ -46,11 +53,15 @@ void Chat::Render() {
 		if (posX > -20)
 			posX = -20;
 		
-		textBubble->SetSize(sizeX, m->getSize().y - 20);
-		textBubble->SetPosition(glm::vec3(posX, m->getPos().y, 1));
-		renderer->Render(textBubble);
-		renderer->Render(m);
+		if (m->getPos().y < TEXT_TOP_Y && m->getPos().y > TEXT_BOTTOM_Y) {
+			textBubble->SetSize(sizeX, m->getSize().y - 20);
+			textBubble->SetPosition(glm::vec3(posX, m->getPos().y, 1));
+			renderer->Render(textBubble);
+			renderer->Render(m);
+		}
 	}
+	renderer->Render(scrollBarBG);
+	renderer->Render(scrollBar);
 }
 
 void Chat::CloseChat() {
@@ -81,13 +92,11 @@ void Chat::OpenChat(const ChatInfo c) {
 
 		// calculate starting y of the msg
 		if (i > 0) {
-			yPos -= (-tmpText->getSize().y * 0.5f + TEXT_SPACE * i + -allMsg.at(i - 1)->getSize().y * 0.5f);
+			yPos -= (-tmpText->getSize().y * 0.5f + TEXT_SPACE + -allMsg.at(i - 1)->getSize().y * 0.5f);
 		}
 		else {
 			yPos -= (-tmpText->getSize().y * 0.5f);
 		}
-
-
 		glm::vec3 newPos = glm::vec3(c.textPosition[i].x + paddingx, yPos, 0);
 		tmpText->SetPosition(newPos);
 		allMsg.push_back(tmpText);
@@ -96,20 +105,28 @@ void Chat::OpenChat(const ChatInfo c) {
 		upperBound = allMsg.at(0)->getPos().y;
 		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y*0.25f + TEXT_BOTTOM_Y;
 	}
+	float msgLength = (allMsg.at(0)->getPos().y - allMsg.at(allMsg.size() - 1)->getPos().y - TEXT_TOP_Y + TEXT_BOTTOM_Y);
+	float scrollNo = msgLength  / -scrollBar->getSize().y;
+	scrollBarSpeed = (scrollNo / msgLength) * -scrollBarBG->getSize().y;
+	scrollBar->SetPosition(glm::vec3(scrollBarBG->getPos().x, TEXT_TOP_Y - -scrollBar->getSize().y * 0.5, 1));
 }
 
 void Chat::Scroll(int direction) {
-	if (direction > 0) {
+	if (direction < 0) {
 		// scroll up
-		if(allMsg.at(allMsg.size() - 1)->getPos().y < lowerBound)
+		if (allMsg.at(allMsg.size() - 1)->getPos().y < lowerBound) {
 			for (auto m : allMsg)
 				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y + SCROLL_SPEED, 1));
+			scrollBar->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y - scrollBarSpeed, 1));
+		}
 	}
 	else {
 		// scroll down
-		if (allMsg.at(0)->getPos().y > upperBound)
+		if (allMsg.at(0)->getPos().y > upperBound) {
 			for (auto m : allMsg)
 				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y - SCROLL_SPEED, 1));
+			scrollBar->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + scrollBarSpeed, 1));
+		}
 	}
 }
 
@@ -397,6 +414,7 @@ void Phone::Render() {
 			renderer->Render(notifyPopup);
 		}
 	}
+	
 }
 
 void Phone::Scroll(glm::vec3 screen, int direction) {

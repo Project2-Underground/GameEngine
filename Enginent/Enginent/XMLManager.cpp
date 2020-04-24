@@ -331,6 +331,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
+		if (phoneNode.attribute("hasPhone").as_bool())
+			gs->phoneIcon->Appear();
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
 			phone->SetPage(NOTE, itr->attribute("name").as_string());
 		}
@@ -431,6 +433,8 @@ void XMLManager::SaveGame(std::string filename) {
 	int noteSize = (int)phone->app->notes.size();
 	int chatSize = (int)phone->app->chats.size();
 
+	saveLevel.child("Phone").append_attribute("hasPhone").set_value(gs->phoneIcon->IsDisplay());
+
 	for (int i = 0; i < noteSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");
 		node.append_attribute("name").set_value(phone->app->notes[i]->name.c_str());
@@ -439,7 +443,7 @@ void XMLManager::SaveGame(std::string filename) {
 	for (auto c:phone->chats) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
 		node.append_attribute("name").set_value(c.second.name.c_str());
-		node.append_attribute("msgNo").set_value(c.second.texts.size());
+		node.append_attribute("msgNo").set_value(c.second.currentMsgIndex);
 	}
 
 	save.save_file(filename.c_str());

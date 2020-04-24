@@ -14,6 +14,16 @@ Button::Button(std::string texture)
 	hoverTexture = normalTexture;
 	pressTexture = normalTexture;
 }
+void Button::Appear() {
+	SetDisplay(true);
+	if (col)
+		col->enable = true;
+}
+void Button::Disappear() {
+	SetDisplay(false);
+	if (col)
+		col->enable = false;
+}
 
 void Button::SetHoverTexture(std::string texture) {
 	hoverTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
@@ -87,6 +97,12 @@ void PhoneAppsButton::action() {
 
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
+}
+
+void PhoneOpenButton::Init(float x, float y, glm::vec3 pos) {
+	SetSize(x, y);
+	SetPosition(pos);
+	SetCollder(new Collider(this));
 }
 
 void PhoneExitButton::action() {

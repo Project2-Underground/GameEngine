@@ -44,6 +44,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Puzzles.h" />
     <ClInclude Include="ScriptManager.h" />
+    <ClInclude Include="SpecialNPCs.h" />
     <ClInclude Include="XMLManager.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="pch.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="SaveLoadWindow.cpp" />
     <ClCompile Include="ScriptManager.cpp" />
     <ClCompile Include="SettingWindow.cpp" />
+    <ClCompile Include="SpecialNPCs.cpp" />
     <ClCompile Include="XMLManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />

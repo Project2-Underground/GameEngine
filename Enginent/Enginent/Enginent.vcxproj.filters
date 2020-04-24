@@ -147,6 +147,9 @@
     <ClInclude Include="Door.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
+    <ClInclude Include="SpecialNPCs.h">
+      <Filter>GameObj\interactable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp">
@@ -274,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="NumpadPuzzle.cpp">
       <Filter>Puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialNPCs.cpp">
+      <Filter>GameObj\interactable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

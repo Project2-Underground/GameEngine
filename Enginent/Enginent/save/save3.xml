@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
 	<interactObj>
-		<BackDoorRoom_FlowerClue current_dialogue="" has_item="false" />
+		<BackDoorRoom_FlowerClue current_dialogue="" has_item="true" />
 		<BackDoorRoom_Computer current_dialogue="" has_item="false" />
 		<Closet current_dialogue="EliasRoom_closet" has_item="false" open="true" />
 		<Table current_dialogue="EliasRoom_carbinet2" has_item="false" open="false" />
@@ -13,7 +13,7 @@
 		<EmmaRoom_Window current_dialogue="" has_item="false" />
 		<Bookshelf1 current_dialogue="Hall_Bookshelf_L1" has_item="false" />
 		<Bookshelf2 current_dialogue="" has_item="false" />
-		<Gramophone current_dialogue="" has_item="false" />
+		<Gramophone current_dialogue="" has_item="true" />
 		<RabbitCage current_dialogue="" has_item="false" />
 		<Door2 current_dialogue="" has_item="false" />
 		<Door3 current_dialogue="" has_item="false" />
@@ -27,7 +27,7 @@
 		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
-		<StairDoor used="true" />
+		<StairDoor used="false" />
 		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
 		<HallRoomLowerFloor_Door used="false" />
@@ -36,15 +36,15 @@
 	</doors>
 	<NPCs>
 		<Emma hasItem="false" />
-		<Ann hasItem="false" />
-		<Dann hasItem="false" />
-		<Hubert hasItem="false" />
-		<Dialy hasItem="false" />
+		<Ann hasItem="true" />
+		<Dann hasItem="true" />
+		<Hubert hasItem="true" />
+		<Dialy hasItem="true" />
 	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="true" passRequirements="true" />
+		<BookshelfPuzzle done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="441" posY="-110">
+	<Player posX="416.5" posY="-110">
 		<inventory>
 			<item />
 			<item />
@@ -57,11 +57,10 @@
 			<item />
 		</inventory>
 	</Player>
-	<Phone>
+	<Phone hasPhone="true">
 		<Notes />
 		<Chats>
-			<c name="another_person_name" msgNo="4" />
-			<c name="person_name" msgNo="11" />
+			<c name="Unknown" msgNo="12" />
 		</Chats>
 	</Phone>
 </level>

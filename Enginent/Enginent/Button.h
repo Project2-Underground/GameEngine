@@ -21,6 +21,8 @@ public:
 	virtual void checkColliderReleased(float x, float y);
 	void SetTogglePress(bool b) { togglePressed = b; pressAvailable = !b; }
 	bool IsSelected() { return togglePressed; }
+	void Appear();
+	void Disappear();
 
 	void SetHoverTexture(std::string);
 	void SetPressTexture(std::string);
@@ -47,6 +49,7 @@ public:
 class PhoneOpenButton : public Button {
 public:
 	PhoneOpenButton(std::string texture) : Button(texture) {}
+	void Init(float sizex, float sizey, glm::vec3 position);
 	void action();
 };
 

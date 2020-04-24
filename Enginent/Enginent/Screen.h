@@ -10,6 +10,7 @@
 #include "Inventory.h"
 #include "GameWindows.h"
 #include "Door.h"
+#include "SpecialNPCs.h"
 
 enum ScreenState {
 	MENUSCREEN = 0,
@@ -66,7 +67,6 @@ class GameScreen :public Screen {
 	Player* player;
 	Phone* phone;
 
-	PhoneOpenButton* phoneIcon;
 	Button* pause;
 	TextBox* dialogueText;
 
@@ -81,6 +81,7 @@ public:
 	vector<std::string> levels;
 	vector<std::string> objActions;
 	map<std::string, Puzzle*> puzzles;
+	PhoneOpenButton* phoneIcon;
 
 	GameScreen();
 	void Render();

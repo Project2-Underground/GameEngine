@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <chats>
-	<person_name pic="Texture/tmp_texture/person1.png">
-		<m>this is a message in one this is a message in one text bubble this is a message in one text bubble this is a message in one text bubble</m>
-		<m>yes</m>
-		<m>another one</m>
-		<m>henlo</m>
-		<m>how are you</m>
-		<m>my name is person_name</m>
-		<m>yes</m>
-		<m>wait</m>
-		<m>no</m>
-		<m>I'm not suppose to be here</m>
-		<m>take care</m>
-	</person_name>
-	<another_person_name pic="Texture/tmp_texture/person2.png">
-		<m>this is a message in one text bubble</m>
-		<m>this is a message in one text bubble</m>
-		<m>this is a message in one text bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble bubble </m>
-		<m>this is a message in one text bubble</m>
-	</another_person_name>
+	<Unknown pic="Texture/tmp_texture/person1.png">
+		<m>Good day, Mr Elias Adams</m>
+		<m>You have passed the test and became a part of the experiment</m>
+		<m>The next test will be the measure of your intelligence</m>
+		<m>You will have to find your way out of this mansion before you bacome like everyone else</m>
+		<m>This is your first hint...</m>
+		<m>The books</m>
+		<mm>Wish you the best of luck</mm>
+		<m>You seem to be deviating from the path we have set</m>
+		<m>However, you have been doing great in that path</m>
+		<m>And I have new plans for you</m>
+		<m>Go back to the hallroom. Someone wating for you there</m>
+		<mm>Last but not least, I wish you the best of luck</mm>
+	</Unknown>
 </chats>
