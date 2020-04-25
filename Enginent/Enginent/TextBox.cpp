@@ -28,6 +28,7 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key)
 {
+	SetDisplay(true);
 	if (key != "")
 	{
 		Dialogue* tmp = scriptManager->GetDialogue(key);

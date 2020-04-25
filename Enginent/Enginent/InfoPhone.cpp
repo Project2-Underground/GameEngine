@@ -111,7 +111,6 @@ void Chat::OpenChat(const ChatInfo c) {
 	float space = -scrollBar->getSize().y - -thumb->getSize().y;
 
 	float scrollNo = (msgLength - (upperBound - lowerBound)) / SCROLL_SPEED;
-	std::cout << scrollNo << std::endl;
 	scrollBarSpeed = space / scrollNo;
 	thumb->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + space * 0.5f, 1));
 }
@@ -187,6 +186,7 @@ void Application::OpenChat() {
 		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", chats[i]->name, i, chats[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
+		tab->hasNewInfo = chats[i]->noti;
 		itemTabs.push_back(tab);
 	}
 	if (itemTabs.size() > 0) {

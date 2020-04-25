@@ -57,8 +57,9 @@ void Room::LeftClick(float x, float y) {
 
 	for (int i = 0; i < npcs.size(); i++) {
 		InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]);
-		if (npc->CheckCollider((float)x, (float)y))
+		if (npc->CheckCollider((float)x, (float)y)) {
 			((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(npc);
+		}
 	}
 }
 
@@ -116,9 +117,7 @@ DrawableObject* Room::FindObject(std::string name) {
 Level::Level(std::string filename) {
 	XMLManager* lg = XMLManager::GetInstance();
 	lg->GenerateRoom(filename, rooms);
-	levelNo = lg->GetLevelNumber(filename);
-
-	// assign first room as current room
+	lg->GetLevelNumber(filename, this);
 	currentRoom = rooms[lg->GetFirstRoomName()];
 }
 
@@ -148,6 +147,12 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	}
 	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());
 	player->StopWalking();
+
+	if (currentRoom->dialogue != "") {
+		TextBox::GetInstance()->setText(currentRoom->dialogue);
+		TextBox::GetInstance()->SetDisplay(true);
+		currentRoom->dialogue = "";
+	}
 
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
 }

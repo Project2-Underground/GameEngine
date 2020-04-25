@@ -28,7 +28,7 @@ public:
 	void LoadObjSpecialActions(std::string, Level*);
 	void LoadItems(std::vector<Item*>&);
 
-	int GetLevelNumber(std::string); 
+	void GetLevelNumber(std::string, Level*);
 	std::string GetFirstRoomName();
 	void SaveGame(std::string);
 	void LoadFromSave(std::string);

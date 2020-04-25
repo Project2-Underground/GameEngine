@@ -132,6 +132,7 @@ MenuScreen::~MenuScreen() {
 GameScreen::GameScreen() {
 	InventoryEnable = true;
 	PuzzleTime = false;
+	currentLevel = nullptr;
 	// filepath of levels
 	levels.push_back("save/level1.xml");
 	levels.push_back("save/level2.xml");
@@ -141,23 +142,20 @@ GameScreen::GameScreen() {
 	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
-	butler = new Butler();
-	currentLevel = new Level(levels[0]);
-	XMLManager::GetInstance()->LoadItems(items);
-	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
-
-	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
-	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
-	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
 
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
-	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
+
+	ChangeLevel(0);
+	butler = new Butler();
+	XMLManager::GetInstance()->LoadItems(items);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
+	phone->Clear();
 	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
 	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->Disappear();
@@ -183,6 +181,13 @@ GameScreen::GameScreen() {
 	windows.push_back(PauseWindow::GetInstance());
 }
 
+void GameScreen::Init() {
+	butler->Appear();
+	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	if(currentLevel->GetCurrentRoom()->dialogue != "")
+		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
+}
+
 void GameScreen::LoadGame(std::string filename) {
 	XMLManager::GetInstance()->LoadFromSave(filename);
 }
@@ -202,7 +207,6 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
-		renderer->Render(butler);
 	}
 	renderer->Render(UI);
 
@@ -230,7 +234,6 @@ void GameScreen::Update() {
 			else {
 				currentLevel->Update();
 				player->Update();
-				butler->Update();
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();
@@ -313,6 +316,10 @@ void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
+	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
+	Camera* camera = Game::GetInstance()->GetCamera();
+	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
@@ -385,6 +392,9 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	//	break;
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
+		break;
+	case SDLK_q:
+		Game::GetInstance()->TriggerChangeLevel(1);
 		break;
 	default:
 		break;

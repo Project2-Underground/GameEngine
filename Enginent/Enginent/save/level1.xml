@@ -2,8 +2,8 @@
 
 <!-- texture = NONE toset display false-->
 
-<level currentLevel="1" startPosX="0" startPosY="-50" Start="EliasRoom">
-	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
+<level currentLevel="1" startPosX="0" startPosY="-50" Start="EliasRoom" xStart="0">
+	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -36,13 +36,13 @@
 			<fg texture="Texture/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</EliasRoom>
-	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70">
+	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70" dialogue="HallRoom">
 		<background>
 			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0"/>
-			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0"/>
+			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door"/>
+			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door"/>
 		</interactObj>
 		<doors>
 			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door">
@@ -160,7 +160,7 @@
 			</BackDoorRoom_FlowerClue>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="0">
+			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-809" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="4">
 				<ForeGround/>
 			</BackDoorRoom_Foreground_Door>
 			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0"/>

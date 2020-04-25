@@ -28,6 +28,7 @@ public:
 	bool buttonClicked;
 	bool Pause;
 	virtual void Render() = 0;
+	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
@@ -50,6 +51,7 @@ class MenuScreen :public Screen {
 	std::vector<UIObject*> UI;
 public:
 	MenuScreen();
+	void Init() {}
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -84,6 +86,7 @@ public:
 	PhoneOpenButton* phoneIcon;
 
 	GameScreen();
+	void Init();
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -120,6 +123,7 @@ class CutsceneScreen :public Screen {
 public:
 	CutsceneScreen();
 	void Render();
+	void Init() {}
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);
