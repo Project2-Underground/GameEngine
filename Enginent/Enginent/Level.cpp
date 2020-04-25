@@ -95,11 +95,27 @@ void Room::SortObjLayer() {
 			iStart = i;
 		}
 	}
-/*
+	// sort the layers within each main layers
+	if (foreground.size() > 1) {
+		for (int i = 0; i < foreground.size() - 1; i++) {
+			bool swap = false;
+			for (int j = 0; j < foreground.size() - 1 - i; j++) {
+				if (foreground[j]->subLayer > foreground[j + 1]->subLayer) {
+					DrawableObject* tmp = foreground[j];
+					foreground[j] = foreground[j + 1];
+					foreground[j + 1] = tmp;
+					swap = true;
+				}
+			}
+			if (!swap)
+				break;
+		}
+	}
+
 	std::cout << "--------------------------------layers--------------------------------\n";
-	for (auto obj : objects) {
-		std::cout << "obj " << obj->object_name << "layer: "  << obj->layer << " sublayer: " << obj->subLayer << std::endl;
-	}*/
+	for (auto obj : foreground) {
+		std::cout << "obj " << obj->object_name << " sublayer: " << obj->subLayer << std::endl;
+	}
 }
 
 DrawableObject* Room::FindObject(std::string name) {

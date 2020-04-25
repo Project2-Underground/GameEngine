@@ -252,6 +252,7 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
+	buttonClicked = false;
 	if (dialogueText->IsDisplay())
 		dialogueText->clickLeft(screen);
 	else if (GameWindowOpen()) {
@@ -260,16 +261,15 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	}
 	else if (phone->open) 
 		phone->LeftClick(screen.x, screen.y);
-	else if (InventoryEnable) {
-		inventory->LeftClick(screen.x, screen.y);
-	}
 	else if (PuzzleTime)
 		currentPuzzle->LeftClick(screen, world);
 	else {
-		buttonClicked = false;
 		for (int j = 0; j < UI.size(); j++)
 			if (Button * button = dynamic_cast<Button*>(UI[j]))
 				button->checkColliderPressed(screen.x, screen.y);
+	}
+	if (InventoryEnable && !buttonClicked) {
+	inventory->LeftClick(screen.x, screen.y);
 	}
 	if (!buttonClicked && !player->anim->IsPlaying("Pickup")) 
 		currentLevel->LeftClick(world.x, world.y);

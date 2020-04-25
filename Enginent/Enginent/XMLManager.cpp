@@ -47,9 +47,9 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 
 			std::vector<DrawableObject*>& objects = newRoom->objects;
 			GenerateImage(*room, newRoom, "background");
+			GenerateImage(*room, newRoom, "foreground");
 			GenerateDoor(*room, newRoom);
 			GenerateNPC(*room, newRoom);
-			GenerateImage(*room, newRoom, "foreground");
 			GenerateInteractObj(*room, newRoom);
 
 			// camera limit
@@ -141,7 +141,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
-		interactObj->subLayer = child->attribute("layer").as_int();
 		interactObj->SetDialogueName(child->attribute("dialogue").as_string());
 
 		if(child->child("ForeGround"))
@@ -179,7 +178,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			door->SetOpenTexture(door->GetTexture());
 
 		door->layer = OBJECT_LAYER;
-		door->subLayer = child->attribute("layer").as_int();
 		door->SetDialogueName(child->attribute("dialogue").as_string());
 
 		if (child->attribute("stair"))
@@ -244,6 +242,8 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 		tmp->SetTexture(texture);
 	tmp->SetSize(sizeX, -sizeY);
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
+	if (node.attribute("layer"))
+		tmp->subLayer = node.attribute("layer").as_int();
 }
 
 void XMLManager::GetLevelNumber(std::string filename, Level* level) {

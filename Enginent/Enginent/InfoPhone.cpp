@@ -1,5 +1,6 @@
 #include "InfoPhone.h"
 #include "Game.h"
+#include <sstream>
 
 Note::Note(std::string n, unsigned int text) {
 	name = n;
@@ -7,6 +8,30 @@ Note::Note(std::string n, unsigned int text) {
 }
 
 void ChatInfo::AddText(std::string text) {
+	//std::stringstream ss(text);
+	//std::string modifiedText;
+	//std::string line;
+	//std::string word;
+	//int lineCount = 1;
+	//// add each words to line until length reach MAX_FONT_PER_LINE.
+	//// when reach, add \n to line, add line to modifiedText.
+	//// Then clear line to start adding new words.
+	//while (ss >> word) {
+	//	if (line.size() + word.size() > MAX_FONT_PER_LINE) {
+	//		line += '\n';
+	//		modifiedText += line;
+	//		line.clear();
+	//		lineCount++;
+	//	}
+	//	line += word + " ";
+	//}
+	//modifiedText += line;
+
+	// start at text[nextLine], for loop backwards until we find the whitespace (' ').
+	// replace that ' ' with '\n'.
+	// continue to the next line by adding which is (nextLine + MAX_FONT_PER_LINE).
+	// while loop until nextline > text size.
+
 	int nextLine = MAX_FONT_PER_LINE;
 	int lineCount = 1;
 	while (text.size() > nextLine) {
