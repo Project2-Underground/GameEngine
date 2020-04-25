@@ -68,8 +68,9 @@ void InventoryBoxButton::Reset() {
 }
 
 void InventoryBoxButton::checkColliderPressed(float x, float y) {
+	bool clicked = this->col->isClicked(x, y);
 	if (pressAvailable && item) {
-		if (this->col->isClicked(x, y)) {
+		if (clicked) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
 		}
 	}
@@ -82,6 +83,9 @@ void InventoryBoxButton::checkColliderPressed(float x, float y) {
 			vw->SetViewItem(item);
 			action();
 		}
+	}
+	if (clicked) {
+		Game::GetInstance()->GetScreen()->buttonClicked = true;
 	}
 }
 void InventoryBoxButton::updateButton(float x, float y) {

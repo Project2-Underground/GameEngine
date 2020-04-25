@@ -154,6 +154,8 @@
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
+			<EmmaTrigger texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="">
+			</EmmaTrigger>
 			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1">
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>

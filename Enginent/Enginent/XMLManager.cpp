@@ -117,7 +117,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case PLAYER_TRIGGER: {
 			PlayerTriggerObj* obj = new PlayerTriggerObj();
 			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
-			std::cout << "set trigger name: " << child->name() << "\n";
 			interactObj = obj;
 		}break;
 		default: {
