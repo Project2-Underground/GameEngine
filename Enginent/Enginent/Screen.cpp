@@ -252,27 +252,31 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	buttonClicked = false;
 	if (dialogueText->IsDisplay())
 		dialogueText->clickLeft(screen);
-	else if (GameWindowOpen()) {
-		for (auto w : windows)
-			w->LeftClick(screen.x, screen.y);
-	}
-	else if (phone->open) 
-		phone->LeftClick(screen.x, screen.y);
-	else if (PuzzleTime)
-		currentPuzzle->LeftClick(screen, world);
 	else {
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderPressed(screen.x, screen.y);
+		buttonClicked = false;
+		if (GameWindowOpen()) {
+			for (auto w : windows)
+				w->LeftClick(screen.x, screen.y);
+		}
+		else {
+			if (phone->open)
+				phone->LeftClick(screen.x, screen.y);
+			else if (PuzzleTime)
+				currentPuzzle->LeftClick(screen, world);
+			else {
+				for (int j = 0; j < UI.size(); j++)
+					if (Button * button = dynamic_cast<Button*>(UI[j]))
+						button->checkColliderPressed(screen.x, screen.y);
+			}
+			if (InventoryEnable && !buttonClicked) {
+				inventory->LeftClick(screen.x, screen.y);
+			}
+			if (!buttonClicked && !player->anim->IsPlaying("Pickup"))
+				currentLevel->LeftClick(world.x, world.y);
+		}
 	}
-	if (InventoryEnable && !buttonClicked) {
-	inventory->LeftClick(screen.x, screen.y);
-	}
-	if (!buttonClicked && !player->anim->IsPlaying("Pickup")) 
-		currentLevel->LeftClick(world.x, world.y);
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -289,12 +293,12 @@ void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 		phone->LeftRelease(screen.x, screen.y);
 	else if (PuzzleTime)
 		currentPuzzle->LeftRelease(screen, world);
-	if (InventoryEnable) {
+	else if (InventoryEnable) 
 		inventory->LeftRelease(screen.x, screen.y);
-	}
-	for (int j = 0; j < UI.size(); j++)
-		if (Button * button = dynamic_cast<Button*>(UI[j]))
-			button->checkColliderReleased(screen.x, screen.y);
+	else 
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->checkColliderReleased(screen.x, screen.y);
 }
 
 void GameScreen::Scroll(glm::vec3 screen, int direction) {
@@ -328,14 +332,24 @@ void GameScreen::ChangeRoom(std::string room, std::string door) {
 }
 
 InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
-	std::vector<DrawableObject*>* objects = currentLevel->Getobjects();
-	for (int i = (int)objects->size() - 1; i >= 0; i--)
+	std::vector<DrawableObject*> objects = currentLevel->GetCurrentRoom()->objects;
+	for (int i = (int)objects.size() - 1; i >= 0; i--)
 	{
-		if (InteractableObj* obj = dynamic_cast<InteractableObj*>((*objects)[i]))
+		if (InteractableObj* obj = dynamic_cast<InteractableObj*>(objects[i]))
 			if(obj->CheckPointing(pos.x, pos.y))
 			{
 				//std::cout << obj->object_name << ", " << obj->getType() <<  std::endl;
 				return obj->getType();
+			}
+	}
+	std::vector<DrawableObject*> npcs = currentLevel->GetCurrentRoom()->npcs;
+	for (int i = (int)npcs.size() - 1; i >= 0; i--)
+	{
+		if (InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]))
+			if(npc->CheckPointing(pos.x, pos.y))
+			{
+				//std::cout << obj->object_name << ", " << obj->getType() <<  std::endl;
+				return npc->getType();
 			}
 	}
 	return NORMAL;

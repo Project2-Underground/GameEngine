@@ -92,12 +92,6 @@ void SaveLoadWindow::LeftRelease(float x, float y) {
 	}
 }
 
-void SaveLoadWindow::Update() {
-	if (trigger) {
-		display = true;
-		trigger = false;
-	}	
-}
 
 void SaveLoadWindow::UpdateMouseButton(glm::vec3 screen) {
 	if (display) {

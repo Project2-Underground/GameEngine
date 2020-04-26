@@ -29,12 +29,6 @@ PauseWindow::PauseWindow() {
 
 	closeButton = new PauseWindowCloseButton("Texture/tmp_texture/tmp_resume.png");
 }
-void PauseWindow::Update() {
-	if (trigger) {
-		display = true;
-		trigger = false;
-	}
-}
 void PauseWindow::Init(int width, int height) {
 	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.75f);
 

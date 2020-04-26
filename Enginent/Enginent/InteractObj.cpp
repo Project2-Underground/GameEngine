@@ -94,7 +94,7 @@ void InteractableObj::PickUpItem() {
 
 		ViewWindow* vw = ViewWindow::GetInstance();
 		vw->Open();
-		vw->SetViewItem(item->GetViewTexture());
+		vw->SetViewItem(item);
 
 		hasItem = false;
 		interactType = NORMAL;
@@ -193,10 +193,14 @@ void ViewObj::SetViewTexture(std::string view) {
 	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(view);
 }
 
+unsigned int ViewObj::GetViewTexture() {
+	return viewTexture;
+}
+
 void ViewObj::action() {
 	ViewWindow* vw = ViewWindow::GetInstance();
 	vw->Open();
-	vw->SetViewItem(viewTexture);
+	vw->SetViewItem(this);
 	InteractableObj::action();
 	/*TextBox::GetInstance()->setText(this->dialogue_name);
 	TakePic();*/

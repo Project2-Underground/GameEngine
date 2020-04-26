@@ -95,7 +95,11 @@ public:
 
 	ViewObj() { interactType = VIEW; }
 
+	float width;
+	float height;
+
 	void SetViewTexture(std::string);
+	unsigned int GetViewTexture();
 	void action();
 };
 

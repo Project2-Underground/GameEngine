@@ -22,14 +22,17 @@ ViewWindow::ViewWindow() {
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
-void ViewWindow::Update() {
+void GameWindow::Update() {
 	if(trigger)
 		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
 			display = true;
 			trigger = false;
 		}
+	if (display) {
+		CursorUI* cursor = Game::GetInstance()->GetCursor();
+		cursor->enableChange(false);
+	}
 }
-
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
@@ -38,19 +41,38 @@ void ViewWindow::Init(int width, int height) {
 	viewItem->SetPosition(bgWindow->getPos());
 	float closeButtonSize = 40.0f;
 	closeButton->Init(closeButtonSize, -closeButtonSize,
-					  glm::vec3(bgWindow->col->getMaxBound().x - closeButtonSize * 0.75f,
+					  glm::vec3(bgWindow->col->getMaxBound().x + closeButtonSize * 0.5f,
 					  bgWindow->col->getMaxBound().y - closeButtonSize * 0.75f,
 					  0.0f));
 }
 
 void ViewWindow::SetViewItem(Item* item) {
-	viewItem->SetSize(item->aspect * -viewItem->getSize().y, viewItem->getSize().y);
+	float sizeX = item->width;
+	float sizeY = item->height;
+	if (-item->height > 500) {
+		sizeX = 500 * item->aspect;
+		sizeY = -500;
+	}
+	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(item->GetViewTexture());
+	if (viewItem->getSize().x > bgWindow->getSize().x) {
+		closeButton->SetPosition(glm::vec3(viewItem->getSize().x * 0.5f + closeButton->getSize().x * 0.5f, closeButton->getPos().y, 0));
+	}
 }
 
-void ViewWindow::SetViewItem(unsigned int texture) {
-	viewItem->SetSize(-viewItem->getSize().y, viewItem->getSize().y);
-	viewItem->SetTexture(texture);
+void ViewWindow::SetViewItem(ViewObj* obj) {
+	float sizeX = obj->width;
+	float sizeY = obj->height;
+	if (-obj->height > 500) {
+		float aspect = obj->width / -obj->height;
+		sizeX = 500 * aspect;
+		sizeY = -500;
+	}
+	viewItem->SetSize(sizeX, sizeY);
+	viewItem->SetTexture(obj->GetViewTexture());
+	if (viewItem->getSize().x > bgWindow->getSize().x) {
+		closeButton->SetPosition(glm::vec3(viewItem->getSize().x * 0.5f + closeButton->getSize().x * 0.5f, closeButton->getPos().y, 0));
+	}
 }
 
 void ViewWindow::SetText() {

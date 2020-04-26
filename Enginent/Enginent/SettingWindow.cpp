@@ -32,12 +32,6 @@ SettingWindow::SettingWindow() {
 
 	closeButton = new SettingWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 }
-void SettingWindow::Update() {
-	if (trigger) {
-		display = true;
-		trigger = false;
-	}
-}
 void SettingWindow::Init(int width, int height) {
 	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.5f);
 

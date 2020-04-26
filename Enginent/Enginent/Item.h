@@ -21,6 +21,8 @@ public:
 	unsigned int GetInventoryTexture() { return iTexture; }
 	unsigned int GetViewTexture() { return viewTexture; }
 
+	float width;
+	float height;
 	float aspect;
 
 	bool operator==(const Item& item);

@@ -98,6 +98,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case VIEW: {
 			ViewObj* obj = new ViewObj();
 			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
+			obj->width = child->child("view").attribute("width").as_float();
+			obj->height = -child->child("view").attribute("height").as_float();
 			interactObj = obj;
 		}break;
 		case OPEN: {
@@ -595,6 +597,8 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			float y = item->attribute("sizeY").as_float();
 			
 			i->aspect = x / y;
+			i->width = x;
+			i->height = -y;
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);

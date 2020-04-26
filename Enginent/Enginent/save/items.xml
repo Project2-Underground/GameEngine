@@ -2,10 +2,10 @@
 
 <Items>
 	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080"/>
-	<Book1 i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/i_Book1.png" sizeX="56" sizeY="154" />
-	<Book2 i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/i_Book2.png" sizeX="56" sizeY="154" />
-	<Book3 i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/i_Book3.png" sizeX="56" sizeY="154" />
-	<Book4 i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/i_Book4.png" sizeX="56" sizeY="154" />
+	<Book1 i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/Puzzle1_Book1.png" sizeX="109" sizeY="300" />
+	<Book2 i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/Puzzle1_Book2.png" sizeX="109" sizeY="300" />
+	<Book3 i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/Puzzle1_Book3.png" sizeX="109" sizeY="300" />
+	<Book4 i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/Puzzle1_Book4.png" sizeX="109" sizeY="300" />
 	<Puzzle2_ColorCode1 i_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" sizeX="855" sizeY="850" />
 	<Puzzle2_ColorCode2 i_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" sizeX="855" sizeY="850" />
 	<Puzzle2_EmmaPaper1 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1.png" sizeX="1080" sizeY="1080">

@@ -10,7 +10,7 @@ protected:
 	bool trigger;
 	Button* closeButton;
 public:
-	virtual void Update() = 0;
+	virtual void Update();
 	virtual void Init(int width, int height) = 0;
 	virtual void Render() = 0;
 	virtual void LeftClick(float, float) = 0;
@@ -32,7 +32,6 @@ public:
 
 	~ViewWindow();
 
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -40,7 +39,7 @@ public:
 	void UpdateMouseButton(glm::vec3);
 
 	void SetViewItem(Item* item);
-	void SetViewItem(unsigned int texture);
+	void SetViewItem(ViewObj*);
 	void SetText();
 };
 
@@ -54,7 +53,6 @@ public:
 
 	~SaveLoadWindow();
 
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -80,7 +78,6 @@ public:
 	static PauseWindow* GetInstance();
 
 	~PauseWindow();
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -109,7 +106,6 @@ public:
 
 	SettingWindow();
 	~SettingWindow();
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
