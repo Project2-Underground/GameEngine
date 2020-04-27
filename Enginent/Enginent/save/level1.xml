@@ -183,7 +183,7 @@
 		</background>
 		<interactObj>
 			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4">
-				<!-- <puzzle name="Numpad_Backdoor"/> -->
+				<puzzle name="Numpad_Backdoor"/>
 			</BackDoorRoom_Computer>
 		</interactObj>
 		<doors>

@@ -24,11 +24,13 @@ ViewWindow::ViewWindow() {
 
 void GameWindow::Update() {
 	Game* g = Game::GetInstance();
-	if(trigger)
-		if (g->GetPlayer() && g->GetPlayer()->anim && g->GetPlayer()->anim->IsPlaying("Idle")) {
+	if (trigger) {
+		bool playerIsIdle = g->GetPlayer() && g->GetPlayer()->anim && g->GetPlayer()->anim->IsPlaying("Idle");
+		if (g->GetScreenState() == MENUSCREEN || playerIsIdle) {
 			display = true;
 			trigger = false;
 		}
+	}
 	if (display) {
 		CursorUI* cursor = Game::GetInstance()->GetCursor();
 		cursor->enableChange(false);

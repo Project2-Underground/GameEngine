@@ -163,6 +163,7 @@ GameScreen::GameScreen() {
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
+	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Backdoor", new NumpadPuzzle()));
 	PuzzleTime = false;
 
 	dialogueText = TextBox::GetInstance();
