@@ -23,8 +23,9 @@ ViewWindow::ViewWindow() {
 }
 
 void GameWindow::Update() {
+	Game* g = Game::GetInstance();
 	if(trigger)
-		if (Game::GetInstance()->GetPlayer()->anim->IsPlaying("Idle")) {
+		if (g->GetPlayer() && g->GetPlayer()->anim && g->GetPlayer()->anim->IsPlaying("Idle")) {
 			display = true;
 			trigger = false;
 		}

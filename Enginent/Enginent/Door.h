@@ -22,13 +22,13 @@ public:
 	void action();
 };
 
-//class EliasDoor :public Door {
-//public:
-//	EliasDoor(std::string room, std::string door) :Door(room, door) { }
-//	void action();
-//	void Update(); 
-//	void Init();
-//};
+class EliasDoor :public Door {
+	std::string dialogueAfterOpen;
+public:
+	EliasDoor(std::string room, std::string door) :Door(room, door) { }
+	void action();
+	//void Update(); 
+};
 
 class ChangeLevelDoor : public Door {
 	int nextLevel;

@@ -76,7 +76,7 @@ void InventoryBoxButton::checkColliderPressed(float x, float y) {
 	}
 	else if (item) {
 		//std::cout << clickIntervalTime << std::endl;
-		if (clickIntervalTime < DOUBLE_CLICK_TIME && MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+		if (clickIntervalTime < DOUBLE_CLICK_TIME && clicked && MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			clickIntervalTime = DOUBLE_CLICK_TIME;
 			ViewWindow* vw = ViewWindow::GetInstance();
 			vw->Open();

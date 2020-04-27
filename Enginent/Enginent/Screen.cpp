@@ -267,8 +267,9 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 				currentPuzzle->LeftClick(screen, world);
 			else {
 				for (int j = 0; j < UI.size(); j++)
-					if (Button * button = dynamic_cast<Button*>(UI[j]))
+					if (Button * button = dynamic_cast<Button*>(UI[j])) {
 						button->checkColliderPressed(screen.x, screen.y);
+					}
 			}
 			if (InventoryEnable && !buttonClicked) {
 				inventory->LeftClick(screen.x, screen.y);
@@ -295,10 +296,9 @@ void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 		currentPuzzle->LeftRelease(screen, world);
 	else if (InventoryEnable) 
 		inventory->LeftRelease(screen.x, screen.y);
-	else 
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderReleased(screen.x, screen.y);
+	for (int j = 0; j < UI.size(); j++)
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+			button->checkColliderReleased(screen.x, screen.y);
 }
 
 void GameScreen::Scroll(glm::vec3 screen, int direction) {

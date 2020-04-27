@@ -25,7 +25,8 @@
 			</Calendar>
 		</interactObj>
 		<doors>
-			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor">
+			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogueAfterOpen="EliasRoom_door_useKey">
+				<EliasDoor/>
 				<openDoor texture="Texture/EliasRoom/Elias_Room_Door1.png"/>
 				<key name="keyCard"/>
 			</EliasRoomInnerDoor>
