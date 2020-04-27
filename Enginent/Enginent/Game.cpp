@@ -50,7 +50,7 @@ void Game::Init(int width, int height)
 	loadingImage->SetSize((float)width, -(float)height);
 	loadingImage->SetTexture("Texture/tmp_texture/loading.png");
 
-	currentState = MENUSCREEN;
+	currentState = TESTSCENE;
 	cursorGame = new CursorUI();
 	UpdateScreenState();
 
@@ -101,8 +101,8 @@ void Game::UpdateScreenState() {
 		break;
 	case ENDSCENE:
 		break;
-	//case TESTSCENE:
-	//	currentScreen = new TestScreen();
+	case TESTSCENE:
+		currentScreen = new TestScreen();
 	default:
 		break;
 	}

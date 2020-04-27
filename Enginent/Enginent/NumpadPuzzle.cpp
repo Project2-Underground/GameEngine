@@ -68,8 +68,8 @@ void Numpad::Init(std::vector<UIObject*> image, std::vector<Button*> b, int* c, 
 	numUI = new TextObject[cheat_size];
 	for (int i = 0; i < cheat_size; i++)
 	{
-		numUI[i].SetPosition(glm::vec3(-80 + (30 * i), -200, 1));
-		numUI[i].loadText(" ", numColor, 24);
+		numUI[i].SetPosition(glm::vec3(-150 + (100 * i), 266, 1));
+		numUI[i].loadText(" ", numColor, 100);
 	}
 	this->input = input;
 }
@@ -86,7 +86,7 @@ void Numpad::Render()
 		{
 			Game::GetInstance()->GetRenderer()->Render(n_button[i]);
 		}
-		for (int i = 0; i < cheat_size; i++)
+		for (int i = 0; i < input->size(); i++)
 		{
 			Game::GetInstance()->GetRenderer()->Render(&numUI[i]);
 		}
@@ -103,7 +103,7 @@ void Numpad::Update()
 	}
 	for (int i = 0; i < (*input).size(); i++)
 	{
-		numUI[i].loadText(to_string((*input)[i]), numColor, 24);
+		numUI[i].loadText(to_string((*input)[i]), numColor, 100);
 	}
 }
 

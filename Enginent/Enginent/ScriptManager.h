@@ -82,6 +82,6 @@ public:
 	~ScriptManager();
 	static ScriptManager* GetInstance();
 	void LoadScript();
-	Dialogue* GetDialogue(std::string);
+	Dialogue* GetDialogue(std::string, bool talk = false);
 	std::vector<Choice>* GetChoice(std::string);
 };

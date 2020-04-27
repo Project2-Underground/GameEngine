@@ -208,7 +208,11 @@ void NonPlayer::action()
 	std::cout << interactType << std::endl;
 	if (dialogue_name != "")
 	{
-		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->setText(this->dialogue_name, talk);
+		if (!talk)
+		{
+			talk = true;
+		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");

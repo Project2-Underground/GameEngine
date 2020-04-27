@@ -157,7 +157,7 @@ void ScriptManager::LoadScript()
 	}
 }
 
-Dialogue* ScriptManager::GetDialogue(std::string key)
+Dialogue* ScriptManager::GetDialogue(std::string key, bool talk)
 {
 	Script* tmp = scripts[key];
 	if (tmp == nullptr)
@@ -175,6 +175,10 @@ Dialogue* ScriptManager::GetDialogue(std::string key)
 	else if (tmp->currIndex >= tmp->script.size())
 	{
 		tmp->currIndex = tmp->loopIndex;
+	}
+	if (talk && tmp->currIndex == 0)
+	{
+		tmp->currIndex = 1;
 	}
 	return &(tmp->script[index]);
 }
