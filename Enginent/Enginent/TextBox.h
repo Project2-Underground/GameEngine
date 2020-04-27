@@ -51,7 +51,7 @@ class TextBox : public UIObject {
 		static TextBox* GetInstance();
 		~TextBox();
 		void CloseBox() { display = false; }
-		void setText(std::string);
+		void setText(std::string, bool talk = false);
 		void setTextColor(SDL_Color colorN, SDL_Color colorS) { nameColor = colorN; textColor = colorS; }
 		void Render();
 		void clickLeft(glm::vec3);

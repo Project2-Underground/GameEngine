@@ -472,52 +472,57 @@ void CutsceneScreen::HandleKey(SDL_Keycode key) {
 
 /*TestScene NumPad*/
 
-//TestScreen::TestScreen()
-//{
-//	
-//}
-//
-//void TestScreen::Render()
-//{
-//	puzzle->Render();
-//}
-//
-//void TestScreen::Update()
-//{
-//	puzzle->Update();
-//}
-//
-//void TestScreen::RightClick(glm::vec3, glm::vec3)
-//{
-//
-//}
-//
-//void TestScreen::LeftClick(glm::vec3 screen, glm::vec3 world)
-//{
-//	puzzle->LeftClick(screen, world);
-//}
-//
-//void TestScreen::UpdateMouseState(glm::vec3, glm::vec3)
-//{
-//
-//}
-//
-//TestScreen::~TestScreen()
-//{
-//
-//}
-//
-//void TestScreen::RightRelease(glm::vec3, glm::vec3)
-//{
-//
-//}
-//
-//void TestScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
-//{
-//	puzzle->LeftRelease(screen, world);
-//}
-//
-//void TestScreen::HandleKey(SDL_Keycode)
-//{
-//
-//}
+TestScreen::TestScreen()
+{
+	numpad = new NumpadPuzzle();
+}
+
+void TestScreen::Init()
+{
+
+}
+
+void TestScreen::Render()
+{
+	numpad->Render();
+}
+
+void TestScreen::Update()
+{
+	numpad->Update();
+}
+
+void TestScreen::RightClick(glm::vec3, glm::vec3)
+{
+
+}
+
+void TestScreen::LeftClick(glm::vec3 screen, glm::vec3 world)
+{
+	numpad->LeftClick(screen, world);
+}
+
+void TestScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
+{
+
+}
+
+TestScreen::~TestScreen()
+{
+
+}
+
+void TestScreen::RightRelease(glm::vec3, glm::vec3)
+{
+
+}
+
+void TestScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
+{
+	numpad->LeftRelease(screen, world);
+}
+
+void TestScreen::HandleKey(SDL_Keycode)
+{
+
+}

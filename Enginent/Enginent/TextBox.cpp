@@ -26,7 +26,7 @@ TextBox::TextBox()
 	//use TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
 }
 
-void TextBox::setText(std::string key)
+void TextBox::setText(std::string key, bool talk)
 {
 	SetDisplay(true);
 	if (key != "")
@@ -39,7 +39,6 @@ void TextBox::setText(std::string key)
 			d_index = 0;
 			name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
 			std::string tmp_text = d_text->dialogue[d_index].text;
-
 
 			
 			int charCount = 0;
@@ -80,21 +79,9 @@ void TextBox::setText(std::string key)
 				vw->Open();
 				obj->hasItem = false;
 			}
-			//dialogue->loadText(d_text->dialogue[d_index].text, textColor, 24);
-			//dialogue->SetPosition(glm::vec3((-450 + (float)((d_text->dialogue[d_index].text.size() * 10) / 2)), -180, 1.0f));
+
 			Game::GetInstance()->GetCursor()->enableChange(false);
 
-			//int nextLine = MAX_FONT_PER_LINE;
-			//int lineCount = 1;
-			//while (text.size() > nextLine) {
-			//	for (; text[nextLine] != ' '; nextLine--);
-			//	text[nextLine] = '\n';
-			//	lineCount++;
-			//	nextLine += MAX_FONT_PER_LINE;
-			//}
-			//textPosition.push_back(glm::vec3(TEXT_START_X, TEXT_TOP_Y, 0));
-			//texts.push_back(text);
-			//lineCounts.push_back(lineCount);
 		}
 		if (tmp->changeNameObj.size() > 0)
 		{
