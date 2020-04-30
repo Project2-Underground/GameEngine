@@ -33,9 +33,12 @@ protected:
 
 	bool takePic;
 	bool hasNextTexture;
+	bool talk;
 	std::string picName;
 	std::string item_to_use;
 	std::string dialogue_name;
+	std::string dialogue_before;
+	std::string dialogue_after;
 	std::string itemName;
 	std::vector<InteractableObj*> triggerObjs;
 	unsigned int nextTexture; // after picking up an item
@@ -48,7 +51,7 @@ public:
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
 	void SetTakePic(std::string);
-	void SetDialogueName(std::string);
+	void SetDialogueName(std::string, std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
 	void SetInteractType(InteractTypeList type) { interactType = type; }
@@ -60,7 +63,7 @@ public:
 	void PickUpItem();
 	virtual void UseItem(Item* item);
 	void AddTriggerObj(InteractableObj*);
-	void ChangeDialogue(std::string n);
+	void ChangeDialogue(std::string n, std::string a);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
 
 	InteractTypeList getType() { return interactType; };

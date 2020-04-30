@@ -164,6 +164,14 @@ void Numpad::deleteInput()
 Numpad::~Numpad()
 {
 	delete cheat;
+	for (int i = 0; i < image.size(); i++)
+	{
+		delete image[i];
+	}
+	for (int i = 0; i < n_button.size(); i++)
+	{
+		delete n_button[i];
+	}
 }
 
 NumpadPuzzle::NumpadPuzzle()
@@ -262,6 +270,110 @@ void NumpadPuzzle::CompletePuzzle()
 }
 
 NumpadPuzzle::~NumpadPuzzle()
+{
+
+}
+
+
+////////////////////////////////////
+//Numpad 2
+////////////////////////////////////
+
+NumpadPuzzle_2::NumpadPuzzle_2()
+{
+	puzzle = new Numpad("Texture/Puzzle2/buttonscreen.png", 0, 0, 2560, -1440);
+
+	std::vector<UIObject*> images;
+	std::vector<Button*> buttons;
+
+	UIObject* bg = new UIObject();
+	bg->SetTexture("Texture/Puzzle2/black.png");
+	bg->SetPosition(glm::vec3(0, 0, 1));
+	bg->SetSize(1280, -720);
+	images.push_back(bg);
+
+	UIObject* symbol = new UIObject();
+	symbol->SetTexture("Texture/Puzzle2/buttonsymbols.png");
+	symbol->SetPosition(glm::vec3(0, -50, 1));
+	symbol->SetSize(1018, -641);
+	images.push_back(symbol);
+
+	UIObject* space = new UIObject();
+	space->SetTexture("Texture/Puzzle2/buttonspaces.png");
+	space->SetPosition(glm::vec3(0, 215, 1));
+	space->SetSize(371, -15);
+	images.push_back(space);
+
+	int* c = new int[3];
+	c[0] = 2;
+	c[1] = 0;
+	c[2] = 6;
+	std::vector<int>* input = new std::vector<int>();
+
+	NumberButton* n1 = new NumberButton("Texture/Puzzle2/button1.png", "Texture/Puzzle2/button1press.png", 1, -126, 118, 118, -118, input);
+	NumberButton* n2 = new NumberButton("Texture/Puzzle2/button2.png", "Texture/Puzzle2/button2press.png", 2, 0, 118, 118, -118, input);
+	NumberButton* n3 = new NumberButton("Texture/Puzzle2/button3.png", "Texture/Puzzle2/button3press.png", 3, 126, 118, 118, -118, input);
+	NumberButton* n4 = new NumberButton("Texture/Puzzle2/button4.png", "Texture/Puzzle2/button4press.png", 4, -126, -9, 118, -118, input);
+	NumberButton* n5 = new NumberButton("Texture/Puzzle2/button5.png", "Texture/Puzzle2/button5press.png", 5, 0, -9, 118, -118, input);
+	NumberButton* n6 = new NumberButton("Texture/Puzzle2/button6.png", "Texture/Puzzle2/button6press.png", 6, 126, -9, 118, -118, input);
+	NumberButton* n7 = new NumberButton("Texture/Puzzle2/button7.png", "Texture/Puzzle2/button7press.png", 7, -126, -135, 118, -118, input);
+	NumberButton* n8 = new NumberButton("Texture/Puzzle2/button8.png", "Texture/Puzzle2/button8press.png", 8, 0, -135, 118, -118, input);
+	NumberButton* n9 = new NumberButton("Texture/Puzzle2/button9.png", "Texture/Puzzle2/button9press.png", 9, 126, -135, 118, -118, input);
+	NumberButton* n0 = new NumberButton("Texture/Puzzle2/button0.png", "Texture/Puzzle2/button0press.png", 0, 0, -263, 118, -118, input);
+	EnterButton* e = new EnterButton("Texture/Puzzle2/buttonenter.png", "Texture/Puzzle2/buttonenterpress.png", 126, -263, 118, -118, (Numpad*)puzzle);
+	DeleteButton* d = new DeleteButton("Texture/Puzzle2/buttondel.png", "Texture/Puzzle2/buttondelpress.png", -126, -263, 118, -118, (Numpad*)puzzle);
+
+	buttons.push_back(n1);
+	buttons.push_back(n2);
+	buttons.push_back(n3);
+	buttons.push_back(n4);
+	buttons.push_back(n5);
+	buttons.push_back(n6);
+	buttons.push_back(n7);
+	buttons.push_back(n8);
+	buttons.push_back(n9);
+	buttons.push_back(n0);
+	buttons.push_back(e);
+	buttons.push_back(d);
+
+	((Numpad*)puzzle)->Init(images, buttons, c, 3, input);
+}
+
+bool NumpadPuzzle_2::CheckRequirements() {
+	return true;
+}
+
+void NumpadPuzzle_2::Render()
+{
+	puzzle->Render();
+}
+
+void NumpadPuzzle_2::Update()
+{
+	puzzle->Update();
+}
+
+void NumpadPuzzle_2::LeftClick(glm::vec3 screen, glm::vec3 world)
+{
+	puzzle->LeftClick(screen, world);
+}
+
+void NumpadPuzzle_2::LeftRelease(glm::vec3 screen, glm::vec3 world)
+{
+	puzzle->LeftRelease(screen, world);
+}
+
+void NumpadPuzzle_2::UpdateMouseState(glm::vec3, glm::vec3)
+{
+
+}
+
+void NumpadPuzzle_2::CompletePuzzle()
+{
+
+}
+
+NumpadPuzzle_2::~NumpadPuzzle_2()
 {
 
 }

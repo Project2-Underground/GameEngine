@@ -139,7 +139,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->SetCollder(new Collider(interactObj));
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
-		interactObj->SetDialogueName(child->attribute("dialogue").as_string());
+		interactObj->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
 
 		if(child->child("ForeGround"))
 			r->foreground.push_back(interactObj);
@@ -177,7 +177,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
-		door->SetDialogueName(child->attribute("dialogue").as_string());
+		door->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
 
 		if (child->attribute("stair"))
 			door->SetInteractType(STAIR);
@@ -220,7 +220,7 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 		npc->SetCollder(new Collider(npc));
 		npc->layer = NPC_LAYER;
 		npc->subLayer = child->attribute("layer").as_int();
-		npc->SetDialogueName(child->attribute("dialogue").as_string());
+		npc->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
 
 		r->npcs.push_back(npc);
 	}
@@ -273,7 +273,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
-					obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
+					//obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
 
 					obj->hasItem = node.attribute("has_item").as_bool();
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {

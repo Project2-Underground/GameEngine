@@ -84,12 +84,12 @@ void TextBox::setText(std::string key, bool talk)
 		}
 		if (tmp->changeNameObj.size() > 0)
 		{
-			for (std::map<std::string, std::string>::iterator it = tmp->changeNameObj.begin(); it != tmp->changeNameObj.end(); it++)
+			for (std::map<std::string, ChangeName>::iterator it = tmp->changeNameObj.begin(); it != tmp->changeNameObj.end(); it++)
 			{
 				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(it->first));
 				if (obj != nullptr)
 				{
-					obj->ChangeDialogue(it->second);
+					obj->ChangeDialogue(it->second.d_before, it->second.d_after);
 				}
 			}
 		}

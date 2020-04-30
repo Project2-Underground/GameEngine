@@ -78,7 +78,11 @@ void ScriptManager::LoadScript()
 			{
 				std::string objectName = dialogue->attribute("name").as_string();
 				std::string newName = dialogue->attribute("new").as_string();
-				d.changeNameObj[objectName] = newName;
+				std::string newAfter = dialogue->attribute("new_a").as_string();
+				ChangeName ch;
+				ch.d_after = newAfter;
+				ch.d_before = newName;
+				d.changeNameObj[objectName] = ch;
 				dialogue++;
 			}
 			for (int j = 0; j < itemDisplayNum; j++)

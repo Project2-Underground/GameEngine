@@ -25,7 +25,7 @@
 			</Calendar>
 		</interactObj>
 		<doors>
-			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor">
+			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
 				<openDoor texture="Texture/EliasRoom/Elias_Room_Door1.png"/>
 				<key name="keyCard"/>
 			</EliasRoomInnerDoor>
@@ -55,13 +55,13 @@
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Hubert sizeX="205" sizeY="430" posX="-499" posY="-50" layer="0" dialogue="Hubert1">
+			<Hubert sizeX="205" sizeY="430" posX="-499" posY="-50" layer="0" dialogue="Hubert1" dialogue_2 = "Hubert1_after">
 				<item name="Book1"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Hubert>
-			<Dialy sizeX="205" sizeY="430" posX="1144" posY="-50" layer="0" dialogue="Dialy1">
+			<Dialy sizeX="205" sizeY="430" posX="1144" posY="-50" layer="0" dialogue="Dialy1" dialogue_2 = "Dialy1_after">
 				<item name="Book2"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC3.png" frame="2" time_per_frame="0.5" loop="True"/>
@@ -95,13 +95,13 @@
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>
 		</doors>
 		<NPCs>
-			<Ann sizeX="205" sizeY="430" posX="-808" posY="-97" layer="0" dialogue="Ann1">
+			<Ann sizeX="205" sizeY="430" posX="-808" posY="-97" layer="0" dialogue="Ann1" dialogue_2 = "Ann1_after">
 				<item name="Book4"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
-			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1">
+			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1" dialogue_2 = "Dann_after"> 
 				<item name="Book3"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
