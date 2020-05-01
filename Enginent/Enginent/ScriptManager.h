@@ -47,10 +47,15 @@ struct diaplayAfterAction {
 	}
 };
 
+struct ChangeName {
+	std::string d_before;
+	std::string d_after;
+};
+
 struct Dialogue {
 	std::vector<s_Dialogue> dialogue;
 	std::vector<diaplayAfterAction> displayObj;
-	std::map<std::string, std::string> changeNameObj;
+	std::map<std::string, ChangeName> changeNameObj;
 	std::string choice;
 	Dialogue() {
 		choice = "";

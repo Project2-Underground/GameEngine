@@ -8,6 +8,7 @@
 InteractableObj::InteractableObj() {
 	interactType = NORMAL;
 	triggered = true;
+	talk = false;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -28,15 +29,23 @@ void InteractableObj::TakePic() {
 Item* InteractableObj::GetItem() {
 	return ((GameScreen*)Game::GetInstance())->FindItem(itemName);
 }
-void InteractableObj::SetDialogueName(std::string n)
+void InteractableObj::SetDialogueName(std::string n, std::string a)
 {
 	this->dialogue_name = n;
+	this->dialogue_before = n;
+	this->dialogue_after = a;
 }
 
 void InteractableObj::action() {
 	if (dialogue_name != "")
 	{
-		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->setText(this->dialogue_name, talk);
+		if (!talk)
+		{
+			talk = true;
+			if(dialogue_after != "")
+			dialogue_name = dialogue_after;
+		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
@@ -135,9 +144,18 @@ void InteractableObj::AddTriggerObj(InteractableObj* obj) {
 //	}
 //}
 
-void InteractableObj::ChangeDialogue(std::string n)
+void InteractableObj::ChangeDialogue(std::string n, std::string a)
 {
-	this->dialogue_name = n;
+	this->dialogue_before = n;
+	this->dialogue_after = a;
+	if (talk)
+	{
+		this->dialogue_name = a;
+	}
+	else
+	{
+		this->dialogue_name = n;
+	}
 }
 
 void InteractableObj::SetNextTexture(std::string next) {
@@ -167,7 +185,13 @@ void OpenObj::action() {
 	else {
 		if (dialogue_name != "")
 		{
-			TextBox::GetInstance()->setText(this->dialogue_name);
+			TextBox::GetInstance()->setText(this->dialogue_name, talk);
+			if (!talk)
+			{
+				talk = true;
+				if (dialogue_after != "")
+				dialogue_name = dialogue_after;
+			}
 			TextBox::GetInstance()->SetDisplay(true);
 		}
 	}
@@ -178,7 +202,13 @@ void OpenObj::Open() {
 	//std::cout << "open\n";
 	if (dialogue_name != "")
 	{
-		TextBox::GetInstance()->setText(this->dialogue_name);
+		TextBox::GetInstance()->setText(this->dialogue_name, talk);
+		if (!talk)
+		{
+			talk = true;
+			if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	SetTexture(openTexture);
@@ -221,6 +251,8 @@ void NonPlayer::action()
 		if (!talk)
 		{
 			talk = true;
+			if (dialogue_after != "")
+			dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}

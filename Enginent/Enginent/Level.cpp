@@ -112,10 +112,10 @@ void Room::SortObjLayer() {
 		}
 	}
 
-	//std::cout << "--------------------------------layers--------------------------------\n";
-	//for (auto obj : foreground) {
-	//	std::cout << "obj " << obj->object_name << " sublayer: " << obj->subLayer << std::endl;
-	//}
+	std::cout << "--------------------------------layers--------------------------------\n";
+	for (auto obj : foreground) {
+		std::cout << "obj " << obj->object_name << " sublayer: " << obj->subLayer << std::endl;
+	}
 }
 
 DrawableObject* Room::FindObject(std::string name) {
