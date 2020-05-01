@@ -19,11 +19,12 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
-void InteractableObj::TakePic() {
-	if (takePic) {
+void InteractableObj::TakeNote() {
+	//std::cout << (takeNote ? "yes" : "no") << "\n";
+	if (takeNote) {
 		Phone* phone = Phone::GetInstance();
-		phone->AddPage(NOTE, picName);
-		takePic = false;
+		phone->AddPage(NOTE, noteName);
+		takeNote = false;
 	}
 }
 
@@ -53,12 +54,12 @@ void InteractableObj::action() {
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
 	PickUpItem();
-	TakePic();
+	TakeNote();
 }
 
-void InteractableObj::SetTakePic(std::string pic) {
-	picName = pic;
-	takePic = true;
+void InteractableObj::SetNoteName(std::string note) {
+	noteName = note;
+	takeNote = true;
 }
 
 bool InteractableObj::CheckCollider(float x, float y) {
@@ -268,7 +269,7 @@ void NonPlayer::action()
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
-	TakePic();
+	TakeNote();
 }
 
 void PuzzleObj::SetPuzzleName(std::string name) {

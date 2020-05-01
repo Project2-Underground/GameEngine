@@ -16,37 +16,27 @@ PauseWindow::PauseWindow() {
 	otherWindows.push_back(SaveLoadWindow::GetInstance());
 
 	bgWindow = new UIObject();
-	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_texture/tmp_pausebg.png");
 
-	setting = new SettingButton("Texture/tmp_texture/tmp_setting.png");
-	setting->SetPressTexture("Texture/tmp_texture/tmp_setting_pressed.png");
+	setting = new SettingButton("Texture/UI/GameUI/Setting_button.png");
+	setting->SetPressTexture("Texture/UI/GameUI/Setting_button_press.png");
 
-	load = new OpenLoadSaveWindow("Texture/tmp_texture/tmp_load.png");
-	load->SetPressTexture("Texture/tmp_texture/tmp_load_pressed.png");
+	load = new OpenLoadSaveWindow("Texture/UI/GameUI/Loading_button.png");
+	load->SetPressTexture("Texture/UI/GameUI/Loading_button_press.png");
 
-	menu = new MainMenuButton("Texture/tmp_texture/tmp_mainmenu.png");
-	menu->SetPressTexture("Texture/tmp_texture/tmp_mainmenu_pressed.png");
+	menu = new MainMenuButton("Texture/UI/GameUI/Main_menu_button.png");
+	menu->SetPressTexture("Texture/UI/GameUI/Main_menu_button_press.png");
 
-	closeButton = new PauseWindowCloseButton("Texture/tmp_texture/tmp_resume.png");
+	closeButton = new PauseWindowCloseButton("Texture/UI/GameUI/Resume_button.png");
+	closeButton->SetPressTexture("Texture/UI/GameUI/Resume_button_press.png");
 }
 void PauseWindow::Init(int width, int height) {
-	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.75f);
+	bgWindow->SetSize((float)width, -(float)height);
 
-	setting->SetSize(width * 0.25f, -height * 0.075f);
-	setting->SetPosition(glm::vec3(0, height * 0.25f, 0));
-	setting->SetCollder(new Collider(setting));
-
-	load->SetSize(width * 0.25f, -height * 0.075f);
-	load->SetPosition(glm::vec3(0, height * 0.125f, 0));
-	load->SetCollder(new Collider(load));
-
-	menu->SetSize(width * 0.25f, -height * 0.075f);
-	menu->SetPosition(glm::vec3(0, height * -0.125f, 0));
-	menu->SetCollder(new Collider(menu));
-
-	closeButton->SetSize(width * 0.25f, -height * 0.075f);
-	closeButton->SetPosition(glm::vec3(0, height * -0.25f, 0));
-	closeButton->SetCollder(new Collider(closeButton));
+	setting->Init(257, -44, glm::vec3(0, height * 0.25f, 0));
+	load->Init(167, -44, glm::vec3(0, height * 0.125f, 0));
+	menu->Init(316, -44, glm::vec3(0, height * -0.125f, 0));
+	closeButton->Init(237, -44, glm::vec3(0, height * -0.25f, 0));
 }
 void PauseWindow::Render() {
 	bool otherWinOpen = false;
@@ -63,6 +53,10 @@ void PauseWindow::Render() {
 		renderer->Render(load);
 		renderer->Render(menu);
 		renderer->Render(closeButton);
+	}
+	else if (otherWinOpen) {
+		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+		renderer->Render(bgWindow);
 	}
 }
 void PauseWindow::LeftClick(float x, float y) {

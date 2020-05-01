@@ -10,13 +10,13 @@
 	<Book4 i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/Puzzle1_Book4.png" sizeX="109" sizeY="300" />
 	<Puzzle2_ColorCode1 i_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" sizeX="855" sizeY="850" />
 	<Puzzle2_ColorCode2 i_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" sizeX="855" sizeY="850" />
-	<Puzzle2_EmmaPaper1 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1.png" sizeX="1080" sizeY="1080">
+	<Puzzle2_EmmaPaper1 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1.png" sizeX="1080" sizeY="1080" IsizeX="697" IsizeY="503">
 		<separate>
 			<Puzzle2_EmmaPaper2/>
 			<Puzzle2_ColorCode2/>
 		</separate>
 	</Puzzle2_EmmaPaper1>
-	<Puzzle2_EmmaPaper2 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2.png" sizeX="855" sizeY="850" />
+	<Puzzle2_EmmaPaper2 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2.png" sizeX="855" sizeY="850" IsizeX="694" IsizeY="461"/>
 </Items>
 
 <!-- <separate> -->

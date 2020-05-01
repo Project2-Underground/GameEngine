@@ -98,6 +98,17 @@ void PhoneAppsButton::action() {
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
 }
+PhoneOpenButton::PhoneOpenButton(std::string texture) : Button(texture) { 
+	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/tmp_texture/tmp_phone_noti.png");
+}
+void PhoneOpenButton::UpdateButton(bool noti) {
+	if (noti) {
+		SetTexture(notiTexture);
+	}
+	else {
+		SetTexture(normalTexture);
+	}
+}
 
 void PhoneOpenButton::Init(float x, float y, glm::vec3 pos) {
 	SetSize(x, y);

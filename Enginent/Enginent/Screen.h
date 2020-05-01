@@ -82,6 +82,7 @@ class GameScreen :public Screen {
 public:
 	vector<std::string> levels;
 	vector<std::string> objActions;
+	std::vector<Item*> items;
 	map<std::string, Puzzle*> puzzles;
 	PhoneOpenButton* phoneIcon;
 
@@ -108,8 +109,6 @@ public:
 	Player* GetPlayer() { return player; };
 	Inventory* GetInventory() { return inventory; };
 	Item* FindItem(std::string name);
-
-	std::vector<Item*> items;
 
 	~GameScreen();
 

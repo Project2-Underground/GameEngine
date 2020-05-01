@@ -11,6 +11,7 @@ CursorUI::CursorUI() {
 	CS_View = renderer->LoadTexture("Texture/UI/Cursor/View_cursor.png");
 	CS_Save = renderer->LoadTexture("Texture/UI/Cursor/Save_cursor.png");
 	CS_Stair = renderer->LoadTexture("Texture/tmp_texture/tmp_stairsSign.png");
+	CS_Note = renderer->LoadTexture("Texture/UI/InfoPhone/Note_app.png");
 	enable = true;
 
 	this->SetTexture(CS_Normal);
@@ -64,6 +65,9 @@ void CursorUI::setCursor(InteractTypeList type)
 				break;
 			case InteractTypeList::STAIR:
 				this->SetTexture(CS_Stair);
+				break;
+			case InteractTypeList::ADDNOTE:
+				this->SetTexture(CS_Note);
 				break;
 			default:
 				this->SetTexture(CS_Normal);

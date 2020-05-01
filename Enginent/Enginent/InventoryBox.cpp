@@ -11,7 +11,7 @@ InventoryBoxButton::InventoryBoxButton(std::string texture) :Button(texture) {
 
 void InventoryBoxButton::SetItem(Item* item) {
 	this->item = item;
-	itemDisplay.SetSize(item->aspect * (-size.y), size.y);
+	itemDisplay.SetSize(item->iaspect * (-size.y), size.y);
 	itemDisplay.SetTexture(item->GetInventoryTexture());
 }
 
@@ -144,9 +144,14 @@ void ChangeMouseActionTypeButton::updateButton(float x, float y)
 
 void ChangeMouseActionTypeButton::checkColliderPressed(float x, float y)
 {
-	if (pressAvailable) 
-		if (this->col->isClicked(x, y)) 
+	bool clicked = this->col->isClicked(x, y);
+	if (pressAvailable) {
+		if (clicked) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+		}
+	}
+	if(clicked)
+		Game::GetInstance()->GetScreen()->buttonClicked = true;
 }
 
 void ChangeMouseActionTypeButton::checkColliderReleased(float x, float y) {

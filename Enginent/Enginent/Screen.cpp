@@ -170,10 +170,10 @@ GameScreen::GameScreen() {
 	UI.push_back(phoneIcon);
 	UI.push_back(pause);
 
+	windows.push_back(PauseWindow::GetInstance());
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	windows.push_back(SettingWindow::GetInstance());
-	windows.push_back(PauseWindow::GetInstance());
 }
 
 void GameScreen::Init() {
@@ -408,15 +408,24 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 
 GameScreen::~GameScreen() {
 	delete player;
+	delete butler;
 	delete phone;
-	//delete pause;
+	delete phoneIcon;
+	delete pause;
 	delete currentLevel;
+	delete dialogueText;
 
 	for (auto p : puzzles)
 		delete p.second;
 
 	for (auto ui : UI)
 		delete ui;
+
+	for (auto item : items)
+		delete item;
+
+	for (auto p : puzzles)
+		delete p.second;
 
 	delete inventory;
 }

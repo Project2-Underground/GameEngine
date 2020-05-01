@@ -40,7 +40,7 @@ public:
 	Item* GetSelectedItem() { return selectedItem; }
 
 
-	int GetSize() { return INVENTORY_SIZE; }
+	int GetSize() { return (int)InventoryBoxes.size(); }
 	//void displayItem();
 	~Inventory();
 	InventoryBoxButton* GetInventoryBox(int index);

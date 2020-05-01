@@ -12,7 +12,19 @@ void Item::SetInventoryTexture(std::string path) {
 void Item::SetViewTexture(std::string path) {
 	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
-
+void Item::SetSize(float x, float y) {
+	width = x;
+	height = -y;
+	aspect = x / y;
+	iwidth = x;
+	iheight = -y;
+	iaspect = x / y;
+}
+void Item::SetISize(float x, float y) {
+	iwidth = x;
+	iheight = -y;
+	iaspect = x / y;
+}
 SeparatableItem::SeparatableItem(std::string name, std::vector<std::string> items) :Item(name) {
 	for (auto i : items)
 		this->sitems.push_back(i);

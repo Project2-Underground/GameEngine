@@ -47,10 +47,12 @@ public:
 };
 
 class PhoneOpenButton : public Button {
+	unsigned int notiTexture;
 public:
-	PhoneOpenButton(std::string texture) : Button(texture) {}
+	PhoneOpenButton(std::string texture);
 	void Init(float sizex, float sizey, glm::vec3 position);
 	void action();
+	void UpdateButton(bool noti);
 };
 
 class PhoneAppsButton :public Button {

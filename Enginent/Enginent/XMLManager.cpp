@@ -114,8 +114,13 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		}break;
 		case PLAYER_TRIGGER: {
 			PlayerTriggerObj* obj = new PlayerTriggerObj();
-			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
+			obj->SetInteractType(PLAYER_TRIGGER);
 			//std::cout << "set trigger name: " << child->name() << "\n";
+			interactObj = obj;
+		}break;
+		case ADDNOTE: {
+			InteractableObj* obj = new InteractableObj();
+			obj->SetInteractType(ADDNOTE);
 			interactObj = obj;
 		}break;
 		default: {
@@ -129,8 +134,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
-		if (child->child("picture"))
-			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
+		if (child->child("note"))
+			interactObj->SetNoteName(child->child("note").attribute("name").as_string());
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -287,6 +292,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 					obj->SetCurrentDialogueName(node.attribute("current_dialogue").as_string());
 					obj->SetDialogueBeforeName(node.attribute("before_dialogue").as_string());
 					obj->SetDialogueAfterName(node.attribute("after_dialogue").as_string());
+					obj->SetTakeNote(node.attribute("takeNote").as_bool());
 					if (node.attribute("talked").as_bool()) 
 						obj->SetTalked(node.attribute("talked").as_bool());
 
@@ -399,6 +405,7 @@ void XMLManager::SaveGame(std::string filename) {
 				node.append_attribute("before_dialogue").set_value(obj->GetDialogueBeforeName().c_str());
 				node.append_attribute("after_dialogue").set_value(obj->GetDialogueAfterName().c_str());
 				node.append_attribute("talked").set_value(obj->Talked());
+				node.append_attribute("takeNote").set_value(obj->TookNote());
 				node.append_attribute("has_item").set_value(obj->hasItem);
 
 				
@@ -530,16 +537,19 @@ XMLManager::~XMLManager() {
 
 }
 
-void XMLManager::LoadNotes(std::string filename, std::map<std::string, UIObject*>& notes) {
+void XMLManager::LoadNotes(std::string filename, std::map<std::string, NoteInfo>& notes) {
 	if (LoadFile(filename)) {
 		pugi::xml_node allNotes = doc.child("notes");
 
 		// generate all the rooms in that level
 		for (pugi::xml_node_iterator note = allNotes.begin(); note != allNotes.end(); note++) {
-			UIObject* tmp = new UIObject();
-			tmp->SetTexture(note->attribute("texture").as_string());
-			tmp->SetName(note->name());
-			notes.insert(std::pair<std::string, UIObject*>(tmp->object_name, tmp));
+			NoteInfo n;
+			n.name = note->name();
+			if (note->first_child())
+				for (pugi::xml_node_iterator msg = note->begin(); msg != note->end(); msg++) {
+					n.AddText(msg->child_value());
+				}
+			notes.insert(std::pair<std::string, NoteInfo>(n.name, n));
 		}
 	}
 }
@@ -600,10 +610,14 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			}
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
-			
-			i->aspect = x / y;
-			i->width = x;
-			i->height = -y;
+			i->SetSize(x, y);
+
+			if (item->attribute("IsizeX")) {
+				float ix = item->attribute("IsizeX").as_float();
+				float iy = item->attribute("IsizeY").as_float();
+				i->SetISize(ix, iy);
+			}
+
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);

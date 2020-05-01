@@ -27,27 +27,21 @@ Inventory::Inventory() {
 	float x = space * 0.5f - width * 0.5f;
 	float y = tab->getPos().y + tab->getSize().y * -0.35f;
 	// create UIObject and get position of each set from game.h
-	for (int i = 0; i < INVENTORY_SIZE; i++) {
+	for (int i = 0; i < INVENTORY_SIZE - 2; i++) {
 		InventoryBoxButton *tmpObj =  new InventoryBoxButton("Texture/UI/Inventory/Item_scoll_2.png");
 		tmpObj->SetPressTexture("Texture/UI/Inventory/Item_scoll_2_selected.png");
-		tmpObj->SetPosition(glm::vec3(x, tab->getPos().y, 1.0f));
-		tmpObj->SetSize(boxSize, -boxSize);
-		tmpObj->SetCollder(new Collider(tmpObj));
+		tmpObj->Init(boxSize, -boxSize, glm::vec3(x, tab->getPos().y, 1.0f));
 		tmpObj->SetAllPosition(tmpObj->getPos());
 		InventoryBoxes.push_back(tmpObj);
 		x += space;
 	}
 
-	separateButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_separateButton.png", SEPARATE_ACTION);
-	separateButton->SetPressTexture("Texture/tmp_texture/tmp_separateButtonPress.png");
-	separateButton->SetPosition(glm::vec3(100.0f, -500.0f, 0));
-	separateButton->SetSize(100.0f, -50.0f);
-	separateButton->SetCollder(new Collider(separateButton));
-	combineButton = new ChangeMouseActionTypeButton("Texture/tmp_texture/tmp_combineButton.png", COMBINE_ACTION);
-	combineButton->SetPressTexture("Texture/tmp_texture/tmp_combineButtonPress.png");
-	combineButton->SetPosition(glm::vec3(-100.0f, -500.0f, 0));
-	combineButton->SetSize(100.0f, -50.0f);
-	combineButton->SetCollder(new Collider(combineButton));
+	separateButton = new ChangeMouseActionTypeButton("Texture/UI/GameUI/Seperate_button.png", SEPARATE_ACTION);
+	separateButton->SetPressTexture("Texture/UI/GameUI/Seperate_button_pressed.png");
+	separateButton->Init(boxSize, -boxSize, glm::vec3(x, tab->getPos().y, 1.0f));
+	combineButton = new ChangeMouseActionTypeButton("Texture/UI/GameUI/Combine_button.png", COMBINE_ACTION);
+	combineButton->SetPressTexture("Texture/UI/GameUI/Combine_button_pressed.png");
+	combineButton->Init(boxSize, -boxSize, glm::vec3(x + space, tab->getPos().y, 1.0f));
 }
 
 bool Inventory::IsItemInInventory(std::string itemName) {
@@ -203,8 +197,8 @@ void Inventory::SetAllBoxesPos(float y) {
 	for (InventoryBoxButton* ib : InventoryBoxes) {
 		ib->SetAllPosition(glm::vec3(ib->getPos().x, y, 1.0f));
 	}
-	separateButton->SetPosition(glm::vec3(separateButton->getPos().x, y + 50.0f, 1.0f));
-	combineButton->SetPosition(glm::vec3(combineButton->getPos().x, y + 50.0f, 1.0f));
+	separateButton->SetPosition(glm::vec3(separateButton->getPos().x, y, 1.0f));
+	combineButton->SetPosition(glm::vec3(combineButton->getPos().x, y, 1.0f));
 }
 
 Inventory::~Inventory() {

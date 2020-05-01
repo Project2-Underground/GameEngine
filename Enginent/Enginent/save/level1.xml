@@ -7,7 +7,7 @@
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
-		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger, 12:Note -->
 		<interactObj>
 			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1">
 			</bed>
@@ -114,12 +114,10 @@
 		</background>
 		
 		<interactObj>
-			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="4">
-				<ForeGround/>
-			</EmmaRoom_Book>
 			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4">
 			</EmmaRoom_Drawing>
-			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="1" layer="4">>
+			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="2">>
+				<note name="EmmaNote1"/>
 				<ForeGround/>
 			</EmmaRoom_Note1>
 			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4">>>
@@ -142,6 +140,7 @@
 		<foreground>
 			<EmmaRoom_Light texture="Texture/EmmaRoom/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
 			<EmmaRoom_ForeGround texture="Texture/EmmaRoom/EmmaRoom_ForeGround.png" sizeX="1280" sizeY="99" posX="0" posY="-310" layer="0"/>
+			<EmmaRoom_Book  texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" layer="1"/>
 		</foreground>
 		
 	</EmmaRoom>
@@ -150,7 +149,7 @@
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<TriggerEmmaTalk texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="Hall_Bookshelf_L1"/>
+			<!-- <TriggerEmmaTalk texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="Hall_Bookshelf_L1"/> -->
 			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1">
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
