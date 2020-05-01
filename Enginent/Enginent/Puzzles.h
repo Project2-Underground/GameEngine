@@ -22,6 +22,29 @@ public:
 	bool Passed() { return pass; }
 };
 
+struct Paper : public UIObject {
+	Paper();
+	~Paper();
+	int ID;
+	glm::vec3 prevPos;
+	bool CheckCollider(float x, float y);
+};
+
+class Book2 : public UIObject {
+	int id;
+	glm::vec3 prevPos;
+	Paper* paper;
+	int paper_id;
+public:
+	Book2(int id, std::string texture, float sizeX, float sizeY, int posX, int posY, int paperID);
+	~Book2();
+	void UpdatePrevPos();
+	int GetId();
+	glm::vec3 GetPrevPos();
+	bool CheckCollider(float x, float y);
+	bool checkPaper();
+};
+
 class Book : public UIObject {
 	int id;
 	glm::vec3 prevPos;
@@ -86,9 +109,10 @@ class Numpad;
 
 class NumberButton : public Button {
 	std::vector<int>* input;
+	int input_size;
 	int num;
 public:
-	NumberButton(std::string texture, std::string press, int n, float posX, float posY, float sizeX, float sizeY, std::vector<int>* input);
+	NumberButton(std::string texture, std::string press, int n, float posX, float posY, float sizeX, float sizeY, std::vector<int>* input, int input_size);
 	int GetNum() { return num; }
 	void action();
 };
@@ -128,6 +152,10 @@ public:
 	void ActionAfterPuzzle();
 	void CheckCheat();
 	void deleteInput();
+	void setNumColor(SDL_Color c)
+	{
+		this->numColor = c;
+	}
 	~Numpad();
 };
 
