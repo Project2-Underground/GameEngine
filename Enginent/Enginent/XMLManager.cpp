@@ -302,11 +302,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 		}
 
 		// load special npcs
-		//pugi::xml_node butlerNode = file.child("level").child("Butler");
-		//Butler* butler = ((GameScreen*)game->GetScreen())->butler;
-		//butler->SetDisplay(butlerNode.attribute("display").as_bool());
-		//butler->SetPosition(glm::vec3(butlerNode.attribute("posX").as_float(), butlerNode.attribute("posY").as_float(), 1));
-		//butler->SetTriggered(butlerNode.attribute("triggered").as_bool());
+		pugi::xml_node butlerNode = file.child("level").child("Butler");
+		Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+		butler->currentPhase = (Butler::Phase)butlerNode.attribute("phase").as_int();
+		if (butlerNode.attribute("display").as_bool())
+			butler->Appear();
 
 		// load player and inventory
 		pugi::xml_node playerNode = file.child("level").child("Player");
@@ -407,12 +407,9 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	// saving special npcs
-	/*Butler* butler = ((GameScreen*)game->GetScreen())->butler;
-	saveLevel.append_child("Butler").append_attribute("posX").set_value(butler->getPos().x);
-	saveLevel.child("Butler").append_attribute("posY").set_value(butler->getPos().y);
-	saveLevel.child("Butler").append_attribute("display").set_value(butler->IsDisplay());
-	saveLevel.child("Butler").append_attribute("triggered").set_value(butler->IsTriggered());*/
-	//saveLevel.child("butler").append_attribute("current_dialogue").set_value(butler->getPos().y);
+	Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+	saveLevel.append_child("Butler").append_attribute("display").set_value(butler->IsDisplay());
+	saveLevel.child("butler").append_attribute("phase").set_value(butler->currentPhase);
 
 
 	// saving player and inventory
