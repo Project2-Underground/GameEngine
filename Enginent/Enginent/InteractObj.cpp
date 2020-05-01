@@ -3,6 +3,7 @@
 #include "GameWindows.h"
 #include "InfoPhone.h"
 #include "GameWindows.h"
+#include "MouseInput.h"
 
 InteractableObj::InteractableObj() {
 	interactType = NORMAL;
@@ -80,8 +81,12 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 void InteractableObj::UseItem(Item* item) {
 	if (item != nullptr && item_to_use == item->name) {
 		//std::cout << "item is used and removed from the inventory\n";
+		Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 		used = true;
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem(item);
+		if(!item->multipleUse)
+			i->RemoveItem(item);
+
+		i->UnselectItem();
 	}
 }
 
@@ -248,3 +253,17 @@ void PlayerTriggerObj::Update() {
 	}
 }
 
+NumPadPuzzleAfter::NumPadPuzzleAfter() {
+	SetItemToUse("keyCard");
+}
+void NumPadPuzzleAfter::action() {
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		UseItem(gs->GetInventory()->GetSelectedItem());
+		std::cout << "bookshelf2 enable\n";
+		// dialogue after inserting keycard
+		//TextBox::GetInstance()->setText("");
+
+		// enable bookshelf2
+	}
+}

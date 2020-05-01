@@ -125,18 +125,24 @@ void Numpad::LeftRelease(glm::vec3 screen, glm::vec3 world)
 
 void Numpad::ActionAfterPuzzle()
 {
-	//เอาบัตรใส่ในเครื่อง แล้วทำพัซเซิลตู้หนังสือได้
-	display = false;
+	Game* g = Game::GetInstance();
+
+	NumPadPuzzleAfter* tmp = new NumPadPuzzleAfter();
+	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->GetCurrentRoom()->FindObject("BackDoorRoom_Computer");
+	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
+	tmp->SetTexture(puzzleObj->GetTexture());
+	g->GetCurrentLevel()->GetCurrentRoom()->objects.push_back(tmp);
+	puzzleObj->col->enable = false;
+	puzzleObj->SetDisplay(false);
+	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
 
 void Numpad::CheckCheat()
 {
-	std::cout << "Cheack cheat\n";
 	pass = true;
 	if ((*input).size() < cheat_size)
 	{
 		pass = false;
-		std::cout << "less\n";
 	}
 	else 
 	{
@@ -150,7 +156,6 @@ void Numpad::CheckCheat()
 			}
 		}
 	}
-	std::cout << "pass" << pass << std::endl;
 }
 
 void Numpad::deleteInput()

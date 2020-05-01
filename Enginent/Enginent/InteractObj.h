@@ -129,3 +129,9 @@ class PlayerTriggerObj : public InteractableObj {
 public:
 	void Update();
 };
+
+class NumPadPuzzleAfter : public InteractableObj {
+public:
+	NumPadPuzzleAfter();
+	void action();
+};

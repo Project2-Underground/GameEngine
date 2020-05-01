@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <Items>
-	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080"/>
+	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080">
+		<multipleUse/>
+	</keyCard>
 	<Book1 i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/Puzzle1_Book1.png" sizeX="109" sizeY="300" />
 	<Book2 i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/Puzzle1_Book2.png" sizeX="109" sizeY="300" />
 	<Book3 i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/Puzzle1_Book3.png" sizeX="109" sizeY="300" />

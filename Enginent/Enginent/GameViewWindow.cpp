@@ -25,8 +25,8 @@ ViewWindow::ViewWindow() {
 void GameWindow::Update() {
 	Game* g = Game::GetInstance();
 	if (trigger) {
-		bool playerIsIdle = g->GetPlayer() && g->GetPlayer()->anim && g->GetPlayer()->anim->IsPlaying("Idle");
-		if (g->GetScreenState() == MENUSCREEN || playerIsIdle) {
+		bool playerNotPicking = g->GetPlayer() && g->GetPlayer()->anim && !g->GetPlayer()->anim->IsPlaying("Pickup");
+		if (g->GetScreenState() == MENUSCREEN || playerNotPicking) {
 			display = true;
 			trigger = false;
 		}

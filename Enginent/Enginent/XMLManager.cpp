@@ -119,8 +119,13 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case PLAYER_TRIGGER: {
 			PlayerTriggerObj* obj = new PlayerTriggerObj();
 			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
+			std::cout << child->name() << std::endl;
 			interactObj = obj;
 		}break;
+		case PICKUP:
+			interactObj = new InteractableObj();
+			interactObj->SetInteractType(PICKUP);
+			break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
@@ -597,6 +602,9 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
 			
+			if (item->child("multipleUse"))
+				i->multipleUse = true;
+
 			i->aspect = x / y;
 			i->width = x;
 			i->height = -y;

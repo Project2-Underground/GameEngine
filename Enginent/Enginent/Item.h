@@ -25,6 +25,7 @@ public:
 	float height;
 	float aspect;
 
+	bool multipleUse;
 	bool operator==(const Item& item);
 	virtual void action() {};
 };
