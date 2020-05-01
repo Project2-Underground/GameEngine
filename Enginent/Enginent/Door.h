@@ -8,8 +8,7 @@ protected:
 	std::string nextDoor;
 	unsigned int openTexture;
 public:
-	Door(std::string, std::string);
-	virtual void Init() {}
+	Door(std::string nextroom, std::string nextdoor);
 	void SetOpenTexture(std::string texture);
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
 	void Open();

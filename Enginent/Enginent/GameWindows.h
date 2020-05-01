@@ -103,10 +103,10 @@ class SettingWindow : public GameWindow {
 	SoundMuteButton* sfxMute;
 public:
 	static SettingWindow* GetInstance();
-
 	SettingWindow();
 	~SettingWindow();
 	void Init(int width, int height);
+	void Update();
 	void Render();
 	void LeftClick(float, float);
 	void LeftRelease(float, float);

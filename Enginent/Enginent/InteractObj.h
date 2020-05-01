@@ -130,11 +130,14 @@ public:
 
 class PlayerTriggerObj : public InteractableObj {
 public:
+	PlayerTriggerObj();
 	void Update();
 };
 
-class NumPadPuzzleAfter : public InteractableObj {
+class NumpadPuzzleAfter : public InteractableObj {
+	bool actionDone;
 public:
-	NumPadPuzzleAfter();
+	NumpadPuzzleAfter();
 	void action();
+	void UnlockBookshelf();
 };

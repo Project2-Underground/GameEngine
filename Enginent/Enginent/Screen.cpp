@@ -17,25 +17,17 @@ void Screen::CloseGameAllWindow() {
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->SetSize(248, -70);
-	play->SetPosition(glm::vec3(-270, 170, 1));
-	play->SetCollder(new Collider(play));
+	play->Init(248, -70, glm::vec3(-270, 170, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->SetSize(213, -74);
-	load->SetPosition(glm::vec3(-270, 90, 1));
-	load->SetCollder(new Collider(load));
+	load->Init(213, -74, glm::vec3(-270, 70, 1));
 
-	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
-	setting->SetSize(264, -81);
-	setting->SetPosition(glm::vec3(-270.0f, 20, 1.0f));
-	setting->SetCollder(new Collider(setting));
+	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
+	setting->Init(264, -81, glm::vec3(-270.0f, -40, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->SetSize(186, -86);
-	quit->SetPosition(glm::vec3(-270.0f, -50.0f, 1.0f));
-	quit->SetCollder(new Collider(quit));
+	quit->Init(186, -86, glm::vec3(-270.0f, -130.0f, 1.0f));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -97,7 +89,7 @@ void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 			w->LeftRelease(screen.x, screen.y);
 	else
 		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
+			if (Button * button = dynamic_cast<Button*>(UI[j])) 
 				button->checkColliderReleased(screen.x, screen.y);
 }
 
@@ -148,8 +140,9 @@ GameScreen::GameScreen() {
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
 
-	ChangeLevel(0);
 	butler = new Butler();
+
+	ChangeLevel(0);
 	XMLManager::GetInstance()->LoadItems(items);
 	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
@@ -164,6 +157,7 @@ GameScreen::GameScreen() {
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Backdoor", new NumpadPuzzle()));
+	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Emma", new NumpadPuzzle_2()));
 	PuzzleTime = false;
 
 	dialogueText = TextBox::GetInstance();
@@ -178,7 +172,7 @@ GameScreen::GameScreen() {
 
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
-	//windows.push_back(SettingWindow::GetInstance());
+	windows.push_back(SettingWindow::GetInstance());
 	windows.push_back(PauseWindow::GetInstance());
 }
 
@@ -187,10 +181,6 @@ void GameScreen::Init() {
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
 	if(currentLevel->GetCurrentRoom()->dialogue != "")
 		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
-}
-
-void GameScreen::LoadGame(std::string filename) {
-	XMLManager::GetInstance()->LoadFromSave(filename);
 }
 
 Item* GameScreen::FindItem(std::string name) {

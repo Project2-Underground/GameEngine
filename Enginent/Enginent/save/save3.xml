@@ -1,22 +1,24 @@
 <?xml version="1.0"?>
 <level currentLevel="1" currentRoom="MainHallLower">
-	<Rooms>
+	<rooms>
 		<BackDoorRoom dialogue="" />
 		<BackDoorRoomBasement dialogue="" />
-		<EliasRoom dialogue="EliasRoom" />
+		<EliasRoom dialogue="" />
 		<EmmaRoom dialogue="" />
 		<MainHallLower dialogue="" />
 		<MainHallUpper dialogue="" />
 		<congrat dialogue="" />
-	</Rooms>
+	</rooms>
 	<interactObj>
-		<EmmaTrigger current_dialogue="" has_item="false" />
+		<TriggerEmmaTalk current_dialogue="Hall_Bookshelf_L1" has_item="false" />
 		<BackDoorRoom_FlowerClue current_dialogue="" has_item="true" />
+		<BackDoorRoom_EmmaDoor current_dialogue="" has_item="false" />
 		<BackDoorRoom_Computer current_dialogue="" has_item="false" />
-		<Closet current_dialogue="EliasRoom_closet" has_item="false" open="true" />
-		<Table current_dialogue="EliasRoom_carbinet2" has_item="false" open="false" />
+		<NumpadAfterUnlock current_dialogue="" has_item="false" used="true" />
+		<Closet current_dialogue="" has_item="false" open="true" />
+		<Table current_dialogue="EliasRoom_carbinet1" has_item="false" open="false" />
 		<Calendar current_dialogue="EliasRoom_calendar" has_item="false" />
-		<bed current_dialogue="EliasRoom_bed2" has_item="false" />
+		<bed current_dialogue="EliasRoom_bed1" has_item="false" />
 		<EmmaRoom_Book current_dialogue="" has_item="false" />
 		<EmmaRoom_Drawing current_dialogue="" has_item="false" />
 		<EmmaRoom_Note1 current_dialogue="" has_item="false" />
@@ -25,39 +27,41 @@
 		<Bookshelf2 current_dialogue="" has_item="false" />
 		<Gramophone current_dialogue="" has_item="true" />
 		<RabbitCage current_dialogue="" has_item="false" />
-		<Door2 current_dialogue="Hall_door" has_item="false" />
-		<Door3 current_dialogue="Hall_door" has_item="false" />
+		<:anonymous />
+		<Door2 current_dialogue="" has_item="false" />
+		<Door3 current_dialogue="" has_item="false" />
+		<HallRoomUpperFloor_Door1 current_dialogue="" has_item="false" />
 		<sign current_dialogue="" has_item="false" />
 	</interactObj>
 	<item />
 	<doors>
 		<BackDoorRoom_BasementDoor used="true" />
-		<BackDoorRoom_EmmaDoor used="true" />
 		<BackDoorRoom_Foreground_Door used="true" />
 		<BackDoorRoom_BasementStair used="true" />
 		<EliasRoomInnerDoor used="true" />
 		<EmmaRoom_Door used="true" />
-		<StairDoor used="false" />
+		<StairDoor used="true" />
 		<LowerStair used="true" />
 		<EliasRoomOuterDoor used="false" />
-		<HallRoomLowerFloor_Door used="false" />
 		<UpperStair used="true" />
 		<tmpDoor used="true" />
 	</doors>
 	<NPCs>
 		<Emma hasItem="false" />
 		<Ann hasItem="true" />
-		<Dann hasItem="false" />
+		<Dann hasItem="true" />
+		<butler hasItem="false" />
 		<Hubert hasItem="true" />
 		<Dialy hasItem="true" />
 	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="false" passRequirements="false" />
-		<Numpad_Backdoor done="false" passRequirements="false" />
+		<BookshelfPuzzle done="true" passRequirements="false" />
+		<Numpad_Backdoor done="true" passRequirements="false" />
+		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="587.5" posY="-110">
+	<Player posX="472.25" posY="-110">
 		<inventory>
-			<item name="Book3" />
+			<item name="keyCard" />
 			<item />
 			<item />
 			<item />
@@ -74,5 +78,5 @@
 			<c name="Unknown" msgNo="7" />
 		</Chats>
 	</Phone>
-	<Butler Phase="0" display="true" />
+	<Butler display="true" phase="1" />
 </level>

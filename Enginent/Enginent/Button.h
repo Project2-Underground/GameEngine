@@ -113,12 +113,6 @@ public:
 	void action();
 };
 
-class SettingWindowCloseButton :public Button {
-public:
-	SettingWindowCloseButton(std::string texture) :Button(texture) { }
-	void action();
-};
-
 class ChangeMouseActionTypeButton : public Button {
 	int type;
 public:
@@ -156,6 +150,12 @@ public:
 class OpenPauseWindowButton :public Button {
 public:
 	OpenPauseWindowButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class SettingWindowCloseButton :public Button {
+public:
+	SettingWindowCloseButton(std::string texture) :Button(texture) { }
 	void action();
 };
 

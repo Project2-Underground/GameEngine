@@ -126,17 +126,39 @@ void Numpad::LeftRelease(glm::vec3 screen, glm::vec3 world)
 void Numpad::ActionAfterPuzzle()
 {
 	Game* g = Game::GetInstance();
-
-	NumPadPuzzleAfter* tmp = new NumPadPuzzleAfter();
-	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->GetCurrentRoom()->FindObject("BackDoorRoom_Computer");
+	NumpadPuzzleAfter* tmp = new NumpadPuzzleAfter();
+	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->FindObject("BackDoorRoom_Computer");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
-	g->GetCurrentLevel()->GetCurrentRoom()->objects.push_back(tmp);
+	g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->objects.push_back(tmp);
+	puzzleObj->col->enable = false;
+	puzzleObj->SetDisplay(false);
+	((GameScreen*)g->GetScreen())->ClosePuzzle();
+	((GameScreen*)g->GetScreen())->butler->currentPhase = Butler::PHASE1;
+}
+
+void Numpad2::ActionAfterPuzzle() 
+{
+	Game* g = Game::GetInstance();
+
+	Door* tmp = new Door("EmmaRoom", "EmmaRoom_Door");
+	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["BackDoorRoom"]->FindObject("BackDoorRoom_EmmaDoor");
+	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
+	tmp->SetTexture(puzzleObj->GetTexture());
+	g->GetCurrentLevel()->rooms["BackDoorRoom"]->objects.push_back(tmp);
+	g->GetCurrentLevel()->rooms["BackDoorRoom"]->doors.insert(std::pair<std::string, Door*>("BackDoorRoom_EmmaDoor", tmp));
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
-
+void Numpad::CompletePuzzle() {
+	pass = true;
+	ActionAfterPuzzle();
+}
+void Numpad2::CompletePuzzle() {
+	pass = true;
+	ActionAfterPuzzle();
+}
 void Numpad::CheckCheat()
 {
 	pass = true;
@@ -271,7 +293,7 @@ void NumpadPuzzle::UpdateMouseState(glm::vec3, glm::vec3)
 
 void NumpadPuzzle::CompletePuzzle()
 {
-
+	puzzle->CompletePuzzle();
 }
 
 NumpadPuzzle::~NumpadPuzzle()
@@ -286,7 +308,7 @@ NumpadPuzzle::~NumpadPuzzle()
 
 NumpadPuzzle_2::NumpadPuzzle_2()
 {
-	puzzle = new Numpad("Texture/Puzzle2/buttonscreen_2.png", 0, 0, 2560, -1440);
+	puzzle = new Numpad2("Texture/Puzzle2/buttonscreen_2.png", 0, 0, 2560, -1440);
 
 	std::vector<UIObject*> images;
 	std::vector<Button*> buttons;
@@ -377,7 +399,7 @@ void NumpadPuzzle_2::UpdateMouseState(glm::vec3, glm::vec3)
 
 void NumpadPuzzle_2::CompletePuzzle()
 {
-
+	((Numpad2*)puzzle)->CompletePuzzle();
 }
 
 NumpadPuzzle_2::~NumpadPuzzle_2()

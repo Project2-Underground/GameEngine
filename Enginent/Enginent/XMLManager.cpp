@@ -54,6 +54,8 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
 			newRoom->SortObjLayer();
+			if(room->attribute("dialogue"))
+				newRoom->dialogue = room->attribute("dialogue").as_string();
 			newRoom->y = room->attribute("y").as_float();
 
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
@@ -260,10 +262,20 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 		Level* level = gs->GetCurrentLevel();
 
+		// load puzzles
+		pugi::xml_node puzzles = file.child("level").child("puzzles");
+		pugi::xml_node_iterator p;
+		for (p = puzzles.begin(); p != puzzles.end(); p++) {
+			if (p->attribute("done").as_bool())
+				gs->puzzles[p->name()]->CompletePuzzle();
+			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
+		}
+
 		std::map<std::string, Room*>::iterator itr;
 		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 			std::vector<DrawableObject*> objects = itr->second->objects;
 			std::vector<DrawableObject*> npcs = itr->second->npcs;
+			itr->second->dialogue = file.child("level").child("rooms").child(itr->first.c_str()).attribute("dialogue").as_string();
 			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
@@ -281,6 +293,10 @@ void XMLManager::LoadFromSave(std::string filename) {
 						}
 					}
 
+					if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
+						if (node.attribute("used").as_bool())
+							n->UnlockBookshelf();
+					}
 				}
 			}
 			for (int i = 0; i < npcs.size(); i++) {
@@ -289,17 +305,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 			}
 		}
 
-
 		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
-
-		// load puzzles
-		pugi::xml_node puzzles = file.child("level").child("puzzles");
-		pugi::xml_node_iterator p;
-		for (p = puzzles.begin(); p != puzzles.end(); p++) {
-			if (p->attribute("done").as_bool())
-				gs->puzzles[p->name()]->CompletePuzzle();
-			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
-		}
 
 		// load special npcs
 		pugi::xml_node butlerNode = file.child("level").child("Butler");
@@ -353,6 +359,7 @@ void XMLManager::SaveGame(std::string filename) {
 	Level* level = game->GetCurrentLevel();
 	save.append_child("level").append_attribute("currentLevel").set_value(level->levelNo);
 	save.child("level").append_attribute("currentRoom").set_value(level->GetCurrentRoom()->name.c_str());
+	save.child("level").append_child("rooms");
 	save.child("level").append_child("interactObj");
 	save.child("level").append_child("item");
 	save.child("level").append_child("doors");
@@ -371,6 +378,7 @@ void XMLManager::SaveGame(std::string filename) {
 	for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 		std::vector<DrawableObject*> objects = itr->second->objects;
 		std::vector<DrawableObject*> npcs = itr->second->npcs;
+		save.child("level").child("rooms").append_child(itr->first.c_str()).append_attribute("dialogue").set_value(itr->second->dialogue.c_str());
 		for (int i = 0; i < objects.size(); i++) {
 			// if object is an interactObj, NPC, door or items 
 			// save
@@ -390,6 +398,9 @@ void XMLManager::SaveGame(std::string filename) {
 					node.append_attribute("open").set_value(o->IsOpen());
 				}
 
+				if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
+					node.append_attribute("used").set_value(n->used);
+				}
 			}
 		}
 		for (int i = 0; i < npcs.size(); i++) {
@@ -409,7 +420,7 @@ void XMLManager::SaveGame(std::string filename) {
 	// saving special npcs
 	Butler* butler = ((GameScreen*)game->GetScreen())->butler;
 	saveLevel.append_child("Butler").append_attribute("display").set_value(butler->IsDisplay());
-	saveLevel.child("butler").append_attribute("phase").set_value(butler->currentPhase);
+	saveLevel.child("Butler").append_attribute("phase").set_value((int)butler->currentPhase);
 
 
 	// saving player and inventory
@@ -579,11 +590,12 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			else {
 				i = new Item(item->name());
 			}
-
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
 			
 			i->aspect = x / y;
+			i->width = x;
+			i->height = -y;
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);

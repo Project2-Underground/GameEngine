@@ -98,7 +98,6 @@ public:
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
-	void LoadGame(std::string);
 	void OpenPuzzle(std::string);
 	void ResetPuzzle();
 	void ClosePuzzle();

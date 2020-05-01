@@ -52,10 +52,11 @@ void ViewWindow::Init(int width, int height) {
 void ViewWindow::SetViewItem(Item* item) {
 	float sizeX = item->width;
 	float sizeY = item->height;
-	if (-item->height > 500) {
+	if (abs(sizeY) > 500) {
 		sizeX = 500 * item->aspect;
 		sizeY = -500;
 	}
+	std::cout << sizeX << " " << sizeY << std::endl;
 	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(item->GetViewTexture());
 	if (viewItem->getSize().x > bgWindow->getSize().x) {

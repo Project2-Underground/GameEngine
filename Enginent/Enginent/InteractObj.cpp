@@ -9,6 +9,7 @@ InteractableObj::InteractableObj() {
 	interactType = NORMAL;
 	triggered = true;
 	talk = false;
+	used = true;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -267,9 +268,10 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	//std::cout << "click puzzle\n";
-	if (((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
+	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
 		((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
+		UseItem(((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->GetSelectedItem());
 	else
 		InteractableObj::action();
 }
@@ -278,24 +280,58 @@ void SaveObj::action() {
 	Game::GetInstance()->SetSaveGame(true);
 	SaveLoadWindow::GetInstance()->Open();
 }
+PlayerTriggerObj::PlayerTriggerObj() {
+	triggered = false;
+}
 void PlayerTriggerObj::Update() {
 	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
 		action();
 		triggered = true;
+
+		Game::GetInstance()->GetPlayer()->StopWalking();
 	}
 }
 
-NumPadPuzzleAfter::NumPadPuzzleAfter() {
+NumpadPuzzleAfter::NumpadPuzzleAfter() {
+	object_name = "NumpadAfterUnlock";
+	actionDone = false;
 	SetItemToUse("keyCard");
+	//SetDialogueName();
 }
-void NumPadPuzzleAfter::action() {
+void NumpadPuzzleAfter::action() {
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		UseItem(gs->GetInventory()->GetSelectedItem());
-		std::cout << "bookshelf2 enable\n";
-		// dialogue after inserting keycard
-		//TextBox::GetInstance()->setText("");
 
-		// enable bookshelf2
+		if (used && !actionDone) 
+			UnlockBookshelf();
+		
 	}
+	else if (!used) {
+		InteractableObj::action();
+	}
+}
+
+void NumpadPuzzleAfter::UnlockBookshelf() {
+	actionDone = true;
+	Game* g = Game::GetInstance();
+	PuzzleObj* tmp = new PuzzleObj();
+	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallLower"]->FindObject("Bookshelf2");
+	tmp->SetPuzzleName("BookshelfPuzzle2");
+	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
+	tmp->SetTexture(puzzleObj->GetTexture());
+	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
+	puzzleObj->col->enable = false;
+	puzzleObj->SetDisplay(false);
+	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
+
+	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
+		((InteractableObj*)npc)->SetDisplay(false);
+		((InteractableObj*)npc)->col->enable = false;
+	}
+	for (auto npc : g->GetCurrentLevel()->rooms["MainHallUpper"]->npcs) {
+		((InteractableObj*)npc)->SetDisplay(false);
+		((InteractableObj*)npc)->col->enable = false;
+	}
+	((GameScreen*)g->GetScreen())->butler->Appear();
 }

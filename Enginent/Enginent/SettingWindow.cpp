@@ -66,6 +66,16 @@ void SettingWindow::Render() {
 		renderer->Render(closeButton);
 	}
 }
+void SettingWindow::Update() {
+	if (trigger) {
+		display = true;
+		trigger = false;
+	}
+	if (display) {
+		CursorUI* cursor = Game::GetInstance()->GetCursor();
+		cursor->enableChange(false);
+	}
+}
 void SettingWindow::LeftClick(float x, float y) {
 	if (display) {
 		masterVolUp->checkColliderPressed(x, y);
