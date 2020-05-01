@@ -68,6 +68,13 @@ public:
 	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n, std::string a);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
+	std::string GetDialogueBeforeName() { return dialogue_before; }
+	std::string GetDialogueAfterName() { return dialogue_after; }
+	void SetCurrentDialogueName(std::string d) { dialogue_name = d; }
+	void SetDialogueBeforeName(std::string d) { dialogue_before = d; }
+	void SetDialogueAfterName(std::string d) { dialogue_after = d; }
+	void SetTalked(bool b);
+	bool Talked() { return talk; }
 
 	InteractTypeList getType() { return interactType; };
 

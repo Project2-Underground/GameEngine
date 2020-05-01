@@ -56,7 +56,7 @@ void ViewWindow::SetViewItem(Item* item) {
 		sizeX = 500 * item->aspect;
 		sizeY = -500;
 	}
-	std::cout << sizeX << " " << sizeY << std::endl;
+	//std::cout << sizeX << " " << sizeY << std::endl;
 	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(item->GetViewTexture());
 	if (viewItem->getSize().x > bgWindow->getSize().x) {

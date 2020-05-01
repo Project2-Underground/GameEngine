@@ -115,7 +115,7 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case PLAYER_TRIGGER: {
 			PlayerTriggerObj* obj = new PlayerTriggerObj();
 			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
-			std::cout << "set trigger name: " << child->name() << "\n";
+			//std::cout << "set trigger name: " << child->name() << "\n";
 			interactObj = obj;
 		}break;
 		default: {
@@ -284,7 +284,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
-					//obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
+					obj->SetCurrentDialogueName(node.attribute("current_dialogue").as_string());
+					obj->SetDialogueBeforeName(node.attribute("before_dialogue").as_string());
+					obj->SetDialogueAfterName(node.attribute("after_dialogue").as_string());
+					if (node.attribute("talked").as_bool()) 
+						obj->SetTalked(node.attribute("talked").as_bool());
 
 					obj->hasItem = node.attribute("has_item").as_bool();
 					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
@@ -390,9 +394,13 @@ void XMLManager::SaveGame(std::string filename) {
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
-				/// current dialogue
+				/// dialogues
 				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogueName().c_str());
+				node.append_attribute("before_dialogue").set_value(obj->GetDialogueBeforeName().c_str());
+				node.append_attribute("after_dialogue").set_value(obj->GetDialogueAfterName().c_str());
+				node.append_attribute("talked").set_value(obj->Talked());
 				node.append_attribute("has_item").set_value(obj->hasItem);
+
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());

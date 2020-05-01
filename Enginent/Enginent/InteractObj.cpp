@@ -45,7 +45,7 @@ void InteractableObj::action() {
 		{
 			talk = true;
 			if(dialogue_after != "")
-			dialogue_name = dialogue_after;
+				dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
@@ -159,6 +159,14 @@ void InteractableObj::ChangeDialogue(std::string n, std::string a)
 	}
 }
 
+void InteractableObj::SetTalked(bool b) {
+	talk = b;
+	if (talk) {
+		if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+	}
+}
+
 void InteractableObj::SetNextTexture(std::string next) {
 	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
 	hasNextTexture = true;
@@ -191,7 +199,7 @@ void OpenObj::action() {
 			{
 				talk = true;
 				if (dialogue_after != "")
-				dialogue_name = dialogue_after;
+					dialogue_name = dialogue_after;
 			}
 			TextBox::GetInstance()->SetDisplay(true);
 		}
