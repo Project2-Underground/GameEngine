@@ -475,7 +475,7 @@ void CutsceneScreen::HandleKey(SDL_Keycode key) {
 
 TestScreen::TestScreen()
 {
-	numpad = new NumpadPuzzle();
+	numpad = new NumpadPuzzle_2();
 }
 
 void TestScreen::Init()
