@@ -324,7 +324,7 @@ void NumpadPuzzleAfter::action() {
 void NumpadPuzzleAfter::UnlockBookshelf() {
 	actionDone = true;
 	Game* g = Game::GetInstance();
-	PuzzleObj* tmp = new PuzzleObj();
+	/*PuzzleObj* tmp = new PuzzleObj();
 	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallLower"]->FindObject("Bookshelf2");
 	tmp->SetPuzzleName("BookshelfPuzzle2");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
@@ -332,15 +332,16 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
-	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
+	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();*/
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
-		((InteractableObj*)npc)->SetDisplay(false);
-		((InteractableObj*)npc)->col->enable = false;
+		((InteractableObj*)npc)->Appear(false);
 	}
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallUpper"]->npcs) {
-		((InteractableObj*)npc)->SetDisplay(false);
-		((InteractableObj*)npc)->col->enable = false;
+		((InteractableObj*)npc)->Appear(false);
+	}
+	for (auto npc : g->GetCurrentLevel()->rooms["EmmaRoom"]->npcs) {
+		((InteractableObj*)npc)->Appear(false);
 	}
 	((GameScreen*)g->GetScreen())->butler->Appear();
 }

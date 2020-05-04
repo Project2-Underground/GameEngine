@@ -17,6 +17,7 @@ ViewWindow::ViewWindow() {
 	bgWindow = new UIObject();
 	display = false;
 	trigger = false;
+	itemSizeY = 450.0f;
 
 	//bgWindow->SetDisplay(false);
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
@@ -52,9 +53,9 @@ void ViewWindow::Init(int width, int height) {
 void ViewWindow::SetViewItem(Item* item) {
 	float sizeX = item->width;
 	float sizeY = item->height;
-	if (abs(sizeY) > 500) {
-		sizeX = 500 * item->aspect;
-		sizeY = -500;
+	if (abs(sizeY) > itemSizeY) {
+		sizeX = itemSizeY * item->aspect;
+		sizeY = -itemSizeY;
 	}
 	//std::cout << sizeX << " " << sizeY << std::endl;
 	viewItem->SetSize(sizeX, sizeY);
@@ -67,10 +68,10 @@ void ViewWindow::SetViewItem(Item* item) {
 void ViewWindow::SetViewItem(ViewObj* obj) {
 	float sizeX = obj->width;
 	float sizeY = obj->height;
-	if (-obj->height > 500) {
-		float aspect = obj->width / -obj->height;
-		sizeX = 500 * aspect;
-		sizeY = -500;
+	if (abs(sizeY) > itemSizeY) {
+		float aspect = sizeX / sizeY;
+		sizeX = itemSizeY * aspect;
+		sizeY = -itemSizeY;
 	}
 	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(obj->GetViewTexture());

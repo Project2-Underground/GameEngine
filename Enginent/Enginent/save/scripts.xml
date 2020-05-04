@@ -147,7 +147,7 @@
 	</script>
 	<script key = "Hall_door" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Are the people in these rooms also going to be here?"/>
+			<Dialogue name = "Elias" text = "Are they also going to come out?"/>
 		</sub>
 	</script>
 	<script key = "Big_door" loopIndex = "0">

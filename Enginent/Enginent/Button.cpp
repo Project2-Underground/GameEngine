@@ -187,17 +187,11 @@ void SoundMuteButton::action() {
 }
 
 void SoundMuteButton::updateButton(float x, float y) {
-	if (this->col->isClicked(x, y))
-	{
-		SetTexture(hoverTexture);
-	}
-	else
-	{
-		if(SoundManager::GetInstance()->getMute((SoundType)type))
-			SetTexture(muteTexture);
-		else 
-			SetTexture(normalTexture);
-	}
+	if(SoundManager::GetInstance()->getMute((SoundType)type))
+		SetTexture(muteTexture);
+	else 
+		SetTexture(normalTexture);
+	
 }
 
 ChatNoteInfoButton::ChatNoteInfoButton(std::string texture, std::string _title, int _index, bool noti) :Button(texture) {

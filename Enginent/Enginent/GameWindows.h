@@ -26,6 +26,7 @@ class ViewWindow :public GameWindow{
 	static ViewWindow* instance;
 	UIObject* viewItem;
 	ViewWindow();
+	int itemSizeY;
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();

@@ -20,7 +20,7 @@
 				<item name="keyCard"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar">
-				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png"/>
+				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>
 				<description>this is a calendar</description>
 			</Calendar>
 		</interactObj>
@@ -41,9 +41,9 @@
 			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0"/>
-			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0"/>
-			<HallRoomUpperFloor_Door1 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0"/>
+			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door"/>
+			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door"/>
+			<HallRoomUpperFloor_Door1 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door"/>
 		</interactObj>
 		<doors>
 			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door">
@@ -79,7 +79,7 @@
 			</Bookshelf1>
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2">
-				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png"/>
+				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
 				<item name="Puzzle2_ColorCode1"/>
 			</Gramophone>
 			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
