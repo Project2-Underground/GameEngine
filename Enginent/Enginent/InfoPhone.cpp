@@ -417,8 +417,6 @@ void Application::SelectItem(int index) {
 }
 
 void Application::Clear() {
-	for (auto n : notes)
-		delete n;
 	itemTabs.clear();
 	notes.clear();
 	chats.clear();

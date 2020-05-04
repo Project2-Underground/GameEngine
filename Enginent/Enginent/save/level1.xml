@@ -13,11 +13,13 @@
 			</bed>
 			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
+				<sound name="OpenDrawer"/>
 			</Table>
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
 				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 				<item name="keyCard"/>
+				<sound name="OpenCabinet"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>

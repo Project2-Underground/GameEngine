@@ -166,13 +166,13 @@ void SettingButton::action(){
 	SettingWindow::GetInstance()->Open();
 }
 
-void SoundVolumeButton::action() {
-	if (direction >= 0)
-		SoundManager::GetInstance()->upVolume((SoundType)type);
-	else
-		SoundManager::GetInstance()->downVolume((SoundType)type);
-	
-}
+//void SoundVolumeButton::action() {
+//	if (direction >= 0)
+//		SoundManager::GetInstance()->upVolume((SoundType)type);
+//	else
+//		SoundManager::GetInstance()->downVolume((SoundType)type);
+//	
+//}
 
 void SoundMuteButton::SetMuteTexture(std::string texture){
 	muteTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);

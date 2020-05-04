@@ -25,6 +25,7 @@ void InteractableObj::TakeNote() {
 		Phone* phone = Phone::GetInstance();
 		phone->AddPage(NOTE, noteName);
 		takeNote = false;
+		SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 	}
 }
 
@@ -113,9 +114,12 @@ void InteractableObj::PickUpItem() {
 		vw->SetViewItem(item);
 
 		hasItem = false;
-		interactType = NORMAL;
+		if(interactType == PICKUP)
+			interactType = NORMAL;
 		if(hasNextTexture)
 			SetTexture(nextTexture);
+
+		SoundManager::GetInstance()->playSound(SFX, "Pickup", false);
 		/*if (useItemTriggerDialogue) {
 			useItemTriggerDialogue = false;
 			actionTriggerDialogue = false;
@@ -207,6 +211,10 @@ void OpenObj::action() {
 	}
 }
 
+void OpenObj::SetSound(std::string s) {
+	sound = s;
+}
+
 void OpenObj::Open() {
 	open = true;
 	//std::cout << "open\n";
@@ -220,6 +228,9 @@ void OpenObj::Open() {
 			dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
+	}
+	if (!sound.empty()) {
+		SoundManager::GetInstance()->playSound(SFX, sound, false);
 	}
 	SetTexture(openTexture);
 	if (hasItem)interactType = PICKUP;

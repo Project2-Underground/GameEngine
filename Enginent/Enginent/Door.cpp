@@ -13,6 +13,8 @@ Door::Door(std::string next_room, std::string next_door) {
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
+		if(interactType != STAIR)
+			SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
 		gs->ChangeRoom(nextRoom, nextDoor);
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {

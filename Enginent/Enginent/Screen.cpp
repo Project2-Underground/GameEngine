@@ -261,12 +261,12 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 					if (Button * button = dynamic_cast<Button*>(UI[j])) {
 						button->checkColliderPressed(screen.x, screen.y);
 					}
+				if (InventoryEnable && !buttonClicked) {
+					inventory->LeftClick(screen.x, screen.y);
+				}
+				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+					currentLevel->LeftClick(world.x, world.y);
 			}
-			if (InventoryEnable && !buttonClicked) {
-				inventory->LeftClick(screen.x, screen.y);
-			}
-			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-				currentLevel->LeftClick(world.x, world.y);
 		}
 	}
 }

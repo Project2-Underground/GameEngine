@@ -103,6 +103,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case OPEN: {
 			OpenObj* obj = new OpenObj();
 			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
+			if (child->child("sound"))
+				obj->SetSound(child->child("sound").attribute("name").as_string());
 			interactObj = obj;
 		}break;
 		case PUZZLE: {
