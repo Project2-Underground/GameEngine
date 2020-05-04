@@ -42,6 +42,10 @@ void ImageObject::SetCollder(Collider* n_col) {
 unsigned int ImageObject::GetTexture() {
 	return texture;
 }
+void ImageObject::Appear(bool b) {
+	SetDisplay(b);
+	col->enable = b;
+}
 
 void ImageObject::SetTexture(string path)
 {

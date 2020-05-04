@@ -28,7 +28,7 @@ public:
 	void LoadObjSpecialActions(std::string, Level*);
 	void LoadItems(std::vector<Item*>&);
 
-	int GetLevelNumber(std::string); 
+	void GetLevelNumber(std::string, Level*);
 	std::string GetFirstRoomName();
 	void SaveGame(std::string);
 	void LoadFromSave(std::string);
@@ -37,7 +37,7 @@ public:
 	void LoadChats(std::string, std::map<std::string, ChatInfo>&);
 	std::string GetMessage(std::string, int);
 	// note doc
-	void LoadNotes(std::string, std::map<std::string, UIObject*>&);
+	void LoadNotes(std::string, std::map<std::string, NoteInfo>&);
 
 	// script doc
 	//std::map<std::string, Script> GetScript(std::string);

@@ -2,6 +2,16 @@
 #include "Game.h"
 #include "MouseInput.h"
 
+Puzzle::~Puzzle() {
+	if(background)
+		delete background;
+	if(puzzle)
+		delete puzzle;
+	for (auto ui : UI)
+		if(ui)
+			delete ui;
+}
+
 Book::Book(int id, std::string texture, float sizeX, float sizeY, int posX, int posY)
 {
 	this->id = id;
@@ -170,7 +180,7 @@ void Bookshelf::Reset() {
 }
 
 void Bookshelf::ActionAfterPuzzle() {
-	Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->doors["StairDoor"]->Open();
+	Game::GetInstance()->GetCurrentLevel()->rooms["MainHallLower"]->doors["StairDoor"]->Open();
 }
 
 void Bookshelf::CompletePuzzle() {
@@ -330,10 +340,7 @@ void BookshelfPuzzle::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 
 BookshelfPuzzle::~BookshelfPuzzle()
 {
-	delete background;
-	delete puzzle;
-	for (auto ui : UI)
-		delete ui;
+
 }
 
 void BookshelfPuzzle::CompletePuzzle() {

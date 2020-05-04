@@ -3,11 +3,13 @@
 #include "GameWindows.h"
 #include "InfoPhone.h"
 #include "GameWindows.h"
+#include "MouseInput.h"
 
 InteractableObj::InteractableObj() {
 	interactType = NORMAL;
 	triggered = true;
 	talk = false;
+	used = true;
 }
 
 void InteractableObj::SetCollder(Collider* n_col) {
@@ -17,11 +19,12 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
-void InteractableObj::TakePic() {
-	if (takePic) {
+void InteractableObj::TakeNote() {
+	//std::cout << (takeNote ? "yes" : "no") << "\n";
+	if (takeNote) {
 		Phone* phone = Phone::GetInstance();
-		phone->AddPage(NOTE, picName);
-		takePic = false;
+		phone->AddPage(NOTE, noteName);
+		takeNote = false;
 	}
 }
 
@@ -43,7 +46,7 @@ void InteractableObj::action() {
 		{
 			talk = true;
 			if(dialogue_after != "")
-			dialogue_name = dialogue_after;
+				dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
@@ -51,12 +54,12 @@ void InteractableObj::action() {
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
 	PickUpItem();
-	TakePic();
+	TakeNote();
 }
 
-void InteractableObj::SetTakePic(std::string pic) {
-	picName = pic;
-	takePic = true;
+void InteractableObj::SetNoteName(std::string note) {
+	noteName = note;
+	takeNote = true;
 }
 
 bool InteractableObj::CheckCollider(float x, float y) {
@@ -89,8 +92,12 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 void InteractableObj::UseItem(Item* item) {
 	if (item != nullptr && item_to_use == item->name) {
 		//std::cout << "item is used and removed from the inventory\n";
+		Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 		used = true;
-		((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->RemoveItem(item);
+		if(!item->multipleUse)
+			i->RemoveItem(item);
+
+		i->UnselectItem();
 	}
 }
 
@@ -103,7 +110,7 @@ void InteractableObj::PickUpItem() {
 
 		ViewWindow* vw = ViewWindow::GetInstance();
 		vw->Open();
-		vw->SetViewItem(item->GetViewTexture());
+		vw->SetViewItem(item);
 
 		hasItem = false;
 		interactType = NORMAL;
@@ -153,6 +160,14 @@ void InteractableObj::ChangeDialogue(std::string n, std::string a)
 	}
 }
 
+void InteractableObj::SetTalked(bool b) {
+	talk = b;
+	if (talk) {
+		if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+	}
+}
+
 void InteractableObj::SetNextTexture(std::string next) {
 	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
 	hasNextTexture = true;
@@ -185,7 +200,7 @@ void OpenObj::action() {
 			{
 				talk = true;
 				if (dialogue_after != "")
-				dialogue_name = dialogue_after;
+					dialogue_name = dialogue_after;
 			}
 			TextBox::GetInstance()->SetDisplay(true);
 		}
@@ -223,10 +238,14 @@ void ViewObj::SetViewTexture(std::string view) {
 	viewTexture = Game::GetInstance()->GetRenderer()->LoadTexture(view);
 }
 
+unsigned int ViewObj::GetViewTexture() {
+	return viewTexture;
+}
+
 void ViewObj::action() {
 	ViewWindow* vw = ViewWindow::GetInstance();
 	vw->Open();
-	vw->SetViewItem(viewTexture);
+	vw->SetViewItem(this);
 	InteractableObj::action();
 	/*TextBox::GetInstance()->setText(this->dialogue_name);
 	TakePic();*/
@@ -250,7 +269,7 @@ void NonPlayer::action()
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
-	TakePic();
+	TakeNote();
 }
 
 void PuzzleObj::SetPuzzleName(std::string name) {
@@ -258,9 +277,10 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	//std::cout << "click puzzle\n";
-	if (((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
+	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
 		((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
+		UseItem(((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->GetSelectedItem());
 	else
 		InteractableObj::action();
 }
@@ -269,10 +289,59 @@ void SaveObj::action() {
 	Game::GetInstance()->SetSaveGame(true);
 	SaveLoadWindow::GetInstance()->Open();
 }
+PlayerTriggerObj::PlayerTriggerObj() {
+	triggered = false;
+}
 void PlayerTriggerObj::Update() {
 	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
 		action();
 		triggered = true;
+
+		Game::GetInstance()->GetPlayer()->StopWalking();
 	}
 }
 
+NumpadPuzzleAfter::NumpadPuzzleAfter() {
+	object_name = "NumpadAfterUnlock";
+	actionDone = false;
+	SetItemToUse("keyCard");
+	//SetDialogueName();
+}
+void NumpadPuzzleAfter::action() {
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		UseItem(gs->GetInventory()->GetSelectedItem());
+
+		if (used && !actionDone) 
+			UnlockBookshelf();
+		
+	}
+	else if (!used) {
+		InteractableObj::action();
+	}
+}
+
+void NumpadPuzzleAfter::UnlockBookshelf() {
+	actionDone = true;
+	Game* g = Game::GetInstance();
+	/*PuzzleObj* tmp = new PuzzleObj();
+	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallLower"]->FindObject("Bookshelf2");
+	tmp->SetPuzzleName("BookshelfPuzzle2");
+	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
+	tmp->SetTexture(puzzleObj->GetTexture());
+	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
+	puzzleObj->col->enable = false;
+	puzzleObj->SetDisplay(false);
+	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();*/
+
+	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
+		((InteractableObj*)npc)->Appear(false);
+	}
+	for (auto npc : g->GetCurrentLevel()->rooms["MainHallUpper"]->npcs) {
+		((InteractableObj*)npc)->Appear(false);
+	}
+	for (auto npc : g->GetCurrentLevel()->rooms["EmmaRoom"]->npcs) {
+		((InteractableObj*)npc)->Appear(false);
+	}
+	((GameScreen*)g->GetScreen())->butler->Appear();
+}

@@ -1,12 +1,53 @@
 #include "InfoPhone.h"
 #include "Game.h"
+#include <sstream>
 
-Note::Note(std::string n, unsigned int text) {
-	name = n;
-	texture = text;
+void NoteInfo::AddText(std::string text) {
+	std::stringstream ss(text);
+	std::string modifiedText;
+	std::string line;
+	std::string word;
+	lineCount = 1;
+	while (ss >> word) {
+		if (line.size() + word.size() > MAX_FONT_PER_LINE) {
+			texts.push_back(line);
+			textPosition.push_back(glm::vec3(TEXT_START_X, TEXT_TOP_Y, 0));
+			line.clear();
+			lineCount++;
+		}
+		line += word + " ";
+	}
+	if (line != "") {
+		texts.push_back(line);
+		textPosition.push_back(glm::vec3(TEXT_START_X, TEXT_TOP_Y, 0));
+	}
 }
 
 void ChatInfo::AddText(std::string text) {
+	//std::stringstream ss(text);
+	//std::string modifiedText;
+	//std::string line;
+	//std::string word;
+	//int lineCount = 1;
+	//// add each words to line until length reach MAX_FONT_PER_LINE.
+	//// when reach, add \n to line, add line to modifiedText.
+	//// Then clear line to start adding new words.
+	//while (ss >> word) {
+	//	if (line.size() + word.size() > MAX_FONT_PER_LINE) {
+	//		line += '\n';
+	//		modifiedText += line;
+	//		line.clear();
+	//		lineCount++;
+	//	}
+	//	line += word + " ";
+	//}
+	//modifiedText += line;
+
+	// start at text[nextLine], for loop backwards until we find the whitespace (' ').
+	// replace that ' ' with '\n'.
+	// continue to the next line by adding which is (nextLine + MAX_FONT_PER_LINE).
+	// while loop until nextline > text size.
+
 	int nextLine = MAX_FONT_PER_LINE;
 	int lineCount = 1;
 	while (text.size() > nextLine) {
@@ -19,6 +60,117 @@ void ChatInfo::AddText(std::string text) {
 	texts.push_back(text);
 	lineCounts.push_back(lineCount);
 	// calculate size of text and set position relative to the previous text
+}
+
+Note::Note() {
+	scrollBar = new UIObject();
+	thumb = new UIObject();
+	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
+	scrollBar->Init(10.0f, -(TEXT_TOP_Y - TEXT_BOTTOM_Y), glm::vec3(290, 0, 1));
+	textBubble = new UIObject();
+	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
+	textBubble->SetSize(575.0f, 250.0f);
+	textBubble->SetPosition(glm::vec3(-20, scrollBar->getPos().y, 1));
+	thumb->SetTexture("Texture/tmp_texture/tmp_scrollBar.PNG");
+	thumb->SetSize(10.0f, -10.0f);
+	thumb->SetPosition(glm::vec3(270, scrollBar->col->getMaxBound().y, 1));
+	name = new TextObject();
+	name->SetPosition(glm::vec3(-20, 175.0f, 1));
+}
+Note::~Note() {
+	delete textBubble;
+	delete scrollBar;
+	delete thumb;
+	delete name;
+}
+void Note::ClearText() {
+	for (auto t : allMsg)
+		delete t;
+	allMsg.clear();
+}
+void Note::OpenNote(const NoteInfo n) {
+	ClearText();
+
+	name->loadText(n.name, { 255, 255, 255, 255 }, FONT_SIZE);
+
+	float yPos = TEXT_TOP_Y;
+	for (int i = 0; i < n.texts.size(); i++) {
+		TextObject* tmpText = new TextObject();
+		tmpText->loadText(n.texts[i], textColor, FONT_SIZE);
+
+		// calculate starting x of the msg
+		float paddingx = tmpText->getSize().x * 0.5f;
+
+		// calculate starting y of the msg
+		if (i > 0) {
+			yPos -= (-tmpText->getSize().y * 0.5f + TEXT_SPACE + -allMsg.at(i - 1)->getSize().y * 0.5f);
+		}
+		else {
+			yPos -= (-tmpText->getSize().y * 0.5f);
+		}
+		glm::vec3 newPos = glm::vec3(n.textPosition[i].x + paddingx, yPos, 0);
+		tmpText->SetPosition(newPos);
+		allMsg.push_back(tmpText);
+	}
+	if (n.lineCount > 0) {
+		upperBound = allMsg.at(0)->getPos().y;
+		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y * 0.25f + TEXT_BOTTOM_Y;
+	}
+	// calculate thumb height
+	float msgLength = (allMsg.at(0)->getPos().y - allMsg.at(allMsg.size() - 1)->getPos().y);
+	float thumbY = ((scrollBar->getSize().y * scrollBar->getSize().y) / msgLength);
+	float scrollNo = (msgLength - (upperBound - lowerBound)) / SCROLL_SPEED;
+
+	if (scrollNo < 0) {
+		thumb->SetSize(thumb->getSize().x, scrollBar->getSize().y);
+		float space = -scrollBar->getSize().y - -thumb->getSize().y;
+
+		scrollBarSpeed = 0;
+
+		thumb->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y, 1));
+	}
+	else {
+		thumb->SetSize(thumb->getSize().x, -thumbY);
+		float space = -scrollBar->getSize().y - -thumb->getSize().y;
+
+		scrollBarSpeed = space / scrollNo;
+
+		thumb->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + space * 0.5f, 1));
+	}
+}
+void Note::Scroll(int direction) {
+	if (direction < 0) {
+		// scroll up
+		if (allMsg.at(allMsg.size() - 1)->getPos().y + allMsg.at(allMsg.size() - 1)->getSize().y * -0.5f < lowerBound) {
+			for (auto m : allMsg)
+				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y + SCROLL_SPEED, 1));
+			thumb->SetPosition(glm::vec3(thumb->getPos().x, thumb->getPos().y - scrollBarSpeed, 1));
+		}
+	}
+	else {
+		// scroll down
+		if (allMsg.at(0)->getPos().y - allMsg.at(0)->getSize().y * -0.5f > upperBound) {
+			for (auto m : allMsg)
+				m->SetPosition(glm::vec3(m->getPos().x, m->getPos().y - SCROLL_SPEED, 1));
+			thumb->SetPosition(glm::vec3(thumb->getPos().x, thumb->getPos().y + scrollBarSpeed, 1));
+		}
+	}
+}
+void Note::CloseNote() {
+	for (auto m : allMsg)
+		delete m;
+}
+void Note::Render() {
+	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
+	renderer->Render(name);
+	//renderer->Render(textBubble);
+	for (auto m : allMsg) {
+		if (m->getPos().y < TEXT_TOP_Y && m->getPos().y > TEXT_BOTTOM_Y) {
+			renderer->Render(m);
+		}
+	}
+	renderer->Render(scrollBar);
+	renderer->Render(thumb);
 }
 
 Chat::Chat() {
@@ -39,6 +191,10 @@ Chat::Chat() {
 
 Chat::~Chat() {
 	delete profilePic;
+	delete textBubble;
+	delete scrollBar;
+	delete thumb;
+	delete name;
 }
 
 void Chat::Render() {
@@ -111,7 +267,6 @@ void Chat::OpenChat(const ChatInfo c) {
 	float space = -scrollBar->getSize().y - -thumb->getSize().y;
 
 	float scrollNo = (msgLength - (upperBound - lowerBound)) / SCROLL_SPEED;
-	std::cout << scrollNo << std::endl;
 	scrollBarSpeed = space / scrollNo;
 	thumb->SetPosition(glm::vec3(scrollBar->getPos().x, scrollBar->getPos().y + space * 0.5f, 1));
 }
@@ -135,7 +290,7 @@ void Chat::Scroll(int direction) {
 	}
 }
 
-Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
+Application::Application() {
 	open = false;
 	currentPage = 0;
 	appBG = new UIObject();
@@ -144,18 +299,13 @@ Application::Application(glm::vec3 phoneSize, glm::vec3 phonePos) {
 	float iconSize = 100.0f;
 
 	back = new PhoneBackButton("Texture/tmp_texture/tmp_arrowIcon2.png");
-	back->Init(iconSize, -iconSize, glm::vec3(-phoneSize.x * 0.25f - phonePos.x, phonePos.y - phoneSize.y * 0.4f, 1));
+	back->Init(50.0f, -50.0f, glm::vec3(TEXT_START_X, TEXT_BOTTOM_Y - 35.0f, 1));
 
 	home = new PhoneHomeButton("");
 	home->SetDisplay(false);
 	home->Init(iconSize, -iconSize, glm::vec3(350, 0, 1));
 
-	buttons.push_back(back);
-	buttons.push_back(home);
-
-	currentNote = new UIObject();
-	currentNote->SetDisplay(false);
-	currentNote->SetSize(phoneSize.x * 0.5f, -phoneSize.y);
+	currentNote = new Note();
 
 	currentChat = new Chat();
 
@@ -187,6 +337,7 @@ void Application::OpenChat() {
 		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", chats[i]->name, i, chats[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
+		tab->hasNewInfo = chats[i]->noti;
 		itemTabs.push_back(tab);
 	}
 	if (itemTabs.size() > 0) {
@@ -196,7 +347,7 @@ void Application::OpenChat() {
 }
 
 void Application::OpenNote() {
-	float y = TEXT_TOP_Y;
+	float y = TAB_TOP_Y;
 	for (int i = 0; i < notes.size(); i++) {
 		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", notes[i]->name, i, notes[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
@@ -245,6 +396,9 @@ void Application::Scroll(int direction) {
 	}
 	else if (currentAppType == CHAT && chats.size() > 0)
 		currentChat->Scroll(direction);
+	else if (currentAppType == NOTE && notes.size() > 0)
+		currentNote->Scroll(direction);
+
 }
 
 void Application::SelectItem(int index) {
@@ -253,7 +407,7 @@ void Application::SelectItem(int index) {
 	{
 	case NOTE:
 		notes[index]->noti = false;
-		currentNote->SetTexture(notes[index]->texture);
+		currentNote->OpenNote(*notes[index]);
 		break;
 	case CHAT:
 		chats[index]->noti = false;
@@ -287,15 +441,13 @@ void Application::LeftRelease(float x, float y) {
 void Application::Back() {
 	if (openNoteChat)
 		openNoteChat = false;
-	else
-		Close();
 }
 
 void Application::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(appBG);
 
-	if (!openNoteChat)
+	if (!openNoteChat) {
 		for (auto b : itemTabs) {
 			renderer->Render(b);
 			renderer->Render(b->title);
@@ -304,33 +456,33 @@ void Application::Render() {
 				renderer->Render(notifyPopup);
 			}
 		}
-	else 
+	}
+	else {
 		switch (currentAppType)
 		{
 		case NOTE:
-			renderer->Render(currentNote);
+			currentNote->Render();
 			break;
 		case CHAT:
 			currentChat->Render();
 			break;
 		}
-	renderer->Render(buttons);
+		renderer->Render(back);
+	}
+	renderer->Render(home);
 }
 
-void Application::AddNote(UIObject* obj) {
-	currentNote->SetDisplay(true);
-	notes.push_back(new Note(obj->object_name, obj->GetTexture()));
+void Application::AddNote(NoteInfo* obj) {
+	notes.push_back(obj);
 }
 
 void Application::AddChat(ChatInfo* chat) {
 	chats.push_back(chat);
 }
 
-void Application::SetNote(UIObject* obj) {
-	currentNote->SetDisplay(true);
-	Note* note = new Note(obj->object_name, obj->GetTexture());
-	note->noti = false;
-	notes.push_back(note);
+void Application::SetNote(NoteInfo* obj) {
+	obj->noti = false;
+	notes.push_back(obj);
 }
 
 void Application::SetChat(ChatInfo* chat) {
@@ -363,7 +515,7 @@ Phone::Phone() {
 	phone->SetSize(825.0f, -500.5f);
 	phone->SetPosition(glm::vec3(0, 0, 1));
 
-	app = new Application(glm::vec3(sizeX, sizeY, 1), glm::vec3(0, 0, 1));
+	app = new Application();
 	open = false;
 
 	float iconSize = 100.0f;
@@ -396,10 +548,6 @@ Phone::~Phone() {
 			delete ui;
 	if (phone)
 		delete phone;
-
-	for (std::map<std::string, UIObject*>::iterator itr = notes.begin(); itr != notes.end(); itr++)
-		if (itr->second)
-			delete itr->second;
 }
 
 void Phone::Render() {
@@ -451,6 +599,9 @@ void Phone::UpdateButton(float x, float y) {
 	noteIcon->updateButton(x, y);
 	chatIcon->updateButton(x, y);
 	exitButton->updateButton(x, y);
+	if (!app->Unread(CHAT) && !app->Unread(NOTE))
+		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(false);
+
 }
 
 void Phone::OpenApp(AppType apptype) {
@@ -462,10 +613,11 @@ void Phone::CloseApp() {
 }
 
 void Phone::AddPage(AppType apptype, std::string name) {
+	((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
 	switch (apptype)
 	{
 	case NOTE: {
-		app->AddNote(notes[name]);
+		app->AddNote(&notes[name]);
 	}break;
 	case CHAT:
 		app->AddChat(&chats[name]);
@@ -478,7 +630,7 @@ void Phone::SetPage(AppType apptype, std::string name) {
 	switch (apptype)
 	{
 	case NOTE: {
-		app->SetNote(notes[name]);
+		app->SetNote(&notes[name]);
 	}break;
 	case CHAT:
 		app->SetChat(&chats[name]);
@@ -488,9 +640,10 @@ void Phone::SetPage(AppType apptype, std::string name) {
 }
 
 void Phone::Message(std::string name, int msgIndex) {
+	((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
 	chats[name].currentMsgIndex = msgIndex;
 	chats[name].noti = true;
-	SetPage(CHAT, name);
+	AddPage(CHAT, name);
 }
 
 void Phone::Clear() {

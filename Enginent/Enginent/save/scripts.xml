@@ -97,7 +97,7 @@
 			<Dialogue name = "??" text = "Time to find out."/>
 		</sub>
 	</script>
-	<script key = "EliasRoom__door_useKey" loopIndex = "0">
+	<script key = "EliasRoom_door_useKey" loopIndex = "0">
 		<sub>
 			<Dialogue name = "" text = "beep beep beep"/>
 			<Dialogue name = "" text = "Identity confirmation: Elias Adams"/>
@@ -147,7 +147,7 @@
 	</script>
 	<script key = "Hall_door" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Are the people in these rooms also going to be here?"/>
+			<Dialogue name = "Elias" text = "Are they also going to come out?"/>
 		</sub>
 	</script>
 	<script key = "Big_door" loopIndex = "0">

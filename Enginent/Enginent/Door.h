@@ -8,8 +8,7 @@ protected:
 	std::string nextDoor;
 	unsigned int openTexture;
 public:
-	Door(std::string, std::string);
-	virtual void Init() {}
+	Door(std::string nextroom, std::string nextdoor);
 	void SetOpenTexture(std::string texture);
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
 	void Open();
@@ -22,13 +21,13 @@ public:
 	void action();
 };
 
-//class EliasDoor :public Door {
-//public:
-//	EliasDoor(std::string room, std::string door) :Door(room, door) { }
-//	void action();
-//	void Update(); 
-//	void Init();
-//};
+class EliasDoor :public Door {
+	std::string dialogueAfterOpen;
+public:
+	EliasDoor(std::string room, std::string door) :Door(room, door) { }
+	void action();
+	//void Update(); 
+};
 
 class ChangeLevelDoor : public Door {
 	int nextLevel;

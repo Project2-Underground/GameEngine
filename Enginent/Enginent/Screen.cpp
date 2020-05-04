@@ -17,25 +17,17 @@ void Screen::CloseGameAllWindow() {
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->SetSize(248, -70);
-	play->SetPosition(glm::vec3(-270, 170, 1));
-	play->SetCollder(new Collider(play));
+	play->Init(248, -70, glm::vec3(-270, 170, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->SetSize(213, -74);
-	load->SetPosition(glm::vec3(-270, 90, 1));
-	load->SetCollder(new Collider(load));
+	load->Init(213, -74, glm::vec3(-270, 70, 1));
 
-	setting = new SettingWindowCloseButton("Texture/UI/MainScreen/MainScreen_Sound.png");
-	setting->SetSize(264, -81);
-	setting->SetPosition(glm::vec3(-270.0f, 20, 1.0f));
-	setting->SetCollder(new Collider(setting));
+	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
+	setting->Init(264, -81, glm::vec3(-270.0f, -40, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->SetSize(186, -86);
-	quit->SetPosition(glm::vec3(-270.0f, -50.0f, 1.0f));
-	quit->SetCollder(new Collider(quit));
+	quit->Init(186, -86, glm::vec3(-270.0f, -130.0f, 1.0f));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -97,7 +89,7 @@ void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 			w->LeftRelease(screen.x, screen.y);
 	else
 		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
+			if (Button * button = dynamic_cast<Button*>(UI[j])) 
 				button->checkColliderReleased(screen.x, screen.y);
 }
 
@@ -132,6 +124,7 @@ MenuScreen::~MenuScreen() {
 GameScreen::GameScreen() {
 	InventoryEnable = true;
 	PuzzleTime = false;
+	currentLevel = nullptr;
 	// filepath of levels
 	levels.push_back("save/level1.xml");
 	levels.push_back("save/level2.xml");
@@ -141,23 +134,21 @@ GameScreen::GameScreen() {
 	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
-	butler = new Butler();
-	currentLevel = new Level(levels[0]);
-	XMLManager::GetInstance()->LoadItems(items);
-	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
-
-	//player->SetTexture("Texture/Character/Elias_idle.png");
 	player->SetSize(205.0f, -430.0f);
-	player->SetPosition(glm::vec3(0.0f, -50.0f, 1.0f));
 	player->SetCollder(new Collider(player));
-	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
 
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetTarget(player);
-	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
+
+	butler = new Butler();
+
+	ChangeLevel(0);
+	XMLManager::GetInstance()->LoadItems(items);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
+	phone->Clear();
 	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
 	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-500.0f, 300.0f, 1.0f));
 	phoneIcon->Disappear();
@@ -165,6 +156,8 @@ GameScreen::GameScreen() {
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
 
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
+	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Backdoor", new NumpadPuzzle()));
+	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Emma", new NumpadPuzzle_2()));
 	PuzzleTime = false;
 
 	dialogueText = TextBox::GetInstance();
@@ -177,14 +170,17 @@ GameScreen::GameScreen() {
 	UI.push_back(phoneIcon);
 	UI.push_back(pause);
 
+	windows.push_back(PauseWindow::GetInstance());
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
-	//windows.push_back(SettingWindow::GetInstance());
-	windows.push_back(PauseWindow::GetInstance());
+	windows.push_back(SettingWindow::GetInstance());
 }
 
-void GameScreen::LoadGame(std::string filename) {
-	XMLManager::GetInstance()->LoadFromSave(filename);
+void GameScreen::Init() {
+	butler->Appear();
+	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	if(currentLevel->GetCurrentRoom()->dialogue != "")
+		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 }
 
 Item* GameScreen::FindItem(std::string name) {
@@ -202,7 +198,6 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
-		renderer->Render(butler);
 	}
 	renderer->Render(UI);
 
@@ -230,7 +225,6 @@ void GameScreen::Update() {
 			else {
 				currentLevel->Update();
 				player->Update();
-				butler->Update();
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();
@@ -251,24 +245,29 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (dialogueText->IsDisplay())
 		dialogueText->clickLeft(screen);
-	else if (GameWindowOpen()) {
-		for (auto w : windows)
-			w->LeftClick(screen.x, screen.y);
-	}
-	else if (phone->open) 
-		phone->LeftClick(screen.x, screen.y);
-	else if (PuzzleTime)
-		currentPuzzle->LeftClick(screen, world);
 	else {
 		buttonClicked = false;
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderPressed(screen.x, screen.y);
-		if(!buttonClicked && !player->anim->IsPlaying("Pickup"))
-			currentLevel->LeftClick(world.x, world.y);
-	}
-	if (InventoryEnable) {
-		inventory->LeftClick(screen.x, screen.y);
+		if (GameWindowOpen()) {
+			for (auto w : windows)
+				w->LeftClick(screen.x, screen.y);
+		}
+		else {
+			if (phone->open)
+				phone->LeftClick(screen.x, screen.y);
+			else if (PuzzleTime)
+				currentPuzzle->LeftClick(screen, world);
+			else {
+				for (int j = 0; j < UI.size(); j++)
+					if (Button * button = dynamic_cast<Button*>(UI[j])) {
+						button->checkColliderPressed(screen.x, screen.y);
+					}
+			}
+			if (InventoryEnable && !buttonClicked) {
+				inventory->LeftClick(screen.x, screen.y);
+			}
+			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+				currentLevel->LeftClick(world.x, world.y);
+		}
 	}
 }
 
@@ -286,9 +285,8 @@ void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 		phone->LeftRelease(screen.x, screen.y);
 	else if (PuzzleTime)
 		currentPuzzle->LeftRelease(screen, world);
-	if (InventoryEnable) {
+	else if (InventoryEnable) 
 		inventory->LeftRelease(screen.x, screen.y);
-	}
 	for (int j = 0; j < UI.size(); j++)
 		if (Button * button = dynamic_cast<Button*>(UI[j]))
 			button->checkColliderReleased(screen.x, screen.y);
@@ -313,6 +311,10 @@ void GameScreen::ChangeLevel(int level) {
 	if(currentLevel)
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
+	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
+	Camera* camera = Game::GetInstance()->GetCamera();
+	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
@@ -321,14 +323,24 @@ void GameScreen::ChangeRoom(std::string room, std::string door) {
 }
 
 InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
-	std::vector<DrawableObject*>* objects = currentLevel->Getobjects();
-	for (int i = (int)objects->size() - 1; i >= 0; i--)
+	std::vector<DrawableObject*> objects = currentLevel->GetCurrentRoom()->objects;
+	for (int i = (int)objects.size() - 1; i >= 0; i--)
 	{
-		if (InteractableObj* obj = dynamic_cast<InteractableObj*>((*objects)[i]))
+		if (InteractableObj* obj = dynamic_cast<InteractableObj*>(objects[i]))
 			if(obj->CheckPointing(pos.x, pos.y))
 			{
 				//std::cout << obj->object_name << ", " << obj->getType() <<  std::endl;
 				return obj->getType();
+			}
+	}
+	std::vector<DrawableObject*> npcs = currentLevel->GetCurrentRoom()->npcs;
+	for (int i = (int)npcs.size() - 1; i >= 0; i--)
+	{
+		if (InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]))
+			if(npc->CheckPointing(pos.x, pos.y))
+			{
+				//std::cout << obj->object_name << ", " << obj->getType() <<  std::endl;
+				return npc->getType();
 			}
 	}
 	return NORMAL;
@@ -386,6 +398,9 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
 		break;
+	case SDLK_q:
+		Game::GetInstance()->TriggerChangeLevel(1);
+		break;
 	default:
 		break;
 	}
@@ -393,15 +408,24 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 
 GameScreen::~GameScreen() {
 	delete player;
+	delete butler;
 	delete phone;
-	//delete pause;
+	delete phoneIcon;
+	delete pause;
 	delete currentLevel;
+	delete dialogueText;
 
 	for (auto p : puzzles)
 		delete p.second;
 
 	for (auto ui : UI)
 		delete ui;
+
+	for (auto item : items)
+		delete item;
+
+	for (auto p : puzzles)
+		delete p.second;
 
 	delete inventory;
 }

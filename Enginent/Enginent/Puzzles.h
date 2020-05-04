@@ -245,6 +245,7 @@ public:
 };
 
 class Numpad : public PuzzleTemplate{
+protected:
 	UIObject* texture;
 	std::vector<UIObject*> image;
 	std::vector<Button*> n_button; //0-9 and 10,11 for enter/delete 
@@ -263,6 +264,7 @@ public:
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
 	void ActionAfterPuzzle();
+	void CompletePuzzle();
 	void CheckCheat();
 	void deleteInput();
 	void setNumColor(SDL_Color c)
@@ -270,6 +272,13 @@ public:
 		this->numColor = c;
 	}
 	~Numpad();
+};
+
+class Numpad2 : public Numpad {
+public:
+	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) {}
+	void CompletePuzzle();
+	void ActionAfterPuzzle();
 };
 
 class Puzzle {
@@ -291,6 +300,7 @@ public:
 	bool IsInventoryEnable() { return enableInventory; }
 	bool Passed() { return puzzle->Passed(); }
 	bool passedReqiurements;
+	~Puzzle();
 };
 
 class BookshelfPuzzle : public Puzzle {

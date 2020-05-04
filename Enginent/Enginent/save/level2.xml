@@ -2,7 +2,7 @@
 
 <!-- texture = NONE toset display false-->
 
-<level currentLevel="1" startPosX="0" startPosY="-50" Start="MainFloor2">
+<level currentLevel="1" startPosX="0" startPosY="-50" Start="MainFloor2" xStart="0">
 	<MainFloor2 left_limit="-5700" right_limit="5700" top_limit="360" bottom_limit="-360" y="-50">
 		<background>
 			<bg texture="Texture/level2/MainFloor2/Mainfloor_Template.png" sizeX="11699" sizeY="720" posX="0" posY="0" layer="0"/>

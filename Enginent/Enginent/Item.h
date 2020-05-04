@@ -20,9 +20,17 @@ public:
 	void SetViewTexture(std::string path);
 	unsigned int GetInventoryTexture() { return iTexture; }
 	unsigned int GetViewTexture() { return viewTexture; }
+	void SetSize(float x, float y);
+	void SetISize(float x, float y);
 
+	float width;
+	float height;
+	float iwidth;
+	float iheight;
 	float aspect;
+	float iaspect;
 
+	bool multipleUse;
 	bool operator==(const Item& item);
 	virtual void action() {};
 };

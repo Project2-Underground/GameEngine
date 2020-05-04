@@ -57,8 +57,9 @@ void Room::LeftClick(float x, float y) {
 
 	for (int i = 0; i < npcs.size(); i++) {
 		InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]);
-		if (npc->CheckCollider((float)x, (float)y))
+		if (npc->CheckCollider((float)x, (float)y)) {
 			((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(npc);
+		}
 	}
 }
 
@@ -94,11 +95,27 @@ void Room::SortObjLayer() {
 			iStart = i;
 		}
 	}
-/*
-	std::cout << "--------------------------------layers--------------------------------\n";
-	for (auto obj : objects) {
-		std::cout << "obj " << obj->object_name << "layer: "  << obj->layer << " sublayer: " << obj->subLayer << std::endl;
-	}*/
+	// sort the layers within each main layers
+	if (foreground.size() > 1) {
+		for (int i = 0; i < foreground.size() - 1; i++) {
+			bool swap = false;
+			for (int j = 0; j < foreground.size() - 1 - i; j++) {
+				if (foreground[j]->subLayer > foreground[j + 1]->subLayer) {
+					DrawableObject* tmp = foreground[j];
+					foreground[j] = foreground[j + 1];
+					foreground[j + 1] = tmp;
+					swap = true;
+				}
+			}
+			if (!swap)
+				break;
+		}
+	}
+
+	//std::cout << "--------------------------------layers--------------------------------\n";
+	//for (auto obj : foreground) {
+	//	std::cout << "obj " << obj->object_name << " sublayer: " << obj->subLayer << std::endl;
+	//}
 }
 
 DrawableObject* Room::FindObject(std::string name) {
@@ -116,9 +133,7 @@ DrawableObject* Room::FindObject(std::string name) {
 Level::Level(std::string filename) {
 	XMLManager* lg = XMLManager::GetInstance();
 	lg->GenerateRoom(filename, rooms);
-	levelNo = lg->GetLevelNumber(filename);
-
-	// assign first room as current room
+	lg->GetLevelNumber(filename, this);
 	currentRoom = rooms[lg->GetFirstRoomName()];
 }
 
@@ -148,6 +163,12 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	}
 	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());
 	player->StopWalking();
+
+	if (currentRoom->dialogue != "") {
+		TextBox::GetInstance()->setText(currentRoom->dialogue);
+		TextBox::GetInstance()->SetDisplay(true);
+		currentRoom->dialogue = "";
+	}
 
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
 }

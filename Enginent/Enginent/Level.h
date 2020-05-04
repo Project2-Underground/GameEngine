@@ -27,6 +27,7 @@ public:
 	std::vector<DrawableObject*> npcs;
 	std::map<std::string, Door*> doors;
 	std::string name;
+	std::string dialogue;
 
 	void Render();
 	void Update();
@@ -49,6 +50,7 @@ class Level {
 	Room* currentRoom;
 public:
 	int levelNo;
+	float xStart;
 	std::map<std::string, Room*> rooms;
 	Level(std::string);
 	void Render();

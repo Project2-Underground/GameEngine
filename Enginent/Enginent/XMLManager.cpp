@@ -54,6 +54,8 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
 			newRoom->SortObjLayer();
+			if(room->attribute("dialogue"))
+				newRoom->dialogue = room->attribute("dialogue").as_string();
 			newRoom->y = room->attribute("y").as_float();
 
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
@@ -94,6 +96,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case VIEW: {
 			ViewObj* obj = new ViewObj();
 			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
+			obj->width = (child->child("view").attribute("sizeX").as_float());
+			obj->height = (child->child("view").attribute("sizeY").as_float());
 			interactObj = obj;
 		}break;
 		case OPEN: {
@@ -112,8 +116,13 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		}break;
 		case PLAYER_TRIGGER: {
 			PlayerTriggerObj* obj = new PlayerTriggerObj();
-			obj->SetInteractType((InteractTypeList)child->child("trigger").attribute("type").as_int());
-			std::cout << "set trigger name: " << child->name() << "\n";
+			obj->SetInteractType(PLAYER_TRIGGER);
+			//std::cout << "set trigger name: " << child->name() << "\n";
+			interactObj = obj;
+		}break;
+		case ADDNOTE: {
+			InteractableObj* obj = new InteractableObj();
+			obj->SetInteractType(ADDNOTE);
 			interactObj = obj;
 		}break;
 		default: {
@@ -127,8 +136,8 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
-		if (child->child("picture"))
-			interactObj->SetTakePic(child->child("picture").attribute("name").as_string());
+		if (child->child("note"))
+			interactObj->SetNoteName(child->child("note").attribute("name").as_string());
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -243,10 +252,9 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
 }
 
-int XMLManager::GetLevelNumber(std::string filename) {
+void XMLManager::GetLevelNumber(std::string filename, Level* lvl) {
 	if (LoadFile(filename))
-		return doc.child("level").attribute("currentLevel").as_int();
-	return 0;
+		lvl->levelNo = doc.child("level").attribute("currentLevel").as_int();
 }
 
 void XMLManager::LoadFromSave(std::string filename) {
@@ -261,38 +269,6 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 		Level* level = gs->GetCurrentLevel();
 
-		std::map<std::string, Room*>::iterator itr;
-		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
-			std::vector<DrawableObject*> objects = itr->second->objects;
-			std::vector<DrawableObject*> npcs = itr->second->npcs;
-			for (int i = 0; i < objects.size(); i++) {
-				// load from save
-				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
-						door->Open();
-				}
-				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
-					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
-					//obj->ChangeDialogue(node.attribute("current_dialogue").as_string());
-
-					obj->hasItem = node.attribute("has_item").as_bool();
-					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
-						if (node.attribute("open").as_bool()) {
-							o->Open();
-						}
-					}
-
-				}
-			}
-			for (int i = 0; i < npcs.size(); i++) {
-				NonPlayer* npc = (NonPlayer*)npcs[i];
-				npc->hasItem = file.child("level").child("NPCs").child(npc->object_name.c_str()).attribute("hasItem").as_bool();
-			}
-		}
-
-
-		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
-
 		// load puzzles
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
@@ -302,12 +278,53 @@ void XMLManager::LoadFromSave(std::string filename) {
 			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
 		}
 
+		std::map<std::string, Room*>::iterator itr;
+		for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
+			std::vector<DrawableObject*> objects = itr->second->objects;
+			std::vector<DrawableObject*> npcs = itr->second->npcs;
+			itr->second->dialogue = file.child("level").child("rooms").child(itr->first.c_str()).attribute("dialogue").as_string();
+			for (int i = 0; i < objects.size(); i++) {
+				// load from save
+				if (Door * door = dynamic_cast<Door*>(objects[i])) {
+					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
+						door->Open();
+				}
+				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
+					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
+					obj->SetCurrentDialogueName(node.attribute("current_dialogue").as_string());
+					obj->SetDialogueBeforeName(node.attribute("before_dialogue").as_string());
+					obj->SetDialogueAfterName(node.attribute("after_dialogue").as_string());
+					obj->SetTakeNote(node.attribute("takeNote").as_bool());
+					if (node.attribute("talked").as_bool()) 
+						obj->SetTalked(node.attribute("talked").as_bool());
+
+					obj->hasItem = node.attribute("has_item").as_bool();
+					if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
+						if (node.attribute("open").as_bool()) {
+							o->Open();
+						}
+					}
+
+					if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
+						if (node.attribute("used").as_bool())
+							n->UnlockBookshelf();
+					}
+				}
+			}
+			for (int i = 0; i < npcs.size(); i++) {
+				NonPlayer* npc = (NonPlayer*)npcs[i];
+				npc->hasItem = file.child("level").child("NPCs").child(npc->object_name.c_str()).attribute("hasItem").as_bool();
+			}
+		}
+
+		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
+
 		// load special npcs
-		//pugi::xml_node butlerNode = file.child("level").child("Butler");
-		//Butler* butler = ((GameScreen*)game->GetScreen())->butler;
-		//butler->SetDisplay(butlerNode.attribute("display").as_bool());
-		//butler->SetPosition(glm::vec3(butlerNode.attribute("posX").as_float(), butlerNode.attribute("posY").as_float(), 1));
-		//butler->SetTriggered(butlerNode.attribute("triggered").as_bool());
+		pugi::xml_node butlerNode = file.child("level").child("Butler");
+		Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+		butler->currentPhase = (Butler::Phase)butlerNode.attribute("phase").as_int();
+		if (butlerNode.attribute("display").as_bool())
+			butler->Appear();
 
 		// load player and inventory
 		pugi::xml_node playerNode = file.child("level").child("Player");
@@ -354,6 +371,7 @@ void XMLManager::SaveGame(std::string filename) {
 	Level* level = game->GetCurrentLevel();
 	save.append_child("level").append_attribute("currentLevel").set_value(level->levelNo);
 	save.child("level").append_attribute("currentRoom").set_value(level->GetCurrentRoom()->name.c_str());
+	save.child("level").append_child("rooms");
 	save.child("level").append_child("interactObj");
 	save.child("level").append_child("item");
 	save.child("level").append_child("doors");
@@ -372,6 +390,7 @@ void XMLManager::SaveGame(std::string filename) {
 	for (itr = level->rooms.begin(); itr != level->rooms.end(); itr++) {
 		std::vector<DrawableObject*> objects = itr->second->objects;
 		std::vector<DrawableObject*> npcs = itr->second->npcs;
+		save.child("level").child("rooms").append_child(itr->first.c_str()).append_attribute("dialogue").set_value(itr->second->dialogue.c_str());
 		for (int i = 0; i < objects.size(); i++) {
 			// if object is an interactObj, NPC, door or items 
 			// save
@@ -383,14 +402,22 @@ void XMLManager::SaveGame(std::string filename) {
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 				saveLevel.child("interactObj").append_child(obj->object_name.c_str());
 				pugi::xml_node node = saveLevel.child("interactObj").child(obj->object_name.c_str());
-				/// current dialogue
+				/// dialogues
 				node.append_attribute("current_dialogue").set_value(obj->GetCurrentDialogueName().c_str());
+				node.append_attribute("before_dialogue").set_value(obj->GetDialogueBeforeName().c_str());
+				node.append_attribute("after_dialogue").set_value(obj->GetDialogueAfterName().c_str());
+				node.append_attribute("talked").set_value(obj->Talked());
+				node.append_attribute("takeNote").set_value(obj->TookNote());
 				node.append_attribute("has_item").set_value(obj->hasItem);
+
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
 					node.append_attribute("open").set_value(o->IsOpen());
 				}
 
+				if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
+					node.append_attribute("used").set_value(n->used);
+				}
 			}
 		}
 		for (int i = 0; i < npcs.size(); i++) {
@@ -408,12 +435,9 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	// saving special npcs
-	/*Butler* butler = ((GameScreen*)game->GetScreen())->butler;
-	saveLevel.append_child("Butler").append_attribute("posX").set_value(butler->getPos().x);
-	saveLevel.child("Butler").append_attribute("posY").set_value(butler->getPos().y);
-	saveLevel.child("Butler").append_attribute("display").set_value(butler->IsDisplay());
-	saveLevel.child("Butler").append_attribute("triggered").set_value(butler->IsTriggered());*/
-	//saveLevel.child("butler").append_attribute("current_dialogue").set_value(butler->getPos().y);
+	Butler* butler = ((GameScreen*)game->GetScreen())->butler;
+	saveLevel.append_child("Butler").append_attribute("display").set_value(butler->IsDisplay());
+	saveLevel.child("Butler").append_attribute("phase").set_value((int)butler->currentPhase);
 
 
 	// saving player and inventory
@@ -515,16 +539,19 @@ XMLManager::~XMLManager() {
 
 }
 
-void XMLManager::LoadNotes(std::string filename, std::map<std::string, UIObject*>& notes) {
+void XMLManager::LoadNotes(std::string filename, std::map<std::string, NoteInfo>& notes) {
 	if (LoadFile(filename)) {
 		pugi::xml_node allNotes = doc.child("notes");
 
 		// generate all the rooms in that level
 		for (pugi::xml_node_iterator note = allNotes.begin(); note != allNotes.end(); note++) {
-			UIObject* tmp = new UIObject();
-			tmp->SetTexture(note->attribute("texture").as_string());
-			tmp->SetName(note->name());
-			notes.insert(std::pair<std::string, UIObject*>(tmp->object_name, tmp));
+			NoteInfo n;
+			n.name = note->name();
+			if (note->first_child())
+				for (pugi::xml_node_iterator msg = note->begin(); msg != note->end(); msg++) {
+					n.AddText(msg->child_value());
+				}
+			notes.insert(std::pair<std::string, NoteInfo>(n.name, n));
 		}
 	}
 }
@@ -583,11 +610,16 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			else {
 				i = new Item(item->name());
 			}
-
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
-			
-			i->aspect = x / y;
+			i->SetSize(x, y);
+
+			if (item->attribute("IsizeX")) {
+				float ix = item->attribute("IsizeX").as_float();
+				float iy = item->attribute("IsizeY").as_float();
+				i->SetISize(ix, iy);
+			}
+
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);

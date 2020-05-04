@@ -47,10 +47,12 @@ public:
 };
 
 class PhoneOpenButton : public Button {
+	unsigned int notiTexture;
 public:
-	PhoneOpenButton(std::string texture) : Button(texture) {}
+	PhoneOpenButton(std::string texture);
 	void Init(float sizex, float sizey, glm::vec3 position);
 	void action();
+	void UpdateButton(bool noti);
 };
 
 class PhoneAppsButton :public Button {
@@ -113,12 +115,6 @@ public:
 	void action();
 };
 
-class SettingWindowCloseButton :public Button {
-public:
-	SettingWindowCloseButton(std::string texture) :Button(texture) { }
-	void action();
-};
-
 class ChangeMouseActionTypeButton : public Button {
 	int type;
 public:
@@ -156,6 +152,12 @@ public:
 class OpenPauseWindowButton :public Button {
 public:
 	OpenPauseWindowButton(std::string texture) :Button(texture) {}
+	void action();
+};
+
+class SettingWindowCloseButton :public Button {
+public:
+	SettingWindowCloseButton(std::string texture) :Button(texture) { }
 	void action();
 };
 

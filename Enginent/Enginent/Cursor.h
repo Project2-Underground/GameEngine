@@ -11,6 +11,7 @@ class CursorUI : public UIObject {
 		unsigned int CS_View;
 		unsigned int CS_Save;
 		unsigned int CS_Stair;
+		unsigned int CS_Note;
 		bool enable;
 
 	public:

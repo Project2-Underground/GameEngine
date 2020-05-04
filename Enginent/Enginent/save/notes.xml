@@ -1,4 +1,31 @@
 <notes>
-	<tmp_note1 texture="Texture/tmp_texture/tmp_noteIcon.png"/>
-	<tmp_note2 texture="Texture/tmp_texture/tmp_noteIcon2.png"/>
+	<Note1>
+		<l>What is happening right now?! Why am I here in this crazy mansion? Did I get kidnapped by some weird organization? But what kind of organization has the power to do all these?</l>
+	</Note1>
+	<Note2>
+		<l>The people living in this mansion are not normal. They don't even care enough to get out of this strange place. Come to think of it, the Pagoda card has the same issue date as my ID card. What are they trying to do in this experiment?</l>
+	</Note2>
+	<Note3>
+		<l>Summarized main point of 'the books' By Elias</l>
+		<l>information</l>
+		<l>1. The first and third shelf are mirrored(?)</l>
+		<l>2. The symbols on the second shelf is inverted from the third shelf </l>
+		<l>3. All of the books on the third shelf are different</l>
+		<l>4. Each shelf originally has one color </l>
+		
+		<l>A long haired lady used the book to pass the challenge --> The books and the bookcase had been changed? --> People saw what the lady does, so they took out the books --> The books are disorganized.</l>
+	</Note3>
+	<EmmaNote1>
+		<l>Dear Em,</l>
+		<l>   After the first day of the experiment it seems my memories are being sucked away. If it keeps going on like this, I will eventaully lost all of my memories.( Hopefully it won't end up like that )</l>
+		<l>P.S. I already forgot about my color code paper, but I can still recall my room's passcode.</l>
+	</EmmaNote1>
+	<EmmaNote2>
+		<l>Dear Em,</l>
+		<l>   My memory keeps getting worst. I should have kept the pictures of them. Is it too late to try and paint pictures of them now? Would 'she' want me to pay her a visit? ( Probably not. cuz now I'm just a test subject )</l>
+	</EmmaNote2>
+	<EmmaNote3>
+		<l>I'm not going to pass the test. There's only little time left before I forget about this whole experiment.</l>
+		<l>I just want to shove myself into some dark alley and hope that my memories will come back.</l>
+	</EmmaNote3>
 </notes>

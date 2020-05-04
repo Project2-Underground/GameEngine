@@ -28,6 +28,7 @@ public:
 	bool buttonClicked;
 	bool Pause;
 	virtual void Render() = 0;
+	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
@@ -50,6 +51,7 @@ class MenuScreen :public Screen {
 	std::vector<UIObject*> UI;
 public:
 	MenuScreen();
+	void Init() {}
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -80,10 +82,12 @@ class GameScreen :public Screen {
 public:
 	vector<std::string> levels;
 	vector<std::string> objActions;
+	std::vector<Item*> items;
 	map<std::string, Puzzle*> puzzles;
 	PhoneOpenButton* phoneIcon;
 
 	GameScreen();
+	void Init();
 	void Render();
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
@@ -95,7 +99,6 @@ public:
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
-	void LoadGame(std::string);
 	void OpenPuzzle(std::string);
 	void ResetPuzzle();
 	void ClosePuzzle();
@@ -106,8 +109,6 @@ public:
 	Player* GetPlayer() { return player; };
 	Inventory* GetInventory() { return inventory; };
 	Item* FindItem(std::string name);
-
-	std::vector<Item*> items;
 
 	~GameScreen();
 
@@ -120,6 +121,7 @@ class CutsceneScreen :public Screen {
 public:
 	CutsceneScreen();
 	void Render();
+	void Init() {}
 	void Update();
 	void RightClick(glm::vec3, glm::vec3);
 	void LeftClick(glm::vec3, glm::vec3);

@@ -17,7 +17,8 @@ enum InteractTypeList
 	OPEN,
 	PUZZLE,
 	STAIR,
-	PLAYER_TRIGGER
+	PLAYER_TRIGGER,
+	ADDNOTE
 };
 
 enum DialogueTrigger 
@@ -31,10 +32,10 @@ protected:
 	InteractTypeList interactType;
 	std::string interact_sound = "";
 
-	bool takePic;
+	bool takeNote;
 	bool hasNextTexture;
 	bool talk;
-	std::string picName;
+	std::string noteName;
 	std::string item_to_use;
 	std::string dialogue_name;
 	std::string dialogue_before;
@@ -44,13 +45,16 @@ protected:
 	unsigned int nextTexture; // after picking up an item
 
 public:
+	bool used;
+	bool triggered;
+	bool hasItem;
 	InteractableObj();
 
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
-	void SetTakePic(std::string);
+	void SetNoteName(std::string);
 	void SetDialogueName(std::string, std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
@@ -59,20 +63,26 @@ public:
 	void SetNextTexture(std::string);
 	void SetItem(std::string item) { itemName = item; hasItem = true; }
 	Item* GetItem();
-	void TakePic();
+	void TakeNote();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
 	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n, std::string a);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
+	std::string GetDialogueBeforeName() { return dialogue_before; }
+	std::string GetDialogueAfterName() { return dialogue_after; }
+	void SetCurrentDialogueName(std::string d) { dialogue_name = d; }
+	void SetDialogueBeforeName(std::string d) { dialogue_before = d; }
+	void SetDialogueAfterName(std::string d) { dialogue_after = d; }
+	void SetTalked(bool b);
+	void SetTakeNote(bool b) { takeNote = b; }
+	bool Talked() { return talk; }
+	bool TookNote() { return takeNote; }
 
 	InteractTypeList getType() { return interactType; };
 
 	~InteractableObj();
 	bool operator==(const InteractableObj& obj);
-	bool used;
-	bool triggered;
-	bool hasItem;
 };
 
 class OpenObj : public InteractableObj {
@@ -98,7 +108,11 @@ public:
 
 	ViewObj() { interactType = VIEW; }
 
+	float width;
+	float height;
+
 	void SetViewTexture(std::string);
+	unsigned int GetViewTexture();
 	void action();
 };
 
@@ -126,5 +140,14 @@ public:
 
 class PlayerTriggerObj : public InteractableObj {
 public:
+	PlayerTriggerObj();
 	void Update();
+};
+
+class NumpadPuzzleAfter : public InteractableObj {
+	bool actionDone;
+public:
+	NumpadPuzzleAfter();
+	void action();
+	void UnlockBookshelf();
 };

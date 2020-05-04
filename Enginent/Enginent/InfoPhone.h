@@ -21,11 +21,13 @@ enum AppType {
 	CHAT
 };
 
-struct Note {
+struct NoteInfo {
 	std::string name;
-	unsigned int texture;
+	std::vector<std::string> texts;
+	std::vector<glm::vec3> textPosition;
+	int lineCount;
 	bool noti = true;
-	Note(std::string n, unsigned int text);
+	void AddText(std::string);
 };
 
 struct ChatInfo {
@@ -38,6 +40,26 @@ struct ChatInfo {
 	bool noti = true;
 
 	void AddText(std::string);
+};
+
+class Note {
+	SDL_Color textColor = { 255, 255, 255, 255 };
+	TextObject* name;
+	UIObject* textBubble;
+	UIObject* scrollBar;
+	UIObject* thumb;
+	std::vector<TextObject*> allMsg;
+	float upperBound;
+	float lowerBound;
+	float scrollBarSpeed;
+public:
+	Note();
+	~Note();
+	void ClearText();
+	void OpenNote(const NoteInfo);
+	void Scroll(int direction);
+	void CloseNote();
+	void Render();
 };
 
 class Chat{
@@ -64,16 +86,16 @@ public:
 
 class Application {
 public:
-	Application(glm::vec3 phoneSize, glm::vec3 phonePos);
-	void Render();
+	Application();
 
+	void Render();
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
 	void Scroll(int direction);
 	void Back();
-	void AddNote(UIObject*);
+	void AddNote(NoteInfo*);
 	void AddChat(ChatInfo*);
-	void SetNote(UIObject*);
+	void SetNote(NoteInfo*);
 	void SetChat(ChatInfo*);
 	void OpenChat();
 	void OpenNote();
@@ -90,7 +112,7 @@ public:
 	int currentPage;
 
 	std::vector<ChatNoteInfoButton*> itemTabs;
-	std::vector<Note*> notes;
+	std::vector<NoteInfo*> notes;
 	std::vector<ChatInfo*> chats;
 	std::vector<UIObject*> buttons;
 
@@ -98,7 +120,7 @@ public:
 private:
 	UIObject* notifyPopup;
 	Chat* currentChat;
-	UIObject* currentNote;
+	Note* currentNote;
 	UIObject* appBG;
 	// PhoneNextButton* next;
 	PhoneBackButton* back;
@@ -135,7 +157,7 @@ public:
 
 	~Phone();
 
-	std::map<std::string, UIObject*> notes;
+	std::map<std::string, NoteInfo> notes;
 	std::map<std::string, ChatInfo> chats;
 private:
 	Phone();

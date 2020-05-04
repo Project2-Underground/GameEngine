@@ -106,6 +106,7 @@ void Game::UpdateScreenState() {
 	default:
 		break;
 	}
+	currentScreen->Init();
 }
 
 //void Game::RightClick(int x, int y) {

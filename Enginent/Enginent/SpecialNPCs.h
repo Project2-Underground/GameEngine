@@ -4,7 +4,8 @@
 
 
 class Butler : public PlayerTriggerObj {
-
+	bool clickToInteract;
+	bool disappearAfterAction;
 public:
 	enum Phase {
 		PHASE0 = 0,
@@ -12,7 +13,7 @@ public:
 	};
 	Phase currentPhase;
 	Butler();
-	void Appear(glm::vec3 pos, std::string dialogue);
+	void Appear();
 	void SetTriggered(bool b);
 	void action();
 	bool IsTriggered();

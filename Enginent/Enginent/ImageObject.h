@@ -25,6 +25,7 @@ public:
 	void SetTexture(unsigned int texture);
 	void SetPosition(glm::vec3 newPosition);
 	void InitAnimator() { anim = new Animator(); }
+	void Appear(bool b);
 	unsigned int GetTexture();
 	bool IsDisplay() { return display; }
 	void SetDisplay(bool d) { display = d; }

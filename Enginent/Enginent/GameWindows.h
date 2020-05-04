@@ -10,7 +10,7 @@ protected:
 	bool trigger;
 	Button* closeButton;
 public:
-	virtual void Update() = 0;
+	virtual void Update();
 	virtual void Init(int width, int height) = 0;
 	virtual void Render() = 0;
 	virtual void LeftClick(float, float) = 0;
@@ -26,13 +26,13 @@ class ViewWindow :public GameWindow{
 	static ViewWindow* instance;
 	UIObject* viewItem;
 	ViewWindow();
+	int itemSizeY;
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();
 
 	~ViewWindow();
 
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -40,7 +40,7 @@ public:
 	void UpdateMouseButton(glm::vec3);
 
 	void SetViewItem(Item* item);
-	void SetViewItem(unsigned int texture);
+	void SetViewItem(ViewObj*);
 	void SetText();
 };
 
@@ -54,7 +54,6 @@ public:
 
 	~SaveLoadWindow();
 
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -80,7 +79,6 @@ public:
 	static PauseWindow* GetInstance();
 
 	~PauseWindow();
-	void Update();
 	void Init(int width, int height);
 	void Render();
 	void LeftClick(float, float);
@@ -106,11 +104,10 @@ class SettingWindow : public GameWindow {
 	SoundMuteButton* sfxMute;
 public:
 	static SettingWindow* GetInstance();
-
 	SettingWindow();
 	~SettingWindow();
-	void Update();
 	void Init(int width, int height);
+	void Update();
 	void Render();
 	void LeftClick(float, float);
 	void LeftRelease(float, float);
