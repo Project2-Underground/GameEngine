@@ -17,6 +17,7 @@ public:
 	virtual void LeftRelease(float, float) = 0;
 	virtual void UpdateMouseButton(glm::vec3) = 0;
 
+	void ForceClose();
 	virtual void Close();
 	virtual void Open();
 	bool IsOpen() { return display; }
@@ -26,7 +27,7 @@ class ViewWindow :public GameWindow{
 	static ViewWindow* instance;
 	UIObject* viewItem;
 	ViewWindow();
-	int itemSizeY;
+	float itemSizeY;
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();

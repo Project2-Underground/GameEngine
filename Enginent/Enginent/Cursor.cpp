@@ -78,11 +78,19 @@ void CursorUI::setCursor(InteractTypeList type)
 				break;
 		}
 	}
-}
-
-void CursorUI::enableChange(bool e)
-{
-	if (!e)
+	else {
 		this->SetTexture(CS_Normal);
-	enable = e;
+	}
+}
+void CursorUI::EnableCursor(unsigned char c, bool b) {
+	if (b) 
+		cursorDisableCheck |= c;
+	else
+		cursorDisableCheck &= ~c;
+	enable = !(cursorDisableCheck & 255);
+}
+void CursorUI::ResetCursor() {
+	cursorDisableCheck &= 0;
+	enable = true;
+	SetTexture(CS_Normal);
 }

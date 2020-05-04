@@ -169,10 +169,15 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		Door* door;
 		if (child->child("wall_door"))
 			door = new WallDoor(next_room, next_door);
+		else if (child->child("EliasDoor"))
+			door = new EliasDoor(next_room, next_door);
 		else
 			door = new Door(next_room, next_door);
 
 		door->object_name = child->name();
+
+		if (child->child("isOpenDoor"))
+			door->isOpenDoor = true;
 
 		CreateObject(door, *child);
 
@@ -210,14 +215,11 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 		float sizeY = child->attribute("sizeY").as_float();
 		float posX = child->attribute("posX").as_float();
 		float posY = child->attribute("posY").as_float();
-		npc->SetSize(sizeX, -sizeY);
-		npc->SetPosition(glm::vec3(posX, posY, 1.0));
-		npc->SetCollder(new Collider(npc));
+		npc->Init(sizeX, -sizeY, glm::vec3(posX, posY, 1.0));
 
 		if (child->child("item")) 
 			npc->SetItem(child->child("item").attribute("name").as_string());
 		
-
 		npc->InitAnimator();
 		pugi::xml_node animaions = child->child("Animations");
 		for (pugi::xml_node_iterator anim = animaions.begin(); anim != animaions.end(); anim++) {
@@ -228,7 +230,6 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 									anim->attribute("loop").as_bool());
 		}
 
-		npc->SetCollder(new Collider(npc));
 		npc->layer = NPC_LAYER;
 		npc->subLayer = child->attribute("layer").as_int();
 		npc->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
@@ -263,6 +264,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 	pugi::xml_document file;
 	pugi::xml_parse_result result = file.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 	if (result) {
+		SoundManager::GetInstance()->LoadMute();
 		Game* game = Game::GetInstance();
 		GameScreen* gs = (GameScreen*)game->GetScreen();
 
@@ -327,6 +329,10 @@ void XMLManager::LoadFromSave(std::string filename) {
 		butler->currentPhase = (Butler::Phase)butlerNode.attribute("phase").as_int();
 		if (butlerNode.attribute("display").as_bool())
 			butler->Appear();
+		else {
+			butler->SetDisplay(false);
+			butler->col->enable = false;
+		}
 
 		// load player and inventory
 		pugi::xml_node playerNode = file.child("level").child("Player");
@@ -363,6 +369,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		}
 
 		TextBox::GetInstance()->SetDisplay(false);
+		SoundManager::GetInstance()->LoadMute();
 	}
 }
 

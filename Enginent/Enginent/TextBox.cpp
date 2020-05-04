@@ -28,6 +28,7 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key, bool talk)
 {
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 	SetDisplay(true);
 	if (key != "")
 	{
@@ -79,9 +80,6 @@ void TextBox::setText(std::string key, bool talk)
 				vw->Open();
 				obj->hasItem = false;
 			}
-
-			Game::GetInstance()->GetCursor()->enableChange(false);
-
 		}
 		if (tmp->changeNameObj.size() > 0)
 		{
@@ -177,7 +175,8 @@ void TextBox::clickLeft(glm::vec3 pos)
 	}
 	else if (d_text->choice == "")
 	{
-		Game::GetInstance()->GetCursor()->enableChange(true);
+		//Game::GetInstance()->GetCursor()->enableChange(true);
+		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, false);
 		display = false;
 	}
 	else

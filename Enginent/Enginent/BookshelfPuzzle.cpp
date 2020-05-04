@@ -69,6 +69,7 @@ bool Space::CheckCollide(Collider* col)
 
 Bookshelf::Bookshelf(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	dialogueAfterComplete = "Hall_Bookshelf_L3";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
@@ -166,6 +167,7 @@ void Bookshelf::Update()
 	}
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
+		TextBox::GetInstance()->setText(dialogueAfterComplete);
 		doneAction = true;
 	}
 }
@@ -312,6 +314,7 @@ bool BookshelfPuzzle::CheckRequirements() {
 	for (int i = 0; i < 4; i++) {
 		inventory->RemoveItem(requireBooks[i]);
 	}
+	prepTalk = "Hall_Bookshelf_L2";
 	passedReqiurements = true;
 	return true;
 }
@@ -452,6 +455,7 @@ void Bookshelf2::Update()
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
 		doneAction = true;
+		TextBox::GetInstance()->setText(dialogueAfterComplete);
 	}
 }
 
@@ -581,12 +585,57 @@ void Bookshelf2::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void Bookshelf2::ActionAfterPuzzle()
 {
-
+	Game* g = Game::GetInstance();
+	Door* door = new ChangeLevelDoor(1);
+	InteractableObj* obj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallUpper"]->FindObject("HallRoomUpperFloor_Door1");
+	door->Init(obj->getSize().x, obj->getSize().y, obj->getPos());
+	door->SetTexture("Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
+	g->GetCurrentLevel()->rooms["MainHallUpper"]->doors.insert(std::pair<std::string, Door*>("level2Door", door));
+	g->GetCurrentLevel()->rooms["MainHallUpper"]->objects.push_back(door);
+	obj->Appear(false);
+	GameScreen* gs = ((GameScreen*)g->GetScreen());
+	Butler* butler = gs->butler;
+	butler->currentPhase = Butler::PHASE2;
+	butler->Appear();
+	gs->ClosePuzzle();
 }
 
+Book2* Bookshelf2::FindBook2(int id) {
+	for (int i = 0; i < books_2.size(); i++) 
+		if (books_2[i]->GetId() == id)
+			return books_2[i];
+	return nullptr;
+}
+Paper* Bookshelf2::FindPaper(int id) {
+	for (int i = 0; i < papers.size(); i++)
+		if (papers[i]->ID == id)
+			return papers[i];
+	return nullptr;
+}
+Book* Bookshelf2::FindBook(int id) {
+	for (int i = 0; i < books.size(); i++)
+		if (books[i]->GetId() == id)
+			return books[i];
+	return nullptr;
+}
 void Bookshelf2::CompletePuzzle()
 {
-
+	for (int i = 0; i < log.size(); i++) {
+		Book* b = FindBook(log[i]->id);
+		log[i]->book = b;
+		b->SetPosition(log[i]->collider->getPosition());
+		b->col->setNewPos(log[i]->collider->getPosition());
+	}
+	for (int i = 0; i < books_2.size(); i++) {
+		Paper* p = FindPaper(books_2[i]->GetPaperid());
+		books_2[i]->paper = p;
+		p->SetTexture(p->book_paperTexture);
+		p->SetPosition(books_2[i]->getPos());
+		p->col->setNewPos(books_2[i]->getPos());
+		p->SetSize(46, -124);
+	}
+	pass = true;
+	ActionAfterPuzzle();
 }
 
 Bookshelf2::~Bookshelf2()
@@ -631,7 +680,6 @@ BookshelfPuzzle_2::BookshelfPuzzle_2()
 	books.push_back(tmp_book);
 	tmp_book = new Book2(14, "Texture/puzzle5/Puzzle5_IncomBook4.png", 65, -155, 0, -270, 4);
 	books.push_back(tmp_book);
-
 
 	Book* tmp_book1 = new Book(4, "Texture/puzzle5/Puzzle5_WhiteBook4.png", 65, -155, -107, 268);
 	books_1.push_back(tmp_book1);
@@ -754,10 +802,9 @@ void BookshelfPuzzle_2::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
 
 void BookshelfPuzzle_2::CompletePuzzle()
 {
-
+	puzzle->CompletePuzzle();
 }
 
 BookshelfPuzzle_2::~BookshelfPuzzle_2()
 {
-
 }

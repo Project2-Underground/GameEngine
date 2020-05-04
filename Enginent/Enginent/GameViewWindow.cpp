@@ -34,7 +34,6 @@ void GameWindow::Update() {
 	}
 	if (display) {
 		CursorUI* cursor = Game::GetInstance()->GetCursor();
-		cursor->enableChange(false);
 	}
 }
 
@@ -117,13 +116,18 @@ void ViewWindow::UpdateMouseButton(glm::vec3 screen) {
 	}
 }
 
+void GameWindow::ForceClose() {
+	display = false;
+}
 void GameWindow::Close() {
-	Game::GetInstance()->GetCursor()->enableChange(true);
+	//Game::GetInstance()->GetCursor()->enableChange(true);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_OTHER_WINDOW_ON, false);
 	display = false;
 }
 
 void GameWindow::Open() {
 	CursorUI* cursor = Game::GetInstance()->GetCursor();
-	cursor->enableChange(false);
+	//cursor->enableChange(false);
+	cursor->EnableCursor(CURSOR_OTHER_WINDOW_ON, true);
 	trigger = true;
 }

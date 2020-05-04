@@ -106,14 +106,16 @@ void PauseWindow::UpdateMouseButton(glm::vec3 screen) {
 }
 void PauseWindow::Open() {
 	Game* game = Game::GetInstance();
-	game->GetCursor()->enableChange(false);
+	//game->GetCursor()->enableChange(false);
+	game->GetCursor()->EnableCursor(CURSOR_PAUSE_ON, true);
 	game->GetScreen()->Pause = true;
 	trigger = true;
 	SoundManager::GetInstance()->pause(true);
 }
 void PauseWindow::Close() {
 	Game* game = Game::GetInstance();
-	game->GetCursor()->enableChange(true);
+	//game->GetCursor()->enableChange(true);
+	game->GetCursor()->EnableCursor(CURSOR_PAUSE_ON, false);
 	game->GetScreen()->Pause = false;
 	display = false;
 	trigger = false;

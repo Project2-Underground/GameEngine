@@ -22,6 +22,8 @@ void InteractableObj::SetCollder(Collider* n_col) {
 void InteractableObj::TakeNote() {
 	//std::cout << (takeNote ? "yes" : "no") << "\n";
 	if (takeNote) {
+		interactType = NORMAL;
+		col->enable = false;
 		Phone* phone = Phone::GetInstance();
 		phone->AddPage(NOTE, noteName);
 		takeNote = false;
@@ -288,8 +290,19 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements())
-		((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements()) {
+		if (!dialogue_name.empty()) {
+			TextBox::GetInstance()->setText(dialogue_name);
+			// tmp solution
+			dialogue_name.clear();
+		}
+		else {
+			Puzzle* p = ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName];
+			if(!p->prepTalk.empty())
+				TextBox::GetInstance()->setText(p->prepTalk);
+			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+		}
+	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
 		UseItem(((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->GetSelectedItem());
 	else
@@ -323,8 +336,10 @@ void NumpadPuzzleAfter::action() {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		UseItem(gs->GetInventory()->GetSelectedItem());
 
-		if (used && !actionDone) 
+		if (used && !actionDone) {
+			TextBox::GetInstance()->setText("backdoor_card");
 			UnlockBookshelf();
+		}
 		
 	}
 	else if (!used) {
@@ -335,15 +350,20 @@ void NumpadPuzzleAfter::action() {
 void NumpadPuzzleAfter::UnlockBookshelf() {
 	actionDone = true;
 	Game* g = Game::GetInstance();
-	/*PuzzleObj* tmp = new PuzzleObj();
+	PuzzleObj* tmp = new PuzzleObj();
 	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallLower"]->FindObject("Bookshelf2");
 	tmp->SetPuzzleName("BookshelfPuzzle2");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
-	puzzleObj->col->enable = false;
-	puzzleObj->SetDisplay(false);
-	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();*/
+	puzzleObj->Appear(false);
+	GameScreen* gs = ((GameScreen*)g->GetScreen());
+	gs->ClosePuzzle();
+	Room* room = g->GetCurrentLevel()->rooms["EmmaRoom"];
+	((InteractableObj*)room->FindObject("EmmaRoom_Drawing"))->SetCurrentDialogueName("EmmaRoom_picture2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Book"))->SetCurrentDialogueName("EmmaRoom_book2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Window"))->SetCurrentDialogueName("EmmaRoom_window2");
+
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);
@@ -354,5 +374,5 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	for (auto npc : g->GetCurrentLevel()->rooms["EmmaRoom"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);
 	}
-	((GameScreen*)g->GetScreen())->butler->Appear();
+	gs->butler->Appear();
 }

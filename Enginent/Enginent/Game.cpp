@@ -181,6 +181,7 @@ void Game::SaveLoad(std::string filename) {
 		}
 		((GameScreen*)currentScreen)->ResetPuzzle();
 		LoadGame(filename);
+		cursorGame->ResetCursor();
 	}
 }
 

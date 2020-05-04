@@ -35,16 +35,18 @@ ISoundSource* SoundManager::createSound(const char* filename)
 
 void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 {
-	switch (t)
-	{
-	case BGM:
-		soundEngine->play2D(bgms[sound], loop);
-		break;
-	case SFX:
-		soundEngine->play2D(sfxs[sound], loop);
-		break;
-	default:
-		break;
+	if (!loadingFromSave) {
+		switch (t)
+		{
+		case BGM:
+			soundEngine->play2D(bgms[sound], loop);
+			break;
+		case SFX:
+			soundEngine->play2D(sfxs[sound], loop);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -232,6 +234,10 @@ void SoundManager::setMute(SoundType t, bool m) {
 		if (m)
 			soundEngine->setSoundVolume(0);
 	}
+}
+
+void SoundManager::LoadMute() {
+	loadingFromSave = !loadingFromSave;
 }
 
 SoundManager::~SoundManager() {

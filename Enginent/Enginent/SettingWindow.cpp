@@ -73,7 +73,6 @@ void SettingWindow::Update() {
 	}
 	if (display) {
 		CursorUI* cursor = Game::GetInstance()->GetCursor();
-		cursor->enableChange(false);
 	}
 }
 void SettingWindow::LeftClick(float x, float y) {
