@@ -36,4 +36,9 @@
 		<choice text = "Mister... Do you know anything about the books?" nextDialogue = "Dann1_B"/>
 		<choice text = "Can you remember anything about the bookcase?" nextDialogue = "Dann1_C"/>
 	</choices>
+	
+	<choices key = "c_Emma1">
+		<choice text = "Have you ever think about cleaning up this room?" nextDialogue = "Emma1_A"/>
+		<choice text = "You seems to know about this place?" nextDialogue = "Emma1_B"/>
+	</choices>
 </c>

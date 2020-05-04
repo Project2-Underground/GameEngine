@@ -23,26 +23,74 @@ public:
 };
 
 struct Paper : public UIObject {
-	Paper();
-	~Paper();
 	int ID;
+	bool select;
+	bool paste;
+	unsigned int book_paperTexture;
+	unsigned int norm_paperTexture;
+	ImageObject* book_paper;
 	glm::vec3 prevPos;
-	bool CheckCollider(float x, float y);
+	Paper(std::string n_texture, std::string b_texture, glm::vec3 Pos, float SizeX, float SizeY, int id)
+	{
+		this->ID = id;
+		select = false;
+		paste = false;
+		book_paper = new ImageObject();
+		book_paper->SetTexture(b_texture);
+		book_paperTexture = book_paper->GetTexture();
+		book_paper->SetTexture(n_texture);
+		norm_paperTexture = book_paper->GetTexture();
+		SetTexture(norm_paperTexture);
+		SetPosition(Pos);
+		SetSize(SizeX, SizeY);
+		prevPos = Pos;
+		this->col = new Collider(this);
+	}
+	bool CheckCollider(float x, float y)
+	{
+		if (this->col->isClicked(x, y))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 };
 
 class Book2 : public UIObject {
+	int paper_id;
 	int id;
 	glm::vec3 prevPos;
-	Paper* paper;
-	int paper_id;
 public:
+	Paper* paper;
 	Book2(int id, std::string texture, float sizeX, float sizeY, int posX, int posY, int paperID);
 	~Book2();
-	void UpdatePrevPos();
-	int GetId();
-	glm::vec3 GetPrevPos();
-	bool CheckCollider(float x, float y);
 	bool checkPaper();
+	int GetId()
+	{
+		return id;
+	}
+	int GetPaperid()
+	{
+		return paper_id;
+	}
+	glm::vec3 GetPrevPos()
+	{
+		return prevPos;
+	}
+	bool CheckCollider(float x, float y)
+	{
+		if (this->col->isClicked(x, y))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 };
 
 class Book : public UIObject {
@@ -84,12 +132,50 @@ struct Space {
 	}
 };
 
+struct Space2 {
+	UIObject* colTemp;
+	Book2* book = nullptr;
+	Collider* collider;
+	int sizeX = 10;
+	int sizeY = 10;
+	int posX = 0;
+	int posY = 0;
+	int id;
+	bool CheckCollide(Collider* col)
+	{
+		if (this->collider->isCollide(col))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	Space2(int id, glm::vec3 pos, float sizeX, float sizeY)
+	{
+		this->id = id;
+		collider = new Collider();
+		collider->setNewPos(pos);
+		collider->setNewSize(sizeX, sizeY);
+		colTemp = new UIObject();
+		colTemp->SetTexture("Texture/Test/white.png");
+		colTemp->SetPosition(collider->getPosition());
+		colTemp->SetSize(sizeX, sizeY);
+	}
+	~Space2()
+	{
+		delete colTemp;
+	}
+};
+
 class Bookshelf : public PuzzleTemplate {
 	UIObject* texture;
 	std::vector<UIObject*> images;
 	std::vector<Space*> log;
 	std::vector<Book*> books;
 	Book* select = nullptr;
+
 public:
 	Bookshelf(std::string, int posX, int posY, int sizeX, int sizeY);
 	void Init(std::vector<Book*>, std::vector<Space*>, std::vector<UIObject*>);
@@ -101,6 +187,33 @@ public:
 	void ActionAfterPuzzle();
 	void CompletePuzzle();
 	~Bookshelf();
+};
+
+class Bookshelf2 : public PuzzleTemplate {
+	UIObject* texture;
+	std::vector<UIObject*> images;
+	std::vector<Space*> log;
+	std::vector<Book2*> books_2;
+	std::vector<Book*> books;
+	std::vector<Paper*> papers;
+	Book* select = nullptr;
+	Book* hold = nullptr;
+	Space* select_s = nullptr;
+	Paper* select_p = nullptr;
+	Book2* select_r = nullptr;
+public:
+	Bookshelf2(std::string, int posX, int posY, int sizeX, int sizeY);
+	void Init(std::vector<Book*>, std::vector<Book2*>, std::vector<Space*>, std::vector<UIObject*>, std::vector<Paper*>);
+	void Render();
+	void Update();
+	void Reset();
+	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void ActionAfterPuzzle();
+	void CompletePuzzle();
+	~Bookshelf2();
 };
 
 //////////////////////////////////////////////
@@ -203,6 +316,22 @@ public:
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~BookshelfPuzzle();
+};
+
+class BookshelfPuzzle_2 : public Puzzle {
+public:
+	BookshelfPuzzle_2();
+	void Render();
+	void Update();
+	void Reset();
+	bool CheckRequirements();
+	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3);
+	void RightRelease(glm::vec3, glm::vec3);
+	void UpdateMouseState(glm::vec3, glm::vec3);
+	void CompletePuzzle();
+	~BookshelfPuzzle_2();
 };
 
 class NumpadPuzzle : public Puzzle {
