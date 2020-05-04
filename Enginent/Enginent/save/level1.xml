@@ -77,12 +77,12 @@
 			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1">
+			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1" dialogue_2 = "Hall_Bookshelf_L1">
 				<puzzle name="BookshelfPuzzle"/>
 			</Bookshelf1>
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2">
 			</Bookshelf2>
-			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2">
+			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2 = "Hall_gramophone">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V)2.png"/>
 				<item name="Puzzle2_ColorCode1"/>
 			</Gramophone>
@@ -118,15 +118,15 @@
 		</background>
 		
 		<interactObj>
-			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="4">
+			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="4" dialogue="EmmaRoom_book" dialogue_2 = "EmmaRoom_book">
 				<ForeGround/>
 			</EmmaRoom_Book>
-			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4">
+			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2 = "EmmaRoom_picture">
 			</EmmaRoom_Drawing>
 			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="1" layer="4">>
 				<ForeGround/>
 			</EmmaRoom_Note1>
-			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4">>>
+			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window" dialogue_2 = "EmmaRoom_window">>>
 			</EmmaRoom_Window>
 		</interactObj>
 		
@@ -136,7 +136,7 @@
 		</doors>
 		
 		<NPCs>
-			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0">
+			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0" dialogue="Emma1" dialogue_2 = "Emma1_after">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Emma/Emma_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -154,7 +154,7 @@
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1">
+			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase" dialogue_2 = "">
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
@@ -179,7 +179,7 @@
 			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4">
+			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4" dialogue="backdoor_com" dialogue_2 = "backdoor_com">
 				<!-- <puzzle name="Numpad_Backdoor"/> -->
 			</BackDoorRoom_Computer>
 		</interactObj>
