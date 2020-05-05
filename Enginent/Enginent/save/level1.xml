@@ -9,9 +9,9 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger, 12:Note -->
 		<interactObj>
-			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1">
+			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1" dialogue_2 = "EliasRoom_bed1">
 			</bed>
-			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1">
+			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1" dialogue_2 = "EliasRoom_carbinet1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
 			</Table>
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
@@ -19,7 +19,7 @@
 				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
 				<item name="keyCard"/>
 			</Closet>
-			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar">
+			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>
 				<description>this is a calendar</description>
 			</Calendar>
@@ -41,12 +41,12 @@
 			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door"/>
-			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door"/>
-			<HallRoomUpperFloor_Door1 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door"/>
+			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<HallRoomUpperFloor_Door1 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door" dialogue_2="Big_door"/>
 		</interactObj>
 		<doors>
-			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door">
+			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door" dialogue_2="Elias_hall_door">
 				<wall_door/>
 			</EliasRoomOuterDoor>
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
@@ -74,7 +74,7 @@
 			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1">
+			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1" dialogue_2="Hall_Bookshelf_L1">
 				<puzzle name="BookshelfPuzzle"/>
 			</Bookshelf1>
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
