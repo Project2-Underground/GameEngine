@@ -52,6 +52,7 @@ void DeleteButton::action() {
 
 Numpad::Numpad(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	dialogueAfterComplete = "backdoor_com_pass";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
@@ -99,7 +100,7 @@ void Numpad::Update()
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
 		doneAction = true;
-		std::cout << "pass";
+		TextBox::GetInstance()->setText(dialogueAfterComplete);
 	}
 	for (int i = 0; i < (*input).size(); i++)
 	{
@@ -263,6 +264,7 @@ NumpadPuzzle::NumpadPuzzle()
 }
 
 bool NumpadPuzzle::CheckRequirements() {
+	prepTalk = "backdoor_com";
 	return true;
 }
 
@@ -369,6 +371,7 @@ NumpadPuzzle_2::NumpadPuzzle_2()
 }
 
 bool NumpadPuzzle_2::CheckRequirements() {
+	prepTalk = "Emma_door_after";
 	return true;
 }
 

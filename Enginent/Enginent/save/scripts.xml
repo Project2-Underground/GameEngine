@@ -153,7 +153,7 @@
 	<script key = "Big_door" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "It feels like I can walk through this wall"/>
-			<Dialogue name = "Elias" text = "Hm...This mansion is making me crazy"/>
+			<Dialogue name = "Elias" text = "This mansion is making me crazy"/>
 		</sub>
 	</script>
 	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
@@ -297,7 +297,7 @@ experiment, I need to ask you about that"/>
 	</script>
 	<script key = "EmmaRoom_book" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "I thought my room was a mess, her room is even more cluttered  with all these books"/>
+			<Dialogue name = "Elias" text = "I thought my room was a mess, her room is even more cluttered with all these books"/>
 		</sub>
 	</script>
 		<script key = "EmmaRoom_picture2" loopIndex = "0">

@@ -10,6 +10,7 @@ class PuzzleTemplate : public UIObject {
 protected:
 	bool pass;
 	bool doneAction;
+	std::string dialogueAfterComplete;
 public:
 	virtual void Render() {};
 	virtual void Update() {};
@@ -201,6 +202,10 @@ class Bookshelf2 : public PuzzleTemplate {
 	Space* select_s = nullptr;
 	Paper* select_p = nullptr;
 	Book2* select_r = nullptr;
+
+	Book2* FindBook2(int id);
+	Paper* FindPaper(int id);
+	Book* FindBook(int id);
 public:
 	Bookshelf2(std::string, int posX, int posY, int sizeX, int sizeY);
 	void Init(std::vector<Book*>, std::vector<Book2*>, std::vector<Space*>, std::vector<UIObject*>, std::vector<Paper*>);
@@ -301,6 +306,8 @@ public:
 	bool Passed() { return puzzle->Passed(); }
 	bool passedReqiurements;
 	~Puzzle();
+
+	std::string prepTalk;
 };
 
 class BookshelfPuzzle : public Puzzle {

@@ -2,6 +2,12 @@
 #include "InteractObj.h"
 #include "UIObject.h"
 
+constexpr auto CURSOR_DIALOGUE_ON = 0x01;
+constexpr auto CURSOR_PAUSE_ON = 0x02;
+constexpr auto CURSOR_OTHER_WINDOW_ON = 0x04;
+constexpr auto CURSOR_PUZZLE_ON = 0x08;
+constexpr auto CURSOR_PHONE_ON = 0x10;
+
 class CursorUI : public UIObject {
 	private:
 		unsigned int CS_Normal;
@@ -12,6 +18,10 @@ class CursorUI : public UIObject {
 		unsigned int CS_Save;
 		unsigned int CS_Stair;
 		unsigned int CS_Note;
+		unsigned int CS_Puzzle;
+
+		unsigned char cursorDisableCheck;
+
 		bool enable;
 
 	public:
@@ -19,6 +29,6 @@ class CursorUI : public UIObject {
 		~CursorUI();
 		void updateCursor();
 		void setCursor(InteractTypeList);
-		void enableChange(bool);
-		void ResetCursor() { SetTexture(CS_Normal); }
+		void EnableCursor(unsigned char, bool);
+		void ResetCursor();
 };

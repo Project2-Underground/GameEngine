@@ -13,6 +13,7 @@ public:
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
 	void Open();
 	void action();
+	bool isOpenDoor;
 };
 
 class WallDoor : public Door {

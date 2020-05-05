@@ -334,7 +334,7 @@ void Application::Close() {
 void Application::OpenChat() {
 	float y = TAB_TOP_Y;
 	for (int i = 0; i < chats.size(); i++) {
-		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", chats[i]->name, i, chats[i]->noti);
+		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/ChoiceBox.png", chats[i]->name, i, chats[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
 		tab->hasNewInfo = chats[i]->noti;
@@ -349,7 +349,7 @@ void Application::OpenChat() {
 void Application::OpenNote() {
 	float y = TAB_TOP_Y;
 	for (int i = 0; i < notes.size(); i++) {
-		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/tmp_texture/tmp_inventoryBox.png", notes[i]->name, i, notes[i]->noti);
+		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/ChoiceBox.png", notes[i]->name, i, notes[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
 		itemTabs.push_back(tab);
@@ -417,8 +417,6 @@ void Application::SelectItem(int index) {
 }
 
 void Application::Clear() {
-	for (auto n : notes)
-		delete n;
 	itemTabs.clear();
 	notes.clear();
 	chats.clear();
@@ -652,11 +650,11 @@ void Phone::Clear() {
 
 void Phone::Open() { 
 	open = true; 
-	Game::GetInstance()->GetCursor()->enableChange(false);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PHONE_ON, true);
 }
 void Phone::Close() { 
 	open = false; 
-	Game::GetInstance()->GetCursor()->enableChange(true);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PHONE_ON, false);
 }
 
 void Phone::PrintAllChat() {

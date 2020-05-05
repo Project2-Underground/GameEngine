@@ -11,7 +11,7 @@ bool Screen::GameWindowOpen() {
 
 void Screen::CloseGameAllWindow() {
 	for (auto w : windows)
-		w->Close();
+		w->ForceClose();
 }
 
 /*MAIN MENU*/
@@ -158,6 +158,7 @@ GameScreen::GameScreen() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle", new BookshelfPuzzle()));
 	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Backdoor", new NumpadPuzzle()));
 	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Emma", new NumpadPuzzle_2()));
+	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
 	PuzzleTime = false;
 
 	dialogueText = TextBox::GetInstance();
@@ -261,12 +262,12 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 					if (Button * button = dynamic_cast<Button*>(UI[j])) {
 						button->checkColliderPressed(screen.x, screen.y);
 					}
+				if (InventoryEnable && !buttonClicked) {
+					inventory->LeftClick(screen.x, screen.y);
+				}
+				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+					currentLevel->LeftClick(world.x, world.y);
 			}
-			if (InventoryEnable && !buttonClicked) {
-				inventory->LeftClick(screen.x, screen.y);
-			}
-			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-				currentLevel->LeftClick(world.x, world.y);
 		}
 	}
 }
@@ -360,7 +361,8 @@ void GameScreen::OpenPuzzle(std::string name) {
 	currentPuzzle = puzzles[name];
 	PuzzleTime = true;
 	InventoryEnable = currentPuzzle->IsInventoryEnable();
-	Game::GetInstance()->GetCursor()->enableChange(false);
+	//Game::GetInstance()->GetCursor()->enableChange(false);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
 }
 
 void GameScreen::ResetPuzzle() {
@@ -371,7 +373,8 @@ void GameScreen::ResetPuzzle() {
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
-	Game::GetInstance()->GetCursor()->enableChange(true);
+	//Game::GetInstance()->GetCursor()->enableChange(true);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
@@ -397,6 +400,16 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	//	break;
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
+		break;
+	case SDLK_2:
+		puzzles["Numpad_Emma"]->CompletePuzzle();
+		break;
+	case SDLK_3:
+		puzzles["Numpad_Backdoor"]->CompletePuzzle();
+		((NumpadPuzzleAfter*)currentLevel->rooms["BackDoorRoomBasement"]->FindObject("NumpadAfterUnlock"))->UnlockBookshelf();
+		break;
+	case SDLK_4:
+		puzzles["BookshelfPuzzle2"]->CompletePuzzle();
 		break;
 	case SDLK_q:
 		Game::GetInstance()->TriggerChangeLevel(1);

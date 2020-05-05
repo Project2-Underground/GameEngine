@@ -173,13 +173,13 @@ public:
 	void action();
 };
 
-class SoundVolumeButton : public Button {
-	int type;
-	int direction;
-public:
-	SoundVolumeButton(std::string texture, int t, int d) : Button(texture) { type = t; direction = d; }
-	void action();
-};
+//class SoundVolumeButton : public Button {
+//	int type;
+//	int direction;
+//public:
+//	SoundVolumeButton(std::string texture, int t, int d) : Button(texture) { type = t; direction = d; }
+//	void action();
+//};
 
 class SoundMuteButton : public Button {
 	int type;

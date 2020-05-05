@@ -19,8 +19,12 @@ void SoundManager::Init()
 
 	// SFX
 	sfxs["Walking"] = createSound("Sound/walking_sound.mp3");
-	sfxs["Door"] = createSound("Sound/Door_sound.mp3");
-	sfxs["Locked"] = createSound("Sound/Locked_sound.mp3");
+	sfxs["OpenDoor"] = createSound("Sound/open_door_3.mp3");
+	sfxs["Locked"] = createSound("Sound/door_lockEdit.mp3");
+	sfxs["CollectNote"] = createSound("Sound/Collect_Note.mp3");
+	sfxs["Pickup"] = createSound("Sound/pick_up_1.mp3");
+	sfxs["OpenDrawer"] = createSound("Sound/open_drawer.mp3");
+	sfxs["OpenCabinet"] = createSound("Sound/open_closet.mp3");
 }
 
 ISoundSource* SoundManager::createSound(const char* filename)
@@ -31,16 +35,18 @@ ISoundSource* SoundManager::createSound(const char* filename)
 
 void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 {
-	switch (t)
-	{
-	case BGM:
-		soundEngine->play2D(bgms[sound], loop);
-		break;
-	case SFX:
-		soundEngine->play2D(sfxs[sound], loop);
-		break;
-	default:
-		break;
+	if (!loadingFromSave) {
+		switch (t)
+		{
+		case BGM:
+			soundEngine->play2D(bgms[sound], loop);
+			break;
+		case SFX:
+			soundEngine->play2D(sfxs[sound], loop);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -228,6 +234,10 @@ void SoundManager::setMute(SoundType t, bool m) {
 		if (m)
 			soundEngine->setSoundVolume(0);
 	}
+}
+
+void SoundManager::LoadMute() {
+	loadingFromSave = !loadingFromSave;
 }
 
 SoundManager::~SoundManager() {

@@ -86,6 +86,7 @@ public:
 };
 
 class OpenObj : public InteractableObj {
+	std::string sound;
 	bool open;
 	unsigned int openTexture;
 public:
@@ -94,6 +95,7 @@ public:
 	void SetOpenTexture(std::string);
 	void action();
 	bool IsOpen() { return open; }
+	void SetSound(std::string);
 
 	void Open();
 	void ClearItem();

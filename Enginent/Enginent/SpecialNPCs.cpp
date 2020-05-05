@@ -13,27 +13,29 @@ Butler::Butler() {
 	anim->AddAnimation("Idle", "Texture/Character/NPCs/MainHallRoom/Butler.png", 2, 0.5f, true);
 }
 void Butler::Appear() {
-	Level* lvl = Game::GetInstance()->GetCurrentLevel();
-	std::vector<DrawableObject*>::iterator itr;
 	switch (currentPhase)
 	{
 	case Butler::PHASE0:
 		// after Elias got out of the room
-		lvl->rooms["MainHallUpper"]->npcs.push_back(this);
+		MoveIn("MainHallUpper");
 		SetPosition(glm::vec3(-987, -102, 1));
 		disappearAfterAction = true;
 		clickToInteract = false;
 		break;
 	case Butler::PHASE1:
 		// after finished puzzle 3
-		itr = std::find(lvl->rooms["MainHallUpper"]->npcs.begin(), lvl->rooms["MainHallUpper"]->npcs.end(), this);
-		if(itr != lvl->rooms["MainHallUpper"]->npcs.end())
-			lvl->rooms["MainHallUpper"]->npcs.erase(itr);
-		lvl->rooms["MainHallLower"]->npcs.push_back(this);
+		MoveOut("MainHallUpper");
+		MoveIn("MainHallLower");
 		SetPosition(glm::vec3(1400, -90, 1));
 		disappearAfterAction = false;
 		clickToInteract = true;
 		//ChangeDialogue();
+		break;
+	case Butler::PHASE2:
+		MoveOut("MainHallUpper");
+		MoveIn("MainHallLower");
+		disappearAfterAction = false;
+		clickToInteract = true;
 		break;
 	default:
 		break;
@@ -41,6 +43,20 @@ void Butler::Appear() {
 	SetDisplay(true);
 	triggered = false;
 	col->enable = true;
+}
+void Butler::MoveOut(std::string roomName) {
+	Level* lvl = Game::GetInstance()->GetCurrentLevel();
+	std::vector<DrawableObject*>::iterator itr;
+	itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
+	if (itr != lvl->rooms[roomName]->npcs.end())
+		lvl->rooms[roomName]->npcs.erase(itr);
+}
+void Butler::MoveIn(std::string roomName) {
+	Level* lvl = Game::GetInstance()->GetCurrentLevel();
+	std::vector<DrawableObject*>::iterator itr;
+	itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
+	if (itr == lvl->rooms[roomName]->npcs.end())
+		lvl->rooms[roomName]->npcs.push_back(this);
 }
 void Butler::Update() {
 	if(anim)

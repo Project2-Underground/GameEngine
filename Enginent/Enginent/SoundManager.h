@@ -26,6 +26,8 @@ private:
 	bool bgmMute;
 	bool sfxMute;
 	bool masterMute;
+
+	bool loadingFromSave;
 protected:
 	SoundManager();
 public:
@@ -45,5 +47,6 @@ public:
 	void setVolume(SoundType, float);
 	float getMute(SoundType);
 	void setMute(SoundType, bool);
+	void LoadMute();
 	~SoundManager();
 };

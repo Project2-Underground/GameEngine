@@ -12,6 +12,7 @@ CursorUI::CursorUI() {
 	CS_Save = renderer->LoadTexture("Texture/UI/Cursor/Save_cursor.png");
 	CS_Stair = renderer->LoadTexture("Texture/tmp_texture/tmp_stairsSign.png");
 	CS_Note = renderer->LoadTexture("Texture/UI/InfoPhone/Note_app.png");
+	CS_Puzzle = renderer->LoadTexture("Texture/tmp_texture/tmp_puzzle_cursor.png");
 	enable = true;
 
 	this->SetTexture(CS_Normal);
@@ -69,16 +70,27 @@ void CursorUI::setCursor(InteractTypeList type)
 			case InteractTypeList::ADDNOTE:
 				this->SetTexture(CS_Note);
 				break;
+			case InteractTypeList::PUZZLE:
+				this->SetTexture(CS_Puzzle);
+				break;
 			default:
 				this->SetTexture(CS_Normal);
 				break;
 		}
 	}
-}
-
-void CursorUI::enableChange(bool e)
-{
-	if (!e)
+	else {
 		this->SetTexture(CS_Normal);
-	enable = e;
+	}
+}
+void CursorUI::EnableCursor(unsigned char c, bool b) {
+	if (b) 
+		cursorDisableCheck |= c;
+	else
+		cursorDisableCheck &= ~c;
+	enable = !(cursorDisableCheck & 255);
+}
+void CursorUI::ResetCursor() {
+	cursorDisableCheck &= 0;
+	enable = true;
+	SetTexture(CS_Normal);
 }

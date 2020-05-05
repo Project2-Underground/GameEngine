@@ -8,11 +8,14 @@ Door::Door(std::string next_room, std::string next_door) {
 	this->nextRoom = next_room;
 	this->nextDoor = next_door;
 	used = true;
+	isOpenDoor = false;
 }
 
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
+		if(interactType != STAIR && !isOpenDoor)
+			SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
 		gs->ChangeRoom(nextRoom, nextDoor);
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
@@ -56,7 +59,7 @@ void EliasDoor::action() {
 		TextBox::GetInstance()->setText("EliasRoom_door_useKey");
 	}
 	else {
-		InteractableObj::action();
+		Door::action();
 	}
 }
 void ChangeLevelDoor::action() {
