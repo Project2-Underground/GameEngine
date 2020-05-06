@@ -273,6 +273,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 
 		Level* level = gs->GetCurrentLevel();
 
+		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
+
 		// load puzzles
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
@@ -321,8 +323,6 @@ void XMLManager::LoadFromSave(std::string filename) {
 			}
 		}
 
-		level->ChangeRoom(file.child("level").attribute("currentRoom").as_string());
-
 		// load special npcs
 		pugi::xml_node butlerNode = file.child("level").child("Butler");
 		Butler* butler = ((GameScreen*)game->GetScreen())->butler;
@@ -356,6 +356,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node phoneNode = file.child("level").child("Phone");
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
+		phone->firstClose = phoneNode.attribute("firstClose").as_bool();
+		phone->note23Done = phoneNode.attribute("note23Track").as_bool();
+		for (pugi::xml_node_iterator track = phoneNode.child("npcTalked").begin(); track != phoneNode.child("npcTalked").end(); track++) {
+			phone->npcTalked.push_back(track->name());
+		}
 		if (phoneNode.attribute("hasPhone").as_bool())
 			gs->phoneIcon->Appear();
 		for (pugi::xml_node_iterator itr = phoneNode.child("Notes").begin(); itr != phoneNode.child("Notes").end(); itr++) {
@@ -467,6 +472,12 @@ void XMLManager::SaveGame(std::string filename) {
 	int chatSize = (int)phone->app->chats.size();
 
 	saveLevel.child("Phone").append_attribute("hasPhone").set_value(gs->phoneIcon->IsDisplay());
+	saveLevel.child("Phone").append_attribute("firstClose").set_value(phone->firstClose);
+	saveLevel.child("Phone").append_attribute("note23Track").set_value(phone->note23Done);
+	saveLevel.child("Phone").append_child("npcTalked");
+	for (int i = 0; i < phone->npcTalked.size(); i++) {
+		saveLevel.child("Phone").child("npcTalked").append_child(phone->npcTalked[i].c_str());
+	}
 
 	for (int i = 0; i < noteSize; i++) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Notes").append_child("n");

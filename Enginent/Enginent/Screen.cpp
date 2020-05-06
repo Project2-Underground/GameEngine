@@ -149,8 +149,8 @@ GameScreen::GameScreen() {
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
 	phone->Clear();
-	phoneIcon = new PhoneOpenButton("Texture/tmp_texture/tmp_phone.png");
-	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-500.0f, 300.0f, 1.0f));
+	phoneIcon = new PhoneOpenButton("Texture/UI/InfoPhone/Tablet_Mini.png");
+	phoneIcon->Init(100.0f, -100.0f, glm::vec3(-580.0f, 300.0f, 1.0f));
 	phoneIcon->Disappear();
 	XMLManager::GetInstance()->LoadNotes("save/notes.xml", phone->notes);
 	XMLManager::GetInstance()->LoadChats("save/chats.xml", phone->chats);
@@ -413,6 +413,9 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 		break;
 	case SDLK_q:
 		Game::GetInstance()->TriggerChangeLevel(1);
+		break;
+	case SDLK_s:
+		player->walkSpeed = 1000;
 		break;
 	default:
 		break;

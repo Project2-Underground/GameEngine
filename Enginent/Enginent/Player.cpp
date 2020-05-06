@@ -38,7 +38,7 @@ void Player::Update()
 void Player::Move()
 {
 	//std::cout << TimeSystem::instance()->GetDT() << std::endl;
-	float walk_sp = WALK_SPEED * TimeSystem::instance()->GetDT();
+	float walk_sp = walkSpeed * TimeSystem::instance()->GetDT();
 	// walk left
 	if (this->pos.x > next_position.x)
 	{

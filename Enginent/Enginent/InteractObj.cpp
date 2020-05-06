@@ -267,6 +267,7 @@ void ViewObj::action() {
 
 void NonPlayer::action()
 {
+	Phone::GetInstance()->AddNPCInteracted(object_name);
 	//std::cout << interactType << std::endl;
 	if (dialogue_name != "")
 	{

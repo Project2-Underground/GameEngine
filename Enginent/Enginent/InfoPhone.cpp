@@ -232,6 +232,9 @@ void Chat::ClearText() {
 }
 
 void Chat::OpenChat(const ChatInfo c) {
+	if (!Phone::GetInstance()->firstClose && Phone::GetInstance()->textAfterClose == "Phone_start" && c.name == "Unknown") {
+		Phone::GetInstance()->firstClose = true;
+	}
 	ClearText();
 	profilePic->SetTexture(c.picTexture);
 
@@ -299,7 +302,8 @@ Application::Application() {
 	float iconSize = 100.0f;
 
 	back = new PhoneBackButton("Texture/tmp_texture/tmp_arrowIcon2.png");
-	back->Init(50.0f, -50.0f, glm::vec3(TEXT_START_X, TEXT_BOTTOM_Y - 35.0f, 1));
+	back->Init(25, -25, glm::vec3(TEXT_START_X, TEXT_BOTTOM_Y - 35.0f, 1));
+	back->col->setNewSize(100, -100);
 
 	home = new PhoneHomeButton("");
 	home->SetDisplay(false);
@@ -506,6 +510,7 @@ Phone* Phone::GetInstance() {
 }
 
 Phone::Phone() {
+	textAfterClose = "Phone_start";
 	phone = new UIObject();
 	phone->SetTexture("Texture/UI/InfoPhone/Tablet.png");
 	float sizeX = 825.0f;
@@ -519,10 +524,12 @@ Phone::Phone() {
 	float iconSize = 100.0f;
 	// init all buttons
 	noteIcon = new PhoneAppsButton("Texture/UI/InfoPhone/Note_app.png");
+	noteIcon->SetPressTexture("Texture/UI/InfoPhone/Note_app_press.png");
 	noteIcon->Init(iconSize, -iconSize, glm::vec3(-250.0f, 150.0f, 1));
 	noteIcon->SetApp(NOTE);
 	
 	chatIcon = new PhoneAppsButton("Texture/UI/InfoPhone/Chat_app.png");
+	chatIcon->SetPressTexture("Texture/UI/InfoPhone/Chat_app_press.png");
 	chatIcon->Init(iconSize, -iconSize, glm::vec3(-100.0f, 150.0f, 1));
 	chatIcon->SetApp(CHAT);
 	
@@ -644,8 +651,30 @@ void Phone::Message(std::string name, int msgIndex) {
 	AddPage(CHAT, name);
 }
 
+void Phone::AddNPCInteracted(std::string name) {
+	bool duplicate = false;
+	for (auto n : npcTalked) {
+		if (n == name) {
+			duplicate = true;
+			break;
+		}
+	}
+	if (!duplicate)
+		npcTalked.push_back(name);
+
+	if (npcTalked.size() == 4 && !note23Done) {
+		AddPage(NOTE, "Note2");
+		AddPage(NOTE, "Note3");
+		note23Done = true;
+	}
+}
+
 void Phone::Clear() {
 	app->Clear();
+	note23Done = false;
+	firstClose = false;
+	textAfterClose = "Phone_start";
+	npcTalked.clear();
 }
 
 void Phone::Open() { 

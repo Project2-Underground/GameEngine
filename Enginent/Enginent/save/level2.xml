@@ -38,6 +38,26 @@
 			</Mainfloor_Building6door>
 		</doors>
 		<NPCs>
+			<NPC4 sizeX="183" sizeY="386" posX="-300" posY="-50" layer="0">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</NPC4>
+			<NPC5 sizeX="149" sizeY="401" posX="-100" posY="-50" layer="0">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC5.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</NPC5>
+			<NPC6 sizeX="166" sizeY="421" posX="100" posY="-50" layer="0">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC6.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</NPC6>
+			<NPC7 sizeX="140" sizeY="386" posX="300" posY="-50" layer="0">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC7.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</NPC4>
 		</NPCs>
 		<foreground>
 		</foreground>

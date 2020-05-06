@@ -65,8 +65,8 @@ void Button::checkColliderReleased(float x, float y) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
 			action();
 		}
-		SetTexture(this->normalTexture);
 	}
+	SetTexture(this->normalTexture);
 }
 
 //////////////Exit Button
@@ -117,7 +117,13 @@ void PhoneOpenButton::Init(float x, float y, glm::vec3 pos) {
 }
 
 void PhoneExitButton::action() {
-	Phone::GetInstance()->Close();
+	Phone* p = Phone::GetInstance();
+	if (p->firstClose) {
+		TextBox::GetInstance()->setText(p->textAfterClose);
+		p->AddPage(NOTE, "Note1");
+		p->firstClose = false;
+	}
+	p->Close();
 }
 //
 //void PhoneNextButton::action() {

@@ -149,17 +149,23 @@ public:
 	void Scroll(glm::vec3, int);
 	void PrintAllChat();
 	void Clear();
+	void AddNPCInteracted(std::string name);
 
 	bool open;
 	bool notiNote;
 	bool notiChat;
+	bool firstClose;
+	bool note23Done;
 	Application* app;
 
 	~Phone();
 
 	std::map<std::string, NoteInfo> notes;
 	std::map<std::string, ChatInfo> chats;
+	std::vector<std::string> npcTalked;
+	std::string textAfterClose;
 private:
+
 	Phone();
 	std::vector<UIObject*> icons;
 	UIObject* notifyPopup;
