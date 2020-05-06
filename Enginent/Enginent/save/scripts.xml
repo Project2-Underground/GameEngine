@@ -604,20 +604,12 @@ experiment, I need to ask you about that"/>
 			<Dialogue name = "Elias" text = "( Hm... Atleast I can still use the symbols as the guideline. So, the symbols will not repeat on the same row... )"/>
 		</sub>		
 	</script>
-	
-	
-	
-	
-	
-	
 	<script key = "Emma1" loopIndex = "0">
-		<sub choice = "c_Emma">
+		<sub choice = "c_Emma1">
 			<Dialogue name = "Emma" text = "I think I noted down something about some experiment you were 
 talking about in here"/>
 		</sub>
 	</script>
-	
-	
 	<script key = "Emma1_after" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Emma" text = "... I think I got something"/>

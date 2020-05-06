@@ -81,7 +81,7 @@
 				<puzzle name="BookshelfPuzzle"/>
 			</Bookshelf1>
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
-			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone">
+			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2="Hall_gramophone">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
 				<item name="Puzzle2_ColorCode1"/>
 			</Gramophone>
@@ -101,7 +101,7 @@
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Ann>
-			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1" dialogue_2 = "Dann_after"> 
+			<Dann sizeX="205" sizeY="430" posX="739" posY="-90" layer="0" dialogue="Dann1" dialogue_2 = "Dann1_after"> 
 				<item name="Book3"/>
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/MainHallRoom/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
@@ -118,16 +118,16 @@
 		</background>
 		
 		<interactObj>
-			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="2" dialogue="EmmaRoom_book">
+			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="2" dialogue="EmmaRoom_book" dialogue_2="Emma_book">
 				<ForeGround/>
 			</EmmaRoom_Book>
-			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture">
+			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2="Emma_picture">
 			</EmmaRoom_Drawing>
-			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3">
+			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" >
 				<note name="EmmaNote1"/>
 				<ForeGround/>
 			</EmmaRoom_Note1>
-			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window">
+			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window" dialogue_2="EmmaRoom_window">
 			</EmmaRoom_Window>
 		</interactObj>
 		
@@ -137,7 +137,7 @@
 		</doors>
 		
 		<NPCs>
-			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0">
+			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0" dialogue="Emma1" dialogue_2="Emma1_after">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Emma/Emma_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -155,7 +155,7 @@
 		</background>
 		<interactObj>
 			<TriggerEmmaTalk texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="Backdoor_Room"/>
-			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase">
+			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase" dialogue_2="">
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
