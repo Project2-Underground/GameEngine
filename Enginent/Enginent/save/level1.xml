@@ -196,19 +196,4 @@
 			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="416" posX="0" posY="-152" layer="0"/>
 		</foreground>
 	</BackDoorRoomBasement>
-	<congrat left_limit="-640" right_limit="640" top_limit="360" bottom_limit="-360" y="-50">
-		<background>
-			<bg texture="" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
-		</background>
-		<interactObj>
-			<sign texture="Texture/Test/Win.png" sizeX="584" sizeY="138" posX="0" posY="0" type="1" layer="4"/>
-		</interactObj>
-		<doors>
-			<tmpDoor texture="NONE" sizeX="172" sizeY="188" posX="0" posY="0" next_room="MainHallLower" next_door="StairDoor" layer="0"/>
-		</doors>
-		<NPCs>
-		</NPCs>
-		<foreground>
-		</foreground>
-	</congrat>
 </level>

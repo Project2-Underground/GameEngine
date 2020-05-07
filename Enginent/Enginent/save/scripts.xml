@@ -174,7 +174,7 @@
 			<Dialogue name = "Elias" text = "( Done )"/>
 			<Dialogue name = "Elias" text = "What is this experiment anyway?"/>
 			<Dialogue name = " " text = "* sound of a door unlocking *"/>
-			<Dialogue name = "Elias" text = "( From somewhere, a door has been unlocked )"/>
+			<Dialogue name = " " text = "( From somewhere, a door has been unlocked )"/>
 		</sub>
 	</script>
 	<script key = "Hall_gramophone" loopIndex = "0">

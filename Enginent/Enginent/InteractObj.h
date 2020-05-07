@@ -141,6 +141,9 @@ public:
 };
 
 class PlayerTriggerObj : public InteractableObj {
+protected:
+	bool clickToInteract;
+	bool disappearAfterAction;
 public:
 	PlayerTriggerObj();
 	void Update();

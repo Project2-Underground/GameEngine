@@ -4,9 +4,6 @@
 
 
 class Butler : public PlayerTriggerObj {
-	bool clickToInteract;
-	bool disappearAfterAction;
-
 	void MoveOut(std::string);
 	void MoveIn(std::string);
 public:

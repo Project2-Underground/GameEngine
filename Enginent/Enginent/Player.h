@@ -12,7 +12,7 @@
 class Player : public ImageObject
 {
 public:
-	const int WALK_SPEED = 250;
+	int walkSpeed = 250;
 	const float ACTION_DISTANCE = 70.0f;
 	bool walk;
 	bool faceLeft;
