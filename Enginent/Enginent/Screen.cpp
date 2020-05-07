@@ -186,7 +186,13 @@ Item* GameScreen::FindItem(std::string name) {
 	for (auto i : items)
 		if (i->name == name)
 			return i;
+	std::cout << "cannot find " << name << std::endl;
 	return nullptr;
+}
+
+Puzzle* GameScreen::FindPuzzle(std::string name)
+{
+	return puzzles[name];
 }
 
 void GameScreen::Render() {

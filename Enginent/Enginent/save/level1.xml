@@ -159,9 +159,7 @@
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
-			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="9" layer="2" dialogue="Emma_door">
-				<puzzle name="Numpad_Emma"/>
-			</BackDoorRoom_EmmaDoor>
+			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="1" layer="2" dialogue="Emma_door" dialogue_2="Emma_door_after"/>
 		</interactObj>
 		<doors>
 			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-820" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="1">

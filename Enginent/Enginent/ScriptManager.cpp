@@ -1,6 +1,7 @@
 #include "ScriptManager.h"
+#include "Game.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note)
+s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim)
 {
 	name = n;
 	text = d;
@@ -9,6 +10,8 @@ s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::stri
 	this->chatName = chatName;
 	this->chatIndex = chatIndex;
 	this->noteName = note;
+	this->puzzleName = puzzle;
+	this->animName = anim;
 }
 
 s_Dialogue::s_Dialogue()
@@ -105,6 +108,8 @@ void ScriptManager::LoadScript()
 				int chatIndex = -1;
 				std::string chatName = "";
 				std::string noteName = "";
+				std::string animName = "";
+				std::string puzzleName = "";
 				if (dialogue->child("item"))
 				{
 					itemName = dialogue->child("item").attribute("name").as_string();
@@ -116,24 +121,25 @@ void ScriptManager::LoadScript()
 				}
 				if (dialogue->child("chat"))
 				{
-					//save chat info
 					chatName = dialogue->child("chat").attribute("name").as_string();
 					chatIndex = dialogue->child("chat").attribute("index").as_int();
 				}
 				if (dialogue->child("note"))
 				{
-					//save chat info
 					noteName = dialogue->child("note").attribute("name").as_string();
 				}
-				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName);
+				if (dialogue->child("animation"))
+				{
+					animName = dialogue->child("animation").attribute("name").as_string();
+				}
+				if (dialogue->child("puzzle"))
+				{
+					puzzleName = dialogue->child("puzzle").attribute("name").as_string();
+				}
+				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName);
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}
-
-			//for (pugi::xml_node_iterator dialogue = s_dialogue->begin(); dialogue != s_dialogue->end(); dialogue++)
-			//{
-			//	
-			//}
 
 			//on obj
 			s->script.push_back(d);
@@ -152,10 +158,15 @@ void ScriptManager::LoadScript()
 		for (pugi::xml_node_iterator s_choice = choices->begin(); s_choice != choices->end(); s_choice++)
 		{
 			//get choice
-			std::string text, next_d;
+			std::string text = "", next_d = "", puzzle = "";
 			text = s_choice->attribute("text").as_string();
-			next_d = s_choice->attribute("nextDialogue").as_string();
-			v_choice->push_back(Choice(text, next_d));
+			if(s_choice->attribute("nextDialogue"))
+				next_d = s_choice->attribute("nextDialogue").as_string();
+			if (s_choice->attribute("puzzle"))
+			{
+				puzzle = s_choice->attribute("puzzle").as_string();
+			}
+			v_choice->push_back(Choice(text, next_d, puzzle));
 		}
 		this->choices[key] = v_choice;
 	}

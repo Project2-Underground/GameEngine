@@ -109,10 +109,6 @@
 			<Dialogue name = "Elias" text = "Am I imagining things or the air outside is strangely chilling."/>
 		</sub>
 	</script>
-	
-	
-	
-	
 	<script key = "HallRoom" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Wait a minute... Where is this place!?"/>
@@ -123,7 +119,7 @@
 			<Dialogue name = "Elias" text = "No... the door... it turned into a wall"/>
 		</sub>
 	</script>
-		<script key = "Elias_hall_door" loopIndex = "0">
+	<script key = "Elias_hall_door" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "How did it turn into a wall? this gives me goose bumps"/>
 		</sub>
@@ -186,11 +182,11 @@
 			<Dialogue name = "Elias" text = "This thing looks like the one at home"/>
 			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago"/>
 			<Dialogue name = "Elias" text = "Though It feels like I just listen to it not that long ago"/>
-			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk."/>
+			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk.">
+				<item name = "Puzzle2_ColorCode1"  NPC = "Gramophone"/>
+			</Dialogue>
 		</sub>
 	</script>
-	
-	
 	<script key = "Backdoor_Room" loopIndex = "0">
 		<sub>
 			<Dialogue name = "???" text = "Is there someone outside?"/>
@@ -220,7 +216,7 @@ come you are going for a stroll with this experiemental going on?"/>
 		</sub>
 	</script>
 	<script key = "Emma_door_after" loopIndex = "0">
-		<sub>
+		<sub choice = "c_puzzle2">
 			<Dialogue name = "Emma" text = "I think the note is somewhere in front of the door"/>
 		</sub>
 	</script>
@@ -245,8 +241,6 @@ come you are going for a stroll with this experiemental going on?"/>
 			<Dialogue name = "Elias" text = "( Okay... What should I do next )"/>
 		</sub>
 	</script>
-	
-	
 	<script key = "EmmaRoom_start" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "( What is this room? It has a different feeling from 
@@ -277,15 +271,12 @@ experiment, I need to ask you about that"/>
 			<Dialogue name = "Emma" text = "The experiment?"/>
 			<Dialogue name = "Elias" text = "( Emma's taking out a book from the pile of papers to read )"/>
 		</sub>
-	</script>
-	
+	</script>	
 	<script key = "EmmaRoom_picture" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "( What is she drawing? Maybe I can take a look when she's not here)"/>
 		</sub>
 	</script>
-	
-	
 	<script key = "EmmaRoom_window" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "There's a window in here? Have you try opening it?"/>
@@ -300,7 +291,7 @@ experiment, I need to ask you about that"/>
 			<Dialogue name = "Elias" text = "I thought my room was a mess, her room is even more cluttered with all these books"/>
 		</sub>
 	</script>
-		<script key = "EmmaRoom_picture2" loopIndex = "0">
+	<script key = "EmmaRoom_picture2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "A father, a mother and a child?"/>
 			<Dialogue name = "Elias" text = "What's this... a new message?"/>
@@ -324,10 +315,6 @@ experiment, I need to ask you about that"/>
 		</sub>
 	</script>
 	
-	
-	
-	
-	
 	<!-- NPC dialogue -->
 	<script key = "Hubert1" loopIndex = "0">
 		<sub choice = "c_Hubert1">
@@ -340,7 +327,7 @@ experiment, I need to ask you about that"/>
 			<Dialogue name = "Hubert" text = "The books you are talking about, it's useless. everyone knows that."/>
 		</sub>
 	</script>
-		<script key = "Hubert2" loopIndex = "0">
+	<script key = "Hubert2" loopIndex = "0">
 		<sub choice = "c_Hubert1">
 			<Dialogue name = "Hubert" text = "Hi, you are new around here?"/>
 			<Dialogue name = "Elias" text = "My name is Elias Adams. Are you also stuck here?"/>
@@ -351,13 +338,12 @@ experiment, I need to ask you about that"/>
 			<Dialogue name = "Hubert" text = "The books you are talking about, it's useless. everyone knows that."/>
 		</sub>
 	</script>
-	
 	<script key = "Hubert1_after" loopIndex = "0">
 		<sub choice = "c_Hubert1">
 			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
 		</sub>
 	</script>
-		<script key = "Hubert2_after" loopIndex = "0">
+	<script key = "Hubert2_after" loopIndex = "0">
 		<sub choice = "c_Hubert2">
 			<Dialogue name = "Hubert" text = "What's up, dreamer boy. Have you given up? Hehe hehe"/>
 		</sub>
@@ -628,8 +614,7 @@ on the table. And, take this, it seems to be a hint on how to power on that in t
 			<Dialogue name = "Elias" text = "What about you?"/>
 			<Dialogue name = "Emma" text = "I'm going to read these papers for a while, might find something else"/>
 		</sub>
-	</script>
-	
+	</script>	
 	<script key = "Emma1_A" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Emma" text = "Are you an old man or something? Stop complaining"/>
@@ -653,4 +638,65 @@ on the table. And, take this, it seems to be a hint on how to power on that in t
 			</Dialogue>
 		</sub>		
 	</script>
+
+
+	<!-- level 2 -->
+	<script key = "Floor2_start" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "What was that feeling!\nI felt like being picked up when I open the door."/>
+			<Dialogue name = "Elias" text = "At least I got outside...a city, huh?\nHm...I'm outisde but I can't feel the wind."/>
+			<Dialogue name = "Elias" text = "Emma said she's going to wait on the upper floor.\nWhat does that even mean?\nI need to ask her about this."/>
+		</sub>
+	</script>
+	<script key = "Floor2_mansiondoor" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "The mansion door turned into a picuture, just like my door."/>
+			<Dialogue name = "Elias" text = "This means that I'm still stuck in the experiment.\nHopefully, I'm not the one going crazy."/>
+		</sub>
+	</script>
+	<script key = "Floor2_mask6" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "( These people with strange masks are looking at me )"/>
+			<Dialogue name = "NPC6" text = "I heard a scientist just showed up."/>
+			<Dialogue name = "NPC5" text = "How?!\nWe need to find that man."/>
+			<Dialogue name = "NPC6" text = "I think he used a secret tunnel to come here."/>
+			<Dialogue name = "NPC5" text = "He must be planning something weird to us!\nLet's go warn everyone!"/>
+			<Dialogue name = "Elias" text = "( A scientist st this place right now?\nThis might be my exit )"/>
+		</sub>
+	</script>
+	<script key = "Floor2_mask5" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC5" text = "I heard that the scientist came here to kill us."/>
+			<Dialogue name = "NPC5" text = "They think we are of no use to them."/>
+			<Dialogue name = "NPC6" text = "I never heard of anyone who got pass this place."/>
+			<Dialogue name = "NPC6" text = "This experiment is just smoke and mirrors, they just want to kill us."/>
+			<Dialogue name = "NPC5" text = "The chief will save us!\nThe chief is always right!"/>
+			<Dialogue name = "Elias" text = "( The chief? This place just gives me goosebumps )"/>
+		</sub>
+	</script>
+	
+	
+	
+		<script key = "Floor2_mask7" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC5" text = "I heard that the scientist came here to kill us."/>
+			<Dialogue name = "NPC5" text = "They think we are of no use to them."/>
+			<Dialogue name = "NPC6" text = "I never heard of anyone who got pass this place."/>
+			<Dialogue name = "NPC6" text = "This experiment is just smoke and mirrors, they just want to kill us."/>
+			<Dialogue name = "NPC5" text = "The chief will save us!\nThe chief is always right!"/>
+			<Dialogue name = "Elias" text = "( The chief? This place just gives me goosebumps )"/>
+		</sub>
+	</script>
+		<script key = "Floor2_mask4" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC5" text = "I heard that the scientist came here to kill us."/>
+			<Dialogue name = "NPC5" text = "They think we are of no use to them."/>
+			<Dialogue name = "NPC6" text = "I never heard of anyone who got pass this place."/>
+			<Dialogue name = "NPC6" text = "This experiment is just smoke and mirrors, they just want to kill us."/>
+			<Dialogue name = "NPC5" text = "The chief will save us!\nThe chief is always right!"/>
+			<Dialogue name = "Elias" text = "( The chief? This place just gives me goosebumps )"/>
+		</sub>
+	</script>
+	
+
 </scripts>

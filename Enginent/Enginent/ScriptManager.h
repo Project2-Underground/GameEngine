@@ -10,10 +10,12 @@
 struct Choice {
 	std::string text;
 	std::string nextScript;
-	Choice(std::string& t, std::string& next)
+	std::string puzzleName;
+	Choice(std::string& t, std::string& next, std::string& puzzle)
 	{
 		text = t;
 		nextScript = next;
+		puzzleName = puzzle;
 	}
 	Choice() {};
 };
@@ -26,8 +28,10 @@ struct s_Dialogue
 	std::string noteName;
 	std::string itemName;
 	std::string NPCName;
+	std::string animName;
+	std::string puzzleName;
 	int chatIndex;
-	s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note);
+	s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim);
 	s_Dialogue();
 };
 
