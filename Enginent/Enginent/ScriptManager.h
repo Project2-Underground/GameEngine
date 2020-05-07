@@ -10,10 +10,12 @@
 struct Choice {
 	std::string text;
 	std::string nextScript;
-	Choice(std::string& t, std::string& next)
+	std::string puzzleName;
+	Choice(std::string& t, std::string& next, std::string& puzzle)
 	{
 		text = t;
 		nextScript = next;
+		puzzleName = puzzle;
 	}
 	Choice() {};
 };

@@ -83,7 +83,6 @@
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2="Hall_gramophone">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
-				<item name="Puzzle2_ColorCode1"/>
 			</Gramophone>
 			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
 		</interactObj>
@@ -159,9 +158,7 @@
 				<item name="Puzzle2_EmmaPaper1" />
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
-			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="9" layer="2" dialogue="Emma_door">
-				<puzzle name="Numpad_Emma"/>
-			</BackDoorRoom_EmmaDoor>
+			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="1" layer="2" dialogue="Emma_door" dialogue_2="Emma_door_after"/>
 		</interactObj>
 		<doors>
 			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-820" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="1">

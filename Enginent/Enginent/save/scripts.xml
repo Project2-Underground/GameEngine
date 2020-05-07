@@ -182,7 +182,9 @@
 			<Dialogue name = "Elias" text = "This thing looks like the one at home"/>
 			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago"/>
 			<Dialogue name = "Elias" text = "Though It feels like I just listen to it not that long ago"/>
-			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk."/>
+			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk.">
+				<item name = "Puzzle2_ColorCode1"  NPC = "Gramophone"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "Backdoor_Room" loopIndex = "0">
@@ -214,7 +216,7 @@ come you are going for a stroll with this experiemental going on?"/>
 		</sub>
 	</script>
 	<script key = "Emma_door_after" loopIndex = "0">
-		<sub>
+		<sub choice = "c_puzzle2">
 			<Dialogue name = "Emma" text = "I think the note is somewhere in front of the door"/>
 		</sub>
 	</script>

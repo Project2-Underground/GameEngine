@@ -157,10 +157,15 @@ void ScriptManager::LoadScript()
 		for (pugi::xml_node_iterator s_choice = choices->begin(); s_choice != choices->end(); s_choice++)
 		{
 			//get choice
-			std::string text, next_d;
+			std::string text = "", next_d = "", puzzle = "";
 			text = s_choice->attribute("text").as_string();
-			next_d = s_choice->attribute("nextDialogue").as_string();
-			v_choice->push_back(Choice(text, next_d));
+			if(s_choice->attribute("nextDialogue"))
+				next_d = s_choice->attribute("nextDialogue").as_string();
+			if (s_choice->attribute("puzzle"))
+			{
+				puzzle = s_choice->attribute("puzzle").as_string();
+			}
+			v_choice->push_back(Choice(text, next_d, puzzle));
 		}
 		this->choices[key] = v_choice;
 	}

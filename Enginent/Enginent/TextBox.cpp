@@ -246,6 +246,11 @@ bool ChoiceBox::CheckClick(glm::vec3 pos)
 		{
 			TextBox::GetInstance()->SetDisplay(false);
 		}
+		if (choice.puzzleName != "")
+		{
+			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(choice.puzzleName);
+		}
+
 		return true;
 	}
 	return false;
