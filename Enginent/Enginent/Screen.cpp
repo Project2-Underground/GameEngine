@@ -183,10 +183,11 @@ void GameScreen::Init() {
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
 	if(currentLevel->GetCurrentRoom()->dialogue != "")
 		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
+	TextBox::GetInstance()->setText("EliasRoom");
 }
 
 Item* GameScreen::FindItem(std::string name) {
-	std::cout << items.size();
+	//std::cout << items.size();
 	for (auto i : items)
 		if (i->name == name)
 			return i;

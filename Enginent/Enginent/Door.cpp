@@ -28,6 +28,7 @@ void Door::action() {
 		UseItem(gs->GetInventory()->GetSelectedItem());
 	}
 	else{
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
 		SoundManager::GetInstance()->playSound(SFX, "Locked");
 		InteractableObj::action();
 	}
@@ -58,6 +59,8 @@ void WallDoor::action() {
 void EliasDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
+		SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
 		gs->ChangeRoom(nextRoom, nextDoor);
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {

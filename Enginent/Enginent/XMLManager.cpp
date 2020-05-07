@@ -127,10 +127,17 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			obj->SetInteractType(ADDNOTE);
 			interactObj = obj;
 		}break;
+		case PICKUP: {
+			interactObj = new InteractableObj();
+			interactObj->SetInteractType(PICKUP);
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
 		}
+
+		if (child->child("typeView"))
+			interactObj->SetInteractType((InteractTypeList)child->child("typeView").attribute("type").as_int());
 
 		if (child->child("item")) {
 			interactObj->SetItem(child->child("item").attribute("name").as_string());

@@ -53,7 +53,8 @@ void InteractableObj::action() {
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
-	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	if(interactType != DOOR)
+		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
 	PickUpItem();
@@ -176,7 +177,7 @@ void OpenObj::SetOpenTexture(std::string openT) {
 
 void OpenObj::action() {
 	if (!open && triggered) {
-		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
 		Open();
 	}
 	else if (open) {

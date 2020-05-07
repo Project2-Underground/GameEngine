@@ -281,7 +281,7 @@ public:
 
 class Numpad2 : public Numpad {
 public:
-	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) {}
+	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) { dialogueAfterComplete.clear(); }
 	void CompletePuzzle();
 	void ActionAfterPuzzle();
 };

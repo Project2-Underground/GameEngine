@@ -136,6 +136,7 @@ void Numpad::ActionAfterPuzzle()
 	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->FindObject("BackDoorRoom_Computer");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
+	tmp->ChangeDialogue("backdoor_com_pass", "backdoor_com_pass");
 	g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->objects.push_back(tmp);
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);

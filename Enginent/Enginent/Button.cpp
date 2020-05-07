@@ -98,8 +98,16 @@ void PhoneAppsButton::action() {
 void PhoneOpenButton::action() {
 	Phone::GetInstance()->Open();
 }
+void PhoneOpenButton::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y)) {
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			action();
+		}
+	}
+}
 PhoneOpenButton::PhoneOpenButton(std::string texture) : Button(texture) { 
-	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/tmp_texture/tmp_phone_noti.png");
+	notiTexture = Game::GetInstance()->GetRenderer()->LoadTexture("Texture/UI/InfoPhone/Tablet_Mini_noti.png");
 }
 void PhoneOpenButton::UpdateButton(bool noti) {
 	if (noti) {
