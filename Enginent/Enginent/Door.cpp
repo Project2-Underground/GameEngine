@@ -52,6 +52,7 @@ void WallDoor::action() {
 	}
 	else {
 		InteractableObj::action();
+		interactType = NORMAL;
 	}
 }
 void EliasDoor::action() {

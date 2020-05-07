@@ -130,6 +130,9 @@ GameScreen::GameScreen() {
 	levels.push_back("save/level1.xml");
 	levels.push_back("save/level2.xml");
 	levels.push_back("save/level3.xml");
+	objActions.push_back("save/objSpecialAction1.xml");
+	objActions.push_back("save/objSpecialAction2.xml");
+	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
 	player->SetSize(205.0f, -430.0f);
@@ -142,6 +145,7 @@ GameScreen::GameScreen() {
 
 	ChangeLevel(0);
 	XMLManager::GetInstance()->LoadItems(items);
+	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
@@ -186,7 +190,7 @@ Item* GameScreen::FindItem(std::string name) {
 	for (auto i : items)
 		if (i->name == name)
 			return i;
-	std::cout << "cannot find " << name << std::endl;
+	//std::cout << "cannot find " << name << std::endl;
 	return nullptr;
 }
 
@@ -223,7 +227,7 @@ void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
 	if (!Pause) {
-		if (!dialogueText->IsDisplay()) {
+		//if (!dialogueText->IsDisplay()) {
 			if (PuzzleTime)
 				currentPuzzle->Update();
 			else {
@@ -232,7 +236,7 @@ void GameScreen::Update() {
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();
-		}
+		//}
 	}
 }
 

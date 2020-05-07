@@ -82,6 +82,7 @@ class GameScreen :public Screen {
 public:
 	vector<std::string> levels;
 	std::vector<Item*> items;
+	vector<std::string> objActions;
 	map<std::string, Puzzle*> puzzles;
 	PhoneOpenButton* phoneIcon;
 

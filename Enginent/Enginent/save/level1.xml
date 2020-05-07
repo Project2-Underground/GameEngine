@@ -18,7 +18,7 @@
 			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="">
 				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
 				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
-				<item name="keyCard"/>
+				<item name="keyCard" scriptHandleItem="false"/>
 				<sound name="OpenCabinet"/>
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
@@ -82,7 +82,7 @@
 			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
 			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2="Hall_gramophone">
 				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
-				<item name="Puzzle2_ColorCode1"/>
+				<item name="Puzzle2_ColorCode1" scriptHandleItem="true"/>
 			</Gramophone>
 			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
 		</interactObj>
@@ -156,7 +156,7 @@
 		<interactObj>
 			<TriggerEmmaTalk texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="Backdoor_Room"/>
 			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase" dialogue_2="">
-				<item name="Puzzle2_EmmaPaper1" />
+				<item name="Puzzle2_EmmaPaper1" scriptHandleItem="false"/>
 				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
 			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="1" layer="2" dialogue="Emma_door" dialogue_2="Emma_door_after"/>

@@ -132,8 +132,11 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		}break;
 		}
 
-		if (child->child("item")) 
+		if (child->child("item")) {
 			interactObj->SetItem(child->child("item").attribute("name").as_string());
+			interactObj->scriptHandleItem = child->child("item").attribute("scriptHandleItem").as_bool();
+			std::cout << "XMLManager::GenerateInteractObj scriptHandleItem "<< child->name() << " : " << interactObj->scriptHandleItem << std::endl;
+		}
 
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
@@ -628,6 +631,24 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());
 			i->SetViewTexture(item->attribute("v_texture").as_string());
 			items.push_back(i);
+		}
+	}
+}
+
+void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
+	if (LoadFile(filename)) {
+		pugi::xml_node objs = doc.child("Objects");
+		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
+			Room* r = level->rooms[room->name()];
+			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
+				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
+				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
+					InteractableObj* o = ((InteractableObj*)(r->FindObject(triggerObj->name())));
+					interactObj->AddTriggerObj(o);
+					o->triggered = false;
+					//std::cout << o->object_name << std::endl;
+				}
+			}
 		}
 	}
 }

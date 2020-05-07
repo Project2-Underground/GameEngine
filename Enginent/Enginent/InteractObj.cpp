@@ -54,6 +54,8 @@ void InteractableObj::action() {
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	for (auto obj : triggerObjs)
+		obj->triggered = true;
 	PickUpItem();
 	TakeNote();
 }
@@ -103,7 +105,7 @@ void InteractableObj::UseItem(Item* item) {
 }
 
 void InteractableObj::PickUpItem() {
-	if (hasItem) {
+	if (hasItem && !scriptHandleItem) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen()); 
 		Item* item = gs->FindItem(itemName);
 		gs->GetInventory()->AddItem(item);
@@ -128,6 +130,10 @@ void InteractableObj::SetAnimation(std::string name, std::string texture, int fr
 		anim = new Animator();
 
 	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
+}
+
+void InteractableObj::AddTriggerObj(InteractableObj* obj) {
+	triggerObjs.push_back(obj);
 }
 
 void InteractableObj::ChangeDialogue(std::string n, std::string a)
@@ -256,6 +262,8 @@ void NonPlayer::action()
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	for (auto obj : triggerObjs)
+		obj->triggered = true;
 	TakeNote();
 }
 

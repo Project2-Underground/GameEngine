@@ -40,13 +40,15 @@ protected:
 	std::string dialogue_name;
 	std::string dialogue_before;
 	std::string dialogue_after;
-	std::string itemName;
+	std::string itemName;    
+	std::vector<InteractableObj*> triggerObjs;
 	unsigned int nextTexture; // after picking up an item
 
 public:
 	bool used;
 	bool triggered;
 	bool hasItem;
+	bool scriptHandleItem;
 	InteractableObj();
 
 	virtual void action();
@@ -65,6 +67,7 @@ public:
 	void TakeNote();
 	void PickUpItem();
 	virtual void UseItem(Item* item);
+	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n, std::string a);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
 	std::string GetDialogueBeforeName() { return dialogue_before; }

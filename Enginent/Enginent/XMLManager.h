@@ -25,6 +25,7 @@ public:
 	void GenerateNPC(pugi::xml_node, Room*);
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
 	void LoadItems(std::vector<Item*>&);
+	void LoadObjSpecialActions(std::string, Level*);
 
 	void GetLevelNumber(std::string, Level*);
 	std::string GetFirstRoomName();
