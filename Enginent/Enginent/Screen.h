@@ -109,6 +109,7 @@ public:
 	Player* GetPlayer() { return player; };
 	Inventory* GetInventory() { return inventory; };
 	Item* FindItem(std::string name);
+	Puzzle* FindPuzzle(std::string name);
 
 	~GameScreen();
 

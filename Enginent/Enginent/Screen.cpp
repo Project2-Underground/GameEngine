@@ -192,6 +192,11 @@ Item* GameScreen::FindItem(std::string name) {
 	return nullptr;
 }
 
+Puzzle* GameScreen::FindPuzzle(std::string name)
+{
+	return puzzles[name];
+}
+
 void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 

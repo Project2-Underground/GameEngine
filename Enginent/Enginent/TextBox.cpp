@@ -1,5 +1,6 @@
 #include "TextBox.h"
 #include "Game.h"
+#include "Player.h"
 
 TextBox* TextBox::_instance = nullptr;
 
@@ -68,9 +69,31 @@ void TextBox::setText(std::string key, bool talk)
 				dialogue.push_back(textObj);
 				lineCount++;
 			}
+
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			//animation
+			if (d_text->dialogue[d_index].animName != "")
+			{
+				Game::GetInstance()->GetPlayer()->anim->Play(d_text->dialogue[d_index].animName, false);
+			}
+
+			//note
+			if (d_text->dialogue[d_index].noteName != "")
+			{
+				Phone* phone = Phone::GetInstance();
+				phone->AddPage(NOTE, d_text->dialogue[d_index].noteName);
+				SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
+			}
+
+			//puzzle
+			if (d_text->dialogue[d_index].puzzleName != "")
+			{
+				((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(d_text->dialogue[d_index].puzzleName);
+			}
+
+
 			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-			InteractableObj* obj = dynamic_cast<NonPlayer*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
 			if (item != nullptr && obj != nullptr && obj->hasItem)
 			{
 				gs->GetInventory()->AddItem(item);
