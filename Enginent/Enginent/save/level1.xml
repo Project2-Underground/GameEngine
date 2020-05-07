@@ -2,7 +2,7 @@
 
 <!-- texture = NONE toset display false-->
 
-<level currentLevel="1" startPosX="0" startPosY="-50" Start="EliasRoom">
+<level currentLevel="1" startPosX="0" Start="EliasRoom">
 	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
@@ -23,7 +23,6 @@
 			</Closet>
 			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>
-				<description>this is a calendar</description>
 			</Calendar>
 		</interactObj>
 		<doors>
@@ -90,6 +89,7 @@
 		<doors>
 			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="259" sizeY="364" posX="-7" posY="174" next_room="BackDoorRoom" next_door="BackDoorRoom_Foreground_Door" layer="0">
 				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
+				<key name="NONE"/>
 				<isOpenDoor/>
 			</StairDoor>
 			<LowerStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-115" next_room="MainHallUpper" next_door="UpperStair" stair="" layer="0"/>

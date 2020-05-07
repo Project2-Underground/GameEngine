@@ -20,7 +20,7 @@ bool XMLManager::LoadFile(std::string filename) {
 	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 	if (result)
 		return true;
-	std::cout << "cannot open file\n";
+	std::cout << "cannot open file " << filename << std::endl;
 	return false;
 }
 
@@ -256,8 +256,10 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 }
 
 void XMLManager::GetLevelNumber(std::string filename, Level* lvl) {
-	if (LoadFile(filename))
+	if (LoadFile(filename)) {
 		lvl->levelNo = doc.child("level").attribute("currentLevel").as_int();
+		lvl->xStart = doc.child("level").attribute("startPosX").as_float();
+	}
 }
 
 void XMLManager::LoadFromSave(std::string filename) {
@@ -279,6 +281,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
+			gs->puzzles[p->name()]->Reset();
 			if (p->attribute("done").as_bool())
 				gs->puzzles[p->name()]->CompletePuzzle();
 			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
@@ -589,24 +592,6 @@ void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>
 					c.AddText(msg->child_value());
 				}
 			chats.insert(std::pair<std::string, ChatInfo>(c.name, c));
-		}
-	}
-}
-
-void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
-	if (LoadFile(filename)) {
-		pugi::xml_node objs = doc.child("Objects");
-		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
-			Room* r = level->rooms[room->name()];
-			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
-				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
-				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
-					InteractableObj* o = ((InteractableObj*)(r->FindObject(triggerObj->name())));
-					interactObj->AddTriggerObj(o);
-					o->triggered = false;
-					//std::cout << o->object_name << std::endl;
-				}
-			}
 		}
 	}
 }

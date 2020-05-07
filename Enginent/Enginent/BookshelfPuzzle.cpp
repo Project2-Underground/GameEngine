@@ -179,10 +179,13 @@ void Bookshelf::Reset() {
 		books[i]->SetPosition(originalPos[i]);
 		log[i]->book = nullptr;
 	}
+	pass = false;
+	doneAction = false;
 }
 
 void Bookshelf::ActionAfterPuzzle() {
 	Game::GetInstance()->GetCurrentLevel()->rooms["MainHallLower"]->doors["StairDoor"]->Open();
+	TextBox::GetInstance()->setText("Hall_Bookshelf_L3");
 }
 
 void Bookshelf::CompletePuzzle() {
@@ -216,15 +219,11 @@ Bookshelf::~Bookshelf()
 
 BookshelfPuzzle::BookshelfPuzzle()
 {
+	prepTalk.clear();
 	enableInventory = false;
 	std::vector<Book*> books1;
 	std::vector<Space*> space1;
 	std::vector<UIObject* > images;
-
-	background = new UIObject();
-	background->SetTexture("Texture/Puzzle/Puzzle1_Background.png");
-	background->SetSize(1280, -720);
-	UI.push_back(background);
 
 	UIObject* bg = new UIObject();
 	bg->SetTexture("Texture/Puzzle/Puzzle1_Background.png");
@@ -273,17 +272,17 @@ BookshelfPuzzle::BookshelfPuzzle()
 	closeButton->SetPosition(glm::vec3(505.0f, 181.0f, 1.0f));
 	closeButton->SetSize(46.0f, -44.0f);
 	closeButton->SetCollder(new Collider(closeButton));
+	UI.push_back(closeButton);
 
 	puzzle = new Bookshelf("Texture/Puzzle/Puzzle1_BookShelf.png", -300, 0, 200, -400);
 	((Bookshelf*)puzzle)->Init(books1, space1, images);
-	UI.push_back(closeButton);
-	UI.push_back(puzzle);
 }
 void BookshelfPuzzle::Reset() {
 	puzzle->Reset();
 }
 void BookshelfPuzzle::Render()
 {
+	((Bookshelf*)puzzle)->Render();
 	Game::GetInstance()->GetRenderer()->Render(UI);
 }
 
@@ -461,7 +460,23 @@ void Bookshelf2::Update()
 
 void Bookshelf2::Reset()
 {
+	glm::vec3 paperOriginalPos[8] = { glm::vec3(338, 263, 0) ,glm::vec3(338, 68, 0) ,glm::vec3(338, -89, 0) ,glm::vec3(338, -247, 0) ,glm::vec3(497, 263, 0) ,
+									  glm::vec3(497, 68, 0) ,glm::vec3(497, -89, 0) ,glm::vec3(497, -247, 0) };
 
+	glm::vec3 bookOriginalPosition[8] = { glm::vec3(-107, 268,1), glm::vec3(107, 268,1), glm::vec3(-107, 93,1), glm::vec3(107, 93,1),
+										  glm::vec3(-107, -88,1), glm::vec3(107, -88,1), glm::vec3(-107, -269,1), glm::vec3(107, -269,1) };
+
+	for (int i = 0; i < 8; i++) {
+		papers[i]->SetPosition(paperOriginalPos[i]);
+		papers[i]->SetSize(229, -161);
+		papers[i]->SetTexture(papers[i]->norm_paperTexture);
+		books[i]->SetPosition(bookOriginalPosition[i]);
+		log[i]->book = nullptr;
+	}
+
+	for (int i = 0; i < books_2.size(); i++) {
+		books_2[i]->paper = nullptr;
+	}
 }
 
 void Bookshelf2::LeftClick(glm::vec3 screen, glm::vec3 world)
@@ -592,12 +607,10 @@ void Bookshelf2::ActionAfterPuzzle()
 	door->SetTexture("Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->doors.insert(std::pair<std::string, Door*>("level2Door", door));
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->objects.push_back(door);
-	obj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());
 	Butler* butler = gs->butler;
 	butler->currentPhase = Butler::PHASE2;
 	butler->Appear();
-	gs->ClosePuzzle();
 }
 
 Book2* Bookshelf2::FindBook2(int id) {
@@ -664,6 +677,7 @@ Bookshelf2::~Bookshelf2()
 
 BookshelfPuzzle_2::BookshelfPuzzle_2()
 {
+	prepTalk.clear();
 	puzzle = new Bookshelf2("Texture/puzzle5/Puzzle5_BookShelf.png", 0, 0, 1280, -720);
 	//void Init(std::vector<Book2*>, std::vector<Space2*>, std::vector<UIObject*>, std::vector<Paper*>);
 	std::vector<Book2*> books;
@@ -752,12 +766,17 @@ BookshelfPuzzle_2::BookshelfPuzzle_2()
 	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper8(I).png", "Texture/puzzle5/Puzzle5_Paper8.png", glm::vec3(497, -247, 0), 229, -161, 8);
 	papers.push_back(tmp_paper);
 
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	UI.push_back(closeButton);
+
 	((Bookshelf2*)puzzle)->Init(books_1, books, spaces, images, papers);
 }
 
 void BookshelfPuzzle_2::Render()
 {
 	((Bookshelf2*)puzzle)->Render();
+	Game::GetInstance()->GetRenderer()->Render(UI);
 }
 
 void BookshelfPuzzle_2::Update()
@@ -767,7 +786,7 @@ void BookshelfPuzzle_2::Update()
 
 void BookshelfPuzzle_2::Reset()
 {
-
+	puzzle->Reset();
 }
 
 bool BookshelfPuzzle_2::CheckRequirements()
@@ -778,11 +797,25 @@ bool BookshelfPuzzle_2::CheckRequirements()
 void BookshelfPuzzle_2::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
 	((Bookshelf2*)puzzle)->LeftClick(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderPressed(screen.x, screen.y);
+		}
+	}
 }
 
 void BookshelfPuzzle_2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
 	((Bookshelf2*)puzzle)->LeftRelease(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderReleased(screen.x, screen.y);
+		}
+	}
 }
 
 void BookshelfPuzzle_2::RightClick(glm::vec3 screen, glm::vec3 world)

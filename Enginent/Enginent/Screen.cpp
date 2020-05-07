@@ -122,6 +122,7 @@ MenuScreen::~MenuScreen() {
 
 /*GAME SCREEN*/
 GameScreen::GameScreen() {
+	Game::GetInstance()->GetCursor()->ResetCursor();
 	InventoryEnable = true;
 	PuzzleTime = false;
 	currentLevel = nullptr;
@@ -129,9 +130,6 @@ GameScreen::GameScreen() {
 	levels.push_back("save/level1.xml");
 	levels.push_back("save/level2.xml");
 	levels.push_back("save/level3.xml");
-	objActions.push_back("save/objSpecialAction1.xml");
-	objActions.push_back("save/objSpecialAction2.xml");
-	objActions.push_back("save/objSpecialAction3.xml");
 
 	player = new Player();
 	player->SetSize(205.0f, -430.0f);
@@ -144,7 +142,6 @@ GameScreen::GameScreen() {
 
 	ChangeLevel(0);
 	XMLManager::GetInstance()->LoadItems(items);
-	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[0], currentLevel);
 
 	inventory = new Inventory();
 	phone = Phone::GetInstance();
@@ -199,8 +196,8 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
+		renderer->Render(UI);
 	}
-	renderer->Render(UI);
 
 	inventory->Render();
 	if(GameWindowOpen())
@@ -313,10 +310,10 @@ void GameScreen::ChangeLevel(int level) {
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	player->StopWalking();
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {

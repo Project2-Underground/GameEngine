@@ -54,8 +54,6 @@ void InteractableObj::action() {
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
-	for (auto obj : triggerObjs)
-		obj->triggered = true;
 	PickUpItem();
 	TakeNote();
 }
@@ -122,12 +120,6 @@ void InteractableObj::PickUpItem() {
 			SetTexture(nextTexture);
 
 		SoundManager::GetInstance()->playSound(SFX, "Pickup", false);
-		/*if (useItemTriggerDialogue) {
-			useItemTriggerDialogue = false;
-			actionTriggerDialogue = false;
-			for (auto obj : dialogueTriggers[USE_ITEM_TRIGGER_DIALOGUE])
-				gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
-		}*/
 	}	
 }
 
@@ -137,20 +129,6 @@ void InteractableObj::SetAnimation(std::string name, std::string texture, int fr
 
 	anim->AddAnimation(name, texture, frameNo, frameRate, loop);
 }
-
-void InteractableObj::AddTriggerObj(InteractableObj* obj) {
-	triggerObjs.push_back(obj);
-}
-
-//
-//void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName) {
-//	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
-//	switch (type)
-//	{
-//		case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
-//		case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
-//	}
-//}
 
 void InteractableObj::ChangeDialogue(std::string n, std::string a)
 {
@@ -260,9 +238,6 @@ void ViewObj::action() {
 	vw->Open();
 	vw->SetViewItem(this);
 	InteractableObj::action();
-	/*TextBox::GetInstance()->setText(this->dialogue_name);
-	TakePic();*/
-	// set description
 }
 
 void NonPlayer::action()
@@ -281,8 +256,6 @@ void NonPlayer::action()
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
-	for (auto obj : triggerObjs)
-		obj->triggered = true;
 	TakeNote();
 }
 
@@ -292,15 +265,14 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 
 void PuzzleObj::action() {
 	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements()) {
-		if (!dialogue_name.empty()) {
+		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			// tmp solution
-			dialogue_name.clear();
+			dialogue_name = "";
 		}
 		else {
 			Puzzle* p = ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName];
-			if(!p->prepTalk.empty())
-				TextBox::GetInstance()->setText(p->prepTalk);
+			TextBox::GetInstance()->setText(p->prepTalk);
 			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
 		}
 	}
@@ -328,6 +300,8 @@ void PlayerTriggerObj::Update() {
 
 NumpadPuzzleAfter::NumpadPuzzleAfter() {
 	object_name = "NumpadAfterUnlock";
+	dialogue_name = "backdoor_com_pass";
+	dialogue_after = "backdoor_com_pass";
 	actionDone = false;
 	SetItemToUse("keyCard");
 	//SetDialogueName();
@@ -356,6 +330,7 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	tmp->SetPuzzleName("BookshelfPuzzle2");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
+	tmp->SetCurrentDialogueName("");
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
 	puzzleObj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());

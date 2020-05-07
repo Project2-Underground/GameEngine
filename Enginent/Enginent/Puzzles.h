@@ -264,7 +264,7 @@ public:
 	void Init(std::vector<UIObject*>, std::vector<Button*>, int* c, int c_size, std::vector<int>* input);
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
@@ -346,7 +346,7 @@ public:
 	NumpadPuzzle();
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
@@ -361,7 +361,7 @@ public:
 	NumpadPuzzle_2();
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);

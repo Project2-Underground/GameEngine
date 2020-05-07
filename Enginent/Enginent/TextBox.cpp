@@ -28,10 +28,11 @@ TextBox::TextBox()
 
 void TextBox::setText(std::string key, bool talk)
 {
+	//std::cout << key << std::endl;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
-	SetDisplay(true);
 	if (key != "")
 	{
+		SetDisplay(true);
 		Dialogue* tmp = scriptManager->GetDialogue(key);
 		if (tmp->dialogue.size() != 0)
 		{

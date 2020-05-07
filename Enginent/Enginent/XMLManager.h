@@ -24,8 +24,6 @@ public:
 	void GenerateDoor(pugi::xml_node, Room*);
 	void GenerateNPC(pugi::xml_node, Room*);
 	void CreateObject(ImageObject* tmp, pugi::xml_node);
-
-	void LoadObjSpecialActions(std::string, Level*);
 	void LoadItems(std::vector<Item*>&);
 
 	void GetLevelNumber(std::string, Level*);

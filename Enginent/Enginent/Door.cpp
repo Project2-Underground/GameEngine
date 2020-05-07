@@ -9,14 +9,20 @@ Door::Door(std::string next_room, std::string next_door) {
 	this->nextDoor = next_door;
 	used = true;
 	isOpenDoor = false;
+	openTexture = 0;
 }
 
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
-		if(interactType != STAIR && !isOpenDoor)
+		if (interactType != STAIR && !isOpenDoor) {
 			SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
-		gs->ChangeRoom(nextRoom, nextDoor);
+			Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
+		}
+		if (GetTexture() != openTexture && openTexture != 0)
+			SetTexture(openTexture);
+		else
+			gs->ChangeRoom(nextRoom, nextDoor);
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());
@@ -28,7 +34,6 @@ void Door::action() {
 }
 
 void Door::SetOpenTexture(std::string texture) {
-	used = false;
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
