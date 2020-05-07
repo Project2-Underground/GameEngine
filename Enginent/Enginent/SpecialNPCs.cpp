@@ -91,3 +91,11 @@ void Butler::SetTriggered(bool b) {
 bool Butler::IsTriggered() {
 	return triggered;
 }
+
+void BackAlleyEmma::action() {
+	NonPlayer::action();
+	GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
+	InteractableObj* obj = (InteractableObj*)gs->GetCurrentLevel()->FindObject("Building1_FloorDoorClose");
+	obj->used = true;
+	obj->SetInteractType = DOOR;
+}

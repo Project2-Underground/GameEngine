@@ -20,3 +20,9 @@ public:
 	bool IsTriggered();
 	void Update();
 };
+
+class BackAlleyEmma : public NonPlayer {
+public:
+	BackAlleyEmma(std::string name) :NonPlayer(name) {}
+	void action();
+};

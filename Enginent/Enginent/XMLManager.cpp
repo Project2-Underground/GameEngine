@@ -142,14 +142,15 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("item")) {
 			interactObj->SetItem(child->child("item").attribute("name").as_string());
 			interactObj->scriptHandleItem = child->child("item").attribute("scriptHandleItem").as_bool();
-			std::cout << "XMLManager::GenerateInteractObj scriptHandleItem "<< child->name() << " : " << interactObj->scriptHandleItem << std::endl;
+			//std::cout << "XMLManager::GenerateInteractObj scriptHandleItem "<< child->name() << " : " << interactObj->scriptHandleItem << std::endl;
 		}
 
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
 		if (child->child("note"))
-			interactObj->SetNoteName(child->child("note").attribute("name").as_string());
+			for(pugi::xml_node_iterator note = child->child("note").begin(); note != child->child("note").end(); note++)
+				interactObj->AddNoteName(note->name());
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -158,6 +159,10 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
 		interactObj->SetCollder(new Collider(interactObj));
+		if (child->child("colOff")) {
+			interactObj->col->enable = false;
+		}
+
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
 		interactObj->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
@@ -181,6 +186,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			door = new WallDoor(next_room, next_door);
 		else if (child->child("EliasDoor"))
 			door = new EliasDoor(next_room, next_door);
+		else if (child->child("SecretDoor"))
+			door = new SecretDoor(next_room, next_door);
 		else
 			door = new Door(next_room, next_door);
 
@@ -219,7 +226,13 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 	pugi::xml_node npcs = room.child("NPCs");
 
 	for (pugi::xml_node_iterator child = npcs.begin(); child != npcs.end(); child++) {
-		NonPlayer* npc = new NonPlayer(child->name());
+		NonPlayer* npc;
+		if (child->name() == "BackAlley_Emma") {
+			npc = new BackAlleyEmma(child->name());
+		}
+		else {
+			npc = new NonPlayer(child->name());
+		}
 
 		float sizeX = child->attribute("sizeX").as_float();
 		float sizeY = child->attribute("sizeY").as_float();
@@ -327,6 +340,10 @@ void XMLManager::LoadFromSave(std::string filename) {
 					if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
 						if (node.attribute("used").as_bool())
 							n->UnlockBookshelf();
+					}
+
+					if (PlayerTriggerObj * t = dynamic_cast<PlayerTriggerObj*>(obj)) {
+						t->triggered = node.attribute("triggered").as_bool();
 					}
 				}
 			}
@@ -444,6 +461,10 @@ void XMLManager::SaveGame(std::string filename) {
 
 				if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
 					node.append_attribute("used").set_value(n->used);
+				}
+
+				if (PlayerTriggerObj * t = dynamic_cast<PlayerTriggerObj*>(obj)) {
+					node.append_attribute("triggered").set_value(t->triggered);
 				}
 			}
 		}

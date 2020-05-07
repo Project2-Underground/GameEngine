@@ -22,13 +22,18 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
-			<MainFloor2_Building5_Door texture="Texture/level2/MainFloor2/MainFloor2_Building5_Door.png" sizeX="486" sizeY="388" posX="-5355" posY="10" type="1" layer="0" dialogue=""/>
-			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue=""/>
-			<MainFloor2_Mansion_Door texture="Texture/level2/MainFloor2/MainFloor2_Mansion_Door.png" sizeX="798" sizeY="446" posX="-2948" posY="73" layer="0" type="1" dialogue=""/>
+			<MainFloor2_Building5_Door texture="Texture/level2/MainFloor2/MainFloor2_Building5_Door.png" sizeX="486" sizeY="388" posX="-5355" posY="10" type="1" layer="0" dialogue="">
+				<typeView type="2"/>
+			</MainFloor2_Building5_Door>
+			<MainFloor2_Mansion_Door texture="Texture/level2/MainFloor2/MainFloor2_Mansion_Door.png" sizeX="798" sizeY="446" posX="-2948" posY="73" layer="0" type="1" dialogue="">
+				<typeView type="2"/>
+			</MainFloor2_Mansion_Door>
 		</interactObj>
 		<doors>
-			<MainFloor2_Building1_Door texture="Texture/level2/MainFloor2/MainFloor2_Building1_Door.png" sizeX="357" sizeY="404" posX="-619" posY="6" layer="0" next_room="Building1" next_door="Building1_Door" dialogue="">
+			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" next_room="BackAlley" next_door="AlleyOut" dialogue="">
 				<key name="NONE"/>
+			</MainFloor2_BlackAlley>
+			<MainFloor2_Building1_Door texture="Texture/level2/MainFloor2/MainFloor2_Building1_Door.png" sizeX="357" sizeY="404" posX="-619" posY="6" layer="0" next_room="Building1" next_door="Building1_Door" dialogue="">
 			</MainFloor2_Building1_Door>
 			<MainFloor2_Building2_Door texture="Texture/level2/MainFloor2/MainFloor2_Building2_Door.png" sizeX="269" sizeY="408" posX="1426" posY="-5" layer="0" next_room="" next_door="" dialogue="">
 				<key name="NONE"/>
@@ -79,6 +84,8 @@
 			<Building1_Door texture="Texture/level2/Building1/Building1_Door.png" sizeX="214" sizeY="360" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
 			</Building1_Door>
 			<Building1_FloorDoorClose texture="Texture/level2/Building1/Building1_FloorDoorClose.png" sizeX="315" sizeY="115" posX="0" posY="0" next_room="" next_door="" layer="0" dialogue="">
+				<SecretDoor/>
+				<key name="NONE"/>
 				<openDoor texture="Texture/level2/Building1/Building1_FloorDoorOpen.png"/>
 			</Building1_FloorDoorClose>
 		</doors>
@@ -88,4 +95,26 @@
 			<fg texture="Texture/level2/Building1/Building1_Foreground.png" sizeX="700" sizeY="141" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</Building1>
+	<BackAlley left_limit="-680" right_limit="680" top_limit="360" bottom_limit="-360" y="-80">
+		<background>
+			<bg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+		</interactObj>
+		<doors>
+			<AlleyOut texture="NONE" sizeX="300" sizeY="720" posX="-488" posY="0" next_room="MainFloor2" next_door="MainFloor2_BlackAlley" layer="0">
+			</AlleyOut>
+		</doors>
+		<NPCs>
+			<BackAlley_Emma sizeX="112" sizeY="336" posX="452" posY="-58" layer="-50">
+				<Animations>
+					<Idle texture="Texture/level2/BackAlley/BackAlley_Emma.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</BackAlley_Emma>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="-275.5" posX="0" posY="0" layer="0"/>
+		</foreground>
+	</BackAlley>
 </level>

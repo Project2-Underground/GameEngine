@@ -7,6 +7,7 @@ Door::Door(std::string next_room, std::string next_door) {
 	interactType = DOOR;
 	this->nextRoom = next_room;
 	this->nextDoor = next_door;
+	triggered = false;
 	used = true;
 	isOpenDoor = false;
 	openTexture = 0;
@@ -14,7 +15,7 @@ Door::Door(std::string next_room, std::string next_door) {
 
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	if (used) {
+	if (used || triggered) {
 		if (interactType != STAIR && !isOpenDoor) {
 			SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
 			Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
@@ -54,6 +55,23 @@ void WallDoor::action() {
 	else {
 		InteractableObj::action();
 		interactType = NORMAL;
+	}
+}
+void SecretDoor::action() {
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	if (used) {
+		if (GetTexture() != openTexture && openTexture != 0)
+			SetTexture(openTexture);
+		else
+			gs->ChangeRoom(nextRoom, nextDoor);
+	}
+	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		UseItem(gs->GetInventory()->GetSelectedItem());
+		if (used)
+			interactType = DOOR;
+	}
+	else {
+		InteractableObj::action();
 	}
 }
 void EliasDoor::action() {

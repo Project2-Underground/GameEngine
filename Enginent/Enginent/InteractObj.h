@@ -35,7 +35,7 @@ protected:
 	bool takeNote;
 	bool hasNextTexture;
 	bool talk;
-	std::string noteName;
+	std::vector<std::string> noteNames;
 	std::string item_to_use;
 	std::string dialogue_name;
 	std::string dialogue_before;
@@ -55,7 +55,7 @@ public:
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
-	void SetNoteName(std::string);
+	void AddNoteName(std::string);
 	void SetDialogueName(std::string, std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);

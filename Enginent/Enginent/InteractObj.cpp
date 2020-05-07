@@ -25,7 +25,9 @@ void InteractableObj::TakeNote() {
 		interactType = NORMAL;
 		col->enable = false;
 		Phone* phone = Phone::GetInstance();
-		phone->AddPage(NOTE, noteName);
+		for (int i = 0; i < noteNames.size(); i++) {
+			phone->AddPage(NOTE, noteNames[i]);
+		}
 		takeNote = false;
 		SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 	}
@@ -61,8 +63,8 @@ void InteractableObj::action() {
 	TakeNote();
 }
 
-void InteractableObj::SetNoteName(std::string note) {
-	noteName = note;
+void InteractableObj::AddNoteName(std::string note) {
+	noteNames.push_back(note);
 	takeNote = true;
 }
 
@@ -100,7 +102,6 @@ void InteractableObj::UseItem(Item* item) {
 		used = true;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
-
 		i->UnselectItem();
 	}
 }
@@ -273,20 +274,22 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements()) {
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	Puzzle* p = gs->FindPuzzle(puzzleName);
+	if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
 		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			// tmp solution
 			dialogue_name = "";
 		}
 		else {
-			Puzzle* p = ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName];
+			Puzzle* p = gs->puzzles[puzzleName];
 			TextBox::GetInstance()->setText(p->prepTalk);
-			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+			gs->OpenPuzzle(puzzleName);
 		}
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
-		UseItem(((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->GetSelectedItem());
+		UseItem(gs->GetInventory()->GetSelectedItem());
 	else
 		InteractableObj::action();
 }
@@ -345,10 +348,13 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	GameScreen* gs = ((GameScreen*)g->GetScreen());
 	gs->ClosePuzzle();
 	Room* room = g->GetCurrentLevel()->rooms["EmmaRoom"];
-	((InteractableObj*)room->FindObject("EmmaRoom_Drawing"))->SetCurrentDialogueName("EmmaRoom_picture2");
-	((InteractableObj*)room->FindObject("EmmaRoom_Book"))->SetCurrentDialogueName("EmmaRoom_book2");
-	((InteractableObj*)room->FindObject("EmmaRoom_Window"))->SetCurrentDialogueName("EmmaRoom_window2");
-
+	((InteractableObj*)room->FindObject("EmmaRoom_Drawing"))->ChangeDialogue("EmmaRoom_picture2", "EmmaRoom_picture2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Book"))->ChangeDialogue("EmmaRoom_book2","EmmaRoom_book2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Window"))->ChangeDialogue("EmmaRoom_window2", "EmmaRoom_window2");
+	InteractableObj* emmaNote = ((InteractableObj*)room->FindObject("EmmaRoom_Note1"));
+	emmaNote->ChangeDialogue("EmmaRoom_note", "EmmaRoom_note");
+	emmaNote->SetInteractType(ADDNOTE);
+	emmaNote->col->enable = true;
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);

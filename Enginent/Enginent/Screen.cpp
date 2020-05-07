@@ -197,7 +197,9 @@ Item* GameScreen::FindItem(std::string name) {
 
 Puzzle* GameScreen::FindPuzzle(std::string name)
 {
-	return puzzles[name];
+	if(!name.empty())
+		return puzzles[name];
+	return nullptr;
 }
 
 void GameScreen::Render() {
@@ -328,7 +330,8 @@ void GameScreen::ChangeLevel(int level) {
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
-	currentLevel->ChangeRoom(room, door);
+	if(!room.empty() && !door.empty())
+		currentLevel->ChangeRoom(room, door);
 }
 
 InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
@@ -381,31 +384,12 @@ void GameScreen::ResetPuzzle() {
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
-	//Game::GetInstance()->GetCursor()->enableChange(true);
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
 	switch (key)
 	{
-	//case SDLK_d: {
-	//	// unlock door
-	//	Item* item = inventory->GetInventoryBox(0)->GetItem();
-	//	if (item != nullptr)
-	//		currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->UseItem(item);
-	//}break;
-	//case SDLK_w: {
-	//	Item* item = inventory->GetInventoryBox(0)->GetItem();
-	//	if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
-	//		((SeparatableItem*)item)->action();
-	//}break;
-	//case SDLK_s:
-	//	// save current game
-	//	XMLManager::GetInstance()->SaveGame("save/test.xml");
-	//	break;
-	//case SDLK_l:
-	//	XMLManager::GetInstance()->LoadFromSave("save/test.xml");
-	//	break;
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
 		break;
