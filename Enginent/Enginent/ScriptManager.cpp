@@ -1,4 +1,5 @@
 #include "ScriptManager.h"
+#include "Game.h"
 
 s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim)
 {

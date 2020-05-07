@@ -180,16 +180,18 @@ void TextBox::clickLeft(glm::vec3 pos)
 			lineCount++;
 		}
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-		Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-		InteractableObj* obj = dynamic_cast<NonPlayer*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
-		if (item != nullptr && obj != nullptr && obj->hasItem)
+		if (d_text->dialogue[d_index].itemName != "")
 		{
-			gs->GetInventory()->AddItem(item);
-
-			ViewWindow* vw = ViewWindow::GetInstance();
-			vw->SetViewItem(item);
-			vw->Open();
-			obj->hasItem = false;
+			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
+			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			if (item != nullptr && obj != nullptr && obj->hasItem)
+			{
+				gs->GetInventory()->AddItem(item);
+				ViewWindow* vw = ViewWindow::GetInstance();
+				vw->SetViewItem(item);
+				vw->Open();
+				obj->hasItem = false;
+			}
 		}
 	}
 	else if (choice_UI->IsDisplay())

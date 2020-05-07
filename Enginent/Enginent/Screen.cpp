@@ -189,6 +189,7 @@ Item* GameScreen::FindItem(std::string name) {
 	for (auto i : items)
 		if (i->name == name)
 			return i;
+	std::cout << "cannot find " << name << std::endl;
 	return nullptr;
 }
 
