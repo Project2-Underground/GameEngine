@@ -278,10 +278,10 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
 }
 
-void XMLManager::GetLevelNumber(std::string filename, Level* lvl) {
+void XMLManager::GetLevelNumber(std::string filename, Level* currentLevel) {
 	if (LoadFile(filename)) {
-		lvl->levelNo = doc.child("level").attribute("currentLevel").as_int();
-		lvl->xStart = doc.child("level").attribute("startPosX").as_float();
+		currentLevel->levelNo = doc.child("level").attribute("currentLevel").as_int();
+		currentLevel->xStart = doc.child("level").attribute("startPosX").as_float();
 	}
 }
 
@@ -304,10 +304,12 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
-			gs->puzzles[p->name()]->Reset();
-			if (p->attribute("done").as_bool())
-				gs->puzzles[p->name()]->CompletePuzzle();
-			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
+			if (gs->puzzles[p->name()]->GetPuzzleLevel() == l) {
+				gs->puzzles[p->name()]->Reset();
+				if (p->attribute("done").as_bool())
+					gs->puzzles[p->name()]->CompletePuzzle();
+				gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
+			}
 		}
 
 		std::map<std::string, Room*>::iterator itr;
@@ -340,6 +342,13 @@ void XMLManager::LoadFromSave(std::string filename) {
 					if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
 						if (node.attribute("used").as_bool())
 							n->UnlockBookshelf();
+					}
+
+					if (RemoveObj * n = dynamic_cast<RemoveObj*>(obj)) {
+						if (node.attribute("triggered").as_bool())
+							n->Trigger();
+						if (node.attribute("used").as_bool())
+							n->RemoveSelf();
 					}
 
 					if (PlayerTriggerObj * t = dynamic_cast<PlayerTriggerObj*>(obj)) {
@@ -459,12 +468,12 @@ void XMLManager::SaveGame(std::string filename) {
 					node.append_attribute("open").set_value(o->IsOpen());
 				}
 
-				if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
-					node.append_attribute("used").set_value(n->used);
+				if (dynamic_cast<NumpadPuzzleAfter*>(obj) || dynamic_cast<RemoveObj*>(obj)) {
+					node.append_attribute("used").set_value(obj->used);
 				}
 
-				if (PlayerTriggerObj * t = dynamic_cast<PlayerTriggerObj*>(obj)) {
-					node.append_attribute("triggered").set_value(t->triggered);
+				if (dynamic_cast<PlayerTriggerObj*>(obj) || dynamic_cast<RemoveObj*>(obj)) {
+					node.append_attribute("triggered").set_value(obj->triggered);
 				}
 			}
 		}
@@ -646,6 +655,9 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 			else {
 				i = new Item(item->name());
 			}
+
+			i->dialogue_name = item->attribute("dialogue").as_string();
+
 			float x = item->attribute("sizeX").as_float();
 			float y = item->attribute("sizeY").as_float();
 			i->SetSize(x, y);

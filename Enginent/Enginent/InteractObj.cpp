@@ -367,3 +367,22 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	}
 	gs->butler->Appear();
 }
+RemoveObj::RemoveObj() {
+
+}
+void RemoveObj::action() {
+	InteractableObj::action();
+	if (!used) 
+		RemoveSelf();
+}
+
+void RemoveObj::RemoveSelf() {
+	used = true;
+	col->enable = false;
+	display = false;
+}
+
+void RemoveObj::Trigger() {
+	triggered = true;
+	col->enable = true;
+}

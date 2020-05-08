@@ -36,7 +36,7 @@ public:
 	void SetPlayerWalkLimit(Collider*);
 	void SetCameraLimit(Collider*);
 	DrawableObject* FindObject(std::string);
-	Collider* GetPlayerWalkLimit() { return playerWalkLimit; };
+	Collider* GetPlayerWalkLimit() {return playerWalkLimit;}
 	Collider* GetCameraLimit() { return cameraLimit; };
 
 	float y;

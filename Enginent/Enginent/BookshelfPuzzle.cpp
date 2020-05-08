@@ -219,6 +219,7 @@ Bookshelf::~Bookshelf()
 
 BookshelfPuzzle::BookshelfPuzzle()
 {
+	currentLevel = 1;
 	prepTalk.clear();
 	enableInventory = false;
 	std::vector<Book*> books1;
@@ -677,6 +678,7 @@ Bookshelf2::~Bookshelf2()
 
 BookshelfPuzzle_2::BookshelfPuzzle_2()
 {
+	currentLevel = 1;
 	prepTalk.clear();
 	puzzle = new Bookshelf2("Texture/puzzle5/Puzzle5_BookShelf.png", 0, 0, 1280, -720);
 	//void Init(std::vector<Book2*>, std::vector<Space2*>, std::vector<UIObject*>, std::vector<Paper*>);

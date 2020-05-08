@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <Objects>
+	<Building1>
+		<Building1_FloorDoorClose>
+			<Building1_FloorDoorOpen/>
+		</Building1_FloorDoorClose>
+	</Building1>
 </Objects>

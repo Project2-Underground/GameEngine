@@ -286,8 +286,11 @@ public:
 	void ActionAfterPuzzle();
 };
 
+//================================================================================================
+
 class Puzzle {
 protected:
+	int currentLevel;
 	std::vector<UIObject*> UI;
 	UIObject* background;
 	PuzzleTemplate* puzzle;
@@ -305,6 +308,7 @@ public:
 	bool IsInventoryEnable() { return enableInventory; }
 	bool Passed() { return puzzle->Passed(); }
 	bool passedReqiurements;
+	int GetPuzzleLevel() { return currentLevel; }
 	~Puzzle();
 
 	std::string prepTalk;

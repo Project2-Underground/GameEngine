@@ -14,6 +14,7 @@ class Item {
 	unsigned int viewTexture;
 public:
 	std::string name;
+	std::string dialogue_name;
 
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);

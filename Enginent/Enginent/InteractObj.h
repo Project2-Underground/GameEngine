@@ -18,7 +18,8 @@ enum InteractTypeList
 	PUZZLE,
 	STAIR,
 	PLAYER_TRIGGER,
-	ADDNOTE
+	ADDNOTE,
+	REMOVE
 };
 
 enum DialogueTrigger 
@@ -156,4 +157,12 @@ public:
 	NumpadPuzzleAfter();
 	void action();
 	void UnlockBookshelf();
+};
+
+class RemoveObj : public InteractableObj {
+public:
+	RemoveObj();
+	void action();
+	void RemoveSelf();
+	void Trigger();
 };

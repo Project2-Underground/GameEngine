@@ -17,12 +17,14 @@ void Butler::Appear() {
 	{
 	case Butler::PHASE0:
 		// after Elias got out of the room
+		currentLevel = 1;
 		MoveIn("MainHallUpper");
 		SetPosition(glm::vec3(-987, -102, 1));
 		disappearAfterAction = true;
 		clickToInteract = false;
 		break;
 	case Butler::PHASE1:
+		currentLevel = 1;
 		// after finished puzzle 3
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
@@ -32,10 +34,14 @@ void Butler::Appear() {
 		//ChangeDialogue();
 		break;
 	case Butler::PHASE2:
+		currentLevel = 1;
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		disappearAfterAction = false;
 		clickToInteract = true;
+		break;
+	case Butler::PHASE3:
+		currentLevel = 2;
 		break;
 	default:
 		break;
@@ -46,17 +52,21 @@ void Butler::Appear() {
 }
 void Butler::MoveOut(std::string roomName) {
 	Level* lvl = Game::GetInstance()->GetCurrentLevel();
-	std::vector<DrawableObject*>::iterator itr;
-	itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
-	if (itr != lvl->rooms[roomName]->npcs.end())
-		lvl->rooms[roomName]->npcs.erase(itr);
+	if (currentLevel == lvl->levelNo) {
+		std::vector<DrawableObject*>::iterator itr;
+		itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
+		if (itr != lvl->rooms[roomName]->npcs.end())
+			lvl->rooms[roomName]->npcs.erase(itr);
+	}
 }
 void Butler::MoveIn(std::string roomName) {
 	Level* lvl = Game::GetInstance()->GetCurrentLevel();
-	std::vector<DrawableObject*>::iterator itr;
-	itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
-	if (itr == lvl->rooms[roomName]->npcs.end())
-		lvl->rooms[roomName]->npcs.push_back(this);
+	if (currentLevel == lvl->levelNo) {
+		std::vector<DrawableObject*>::iterator itr;
+		itr = std::find(lvl->rooms[roomName]->npcs.begin(), lvl->rooms[roomName]->npcs.end(), this);
+		if (itr == lvl->rooms[roomName]->npcs.end())
+			lvl->rooms[roomName]->npcs.push_back(this);
+	}
 }
 void Butler::Update() {
 	if(anim)
@@ -79,6 +89,10 @@ void Butler::action() {
 		break;
 	case Butler::PHASE1:
 		break;
+	case Butler::PHASE2:
+		break;
+	case Butler::PHASE3:
+		break;
 	default:
 		break;
 	}
@@ -91,11 +105,9 @@ void Butler::SetTriggered(bool b) {
 bool Butler::IsTriggered() {
 	return triggered;
 }
-
 void BackAlleyEmma::action() {
 	NonPlayer::action();
 	GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
-	InteractableObj* obj = (InteractableObj*)gs->GetCurrentLevel()->FindObject("Building1_FloorDoorClose");
-	obj->used = true;
-	obj->SetInteractType = DOOR;
+	RemoveObj* obj = (RemoveObj*)gs->GetCurrentLevel()->FindObject("Building1_FloorDoorClose");
+	obj->Trigger();
 }

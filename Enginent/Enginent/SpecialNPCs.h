@@ -4,13 +4,15 @@
 
 
 class Butler : public PlayerTriggerObj {
+	int currentLevel;
 	void MoveOut(std::string);
 	void MoveIn(std::string);
 public:
 	enum Phase {
 		PHASE0 = 0,
 		PHASE1,
-		PHASE2
+		PHASE2,
+		PHASE3
 	};
 	Phase currentPhase;
 	Butler();

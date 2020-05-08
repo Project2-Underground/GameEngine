@@ -142,6 +142,7 @@ void Numpad::ActionAfterPuzzle()
 	puzzleObj->SetDisplay(false);
 	((GameScreen*)g->GetScreen())->ClosePuzzle();
 	((GameScreen*)g->GetScreen())->butler->currentPhase = Butler::PHASE1;
+	Phone::GetInstance()->Message("Unknown2", 5);
 }
 
 void Numpad2::ActionAfterPuzzle() 
@@ -210,6 +211,7 @@ Numpad::~Numpad()
 
 NumpadPuzzle::NumpadPuzzle()
 {
+	currentLevel = 1;
 	prepTalk.clear();
 	puzzle = new Numpad("Texture/Puzzle2/buttonscreen.png", 0, 0, 2560, -1440);
 
@@ -340,6 +342,7 @@ NumpadPuzzle::~NumpadPuzzle()
 
 NumpadPuzzle_2::NumpadPuzzle_2()
 {
+	currentLevel = 1;
 	prepTalk.clear();
 	puzzle = new Numpad2("Texture/Puzzle2/buttonscreen_2.png", 0, 0, 2560, -1440);
 

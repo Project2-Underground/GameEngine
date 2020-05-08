@@ -17,17 +17,17 @@ void Screen::CloseGameAllWindow() {
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->Init(248, -70, glm::vec3(-270, 170, 1));
+	play->Init(248, -70, glm::vec3(-258, 78, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->Init(213, -74, glm::vec3(-270, 70, 1));
+	load->Init(213, -74, glm::vec3(-277, -18, 1));
 
 	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
-	setting->Init(264, -81, glm::vec3(-270.0f, -40, 1.0f));
+	setting->Init(264, -81, glm::vec3(-266, -111, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->Init(186, -86, glm::vec3(-270.0f, -130.0f, 1.0f));
+	quit->Init(186, -86, glm::vec3(-262, -211, 1.0f));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -37,7 +37,7 @@ MenuScreen::MenuScreen() {
 	UIObject* title = new UIObject();
 	title->SetTexture("Texture/UI/MainScreen/MainScreen_Undergroung.png");
 	title->SetSize(756.0f, -94.0f);
-	title->SetPosition(glm::vec3(-270.0f, 250.0f, 1.0f));
+	title->SetPosition(glm::vec3(-258, 207.0f, 1.0f));
 
 	UI.push_back(background);
 	UI.push_back(title);

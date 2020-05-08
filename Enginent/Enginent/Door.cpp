@@ -40,7 +40,8 @@ void Door::SetOpenTexture(std::string texture) {
 }
 
 void Door::Open() {
-	used = true;
+	used = true; 
+	interactType = DOOR;
 	SetTexture(openTexture);
 }
 
@@ -59,7 +60,7 @@ void WallDoor::action() {
 }
 void SecretDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	if (used) {
+	if (used || triggered) {
 		if (GetTexture() != openTexture && openTexture != 0)
 			SetTexture(openTexture);
 		else
