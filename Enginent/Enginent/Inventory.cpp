@@ -6,7 +6,7 @@ Inventory::Inventory() {
 	triggeredOpen = false;
 	move = false;
 	direction = 1;
-	selectedItem = nullptr;
+	other = nullptr;
 
 	float width = (float)Game::GetInstance()->winWidth;
 	float height = (float)Game::GetInstance()->winHeight;
@@ -65,7 +65,7 @@ void Inventory::Update() {
 	else {
 		direction = -1;
 	}
-	if (move && !selectedItem) {
+	if (move && !other) {
 		if (tab->getPos().y >= maxHeight && direction == 1) {
 			move = false;
 			tab->SetPosition(glm::vec3(tab->getPos().x, maxHeight, 1.0f));
@@ -94,7 +94,7 @@ void Inventory::UnselectItem() {
 		}
 		separateButton->Reset();
 		combineButton->Reset();
-		selectedItem = nullptr;
+		other = nullptr;
 		MouseInput::GetInstance()->ResetActionType();
 		triggeredOpen = false;
 	}
@@ -111,38 +111,25 @@ void Inventory::Render() {
 }
 
 void Inventory::SeparateItem(Item* item) {
-	if (dynamic_cast<SeparatableItem*>(item)) {
-		dynamic_cast<SeparatableItem*>(item)->action();
-	}
-	else {
-		//std::cout << "Separate fail\n";
-	}
+	item->Separate();
 	MouseInput::GetInstance()->ResetActionType(); 
 	UnselectItem();
 }
 
 void Inventory::CombineItem(Item* item) {
-	if (selectedItem) {
-		if (dynamic_cast<CombinableItem*>(selectedItem)) {
-			//std::cout << "try combine\n";
-			CombinableItem* c = ((CombinableItem*)selectedItem);
-			c->selectedItem = item;
-			c->action();
-		}
-		else {
-			//std::cout << "items cannot be combine\n";
-		}
+	if (other) {
+		other->Combine(item);
 		MouseInput::GetInstance()->ResetActionType();
 		UnselectItem();
 	}
 	else {
-		selectedItem = item;
+		other = item;
 		//std::cout << "selected item to combine\n";
 	}
 }
 
 void Inventory::SelectItem(Item* item) {
-	selectedItem = item;
+	other = item;
 }
 
 InventoryBoxButton* Inventory::GetInventoryBox(int index) {

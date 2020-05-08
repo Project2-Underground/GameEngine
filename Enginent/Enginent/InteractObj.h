@@ -18,7 +18,8 @@ enum InteractTypeList
 	PUZZLE,
 	STAIR,
 	PLAYER_TRIGGER,
-	ADDNOTE
+	ADDNOTE,
+	REMOVE
 };
 
 enum DialogueTrigger 
@@ -35,12 +36,12 @@ protected:
 	bool takeNote;
 	bool hasNextTexture;
 	bool talk;
-	std::string noteName;
+	std::vector<std::string> noteNames;
 	std::string item_to_use;
 	std::string dialogue_name;
 	std::string dialogue_before;
 	std::string dialogue_after;
-	std::string itemName;
+	std::string itemName;    
 	std::vector<InteractableObj*> triggerObjs;
 	unsigned int nextTexture; // after picking up an item
 
@@ -48,13 +49,14 @@ public:
 	bool used;
 	bool triggered;
 	bool hasItem;
+	bool scriptHandleItem;
 	InteractableObj();
 
 	virtual void action();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
-	void SetNoteName(std::string);
+	void AddNoteName(std::string);
 	void SetDialogueName(std::string, std::string);
 	bool CheckCollider(float x, float y);
 	bool CheckPointing(float x, float y);
@@ -155,4 +157,12 @@ public:
 	NumpadPuzzleAfter();
 	void action();
 	void UnlockBookshelf();
+};
+
+class RemoveObj : public InteractableObj {
+public:
+	RemoveObj();
+	void action();
+	void RemoveSelf();
+	void Trigger();
 };

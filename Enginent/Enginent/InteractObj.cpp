@@ -25,7 +25,9 @@ void InteractableObj::TakeNote() {
 		interactType = NORMAL;
 		col->enable = false;
 		Phone* phone = Phone::GetInstance();
-		phone->AddPage(NOTE, noteName);
+		for (int i = 0; i < noteNames.size(); i++) {
+			phone->AddPage(NOTE, noteNames[i]);
+		}
 		takeNote = false;
 		SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 	}
@@ -53,15 +55,16 @@ void InteractableObj::action() {
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
-	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	if(interactType != DOOR)
+		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
 		obj->triggered = true;
 	PickUpItem();
 	TakeNote();
 }
 
-void InteractableObj::SetNoteName(std::string note) {
-	noteName = note;
+void InteractableObj::AddNoteName(std::string note) {
+	noteNames.push_back(note);
 	takeNote = true;
 }
 
@@ -99,13 +102,12 @@ void InteractableObj::UseItem(Item* item) {
 		used = true;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
-
 		i->UnselectItem();
 	}
 }
 
 void InteractableObj::PickUpItem() {
-	if (hasItem) {
+	if (hasItem && !scriptHandleItem) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen()); 
 		Item* item = gs->FindItem(itemName);
 		gs->GetInventory()->AddItem(item);
@@ -122,12 +124,6 @@ void InteractableObj::PickUpItem() {
 			SetTexture(nextTexture);
 
 		SoundManager::GetInstance()->playSound(SFX, "Pickup", false);
-		/*if (useItemTriggerDialogue) {
-			useItemTriggerDialogue = false;
-			actionTriggerDialogue = false;
-			for (auto obj : dialogueTriggers[USE_ITEM_TRIGGER_DIALOGUE])
-				gs->GetCurrentLevel()->TriggerChangeDialogue(obj.first, obj.second);
-		}*/
 	}	
 }
 
@@ -141,16 +137,6 @@ void InteractableObj::SetAnimation(std::string name, std::string texture, int fr
 void InteractableObj::AddTriggerObj(InteractableObj* obj) {
 	triggerObjs.push_back(obj);
 }
-
-//
-//void InteractableObj::AddTriggerDialogue(DialogueTrigger type, std::string objName, std::string dName) {
-//	dialogueTriggers[type].insert(std::pair<std::string, std::string>(objName, dName));
-//	switch (type)
-//	{
-//		case ACTION_TRIGGER_DIALOGUE: actionTriggerDialogue = true; break;
-//		case USE_ITEM_TRIGGER_DIALOGUE: useItemTriggerDialogue = true; break;
-//	}
-//}
 
 void InteractableObj::ChangeDialogue(std::string n, std::string a)
 {
@@ -192,7 +178,7 @@ void OpenObj::SetOpenTexture(std::string openT) {
 
 void OpenObj::action() {
 	if (!open && triggered) {
-		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
 		Open();
 	}
 	else if (open) {
@@ -260,9 +246,6 @@ void ViewObj::action() {
 	vw->Open();
 	vw->SetViewItem(this);
 	InteractableObj::action();
-	/*TextBox::GetInstance()->setText(this->dialogue_name);
-	TakePic();*/
-	// set description
 }
 
 void NonPlayer::action()
@@ -291,21 +274,22 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 }
 
 void PuzzleObj::action() {
-	if (used && ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName]->CheckRequirements()) {
-		if (!dialogue_name.empty()) {
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	Puzzle* p = gs->FindPuzzle(puzzleName);
+	if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
+		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			// tmp solution
-			dialogue_name.clear();
+			dialogue_name = "";
 		}
 		else {
-			Puzzle* p = ((GameScreen*)Game::GetInstance()->GetScreen())->puzzles[puzzleName];
-			if(!p->prepTalk.empty())
-				TextBox::GetInstance()->setText(p->prepTalk);
-			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(puzzleName);
+			Puzzle* p = gs->puzzles[puzzleName];
+			TextBox::GetInstance()->setText(p->prepTalk);
+			gs->OpenPuzzle(puzzleName);
 		}
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
-		UseItem(((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->GetSelectedItem());
+		UseItem(gs->GetInventory()->GetSelectedItem());
 	else
 		InteractableObj::action();
 }
@@ -328,6 +312,8 @@ void PlayerTriggerObj::Update() {
 
 NumpadPuzzleAfter::NumpadPuzzleAfter() {
 	object_name = "NumpadAfterUnlock";
+	dialogue_name = "backdoor_com_pass";
+	dialogue_after = "backdoor_com_pass";
 	actionDone = false;
 	SetItemToUse("keyCard");
 	//SetDialogueName();
@@ -356,15 +342,19 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	tmp->SetPuzzleName("BookshelfPuzzle2");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
+	tmp->SetCurrentDialogueName("");
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
 	puzzleObj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());
 	gs->ClosePuzzle();
 	Room* room = g->GetCurrentLevel()->rooms["EmmaRoom"];
-	((InteractableObj*)room->FindObject("EmmaRoom_Drawing"))->SetCurrentDialogueName("EmmaRoom_picture2");
-	((InteractableObj*)room->FindObject("EmmaRoom_Book"))->SetCurrentDialogueName("EmmaRoom_book2");
-	((InteractableObj*)room->FindObject("EmmaRoom_Window"))->SetCurrentDialogueName("EmmaRoom_window2");
-
+	((InteractableObj*)room->FindObject("EmmaRoom_Drawing"))->ChangeDialogue("EmmaRoom_picture2", "EmmaRoom_picture2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Book"))->ChangeDialogue("EmmaRoom_book2","EmmaRoom_book2");
+	((InteractableObj*)room->FindObject("EmmaRoom_Window"))->ChangeDialogue("EmmaRoom_window2", "EmmaRoom_window2");
+	InteractableObj* emmaNote = ((InteractableObj*)room->FindObject("EmmaRoom_Note1"));
+	emmaNote->ChangeDialogue("EmmaRoom_note", "EmmaRoom_note");
+	emmaNote->SetInteractType(ADDNOTE);
+	emmaNote->col->enable = true;
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);
@@ -376,4 +366,23 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 		((InteractableObj*)npc)->Appear(false);
 	}
 	gs->butler->Appear();
+}
+RemoveObj::RemoveObj() {
+
+}
+void RemoveObj::action() {
+	InteractableObj::action();
+	if (!used) 
+		RemoveSelf();
+}
+
+void RemoveObj::RemoveSelf() {
+	used = true;
+	col->enable = false;
+	display = false;
+}
+
+void RemoveObj::Trigger() {
+	triggered = true;
+	col->enable = true;
 }

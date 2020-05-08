@@ -108,6 +108,11 @@ void Numpad::Update()
 	}
 }
 
+void Numpad::Reset() {
+	pass = false;
+	doneAction = false;
+}
+
 void Numpad::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
 	for (int i = 0; i < n_button.size(); i++)
@@ -131,11 +136,18 @@ void Numpad::ActionAfterPuzzle()
 	InteractableObj* puzzleObj = (InteractableObj*)g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->FindObject("BackDoorRoom_Computer");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
+	tmp->ChangeDialogue("backdoor_com_pass", "backdoor_com_pass");
 	g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->objects.push_back(tmp);
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
-	((GameScreen*)g->GetScreen())->ClosePuzzle();
 	((GameScreen*)g->GetScreen())->butler->currentPhase = Butler::PHASE1;
+	Phone::GetInstance()->Message("Unknown2", 5);
+	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	i->RemoveItem("Puzzle3_Pic1");
+	i->RemoveItem("Puzzle3_Pic2");
+	i->RemoveItem("Puzzle3_Pic3");
+	i->RemoveItem("Puzzle3_Pic4");
+	((GameScreen*)g->GetScreen())->ClosePuzzle();
 }
 
 void Numpad2::ActionAfterPuzzle() 
@@ -150,6 +162,11 @@ void Numpad2::ActionAfterPuzzle()
 	g->GetCurrentLevel()->rooms["BackDoorRoom"]->doors.insert(std::pair<std::string, Door*>("BackDoorRoom_EmmaDoor", tmp));
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
+	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	i->RemoveItem("Puzzle2_ColorCode1");
+	i->RemoveItem("Puzzle2_ColorCode2");
+	i->RemoveItem("Puzzle2_EmmaPaper1");
+	i->RemoveItem("Puzzle2_EmmaPaper2");
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
 void Numpad::CompletePuzzle() {
@@ -204,6 +221,8 @@ Numpad::~Numpad()
 
 NumpadPuzzle::NumpadPuzzle()
 {
+	currentLevel = 1;
+	prepTalk.clear();
 	puzzle = new Numpad("Texture/Puzzle2/buttonscreen.png", 0, 0, 2560, -1440);
 
 	std::vector<UIObject*> images;
@@ -260,6 +279,10 @@ NumpadPuzzle::NumpadPuzzle()
 	buttons.push_back(e);
 	buttons.push_back(d);
 
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	UI.push_back(closeButton);
+
 	((Numpad*)puzzle)->Init(images, buttons, c, 4, input);
 }
 
@@ -271,6 +294,7 @@ bool NumpadPuzzle::CheckRequirements() {
 void NumpadPuzzle::Render()
 {
 	puzzle->Render();
+	Game::GetInstance()->GetRenderer()->Render(UI);
 }
 
 void NumpadPuzzle::Update()
@@ -278,14 +302,32 @@ void NumpadPuzzle::Update()
 	puzzle->Update();
 }
 
+void NumpadPuzzle::Reset() {
+	puzzle->Reset();
+}
+
 void NumpadPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
 	puzzle->LeftClick(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderPressed(screen.x, screen.y);
+		}
+	}
 }
 
 void NumpadPuzzle::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
 	puzzle->LeftRelease(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderReleased(screen.x, screen.y);
+		}
+	}
 }
 
 void NumpadPuzzle::UpdateMouseState(glm::vec3, glm::vec3)
@@ -310,6 +352,8 @@ NumpadPuzzle::~NumpadPuzzle()
 
 NumpadPuzzle_2::NumpadPuzzle_2()
 {
+	currentLevel = 1;
+	prepTalk.clear();
 	puzzle = new Numpad2("Texture/Puzzle2/buttonscreen_2.png", 0, 0, 2560, -1440);
 
 	std::vector<UIObject*> images;
@@ -365,6 +409,10 @@ NumpadPuzzle_2::NumpadPuzzle_2()
 	buttons.push_back(e);
 	buttons.push_back(d);
 
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	UI.push_back(closeButton);
+
 	SDL_Color numColor = { 255, 255, 255, 1 };
 	((Numpad*)puzzle)->setNumColor(numColor);
 	((Numpad*)puzzle)->Init(images, buttons, c, 3, input);
@@ -378,6 +426,7 @@ bool NumpadPuzzle_2::CheckRequirements() {
 void NumpadPuzzle_2::Render()
 {
 	puzzle->Render();
+	Game::GetInstance()->GetRenderer()->Render(UI);
 }
 
 void NumpadPuzzle_2::Update()
@@ -385,14 +434,32 @@ void NumpadPuzzle_2::Update()
 	puzzle->Update();
 }
 
+void NumpadPuzzle_2::Reset(){
+	puzzle->Reset();
+}
+
 void NumpadPuzzle_2::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
 	puzzle->LeftClick(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderPressed(screen.x, screen.y);
+		}
+	}
 }
 
 void NumpadPuzzle_2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
 	puzzle->LeftRelease(screen, world);
+	for (int j = 0; j < UI.size(); j++)
+	{
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+		{
+			button->checkColliderReleased(screen.x, screen.y);
+		}
+	}
 }
 
 void NumpadPuzzle_2::UpdateMouseState(glm::vec3, glm::vec3)

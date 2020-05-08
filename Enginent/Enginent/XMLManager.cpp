@@ -20,7 +20,7 @@ bool XMLManager::LoadFile(std::string filename) {
 	pugi::xml_parse_result result = doc.load_file(filename.c_str(), pugi::parse_default | pugi::parse_declaration);
 	if (result)
 		return true;
-	std::cout << "cannot open file\n";
+	std::cout << "cannot open file " << filename << std::endl;
 	return false;
 }
 
@@ -127,19 +127,30 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			obj->SetInteractType(ADDNOTE);
 			interactObj = obj;
 		}break;
+		case PICKUP: {
+			interactObj = new InteractableObj();
+			interactObj->SetInteractType(PICKUP);
+		}break;
 		default: {
 			interactObj = new InteractableObj();
 		}break;
 		}
 
-		if (child->child("item")) 
+		if (child->child("typeView"))
+			interactObj->SetInteractType((InteractTypeList)child->child("typeView").attribute("type").as_int());
+
+		if (child->child("item")) {
 			interactObj->SetItem(child->child("item").attribute("name").as_string());
+			interactObj->scriptHandleItem = child->child("item").attribute("scriptHandleItem").as_bool();
+			//std::cout << "XMLManager::GenerateInteractObj scriptHandleItem "<< child->name() << " : " << interactObj->scriptHandleItem << std::endl;
+		}
 
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
 		if (child->child("note"))
-			interactObj->SetNoteName(child->child("note").attribute("name").as_string());
+			for(pugi::xml_node_iterator note = child->child("note").begin(); note != child->child("note").end(); note++)
+				interactObj->AddNoteName(note->name());
 
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
@@ -148,6 +159,10 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
 		interactObj->SetCollder(new Collider(interactObj));
+		if (child->child("colOff")) {
+			interactObj->col->enable = false;
+		}
+
 		interactObj->layer = OBJECT_LAYER;
 		interactObj->subLayer = child->attribute("layer").as_int();
 		interactObj->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
@@ -171,6 +186,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			door = new WallDoor(next_room, next_door);
 		else if (child->child("EliasDoor"))
 			door = new EliasDoor(next_room, next_door);
+		else if (child->child("SecretDoor"))
+			door = new SecretDoor(next_room, next_door);
 		else
 			door = new Door(next_room, next_door);
 
@@ -209,7 +226,13 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 	pugi::xml_node npcs = room.child("NPCs");
 
 	for (pugi::xml_node_iterator child = npcs.begin(); child != npcs.end(); child++) {
-		NonPlayer* npc = new NonPlayer(child->name());
+		NonPlayer* npc;
+		if (child->name() == "BackAlley_Emma") {
+			npc = new BackAlleyEmma(child->name());
+		}
+		else {
+			npc = new NonPlayer(child->name());
+		}
 
 		float sizeX = child->attribute("sizeX").as_float();
 		float sizeY = child->attribute("sizeY").as_float();
@@ -255,9 +278,11 @@ void XMLManager::CreateObject(ImageObject* tmp, pugi::xml_node node) {
 	tmp->SetPosition(glm::vec3(posX, posY, 1.0));
 }
 
-void XMLManager::GetLevelNumber(std::string filename, Level* lvl) {
-	if (LoadFile(filename))
-		lvl->levelNo = doc.child("level").attribute("currentLevel").as_int();
+void XMLManager::GetLevelNumber(std::string filename, Level* currentLevel) {
+	if (LoadFile(filename)) {
+		currentLevel->levelNo = doc.child("level").attribute("currentLevel").as_int();
+		currentLevel->xStart = doc.child("level").attribute("startPosX").as_float();
+	}
 }
 
 void XMLManager::LoadFromSave(std::string filename) {
@@ -279,9 +304,12 @@ void XMLManager::LoadFromSave(std::string filename) {
 		pugi::xml_node puzzles = file.child("level").child("puzzles");
 		pugi::xml_node_iterator p;
 		for (p = puzzles.begin(); p != puzzles.end(); p++) {
-			if (p->attribute("done").as_bool())
-				gs->puzzles[p->name()]->CompletePuzzle();
-			gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
+			if (gs->puzzles[p->name()]->GetPuzzleLevel() == l) {
+				gs->puzzles[p->name()]->Reset();
+				if (p->attribute("done").as_bool())
+					gs->puzzles[p->name()]->CompletePuzzle();
+				gs->puzzles[p->name()]->passedReqiurements = p->attribute("passRequirements").as_bool();
+			}
 		}
 
 		std::map<std::string, Room*>::iterator itr;
@@ -314,6 +342,17 @@ void XMLManager::LoadFromSave(std::string filename) {
 					if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
 						if (node.attribute("used").as_bool())
 							n->UnlockBookshelf();
+					}
+
+					if (RemoveObj * n = dynamic_cast<RemoveObj*>(obj)) {
+						if (node.attribute("triggered").as_bool())
+							n->Trigger();
+						if (node.attribute("used").as_bool())
+							n->RemoveSelf();
+					}
+
+					if (PlayerTriggerObj * t = dynamic_cast<PlayerTriggerObj*>(obj)) {
+						t->triggered = node.attribute("triggered").as_bool();
 					}
 				}
 			}
@@ -429,8 +468,12 @@ void XMLManager::SaveGame(std::string filename) {
 					node.append_attribute("open").set_value(o->IsOpen());
 				}
 
-				if (NumpadPuzzleAfter * n = dynamic_cast<NumpadPuzzleAfter*>(obj)) {
-					node.append_attribute("used").set_value(n->used);
+				if (dynamic_cast<NumpadPuzzleAfter*>(obj) || dynamic_cast<RemoveObj*>(obj)) {
+					node.append_attribute("used").set_value(obj->used);
+				}
+
+				if (dynamic_cast<PlayerTriggerObj*>(obj) || dynamic_cast<RemoveObj*>(obj)) {
+					node.append_attribute("triggered").set_value(obj->triggered);
 				}
 			}
 		}
@@ -491,6 +534,7 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	save.save_file(filename.c_str());
+	SaveGameOptions();
 }
 
 std::string XMLManager::GetMessage(std::string name, int index) {
@@ -593,6 +637,43 @@ void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>
 	}
 }
 
+void XMLManager::LoadItems(std::vector<Item*> &items) {
+	if (LoadFile("save/items.xml")) {
+		for (pugi::xml_node_iterator item = doc.child("Items").begin(); item != doc.child("Items").end(); item++) {
+			Item* i = new Item(item->name());
+
+			if(item->child("separate"))
+				for (pugi::xml_node_iterator s = item->child("separate").begin(); s != item->child("separate").end(); s++) {
+					i->AddSeparatedItem(s->name());
+				}
+
+			if(item->child("combine"))
+				for (pugi::xml_node_iterator c = item->child("separate").begin(); c != item->child("separate").end(); c++) {
+					i->AddItemsToCombine(c->attribute("itemToCombine").as_string(), c->attribute("afterCombined").as_string());
+				}
+
+			if (item->child("multipleUse"))
+				i->multipleUse = true;
+
+			i->dialogue_name = item->attribute("dialogue").as_string();
+
+			float x = item->attribute("sizeX").as_float();
+			float y = item->attribute("sizeY").as_float();
+			i->SetSize(x, y);
+
+			if (item->attribute("IsizeX")) {
+				float ix = item->attribute("IsizeX").as_float();
+				float iy = item->attribute("IsizeY").as_float();
+				i->SetISize(ix, iy);
+			}
+
+			i->SetInventoryTexture(item->attribute("i_texture").as_string());
+			i->SetViewTexture(item->attribute("v_texture").as_string());
+			items.push_back(i);
+		}
+	}
+}
+
 void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
 	if (LoadFile(filename)) {
 		pugi::xml_node objs = doc.child("Objects");
@@ -607,42 +688,6 @@ void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
 					//std::cout << o->object_name << std::endl;
 				}
 			}
-		}
-	}
-}
-
-void XMLManager::LoadItems(std::vector<Item*> &items) {
-	if (LoadFile("save/items.xml")) {
-		for (pugi::xml_node_iterator item = doc.child("Items").begin(); item != doc.child("Items").end(); item++) {
-			Item* i;
-			if (item->child("separate")) {
-				std::vector<std::string> separatedItems;
-				for (pugi::xml_node_iterator separatedItem = item->child("separate").begin(); separatedItem != item->child("separate").end(); separatedItem++) {
-					separatedItems.push_back(separatedItem->name());
-				}
-				i = new SeparatableItem(item->name(), separatedItems);
-			}
-			else if (item->child("combine")) {
-				std::string itemToCombine = item->child("combine").first_child().name();
-				std::string combinedItem = item->child("combine").first_child().next_sibling().name();
-				i = new CombinableItem(item->name(), itemToCombine, combinedItem);
-			}
-			else {
-				i = new Item(item->name());
-			}
-			float x = item->attribute("sizeX").as_float();
-			float y = item->attribute("sizeY").as_float();
-			i->SetSize(x, y);
-
-			if (item->attribute("IsizeX")) {
-				float ix = item->attribute("IsizeX").as_float();
-				float iy = item->attribute("IsizeY").as_float();
-				i->SetISize(ix, iy);
-			}
-
-			i->SetInventoryTexture(item->attribute("i_texture").as_string());
-			i->SetViewTexture(item->attribute("v_texture").as_string());
-			items.push_back(i);
 		}
 	}
 }

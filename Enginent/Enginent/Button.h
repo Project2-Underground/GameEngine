@@ -52,6 +52,7 @@ public:
 	PhoneOpenButton(std::string texture);
 	void Init(float sizex, float sizey, glm::vec3 position);
 	void action();
+	void checkColliderReleased(float x, float y);
 	void UpdateButton(bool noti);
 };
 

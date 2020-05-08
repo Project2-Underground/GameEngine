@@ -327,6 +327,8 @@ void Application::Open(AppType appType) {
 		OpenChat();
 	else
 		OpenNote();
+	if (!Unread(CHAT) && !Unread(NOTE))
+		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(false);
 }
 
 void Application::Close() {
@@ -604,8 +606,6 @@ void Phone::UpdateButton(float x, float y) {
 	noteIcon->updateButton(x, y);
 	chatIcon->updateButton(x, y);
 	exitButton->updateButton(x, y);
-	if (!app->Unread(CHAT) && !app->Unread(NOTE))
-		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(false);
 
 }
 

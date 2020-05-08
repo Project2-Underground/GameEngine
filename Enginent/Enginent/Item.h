@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 enum ItemType {
 	SEPARATABLE = 0,
@@ -10,10 +11,14 @@ enum ItemType {
 };
 
 class Item {
+protected:
+	std::vector<std::string> itemsAfterSeparated;
+	std::map<std::string, std::string> itemsAfterCombined;
 	unsigned int iTexture;
 	unsigned int viewTexture;
 public:
 	std::string name;
+	std::string dialogue_name;
 
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);
@@ -22,6 +27,12 @@ public:
 	unsigned int GetViewTexture() { return viewTexture; }
 	void SetSize(float x, float y);
 	void SetISize(float x, float y);
+
+	void AddSeparatedItem(std::string separatedItem);
+	void AddItemsToCombine(std::string itemToCombine, std::string combineResult);
+
+	void Separate();
+	void Combine(Item* other);
 
 	float width;
 	float height;
@@ -35,20 +46,18 @@ public:
 	virtual void action() {};
 };
 
-class SeparatableItem :public Item {
-	// the items that will be separated into
-	std::vector<std::string> sitems;
-public:
-	SeparatableItem(std::string, std::vector<std::string>);
-	void action();
-};
-
-class CombinableItem :public Item {
-	std::string itemToCombine;			// item that can be combined with
-	std::string scombinedItem;			// item after combined
-public:
-	Item* selectedItem;
-
-	CombinableItem(std::string, std::string itc, std::string ci);
-	void action();
-};
+//class SeparatableItem :public Item {
+//	// the items that will be separated into
+//public:
+//	SeparatableItem(std::string, std::vector<std::string>);
+//	void action();
+//};
+//
+//class CombinableItem :public Item {
+//	std::string itemToCombine;			// item that can be combined with
+//	std::string scombinedItem;			// item after combined
+//public:
+//
+//	CombinableItem(std::string, std::string itc, std::string ci);
+//	void action();
+//};

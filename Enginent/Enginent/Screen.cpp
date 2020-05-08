@@ -17,17 +17,17 @@ void Screen::CloseGameAllWindow() {
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
-	play->Init(248, -70, glm::vec3(-270, 170, 1));
+	play->Init(248, -70, glm::vec3(-258, 78, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
 	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
-	load->Init(213, -74, glm::vec3(-270, 70, 1));
+	load->Init(213, -74, glm::vec3(-277, -18, 1));
 
 	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
-	setting->Init(264, -81, glm::vec3(-270.0f, -40, 1.0f));
+	setting->Init(264, -81, glm::vec3(-266, -111, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
-	quit->Init(186, -86, glm::vec3(-270.0f, -130.0f, 1.0f));
+	quit->Init(186, -86, glm::vec3(-262, -211, 1.0f));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -37,7 +37,7 @@ MenuScreen::MenuScreen() {
 	UIObject* title = new UIObject();
 	title->SetTexture("Texture/UI/MainScreen/MainScreen_Undergroung.png");
 	title->SetSize(756.0f, -94.0f);
-	title->SetPosition(glm::vec3(-270.0f, 250.0f, 1.0f));
+	title->SetPosition(glm::vec3(-258, 207.0f, 1.0f));
 
 	UI.push_back(background);
 	UI.push_back(title);
@@ -122,6 +122,7 @@ MenuScreen::~MenuScreen() {
 
 /*GAME SCREEN*/
 GameScreen::GameScreen() {
+	Game::GetInstance()->GetCursor()->ResetCursor();
 	InventoryEnable = true;
 	PuzzleTime = false;
 	currentLevel = nullptr;
@@ -182,20 +183,23 @@ void GameScreen::Init() {
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
 	if(currentLevel->GetCurrentRoom()->dialogue != "")
 		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
+	TextBox::GetInstance()->setText("EliasRoom");
 }
 
 Item* GameScreen::FindItem(std::string name) {
-	std::cout << items.size();
+	//std::cout << items.size();
 	for (auto i : items)
 		if (i->name == name)
 			return i;
-	std::cout << "cannot find " << name << std::endl;
+	//std::cout << "cannot find " << name << std::endl;
 	return nullptr;
 }
 
 Puzzle* GameScreen::FindPuzzle(std::string name)
 {
-	return puzzles[name];
+	if(!name.empty())
+		return puzzles[name];
+	return nullptr;
 }
 
 void GameScreen::Render() {
@@ -205,8 +209,8 @@ void GameScreen::Render() {
 		currentPuzzle->Render();
 	else {
 		currentLevel->Render();
+		renderer->Render(UI);
 	}
-	renderer->Render(UI);
 
 	inventory->Render();
 	if(GameWindowOpen())
@@ -226,7 +230,7 @@ void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
 	if (!Pause) {
-		if (!dialogueText->IsDisplay()) {
+		//if (!dialogueText->IsDisplay()) {
 			if (PuzzleTime)
 				currentPuzzle->Update();
 			else {
@@ -235,7 +239,7 @@ void GameScreen::Update() {
 			}
 			if (InventoryEnable && !phone->open)
 				inventory->Update();
-		}
+		//}
 	}
 }
 
@@ -250,32 +254,32 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (dialogueText->IsDisplay())
-		dialogueText->clickLeft(screen);
-	else {
-		buttonClicked = false;
-		if (GameWindowOpen()) {
+	buttonClicked = false; 
+	if (GameWindowOpen() || dialogueText->IsDisplay()) {
+		if(GameWindowOpen())
 			for (auto w : windows)
 				w->LeftClick(screen.x, screen.y);
-		}
+		if(dialogueText->IsDisplay() && !buttonClicked)
+			dialogueText->clickLeft(screen);
+	}
+	else {
+		if (phone->open)
+			phone->LeftClick(screen.x, screen.y);
+		else if (PuzzleTime)
+			currentPuzzle->LeftClick(screen, world);
 		else {
-			if (phone->open)
-				phone->LeftClick(screen.x, screen.y);
-			else if (PuzzleTime)
-				currentPuzzle->LeftClick(screen, world);
-			else {
-				for (int j = 0; j < UI.size(); j++)
-					if (Button * button = dynamic_cast<Button*>(UI[j])) {
-						button->checkColliderPressed(screen.x, screen.y);
-					}
-				if (InventoryEnable && !buttonClicked) {
-					inventory->LeftClick(screen.x, screen.y);
+			for (int j = 0; j < UI.size(); j++)
+				if (Button * button = dynamic_cast<Button*>(UI[j])) {
+					button->checkColliderPressed(screen.x, screen.y);
 				}
-				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-					currentLevel->LeftClick(world.x, world.y);
+			if (InventoryEnable && !buttonClicked) {
+				inventory->LeftClick(screen.x, screen.y);
 			}
+			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+				currentLevel->LeftClick(world.x, world.y);
 		}
 	}
+	
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -319,14 +323,15 @@ void GameScreen::ChangeLevel(int level) {
 		delete currentLevel;
 	currentLevel = new Level(levels[level]);
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
+	player->StopWalking();
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
-	XMLManager::GetInstance()->LoadObjSpecialActions(objActions[level], currentLevel);
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
-	currentLevel->ChangeRoom(room, door);
+	if(!room.empty() && !door.empty())
+		currentLevel->ChangeRoom(room, door);
 }
 
 InteractTypeList GameScreen::GetPointedObject(glm::vec3 pos) {
@@ -379,31 +384,12 @@ void GameScreen::ResetPuzzle() {
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
-	//Game::GetInstance()->GetCursor()->enableChange(true);
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
 	switch (key)
 	{
-	//case SDLK_d: {
-	//	// unlock door
-	//	Item* item = inventory->GetInventoryBox(0)->GetItem();
-	//	if (item != nullptr)
-	//		currentLevel->GetCurrentRoom()->doors["EliasRoomInnerDoor"]->UseItem(item);
-	//}break;
-	//case SDLK_w: {
-	//	Item* item = inventory->GetInventoryBox(0)->GetItem();
-	//	if (item != nullptr && dynamic_cast<SeparatableItem*>(item)) 
-	//		((SeparatableItem*)item)->action();
-	//}break;
-	//case SDLK_s:
-	//	// save current game
-	//	XMLManager::GetInstance()->SaveGame("save/test.xml");
-	//	break;
-	//case SDLK_l:
-	//	XMLManager::GetInstance()->LoadFromSave("save/test.xml");
-	//	break;
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
 		break;

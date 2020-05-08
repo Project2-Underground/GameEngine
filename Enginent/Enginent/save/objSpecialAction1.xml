@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <Objects>
-	<EliasRoom>
-		<EliasRoomInnerDoor>
-			<Closet/>
-			<Table/>
-		</EliasRoomInnerDoor>
-	</EliasRoom>
+    <EliasRoom>
+        <EliasRoomInnerDoor>
+            <Closet/>
+            <Table/>
+        </EliasRoomInnerDoor>
+    </EliasRoom>
 </Objects>

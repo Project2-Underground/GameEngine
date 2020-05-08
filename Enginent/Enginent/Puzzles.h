@@ -264,7 +264,7 @@ public:
 	void Init(std::vector<UIObject*>, std::vector<Button*>, int* c, int c_size, std::vector<int>* input);
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
@@ -281,13 +281,16 @@ public:
 
 class Numpad2 : public Numpad {
 public:
-	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) {}
+	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) { dialogueAfterComplete.clear(); }
 	void CompletePuzzle();
 	void ActionAfterPuzzle();
 };
 
+//================================================================================================
+
 class Puzzle {
 protected:
+	int currentLevel;
 	std::vector<UIObject*> UI;
 	UIObject* background;
 	PuzzleTemplate* puzzle;
@@ -305,6 +308,7 @@ public:
 	bool IsInventoryEnable() { return enableInventory; }
 	bool Passed() { return puzzle->Passed(); }
 	bool passedReqiurements;
+	int GetPuzzleLevel() { return currentLevel; }
 	~Puzzle();
 
 	std::string prepTalk;
@@ -346,7 +350,7 @@ public:
 	NumpadPuzzle();
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
@@ -361,7 +365,7 @@ public:
 	NumpadPuzzle_2();
 	void Render();
 	void Update();
-	void Reset() {};
+	void Reset();
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);

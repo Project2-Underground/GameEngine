@@ -22,12 +22,17 @@ public:
 	void action();
 };
 
+class SecretDoor : public Door {
+public:
+	SecretDoor(std::string room, std::string door) :Door(room, door) { used = false; interactType = NORMAL; }
+	void action();
+};
+
 class EliasDoor :public Door {
 	std::string dialogueAfterOpen;
 public:
 	EliasDoor(std::string room, std::string door) :Door(room, door) { }
 	void action();
-	//void Update(); 
 };
 
 class ChangeLevelDoor : public Door {

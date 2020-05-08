@@ -26,13 +26,13 @@ TextBox::TextBox()
 
 	//use TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
 }
-
 void TextBox::setText(std::string key, bool talk)
 {
+	//std::cout << key << std::endl;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
-	SetDisplay(true);
 	if (key != "")
 	{
+		SetDisplay(true);
 		Dialogue* tmp = scriptManager->GetDialogue(key);
 		if (tmp->dialogue.size() != 0)
 		{
@@ -131,6 +131,9 @@ void TextBox::Render()
 		{
 			Game::GetInstance()->GetRenderer()->Render(dialogue[i]);
 		}
+	}
+	else {
+		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, false);
 	}
 	if (choice_UI->IsDisplay())
 	{
