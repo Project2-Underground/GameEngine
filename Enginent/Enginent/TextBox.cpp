@@ -40,7 +40,7 @@ void TextBox::setText(std::string key, bool talk)
 			d_text = tmp;
 			d_index = 0;
 			name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
-			std::string tmp_text = d_text->dialogue[d_index].text;
+			std::stringstream tmp_text(d_text->dialogue[d_index].text);
 
 			
 			int charCount = 0;
@@ -50,25 +50,28 @@ void TextBox::setText(std::string key, bool talk)
 				delete dialogue[i];
 			}
 			dialogue.clear();
-			while (tmp_text.size() > charCount)
+			std::string word = "";
+			std::stringstream s_tmp("");
+			while(std::getline(tmp_text, word, ' '))
 			{
-				std::stringstream s_tmp;
-				for (int i = 0; i < MAX_CHAR && charCount < tmp_text.size(); i++)
+				if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\n")
 				{
-					if (tmp_text[charCount] == '\\')
-					{
-						charCount += 2;
-						break;
-					}
-					s_tmp << tmp_text[charCount];
-					charCount++;
+					TextObject* textObj = new TextObject();
+					textObj->loadText(s_tmp.str(), textColor, 24);
+					textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+					dialogue.push_back(textObj);
+					lineCount++;
+					s_tmp.str("");
+					std::cout << std::endl;
 				}
-				TextObject* textObj = new TextObject();
-				textObj->loadText(s_tmp.str(), textColor, 24);
-				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
-				dialogue.push_back(textObj);
-				lineCount++;
+				s_tmp << " " << word;
 			}
+			TextObject* textObj = new TextObject();
+			textObj->loadText(s_tmp.str(), textColor, 24);
+			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+			dialogue.push_back(textObj);
+			lineCount++;
+			s_tmp.str("");
 
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 			//animation
@@ -151,7 +154,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 	{
 		d_index++;
 		name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
-		std::string tmp_text = d_text->dialogue[d_index].text;
+		std::stringstream tmp_text(d_text->dialogue[d_index].text);
 
 		int charCount = 0;
 		int lineCount = 0;
@@ -160,25 +163,28 @@ void TextBox::clickLeft(glm::vec3 pos)
 			delete dialogue[i];
 		}
 		dialogue.clear();
-		while (tmp_text.size() > charCount)
+		std::string word = "";
+		std::stringstream s_tmp("");
+		while (std::getline(tmp_text, word, ' '))
 		{
-			std::stringstream s_tmp;
-			for (int i = 0; i < MAX_CHAR && charCount < tmp_text.size(); i++)
+			if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\n")
 			{
-				if (tmp_text[charCount] == '\\')
-				{
-					charCount += 2;
-					break;
-				}
-				s_tmp << tmp_text[charCount];
-				charCount++;
+				TextObject* textObj = new TextObject();
+				textObj->loadText(s_tmp.str(), textColor, 24);
+				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+				dialogue.push_back(textObj);
+				lineCount++;
+				s_tmp.str("");
 			}
-			TextObject* textObj = new TextObject();
-			textObj->loadText(s_tmp.str(), textColor, 24);
-			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
-			dialogue.push_back(textObj);
-			lineCount++;
+			s_tmp << " " << word;
 		}
+		TextObject* textObj = new TextObject();
+		textObj->loadText(s_tmp.str(), textColor, 24);
+		textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+		dialogue.push_back(textObj);
+		lineCount++;
+		s_tmp.str("");
+
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		if (d_text->dialogue[d_index].itemName != "")
 		{

@@ -26,7 +26,6 @@
 		<choice text = "So, no one's really going to leave this place?" nextDialogue = "Ann1_B"/>
 		<choice text = "Can you remember anything about the bookcase?" nextDialogue = "Ann1_C"/>
 	</choices>
-	
 	<choices key = "c_Dann1">
 		<choice text = "...." nextDialogue = "Dann1_A"/>
 		<choice text = "Mister... Do you know anything about the books?" nextDialogue = "Dann1_B"/>
@@ -41,6 +40,16 @@
 		<choice text = "You seems to know about this place?" nextDialogue = "Emma1_B"/>
 	</choices>
 	<choices key = "c_puzzle2">
+		<choice text = "Input the number." nextDialogue = "" puzzle = "Numpad_Emma"/>
+		<choice text = "Not yet." nextDialogue = ""/>
+	</choices>	
+	
+	
+	
+	
+	
+	
+	<choices key = "c_Building3">
 		<choice text = "Input the number." nextDialogue = "" puzzle = "Numpad_Emma"/>
 		<choice text = "Not yet." nextDialogue = ""/>
 	</choices>
