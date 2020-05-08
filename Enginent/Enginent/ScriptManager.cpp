@@ -113,7 +113,8 @@ void ScriptManager::LoadScript()
 				if (dialogue->child("item"))
 				{
 					itemName = dialogue->child("item").attribute("name").as_string();
-					NPCName = dialogue->child("item").attribute("NPC").as_string();
+					if(dialogue->child("item").attribute("NPC"))
+						NPCName = dialogue->child("item").attribute("NPC").as_string();
 					//create item
 					/*item = new Item(dialogue->child("item").attribute("name").as_string());
 					item->SetInventoryTexture(dialogue->child("item").attribute("i_texture").as_string());
