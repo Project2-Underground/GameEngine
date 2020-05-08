@@ -22,47 +22,47 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger, 12:addNote, 13:remove-->
 		<interactObj>
-			<MainFloor2_Building5_Door texture="Texture/level2/MainFloor2/MainFloor2_Building5_Door.png" sizeX="486" sizeY="388" posX="-5355" posY="10" type="1" layer="0" dialogue="">
+			<MainFloor2_Building5_Door texture="Texture/level2/MainFloor2/MainFloor2_Building5_Door.png" sizeX="486" sizeY="388" posX="-5355" posY="10" type="1" layer="0" dialogue="Floor2_Building5">
 				<typeView type="2"/>
 			</MainFloor2_Building5_Door>
-			<MainFloor2_Mansion_Door texture="Texture/level2/MainFloor2/MainFloor2_Mansion_Door.png" sizeX="798" sizeY="446" posX="-2948" posY="73" layer="0" type="1" dialogue="">
+			<MainFloor2_Mansion_Door texture="Texture/level2/MainFloor2/MainFloor2_Mansion_Door.png" sizeX="798" sizeY="446" posX="-2948" posY="73" layer="0" type="1" dialogue="Floor2_mansiondoor">
 				<typeView type="2"/>
 			</MainFloor2_Mansion_Door>
-			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue=""/>
+			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue="Floor2_BackAlley"/>
 		</interactObj>
 		<doors>
 			<MainFloor2_Building1_Door texture="Texture/level2/MainFloor2/MainFloor2_Building1_Door.png" sizeX="357" sizeY="404" posX="-619" posY="6" layer="0" next_room="Building1" next_door="Building1_Door" dialogue="">
 			</MainFloor2_Building1_Door>
-			<MainFloor2_Building2_Door texture="Texture/level2/MainFloor2/MainFloor2_Building2_Door.png" sizeX="269" sizeY="408" posX="1426" posY="-5" layer="0" next_room="" next_door="" dialogue="">
+			<MainFloor2_Building2_Door texture="Texture/level2/MainFloor2/MainFloor2_Building2_Door.png" sizeX="269" sizeY="408" posX="1426" posY="-5" layer="0" next_room="" next_door="" dialogue="Floor2_Building2">
 				<key name="NONE"/>
 			</MainFloor2_Building2_Door>
-			<MainFloor2_Building3_Door texture="Texture/level2/MainFloor2/MainFloor2_Building3_Door.png" sizeX="369" sizeY="387" posX="3562" posY="2" next_room="" next_door="" layer="0" dialogue="">
+			<MainFloor2_Building3_Door texture="Texture/level2/MainFloor2/MainFloor2_Building3_Door.png" sizeX="369" sizeY="387" posX="3562" posY="2" next_room="" next_door="" layer="0" dialogue="Floor2_Building3">
 			</MainFloor2_Building3_Door>
-			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="">
+			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="Floor2_Building4">
 			</MainFloor2_Building4_Door>
 		</doors>
 		<NPCs>
-			<NPC4 sizeX="143" sizeY="386" posX="2537" posY="0" layer="0">
+			<NPC4 sizeX="143" sizeY="386" posX="2537" posY="0" layer="0" dialogue="Floor2_mask4">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</NPC4>
-			<NPC5 sizeX="149" sizeY="401" posX="559" posY="52" layer="0">
+			<NPC5 sizeX="149" sizeY="401" posX="559" posY="52" layer="0" dialogue="Floor2_mask5">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC5.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</NPC5>
-			<NPC6 sizeX="166" sizeY="421" posX="321" posY="42" layer="0">
+			<NPC6 sizeX="166" sizeY="421" posX="321" posY="42" layer="0" dialogue="Floor2_mask6">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC6.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</NPC6>
-			<NPC7 sizeX="140" sizeY="386" posX="2336" posY="61" layer="0">
+			<NPC7 sizeX="140" sizeY="386" posX="2336" posY="61" layer="0" dialogue="Floor2_mask7">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC7.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</NPC7>
-			<Cultist sizeX="145.5" sizeY="366" posX="4596" posY="-58" layer="0">
+			<Cultist sizeX="145.5" sizeY="366" posX="4596" posY="-58" layer="0" dialogue="Floor2_Cultist" dialogue_2="Floor2_Cultist_after">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/Cultist_Mask.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>

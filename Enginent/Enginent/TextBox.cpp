@@ -96,15 +96,18 @@ void TextBox::setText(std::string key, bool talk)
 
 
 			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
-			if (item != nullptr && obj != nullptr && obj->hasItem)
+			InteractableObj* obj = nullptr;
+			if(d_text->dialogue[d_index].NPCName != "")
+				obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			if (item != nullptr && ((obj != nullptr && obj->hasItem) || d_text->dialogue[d_index].NPCName == ""))
 			{
 				gs->GetInventory()->AddItem(item);
 
 				ViewWindow* vw = ViewWindow::GetInstance();
 				vw->SetViewItem(item);
 				vw->Open();
-				obj->hasItem = false;
+				if (obj != nullptr)
+					obj->hasItem = false;
 			}
 		}
 		if (tmp->changeNameObj.size() > 0)
@@ -192,14 +195,17 @@ void TextBox::clickLeft(glm::vec3 pos)
 		if (d_text->dialogue[d_index].itemName != "")
 		{
 			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
-			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
-			if (item != nullptr && obj != nullptr && obj->hasItem)
+			InteractableObj* obj = nullptr;
+			if (d_text->dialogue[d_index].NPCName != "")
+				obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			if (item != nullptr && ((obj != nullptr && obj->hasItem) || d_text->dialogue[d_index].NPCName == ""))
 			{
 				gs->GetInventory()->AddItem(item);
 				ViewWindow* vw = ViewWindow::GetInstance();
 				vw->SetViewItem(item);
 				vw->Open();
-				obj->hasItem = false;
+				if(obj != nullptr)
+					obj->hasItem = false;
 			}
 		}
 	}
