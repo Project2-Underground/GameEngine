@@ -4,7 +4,7 @@
 SaveLoadWindow::SaveLoadWindow() {
 	closeButton = new SaveLoadWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
 	bgWindow = new UIObject();
-	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_texture/tmp_pausebg.png");
 }
 
 SaveLoadWindow::~SaveLoadWindow() {
@@ -44,9 +44,7 @@ void SaveLoadWindow::Init(int width, int height) {
 	saveButtons.push_back(tmp3);
 	saveButtons.push_back(tmp4);
 
-	closeButton->SetSize(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f);
-	closeButton->SetPosition(glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
-	closeButton->SetCollder(new Collider(closeButton));
+	closeButton->Init(320.0f, -40.0f, glm::vec3(0, -240, 0.0f));
 }
 
 void SaveLoadWindow::Render() {

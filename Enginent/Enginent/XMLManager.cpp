@@ -212,7 +212,7 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->subLayer = child->attribute("layer").as_int();
 		door->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
 
-		if (child->attribute("stair"))
+		if (child->attribute("stair")) 
 			door->SetInteractType(STAIR);
 
 		if (child->child("ForeGround"))
@@ -449,7 +449,8 @@ void XMLManager::SaveGame(std::string filename) {
 			// save
 
 			if (Door * door = dynamic_cast<Door*>(objects[i])) {
-				saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
+				if(door->getType() != STAIR)
+					saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
 				//saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {

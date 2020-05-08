@@ -102,6 +102,7 @@ public:
 	void SelectItem(int);
 	void Clear();
 	bool Unread(AppType);
+	bool HasItem(AppType, std::string);
 
 	void Open(AppType);
 	void Close();

@@ -20,6 +20,7 @@ class Inventory {
 	float minHeight;
 	float maxHeight;
 	bool triggeredOpen;
+	bool HasItem(Item*);
 public:
 	Inventory();
 	void Update();

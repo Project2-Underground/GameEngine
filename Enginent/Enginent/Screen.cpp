@@ -133,6 +133,10 @@ GameScreen::GameScreen() {
 	objActions.push_back("save/objSpecialAction1.xml");
 	objActions.push_back("save/objSpecialAction2.xml");
 	objActions.push_back("save/objSpecialAction3.xml");
+}
+
+void GameScreen::Init() {
+	dialogueText = TextBox::GetInstance();
 
 	player = new Player();
 	player->SetSize(205.0f, -430.0f);
@@ -162,8 +166,6 @@ GameScreen::GameScreen() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
 	PuzzleTime = false;
 
-	dialogueText = TextBox::GetInstance();
-
 	pause = new OpenPauseWindowButton("Texture/tmp_texture/tmp_pause.png");
 	pause->SetSize(60, -60);
 	pause->SetPosition(glm::vec3(600, 300, 1));
@@ -176,14 +178,9 @@ GameScreen::GameScreen() {
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	windows.push_back(SettingWindow::GetInstance());
-}
 
-void GameScreen::Init() {
 	butler->Appear();
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
-	if(currentLevel->GetCurrentRoom()->dialogue != "")
-		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
-	TextBox::GetInstance()->setText("EliasRoom");
 }
 
 Item* GameScreen::FindItem(std::string name) {
@@ -230,16 +227,14 @@ void GameScreen::Update() {
 	for (auto w : windows)
 		w->Update();
 	if (!Pause) {
-		//if (!dialogueText->IsDisplay()) {
-			if (PuzzleTime)
-				currentPuzzle->Update();
-			else {
-				currentLevel->Update();
-				player->Update();
-			}
-			if (InventoryEnable && !phone->open)
-				inventory->Update();
-		//}
+		if (PuzzleTime)
+			currentPuzzle->Update();
+		else {
+			currentLevel->Update();
+			player->Update();
+		}
+		if (InventoryEnable && !phone->open)
+			inventory->Update();
 	}
 }
 
@@ -327,6 +322,8 @@ void GameScreen::ChangeLevel(int level) {
 	player->SetWalkLimit(currentLevel->GetCurrentRoom()->GetPlayerWalkLimit());
 	Camera* camera = Game::GetInstance()->GetCamera();
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
+	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
+	currentLevel->GetCurrentRoom()->dialogue.clear();
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {

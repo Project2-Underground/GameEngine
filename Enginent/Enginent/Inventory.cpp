@@ -153,14 +153,23 @@ void Inventory::LeftRelease(float x, float y) {
 }
 
 void Inventory::AddItem(Item* item) {
-	for (InventoryBoxButton *ib : InventoryBoxes) {
-		if (ib->GetItem() == nullptr) {
-			ib->SetItem(item);
-			break;
+	if (item && !HasItem(item)) {
+		for (InventoryBoxButton* ib : InventoryBoxes) {
+			if (ib->GetItem() == nullptr) {
+				ib->SetItem(item);
+				break;
+			}
 		}
 	}
 }
-
+bool Inventory::HasItem(Item* item) {
+	for (InventoryBoxButton* ib : InventoryBoxes) {
+		if (ib->GetItem() == item) {
+			return true;
+		}
+	}
+	return false;
+}
 void Inventory::RemoveItem(std::string itemName) {
 	for (InventoryBoxButton* ib : InventoryBoxes) {
 		if (ib->GetItem() != nullptr && (ib->GetItem()->name == itemName)) {

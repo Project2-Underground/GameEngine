@@ -29,7 +29,7 @@
 	</script>	
 	<script key = "EliasRoom_carbinet1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "??" text = "Hm... Not so different from the bed, documents are everywhere. \n I'll clean this up later"/>
+			<Dialogue name = "??" text = "Hm... Not so different from the bed, documents are everywhere. I'll clean this up later"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_bin1" loopIndex = "0">
@@ -730,6 +730,11 @@ on the table. And, take this, it seems to be a hint on how to power on that in t
 			<Dialogue name = "Butler" text = "Don't forget to look into the mirror, it's just right in the middle of the bookshelf."/>
 		</sub>		
 	</script>
+	<script key = "Butler1_end" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "( He's not responding anymore )"/>
+		</sub>		
+	</script>
 
 
 
@@ -824,6 +829,11 @@ on the table. And, take this, it seems to be a hint on how to power on that in t
 		</sub>
 	</script>
 	<script key = "Floor2_BackAlley" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "It's just a hologram"/>
+		</sub>
+	</script>
+	<script key = "Floor2_BackAlley_finishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
 			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>

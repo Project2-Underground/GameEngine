@@ -377,6 +377,7 @@ bool Book2::checkPaper()
 
 Bookshelf2::Bookshelf2(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	dialogueAfterComplete = "Hall_Bookshelf_R3";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
@@ -612,10 +613,11 @@ void Bookshelf2::ActionAfterPuzzle()
 	door->SetTexture("Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->doors.insert(std::pair<std::string, Door*>("level2Door", door));
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->objects.push_back(door);
+	obj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());
 	Butler* butler = gs->butler;
 	butler->currentPhase = Butler::PHASE2;
-	butler->Appear();
+	butler->Appear(); 
 }
 
 Book2* Bookshelf2::FindBook2(int id) {

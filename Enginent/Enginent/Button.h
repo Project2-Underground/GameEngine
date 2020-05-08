@@ -142,6 +142,7 @@ public:
 	void SetSaveLevel(std::string s);
 	void updateButton(float, float);
 	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
 	void action();
 
 	bool hasSaved;

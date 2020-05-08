@@ -3,14 +3,14 @@
 	<rooms>
 		<BackAlley dialogue="" />
 		<Building1 dialogue="" />
-		<MainFloor2 dialogue="" />
+		<MainFloor2 dialogue="Floor2_start" />
 	</rooms>
 	<interactObj>
 		<Building1_FloorDoorClose current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Building5_Door current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Mansion_Door current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_BlackAlley current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="true" takeNote="false" has_item="false" />
+		<MainFloor2_BlackAlley current_dialogue="Floor2_BackAlley" before_dialogue="Floor2_BackAlley" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 	</interactObj>
 	<item />
 	<doors>
@@ -31,12 +31,12 @@
 		<Cultist hasItem="false" />
 	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="true" passRequirements="false" />
+		<BookshelfPuzzle done="false" passRequirements="false" />
 		<BookshelfPuzzle2 done="true" passRequirements="false" />
-		<Numpad_Backdoor done="true" passRequirements="false" />
-		<Numpad_Emma done="true" passRequirements="false" />
+		<Numpad_Backdoor done="false" passRequirements="false" />
+		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="238.75" posY="-80">
+	<Player posX="168" posY="-80">
 		<inventory>
 			<item name="keyCard" />
 			<item />
@@ -49,15 +49,11 @@
 	</Player>
 	<Phone hasPhone="true" firstClose="false" note23Track="false">
 		<Notes>
-			<n name="EmmaNote1" />
-			<n name="EmmaNote1" />
-			<n name="EmmaNote2" />
-			<n name="EmmaNote3" />
+			<n name="Note1" />
 		</Notes>
 		<Chats>
-			<c name="" msgNo="7" />
-			<c name="Unknown1" msgNo="0" />
-			<c name="Unknown2" msgNo="5" />
+			<c name="Unknown1" msgNo="7" />
+			<c name="Unknown2" msgNo="0" />
 		</Chats>
 		<npcTalked />
 	</Phone>

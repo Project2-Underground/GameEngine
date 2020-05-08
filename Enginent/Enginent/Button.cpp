@@ -275,3 +275,11 @@ void SaveLoadGameButton::checkColliderPressed(float x, float y) {
 		Game::GetInstance()->GetScreen()->buttonClicked = true;
 	}
 }
+void SaveLoadGameButton::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y)) {
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			action();
+		}
+	}
+}

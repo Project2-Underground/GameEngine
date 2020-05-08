@@ -3,7 +3,7 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="1" startPosX="0" Start="EliasRoom">
-	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
+	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>

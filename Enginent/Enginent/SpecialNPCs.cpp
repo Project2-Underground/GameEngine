@@ -17,6 +17,7 @@ void Butler::Appear() {
 	{
 	case Butler::PHASE0:
 		// after Elias got out of the room
+		dialogue_name = "Butler_start";
 		currentLevel = 1;
 		MoveIn("MainHallUpper");
 		SetPosition(glm::vec3(-987, -102, 1));
@@ -26,6 +27,7 @@ void Butler::Appear() {
 	case Butler::PHASE1:
 		currentLevel = 1;
 		// after finished puzzle 3
+		ChangeDialogue("Butler1", "Butler1_after");
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		SetPosition(glm::vec3(1400, -90, 1));
@@ -35,6 +37,7 @@ void Butler::Appear() {
 		break;
 	case Butler::PHASE2:
 		currentLevel = 1;
+		ChangeDialogue("Butler1_end", "Butler1_end");
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		disappearAfterAction = false;
@@ -49,6 +52,48 @@ void Butler::Appear() {
 	SetDisplay(true);
 	triggered = false;
 	col->enable = true;
+}
+void Butler::action() {
+	switch (currentPhase)
+	{
+	case Butler::PHASE0:
+		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->Appear();
+		Phone::GetInstance()->Message("Unknown1", 7);
+		break;
+	case Butler::PHASE1:
+		break;
+	case Butler::PHASE2:
+		break;
+	case Butler::PHASE3:
+		break;
+	default:
+		break;
+	}
+
+	InteractableObj::action();
+}
+void Butler::Update() {
+	if (anim)
+		anim->Update();
+	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
+		SetDisplay(false);
+		col->enable = false;
+	}
+	if (!clickToInteract) {
+		PlayerTriggerObj::Update();
+	}
+}
+void Butler::SetTriggered(bool b) {
+	triggered = b;
+}
+bool Butler::IsTriggered() {
+	return triggered;
+}
+void BackAlleyEmma::action() {
+	NonPlayer::action();
+	GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
+	RemoveObj* obj = (RemoveObj*)gs->GetCurrentLevel()->FindObject("Building1_FloorDoorClose");
+	obj->Trigger();
 }
 void Butler::MoveOut(std::string roomName) {
 	Level* lvl = Game::GetInstance()->GetCurrentLevel();
@@ -67,47 +112,4 @@ void Butler::MoveIn(std::string roomName) {
 		if (itr == lvl->rooms[roomName]->npcs.end())
 			lvl->rooms[roomName]->npcs.push_back(this);
 	}
-}
-void Butler::Update() {
-	if(anim)
-		anim->Update();
-	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
-		SetDisplay(false);
-		col->enable = false;
-	}
-	if (!clickToInteract) {
-		PlayerTriggerObj::Update();
-	}
-}
-void Butler::action() {
-	switch (currentPhase)
-	{
-	case Butler::PHASE0:
-		dialogue_name = "Butler_start";
-		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->Appear();
-		Phone::GetInstance()->Message("Unknown1", 7);
-		break;
-	case Butler::PHASE1:
-		break;
-	case Butler::PHASE2:
-		break;
-	case Butler::PHASE3:
-		break;
-	default:
-		break;
-	}
-
-	InteractableObj::action();
-}
-void Butler::SetTriggered(bool b) {
-	triggered = b;
-}
-bool Butler::IsTriggered() {
-	return triggered;
-}
-void BackAlleyEmma::action() {
-	NonPlayer::action();
-	GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
-	RemoveObj* obj = (RemoveObj*)gs->GetCurrentLevel()->FindObject("Building1_FloorDoorClose");
-	obj->Trigger();
 }
