@@ -27,7 +27,8 @@ void Butler::Appear() {
 	case Butler::PHASE1:
 		currentLevel = 1;
 		// after finished puzzle 3
-		ChangeDialogue("Butler1", "Butler1_after");
+		dialogue_name = "Butler1";
+		dialogue_after = "Butler1_after";
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		SetPosition(glm::vec3(1400, -90, 1));
@@ -37,7 +38,8 @@ void Butler::Appear() {
 		break;
 	case Butler::PHASE2:
 		currentLevel = 1;
-		ChangeDialogue("Butler1_end", "Butler1_end");
+		dialogue_name = "Butler1_end";
+		dialogue_after = "Butler1_end";
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		disappearAfterAction = false;
