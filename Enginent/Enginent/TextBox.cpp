@@ -54,21 +54,22 @@ void TextBox::setText(std::string key, bool talk)
 			std::stringstream s_tmp("");
 			while(std::getline(tmp_text, word, ' '))
 			{
-				if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\n")
+				if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\\n")
 				{
 					TextObject* textObj = new TextObject();
 					textObj->loadText(s_tmp.str(), textColor, 24);
-					textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+					textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
 					dialogue.push_back(textObj);
 					lineCount++;
 					s_tmp.str("");
 					std::cout << std::endl;
 				}
-				s_tmp << " " << word;
+				if(word != "\\n")
+					s_tmp << " " << word;
 			}
 			TextObject* textObj = new TextObject();
 			textObj->loadText(s_tmp.str(), textColor, 24);
-			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
 			dialogue.push_back(textObj);
 			lineCount++;
 			s_tmp.str("");
@@ -173,20 +174,21 @@ void TextBox::clickLeft(glm::vec3 pos)
 		std::stringstream s_tmp("");
 		while (std::getline(tmp_text, word, ' '))
 		{
-			if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\n")
+			if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\\n")
 			{
 				TextObject* textObj = new TextObject();
 				textObj->loadText(s_tmp.str(), textColor, 24);
-				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
 				dialogue.push_back(textObj);
 				lineCount++;
 				s_tmp.str("");
 			}
-			s_tmp << " " << word;
+			if(word != "\\n")
+				s_tmp << " " << word;
 		}
 		TextObject* textObj = new TextObject();
 		textObj->loadText(s_tmp.str(), textColor, 24);
-		textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
+		textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
 		dialogue.push_back(textObj);
 		lineCount++;
 		s_tmp.str("");
