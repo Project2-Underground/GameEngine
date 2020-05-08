@@ -4,10 +4,14 @@
 	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080" dialogue="">
 		<multipleUse/>
 	</keyCard>
+	
+	<!-- Puzzle 1 -->
 	<Book1 i_texture = "Texture/Puzzle/i_Book1.png" v_texture = "Texture/Puzzle/Puzzle1_Book1.png" sizeX="109" sizeY="300" />
 	<Book2 i_texture = "Texture/Puzzle/i_Book2.png" v_texture = "Texture/Puzzle/Puzzle1_Book2.png" sizeX="109" sizeY="300" />
 	<Book3 i_texture = "Texture/Puzzle/i_Book3.png" v_texture = "Texture/Puzzle/Puzzle1_Book3.png" sizeX="109" sizeY="300" />
 	<Book4 i_texture = "Texture/Puzzle/i_Book4.png" v_texture = "Texture/Puzzle/Puzzle1_Book4.png" sizeX="109" sizeY="300" />
+	
+	<!-- Puzzle2 -->
 	<Puzzle2_ColorCode1 i_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode1.png" sizeX="855" sizeY="850" dialogue=""/>
 	<Puzzle2_ColorCode2 i_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" v_texture = "Texture/ViewItem/Puzzle2_ColorCode2.png" sizeX="855" sizeY="850" dialogue=""/>
 	<Puzzle2_EmmaPaper1 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper1.png" sizeX="1080" sizeY="1080" IsizeX="697" IsizeY="503">
@@ -16,7 +20,74 @@
 			<Puzzle2_ColorCode2/>
 		</separate>
 	</Puzzle2_EmmaPaper1>
-	<Puzzle2_EmmaPaper2 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2.png" sizeX="855" sizeY="850" IsizeX="694" IsizeY="461"/>
+	<Puzzle2_EmmaPaper2 i_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2(I).png" v_texture = "Texture/ViewItem/Puzzle2_EmmaPaper2.png" sizeX="855" sizeY="850" IsizeX="230" IsizeY="211"/>
+	
+	<!-- Puzzle3 -->
+	<Puzzle3_Pic1 i_texture = "Texture/Puzzle3/Puzzle3_Pic1.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic1.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
+	<Puzzle3_Pic2 i_texture = "Texture/Puzzle3/Puzzle3_Pic2.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic2.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
+	<Puzzle3_Pic3 i_texture = "Texture/Puzzle3/Puzzle3_Pic3.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic3.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
+	<Puzzle3_Pic4 i_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
+	
+	<!-- Puzzle 6 -->
+	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Alcohol.png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
+	<Puzzle6_Cloth i_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Cloth.png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719"/>
+	<Puzzle6_MEAT i_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" v_texture = "Texture/Puzzle3/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157"/>
+	<Puzzle6_Paper i_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Paper.png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713"/>
+	
+	<Puzzle6_PillAfternoon_sep1 i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" sizeX="72" sizeY="64" IsizeX="72" IsizeY="64">
+		<combine>
+			<c itemToCombine="Puzzle6_PillAfternoon_sep2" afterCombined="Puzzle6_PillAfternoon"/>
+			<c itemToCombine="Puzzle6_PillEvening_sep2" afterCombined="Puzzle6_PillBedtime"/>
+		</combine>
+	</Puzzle6_PillAfternoon_sep1>
+	<Puzzle6_PillAfternoon_sep2 i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep2.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep2.png" sizeX="72" sizeY="63" IsizeX="72" IsizeY="63">
+		<combine>
+			<c itemToCombine="Puzzle6_PillAfternoon_sep1" afterCombined="Puzzle6_PillAfternoon"/>
+			<c itemToCombine="Puzzle6_PillEvening_sep1" afterCombined="Puzzle6_PillMorning"/>
+		</combine>
+	</Puzzle6_PillAfternoon_sep2>
+	<Puzzle6_PillEvening_sep1 i_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep1.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep1.png" sizeX="73" sizeY="67" IsizeX="73" IsizeY="67">
+		<combine>
+			<c itemToCombine="Puzzle6_PillEvening_sep2" afterCombined="Puzzle6_PillEvening"/>
+			<c itemToCombine="Puzzle6_PillAfternoon_sep2" afterCombined="Puzzle6_PillMorning"/>
+		</combine>
+	</Puzzle6_PillEvening_sep1>
+	<Puzzle6_PillEvening_sep2 i_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep2.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep2.png" sizeX="76" sizeY="70" IsizeX="76" IsizeY="70">
+		<combine>
+			<c itemToCombine="Puzzle6_PillAfternoon_sep1" afterCombined="Puzzle6_PillBedtime"/>
+			<c itemToCombine="Puzzle6_PillEvening_sep1" afterCombined="Puzzle6_PillEvening"/>
+		</combine>
+	</Puzzle6_PillEvening_sep2>
+	
+	<Puzzle6_PillAfternoon i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+		<separate>
+			<Puzzle6_PillAfternoon_sep1/>
+			<Puzzle6_PillAfternoon_sep2/>
+		</separate>
+	</Puzzle6_PillAfternoon>
+	<Puzzle6_PillBedtime i_texture = "Texture/Puzzle6/Puzzle6_PillBedtime.png" v_texture = "Texture/Puzzle6/Puzzle6_PillBedtime.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
+		<separate>
+			<Puzzle6_PillAfternoon_sep1/>
+			<Puzzle6_PillEvening_sep2/>
+		</separate>
+		<combine>
+			<c itemToCombine="Puzzle6_MEAT" afterCombined="Puzzle6_PillBedtime_withMEAT"/>
+		</combine>
+	</Puzzle6_PillBedtime>
+	<Puzzle6_PillEvening i_texture = "Texture/Puzzle6/Puzzle6_PillEvening.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+		<separate>
+			<Puzzle6_PillEvening_sep1/>
+			<Puzzle6_PillEvening_sep2/>
+		</separate>
+	</Puzzle6_PillEvening>
+	<Puzzle6_PillMorning i_texture = "Texture/Puzzle6/Puzzle6_PillMorning.png" v_texture = "Texture/Puzzle6/Puzzle6_PillMorning.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+		<separate>
+			<Puzzle6_PillEvening_sep1/>
+			<Puzzle6_PillAfternoon_sep2/>
+		</separate>
+	</Puzzle6_PillMorning>
+	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/Puzzle6/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/Puzzle6/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86"/>
+	
 </Items>
 
 <!-- <separate> -->

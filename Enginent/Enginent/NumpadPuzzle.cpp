@@ -140,9 +140,14 @@ void Numpad::ActionAfterPuzzle()
 	g->GetCurrentLevel()->rooms["BackDoorRoomBasement"]->objects.push_back(tmp);
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
-	((GameScreen*)g->GetScreen())->ClosePuzzle();
 	((GameScreen*)g->GetScreen())->butler->currentPhase = Butler::PHASE1;
 	Phone::GetInstance()->Message("Unknown2", 5);
+	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	i->RemoveItem("Puzzle3_Pic1");
+	i->RemoveItem("Puzzle3_Pic2");
+	i->RemoveItem("Puzzle3_Pic3");
+	i->RemoveItem("Puzzle3_Pic4");
+	((GameScreen*)g->GetScreen())->ClosePuzzle();
 }
 
 void Numpad2::ActionAfterPuzzle() 
@@ -157,6 +162,11 @@ void Numpad2::ActionAfterPuzzle()
 	g->GetCurrentLevel()->rooms["BackDoorRoom"]->doors.insert(std::pair<std::string, Door*>("BackDoorRoom_EmmaDoor", tmp));
 	puzzleObj->col->enable = false;
 	puzzleObj->SetDisplay(false);
+	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	i->RemoveItem("Puzzle2_ColorCode1");
+	i->RemoveItem("Puzzle2_ColorCode2");
+	i->RemoveItem("Puzzle2_EmmaPaper1");
+	i->RemoveItem("Puzzle2_EmmaPaper2");
 	((GameScreen*)Game::GetInstance()->GetScreen())->ClosePuzzle();
 }
 void Numpad::CompletePuzzle() {

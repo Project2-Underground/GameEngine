@@ -254,32 +254,32 @@ void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (dialogueText->IsDisplay())
-		dialogueText->clickLeft(screen);
-	else {
-		buttonClicked = false;
-		if (GameWindowOpen()) {
+	buttonClicked = false; 
+	if (GameWindowOpen() || dialogueText->IsDisplay()) {
+		if(GameWindowOpen())
 			for (auto w : windows)
 				w->LeftClick(screen.x, screen.y);
-		}
+		if(dialogueText->IsDisplay() && !buttonClicked)
+			dialogueText->clickLeft(screen);
+	}
+	else {
+		if (phone->open)
+			phone->LeftClick(screen.x, screen.y);
+		else if (PuzzleTime)
+			currentPuzzle->LeftClick(screen, world);
 		else {
-			if (phone->open)
-				phone->LeftClick(screen.x, screen.y);
-			else if (PuzzleTime)
-				currentPuzzle->LeftClick(screen, world);
-			else {
-				for (int j = 0; j < UI.size(); j++)
-					if (Button * button = dynamic_cast<Button*>(UI[j])) {
-						button->checkColliderPressed(screen.x, screen.y);
-					}
-				if (InventoryEnable && !buttonClicked) {
-					inventory->LeftClick(screen.x, screen.y);
+			for (int j = 0; j < UI.size(); j++)
+				if (Button * button = dynamic_cast<Button*>(UI[j])) {
+					button->checkColliderPressed(screen.x, screen.y);
 				}
-				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-					currentLevel->LeftClick(world.x, world.y);
+			if (InventoryEnable && !buttonClicked) {
+				inventory->LeftClick(screen.x, screen.y);
 			}
+			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+				currentLevel->LeftClick(world.x, world.y);
 		}
 	}
+	
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)

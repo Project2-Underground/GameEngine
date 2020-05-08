@@ -25,39 +25,67 @@ void Item::SetISize(float x, float y) {
 	iheight = -y;
 	iaspect = x / y;
 }
-SeparatableItem::SeparatableItem(std::string name, std::vector<std::string> items) :Item(name) {
-	for (auto i : items)
-		this->sitems.push_back(i);
+void Item::AddSeparatedItem(std::string separatedItem) {
+	itemsAfterSeparated.push_back(separatedItem);
 }
-
-void SeparatableItem::action() {
-	// add the new items to the inventory
-	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-	for (auto i : sitems) {
-		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(i));
-	}
-	// remove *this from the inventory
-	inventory->RemoveItem(this);
-}
-
-CombinableItem::CombinableItem(std::string name, std::string itc, std::string ci) :Item(name) {
-	itemToCombine = itc;
-	scombinedItem = ci;
-}
-
-void CombinableItem::action() {
-	if (selectedItem->name == itemToCombine) {
-		Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-		// add combinedItem to the inventory
-		// remove item and *this from the inventory
-		inventory->RemoveItem(selectedItem);
+void Item::AddItemsToCombine(std::string itemToCombine, std::string combineResult) {
+	itemsAfterCombined.insert(std::pair<std::string, std::string>(itemToCombine, combineResult));
+}	
+void Item::Separate() {
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	Inventory* inventory = gs->GetInventory();
+	if (itemsAfterSeparated.size() != 0) {
 		inventory->RemoveItem(this);
-		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(scombinedItem));
+		for (auto i : itemsAfterSeparated) {
+			inventory->AddItem(gs->FindItem(i));
+		}
 	}
-	/*else {
-		std::cout << "Combine fail\n";
-	}*/
 }
+void Item::Combine(Item* other) {
+	for (auto i : itemsAfterCombined) {
+		if (i.first == other->name) {
+			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			Inventory* inventory = gs->GetInventory();
+			inventory->RemoveItem(other);
+			inventory->RemoveItem(this);
+			inventory->AddItem(gs->FindItem(i.second));
+			break;
+		}
+	}
+}
+//SeparatableItem::SeparatableItem(std::string name, std::vector<std::string> items) :Item(name) {
+//	for (auto i : items)
+//		this->itemsAfterSeparated.push_back(i);
+//}
+//
+//void SeparatableItem::action() {
+//	// add the new items to the inventory
+//	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+//	for (auto i : itemsAfterSeparated) {
+//		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(i));
+//	}
+//	// remove *this from the inventory
+//	inventory->RemoveItem(this);
+//}
+//
+//CombinableItem::CombinableItem(std::string name, std::string itc, std::string ci) :Item(name) {
+//	itemToCombine = itc;
+//	scombinedItem = ci;
+//}
+//
+//void CombinableItem::action() {
+//	if (other->name == itemToCombine) {
+//		Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+//		// add combinedItem to the inventory
+//		// remove item and *this from the inventory
+//		inventory->RemoveItem(other);
+//		inventory->RemoveItem(this);
+//		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(scombinedItem));
+//	}
+//	/*else {
+//		std::cout << "Combine fail\n";
+//	}*/
+//}
 
 bool Item::operator==(const Item& item) {
 	if (this->name == item.name) {

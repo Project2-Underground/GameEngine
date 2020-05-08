@@ -534,6 +534,7 @@ void XMLManager::SaveGame(std::string filename) {
 	}
 
 	save.save_file(filename.c_str());
+	SaveGameOptions();
 }
 
 std::string XMLManager::GetMessage(std::string name, int index) {
@@ -639,22 +640,20 @@ void XMLManager::LoadChats(std::string filename, std::map<std::string, ChatInfo>
 void XMLManager::LoadItems(std::vector<Item*> &items) {
 	if (LoadFile("save/items.xml")) {
 		for (pugi::xml_node_iterator item = doc.child("Items").begin(); item != doc.child("Items").end(); item++) {
-			Item* i;
-			if (item->child("separate")) {
-				std::vector<std::string> separatedItems;
-				for (pugi::xml_node_iterator separatedItem = item->child("separate").begin(); separatedItem != item->child("separate").end(); separatedItem++) {
-					separatedItems.push_back(separatedItem->name());
+			Item* i = new Item(item->name());
+
+			if(item->child("separate"))
+				for (pugi::xml_node_iterator s = item->child("separate").begin(); s != item->child("separate").end(); s++) {
+					i->AddSeparatedItem(s->name());
 				}
-				i = new SeparatableItem(item->name(), separatedItems);
-			}
-			else if (item->child("combine")) {
-				std::string itemToCombine = item->child("combine").first_child().name();
-				std::string combinedItem = item->child("combine").first_child().next_sibling().name();
-				i = new CombinableItem(item->name(), itemToCombine, combinedItem);
-			}
-			else {
-				i = new Item(item->name());
-			}
+
+			if(item->child("combine"))
+				for (pugi::xml_node_iterator c = item->child("separate").begin(); c != item->child("separate").end(); c++) {
+					i->AddItemsToCombine(c->attribute("itemToCombine").as_string(), c->attribute("afterCombined").as_string());
+				}
+
+			if (item->child("multipleUse"))
+				i->multipleUse = true;
 
 			i->dialogue_name = item->attribute("dialogue").as_string();
 

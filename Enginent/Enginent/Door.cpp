@@ -48,7 +48,7 @@ void Door::Open() {
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used) {
-		gs->ChangeRoom(nextRoom, nextDoor);
+		Door::action();
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());

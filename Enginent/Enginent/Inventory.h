@@ -12,7 +12,7 @@ class Inventory {
 	ChangeMouseActionTypeButton* separateButton;
 	ChangeMouseActionTypeButton* combineButton;
 
-	Item* selectedItem;
+	Item* other;
 
 	float boxOffset;
 	bool move;
@@ -37,7 +37,7 @@ public:
 	void SelectItem(Item* item);
 	void UnselectItem();
 	bool IsItemInInventory(std::string);
-	Item* GetSelectedItem() { return selectedItem; }
+	Item* GetSelectedItem() { return other; }
 
 
 	int GetSize() { return (int)InventoryBoxes.size(); }
