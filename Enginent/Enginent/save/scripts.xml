@@ -191,6 +191,7 @@
 			<Dialogue name = "Elias" text = "Though It feels like I just listen to it not that long ago"/>
 			<Dialogue name = "Elias" text = "Wait. There's a piece of paper stuck under the disk.">
 				<item name = "Puzzle2_ColorCode1"  NPC = "Gramophone"/>
+				<animation name = "Pickup"/>
 			</Dialogue>
 		</sub>
 	</script>
@@ -251,7 +252,9 @@ come you are going for a stroll with this experiemental going on?"/>
 	</script>
 	<script key = "backdoor_vase" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "There's a piece of paper in the vase"/>
+			<Dialogue name = "Elias" text = "There's a piece of paper in the vase">
+				<animation name = "Pickup"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "backdoor_com" loopIndex = "0">
@@ -341,7 +344,16 @@ experiment, I need to ask you about that"/>
 	</script>
 	<script key = "EmmaRoom_note" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "These are the papers she were reading."/>
+			<Dialogue name = "Elias" text = "These are the papers she were reading.">
+				<note name = "EmmaNote1" />
+			</Dialogue>
+			<Dialogue name = " " text = " ">
+				<note name = "EmmaNote2" />
+				<animation name = "Pickup"/>
+			</Dialogue>
+			<Dialogue name = " " text = "You received new notes.">
+				<note name = "EmmaNote3" />
+			</Dialogue>
 		</sub>
 	</script>
 	
