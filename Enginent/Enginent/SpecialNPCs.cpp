@@ -71,7 +71,7 @@ void Butler::MoveIn(std::string roomName) {
 void Butler::Update() {
 	if(anim)
 		anim->Update();
-	if (triggered && display && disappearAfterAction) {
+	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
 		SetDisplay(false);
 		col->enable = false;
 	}
@@ -85,7 +85,7 @@ void Butler::action() {
 	case Butler::PHASE0:
 		dialogue_name = "Butler_start";
 		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->Appear();
-		Phone::GetInstance()->Message("Unknown", 7);
+		Phone::GetInstance()->Message("Unknown1", 7);
 		break;
 	case Butler::PHASE1:
 		break;

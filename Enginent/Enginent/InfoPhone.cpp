@@ -232,7 +232,7 @@ void Chat::ClearText() {
 }
 
 void Chat::OpenChat(const ChatInfo c) {
-	if (!Phone::GetInstance()->firstClose && Phone::GetInstance()->textAfterClose == "Phone_start" && c.name == "Unknown") {
+	if (!Phone::GetInstance()->firstClose && Phone::GetInstance()->textAfterClose == "Phone_start" && c.name == "Unknown1") {
 		Phone::GetInstance()->firstClose = true;
 	}
 	ClearText();

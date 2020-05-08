@@ -466,13 +466,16 @@ void Bookshelf2::Reset()
 
 	glm::vec3 bookOriginalPosition[8] = { glm::vec3(-107, 268,1), glm::vec3(107, 268,1), glm::vec3(-107, 93,1), glm::vec3(107, 93,1),
 										  glm::vec3(-107, -88,1), glm::vec3(107, -88,1), glm::vec3(-107, -269,1), glm::vec3(107, -269,1) };
+	
+	int logOriginalBook[8] = { 4,8,3,1,6,5,7,2 };
 
 	for (int i = 0; i < 8; i++) {
 		papers[i]->SetPosition(paperOriginalPos[i]);
 		papers[i]->SetSize(229, -161);
 		papers[i]->SetTexture(papers[i]->norm_paperTexture);
+		papers[i]->col->CalNewBound();
 		books[i]->SetPosition(bookOriginalPosition[i]);
-		log[i]->book = nullptr;
+		log[i]->book = FindBook(logOriginalBook[i]);
 	}
 
 	for (int i = 0; i < books_2.size(); i++) {
@@ -547,8 +550,9 @@ void Bookshelf2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 				select_p->paste = true;
 				select_p->SetTexture(select_p->book_paperTexture);
 				select_p->SetPosition(books_2[i]->getPos());
-				select_p->col->setNewPos(books_2[i]->getPos());
 				select_p->SetSize(46, -124);
+				select_p->col->setNewPos(books_2[i]->getPos());
+				select_p->col->setNewSize(select_p->getSize());
 				books_2[i]->paper = select_p;
 				select_p = nullptr;
 				placed = true;
