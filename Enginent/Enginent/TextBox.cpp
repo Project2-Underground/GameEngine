@@ -58,7 +58,7 @@ void TextBox::setText(std::string key, bool talk)
 				{
 					TextObject* textObj = new TextObject();
 					textObj->loadText(s_tmp.str(), textColor, 24);
-					textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
+					textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
 					dialogue.push_back(textObj);
 					lineCount++;
 					s_tmp.str("");
@@ -69,7 +69,7 @@ void TextBox::setText(std::string key, bool talk)
 			}
 			TextObject* textObj = new TextObject();
 			textObj->loadText(s_tmp.str(), textColor, 24);
-			textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
+			textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
 			dialogue.push_back(textObj);
 			lineCount++;
 			s_tmp.str("");
@@ -178,17 +178,19 @@ void TextBox::clickLeft(glm::vec3 pos)
 			{
 				TextObject* textObj = new TextObject();
 				textObj->loadText(s_tmp.str(), textColor, 24);
-				textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
+				textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x/2.0f)), -180 - (lineCount * 35), 1.0f));
+				//textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 10) / 2)), -180 - (lineCount * 24), 1.0f));
 				dialogue.push_back(textObj);
 				lineCount++;
 				s_tmp.str("");
+				std::cout << std::endl;
 			}
-			if(word != "\\n")
+			if (word != "\\n")
 				s_tmp << " " << word;
 		}
 		TextObject* textObj = new TextObject();
 		textObj->loadText(s_tmp.str(), textColor, 24);
-		textObj->SetPosition(glm::vec3((-450 + (float)((s_tmp.str().size() * 24.0f) / 2.0f)), -180 - (lineCount * 35), 1.0f));
+		textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
 		dialogue.push_back(textObj);
 		lineCount++;
 		s_tmp.str("");
