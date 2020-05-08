@@ -345,10 +345,8 @@ experiment, I need to ask you about that"/>
 	<script key = "EmmaRoom_note" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "These are the papers she were reading.">
-				<note name = "EmmaNote2" />
 			</Dialogue>
 			<Dialogue name = " " text = "You received new notes.">
-				<note name = "EmmaNote3" />
 			</Dialogue>
 		</sub>
 	</script>

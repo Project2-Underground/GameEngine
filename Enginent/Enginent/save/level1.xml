@@ -122,7 +122,7 @@
 			</EmmaRoom_Book>
 			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2="EmmaRoom_picture">
 			</EmmaRoom_Drawing>
-			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" dialogue="">
+			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" dialogue="EmmaRoom_note">
 				<note>
 					<EmmaNote1/>
 					<EmmaNote2/>
