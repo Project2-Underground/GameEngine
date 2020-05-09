@@ -483,6 +483,13 @@ void Bookshelf2::Reset()
 void Bookshelf2::LeftClick(glm::vec3 screen, glm::vec3 world)
 {
 	if (!pass) {
+		for (int i = 0; i < books_2.size(); i++)
+		{
+			if (books_2[i]->col->isClicked(screen.x, screen.y) && books_2[i]->paper != nullptr)
+			{
+				select_r = books_2[i];
+			}
+		}
 		if (select == nullptr && select_p == nullptr)
 		{
 			for (int i = 0; i < books.size(); i++)
@@ -537,6 +544,21 @@ void Bookshelf2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 			select_s = nullptr;
 		}
 	}
+	if (select_r != nullptr)
+	{
+		if (select_r->col->isClicked(screen.x, screen.y))
+		{
+			select_r->paper->SetPosition(select_r->paper->prevPos);
+			select_r->paper->col->setNewPos(select_r->paper->prevPos);
+			select_r->paper->paste = false;
+			select_r->paper->SetTexture(select_r->paper->norm_paperTexture);
+			select_r->paper->SetSize(229, -161);
+			select_r->paper = nullptr;
+			
+		}
+		select_r = nullptr;
+	}
+
 	if (select_p)
 	{
 		bool placed = false;
@@ -566,37 +588,12 @@ void Bookshelf2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 
 void Bookshelf2::RightClick(glm::vec3 screen, glm::vec3 world)
 {
-	if (!pass)
-	{
-		if (select_r == nullptr)
-		{
-			std::cout << "Check\n";
-			for (int i = 0; i < books_2.size(); i++)
-			{
-				if (books_2[i]->col->isClicked(screen.x, screen.y))
-				{
-					select_r = books_2[i];
-				}
-			}
-		}
-	}
+
 }
 
 void Bookshelf2::RightRelease(glm::vec3 screen, glm::vec3 world)
 {
-	if (select_r != nullptr)
-	{
-		if (select_r->col->isClicked(screen.x, screen.y) && select_r->paper != nullptr)
-		{
-			select_r->paper->SetPosition(select_r->paper->prevPos);
-			select_r->paper->col->setNewPos(select_r->paper->prevPos);
-			select_r->paper->paste = false;
-			select_r->paper->SetTexture(select_r->paper->norm_paperTexture);
-			select_r->paper->SetSize(229, -161);
-		}
-		select_r->paper = nullptr;
-	}
-	select_r = nullptr;
+
 }
 
 void Bookshelf2::ActionAfterPuzzle()
