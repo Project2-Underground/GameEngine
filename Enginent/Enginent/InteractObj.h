@@ -41,6 +41,7 @@ protected:
 	std::string dialogue_name;
 	std::string dialogue_before;
 	std::string dialogue_after;
+	std::string dialogue_after_used;
 	std::string itemName;    
 	std::vector<InteractableObj*> triggerObjs;
 	unsigned int nextTexture; // after picking up an item
@@ -76,6 +77,7 @@ public:
 	void SetCurrentDialogueName(std::string d) { dialogue_name = d; }
 	void SetDialogueBeforeName(std::string d) { dialogue_before = d; }
 	void SetDialogueAfterName(std::string d) { dialogue_after = d; }
+	void SetDialogueAfterUsedName(std::string d) { dialogue_after_used = d; }
 	void SetTalked(bool b);
 	void SetTakeNote(bool b) { takeNote = b; }
 	bool Talked() { return talk; }

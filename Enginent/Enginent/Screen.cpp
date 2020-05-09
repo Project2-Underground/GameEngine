@@ -239,7 +239,10 @@ void GameScreen::Update() {
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
-	if (!PuzzleTime) {
+	if (PuzzleTime) {
+		currentPuzzle->RightClick(screen, world);
+	}
+	else if (!PuzzleTime) {
 		inventory->UnselectItem();
 		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
 			currentLevel->RightClick(world.x, world.y);
@@ -279,7 +282,9 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 {
-
+	if (PuzzleTime) {
+		currentPuzzle->RightRelease(screen, world);
+	}
 }
 
 void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
@@ -369,7 +374,6 @@ void GameScreen::OpenPuzzle(std::string name) {
 	currentPuzzle = puzzles[name];
 	PuzzleTime = true;
 	InventoryEnable = currentPuzzle->IsInventoryEnable();
-	//Game::GetInstance()->GetCursor()->enableChange(false);
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
 }
 

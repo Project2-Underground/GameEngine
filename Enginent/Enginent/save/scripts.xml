@@ -712,9 +712,9 @@ talking about in here"/>
 	</script>
 	<script key = "Butler1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Butler" text = "Good evening sir Elias, I’m waiting for you. Can you help me with this bookshelf?"/>
+			<Dialogue name = "Butler" text = "Good evening sir Elias, I'm waiting for you. Can you help me with this bookshelf?"/>
 			<Dialogue name = "Butler" text = "Remember that you must not touch any books with black color. \n And try to adjust the rest of the books"/>
-			<Dialogue name = "Butler" text = "Oh, and don’t forget to look into the mirror."/>
+			<Dialogue name = "Butler" text = "Oh, and don't forget to look into the mirror."/>
 		</sub>		
 	</script>
 	<script key = "Butler1_after" loopIndex = "0">

@@ -35,6 +35,11 @@ void Player::Update()
 
 }
 
+void Player::Turn() {
+	SetScale(-1, 1);
+	faceLeft = !faceLeft;
+}
+
 void Player::Move()
 {
 	//std::cout << TimeSystem::instance()->GetDT() << std::endl;
@@ -46,8 +51,7 @@ void Player::Move()
 		{
 			if (!faceLeft)
 			{
-				this->SetScale(-1, 1);
-				faceLeft = true;
+				Turn();
 			}
 			this->Translate(glm::vec3(-walk_sp, 0, 0));
 		}
@@ -63,8 +67,7 @@ void Player::Move()
 		{
 			if (faceLeft)
 			{
-				this->SetScale(-1, 1);
-				faceLeft = false;
+				Turn();
 			}
 			this->Translate(glm::vec3(walk_sp, 0, 0));
 		}

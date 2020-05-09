@@ -38,12 +38,11 @@ void Butler::Appear() {
 		break;
 	case Butler::PHASE2:
 		currentLevel = 1;
-		dialogue_name = "Butler1_end";
-		dialogue_after = "Butler1_end";
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
 		disappearAfterAction = false;
 		clickToInteract = true;
+		triggered = false;
 		break;
 	case Butler::PHASE3:
 		currentLevel = 2;
@@ -75,8 +74,16 @@ void Butler::action() {
 	InteractableObj::action();
 }
 void Butler::Update() {
-	if (anim)
-		anim->Update();
+	anim->Update();
+	if (currentPhase == PHASE2 && !((GameScreen*)Game::GetInstance()->GetScreen())->IsPuzzleOpen() && !triggered) {
+		Player* player = Game::GetInstance()->GetPlayer();
+		if (player->faceLeft) 
+			player->Turn();
+		
+		TextBox::GetInstance()->setText(dialogue_name);
+		dialogue_name = "Butler1_end";
+		triggered = true;
+	}
 	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
 		SetDisplay(false);
 		col->enable = false;

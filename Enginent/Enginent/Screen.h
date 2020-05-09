@@ -102,6 +102,7 @@ public:
 	void OpenPuzzle(std::string);
 	void ResetPuzzle();
 	void ClosePuzzle();
+	bool IsPuzzleOpen() { return PuzzleTime; }
 
 	Door* GetDoor(std::string);
 	Level* GetCurrentLevel() { return currentLevel; }

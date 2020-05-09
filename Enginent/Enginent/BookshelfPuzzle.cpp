@@ -377,7 +377,7 @@ bool Book2::checkPaper()
 
 Bookshelf2::Bookshelf2(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
-	dialogueAfterComplete = "Hall_Bookshelf_R3";
+	dialogueAfterComplete = "";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
