@@ -8,9 +8,9 @@
 	<interactObj>
 		<Building1_FloorDoorClose current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Building5_Door current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Mansion_Door current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_BlackAlley current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_BlackAlley current_dialogue="Floor2_BackAlley" before_dialogue="Floor2_BackAlley" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 	</interactObj>
 	<item />
 	<doors>
@@ -36,7 +36,7 @@
 		<Numpad_Backdoor done="false" passRequirements="false" />
 		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="318" posY="-80">
+	<Player posX="218" posY="-80">
 		<inventory>
 			<item name="keyCard" />
 			<item />
@@ -50,9 +50,8 @@
 	<Phone hasPhone="true" firstClose="false" note23Track="false">
 		<Notes />
 		<Chats>
-			<c name="" msgNo="7" />
-			<c name="Unknown1" msgNo="0" />
-			<c name="Unknown2" msgNo="0" />
+			<c name="Unknown1" msgNo="7" />
+			<c name="Unknown2" msgNo="5" />
 		</Chats>
 		<npcTalked />
 	</Phone>

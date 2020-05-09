@@ -27,6 +27,7 @@ public:
 	void SetCollder(Collider* n_col);
 	void SetWalkLimit(Collider* limit);
 
+	void Turn();
 	void Move();
 	void StopWalking();
 

@@ -276,20 +276,25 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 void PuzzleObj::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	Puzzle* p = gs->FindPuzzle(puzzleName);
+	//std::cout << " PuzzleObj::action() used " << used << std::endl;
 	if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
 		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
-			// tmp solution
 			dialogue_name = "";
 		}
 		else {
-			Puzzle* p = gs->puzzles[puzzleName];
-			TextBox::GetInstance()->setText(p->prepTalk);
+			//Puzzle* p = gs->puzzles[puzzleName];
+			//TextBox::GetInstance()->setText(p->prepTalk);
 			gs->OpenPuzzle(puzzleName);
 		}
 	}
-	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) 
+	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());
+		if (used) {
+			TextBox::GetInstance()->setText(dialogue_after_used);
+			dialogue_name = "";
+		}
+	}
 	else
 		InteractableObj::action();
 }
@@ -332,6 +337,9 @@ void NumpadPuzzleAfter::action() {
 	else if (!used) {
 		InteractableObj::action();
 	}
+	else {
+		TextBox::GetInstance()->setText("backdoor_card");
+	}
 }
 
 void NumpadPuzzleAfter::UnlockBookshelf() {
@@ -342,7 +350,9 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	tmp->SetPuzzleName("BookshelfPuzzle2");
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
-	tmp->SetCurrentDialogueName("");
+	tmp->ChangeDialogue("Hall_Bookshelf_R1", "Hall_Bookshelf_R1");
+	tmp->SetDialogueAfterUsedName("Hall_Bookshelf_R2");
+	tmp->SetItemToUse("keyCard");
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
 	puzzleObj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());

@@ -12,14 +12,16 @@ protected:
 	bool doneAction;
 	std::string dialogueAfterComplete;
 public:
-	virtual void Render() {};
-	virtual void Update() {};
-	virtual void Reset() {};
-	virtual void LeftClick(glm::vec3, glm::vec3) {};
-	virtual void LeftRelease(glm::vec3, glm::vec3) {};
-	virtual void FinishedPuzzle() {};
-	virtual void ActionAfterPuzzle() {};
-	virtual void CompletePuzzle() {};
+	virtual void Render() {}
+	virtual void Update() {}
+	virtual void Reset() {}
+	virtual void LeftClick(glm::vec3, glm::vec3) {}
+	virtual void LeftRelease(glm::vec3, glm::vec3) {}
+	virtual void RightClick(glm::vec3, glm::vec3) {}
+	virtual void RightRelease(glm::vec3, glm::vec3) {}
+	virtual void FinishedPuzzle() {}
+	virtual void ActionAfterPuzzle() {}
+	virtual void CompletePuzzle() {}
 	bool Passed() { return pass; }
 };
 
@@ -267,7 +269,6 @@ public:
 	void Reset();
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
-	void RightClick(glm::vec3, glm::vec3) {}
 	void ActionAfterPuzzle();
 	void CompletePuzzle();
 	void CheckCheat();
@@ -301,6 +302,7 @@ public:
 	virtual void Reset() = 0;
 	virtual bool CheckRequirements() = 0;
 	virtual void RightClick(glm::vec3, glm::vec3) = 0;
+	virtual void RightRelease(glm::vec3, glm::vec3) = 0;
 	virtual void LeftClick(glm::vec3, glm::vec3) = 0;
 	virtual void LeftRelease(glm::vec3, glm::vec3) = 0;
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
@@ -324,6 +326,7 @@ public:
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
+	void RightRelease(glm::vec3, glm::vec3) {}
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~BookshelfPuzzle();
@@ -355,6 +358,7 @@ public:
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
+	void RightRelease(glm::vec3, glm::vec3) {}
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~NumpadPuzzle();
@@ -370,6 +374,7 @@ public:
 	void LeftClick(glm::vec3, glm::vec3);
 	void LeftRelease(glm::vec3, glm::vec3);
 	void RightClick(glm::vec3, glm::vec3) {}
+	void RightRelease(glm::vec3, glm::vec3) {}
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~NumpadPuzzle_2();

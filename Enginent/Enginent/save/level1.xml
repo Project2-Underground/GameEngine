@@ -3,13 +3,14 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="1" startPosX="0" Start="EliasRoom">
-	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50">
+	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
 		<background>
 			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger, 12:Note -->
 		<interactObj>
 			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1" dialogue_2 = "EliasRoom_bed1">
+				<typeView type="2"/>
 			</bed>
 			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1" dialogue_2 = "EliasRoom_carbinet1">
 				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
@@ -118,9 +119,11 @@
 		</background>
 		<interactObj>
 			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="2" dialogue="EmmaRoom_book" dialogue_2="EmmaRoom_book">
+				<typeView type="2"/>
 				<ForeGround/>
 			</EmmaRoom_Book>
 			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2="EmmaRoom_picture">
+				<typeView type="2"/>	
 			</EmmaRoom_Drawing>
 			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" dialogue="EmmaRoom_note">
 				<note>
@@ -132,6 +135,7 @@
 				<ForeGround/>
 			</EmmaRoom_Note1>
 			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window" dialogue_2="EmmaRoom_window">
+				<typeView type="2"/>
 			</EmmaRoom_Window>
 		</interactObj>
 		

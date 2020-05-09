@@ -107,7 +107,7 @@
 		<sub>
 			<Dialogue name = "" text = "beep beep beep"/>
 			<Dialogue name = "" text = "Identity confirmation: Elias Adams"/>
-			<Dialogue name = "Elias" text = "Looks like it works!"/>
+			<Dialogue name = "Elias" text = "Looks like it's working!"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_door_unlock" loopIndex = "0">
@@ -712,14 +712,19 @@ talking about in here"/>
 	</script>
 	<script key = "Butler1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Butler" text = "Good evening sir Elias, I’m waiting for you. Can you help me with this bookshelf?"/>
+			<Dialogue name = "Butler" text = "Good evening sir Elias, I'm waiting for you. Can you help me with this bookshelf?"/>
 			<Dialogue name = "Butler" text = "Remember that you must not touch any books with black color. \n And try to adjust the rest of the books"/>
-			<Dialogue name = "Butler" text = "Oh, and don’t forget to look into the mirror."/>
+			<Dialogue name = "Butler" text = "Oh, and don't forget to look into the mirror."/>
 		</sub>		
 	</script>
 	<script key = "Butler1_after" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Butler" text = "Don't forget to look into the mirror, it's just right in the middle of the bookshelf."/>
+		</sub>		
+	</script>
+	<script key = "Butler1_end" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "( He's not responding anymore )"/>
 		</sub>		
 	</script>
 
@@ -816,6 +821,11 @@ talking about in here"/>
 		</sub>
 	</script>
 	<script key = "Floor2_BackAlley" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "This is just a hologram"/>
+		</sub>
+	</script>
+	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
 			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>

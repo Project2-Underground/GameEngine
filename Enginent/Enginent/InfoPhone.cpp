@@ -232,7 +232,7 @@ void Chat::ClearText() {
 }
 
 void Chat::OpenChat(const ChatInfo c) {
-	if (!Phone::GetInstance()->firstClose && Phone::GetInstance()->textAfterClose == "Phone_start" && c.name == "Unknown") {
+	if (!Phone::GetInstance()->firstClose && Phone::GetInstance()->textAfterClose == "Phone_start" && c.name == "Unknown1") {
 		Phone::GetInstance()->firstClose = true;
 	}
 	ClearText();
@@ -382,22 +382,42 @@ bool Application::Unread(AppType apptype) {
 	}
 	return false;
 }
+bool Application::HasItem(AppType apptype, std::string name) {
+	switch (apptype)
+	{
+	case NOTE:
+		for (auto n : notes)
+			if (n->name == name)
+				return true;
+		break;
+	case CHAT:
+		for (auto c : chats)
+			if (c->name == name)
+				return true;
+		break;
+	}
+	return false;
+}
 
 void Application::Scroll(int direction) {
 	if (!openNoteChat) {
 		if (itemTabs.size() > 0) {
-			if (direction > 0)
-				if (itemTabs.at(itemTabs.size() - 1)->getPos().y < lowerBound)
+			if (direction < 0) {
+				if (itemTabs.at(itemTabs.size() - 1)->getPos().y < lowerBound) {
 					for (auto i : itemTabs) {
 						i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
-						i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y + SCROLL_SPEED, 1.0f));
+						i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y, 1.0f));
 					}
-				else
-					if (itemTabs.at(0)->getPos().y > upperBound)
-						for (auto i : itemTabs) {
-							i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
-							i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
-						}
+				}
+			}
+			else {
+				if (itemTabs.at(0)->getPos().y > upperBound) {
+					for (auto i : itemTabs) {
+						i->SetPosition(glm::vec3(i->getPos().x, i->getPos().y - SCROLL_SPEED, 1.0f));
+						i->title->SetPosition(glm::vec3(i->title->getPos().x, i->getPos().y, 1.0f));
+					}
+				}
+			}
 		}
 	}
 	else if (currentAppType == CHAT && chats.size() > 0)
@@ -453,11 +473,14 @@ void Application::Render() {
 
 	if (!openNoteChat) {
 		for (auto b : itemTabs) {
-			renderer->Render(b);
-			renderer->Render(b->title);
-			if (b->hasNewInfo) {
-				notifyPopup->SetPosition(glm::vec3(TEXT_START_X + b->getSize().x, b->getPos().y + -notifyPopup->getSize().y * 0.5f, 1.0f));
-				renderer->Render(notifyPopup);
+			if (b->getPos().y - b->getSize().y * -0.25f <= upperBound &&
+				b->getPos().y + b->getSize().y * -0.25f >= lowerBound) {
+				renderer->Render(b);
+				renderer->Render(b->title);
+				if (b->hasNewInfo) {
+					notifyPopup->SetPosition(glm::vec3(TEXT_START_X + b->getSize().x, b->getPos().y + -notifyPopup->getSize().y * 0.5f, 1.0f));
+					renderer->Render(notifyPopup);
+				}
 			}
 		}
 	}
@@ -618,16 +641,18 @@ void Phone::CloseApp() {
 }
 
 void Phone::AddPage(AppType apptype, std::string name) {
-	((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
-	switch (apptype)
-	{
-	case NOTE: {
-		app->AddNote(&notes[name]);
-	}break;
-	case CHAT:
-		app->AddChat(&chats[name]);
-	default:
-		break;
+	if (!app->HasItem(apptype, name)) {
+		((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
+		switch (apptype)
+		{
+		case NOTE: {
+			app->AddNote(&notes[name]);
+		}break;
+		case CHAT:
+			app->AddChat(&chats[name]);
+		default:
+			break;
+		}
 	}
 }
 

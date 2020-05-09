@@ -377,6 +377,7 @@ bool Book2::checkPaper()
 
 Bookshelf2::Bookshelf2(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	dialogueAfterComplete = "";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
 	this->texture->SetPosition(glm::vec3(posX, posY, 1));
@@ -466,13 +467,16 @@ void Bookshelf2::Reset()
 
 	glm::vec3 bookOriginalPosition[8] = { glm::vec3(-107, 268,1), glm::vec3(107, 268,1), glm::vec3(-107, 93,1), glm::vec3(107, 93,1),
 										  glm::vec3(-107, -88,1), glm::vec3(107, -88,1), glm::vec3(-107, -269,1), glm::vec3(107, -269,1) };
+	
+	int logOriginalBook[8] = { 4,8,3,1,6,5,7,2 };
 
 	for (int i = 0; i < 8; i++) {
 		papers[i]->SetPosition(paperOriginalPos[i]);
 		papers[i]->SetSize(229, -161);
 		papers[i]->SetTexture(papers[i]->norm_paperTexture);
+		papers[i]->col->CalNewBound();
 		books[i]->SetPosition(bookOriginalPosition[i]);
-		log[i]->book = nullptr;
+		log[i]->book = FindBook(logOriginalBook[i]);
 	}
 
 	for (int i = 0; i < books_2.size(); i++) {
@@ -569,8 +573,9 @@ void Bookshelf2::LeftRelease(glm::vec3 screen, glm::vec3 world)
 				select_p->paste = true;
 				select_p->SetTexture(select_p->book_paperTexture);
 				select_p->SetPosition(books_2[i]->getPos());
-				select_p->col->setNewPos(books_2[i]->getPos());
 				select_p->SetSize(46, -124);
+				select_p->col->setNewPos(books_2[i]->getPos());
+				select_p->col->setNewSize(select_p->getSize());
 				books_2[i]->paper = select_p;
 				select_p = nullptr;
 				placed = true;
@@ -605,10 +610,11 @@ void Bookshelf2::ActionAfterPuzzle()
 	door->SetTexture("Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->doors.insert(std::pair<std::string, Door*>("level2Door", door));
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->objects.push_back(door);
+	obj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());
 	Butler* butler = gs->butler;
 	butler->currentPhase = Butler::PHASE2;
-	butler->Appear();
+	butler->Appear(); 
 }
 
 Book2* Bookshelf2::FindBook2(int id) {
