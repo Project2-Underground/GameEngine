@@ -161,10 +161,10 @@
 	</script>
 	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
 		<sub  change = "4">
-			<ChangeName name = "Hubert" new = "Hubert2" new_a = "Hubert2_after"/>
-			<ChangeName name = "Dialy" new = "Dialy2" new_a = "Dialy2_after"/>
 			<ChangeName name = "Ann" new = "Ann2" new_a = "Ann2_after"/>
 			<ChangeName name = "Dann" new = "Dann2" new_a = "Dann2_after"/>
+			<ChangeName name = "Hubert" new = "Hubert2" new_a = "Hubert2_after"/>
+			<ChangeName name = "Dialy" new = "Dialy2" new_a = "Dialy2_after"/>
 			<Dialogue name = "Elias" text = "I have to do something with the books"/>
 			<Dialogue name = "Elias" text = "( I have no idea what I'm doing. Let's just put these books back for now )"/>
 			<Dialogue name = "Elias" text = "( I should go gather some information and find all the missing books )"/>
@@ -364,7 +364,7 @@ experiment, I need to ask you about that"/>
 		</sub>
 	</script>
 	<script key = "Hubert2" loopIndex = "0">
-		<sub choice = "c_Hubert1">
+		<sub choice = "c_Hubert2">
 			<Dialogue name = "Hubert" text = "Hi, you are new around here?"/>
 			<Dialogue name = "Elias" text = "My name is Elias Adams. Are you also stuck here?"/>
 			<Dialogue name = "Hubert" text = "Elias, you are finding the exit right? And this is the book you are finding, right?"/>

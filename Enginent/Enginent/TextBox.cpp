@@ -28,7 +28,7 @@ TextBox::TextBox()
 }
 void TextBox::setText(std::string key, bool talk)
 {
-	//std::cout << key << std::endl;
+	std::cout << "key: " << key << std::endl;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 	if (key != "")
 	{
@@ -115,10 +115,16 @@ void TextBox::setText(std::string key, bool talk)
 		{
 			for (std::map<std::string, ChangeName>::iterator it = tmp->changeNameObj.begin(); it != tmp->changeNameObj.end(); it++)
 			{
-				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(it->first));
+				//std::cout << "Change: " << it->second.d_before << ", " << it->second.d_after << std::endl;
+
+				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->FindObject(it->first));
 				if (obj != nullptr)
 				{
 					obj->ChangeDialogue(it->second.d_before, it->second.d_after);
+				}
+				else
+				{
+					std::cout << "Cannot find " << it->first << std::endl;
 				}
 			}
 		}
@@ -226,6 +232,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 	else
 	{
 		choice_UI->setChoice(d_text->choice);
+		std::cout << d_text->choice << std::endl;
 	}
 }
 
