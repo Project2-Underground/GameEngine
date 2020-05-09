@@ -821,6 +821,38 @@ talking about in here"/>
 			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
 		</sub>
 	</script>
+	
+	
+	
+	<script key = "Floor2_Mask4_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC4" text = "Hey! \n I heard you take care of the traitor for us"/>
+			<Dialogue name = "NPC4" text = "You saved us! \n Thank you."/>
+			<Dialogue name = "NPC4" text = "I also thought it was that guy! \n He had always been so weird"/>
+			<Dialogue name = "Elias" text = "He told me to tell you guys to go search for the scientist. \n She's hiding behind the shadow"/>
+			<Dialogue name = "NPC4" text = "The chief finally spoke! \n I'll see you later!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask7_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC7" text = "Oh... you're the new member"/>
+			<Dialogue name = "NPC7" text = "Damn it! \n I've been observing that damn paper in his hand for a while now, but why did I not notice it!"/>
+			<Dialogue name = "Elias" text = "You'll need to search for the scientist. \n He said that the scientist is behind the shadow."/>
+			<Dialogue name = "NPC7" text = "Yeah, sure. \n I'll be looking forward to working with you again!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask5_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask6_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
+		</sub>
+	</script>
 
 
 </scripts>
