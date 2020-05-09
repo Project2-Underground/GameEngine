@@ -107,7 +107,7 @@
 		<sub>
 			<Dialogue name = "" text = "beep beep beep"/>
 			<Dialogue name = "" text = "Identity confirmation: Elias Adams"/>
-			<Dialogue name = "Elias" text = "Looks like it works!"/>
+			<Dialogue name = "Elias" text = "Looks like it's working!"/>
 		</sub>
 	</script>
 	<script key = "EliasRoom_door_unlock" loopIndex = "0">

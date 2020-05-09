@@ -1,42 +1,58 @@
 <?xml version="1.0"?>
-<level currentLevel="2" currentRoom="Building1">
+<level currentLevel="1" currentRoom="MainHallLower">
 	<rooms>
-		<BackAlley dialogue="" />
-		<Building1 dialogue="" />
-		<MainFloor2 dialogue="Floor2_start" />
+		<BackDoorRoom dialogue="" />
+		<BackDoorRoomBasement dialogue="" />
+		<EliasRoom dialogue="" />
+		<EmmaRoom dialogue="EmmaRoom_start" />
+		<MainHallLower dialogue="" />
+		<MainHallUpper dialogue="" />
 	</rooms>
 	<interactObj>
-		<Building1_FloorDoorClose current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<TriggerEmmaTalk current_dialogue="Backdoor_Room" before_dialogue="Backdoor_Room" after_dialogue="" talked="false" takeNote="false" has_item="false" triggered="false" />
+		<BackDoorRoom_FlowerClue current_dialogue="backdoor_vase" before_dialogue="backdoor_vase" after_dialogue="" talked="false" takeNote="false" has_item="true" />
+		<BackDoorRoom_EmmaDoor current_dialogue="Emma_door" before_dialogue="Emma_door" after_dialogue="Emma_door_after" talked="false" takeNote="false" has_item="false" />
+		<BackDoorRoom_Computer current_dialogue="backdoor_com" before_dialogue="backdoor_com" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Closet current_dialogue="EliasRoom_closet2" before_dialogue="EliasRoom_closet2" after_dialogue="EliasRoom_closet2" talked="true" takeNote="false" has_item="false" open="true" />
+		<Table current_dialogue="EliasRoom_carbinet2" before_dialogue="EliasRoom_carbinet2" after_dialogue="EliasRoom_carbinet2" talked="false" takeNote="false" has_item="false" open="false" />
+		<Calendar current_dialogue="EliasRoom_calendar" before_dialogue="EliasRoom_calendar" after_dialogue="EliasRoom_calendar" talked="false" takeNote="false" has_item="false" />
+		<bed current_dialogue="EliasRoom_bed2" before_dialogue="EliasRoom_bed2" after_dialogue="EliasRoom_bed2" talked="false" takeNote="false" has_item="false" />
+		<EmmaRoom_Book current_dialogue="EmmaRoom_book" before_dialogue="EmmaRoom_book" after_dialogue="EmmaRoom_book" talked="false" takeNote="false" has_item="false" />
+		<EmmaRoom_Note1 current_dialogue="EmmaRoom_note" before_dialogue="EmmaRoom_note" after_dialogue="" talked="false" takeNote="true" has_item="false" />
+		<EmmaRoom_Drawing current_dialogue="EmmaRoom_picture" before_dialogue="EmmaRoom_picture" after_dialogue="EmmaRoom_picture" talked="false" takeNote="false" has_item="false" />
+		<EmmaRoom_Window current_dialogue="EmmaRoom_window" before_dialogue="EmmaRoom_window" after_dialogue="EmmaRoom_window" talked="false" takeNote="false" has_item="false" />
+		<Bookshelf1 current_dialogue="Hall_Bookshelf_L1" before_dialogue="Hall_Bookshelf_L1" after_dialogue="Hall_Bookshelf_L1" talked="false" takeNote="false" has_item="false" />
+		<Bookshelf2 current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Gramophone current_dialogue="Hall_gramophone" before_dialogue="Hall_gramophone" after_dialogue="Hall_gramophone" talked="false" takeNote="false" has_item="true" />
 		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="true" takeNote="false" has_item="false" />
-		<MainFloor2_BlackAlley current_dialogue="Floor2_BackAlley" before_dialogue="Floor2_BackAlley" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Door2 current_dialogue="Hall_door" before_dialogue="Hall_door" after_dialogue="Hall_door" talked="false" takeNote="false" has_item="false" />
+		<Door3 current_dialogue="Hall_door" before_dialogue="Hall_door" after_dialogue="Hall_door" talked="false" takeNote="false" has_item="false" />
+		<HallRoomUpperFloor_Door1 current_dialogue="Big_door" before_dialogue="Big_door" after_dialogue="Big_door" talked="false" takeNote="false" has_item="false" />
 	</interactObj>
 	<item />
 	<doors>
-		<AlleyOut used="true" />
-		<Building1_Door used="true" />
-		<Building1_FloorDoorOpen used="false" />
-		<MainFloor2_Building1_Door used="true" />
-		<MainFloor2_Building2_Door used="false" />
-		<MainFloor2_Building3_Door used="true" />
-		<MainFloor2_Building4_Door used="true" />
+		<BackDoorRoom_BasementDoor used="true" />
+		<BackDoorRoom_Foreground_Door used="true" />
+		<EliasRoomInnerDoor used="true" />
+		<EmmaRoom_Door used="true" />
+		<StairDoor used="false" />
+		<EliasRoomOuterDoor used="false" />
 	</doors>
 	<NPCs>
-		<BackAlley_Emma hasItem="false" />
-		<NPC4 hasItem="false" />
-		<NPC5 hasItem="false" />
-		<NPC6 hasItem="false" />
-		<NPC7 hasItem="false" />
-		<Cultist hasItem="false" />
+		<Emma hasItem="true" />
+		<Ann hasItem="true" />
+		<Dann hasItem="true" />
+		<Hubert hasItem="true" />
+		<Dialy hasItem="true" />
+		<butler hasItem="false" />
 	</NPCs>
 	<puzzles>
 		<BookshelfPuzzle done="false" passRequirements="false" />
-		<BookshelfPuzzle2 done="true" passRequirements="false" />
+		<BookshelfPuzzle2 done="false" passRequirements="false" />
 		<Numpad_Backdoor done="false" passRequirements="false" />
 		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="168" posY="-80">
+	<Player posX="483" posY="-110">
 		<inventory>
 			<item name="keyCard" />
 			<item />
@@ -48,14 +64,12 @@
 		</inventory>
 	</Player>
 	<Phone hasPhone="true" firstClose="false" note23Track="false">
-		<Notes>
-			<n name="Note1" />
-		</Notes>
+		<Notes />
 		<Chats>
 			<c name="Unknown1" msgNo="7" />
 			<c name="Unknown2" msgNo="0" />
 		</Chats>
 		<npcTalked />
 	</Phone>
-	<Butler display="true" phase="2" />
+	<Butler display="false" phase="0" />
 </level>
