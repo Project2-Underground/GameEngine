@@ -166,6 +166,10 @@ void GameScreen::Init() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
 	PuzzleTime = false;
 
+	GLRenderer* r = Game::GetInstance()->GetRenderer();
+	cutscenes.insert(std::pair<std::string, unsigned int>("StartGameCutscene", r->LoadTexture("Texture/Cutscene/StartGameCutscene.png")));
+	CutsceneTime = false;
+
 	pause = new OpenPauseWindowButton("Texture/tmp_texture/tmp_pause.png");
 	pause->SetSize(60, -60);
 	pause->SetPosition(glm::vec3(600, 300, 1));
@@ -178,6 +182,9 @@ void GameScreen::Init() {
 	windows.push_back(ViewWindow::GetInstance());
 	windows.push_back(SaveLoadWindow::GetInstance());
 	windows.push_back(SettingWindow::GetInstance());
+
+	cutscene = new UIObject();
+	cutscene->SetSize(1280, 720);
 
 	butler->Appear();
 	player->SetPosition(glm::vec3(currentLevel->xStart, currentLevel->GetCurrentRoom()->y, 1));
@@ -202,82 +209,100 @@ Puzzle* GameScreen::FindPuzzle(std::string name)
 void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 
-	if (PuzzleTime) 
-		currentPuzzle->Render();
-	else {
-		currentLevel->Render();
-		renderer->Render(UI);
+	if (CutsceneTime) {
+		renderer->Render(cutscene);
 	}
+	else {
+		if (PuzzleTime)
+			currentPuzzle->Render();
+		else {
+			currentLevel->Render();
+			renderer->Render(UI);
+		}
 
-	inventory->Render();
-	if(GameWindowOpen())
-		for (auto w : windows)
+		inventory->Render();
+		if (GameWindowOpen())
+			for (auto w : windows)
 				w->Render();
-	else {
-		if (phone->open)
-			phone->Render();
-		if (dialogueText->IsDisplay())
-			dialogueText->Render();
+		else {
+			if (phone->open)
+				phone->Render();
+			if (dialogueText->IsDisplay())
+				dialogueText->Render();
+		}
 	}
-
 	dialogueText->Render();
 }
 
 void GameScreen::Update() {
-	for (auto w : windows)
-		w->Update();
-	if (!Pause) {
-		if (PuzzleTime)
-			currentPuzzle->Update();
-		else {
-			currentLevel->Update();
-			player->Update();
+	if (!CutsceneTime) {
+		for (auto w : windows)
+			w->Update();
+		if (!Pause) {
+			if (PuzzleTime)
+				currentPuzzle->Update();
+			else {
+				currentLevel->Update();
+				player->Update();
+			}
+			if (InventoryEnable && !phone->open)
+				inventory->Update();
 		}
-		if (InventoryEnable && !phone->open)
-			inventory->Update();
 	}
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
-	if (PuzzleTime) {
-		currentPuzzle->RightClick(screen, world);
-	}
-	else if (!PuzzleTime) {
-		inventory->UnselectItem();
-		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
-			currentLevel->RightClick(world.x, world.y);
-	}
-	else if (dialogueText->IsDisplay())
+	if (CutsceneTime) {
 		dialogueText->clickLeft(screen);
+	}
+	else {
+		if (PuzzleTime) {
+			currentPuzzle->RightClick(screen, world);
+		}
+		else if (!PuzzleTime) {
+			inventory->UnselectItem();
+			if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
+				currentLevel->RightClick(world.x, world.y);
+		}
+		else if (dialogueText->IsDisplay())
+			dialogueText->clickLeft(screen);
+	}
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	buttonClicked = false; 
-	if (GameWindowOpen() || dialogueText->IsDisplay()) {
-		if(GameWindowOpen())
-			for (auto w : windows)
-				w->LeftClick(screen.x, screen.y);
-		if(dialogueText->IsDisplay() && !buttonClicked)
-			dialogueText->clickLeft(screen);
+	if (CutsceneTime) {
+		dialogueText->clickLeft(screen);
+		if (!dialogueText->IsDisplay())
+			CutsceneTime = false;
 	}
 	else {
-		if (phone->open)
-			phone->LeftClick(screen.x, screen.y);
-		else if (PuzzleTime)
-			currentPuzzle->LeftClick(screen, world);
-		else {
-			for (int j = 0; j < UI.size(); j++)
-				if (Button * button = dynamic_cast<Button*>(UI[j])) {
-					button->checkColliderPressed(screen.x, screen.y);
-				}
-			if (InventoryEnable && !buttonClicked) {
-				inventory->LeftClick(screen.x, screen.y);
+		buttonClicked = false;
+		for (int j = 0; j < UI.size(); j++) {
+			if (Button * button = dynamic_cast<Button*>(UI[j])) {
+				button->checkColliderPressed(screen.x, screen.y);
 			}
-			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-				currentLevel->LeftClick(world.x, world.y);
+		}
+		if (GameWindowOpen() || dialogueText->IsDisplay() && !buttonClicked) {
+			if (GameWindowOpen())
+				for (auto w : windows)
+					w->LeftClick(screen.x, screen.y);
+			if (dialogueText->IsDisplay() && !buttonClicked)
+				dialogueText->clickLeft(screen);
+		}
+		else {
+			if (phone->open)
+				phone->LeftClick(screen.x, screen.y);
+			else if (PuzzleTime)
+				currentPuzzle->LeftClick(screen, world);
+			else {
+				if (InventoryEnable && !buttonClicked) {
+					inventory->LeftClick(screen.x, screen.y);
+				}
+				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+					currentLevel->LeftClick(world.x, world.y);
+			}
 		}
 	}
-	
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -288,19 +313,21 @@ void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 }
 
 void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
-{
-	if (GameWindowOpen())
-		for (auto w : windows)
-			w->LeftRelease(screen.x, screen.y);
-	else if (phone->open)
-		phone->LeftRelease(screen.x, screen.y);
-	else if (PuzzleTime)
-		currentPuzzle->LeftRelease(screen, world);
-	else if (InventoryEnable) 
-		inventory->LeftRelease(screen.x, screen.y);
-	for (int j = 0; j < UI.size(); j++)
-		if (Button * button = dynamic_cast<Button*>(UI[j]))
-			button->checkColliderReleased(screen.x, screen.y);
+{	
+	if (!CutsceneTime) {
+		if (GameWindowOpen())
+			for (auto w : windows)
+				w->LeftRelease(screen.x, screen.y);
+		else if (phone->open)
+			phone->LeftRelease(screen.x, screen.y);
+		else if (PuzzleTime)
+			currentPuzzle->LeftRelease(screen, world);
+		else if (InventoryEnable)
+			inventory->LeftRelease(screen.x, screen.y);
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->checkColliderReleased(screen.x, screen.y);
+	}
 }
 
 void GameScreen::Scroll(glm::vec3 screen, int direction) {
@@ -377,6 +404,12 @@ void GameScreen::OpenPuzzle(std::string name) {
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
 }
 
+void GameScreen::OpenCutscene(std::string cutsceneName, std::string dialogueName) {
+	cutscene->SetTexture(cutscenes[cutsceneName]);
+	TextBox::GetInstance()->setText(dialogueName);
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
+}
+
 void GameScreen::ResetPuzzle() {
 	for (auto puzzle : puzzles)
 		puzzle.second->Reset();
@@ -385,6 +418,10 @@ void GameScreen::ResetPuzzle() {
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
+	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
+}
+void GameScreen::CloseCutscene() {
+	CutsceneTime = false;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
 }
 
@@ -440,42 +477,47 @@ GameScreen::~GameScreen() {
 }
 
 /*CUTSCENE*/
-CutsceneScreen::CutsceneScreen() {
+CreditScreen::CreditScreen() {
+	TextObject* credit = new TextObject();
+	std::string creditText;
+	float startY = -380;
+	float startX = -450;
+
 
 }
 
-void CutsceneScreen::Render() {
+void CreditScreen::Render() {
 	// play the cutscene
 }
-void CutsceneScreen::Update() {
+void CreditScreen::Update() {
 	// eg. 2 clicks to skip a cutscene
 }
 
-void CutsceneScreen::LeftClick(glm::vec3, glm::vec3) {
+void CreditScreen::LeftClick(glm::vec3, glm::vec3) {
 
 }
 
-void CutsceneScreen::RightClick(glm::vec3, glm::vec3)
+void CreditScreen::RightClick(glm::vec3, glm::vec3)
 {
 
 }
 
-void CutsceneScreen::RightRelease(glm::vec3, glm::vec3)
+void CreditScreen::RightRelease(glm::vec3, glm::vec3)
 {
 
 }
 
-void CutsceneScreen::LeftRelease(glm::vec3, glm::vec3)
+void CreditScreen::LeftRelease(glm::vec3, glm::vec3)
 {
 
 }
 
-void CutsceneScreen::UpdateMouseState(glm::vec3, glm::vec3)
+void CreditScreen::UpdateMouseState(glm::vec3, glm::vec3)
 {
 
 }
 
-void CutsceneScreen::HandleKey(SDL_Keycode key) {
+void CreditScreen::HandleKey(SDL_Keycode key) {
 
 }
 

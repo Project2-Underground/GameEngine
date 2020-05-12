@@ -33,7 +33,7 @@ TextBox::TextBox()
 }
 void TextBox::setText(std::string key, bool talk)
 {
-	std::cout << "key: " << key << std::endl;
+	//std::cout << "key: " << key << std::endl;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 	if (key != "")
 	{
@@ -64,7 +64,7 @@ void TextBox::setText(std::string key, bool talk)
 					curr_dialogueSize += str.size() + 1;
 					lineCount++;
 					s_tmp.str("");
-					std::cout << std::endl;
+					//std::cout << std::endl;
 				}
 				if(word != "\\n")
 					s_tmp << " " << word;

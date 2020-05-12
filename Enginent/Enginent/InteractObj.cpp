@@ -19,6 +19,10 @@ void InteractableObj::SetCollder(Collider* n_col) {
 	std::cout << "collider max bound: " << col->getMaxBound().x << ", " << col->getMaxBound().y << std::endl;*/
 }
 
+void InteractableObj::Trigger() {
+	triggered = true;
+}
+
 void InteractableObj::TakeNote() {
 	//std::cout << (takeNote ? "yes" : "no") << "\n";
 	if (takeNote) {
@@ -42,7 +46,6 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 	this->dialogue_before = n;
 	this->dialogue_after = a;
 }
-
 void InteractableObj::action() {
 	if (talk == true)
 	{
@@ -61,7 +64,7 @@ void InteractableObj::action() {
 	if(interactType != DOOR)
 		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	for (auto obj : triggerObjs)
-		obj->triggered = true;
+		obj->Trigger();
 	PickUpItem();
 	TakeNote();
 }
@@ -276,8 +279,11 @@ void NonPlayer::action()
 		TextBox::GetInstance()->SetDisplay(true);
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
+	if (object_name == "Emma") {
+		((Door*)Game::GetInstance()->GetCurrentLevel()->FindObject("BackDoorRoom_BasementDoor"))->Trigger();
+	}
 	for (auto obj : triggerObjs)
-		obj->triggered = true;
+		obj->Trigger();
 	TakeNote();
 }
 
@@ -377,6 +383,9 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	emmaNote->ChangeDialogue("EmmaRoom_note", "EmmaRoom_note");
 	emmaNote->SetInteractType(ADDNOTE);
 	emmaNote->col->enable = true;
+	Item* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->FindItem("keyCard");
+	if(i)
+		i->multipleUse = false;
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);

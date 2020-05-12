@@ -109,6 +109,7 @@ void Numpad::Update()
 }
 
 void Numpad::Reset() {
+	(*input).clear();
 	pass = false;
 	doneAction = false;
 }
@@ -149,6 +150,7 @@ void Numpad::ActionAfterPuzzle()
 	i->RemoveItem("Puzzle3_Pic2");
 	i->RemoveItem("Puzzle3_Pic3");
 	i->RemoveItem("Puzzle3_Pic4");
+	g->GetCurrentLevel()->rooms["EmmaRoom"]->dialogue.clear();
 	((GameScreen*)g->GetScreen())->ClosePuzzle();
 }
 
@@ -217,6 +219,12 @@ Numpad::~Numpad()
 	{
 		delete n_button[i];
 	}
+	if(texture)
+		delete texture;
+	if(input)
+		delete input;
+	if(numUI)
+		delete numUI;
 }
 
 NumpadPuzzle::NumpadPuzzle()

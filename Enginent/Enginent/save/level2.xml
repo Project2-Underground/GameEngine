@@ -13,6 +13,7 @@
 			<MainFloor2_BG2 texture="Texture/level2/MainFloor2/MainFloor2_BG2.png" sizeX="7069" sizeY="433" posX="2195" posY="143" layer="0"/>
 			<MainFloor2_BG1 texture="Texture/level2/MainFloor2/MainFloor2_BG1.png" sizeX="10880" sizeY="208" posX="2195" posY="143" layer="0"/>
 			<MainFloor2_French texture="Texture/level2/MainFloor2/MainFloor2_French.png" sizeX="10767" sizeY="238" posX="466" posY="-15" layer="0"/>
+			<BG_People texture="Texture/level2/MainFloor2/BG_People.png" sizeX="9009" sizeY="334" posX="-250" posY="69" layer="0"/>
 			<MainFloor2_Building1 texture="Texture/level2/MainFloor2/MainFloor2_Building1.png" sizeX="1333" sizeY="559" posX="-424" posY="81" layer="1"/>
 			<MainFloor2_Building2 texture="Texture/level2/MainFloor2/MainFloor2_Building2.png" sizeX="1443" sizeY="585" posX="1409" posY="68" layer="1"/>
 			<MainFloor2_Building3 texture="Texture/level2/MainFloor2/MainFloor2_Building3.png" sizeX="1682" sizeY="613" posX="3273" posY="54" layer="1"/>
@@ -28,7 +29,6 @@
 			<MainFloor2_Mansion_Door texture="Texture/level2/MainFloor2/MainFloor2_Mansion_Door.png" sizeX="798" sizeY="446" posX="-2948" posY="73" layer="0" type="1" dialogue="Floor2_mansiondoor">
 				<typeView type="2"/>
 			</MainFloor2_Mansion_Door>
-			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue="Floor2_BackAlley"/>
 		</interactObj>
 		<doors>
 			<MainFloor2_Building1_Door texture="Texture/level2/MainFloor2/MainFloor2_Building1_Door.png" sizeX="357" sizeY="404" posX="-619" posY="6" layer="0" next_room="Building1" next_door="Building1_Door" dialogue="">
@@ -40,6 +40,10 @@
 			</MainFloor2_Building3_Door>
 			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="Floor2_Building4">
 			</MainFloor2_Building4_Door>
+			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue="Floor2_BackAlley">
+				<isOpenDoor/>
+				<colOff/>
+			</MainFloor2_BlackAlley>
 		</doors>
 		<NPCs>
 			<NPC4 sizeX="133" sizeY="376" posX="2547" posY="-10" layer="0" dialogue="Floor2_mask4">
@@ -57,7 +61,7 @@
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC6.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</NPC6>
-			<NPC7 sizeX="130" sizeY="376" posX="2336" posY="51" layer="0" dialogue="Floor2_mask7">
+			<NPC7 sizeX="130" sizeY="376" posX="2336" posY="30" layer="0" dialogue="Floor2_mask7">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC7.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -69,9 +73,10 @@
 			</Cultist>
 		</NPCs>
 		<foreground>
+			<fg texture="Texture/level2/MainFloor2/FG_People.png" sizeX="9422" sizeY="234" posX="-396" posY="-242" layer="0"/>
 		</foreground>
 	</MainFloor2>
-	<Building1 left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-80">
+	<Building1 left_limit="-580" right_limit="580" top_limit="360" bottom_limit="-360" y="-80">
 		<background>
 			<bg texture="Texture/level2/Building1/Building1_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -85,7 +90,7 @@
 		<doors>
 			<Building1_Door texture="Texture/level2/Building1/Building1_Door.png" sizeX="214" sizeY="360" posX="418" posY="2" next_room="MainFloor2" next_door="MainFloor2_Building1_Door" layer="0" dialogue="">
 			</Building1_Door>
-			<Building1_FloorDoorOpen texture="Texture/level2/Building1/Building1_FloorDoorOpen.png" sizeX="297" sizeY="73" posX="-374.5" posY="-214" next_room="" next_door="" layer="0" dialogue="">
+			<Building1_FloorDoorOpen texture="Texture/level2/Building1/Building1_FloorDoorOpen.png" sizeX="297" sizeY="73" posX="-374.5" posY="-214" next_room="Building2" next_door="Building2_Door1" layer="0" dialogue="">
 				<SecretDoor/>
 				<key name="NONE"/>
 			</Building1_FloorDoorOpen>
@@ -96,7 +101,75 @@
 			<fg texture="Texture/level2/Building1/Building1_Foreground.png" sizeX="700" sizeY="141" posX="256" posY="-290" layer="0"/>
 		</foreground>
 	</Building1>
-	<BackAlley left_limit="-680" right_limit="680" top_limit="360" bottom_limit="-360" y="-80">
+	<Building2 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90">
+		<background>
+			<bg texture="Texture/level2/Building2/Building2_Template1.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Building2_Computer1  texture="Texture/level2/Building2/Building2_Computer1.png" sizeX="172" sizeY="156" posX="-207.5" posY="17" type="1" layer="0" dialogue="">
+			</Building2_Computer1>
+		</interactObj>
+		<doors>
+			<Building2_Door1 texture="Texture/level2/Building2/Building2_Door1.png" sizeX="314" sizeY="80" posX="283.5" posY="-269" next_room="Building1" next_door="Building1_FloorDoorOpen" layer="0" dialogue="">
+				<playerNextX value="263"/>
+			</Building2_Door1>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building2/Building2_Foreground1.png" sizeX="1575" sizeY="121" posX="0" posY="-299.5" layer="0"/>
+		</foreground>
+	</Building2>
+	<Building3 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90">
+		<background>
+			<bg texture="Texture/level2/Building3/Building3_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+		</interactObj>
+		<doors>
+			<Building3_Exit texture="NONE" sizeX="124" sizeY="506" posX="-708.5" posY="-75" next_room="MainFloor2" next_door="MainFloor2_Building3_Door" layer="0" dialogue="">
+				<playerNextX value="-619"/>
+			</Building3_Exit>
+		</doors>
+		<NPCs>
+			<Building3_NPC4 sizeX="133" sizeY="376" posX="-65.5" posY="-42" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Building3_NPC4>
+			<Building3_NPC5 sizeX="139" sizeY="391" posX="107" posY="-28.5" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC5.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Building3_NPC5>
+			<Building3_NPC6 sizeX="156" sizeY="411" posX="-425.5" posY="-17.5" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC6.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Building3_NPC6>
+			<Building3_NPC7 sizeX="130" sizeY="376" posX="-241" posY="-40.5" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC7.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Building3_NPC7>
+			<Cultist_Mask sizeX="145.5" sizeY="366" posX="340.5" posY="-54.5" layer="0" dialogue="" dialogue_2="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/Cultist_Mask.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Cultist_Mask>
+			<Building3_Emma sizeX="186" sizeY="350" posX="648.5" posY="70.5" layer="0" dialogue="" dialogue_2="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Emma/Building3_Emma.png" frame="1" time_per_frame="0" loop="True"/>
+				</Animations>
+			</Building3_Emma>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building3/Building3_ForeGround.png" sizeX="1326" sizeY="254" posX="29.5" posY="-233" layer="0"/>
+		</foreground>
+	</Building3>
+	<BackAlley left_limit="-680" right_limit="680" top_limit="360" bottom_limit="-360" y="-95">
 		<background>
 			<bg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -104,18 +177,19 @@
 		<interactObj>
 		</interactObj>
 		<doors>
-			<AlleyOut texture="NONE" sizeX="300" sizeY="720" posX="-488" posY="0" next_room="MainFloor2" next_door="MainFloor2_BlackAlley" layer="0">
+			<AlleyOut texture="NONE" sizeX="250" sizeY="720" posX="-662.5" posY="0" next_room="MainFloor2" next_door="MainFloor2_BlackAlley" layer="0">
+				<playerNextX value="-674"/>
 			</AlleyOut>
 		</doors>
 		<NPCs>
-			<BackAlley_Emma sizeX="112" sizeY="336" posX="452" posY="-58" layer="-50">
+			<BackAlley_Emma sizeX="112" sizeY="336" posX="541" posY="-39" layer="0">
 				<Animations>
 					<Idle texture="Texture/level2/BackAlley/BackAlley_Emma.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</BackAlley_Emma>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="-275.5" posX="0" posY="0" layer="0"/>
+			<fg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="169" posX="0" posY="-275.5" layer="0"/>
 		</foreground>
 	</BackAlley>
 </level>

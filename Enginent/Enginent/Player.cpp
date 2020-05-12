@@ -13,7 +13,7 @@ Player::Player()
 	anim->AddAnimation("Idle", "Texture/Character/Elias_idle.png",4,0.25f);
 	anim->AddAnimation("Move", "Texture/Character/Elias_walk.png",4,0.25f);
 	anim->AddAnimation("Pickup", "Texture/Character/Elias_pick.png",4,0.25f,true);
-	anim->AddAnimation("Panic", "Texture/Character/Elias_pick.png",3,0.25f,true);
+	anim->AddAnimation("Panic", "Texture/Character/Elias_pick.png",1,0.75f,true);
 	anim->Play("Idle", true);
 
 	walk = false;
@@ -106,6 +106,15 @@ void Player::CheckTarget(InteractableObj* target) {
 	if (distance <= ACTION_DISTANCE) {
 		target->action();
 		StopWalking();
+		float playerPosFromTarget = getPos().x - target->getPos().x;
+		if (playerPosFromTarget <= 0) {
+			if (faceLeft)
+				Turn();
+		}
+		else {
+			if (!faceLeft)
+				Turn();
+		}
 	}
 	else {
 		TextBox::GetInstance()->setText("tooFar");

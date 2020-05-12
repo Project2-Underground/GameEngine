@@ -182,8 +182,10 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		std::string next_door = child->attribute("next_door").as_string();
 
 		Door* door;
-		if (child->child("wall_door"))
+		if (child->child("wall_door")) {
 			door = new WallDoor(next_room, next_door);
+			door->SetDialogueAfterTriggerName(child->attribute("dialogueAfterTrigger").as_string());
+		}
 		else if (child->child("EliasDoor"))
 			door = new EliasDoor(next_room, next_door);
 		else if (child->child("SecretDoor"))
@@ -200,6 +202,9 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		door->SetCollder(new Collider(door));
 
+		if (child->child("playerNextX"))
+			door->SetPlayerNextX(child->child("playerNextX").attribute("value").as_float());
+		
 		if (child->child("key"))
 			door->SetItemToUse(child->child("key").attribute("name").as_string());
 
@@ -211,6 +216,10 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
 		door->SetDialogueName(child->attribute("dialogue").as_string(), child->attribute("dialogue_2").as_string());
+
+		if (child->child("colOff")) {
+			door->col->enable = false;
+		}
 
 		if (child->attribute("stair")) 
 			door->SetInteractType(STAIR);
@@ -386,7 +395,9 @@ void XMLManager::LoadFromSave(std::string filename) {
 			// has attribute named "name"
 			if (item.attribute("name").as_string() != "") {
 				// put that item in the inventory
-				gs->GetInventory()->GetInventoryBox(i)->SetItem(gs->FindItem(item.attribute("name").as_string()));
+				Item* tmpI = gs->FindItem(item.attribute("name").as_string());
+				tmpI->multipleUse = item.attribute("multipleUse").as_bool();
+				gs->GetInventory()->GetInventoryBox(i)->SetItem(tmpI);
 			}
 			item = item.next_sibling();
 		}
@@ -506,8 +517,10 @@ void XMLManager::SaveGame(std::string filename) {
 	for (int i = 0; i < gs->GetInventory()->GetSize(); i++) {
 		pugi::xml_node node = saveLevel.child("Player").child("inventory").append_child("item");
 		Item* item = gs->GetInventory()->GetInventoryBox(i)->GetItem();
-		if (item != nullptr)
+		if (item != nullptr) {
 			node.append_attribute("name").set_value(item->name.c_str());
+			node.append_attribute("multipleUse").set_value(item->multipleUse);
+		}
 	}
 
 	// save infoPhone
@@ -678,15 +691,18 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
 	if (LoadFile(filename)) {
 		pugi::xml_node objs = doc.child("Objects");
+		std::cout << " XMLManager::LoadObjSpecialActions \n";
 		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
 			Room* r = level->rooms[room->name()];
+			std::cout << r->name << "==\n";
 			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
 				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
+				std::cout << interactObj->object_name << "==\n";
 				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
-					InteractableObj* o = ((InteractableObj*)(r->FindObject(triggerObj->name())));
+					InteractableObj* o = ((InteractableObj*)(Game::GetInstance()->GetCurrentLevel()->FindObject(triggerObj->name())));
 					interactObj->AddTriggerObj(o);
 					o->triggered = false;
-					//std::cout << o->object_name << std::endl;
+					std::cout << o->object_name << std::endl;
 				}
 			}
 		}

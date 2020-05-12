@@ -5,51 +5,51 @@
 <level currentLevel="1" startPosX="0" Start="EliasRoom">
 	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
 		<background>
-			<bg texture="Texture/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger, 12:Note -->
 		<interactObj>
-			<bed texture="Texture/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1" dialogue_2 = "EliasRoom_bed1">
+			<bed texture="Texture/level1/EliasRoom/Elias_Room_BedChaos.png" sizeX="539" sizeY="277" posX="413" posY="-154" type="1" layer="4" dialogue="EliasRoom_bed1" dialogue_2 = "EliasRoom_bed1">
 				<typeView type="2"/>
 			</bed>
-			<Table texture="Texture/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1" dialogue_2 = "EliasRoom_carbinet1">
-				<clicked texture="Texture/EliasRoom/Elias_Room_TVCabinetO.png"/>
+			<Table texture="Texture/level1/EliasRoom/Elias_Room_TVCabinet.png" sizeX="380" sizeY="292" posX="62" posY="-92" type="8" layer="2" dialogue="EliasRoom_carbinet1" dialogue_2 = "EliasRoom_carbinet1">
+				<clicked texture="Texture/level1/EliasRoom/Elias_Room_TVCabinetO.png"/>
 				<sound name="OpenDrawer"/>
 			</Table>
-			<Closet texture="Texture/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="EliasRoom_closet1" dialogue_2="EliasRoom_closet1">
-				<clicked texture="Texture/EliasRoom/Elias_Room_CabinetOpen.png"/>
-				<picked texture="Texture/EliasRoom/Elias_Room_Cabinet(3).png"/>
+			<Closet texture="Texture/level1/EliasRoom/Elias_Room_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1" dialogue="EliasRoom_closet1" dialogue_2="EliasRoom_closet1">
+				<clicked texture="Texture/level1/EliasRoom/Elias_Room_CabinetOpen.png"/>
+				<picked texture="Texture/level1/EliasRoom/Elias_Room_Cabinet(3).png"/>
 				<item name="keyCard" scriptHandleItem="false"/>
 				<sound name="OpenCabinet"/>
 			</Closet>
-			<Calendar texture="Texture/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
+			<Calendar texture="Texture/level1/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>
 			</Calendar>
 		</interactObj>
 		<doors>
-			<EliasRoomInnerDoor texture="Texture/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
+			<EliasRoomInnerDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
 				<EliasDoor />
-				<openDoor texture="Texture/EliasRoom/Elias_Room_Door1.png"/>
+				<openDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png"/>
 				<key name="keyCard"/>
 			</EliasRoomInnerDoor>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+			<fg texture="Texture/level1/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</EliasRoom>
 	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70" dialogue="HallRoom">
 		<background>
-			<bg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Door2 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
-			<Door3 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
-			<HallRoomUpperFloor_Door1 texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door" dialogue_2="Big_door"/>
+			<Door2 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<Door3 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<HallRoomUpperFloor_Door1 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door" dialogue_2="Big_door"/>
 		</interactObj>
 		<doors>
-			<EliasRoomOuterDoor texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door" dialogue_2="Elias_hall_door">
+			<EliasRoomOuterDoor texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door" dialogue_2="Elias_hall_door">
 				<wall_door/>
 			</EliasRoomOuterDoor>
 			<UpperStair texture="NONE" sizeX="904" sizeY="234" posX="0" posY="-243" next_room="MainHallLower" next_door="LowerStair" stair="" layer="0"/>
@@ -69,27 +69,27 @@
 			</Dialy>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
+			<fg texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Foreground.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallUpper>
 	<MainHallLower left_limit="-1580" right_limit="1580" top_limit="360" bottom_limit="-360" y="-110">
 		<background>
-			<bg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Template.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Bookshelf1 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1" dialogue_2="Hall_Bookshelf_L1">
+			<Bookshelf1 texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf1.png" sizeX="225" sizeY="390" posX="-1158" posY="-17" type="9" layer="2" dialogue="Hall_Bookshelf_L1" dialogue_2="Hall_Bookshelf_L1">
 				<puzzle name="BookshelfPuzzle"/>
 			</Bookshelf1>
-			<Bookshelf2 texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
-			<Gramophone texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2="Hall_gramophone_after">
-				<view texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
+			<Bookshelf2 texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Bookshelf2.png" sizeX="510" sizeY="451" posX="1140" posY="-44" type="1" layer="2"/>
+			<Gramophone texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone.png" sizeX="188" sizeY="205" posX="-495" posY="-110" type="2" layer="2" dialogue="Hall_gramophone" dialogue_2="Hall_gramophone_after">
+				<view texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Gramophone(V).png" sizeX="817" sizeY="720"/>
 				<item name="Puzzle2_ColorCode1" scriptHandleItem="true"/>
 			</Gramophone>
-			<RabbitCage texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
+			<RabbitCage texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Rabbitcage.png" sizeX="200" sizeY="203" posX="503" posY="-115" type="7" layer="2"/>
 		</interactObj>
 		<doors>
-			<StairDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="259" sizeY="364" posX="-7" posY="174" next_room="BackDoorRoom" next_door="BackDoorRoom_Foreground_Door" layer="0">
-				<openDoor texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
+			<StairDoor texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Door.png" sizeX="259" sizeY="364" posX="-7" posY="174" next_room="BackDoorRoom" next_door="BackDoorRoom_Foreground_Door" layer="0">
+				<openDoor texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_DoorOpen.png"/>
 				<key name="NONE"/>
 				<isOpenDoor/>
 			</StairDoor>
@@ -110,22 +110,22 @@
 			</Dann>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
+			<fg texture="Texture/level1/MainHall/LowerFloor/HallRoomLowerFloor_Foreground.png" sizeX="3161" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</MainHallLower>
 	<EmmaRoom left_limit="-438" right_limit="563" top_limit="360" bottom_limit="-360" y="-70" dialogue="EmmaRoom_start">
 		<background>
-			<bg texture="Texture/EmmaRoom/EmmaRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/EmmaRoom/EmmaRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<EmmaRoom_Book texture="Texture/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="2" dialogue="EmmaRoom_book" dialogue_2="EmmaRoom_book">
+			<EmmaRoom_Book texture="Texture/level1/EmmaRoom/EmmaRoom_Book.png" sizeX="158" sizeY="86" posX="-388" posY="-292.5" type="1" layer="2" dialogue="EmmaRoom_book" dialogue_2="EmmaRoom_book">
 				<typeView type="2"/>
 				<ForeGround/>
 			</EmmaRoom_Book>
-			<EmmaRoom_Drawing texture="Texture/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2="EmmaRoom_picture">
+			<EmmaRoom_Drawing texture="Texture/level1/EmmaRoom/EmmaRoom_Drawing.png" sizeX="112" sizeY="218" posX="48" posY="-102" type="1" layer="4" dialogue="EmmaRoom_picture" dialogue_2="EmmaRoom_picture">
 				<typeView type="2"/>	
 			</EmmaRoom_Drawing>
-			<EmmaRoom_Note1 texture="Texture/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" dialogue="EmmaRoom_note">
+			<EmmaRoom_Note1 texture="Texture/level1/EmmaRoom/EmmaRoom_Note1.png" sizeX="53" sizeY="42" posX="-370.5" posY="-256" type="12" layer="3" dialogue="EmmaRoom_note">
 				<note>
 					<EmmaNote1/>
 					<EmmaNote2/>
@@ -134,18 +134,18 @@
 				<colOff/>
 				<ForeGround/>
 			</EmmaRoom_Note1>
-			<EmmaRoom_Window  texture="Texture/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window" dialogue_2="EmmaRoom_window">
+			<EmmaRoom_Window  texture="Texture/level1/EmmaRoom/EmmaRoom_Window.png" sizeX="53" sizeY="219" posX="613.5" posY="87.5" type="1" layer="4" dialogue="EmmaRoom_window" dialogue_2="EmmaRoom_window">
 				<typeView type="2"/>
 			</EmmaRoom_Window>
 		</interactObj>
 		
 		<doors>
-			<EmmaRoom_Door texture="Texture/EmmaRoom/EmmaRoom_Door.png" sizeX="209" sizeY="369" posX="-141.5" posY="1" next_room="BackDoorRoom" next_door="BackDoorRoom_EmmaDoor" layer="0">
+			<EmmaRoom_Door texture="Texture/level1/EmmaRoom/EmmaRoom_Door.png" sizeX="209" sizeY="369" posX="-141.5" posY="1" next_room="BackDoorRoom" next_door="BackDoorRoom_EmmaDoor" layer="0">
 			</EmmaRoom_Door>
 		</doors>
 		
 		<NPCs>
-			<Emma sizeX="210" sizeY="266" posX="131.5" posY="-127" layer="0" dialogue="Emma1" dialogue_2="Emma1_after">
+			<Emma sizeX="210" sizeY="334" posX="131.5" posY="-127" layer="0" dialogue="Emma1" dialogue_2="Emma1_after">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Emma/Emma_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -154,45 +154,47 @@
 		</NPCs>
 		
 		<foreground>
-			<EmmaRoom_Light texture="Texture/EmmaRoom/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
-			<EmmaRoom_ForeGround texture="Texture/EmmaRoom/EmmaRoom_ForeGround.png" sizeX="1280" sizeY="99" posX="0" posY="-310" layer="0"/>
+			<EmmaRoom_Light texture="Texture/level1/EmmaRoom/EmmaRoom_Light.png" sizeX="881" sizeY="568" posX="199.5" posY="-76" layer="0"/>
+			<EmmaRoom_ForeGround texture="Texture/level1/EmmaRoom/EmmaRoom_ForeGround.png" sizeX="1280" sizeY="99" posX="0" posY="-310" layer="0"/>
 		</foreground>
 	</EmmaRoom>
 	<BackDoorRoom left_limit="-800" right_limit="903.75" top_limit="385" bottom_limit="-385" y="-70">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/BackDoorRoom/BackDoorRoom_Template.png" sizeX="1808" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
 			<TriggerEmmaTalk texture="NONE" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="11" layer="1" dialogue="Backdoor_Room"/>
-			<BackDoorRoom_FlowerClue texture="Texture/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase" dialogue_2="">
+			<BackDoorRoom_FlowerClue texture="Texture/level1/BackDoorRoom/BackDoorRoom_FlowerClue.png" sizeX="141" sizeY="255" posX="-253.5" posY="-72" type="3" layer="1" dialogue="backdoor_vase" dialogue_2="">
 				<item name="Puzzle2_EmmaPaper1" scriptHandleItem="false"/>
-				<picked texture="Texture/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
+				<picked texture="Texture/level1/BackDoorRoom/BackDoorRoom_FlowerNoClue.png"/>
 			</BackDoorRoom_FlowerClue>
-			<BackDoorRoom_EmmaDoor texture="Texture/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="1" layer="2" dialogue="Emma_door" dialogue_2="Emma_door_after">
+			<BackDoorRoom_EmmaDoor texture="Texture/level1/BackDoorRoom/BackDoorRoom_EmmaDoor.png" sizeX="220" sizeY="387" posX="-66" posY="5" type="1" layer="2" dialogue="Emma_door" dialogue_2="Emma_door_after">
 				<typeView type="9"/>
 			</BackDoorRoom_EmmaDoor>
 		</interactObj>
 		<doors>
-			<BackDoorRoom_Foreground_Door texture="Texture/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-820" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="1">
+			<BackDoorRoom_Foreground_Door texture="Texture/level1/BackDoorRoom/BackDoorRoom_Foreground_Doortest.png" sizeX="152" sizeY="541" posX="-820" posY="-51" next_room="MainHallLower" next_door="StairDoor" layer="1">
+				<playerNextX value="-700"/>
 				<isOpenDoor/>
 				<ForeGround/>
 			</BackDoorRoom_Foreground_Door>
-			<BackDoorRoom_BasementDoor texture="Texture/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0">
+			<BackDoorRoom_BasementDoor texture="Texture/level1/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0" dialogue="" dialogueAfterTrigger="">
+				<wall_door/>
 				<isOpenDoor/>
 			</BackDoorRoom_BasementDoor>
 		</doors>
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_Foreground texture="Texture/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1379" sizeY="578" posX="-196" posY="-72" layer="0"/>
+			<BackDoorRoom_Foreground texture="Texture/level1/BackDoorRoom/BackDoorRoom_Foreground.png" sizeX="1379" sizeY="578" posX="-196" posY="-72" layer="0"/>
 		</foreground>
 	</BackDoorRoom>
 	<BackDoorRoomBasement left_limit="-596" right_limit="588" top_limit="385" bottom_limit="-385" y="-30">
 		<background>
-			<bg texture="Texture/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level1/BackDoorRoom/BackDoorRoom_Basement.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<BackDoorRoom_Computer texture="Texture/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4" dialogue="backdoor_com">
+			<BackDoorRoom_Computer texture="Texture/level1/BackDoorRoom/BackDoorRoom_Computer.png" sizeX="246" sizeY="281" posX="-60" posY="19" type="9" layer="4" dialogue="backdoor_com">
 				<puzzle name="Numpad_Backdoor"/>
 				<typeView type="9"/>
 			</BackDoorRoom_Computer>
@@ -203,7 +205,7 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<BackDoorRoom_BasementForeGround texture="Texture/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="416" posX="0" posY="-152" layer="0"/>
+			<BackDoorRoom_BasementForeGround texture="Texture/level1/BackDoorRoom/BackDoorRoom_BasementForeGround.png" sizeX="1280" sizeY="416" posX="0" posY="-152" layer="0"/>
 		</foreground>
 	</BackDoorRoomBasement>
 </level>

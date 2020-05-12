@@ -15,9 +15,7 @@
 enum ScreenState {
 	MENUSCREEN = 0,
 	GAMESCREEN,
-	CUTSCENE,
-	ENDSCENE,
-	EXIT,
+	CREDITSCREEN,
 	TESTSCENE
 };
 
@@ -77,13 +75,17 @@ class GameScreen :public Screen {
 
 	Inventory* inventory;
 
+	UIObject* cutscene;
+
 	bool PuzzleTime;
+	bool CutsceneTime;
 	bool InventoryEnable;
 public:
 	vector<std::string> levels;
 	std::vector<Item*> items;
 	vector<std::string> objActions;
 	map<std::string, Puzzle*> puzzles;
+	map<std::string, unsigned int> cutscenes;
 	PhoneOpenButton* phoneIcon;
 
 	GameScreen();
@@ -100,9 +102,12 @@ public:
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void OpenPuzzle(std::string);
+	void OpenCutscene(std::string cutsceneName, std::string dialogueName);
 	void ResetPuzzle();
 	void ClosePuzzle();
+	void CloseCutscene();
 	bool IsPuzzleOpen() { return PuzzleTime; }
+	bool IsCutsceneOpen() { return CutsceneTime; }
 
 	Door* GetDoor(std::string);
 	Level* GetCurrentLevel() { return currentLevel; }
@@ -119,9 +124,9 @@ public:
 };
 
 // may change to other thing
-class CutsceneScreen :public Screen {
+class CreditScreen :public Screen {
 public:
-	CutsceneScreen();
+	CreditScreen();
 	void Render();
 	void Init() {}
 	void Update();

@@ -24,8 +24,9 @@ Room::~Room() {
 void Room::Update() {
 	for (auto obj : objects)
 		obj->Update();
-	for (auto npc : npcs)
+	for (auto npc : npcs) {
 		npc->Update();
+	}
 }
 
 void Room::SetPlayerWalkLimit(Collider* col) {
@@ -41,10 +42,7 @@ void Room::SetCameraLimit(Collider* col) {
 void Room::RightClick(float x, float y) {
 	Game* game = Game::GetInstance();
 	TextBox* textbox = TextBox::GetInstance();
-	//if (textbox->IsDisplay())
-	//	textbox->SetDisplay(false);
-	//else
-		((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition((float)x, (float)y);
+	((GameScreen*)game->GetScreen())->GetPlayer()->SetNextPosition((float)x, (float)y);
 }
 
 void Room::LeftClick(float x, float y) {
@@ -125,6 +123,9 @@ DrawableObject* Room::FindObject(std::string name) {
 	for (auto npc : npcs)
 		if (npc->object_name == name)
 			return npc;
+	for (auto door : doors)
+		if (door.first == name)
+			return door.second;
 	return nullptr;
 }
 
@@ -157,10 +158,20 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	currentRoom = rooms[roomName];
 
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
-	if (door != " ") {
-		glm::vec3 nextPlayerPosition = glm::vec3(currentRoom->doors[door]->getPos().x, currentRoom->y, 1);
-		player->SetPosition(nextPlayerPosition);
+
+	float playerNextx = 0;
+	if (!door.empty()) {
+		if (currentRoom->doors[door]->hasNextX) {
+			playerNextx = currentRoom->doors[door]->playerNextX;
+		}
+		else {
+			playerNextx = currentRoom->doors[door]->getPos().x;
+		}
 	}
+
+	glm::vec3 nextPlayerPosition = glm::vec3(playerNextx, currentRoom->y, 1);
+	player->SetPosition(nextPlayerPosition);
+	
 	player->SetWalkLimit(currentRoom->GetPlayerWalkLimit());
 	player->StopWalking();
 

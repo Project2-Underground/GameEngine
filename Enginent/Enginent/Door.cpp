@@ -10,6 +10,7 @@ Door::Door(std::string next_room, std::string next_door) {
 	triggered = false;
 	used = true;
 	isOpenDoor = false;
+	hasNextX = false;
 	openTexture = 0;
 }
 
@@ -39,6 +40,16 @@ void Door::SetOpenTexture(std::string texture) {
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
 }
 
+void Door::SetPlayerNextX(float x) {
+	playerNextX = x;
+	hasNextX = true;
+}
+
+void Door::Trigger() {
+	triggered = true;
+	interactType = DOOR;
+}
+
 void Door::Open() {
 	used = true; 
 	interactType = DOOR;
@@ -47,7 +58,11 @@ void Door::Open() {
 
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	if (used) {
+	std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
+	if (triggered) {
+		interactType = DOOR;
+		TextBox::GetInstance()->setText(dialogue_after_trigger);
+		dialogue_after_trigger.clear();
 		Door::action();
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {

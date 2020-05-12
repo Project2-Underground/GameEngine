@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <Items>
-	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080" dialogue="">
+	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/level1/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080" dialogue="">
 		<multipleUse/>
 	</keyCard>
 	
@@ -29,10 +29,10 @@
 	<Puzzle3_Pic4 i_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
 	
 	<!-- Puzzle 6 -->
-	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Alcohol.png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
-	<Puzzle6_Cloth i_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Cloth.png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719"/>
-	<Puzzle6_MEAT i_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" v_texture = "Texture/Puzzle3/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157"/>
-	<Puzzle6_Paper i_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" v_texture = "Texture/Puzzle3/Puzzle6_Paper.png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713"/>
+	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
+	<Puzzle6_Cloth i_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719"/>
+	<Puzzle6_MEAT i_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" v_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157"/>
+	<Puzzle6_Paper i_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713"/>
 	
 	<Puzzle6_PillAfternoon_sep1 i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" sizeX="72" sizeY="64" IsizeX="72" IsizeY="64">
 		<combine>

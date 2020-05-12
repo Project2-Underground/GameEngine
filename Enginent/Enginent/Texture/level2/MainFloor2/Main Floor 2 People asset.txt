@@ -1,0 +1,9 @@
+Main Floor 2 People asset
+
+BG_People
+x -250
+y 69
+
+FG_People
+x -396
+y -242

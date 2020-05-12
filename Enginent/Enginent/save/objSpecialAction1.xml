@@ -2,9 +2,14 @@
 
 <Objects>
     <EliasRoom>
-        <EliasRoomInnerDoor>
-            <Closet/>
-            <Table/>
-        </EliasRoomInnerDoor>
+		<EliasRoomInnerDoor>
+			<Closet/>
+			<Table/>
+		</EliasRoomInnerDoor>
     </EliasRoom>
+	<EmmaRoom>
+		<Emma>
+			<BackDoorRoom_BasementDoor/>
+		</Emma>
+	</EmmaRoom>
 </Objects>
