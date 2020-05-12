@@ -23,6 +23,7 @@ void Butler::Appear() {
 		SetPosition(glm::vec3(-987, -102, 1));
 		disappearAfterAction = true;
 		clickToInteract = false;
+		triggered = false;
 		break;
 	case Butler::PHASE1:
 		currentLevel = 1;
@@ -89,21 +90,23 @@ void Butler::action() {
 }
 void Butler::Update() {
 	anim->Update();
+	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
+		SetDisplay(false);
+		col->enable = false;
+		triggered = false;
+	}
+	if (!clickToInteract) {
+		PlayerTriggerObj::Update();
+	}
 	if (currentPhase == PHASE2 && !((GameScreen*)Game::GetInstance()->GetScreen())->IsPuzzleOpen() && !triggered) {
 		Player* player = Game::GetInstance()->GetPlayer();
-		if (player->faceLeft) 
-			player->Turn();
-		
 		TextBox::GetInstance()->setText(dialogue_name);
 		dialogue_name = "Butler1_end";
 		triggered = true;
 	}
-	if (triggered && display && disappearAfterAction && !TextBox::GetInstance()->IsDisplay()) {
-		SetDisplay(false);
-		col->enable = false;
-	}
-	if (!clickToInteract) {
-		PlayerTriggerObj::Update();
+	else if (currentPhase == PHASE0 && !display && !triggered) {
+		Phone::GetInstance()->Open();
+		triggered = true;
 	}
 }
 void Butler::SetTriggered(bool b) {

@@ -12,6 +12,7 @@ public:
 	void SetOpenTexture(std::string texture);
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
 	void SetPlayerNextX(float x);
+	void Trigger();
 	void Open();
 	void action();
 	float playerNextX;

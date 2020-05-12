@@ -29,7 +29,7 @@
 	<Puzzle3_Pic4 i_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
 	
 	<!-- Puzzle 6 -->
-	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle6/uzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
+	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
 	<Puzzle6_Cloth i_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719"/>
 	<Puzzle6_MEAT i_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" v_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157"/>
 	<Puzzle6_Paper i_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713"/>

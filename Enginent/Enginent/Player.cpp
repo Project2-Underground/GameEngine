@@ -106,6 +106,15 @@ void Player::CheckTarget(InteractableObj* target) {
 	if (distance <= ACTION_DISTANCE) {
 		target->action();
 		StopWalking();
+		float playerPosFromTarget = getPos().x - target->getPos().x;
+		if (playerPosFromTarget <= 0) {
+			if (faceLeft)
+				Turn();
+		}
+		else {
+			if (!faceLeft)
+				Turn();
+		}
 	}
 	else {
 		TextBox::GetInstance()->setText("tooFar");

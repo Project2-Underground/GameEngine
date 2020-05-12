@@ -58,7 +58,7 @@ public:
 	void RightClick(float, float);
 	void LeftClick(float, float);
 
-	void ChangeRoom(std::string roomName, std::string door = " ");
+	void ChangeRoom(std::string roomName, std::string door = "");
 	void TriggerChangeDialogue(std::string objName, std::string dName);
 
 	std::vector<DrawableObject*>* Getobjects();

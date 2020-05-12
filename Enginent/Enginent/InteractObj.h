@@ -42,11 +42,12 @@ protected:
 	std::string dialogue_before;
 	std::string dialogue_after;
 	std::string dialogue_after_used;
+	std::string dialogue_after_trigger;
 	std::string itemName;    
-	std::vector<InteractableObj*> triggerObjs;
 	unsigned int nextTexture; // after picking up an item
 
 public:
+	std::vector<InteractableObj*> triggerObjs;
 	bool used;
 	bool triggered;
 	bool hasItem;
@@ -54,6 +55,7 @@ public:
 	InteractableObj();
 
 	virtual void action();
+	virtual void Trigger();
 	void SetAnimation(std::string name, std::string texture, int frameNo, float frameRate, bool loop = false);
 	void SetCollder(Collider* n_col);
 	void SetType(InteractTypeList newInteractType) { interactType = newInteractType; };
@@ -78,6 +80,7 @@ public:
 	void SetDialogueBeforeName(std::string d) { dialogue_before = d; }
 	void SetDialogueAfterName(std::string d) { dialogue_after = d; }
 	void SetDialogueAfterUsedName(std::string d) { dialogue_after_used = d; }
+	void SetDialogueAfterTriggerName(std::string d) { dialogue_after_trigger = d; }
 	void SetTalked(bool b);
 	void SetTakeNote(bool b) { takeNote = b; }
 	bool Talked() { return talk; }

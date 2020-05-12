@@ -45,6 +45,11 @@ void Door::SetPlayerNextX(float x) {
 	hasNextX = true;
 }
 
+void Door::Trigger() {
+	triggered = true;
+	interactType = DOOR;
+}
+
 void Door::Open() {
 	used = true; 
 	interactType = DOOR;
@@ -53,7 +58,11 @@ void Door::Open() {
 
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	if (used) {
+	std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
+	if (triggered) {
+		interactType = DOOR;
+		TextBox::GetInstance()->setText(dialogue_after_trigger);
+		dialogue_after_trigger.clear();
 		Door::action();
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {

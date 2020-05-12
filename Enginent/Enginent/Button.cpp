@@ -126,7 +126,7 @@ void PhoneOpenButton::Init(float x, float y, glm::vec3 pos) {
 
 void PhoneExitButton::action() {
 	Phone* p = Phone::GetInstance();
-	if (p->firstClose && p->textAfterClose.empty()) {
+	if (p->firstClose && !p->textAfterClose.empty()) {
 		TextBox::GetInstance()->setText(p->textAfterClose);
 		p->textAfterClose.clear();
 		p->AddPage(NOTE, "Note1");

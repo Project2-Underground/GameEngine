@@ -90,7 +90,7 @@
 		<doors>
 			<Building1_Door texture="Texture/level2/Building1/Building1_Door.png" sizeX="214" sizeY="360" posX="418" posY="2" next_room="MainFloor2" next_door="MainFloor2_Building1_Door" layer="0" dialogue="">
 			</Building1_Door>
-			<Building1_FloorDoorOpen texture="Texture/level2/Building1/Building1_FloorDoorOpen.png" sizeX="297" sizeY="73" posX="-374.5" posY="-214" next_room="" next_door="" layer="0" dialogue="">
+			<Building1_FloorDoorOpen texture="Texture/level2/Building1/Building1_FloorDoorOpen.png" sizeX="297" sizeY="73" posX="-374.5" posY="-214" next_room="Building2" next_door="Building2_Door1" layer="0" dialogue="">
 				<SecretDoor/>
 				<key name="NONE"/>
 			</Building1_FloorDoorOpen>
