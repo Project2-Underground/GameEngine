@@ -232,7 +232,7 @@ class NumberButton : public Button {
 	int input_size;
 	int num;
 public:
-	NumberButton(std::string texture, std::string press, int n, float posX, float posY, float sizeX, float sizeY, std::vector<int>* input, int input_size);
+	NumberButton(std::string texture, std::string press, int n, float posX, float posY, float sizeX, float sizeY, std::vector<int>* input, int input_size, std::string sound);
 	int GetNum() { return num; }
 	void action();
 };
@@ -240,14 +240,14 @@ public:
 class EnterButton : public Button {
 	Numpad* numpad;
 public:
-	EnterButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n);
+	EnterButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n, std::string sound);
 	void action();
 };
 
 class DeleteButton : public Button {
 	Numpad* numpad;
 public:
-	DeleteButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n);
+	DeleteButton(std::string texture, std::string press, float posX, float posY, float sizeX, float sizeY, Numpad* n, std::string sound);
 	void action();
 };
 

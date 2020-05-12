@@ -26,6 +26,8 @@ void SoundManager::Init()
 	sfxs["OpenDrawer"] = createSound("Sound/open_drawer.mp3");
 	sfxs["OpenCabinet"] = createSound("Sound/open_closet.mp3");
 	sfxs["Key"] = createSound("Sound/Key.mp3");
+	sfxs["EmmaNumpad"] = createSound("Sound/EmmaNumpadSound.mp3");
+	sfxs["BasementNumpad"] = createSound("Sound/BasementNumpadSound.mp3");
 }
 
 ISoundSource* SoundManager::createSound(const char* filename)

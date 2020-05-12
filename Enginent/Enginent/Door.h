@@ -45,3 +45,9 @@ public:
 	ChangeLevelDoor(int nextLvl) :Door("", "") { nextLevel = nextLvl; }
 	void action();
 };
+
+class Building4InnerDoor : public Door {
+public:
+	Building4InnerDoor(std::string room, std::string door);
+	void action();
+};
