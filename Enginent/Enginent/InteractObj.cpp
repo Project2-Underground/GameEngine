@@ -44,14 +44,17 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 }
 
 void InteractableObj::action() {
+	if (talk == true)
+	{
+		if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+	}
 	if (dialogue_name != "")
 	{
 		TextBox::GetInstance()->setText(this->dialogue_name, talk);
 		if (!talk)
 		{
 			talk = true;
-			if(dialogue_after != "")
-				dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
@@ -185,14 +188,17 @@ void OpenObj::action() {
 		PickUpItem();
 	}
 	else {
+		if (talk == true)
+		{
+			if (dialogue_after != "")
+				dialogue_name = dialogue_after;
+		}
 		if (dialogue_name != "")
 		{
 			TextBox::GetInstance()->setText(this->dialogue_name, talk);
 			if (!talk)
 			{
 				talk = true;
-				if (dialogue_after != "")
-					dialogue_name = dialogue_after;
 			}
 			TextBox::GetInstance()->SetDisplay(true);
 		}
@@ -206,14 +212,17 @@ void OpenObj::SetSound(std::string s) {
 void OpenObj::Open() {
 	open = true;
 	//std::cout << "open\n";
+	if (talk == true)
+	{
+		if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+	}
 	if (dialogue_name != "")
 	{
 		TextBox::GetInstance()->setText(this->dialogue_name, talk);
 		if (!talk)
 		{
 			talk = true;
-			if (dialogue_after != "")
-			dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
@@ -252,14 +261,17 @@ void NonPlayer::action()
 {
 	Phone::GetInstance()->AddNPCInteracted(object_name);
 	//std::cout << interactType << std::endl;
+	if (talk == true)
+	{
+		if (dialogue_after != "")
+			dialogue_name = dialogue_after;
+	}
 	if (dialogue_name != "")
 	{
 		TextBox::GetInstance()->setText(this->dialogue_name, talk);
 		if (!talk)
 		{
 			talk = true;
-			if (dialogue_after != "")
-			dialogue_name = dialogue_after;
 		}
 		TextBox::GetInstance()->SetDisplay(true);
 	}
@@ -365,6 +377,9 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	emmaNote->ChangeDialogue("EmmaRoom_note", "EmmaRoom_note");
 	emmaNote->SetInteractType(ADDNOTE);
 	emmaNote->col->enable = true;
+	Item* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->FindItem("keyCard");
+	if(i)
+		i->multipleUse = false;
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);

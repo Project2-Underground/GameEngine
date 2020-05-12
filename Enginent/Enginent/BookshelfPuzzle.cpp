@@ -203,6 +203,8 @@ void Bookshelf::CompletePuzzle() {
 
 Bookshelf::~Bookshelf()
 {
+	if (texture)
+		delete texture;
 	for (int i = 0; i < images.size(); i++)
 	{
 		delete images[i];
@@ -243,12 +245,12 @@ BookshelfPuzzle::BookshelfPuzzle()
 	block->SetSize(358, -417);
 	images.push_back(block);
 
-	Book* book1 = new Book(1, "Texture/Puzzle/Puzzle1_Book1.png", 56, -154, 252, 87);
-	Book* book2 = new Book(2, "Texture/Puzzle/Puzzle1_Book2.png", 56, -154, 352, 87);
-	Book* book3 = new Book(3, "Texture/Puzzle/Puzzle1_Book3.png", 56, -154, 448, 87);
-	Book* book4 = new Book(4, "Texture/Puzzle/Puzzle1_Book4.png", 56, -154, 252, -88);
-	Book* book5 = new Book(5, "Texture/Puzzle/Puzzle1_Book5.png", 56, -154, 448, -88);
-	Book* book6 = new Book(6, "Texture/Puzzle/Puzzle1_Book6.png", 56, -154, 352, -88);
+	Book* book1 = new Book(1, "Texture/Puzzle/Puzzle1_Book1_highlight.png", 56, -154, 252, 87);
+	Book* book2 = new Book(2, "Texture/Puzzle/Puzzle1_Book2_highlight.png", 56, -154, 352, 87);
+	Book* book3 = new Book(3, "Texture/Puzzle/Puzzle1_Book3_highlight.png", 56, -154, 448, 87);
+	Book* book4 = new Book(4, "Texture/Puzzle/Puzzle1_Book4_highlight.png", 56, -154, 252, -88);
+	Book* book5 = new Book(5, "Texture/Puzzle/Puzzle1_Book5_highlight.png", 56, -154, 448, -88);
+	Book* book6 = new Book(6, "Texture/Puzzle/Puzzle1_Book6_highlight.png", 56, -154, 352, -88);
 	Space* s1 = new Space(1, glm::vec3(-185, 93, 0), 57.0f, -155.0f);
 	Space* s2 = new Space(2, glm::vec3(-303, 93, 0), 57.0f, -155.0f);
 	Space* s3 = new Space(3, glm::vec3(-243, 267, 0), 57.0f, -155.0f);
@@ -607,7 +609,7 @@ void Bookshelf2::ActionAfterPuzzle()
 	Door* door = new ChangeLevelDoor(1);
 	InteractableObj* obj = (InteractableObj*)g->GetCurrentLevel()->rooms["MainHallUpper"]->FindObject("HallRoomUpperFloor_Door1");
 	door->Init(obj->getSize().x, obj->getSize().y, obj->getPos());
-	door->SetTexture("Texture/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
+	door->SetTexture("Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door1Open.png");
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->doors.insert(std::pair<std::string, Door*>("level2Door", door));
 	g->GetCurrentLevel()->rooms["MainHallUpper"]->objects.push_back(door);
 	obj->Appear(false);
@@ -657,6 +659,8 @@ void Bookshelf2::CompletePuzzle()
 
 Bookshelf2::~Bookshelf2()
 {
+	if (texture)
+		delete texture;
 	for (int i = 0; i < images.size(); i++)
 	{
 		delete images[i];

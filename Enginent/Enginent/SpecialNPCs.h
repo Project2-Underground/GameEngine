@@ -12,7 +12,9 @@ public:
 		PHASE0 = 0,
 		PHASE1,
 		PHASE2,
-		PHASE3
+		PHASE3,
+		ROUTE_A,
+		ROUTE_B
 	};
 	Phase currentPhase;
 	Butler();

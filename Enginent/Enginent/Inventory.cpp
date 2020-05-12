@@ -51,6 +51,13 @@ bool Inventory::IsItemInInventory(std::string itemName) {
 	}
 	return false;
 }
+Item* Inventory::FindItem(std::string itemName) {
+	for (auto ib : InventoryBoxes) {
+		if (ib->GetItem() && ib->GetItem()->name == itemName)
+			return ib->GetItem();
+	}
+	return nullptr;
+}
 void Inventory::Update() {
 	// temporary mouse input
 	int x, y;

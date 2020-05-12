@@ -161,10 +161,10 @@
 	</script>
 	<script key = "Hall_Bookshelf_L1" loopIndex = "0">
 		<sub  change = "4">
-			<ChangeName name = "Hubert" new = "Hubert2" new_a = "Hubert2_after"/>
-			<ChangeName name = "Dialy" new = "Dialy2" new_a = "Dialy2_after"/>
 			<ChangeName name = "Ann" new = "Ann2" new_a = "Ann2_after"/>
 			<ChangeName name = "Dann" new = "Dann2" new_a = "Dann2_after"/>
+			<ChangeName name = "Hubert" new = "Hubert2" new_a = "Hubert2_after"/>
+			<ChangeName name = "Dialy" new = "Dialy2" new_a = "Dialy2_after"/>
 			<Dialogue name = "Elias" text = "I have to do something with the books"/>
 			<Dialogue name = "Elias" text = "( I have no idea what I'm doing. Let's just put these books back for now )"/>
 			<Dialogue name = "Elias" text = "( I should go gather some information and find all the missing books )"/>
@@ -364,7 +364,7 @@ experiment, I need to ask you about that"/>
 		</sub>
 	</script>
 	<script key = "Hubert2" loopIndex = "0">
-		<sub choice = "c_Hubert1">
+		<sub choice = "c_Hubert2">
 			<Dialogue name = "Hubert" text = "Hi, you are new around here?"/>
 			<Dialogue name = "Elias" text = "My name is Elias Adams. Are you also stuck here?"/>
 			<Dialogue name = "Hubert" text = "Elias, you are finding the exit right? And this is the book you are finding, right?"/>
@@ -791,7 +791,7 @@ talking about in here"/>
 			<Dialogue name = "Elias" text = "What do you mean!"/>
 			<Dialogue name = "Cultist" text = "In other words, I can assist you with the way out. \n Especially now, as I have got my hands on these fascinating data."/>
 			<Dialogue name = "Elias" text = "( Does he know the way out? )"/>
-			<Dialogue name = "Cultist" text = "I have my duty -- to assist people in getting out. \nB ut not everyone gets the privilege."/>
+			<Dialogue name = "Cultist" text = "I have my duty -- to assist people in getting out. \n But not everyone gets the privilege."/>
 			<Dialogue name = "Elias" text = "And what will I have to do for you to let me out?"/>
 		</sub>
 	</script>
@@ -826,6 +826,38 @@ talking about in here"/>
 		</sub>
 	</script>
 	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
+		</sub>
+	</script>
+	
+	
+	
+	<script key = "Floor2_Mask4_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC4" text = "Hey! \n I heard you take care of the traitor for us"/>
+			<Dialogue name = "NPC4" text = "You saved us! \n Thank you."/>
+			<Dialogue name = "NPC4" text = "I also thought it was that guy! \n He had always been so weird"/>
+			<Dialogue name = "Elias" text = "He told me to tell you guys to go search for the scientist. \n She's hiding behind the shadow"/>
+			<Dialogue name = "NPC4" text = "The chief finally spoke! \n I'll see you later!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask7_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "NPC7" text = "Oh... you're the new member"/>
+			<Dialogue name = "NPC7" text = "Damn it! \n I've been observing that damn paper in his hand for a while now, but why did I not notice it!"/>
+			<Dialogue name = "Elias" text = "You'll need to search for the scientist. \n He said that the scientist is behind the shadow."/>
+			<Dialogue name = "NPC7" text = "Yeah, sure. \n I'll be looking forward to working with you again!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask5_2" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
+		</sub>
+	</script>
+	<script key = "Floor2_Mask6_2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
 			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>

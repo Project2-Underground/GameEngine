@@ -18,7 +18,6 @@ class CursorUI : public UIObject {
 		unsigned int CS_Save;
 		unsigned int CS_Stair;
 		unsigned int CS_Note;
-		unsigned int CS_Puzzle;
 
 		unsigned char cursorDisableCheck;
 

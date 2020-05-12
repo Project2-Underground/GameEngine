@@ -10,6 +10,7 @@ Door::Door(std::string next_room, std::string next_door) {
 	triggered = false;
 	used = true;
 	isOpenDoor = false;
+	hasNextX = false;
 	openTexture = 0;
 }
 
@@ -37,6 +38,11 @@ void Door::action() {
 
 void Door::SetOpenTexture(std::string texture) {
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+}
+
+void Door::SetPlayerNextX(float x) {
+	playerNextX = x;
+	hasNextX = true;
 }
 
 void Door::Open() {

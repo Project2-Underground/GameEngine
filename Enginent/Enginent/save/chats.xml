@@ -17,4 +17,11 @@
 		<m>Go back to the hallroom. Someone wating for you there</m>
 		<m>Last but not least, I wish you the best of luck</m>
 	</Unknown2>
+	<Unknown3 pic="Texture/tmp_texture/person1.png">
+		<m>Hello again.</m>
+		<m>From I, who have been following you. You are doing good.</m>
+		<m>So, I'm helping you a little.</m>
+		<m>This will be the last puzzle for you. Pass it.</m>
+		<m>Because I have something to talk with you.</m>
+	</Unknown3>
 </chats>
