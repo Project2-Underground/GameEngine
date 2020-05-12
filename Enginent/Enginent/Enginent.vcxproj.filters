@@ -150,9 +150,6 @@
     <ClInclude Include="SpecialNPCs.h">
       <Filter>GameObj\interactable</Filter>
     </ClInclude>
-    <ClInclude Include="Cutscene.h">
-      <Filter>GameUI</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp">

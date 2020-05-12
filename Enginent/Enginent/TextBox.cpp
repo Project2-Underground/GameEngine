@@ -110,8 +110,17 @@ void TextBox::setText(std::string key, bool talk)
 			}
 			else
 			{
-				//disable cutscene
 				cutscene->SetDisplay(false);
+			}
+
+			//change texture
+			if (d_text->dialogue[d_index].spriteChange != "")
+			{
+				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+				if (obj != nullptr)
+				{
+					obj->SetTexture(d_text->dialogue[d_index].sprite);
+				}
 			}
 
 			ViewWindow* vw = ViewWindow::GetInstance();
@@ -308,8 +317,17 @@ void TextBox::clickLeft(glm::vec3 pos)
 		}
 		else
 		{
-			//disable cutscene
 			cutscene->SetDisplay(false);
+		}
+
+		//change texture
+		if (d_text->dialogue[d_index].spriteChange != "")
+		{
+			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			if (obj != nullptr)
+			{
+				obj->SetTexture(d_text->dialogue[d_index].sprite);
+			}
 		}
 
 		ViewWindow* vw = ViewWindow::GetInstance();

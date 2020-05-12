@@ -33,6 +33,8 @@ struct s_Dialogue
 	std::string animName;
 	std::string puzzleName;
 	std::string soundName;
+	std::string spriteChange = "";
+	unsigned int sprite;
 	unsigned int CutScene;
 	bool CutScenebl = 0;
 	bool showItemWin;

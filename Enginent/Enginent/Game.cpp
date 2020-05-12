@@ -96,11 +96,6 @@ void Game::UpdateScreenState() {
 	case GAMESCREEN:
 		currentScreen = new GameScreen();
 		break;
-	case CUTSCENE:
-		currentScreen = new CutsceneScreen();
-		break;
-	case ENDSCENE:
-		break;
 	case TESTSCENE:
 		currentScreen = new TestScreen();
 	default:
