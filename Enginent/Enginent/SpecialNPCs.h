@@ -7,6 +7,7 @@ class Butler : public PlayerTriggerObj {
 	int currentLevel;
 	void MoveOut(std::string);
 	void MoveIn(std::string);
+	bool turnLeft;
 public:
 	enum Phase {
 		PHASE0 = 0,
