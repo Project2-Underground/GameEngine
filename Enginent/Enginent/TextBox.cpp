@@ -26,6 +26,8 @@ TextBox::TextBox()
 	std::string text = "";
 	name->SetPosition(glm::vec3(-400.0f, -115.0f, 1.0f));
 	choice_UI = new ChoiceUI();
+	cutscene = new UIObject();
+	cutscene->SetSize(1280, -720);
 
 	//use TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
 }
@@ -100,6 +102,18 @@ void TextBox::setText(std::string key, bool talk)
 				SoundManager::GetInstance()->playSound(SFX, d_text->dialogue[d_index].soundName);
 			}
 
+			//cutscene
+			if (d_text->dialogue[d_index].CutScenebl)
+			{
+				cutscene->SetTexture(d_text->dialogue[d_index].CutScene);
+				cutscene->SetDisplay(true);
+			}
+			else
+			{
+				//disable cutscene
+				cutscene->SetDisplay(false);
+			}
+
 			ViewWindow* vw = ViewWindow::GetInstance();
 			if (d_text->dialogue[d_index].showItemWin)
 			{
@@ -148,6 +162,7 @@ void TextBox::Render()
 	if (display)
 	{
 		Update();
+		Game::GetInstance()->GetRenderer()->Render(cutscene);
 		Game::GetInstance()->GetRenderer()->Render(background);
 		Game::GetInstance()->GetRenderer()->Render(name);
 		for (int i = 0; i < dialogue.size(); i++)
@@ -283,6 +298,18 @@ void TextBox::clickLeft(glm::vec3 pos)
 		if (d_text->dialogue[d_index].soundName != "")
 		{
 			SoundManager::GetInstance()->playSound(SFX, d_text->dialogue[d_index].soundName);
+		}
+
+		//cutscene
+		if (d_text->dialogue[d_index].CutScenebl)
+		{
+			cutscene->SetTexture(d_text->dialogue[d_index].CutScene);
+			cutscene->SetDisplay(true);
+		}
+		else
+		{
+			//disable cutscene
+			cutscene->SetDisplay(false);
 		}
 
 		ViewWindow* vw = ViewWindow::GetInstance();

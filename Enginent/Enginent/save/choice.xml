@@ -43,18 +43,10 @@
 		<choice text = "Input the number." nextDialogue = "" puzzle = "Numpad_Emma"/>
 		<choice text = "Not yet." nextDialogue = ""/>
 	</choices>	
-	
-	
-	
-		
 	<choices key = "c_Building3">
-		<choice text = "Input the number." nextDialogue = ""/>
+		<choice text = "Input the number." nextDialogue = "" room = "Building3"/>
 		<choice text = "Not yet." nextDialogue = ""/>
 	</choices>
-	
-	
-
-	
 	<choices key = "c_NPC2">
 		<choice text = "Return the paper" nextDialogue = "Building4_NPC2A"/>
 		<choice text = "Calm down, I just want to talk about something around here." nextDialogue = "Building4_NPC2B"/>

@@ -36,6 +36,7 @@ public:
 class TextBox : public UIObject {
 	private:
 		UIObject* background;
+		UIObject* cutscene;
 		std::vector<TextObject*> dialogue;
 		std::vector<std::string> curr_dialogue;
 		std::vector<std::string> show_dialogue;

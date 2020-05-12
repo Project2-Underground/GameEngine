@@ -11,11 +11,13 @@ struct Choice {
 	std::string text;
 	std::string nextScript;
 	std::string puzzleName;
-	Choice(std::string& t, std::string& next, std::string& puzzle)
+	std::string roomName;
+	Choice(std::string& t, std::string& next, std::string& puzzle, std::string& room)
 	{
 		text = t;
 		nextScript = next;
 		puzzleName = puzzle;
+		roomName = room;
 	}
 	Choice() {};
 };
@@ -31,6 +33,8 @@ struct s_Dialogue
 	std::string animName;
 	std::string puzzleName;
 	std::string soundName;
+	unsigned int CutScene;
+	bool CutScenebl = 0;
 	bool showItemWin;
 	int chatIndex;
 	s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim, std::string sound, bool show);

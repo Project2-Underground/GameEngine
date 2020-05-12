@@ -49,6 +49,7 @@ ScriptManager* ScriptManager::GetInstance()
 
 void ScriptManager::LoadScript()
 {
+	ImageObject img_tmp;
 	pugi::xml_node script = scriptDoc.child("scripts");
 	for (pugi::xml_node_iterator scripts = script.begin(); scripts != script.end(); scripts++)
 	{
@@ -113,6 +114,8 @@ void ScriptManager::LoadScript()
 				std::string animName = "";
 				std::string puzzleName = "";
 				std::string soundName = "";
+				std::string cutscene = "";
+				bool cutSceneBL = false;
 				bool showWin = false;
 				if (dialogue->child("item"))
 				{
@@ -149,7 +152,16 @@ void ScriptManager::LoadScript()
 				{
 					showWin = dialogue->attribute("show").as_bool();
 				}
+				if (dialogue->attribute("cutscene"))
+				{
+					cutscene = dialogue->attribute("cutscene").as_string();
+					cutSceneBL = true;
+				}
 				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName, soundName, showWin);
+				img_tmp.SetTexture(cutscene);
+				unsigned int texture = img_tmp.GetTexture();
+				tmp.CutScene = texture;
+				tmp.CutScenebl = cutSceneBL;
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}
@@ -171,7 +183,7 @@ void ScriptManager::LoadScript()
 		for (pugi::xml_node_iterator s_choice = choices->begin(); s_choice != choices->end(); s_choice++)
 		{
 			//get choice
-			std::string text = "", next_d = "", puzzle = "";
+			std::string text = "", next_d = "", puzzle = "", room = "";
 			text = s_choice->attribute("text").as_string();
 			if(s_choice->attribute("nextDialogue"))
 				next_d = s_choice->attribute("nextDialogue").as_string();
@@ -179,7 +191,11 @@ void ScriptManager::LoadScript()
 			{
 				puzzle = s_choice->attribute("puzzle").as_string();
 			}
-			v_choice->push_back(Choice(text, next_d, puzzle));
+			if (s_choice->attribute("room"))
+			{
+				room = s_choice->attribute("room").as_string();
+			}
+			v_choice->push_back(Choice(text, next_d, puzzle, room));
 		}
 		this->choices[key] = v_choice;
 	}
