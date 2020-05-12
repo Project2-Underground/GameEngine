@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "TimeSystem.h"
 
-#define TEXT_SPEED 100
+#define TEXT_SPEED 2
 
 TextBox* TextBox::_instance = nullptr;
 
@@ -42,24 +42,27 @@ void TextBox::setText(std::string key, bool talk)
 			d_text = tmp;
 			d_index = 0;
 			name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
+			curr_dialogue = d_text->dialogue[d_index].text;
 			std::stringstream tmp_text(d_text->dialogue[d_index].text);
-			curr_dialogueSize = 0;
-			showAll = false;
 
+			
 			int charCount = 0;
 			int lineCount = 0;
-			curr_dialogue.clear();
-			this->charCount = 0;
-
+			for (int i = 0; i < dialogue.size(); i++)
+			{
+				delete dialogue[i];
+			}
+			dialogue.clear();
 			std::string word = "";
 			std::stringstream s_tmp("");
 			while(std::getline(tmp_text, word, ' '))
 			{
 				if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\\n")
 				{
-					std::string str(s_tmp.str());
-					curr_dialogue.push_back(str);
-					curr_dialogueSize += str.size() + 1;
+					TextObject* textObj = new TextObject();
+					textObj->loadText(s_tmp.str(), textColor, 24);
+					textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
+					dialogue.push_back(textObj);
 					lineCount++;
 					s_tmp.str("");
 					std::cout << std::endl;
@@ -67,9 +70,10 @@ void TextBox::setText(std::string key, bool talk)
 				if(word != "\\n")
 					s_tmp << " " << word;
 			}
-			std::string str(s_tmp.str());
-			curr_dialogue.push_back(str);
-			curr_dialogueSize += str.size();
+			TextObject* textObj = new TextObject();
+			textObj->loadText(s_tmp.str(), textColor, 24);
+			textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
+			dialogue.push_back(textObj);
 			lineCount++;
 			s_tmp.str("");
 
@@ -167,45 +171,10 @@ void TextBox::Render()
 void TextBox::Update()
 {
 	time += TimeSystem::instance()->GetTimeBetweenFrame();
-	if (time >= TEXT_SPEED && charCount <= curr_dialogueSize)
+	if (time / 1000 >= TEXT_SPEED && charCount < curr_dialogueSize)
 	{
 		charCount++;
 		time = 0;
-	}
-
-	if (!showAll)
-	{
-		for (int i = 0; i < dialogue.size(); i++)
-		{
-			delete dialogue[i];
-		}
-		dialogue.clear();
-		int count = 0;
-		int lineCount = 0;
-		std::stringstream s_tmp("");
-		for (int i = 0; i < charCount; i++)
-		{
-			if (count > curr_dialogue[lineCount].size())
-			{
-				TextObject* textObj = new TextObject();
-				textObj->loadText(s_tmp.str(), textColor, 24);
-				textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
-				dialogue.push_back(textObj);
-				s_tmp.str("");
-				lineCount++;
-				count = 0;
-			}
-			s_tmp << curr_dialogue[lineCount][count];
-			count++;
-		}
-		TextObject* textObj = new TextObject();
-		textObj->loadText(s_tmp.str(), textColor, 24);
-		textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
-		dialogue.push_back(textObj);
-	}
-	if (charCount >= curr_dialogueSize)
-	{
-		showAll = true;
 	}
 }
 
@@ -221,30 +190,29 @@ TextBox::~TextBox()
 
 void TextBox::clickLeft(glm::vec3 pos)
 {
-	if (!showAll)
-	{
-		charCount = curr_dialogueSize - 1;
-	}
-	else if (d_index < d_text->dialogue.size() - 1 && choice_UI->IsDisplay() == false)
+	if (d_index < d_text->dialogue.size() - 1 && choice_UI->IsDisplay() == false)
 	{
 		d_index++;
 		name->loadText(d_text->dialogue[d_index].name, nameColor, 30);
 		std::stringstream tmp_text(d_text->dialogue[d_index].text);
-		curr_dialogueSize = 0;
-		showAll = false;
+
 		int charCount = 0;
 		int lineCount = 0;
+		for (int i = 0; i < dialogue.size(); i++)
+		{
+			delete dialogue[i];
+		}
+		dialogue.clear();
 		std::string word = "";
 		std::stringstream s_tmp("");
-		curr_dialogue.clear();
-		this->charCount = 0;
 		while (std::getline(tmp_text, word, ' '))
 		{
 			if (s_tmp.str().size() + word.size() > MAX_CHAR || word == "\\n")
 			{
-				std::string str(s_tmp.str());
-				curr_dialogue.push_back(str);
-				curr_dialogueSize += str.size() + 1;
+				TextObject* textObj = new TextObject();
+				textObj->loadText(s_tmp.str(), textColor, 24);
+				textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x/2.0f)), -180 - (lineCount * 35), 1.0f));
+				dialogue.push_back(textObj);
 				lineCount++;
 				s_tmp.str("");
 				std::cout << std::endl;
@@ -252,9 +220,10 @@ void TextBox::clickLeft(glm::vec3 pos)
 			if (word != "\\n")
 				s_tmp << " " << word;
 		}
-		std::string str(s_tmp.str());
-		curr_dialogue.push_back(str);
-		curr_dialogueSize += str.size();
+		TextObject* textObj = new TextObject();
+		textObj->loadText(s_tmp.str(), textColor, 24);
+		textObj->SetPosition(glm::vec3((-450 + (textObj->getSize().x / 2.0f)), -180 - (lineCount * 35), 1.0f));
+		dialogue.push_back(textObj);
 		lineCount++;
 		s_tmp.str("");
 

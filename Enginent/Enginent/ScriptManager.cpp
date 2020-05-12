@@ -1,7 +1,7 @@
 #include "ScriptManager.h"
 #include "Game.h"
 
-s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim)
+s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::string npc, std::string chatName, int chatIndex, std::string note, std::string puzzle, std::string anim, std::string sound, bool show)
 {
 	name = n;
 	text = d;
@@ -12,6 +12,8 @@ s_Dialogue::s_Dialogue(std::string n, std::string d, std::string item, std::stri
 	this->noteName = note;
 	this->puzzleName = puzzle;
 	this->animName = anim;
+	this->soundName = sound;
+	this->showItemWin = show;
 }
 
 s_Dialogue::s_Dialogue()
@@ -110,6 +112,8 @@ void ScriptManager::LoadScript()
 				std::string noteName = "";
 				std::string animName = "";
 				std::string puzzleName = "";
+				std::string soundName = "";
+				bool showWin = false;
 				if (dialogue->child("item"))
 				{
 					itemName = dialogue->child("item").attribute("name").as_string();
@@ -137,7 +141,15 @@ void ScriptManager::LoadScript()
 				{
 					puzzleName = dialogue->child("puzzle").attribute("name").as_string();
 				}
-				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName);
+				if (dialogue->attribute("sound"))
+				{
+					soundName = dialogue->attribute("sound").as_string();
+				}
+				if (dialogue->attribute("show"))
+				{
+					showWin = dialogue->attribute("show").as_bool();
+				}
+				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName, soundName, showWin);
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}

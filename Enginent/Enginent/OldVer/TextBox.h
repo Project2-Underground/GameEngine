@@ -37,11 +37,10 @@ class TextBox : public UIObject {
 	private:
 		UIObject* background;
 		std::vector<TextObject*> dialogue;
-		std::vector<std::string> curr_dialogue;
-		std::vector<std::string> show_dialogue;
+		std::string curr_dialogue = "";
 		int curr_dialogueSize = 0;
 		int charCount = 0;
-		bool showAll = true;
+		bool showAll = false;
 		TextObject* name;
 		SDL_Color textColor = {255, 255, 255, 0};
 		SDL_Color nameColor = {0, 0, 0, 0 };

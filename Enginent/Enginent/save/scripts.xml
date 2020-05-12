@@ -197,6 +197,13 @@
 			</Dialogue>
 		</sub>
 	</script>
+	<script key = "Hall_gramophone_after" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "This thing looks like the one at home."/>
+			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago."/>
+			<Dialogue name = "Elias" text = "Though it feels like I just listen to it not that long ago."/>
+		</sub>
+	</script>
 	<script key = "Hall_Bookshelf_R1" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Hm... looks like I need to insert the card first."/>
@@ -729,8 +736,12 @@ talking about in here"/>
 	<!-- level 2 -->
 	<script key = "Floor2_start" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "What was that feeling! \n I felt like being picked up when I open the door."/>
-			<Dialogue name = "Elias" text = "At least I got outside...a city, huh? \n Hm...I'm outisde but I can't feel the wind."/>
+			<Dialogue name = "Elias" text = "What was that feeling! \n I felt like being picked up when I open the door.">
+				<animation name = "Panic"/>
+			</Dialogue>
+			<Dialogue name = "Elias" text = "At least I got outside...a city, huh? \n Hm...I'm outisde but I can't feel the wind.">
+				<animation name = "Panic"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "Emma said she's going to wait on the upper floor. \n What does that even mean? \n I need to ask her about this."/>
 		</sub>
 	</script>
