@@ -791,7 +791,7 @@ talking about in here"/>
 			<Dialogue name = "Elias" text = "What do you mean!"/>
 			<Dialogue name = "Cultist" text = "In other words, I can assist you with the way out. \n Especially now, as I have got my hands on these fascinating data."/>
 			<Dialogue name = "Elias" text = "( Does he know the way out? )"/>
-			<Dialogue name = "Cultist" text = "I have my duty -- to assist people in getting out. \nB ut not everyone gets the privilege."/>
+			<Dialogue name = "Cultist" text = "I have my duty -- to assist people in getting out. \n But not everyone gets the privilege."/>
 			<Dialogue name = "Elias" text = "And what will I have to do for you to let me out?"/>
 		</sub>
 	</script>

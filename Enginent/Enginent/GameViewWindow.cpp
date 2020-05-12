@@ -47,6 +47,7 @@ void ViewWindow::Init(int width, int height) {
 					  glm::vec3(bgWindow->col->getMaxBound().x + closeButtonSize * 0.5f,
 					  bgWindow->col->getMaxBound().y - closeButtonSize * 0.75f,
 					  0.0f));
+	closeButton->col->setNewSize(100, -100);
 }
 
 void ViewWindow::SetViewItem(Item* item) {

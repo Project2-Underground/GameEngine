@@ -377,6 +377,9 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	emmaNote->ChangeDialogue("EmmaRoom_note", "EmmaRoom_note");
 	emmaNote->SetInteractType(ADDNOTE);
 	emmaNote->col->enable = true;
+	Item* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->FindItem("keyCard");
+	if(i)
+		i->multipleUse = false;
 
 	for (auto npc : g->GetCurrentLevel()->rooms["MainHallLower"]->npcs) {
 		((InteractableObj*)npc)->Appear(false);

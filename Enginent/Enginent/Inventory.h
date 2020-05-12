@@ -38,8 +38,8 @@ public:
 	void SelectItem(Item* item);
 	void UnselectItem();
 	bool IsItemInInventory(std::string);
+	Item* FindItem(std::string);
 	Item* GetSelectedItem() { return other; }
-
 
 	int GetSize() { return (int)InventoryBoxes.size(); }
 	//void displayItem();

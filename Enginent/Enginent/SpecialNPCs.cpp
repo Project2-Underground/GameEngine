@@ -27,6 +27,7 @@ void Butler::Appear() {
 	case Butler::PHASE1:
 		currentLevel = 1;
 		// after finished puzzle 3
+		talk = false;
 		dialogue_name = "Butler1";
 		dialogue_after = "Butler1_after";
 		MoveOut("MainHallUpper");
@@ -38,8 +39,12 @@ void Butler::Appear() {
 		break;
 	case Butler::PHASE2:
 		currentLevel = 1;
+		talk = false;
+		dialogue_name = "Hall_Bookshelf_R3";
+		dialogue_after = "Butler1_end";
 		MoveOut("MainHallUpper");
 		MoveIn("MainHallLower");
+		SetPosition(glm::vec3(1400, -90, 1));
 		disappearAfterAction = false;
 		clickToInteract = true;
 		triggered = false;
@@ -47,11 +52,16 @@ void Butler::Appear() {
 	case Butler::PHASE3:
 		currentLevel = 2;
 		break;
+	case Butler::ROUTE_A:
+		currentLevel = 3;
+		break;
+	case Butler::ROUTE_B:
+		currentLevel = 3;
+		break;
 	default:
 		break;
 	}
 	SetDisplay(true);
-	triggered = false;
 	col->enable = true;
 }
 void Butler::action() {
@@ -66,6 +76,10 @@ void Butler::action() {
 	case Butler::PHASE2:
 		break;
 	case Butler::PHASE3:
+		break;
+	case Butler::ROUTE_A:
+		break;
+	case Butler::ROUTE_B:
 		break;
 	default:
 		break;

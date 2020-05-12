@@ -11,8 +11,11 @@ public:
 	Door(std::string nextroom, std::string nextdoor);
 	void SetOpenTexture(std::string texture);
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
+	void SetPlayerNextX(float x);
 	void Open();
 	void action();
+	float playerNextX;
+	bool hasNextX;
 	bool isOpenDoor;
 };
 
