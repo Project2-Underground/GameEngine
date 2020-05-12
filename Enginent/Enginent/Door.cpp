@@ -58,12 +58,14 @@ void Door::Open() {
 
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
+	//std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
 	if (triggered) {
 		interactType = DOOR;
-		TextBox::GetInstance()->setText(dialogue_after_trigger);
-		dialogue_after_trigger.clear();
-		Door::action();
+		if (!dialogue_after_trigger.empty()) {
+			TextBox::GetInstance()->setText(dialogue_after_trigger);
+			dialogue_after_trigger.clear();
+		}else
+			Door::action();
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());

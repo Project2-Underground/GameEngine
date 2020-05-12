@@ -55,9 +55,21 @@ void Butler::Appear() {
 		break;
 	case Butler::ROUTE_A:
 		currentLevel = 3;
+		dialogue_name = "Floor3A_butler";
+		MoveIn("MainFloor3");
+		disappearAfterAction = false;
+		clickToInteract = true;
+		triggered = false;
+		SetPosition(glm::vec3(1974, -37, 1));
 		break;
 	case Butler::ROUTE_B:
 		currentLevel = 3;
+		dialogue_name = "Floor3B_butler";
+		MoveIn("MainFloor3");
+		SetPosition(glm::vec3(-2185, -37, 1));
+		disappearAfterAction = false;
+		clickToInteract = false;
+		triggered = false;
 		break;
 	default:
 		break;

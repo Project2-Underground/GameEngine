@@ -335,6 +335,12 @@ void GameScreen::ChangeLevel(int level) {
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 	currentLevel->GetCurrentRoom()->dialogue.clear();
+
+	if (level == 2) {
+		// floor 3
+		// assuming the Butler::PHASE is already set using the dialogue
+		butler->Appear();
+	}
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
