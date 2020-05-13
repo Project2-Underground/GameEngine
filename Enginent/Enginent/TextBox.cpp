@@ -134,8 +134,8 @@ void TextBox::setText(std::string key, bool talk)
 				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
 				if (obj != nullptr)
 				{
-					obj->SetDisplay(true);
-					obj->col->enable = true;
+					obj->SetDisplay(d_text->dialogue[d_index].en);
+					obj->col->enable = d_text->dialogue[d_index].en;
 				}
 			}
 
@@ -357,8 +357,8 @@ void TextBox::clickLeft(glm::vec3 pos)
 			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
 			if (obj != nullptr)
 			{
-				obj->SetDisplay(true);
-				obj->col->enable = true;
+				obj->SetDisplay(d_text->dialogue[d_index].en);
+				obj->col->enable = d_text->dialogue[d_index].en;
 			}
 		}
 

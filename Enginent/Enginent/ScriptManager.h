@@ -34,6 +34,7 @@ struct s_Dialogue
 	std::string puzzleName;
 	std::string soundName;
 	std::string Enable;
+	bool en;
 	std::string roomName = "";
 	std::string spriteChange = "";
 	unsigned int sprite;

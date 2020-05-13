@@ -119,6 +119,7 @@ void ScriptManager::LoadScript()
 				std::string spriteObj = "";
 				std::string spriteName = "";
 				std::string Enable = "";
+				bool en = true;
 				bool cutSceneBL = false;
 				bool sprite = false;
 				bool showWin = false;
@@ -176,6 +177,10 @@ void ScriptManager::LoadScript()
 				{
 					Enable = dialogue->attribute("enable").as_string();
 				}
+				if (dialogue->attribute("bool"))
+				{
+					en = dialogue->attribute("bool").as_bool();
+				}
 				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName, soundName, showWin);
 				if (cutSceneBL)
 				{
@@ -193,6 +198,7 @@ void ScriptManager::LoadScript()
 				tmp.CutScenebl = cutSceneBL;
 				tmp.roomName = roomName;
 				tmp.Enable = Enable;
+				tmp.en = en;
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}
