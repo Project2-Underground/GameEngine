@@ -125,7 +125,7 @@ void TextBox::setText(std::string key, bool talk)
 			//change room
 			if (d_text->dialogue[d_index].roomName != "")
 			{
-				Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName);
+				Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName, d_text->dialogue[d_index].doorName);
 			}
 
 			//enable object
@@ -348,7 +348,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//change room
 		if (d_text->dialogue[d_index].roomName != "")
 		{
-			Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName);
+			Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName, d_text->dialogue[d_index].doorName);
 		}
 
 		//enable object
@@ -448,7 +448,7 @@ bool ChoiceBox::CheckClick(glm::vec3 pos)
 		}
 		if (choice.roomName != "")
 		{
-			((GameScreen*)Game::GetInstance()->GetScreen())->GetCurrentLevel()->ChangeRoom(choice.roomName);
+			((GameScreen*)Game::GetInstance()->GetScreen())->GetCurrentLevel()->ChangeRoom(choice.roomName, choice.doorName);
 		}
 
 		return true;

@@ -44,7 +44,7 @@
 		<choice text = "Not yet." nextDialogue = ""/>
 	</choices>	
 	<choices key = "c_Building4">
-		<choice text = "Input the number." nextDialogue = "" room = "Building4"/>
+		<choice text = "Enter the building." nextDialogue = "" room = "Building4Puzzle6Floor1" door = "Building4Puzzle6Floor1Out"/>
 		<choice text = "Not yet." nextDialogue = ""/>
 	</choices>
 	<choices key = "c_NPC2">
@@ -69,7 +69,11 @@
 	</choices>		
 	<choices key = "c_emmaalley">
 		<choice text = "Are you really a scientist?" nextDialogue = "BackAlley_Emma1_A"/>
-		<choice text = "This place and the experiment. What is it all about?" nextDialogue = "BackAlley_Emma1_B"/>
+		<choice text = "What will happen if I'm still stuck in this experiment?" nextDialogue = "BackAlley_Emma1_B"/>
+	</choices>	
+	<choices key = "c_emily">
+		<choice text = "I want to go outside." nextDialogue = "Lab_Emily_A"/>
+		<choice text = "I'm staying." nextDialogue = "Lab_Emily_B"/>
 	</choices>	
 
 	

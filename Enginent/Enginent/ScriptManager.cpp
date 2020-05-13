@@ -115,6 +115,7 @@ void ScriptManager::LoadScript()
 				std::string puzzleName = "";
 				std::string soundName = "";
 				std::string roomName = "";
+				std::string doorName = "";
 				std::string cutscene = "";
 				std::string spriteObj = "";
 				std::string spriteName = "";
@@ -160,6 +161,10 @@ void ScriptManager::LoadScript()
 				{
 					roomName = dialogue->attribute("room").as_string();
 				}
+				if (dialogue->attribute("door"))
+				{
+					doorName = dialogue->attribute("door").as_string();
+				}
 				if (dialogue->attribute("sound"))
 				{
 					soundName = dialogue->attribute("sound").as_string();
@@ -197,6 +202,7 @@ void ScriptManager::LoadScript()
 				}
 				tmp.CutScenebl = cutSceneBL;
 				tmp.roomName = roomName;
+				tmp.doorName = doorName;
 				tmp.Enable = Enable;
 				tmp.en = en;
 				d.dialogue.push_back(tmp);
@@ -220,7 +226,7 @@ void ScriptManager::LoadScript()
 		for (pugi::xml_node_iterator s_choice = choices->begin(); s_choice != choices->end(); s_choice++)
 		{
 			//get choice
-			std::string text = "", next_d = "", puzzle = "", room = "";
+			std::string text = "", next_d = "", puzzle = "", room = "", door = "";
 			text = s_choice->attribute("text").as_string();
 			if(s_choice->attribute("nextDialogue"))
 				next_d = s_choice->attribute("nextDialogue").as_string();
@@ -232,7 +238,11 @@ void ScriptManager::LoadScript()
 			{
 				room = s_choice->attribute("room").as_string();
 			}
-			v_choice->push_back(Choice(text, next_d, puzzle, room));
+			if (s_choice->attribute("door"))
+			{
+				door = s_choice->attribute("door").as_string();
+			}
+			v_choice->push_back(Choice(text, next_d, puzzle, room, door));
 		}
 		this->choices[key] = v_choice;
 	}
