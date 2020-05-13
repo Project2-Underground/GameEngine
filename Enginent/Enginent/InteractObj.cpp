@@ -6,6 +6,7 @@
 #include "MouseInput.h"
 
 InteractableObj::InteractableObj() {
+	sound.clear();
 	interactType = NORMAL;
 	triggered = true;
 	talk = false;
@@ -47,6 +48,7 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 	this->dialogue_after = a;
 }
 void InteractableObj::action() {
+	SoundManager::GetInstance()->playSound(SFX,sound);
 	if (talk == true)
 	{
 		if (dialogue_after != "")
@@ -104,14 +106,33 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 void InteractableObj::UseItem(Item* item) {
 	if (item != nullptr && item_to_use == item->name) {
 		//std::cout << "item is used and removed from the inventory\n";
-		Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		Inventory* i = gs->GetInventory();
 		used = true;
+		TextBox::GetInstance()->setText(item->GetDialogueAfterUseWith(this->object_name));
+		if (hasPositionAfterUsed)
+			SetPosition(positionAfterUse);
+		if (hasUsedTexture)
+			SetTexture(usedTexture);
+		if (hasNewItemAfterUsed) {
+			Item* item = gs->FindItem(new_item_after_used);
+			i->AddItem(item);
+			ViewWindow* vw = ViewWindow::GetInstance();
+			vw->SetViewItem(item);
+			vw->Open();
+		}
 		if(!item->multipleUse)
 			i->RemoveItem(item);
 		i->UnselectItem();
 	}
 }
-
+void InteractableObj::Used() {
+	used = true;
+	if (hasUsedTexture)
+		SetTexture(usedTexture);
+	if (hasPositionAfterUsed)
+		SetPosition(positionAfterUse);
+}
 void InteractableObj::PickUpItem() {
 	if (hasItem && !scriptHandleItem) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen()); 
@@ -170,6 +191,18 @@ void InteractableObj::SetNextTexture(std::string next) {
 	nextTexture = Game::GetInstance()->GetRenderer()->LoadTexture(next);
 	hasNextTexture = true;
 }
+void InteractableObj::SetUsedTexture(std::string used) {
+	usedTexture = Game::GetInstance()->GetRenderer()->LoadTexture(used);
+	hasUsedTexture = true;
+}
+void InteractableObj::SetPositionAfterUsed(float x, float y) {
+	positionAfterUse = glm::vec3(x, y, 1);
+	hasPositionAfterUsed = true;
+}
+void InteractableObj::SetNewItemAfterUsed(std::string item) {
+	new_item_after_used = item;
+	hasNewItemAfterUsed = true;
+}
 
 OpenObj::OpenObj() {
 	interactType = PICKUP;
@@ -208,7 +241,7 @@ void OpenObj::action() {
 	}
 }
 
-void OpenObj::SetSound(std::string s) {
+void InteractableObj::SetSound(std::string s) {
 	sound = s;
 }
 
@@ -259,7 +292,11 @@ void ViewObj::action() {
 	vw->SetViewItem(this);
 	InteractableObj::action();
 }
-
+NonPlayer::NonPlayer(std::string name) { 
+	object_name = name; 
+	interactType = TALK; 
+	talk = false; 
+}
 void NonPlayer::action()
 {
 	Phone::GetInstance()->AddNPCInteracted(object_name);
@@ -308,13 +345,11 @@ void PuzzleObj::action() {
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());
-		if (used) {
-			TextBox::GetInstance()->setText(dialogue_after_used);
-			dialogue_name = "";
-		}
+		dialogue_name = dialogue_after_use;
 	}
-	else
+	else {
 		InteractableObj::action();
+	}
 }
 
 void SaveObj::action() {
@@ -347,7 +382,6 @@ void NumpadPuzzleAfter::action() {
 		UseItem(gs->GetInventory()->GetSelectedItem());
 
 		if (used && !actionDone) {
-			TextBox::GetInstance()->setText("backdoor_card");
 			UnlockBookshelf();
 		}
 		
@@ -369,8 +403,8 @@ void NumpadPuzzleAfter::UnlockBookshelf() {
 	tmp->Init(puzzleObj->getSize().x, puzzleObj->getSize().y, puzzleObj->getPos());
 	tmp->SetTexture(puzzleObj->GetTexture());
 	tmp->ChangeDialogue("Hall_Bookshelf_R1", "Hall_Bookshelf_R1");
-	tmp->SetDialogueAfterUsedName("Hall_Bookshelf_R2");
 	tmp->SetItemToUse("keyCard");
+	tmp->SetName("bookShelfPuzzle2");
 	g->GetCurrentLevel()->rooms["MainHallLower"]->objects.push_back(tmp);
 	puzzleObj->Appear(false);
 	GameScreen* gs = ((GameScreen*)g->GetScreen());

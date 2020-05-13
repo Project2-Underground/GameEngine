@@ -93,3 +93,6 @@ void CursorUI::ResetCursor() {
 	enable = true;
 	SetTexture(CS_Normal);
 }
+bool CursorUI::IsEnable() {
+	return enable;
+}

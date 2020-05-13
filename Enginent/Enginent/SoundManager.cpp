@@ -14,10 +14,13 @@ void SoundManager::Init()
 	masterVol = 1.0f;
 	bgmVol = 1.0f;
 	sfxVol = 1.0f;
+
 	// BGM
 	bgms["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3");
+	bgms["Mainfloor2"] = createSound("Sound/mainfloor2.mp3");
+	bgms["Mainfloor3"] = createSound("Sound/mainfloor3.mp3");
 
-	// SFX
+	// normal SFX
 	sfxs["Walking"] = createSound("Sound/walking_sound.mp3");
 	sfxs["OpenDoor"] = createSound("Sound/open_door_3.mp3");
 	sfxs["Locked"] = createSound("Sound/door_lockEdit.mp3");
@@ -26,8 +29,16 @@ void SoundManager::Init()
 	sfxs["OpenDrawer"] = createSound("Sound/open_drawer.mp3");
 	sfxs["OpenCabinet"] = createSound("Sound/open_closet.mp3");
 	sfxs["Key"] = createSound("Sound/Key.mp3");
-	sfxs["EmmaNumpad"] = createSound("Sound/EmmaNumpadSound.mp3");
+	sfxs["Click_Button"] = createSound("Sound/Click_Button.mp3");
 	sfxs["BasementNumpad"] = createSound("Sound/BasementNumpadSound.mp3");
+	sfxs["Click"] = createSound("Sound/Click.mp3");
+	sfxs["Puzzle25DoorOpen"] = createSound("Sound/Puzzle_2-5_DoorOpen.mp3");
+	sfxs["Puzzle_3_finish_sound"] = createSound("Sound/Puzzle_2-Puzzle_3_finish_sound.mp3");
+
+	// cutscene SFX
+	sfxs["Reload"] = createSound("Sound/Reload.mp3");
+	sfxs["Butler_Shoot"] = createSound("Sound/Butler_Shoot.mp3");
+	sfxs["fire"] = createSound("Sound/fire-sound-effects.mp3");
 }
 
 ISoundSource* SoundManager::createSound(const char* filename)
@@ -38,17 +49,19 @@ ISoundSource* SoundManager::createSound(const char* filename)
 
 void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 {
-	if (!loadingFromSave) {
-		switch (t)
-		{
-		case BGM:
-			soundEngine->play2D(bgms[sound], loop);
-			break;
-		case SFX:
-			soundEngine->play2D(sfxs[sound], loop);
-			break;
-		default:
-			break;
+	if (!sound.empty()) {
+		if (!loadingFromSave) {
+			switch (t)
+			{
+			case BGM:
+				soundEngine->play2D(bgms[sound], loop);
+				break;
+			case SFX:
+				soundEngine->play2D(sfxs[sound], loop);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }

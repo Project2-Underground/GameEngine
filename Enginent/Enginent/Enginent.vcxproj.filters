@@ -281,6 +281,9 @@
     <ClCompile Include="SpecialNPCs.cpp">
       <Filter>GameObj\interactable</Filter>
     </ClCompile>
+    <ClCompile Include="PuppetPuzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\fragment.shd">

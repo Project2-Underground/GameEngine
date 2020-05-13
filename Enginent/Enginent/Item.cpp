@@ -30,7 +30,20 @@ void Item::AddSeparatedItem(std::string separatedItem) {
 }
 void Item::AddItemsToCombine(std::string itemToCombine, std::string combineResult) {
 	itemsAfterCombined.insert(std::pair<std::string, std::string>(itemToCombine, combineResult));
-}	
+}
+void Item::AddDialogueAfterUsedWithObj(std::string objName, std::string dialogueName) {
+	dialogueAfterUsedWithObj.insert(std::pair<std::string, std::string>(objName, dialogueName));
+}
+void Item::ChangeDialogueAfterUsedWithObj(std::string objName, std::string dialogueName) {
+	dialogueAfterUsedWithObj[objName] = dialogueName;
+}
+std::string Item::GetDialogueAfterUseWith(std::string objName) {
+	for (auto obj : dialogueAfterUsedWithObj) {
+		if (obj.first == objName)
+			return obj.second;
+	}
+	return "";
+}
 void Item::Separate() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	Inventory* inventory = gs->GetInventory();

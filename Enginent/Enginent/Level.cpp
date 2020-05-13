@@ -47,17 +47,22 @@ void Room::RightClick(float x, float y) {
 
 void Room::LeftClick(float x, float y) {
 	Game* game = Game::GetInstance();
+	Player* player = game->GetPlayer();
 
 	for (int i = 0; i < objects.size(); i++)
 		if (InteractableObj * ib = dynamic_cast<InteractableObj*>(objects[i]))
 			if (ib->CheckCollider((float)x, (float)y)) 
-				((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(ib);
+				player->CheckTarget(ib);
 
 	for (int i = 0; i < npcs.size(); i++) {
 		InteractableObj* npc = dynamic_cast<InteractableObj*>(npcs[i]);
 		if (npc->CheckCollider((float)x, (float)y)) {
-			((GameScreen*)game->GetScreen())->GetPlayer()->CheckTarget(npc);
+			player->CheckTarget(npc);
 		}
+	}
+
+	if (player->CheckCollider((float)x, (float)y)) {
+		player->action();
 	}
 }
 
