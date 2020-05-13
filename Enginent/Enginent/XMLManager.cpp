@@ -188,6 +188,8 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 		}
 		else if (child->child("EliasDoor"))
 			door = new EliasDoor(next_room, next_door);
+		else if (child->child("Building4InnerDoor"))
+			door = new Building4InnerDoor(next_room, next_door);
 		else if (child->child("SecretDoor"))
 			door = new SecretDoor(next_room, next_door);
 		else
@@ -691,18 +693,18 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 void XMLManager::LoadObjSpecialActions(std::string filename, Level* level) {
 	if (LoadFile(filename)) {
 		pugi::xml_node objs = doc.child("Objects");
-		std::cout << " XMLManager::LoadObjSpecialActions \n";
+		//std::cout << " XMLManager::LoadObjSpecialActions \n";
 		for (pugi::xml_node_iterator room = objs.begin(); room != objs.end(); room++) {
 			Room* r = level->rooms[room->name()];
-			std::cout << r->name << "==\n";
+			//std::cout << r->name << "==\n";
 			for (pugi::xml_node_iterator obj = room->begin(); obj != room->end(); obj++) {
 				InteractableObj* interactObj = ((InteractableObj*)(r->FindObject(obj->name())));
-				std::cout << interactObj->object_name << "==\n";
+				//std::cout << interactObj->object_name << "==\n";
 				for (pugi::xml_node_iterator triggerObj = obj->begin(); triggerObj != obj->end(); triggerObj++) {
 					InteractableObj* o = ((InteractableObj*)(Game::GetInstance()->GetCurrentLevel()->FindObject(triggerObj->name())));
 					interactObj->AddTriggerObj(o);
 					o->triggered = false;
-					std::cout << o->object_name << std::endl;
+					//std::cout << o->object_name << std::endl;
 				}
 			}
 		}

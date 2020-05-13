@@ -58,12 +58,14 @@ void Door::Open() {
 
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
+	//std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
 	if (triggered) {
 		interactType = DOOR;
-		TextBox::GetInstance()->setText(dialogue_after_trigger);
-		dialogue_after_trigger.clear();
-		Door::action();
+		if (!dialogue_after_trigger.empty()) {
+			TextBox::GetInstance()->setText(dialogue_after_trigger);
+			dialogue_after_trigger.clear();
+		}else
+			Door::action();
 	}
 	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());
@@ -107,4 +109,25 @@ void EliasDoor::action() {
 }
 void ChangeLevelDoor::action() {
 	Game::GetInstance()->TriggerChangeLevel(nextLevel);
+}
+
+Building4InnerDoor::Building4InnerDoor(std::string room, std::string door) :Door(room, door) {
+	triggered = false;
+	used = false;
+}
+
+void Building4InnerDoor::action() {
+	if (triggered) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
+		gs->ChangeRoom(nextRoom, nextDoor);
+		// does something nice
+		// ...
+	}
+	else {
+		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
+		SoundManager::GetInstance()->playSound(SFX, "Locked");
+		InteractableObj::action();
+	}
 }

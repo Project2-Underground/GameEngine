@@ -178,7 +178,7 @@
 				<isOpenDoor/>
 				<ForeGround/>
 			</BackDoorRoom_Foreground_Door>
-			<BackDoorRoom_BasementDoor texture="Texture/level1/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0" dialogue="" dialogueAfterTrigger="">
+			<BackDoorRoom_BasementDoor texture="Texture/level1/BackDoorRoom/BackDoorRoom_BasementDoor.png" sizeX="292" sizeY="404" posX="639" posY="9" next_room="BackDoorRoomBasement" next_door="BackDoorRoom_BasementStair" layer="0" dialogue="backdoor_basement" dialogueAfterTrigger="backdoor_basement_go">
 				<wall_door/>
 				<isOpenDoor/>
 			</BackDoorRoom_BasementDoor>

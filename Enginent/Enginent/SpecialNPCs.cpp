@@ -7,6 +7,7 @@ Butler::Butler() {
 	object_name = "butler";
 	interactType = TALK;
 	triggered = true;
+	turnLeft = true;
 	Init(180, -409, glm::vec3(-987, -102, 1));
 	col->setNewSize(350, -350);
 	InitAnimator();
@@ -16,6 +17,10 @@ void Butler::Appear() {
 	switch (currentPhase)
 	{
 	case Butler::PHASE0:
+		if (!turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		// after Elias got out of the room
 		dialogue_name = "Butler_start";
 		currentLevel = 1;
@@ -26,6 +31,10 @@ void Butler::Appear() {
 		triggered = false;
 		break;
 	case Butler::PHASE1:
+		if (!turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		currentLevel = 1;
 		// after finished puzzle 3
 		talk = false;
@@ -39,6 +48,10 @@ void Butler::Appear() {
 		//ChangeDialogue();
 		break;
 	case Butler::PHASE2:
+		if (!turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		currentLevel = 1;
 		talk = false;
 		dialogue_name = "Hall_Bookshelf_R3";
@@ -51,13 +64,37 @@ void Butler::Appear() {
 		triggered = false;
 		break;
 	case Butler::PHASE3:
+		if (!turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		currentLevel = 2;
 		break;
 	case Butler::ROUTE_A:
+		if (turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		currentLevel = 3;
+		dialogue_name = "Floor3A_butler";
+		MoveIn("MainFloor3");
+		disappearAfterAction = false;
+		clickToInteract = true;
+		triggered = false;
+		SetPosition(glm::vec3(1974, -37, 1));
 		break;
 	case Butler::ROUTE_B:
+		if (turnLeft) {
+			SetScale(-1, 1);
+			turnLeft = !turnLeft;
+		}
 		currentLevel = 3;
+		dialogue_name = "Floor3B_butler";
+		MoveIn("MainFloor3");
+		SetPosition(glm::vec3(-2185, -37, 1));
+		disappearAfterAction = false;
+		clickToInteract = false;
+		triggered = false;
 		break;
 	default:
 		break;

@@ -1430,7 +1430,7 @@
 	</script>
 	<script key = "Floor3A_factory" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "I should do what the butler told"/>
+			<Dialogue name = "Elias" text = "I should do what the butler told me"/>
 		</sub>
 	</script>
 	
@@ -1444,12 +1444,12 @@
 	</script>
 	<script key = "Floor3B_people1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "To the right way, to the right!"/>
+			<Dialogue name = "People" text = "To the right way, to the right!"/>
 		</sub>
 	</script>
 	<script key = "Floor3B_people2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "You have to go to the right way!"/>
+			<Dialogue name = "People" text = "You have to go to the right way!"/>
 		</sub>
 	</script>
 	<script key = "Floor3B_butler" loopIndex = "0">

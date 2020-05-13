@@ -166,10 +166,6 @@ void GameScreen::Init() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
 	PuzzleTime = false;
 
-	GLRenderer* r = Game::GetInstance()->GetRenderer();
-	cutscenes.insert(std::pair<std::string, unsigned int>("StartGameCutscene", r->LoadTexture("Texture/Cutscene/StartGameCutscene.png")));
-	CutsceneTime = false;
-
 	pause = new OpenPauseWindowButton("Texture/tmp_texture/tmp_pause.png");
 	pause->SetSize(60, -60);
 	pause->SetPosition(glm::vec3(600, 300, 1));
@@ -209,100 +205,84 @@ Puzzle* GameScreen::FindPuzzle(std::string name)
 void GameScreen::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 
-	if (CutsceneTime) {
-		renderer->Render(cutscene);
-	}
+	if (PuzzleTime)
+		currentPuzzle->Render();
 	else {
-		if (PuzzleTime)
-			currentPuzzle->Render();
-		else {
-			currentLevel->Render();
-			renderer->Render(UI);
-		}
-
-		inventory->Render();
-		if (GameWindowOpen())
-			for (auto w : windows)
-				w->Render();
-		else {
-			if (phone->open)
-				phone->Render();
-			if (dialogueText->IsDisplay())
-				dialogueText->Render();
-		}
+		currentLevel->Render();
+		renderer->Render(UI);
 	}
+
+	inventory->Render();
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->Render();
+	else {
+		if (phone->open)
+			phone->Render();
+		if (dialogueText->IsDisplay())
+			dialogueText->Render();
+	}
+	
 	dialogueText->Render();
 }
 
 void GameScreen::Update() {
-	if (!CutsceneTime) {
-		for (auto w : windows)
-			w->Update();
-		if (!Pause) {
-			if (PuzzleTime)
-				currentPuzzle->Update();
-			else {
-				currentLevel->Update();
-				player->Update();
-			}
-			if (InventoryEnable && !phone->open)
-				inventory->Update();
+	for (auto w : windows)
+		w->Update();
+	if (!Pause) {
+		if (PuzzleTime)
+			currentPuzzle->Update();
+		else {
+			currentLevel->Update();
+			player->Update();
 		}
+		if (InventoryEnable && !phone->open)
+			inventory->Update();
 	}
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
-	if (CutsceneTime) {
+	if (PuzzleTime) {
+		currentPuzzle->RightClick(screen, world);
+	}
+	else if (dialogueText->IsDisplay())
 		dialogueText->clickLeft(screen);
+	else if (!PuzzleTime) {
+		inventory->UnselectItem();
+		if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
+			currentLevel->RightClick(world.x, world.y);
 	}
-	else {
-		if (PuzzleTime) {
-			currentPuzzle->RightClick(screen, world);
-		}
-		else if (!PuzzleTime) {
-			inventory->UnselectItem();
-			if (!phone->open && !player->anim->IsPlaying("Pickup") && !GameWindowOpen() && !dialogueText->IsDisplay())
-				currentLevel->RightClick(world.x, world.y);
-		}
-		else if (dialogueText->IsDisplay())
-			dialogueText->clickLeft(screen);
-	}
+	
 }
 
 void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (CutsceneTime) {
-		dialogueText->clickLeft(screen);
-		if (!dialogueText->IsDisplay())
-			CutsceneTime = false;
+	buttonClicked = false;
+	for (int j = 0; j < UI.size(); j++) {
+		if (Button * button = dynamic_cast<Button*>(UI[j])) {
+			button->checkColliderPressed(screen.x, screen.y);
+		}
+	}
+	if (GameWindowOpen() || dialogueText->IsDisplay() && !buttonClicked) {
+		if (GameWindowOpen())
+			for (auto w : windows)
+				w->LeftClick(screen.x, screen.y);
+		if (dialogueText->IsDisplay() && !buttonClicked)
+			dialogueText->clickLeft(screen);
 	}
 	else {
-		buttonClicked = false;
-		for (int j = 0; j < UI.size(); j++) {
-			if (Button * button = dynamic_cast<Button*>(UI[j])) {
-				button->checkColliderPressed(screen.x, screen.y);
-			}
-		}
-		if (GameWindowOpen() || dialogueText->IsDisplay() && !buttonClicked) {
-			if (GameWindowOpen())
-				for (auto w : windows)
-					w->LeftClick(screen.x, screen.y);
-			if (dialogueText->IsDisplay() && !buttonClicked)
-				dialogueText->clickLeft(screen);
-		}
+		if (phone->open)
+			phone->LeftClick(screen.x, screen.y);
+		else if (PuzzleTime)
+			currentPuzzle->LeftClick(screen, world);
 		else {
-			if (phone->open)
-				phone->LeftClick(screen.x, screen.y);
-			else if (PuzzleTime)
-				currentPuzzle->LeftClick(screen, world);
-			else {
-				if (InventoryEnable && !buttonClicked) {
-					inventory->LeftClick(screen.x, screen.y);
-				}
-				if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
-					currentLevel->LeftClick(world.x, world.y);
+			if (InventoryEnable && !buttonClicked) {
+				inventory->LeftClick(screen.x, screen.y);
 			}
+			if (!buttonClicked && !player->anim->IsPlaying("Pickup") && !PuzzleTime)
+				currentLevel->LeftClick(world.x, world.y);
 		}
 	}
+	
 }
 
 void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
@@ -314,20 +294,19 @@ void GameScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {	
-	if (!CutsceneTime) {
-		if (GameWindowOpen())
-			for (auto w : windows)
-				w->LeftRelease(screen.x, screen.y);
-		else if (phone->open)
-			phone->LeftRelease(screen.x, screen.y);
-		else if (PuzzleTime)
-			currentPuzzle->LeftRelease(screen, world);
-		else if (InventoryEnable)
-			inventory->LeftRelease(screen.x, screen.y);
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderReleased(screen.x, screen.y);
-	}
+	if (GameWindowOpen())
+		for (auto w : windows)
+			w->LeftRelease(screen.x, screen.y);
+	else if (phone->open)
+		phone->LeftRelease(screen.x, screen.y);
+	else if (PuzzleTime)
+		currentPuzzle->LeftRelease(screen, world);
+	else if (InventoryEnable)
+		inventory->LeftRelease(screen.x, screen.y);
+	for (int j = 0; j < UI.size(); j++)
+		if (Button * button = dynamic_cast<Button*>(UI[j]))
+			button->checkColliderReleased(screen.x, screen.y);
+	
 }
 
 void GameScreen::Scroll(glm::vec3 screen, int direction) {
@@ -356,6 +335,12 @@ void GameScreen::ChangeLevel(int level) {
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 	currentLevel->GetCurrentRoom()->dialogue.clear();
+
+	if (level == 2) {
+		// floor 3
+		// assuming the Butler::PHASE is already set using the dialogue
+		butler->Appear();
+	}
 }
 
 void GameScreen::ChangeRoom(std::string room, std::string door) {
@@ -404,12 +389,6 @@ void GameScreen::OpenPuzzle(std::string name) {
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
 }
 
-void GameScreen::OpenCutscene(std::string cutsceneName, std::string dialogueName) {
-	cutscene->SetTexture(cutscenes[cutsceneName]);
-	TextBox::GetInstance()->setText(dialogueName);
-	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, true);
-}
-
 void GameScreen::ResetPuzzle() {
 	for (auto puzzle : puzzles)
 		puzzle.second->Reset();
@@ -418,10 +397,6 @@ void GameScreen::ResetPuzzle() {
 void GameScreen::ClosePuzzle() {
 	PuzzleTime = false;
 	InventoryEnable = true;
-	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
-}
-void GameScreen::CloseCutscene() {
-	CutsceneTime = false;
 	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_PUZZLE_ON, false);
 }
 

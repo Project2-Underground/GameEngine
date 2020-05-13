@@ -96,6 +96,9 @@ void Game::UpdateScreenState() {
 	case GAMESCREEN:
 		currentScreen = new GameScreen();
 		break;
+	case CREDITSCREEN:
+		currentScreen = new CreditScreen();
+		break;
 	case TESTSCENE:
 		currentScreen = new TestScreen();
 	default:

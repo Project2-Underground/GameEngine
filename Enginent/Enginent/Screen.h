@@ -78,7 +78,6 @@ class GameScreen :public Screen {
 	UIObject* cutscene;
 
 	bool PuzzleTime;
-	bool CutsceneTime;
 	bool InventoryEnable;
 public:
 	vector<std::string> levels;
@@ -102,12 +101,9 @@ public:
 	void ChangeLevel(int level);
 	void ChangeRoom(std::string, std::string);
 	void OpenPuzzle(std::string);
-	void OpenCutscene(std::string cutsceneName, std::string dialogueName);
 	void ResetPuzzle();
 	void ClosePuzzle();
-	void CloseCutscene();
 	bool IsPuzzleOpen() { return PuzzleTime; }
-	bool IsCutsceneOpen() { return CutsceneTime; }
 
 	Door* GetDoor(std::string);
 	Level* GetCurrentLevel() { return currentLevel; }

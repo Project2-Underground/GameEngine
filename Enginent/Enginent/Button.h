@@ -6,6 +6,7 @@
 
 class Button : public UIObject {
 protected:
+	std::string sound;
 	SDL_Color textColor = { 0, 0, 0, 0 };
 	unsigned int normalTexture;
 	unsigned int hoverTexture;

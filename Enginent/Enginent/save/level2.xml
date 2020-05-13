@@ -169,6 +169,30 @@
 			<fg texture="Texture/level2/Building3/Building3_ForeGround.png" sizeX="1326" sizeY="254" posX="29.5" posY="-233" layer="0"/>
 		</foreground>
 	</Building3>
+	<Building4Floor1 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90">
+		<background>
+			<bg texture="Texture/level2/Building3/Building3_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+		</interactObj>
+		<doors>
+			<Building4InnerDoor texture="NONE" sizeX="124" sizeY="506" posX="-708.5" posY="-75" next_room="MainFloor2" next_door="MainFloor2_Building3_Door" layer="0" dialogue="">
+				<Building4InnerDoor/>
+				<playerNextX value="-619"/>
+			</Building4InnerDoor>
+		</doors>
+		<NPCs>
+			<Building3_NPC4 sizeX="133" sizeY="376" posX="-65.5" posY="-42" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Building3_NPC4>
+		</NPCs>
+		<foreground>
+			
+		</foreground>
+	</Building4Floor1>
 	<BackAlley left_limit="-680" right_limit="680" top_limit="360" bottom_limit="-360" y="-95">
 		<background>
 			<bg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
@@ -182,7 +206,7 @@
 			</AlleyOut>
 		</doors>
 		<NPCs>
-			<BackAlley_Emma sizeX="112" sizeY="336" posX="541" posY="-39" layer="0">
+			<BackAlley_Emma sizeX="112" sizeY="336" posX="541" posY="-39" layer="0" dialogue="">
 				<Animations>
 					<Idle texture="Texture/level2/BackAlley/BackAlley_Emma.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
