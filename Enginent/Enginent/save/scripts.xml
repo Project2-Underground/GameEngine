@@ -3,7 +3,14 @@
 <scripts>
 	<script key = "" loopIndex = "">
 		<sub>
-			<Dialogue name = "" text = ""/>
+			<Dialogue name = "" text = "" sound = "" show = "" cutscene = "" room = "" enable = "">
+				<item name = "" NPC = "" />
+				<chat name = "" index = ""/>
+				<note name = ""/>
+				<animation name = ""/>
+				<puzzle name = ""/>
+				<sprite name = "" texture = ""/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "tooFar" loopIndex = "0">
@@ -188,10 +195,10 @@
 	</script>
 	<script key = "Hall_gramophone" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "This thing looks like the one at home."/>
-			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago."/>
-			<Dialogue name = "Elias" text = "Though it feels like I just listen to it not that long ago."/>
-			<Dialogue name = "Elias" text = "Wait. \n There's a piece of paper stuck under the disk.">
+			<Dialogue name = "Elias" text = "This thing looks like the one at home." show = "1"/>
+			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago." show = "1"/>
+			<Dialogue name = "Elias" text = "Though it feels like I just listen to it not that long ago." show = "1"/>
+			<Dialogue name = "Elias" text = "Wait. \n There's a piece of paper stuck under the disk." show = "1">
 				<item name = "Puzzle2_ColorCode1"  NPC = "Gramophone"/>
 				<animation name = "Pickup"/>
 			</Dialogue>
@@ -423,76 +430,69 @@
 			</Dialogue>
 		</sub>
 	</script>
-	
-	
-	
-	<!-- Not proof read -->
-	
-	
 	<script key = "Hubert1_C" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Hubert" text = "Not given up yet? Why are you asking about this anyway?"/>
-			<Dialogue name = "Hubert" text = "When I went to take the book, it's as if the order of the books on the second row
- is the opposite of the third row, that's it."/>
-			<Dialogue name = "Hubert" text = "Let it go, kid. There's no way out of here"/>
+			<Dialogue name = "Hubert" text = "Not given up yet? \n Why are you asking about this anyway?"/>
+			<Dialogue name = "Hubert" text = "When I went to take the book, it's as if the order of the books on the second row is the opposite of the third row, that's it."/>
+			<Dialogue name = "Hubert" text = "Let it go, kid. \n There's no way out of here."/>
 		</sub>
 	</script>
 	<script key = "Dialy1" loopIndex = "0">
 		<sub choice = "c_Dialy1">
 			<Dialogue name = "Elias" text = "Excuse me, may I ask you something?"/>
 			<Dialogue name = "Dialy" text = "Yeah?"/>
-			<Dialogue name = "Elias" text = "(She won't look away from her phone)"/>
-			<Dialogue name = "Elias" text = "(Wait! Can her phone send messages outside?)"/>
+			<Dialogue name = "Elias" text = "( She won't look away from her phone. )"/>
+			<Dialogue name = "Elias" text = "( Wait! Can her phone send messages outside? )"/>
 			<Dialogue name = "Elias" text = "Your phone have a signal?"/>
-			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either"/>
+			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either."/>
 			<Dialogue name = "Elias" text = "Then why..."/>
 			<Dialogue name = "Dialy" text = "Am I always looking at my phone?"/>
-			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down"/>
-			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications"/>
+			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down."/>
+			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications."/>
 			<Dialogue name = "Dialy" text = "I won't be putting this down, never."/>
-			<Dialogue name = "Elias" text = "(Did she said after she came here?)"/>
+			<Dialogue name = "Elias" text = "( Did she said after she came here? )"/>
 		</sub>
 	</script>
 	<script key = "Dialy1_after" loopIndex = "0">
 		<sub choice = "c_Dialy1">
 			<Dialogue name = "Elias" text = "Would you like to check out the bookcase together?"/>
-			<Dialogue name = "Dialy" text = "Huh? Can't you see I'm busy right now? "/>
+			<Dialogue name = "Dialy" text = "Huh? \n Can't you see I'm busy right now?"/>
 		</sub>
 	</script>
 	<script key = "Dialy2" loopIndex = "0">
 		<sub choice = "c_Dialy2">
 			<Dialogue name = "Elias" text = "Excuse me, may I ask you something?"/>
 			<Dialogue name = "Dialy" text = "Yeah?"/>
-			<Dialogue name = "Elias" text = "(She won't look away from her phone)"/>
-			<Dialogue name = "Elias" text = "(Wait! Can her phone send messages outside?)"/>
+			<Dialogue name = "Elias" text = "( She won't look away from her phone. )"/>
+			<Dialogue name = "Elias" text = "( Wait! Can her phone send messages outside? )"/>
 			<Dialogue name = "Elias" text = "Your phone have a signal?"/>
-			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either"/>
+			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either."/>
 			<Dialogue name = "Elias" text = "Then why..."/>
 			<Dialogue name = "Dialy" text = "Am I always looking at my phone?"/>
-			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down"/>
-			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications"/>
+			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down."/>
+			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications."/>
 			<Dialogue name = "Dialy" text = "I won't be putting this down, never."/>
-			<Dialogue name = "Elias" text = "(Did she said after she came here?)"/>
+			<Dialogue name = "Elias" text = "( Did she said after she came here? )"/>
 		</sub>
 	</script>	
 	<script key = "Dialy2_after" loopIndex = "0">
 		<sub choice = "c_Dialy2">
 			<Dialogue name = "Elias" text = "Would you like to check out the bookcase together?"/>
-			<Dialogue name = "Dialy" text = "Huh? Can't you see I'm busy right now? "/>
+			<Dialogue name = "Dialy" text = "Huh? \n Can't you see I'm busy right now?"/>
 		</sub>
 	</script>
 	<script key = "Dialy1_A" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Dialy" text = "A while."/>
-			<Dialogue name = "Dialy" text = "There were people talking about something to do with doctrine and religionใ yada yada"/>
-			<Dialogue name = "Elias" text = "Hm? And had he gone out?"/>
-			<Dialogue name = "Dialy" text = "Yeah. He left the hint with the books"/>
-			<Dialogue name = "Dialy" text = "It has something to do with the position of the books in that bookcase over there"/>
+			<Dialogue name = "Dialy" text = "There were people talking about something to do with doctrine and religion yada yada."/>
+			<Dialogue name = "Elias" text = "Hm? \n And had he gone out?"/>
+			<Dialogue name = "Dialy" text = "Yeah. \n He left the hint with the books"/>
+			<Dialogue name = "Dialy" text = "It has something to do with the position of the books in that bookcase over there."/>
 			<Dialogue name = "Dialy" text = "But when I went back to the bookcase, it has been searched throughout, a complete mess. The key book doesn't seem to be there anymore."/>
-			<Dialogue name = "Dialy" text = "After that the light flickered, and then I felt like something had changed. "/>
-			<Dialogue name = "Dialy" text = "Well, I still don't know what to do"/>
-			<Dialogue name = "Dialy" text = "These people are messing up the room and I don't even care anymore"/>
-			<Dialogue name = "Dialy" text = "If you want it, just take it"/>
+			<Dialogue name = "Dialy" text = "After that the light flickered, and then I felt like something had changed."/>
+			<Dialogue name = "Dialy" text = "Well, I still don't know what to do."/>
+			<Dialogue name = "Dialy" text = "These people are messing up the room and I don't even care anymore."/>
+			<Dialogue name = "Dialy" text = "If you want it, just take it."/>
 			<Dialogue name = "Elias" text = "( is she really not going to do anything about this? )">
 				<item name = "Book2" NPC = "Dialy"/>
 			</Dialogue>
@@ -501,30 +501,37 @@
 	<script key = "Dialy1_C" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Dialy" text = "The books' position? "/>
-			<Dialogue name = "Dialy" text = "I remember the symbols of the books on the third row are ordered opposite from the first row"/>
-			<Dialogue name = "Dialy" text = "Other than that, I have no idea"/>
-			<Dialogue name = "Elias" text = "( The symbols of the books on the third row are ordered opposite from the first row )"/>
-			<Dialogue name = "Elias" text = " ( Let's hope she remembers it correctly )"/>
+			<Dialogue name = "Dialy" text = "I remember the symbols of the books on the third row are ordered opposite from the first row."/>
+			<Dialogue name = "Dialy" text = "Other than that, I have no idea."/>
+			<Dialogue name = "Elias" text = "( The symbols of the books on the third row are ordered opposite from the first row. )"/>
+			<Dialogue name = "Elias" text = " ( Let's hope she remembers it correctly. )"/>
 		</sub>		
 	</script>
 	<script key = "Ann1" loopIndex = "0">
 		<sub choice = "c_Ann1">
-			<Dialogue name = "Elias" text = "Um... hello"/>
+			<Dialogue name = "Elias" text = "Um... hello."/>
 			<Dialogue name = "Ann" text = "... Hi... Who are you?"/>
-			<Dialogue name = "Elias" text = "My name is Elias. I just got out from the room on the upper floor"/>
+			<Dialogue name = "Elias" text = "My name is Elias. \n I just got out from the room on the upper floor."/>
 			<Dialogue name = "Ann" text = "... So, you are... the dreamer boy they are talking about?"/>
-			<Dialogue name = "Elias" text = "Wait wait wait. Who's talking about me like that!"/>
-			<Dialogue name = "Ann" text = "... You are finding a way to leave this place, right? ... No one here's going to go with you."/>
-			<Dialogue name = "Ann" text = "That's why they are looking at you like a crazy person"/>
-			<Dialogue name = "Elias:" text = "(For god's sake, I hate being the gossip target)"/>
+			<Dialogue name = "Elias" text = "Wait wait wait. \n Who's talking about me like that!"/>
+			<Dialogue name = "Ann" text = "... You are finding a way to leave this place, right? \n ... No one here's going to go with you."/>
+			<Dialogue name = "Ann" text = "That's why they are looking at you like a crazy person."/>
+			<Dialogue name = "Elias" text = "( For god's sake, I hate being the gossip target. )"/>
 		</sub>
 	</script>
 	<script key = "Ann1_after" loopIndex = "0">
 		<sub choice = "c_Ann1">
-			<Dialogue name = "Ann" text = "You're back... Are we ready for a mass suicide?"/>
-			<Dialogue name = "Elias:" text = "Ah... maybe later"/>
+			<Dialogue name = "Ann" text = "You're back... \n Are we ready for a mass suicide?"/>
+			<Dialogue name = "Elias:" text = "Ah... maybe later."/>
 		</sub>
 	</script>
+	
+		
+	
+	
+	<!-- Not proof read -->
+	
+	
 	<script key = "Ann2" loopIndex = "0">
 		<sub choice = "c_Ann2">
 			<Dialogue name = "Elias" text = "Um... hello"/>

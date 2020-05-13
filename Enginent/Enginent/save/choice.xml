@@ -52,7 +52,6 @@
 		<choice text = "Calm down, I just want to talk about something around here." nextDialogue = "Building4_NPC2B"/>
 		<choice text = "I am new here, I can be your friend if you would like." nextDialogue = "Building4_NPC2C"/>
 	</choices>
-	
 	<choices key = "puzz7_quest1">
 		<choice text = "Help him." nextDialogue = ""/>
 		<choice text = "Fight him." nextDialogue = ""/>

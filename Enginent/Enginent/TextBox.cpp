@@ -64,7 +64,6 @@ void TextBox::setText(std::string key, bool talk)
 					curr_dialogueSize += str.size() + 1;
 					lineCount++;
 					s_tmp.str("");
-					//std::cout << std::endl;
 				}
 				if(word != "\\n")
 					s_tmp << " " << word;
@@ -116,10 +115,27 @@ void TextBox::setText(std::string key, bool talk)
 			//change texture
 			if (d_text->dialogue[d_index].spriteChange != "")
 			{
-				InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].spriteChange));
 				if (obj != nullptr)
 				{
 					obj->SetTexture(d_text->dialogue[d_index].sprite);
+				}
+			}
+
+			//change room
+			if (d_text->dialogue[d_index].roomName != "")
+			{
+				Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName);
+			}
+
+			//enable object
+			if (d_text->dialogue[d_index].Enable != "")
+			{
+				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+				if (obj != nullptr)
+				{
+					obj->SetDisplay(true);
+					obj->col->enable = true;
 				}
 			}
 
@@ -271,7 +287,6 @@ void TextBox::clickLeft(glm::vec3 pos)
 				curr_dialogueSize += str.size() + 1;
 				lineCount++;
 				s_tmp.str("");
-				std::cout << std::endl;
 			}
 			if (word != "\\n")
 				s_tmp << " " << word;
@@ -323,10 +338,27 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//change texture
 		if (d_text->dialogue[d_index].spriteChange != "")
 		{
-			InteractableObj* obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].spriteChange));
 			if (obj != nullptr)
 			{
 				obj->SetTexture(d_text->dialogue[d_index].sprite);
+			}
+		}
+
+		//change room
+		if (d_text->dialogue[d_index].roomName != "")
+		{
+			Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName);
+		}
+
+		//enable object
+		if (d_text->dialogue[d_index].Enable != "")
+		{
+			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+			if (obj != nullptr)
+			{
+				obj->SetDisplay(true);
+				obj->col->enable = true;
 			}
 		}
 
@@ -369,7 +401,6 @@ void TextBox::clickLeft(glm::vec3 pos)
 	else
 	{
 		choice_UI->setChoice(d_text->choice);
-		std::cout << d_text->choice << std::endl;
 	}
 }
 
@@ -414,6 +445,10 @@ bool ChoiceBox::CheckClick(glm::vec3 pos)
 		if (choice.puzzleName != "")
 		{
 			((GameScreen*)Game::GetInstance()->GetScreen())->OpenPuzzle(choice.puzzleName);
+		}
+		if (choice.roomName != "")
+		{
+			((GameScreen*)Game::GetInstance()->GetScreen())->GetCurrentLevel()->ChangeRoom(choice.roomName);
 		}
 
 		return true;

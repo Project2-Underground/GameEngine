@@ -44,12 +44,12 @@
 	<puzzles>
 		<BookshelfPuzzle done="false" passRequirements="false" />
 		<BookshelfPuzzle2 done="true" passRequirements="false" />
-		<Numpad_Backdoor done="true" passRequirements="false" />
+		<Numpad_Backdoor done="false" passRequirements="false" />
 		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="251" posY="-80">
+	<Player posX="202" posY="-80">
 		<inventory>
-			<item name="keyCard" multipleUse="false" />
+			<item name="keyCard" multipleUse="true" />
 			<item />
 			<item />
 			<item />
@@ -67,7 +67,9 @@
 			<c name="Unknown2" msgNo="5" />
 			<c name="Unknown3" msgNo="0" />
 		</Chats>
-		<npcTalked />
+		<npcTalked>
+			<Hubert />
+		</npcTalked>
 	</Phone>
 	<Butler display="true" phase="2" />
 </level>
