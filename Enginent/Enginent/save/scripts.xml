@@ -1276,7 +1276,7 @@
 			<Dialogue name = "Elias" text = "And what about this knife?"/>
 			<Dialogue name = "puppet" text = "AHHHHHHH!">
 				<item name = "Puzzle7_Knife"/>
-				<sprite name = "Puzzle7_StabbedPuppet" texture = "Puzzle6_Puppet.png"/>
+				<sprite name = "Puzzle7_StabbedPuppet" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "What?! \n This thing can talk?"/>
 			<Dialogue name = "puppet" text = "Who are you? \n Your voice is not like those monsters."/>
