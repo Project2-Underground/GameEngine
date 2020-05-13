@@ -40,6 +40,7 @@
 				<key name="NONE"/>
 			</MainFloor2_Building3_Door>
 			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="Floor2_Building4">
+				<key name="NONE"/>
 			</MainFloor2_Building4_Door>
 			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue="Floor2_BackAlley">
 				<isOpenDoor/>
