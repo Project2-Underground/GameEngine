@@ -927,9 +927,13 @@
 			<Dialogue name = "Elias" text = "What is it doing?"/>
 			<Dialogue name = "Elias" text = "And how am I going to shut down this?"/>
 			<Dialogue name = "Elias" text = "There's no going back now. \n I'll have to do it my way, then."/>
-			<Dialogue name = " " text = "( Smashes the computer screen. )"/>
+			<Dialogue name = " " text = "( Smashes the computer screen. )">
+				<sprite name="Building2_Computer1" texture="Texture/level2/Building2/Building2_Computer2.png"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing down below will do. It won't explode in my face, right?"/>
-			<Dialogue name = " " text = "*Smashes sound*"/>
+			<Dialogue name = " " text = "*Smashes sound*">
+				<sprite name="bg" texture="Texture/level2/Building2/Building2_Template2.png"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "Smoke... smoke is coming out."/>
 			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma."/>
 		</sub>
@@ -1264,17 +1268,15 @@
 	</script>
 	<script key = "puzzle7_puppet" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Hm, this thing has been rebuilt."/>
-			<Dialogue name = "Elias" text = "(Knock knock)"/>
-			<Dialogue name = "puppet" text = "Hey, quit messing with me!"/>
+			<Dialogue name = "Elias" text = "Wait, I think this puppet must be burnt already."/>
+			<Dialogue name = "Elias" text = "And what about this knife?"/>
+			<Dialogue name = "puppet" text = "AHHHHHHH!"/>
 			<Dialogue name = "Elias" text = "What?! This thing can talk?"/>
-			<Dialogue name = "puppet" text = "Wait, you are not people around here, right? I can tell from your voice."/>
+			<Dialogue name = "puppet" text = "Who are you? Your voice is not like those monsters."/>
 			<Dialogue name = "Elias" text = "Yeah, need some help to get out of this puppet?"/>
-			<Dialogue name = "puppet" text = "Huh, don't think you can fool me again. I know someone like you, such a dead face liar."/>
-			<Dialogue name = "Elias" text = "I also know someone like you, but he might not be able to fit in this puppet."/>
-			<Dialogue name = "puppet" text = "Really?"/>
-			<Dialogue name = "puppet" text = "If so, could you help me get out of this puppet?"/>
-			<Dialogue name = "Elias" text = "Um.... Let me see."/>
+			<Dialogue name = "puppet" text = "If you could, I will be really grateful."/>
+			<Dialogue name = "puppet" text = "But the point is I don't even know how I can get into this puppet."/>
+			<Dialogue name = "Elias" text = "Um.... Let me figure something out."/>
 		</sub>
 	</script>
 	<script key = "puzzle7_puppet_after" loopIndex = "0">
@@ -1295,8 +1297,9 @@
 	</script>
 	<script key = "puzzle7_NPC1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "NPC1" text = "Hello, you look like someone I know."/>
-			<Dialogue name = "Elias" text = "You might remember a wrong person."/>
+			<Dialogue name = "NPC1" text = "Hello, are you a newcomer?"/>
+			<Dialogue name = "Elias" text = "Don't you remember me? I just passed your test for a couple of hours."/>
+			<Dialogue name = "NPC1" text = "I don't think so...."/>
 			<Dialogue name = "NPC1" text = "However, take this paper. Whoever come in this place have to hold it."/>
 			<Dialogue name = "NPC1" text = "Oh, and There are some rules you have to learn."/>
 			<Dialogue name = "Elias" text = "What rule?"/>
