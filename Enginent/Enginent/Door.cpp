@@ -56,7 +56,8 @@ void Door::Trigger() {
 void Door::Open() {
 	used = true; 
 	interactType = DOOR;
-	SetTexture(openTexture);
+	if(hasOpenTexture)
+		SetTexture(openTexture);
 }
 
 void WallDoor::action() {

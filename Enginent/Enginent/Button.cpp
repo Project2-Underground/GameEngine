@@ -227,7 +227,7 @@ void SaveLoadGameButton::action() {
 		SetSaveLevel(savelevel);
 		hasSaved = true;
 	}
-	if (hasSaved) {
+	else if (hasSaved) {
 		SoundManager::GetInstance()->stopAllSounds();
 		Game::GetInstance()->TriggerLoadGame(filename);
 	}

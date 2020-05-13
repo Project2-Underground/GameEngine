@@ -3,7 +3,7 @@
 	<rooms>
 		<BackAlley dialogue="" />
 		<Building1 dialogue="" />
-		<Building2 dialogue="" />
+		<Building2 dialogue="Building2" />
 		<Building3 dialogue="" />
 		<Building4Puzzle6Floor1 dialogue="" />
 		<Building4Puzzle6Floor2 dialogue="" />
@@ -14,32 +14,35 @@
 		<MainFloor2 dialogue="" />
 	</rooms>
 	<interactObj>
-		<Building1_FloorDoorClose current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Building1_FloorDoorClose current_dialogue="Building1_FloorDoorClose" before_dialogue="Building1_FloorDoorClose" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Building2_Computer1 current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle6_AltarwithPills current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="true" />
+		<Building2_Computer1 current_dialogue="Building2_com" before_dialogue="Building2_com" after_dialogue="Building2_com_broke" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_NPC1 current_dialogue="Building4_NPC1" before_dialogue="Building4_NPC1" after_dialogue="" talked="false" takeNote="false" has_item="false" triggered="false" />
+		<Puzzle6_AltarwithPills current_dialogue="Building4_altar" before_dialogue="Building4_altar" after_dialogue="Building4_altar_after" talked="false" takeNote="false" has_item="true" />
+		<Puzzle6_NPC1Trigger current_dialogue="puzzle6_2_NPC1" before_dialogue="puzzle6_2_NPC1" after_dialogue="" talked="false" takeNote="false" has_item="false" triggered="false" />
 		<Puzzle6_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="true" open="false" />
 		<Puzzle6_WallTorch current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle6_LockedDoor current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle6_Puppet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle7_WallTorch current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle7_StabbedPuppet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<Puzzle7_LockedDoor current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_LockedDoor current_dialogue="puzzle6_3_doorlock" before_dialogue="puzzle6_3_doorlock" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_Puppet current_dialogue="puzzle6_puppet" before_dialogue="puzzle6_puppet" after_dialogue="puzzle6_puppet" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_WallTorch current_dialogue="puzzle7_torch" before_dialogue="puzzle7_torch" after_dialogue="puzzle7_torch" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_StabbedPuppet current_dialogue="puzzle7_puppet" before_dialogue="puzzle7_puppet" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_LockedDoor current_dialogue="puzzle7_lockeddoor" before_dialogue="puzzle7_lockeddoor" after_dialogue="puzzle7_lockeddoor" talked="false" takeNote="false" has_item="false" />
 		<Puzzle7_EyeKeyFalse1 current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<Puzzle7_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="true" open="false" />
 		<Puzzle7_Altar1 current_dialogue="puzzle7_altar1" before_dialogue="puzzle7_altar1" after_dialogue="puzzle7_altar1_after" talked="false" takeNote="false" has_item="false" />
-		<Puzzle7_Altar2 current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_Altar2 current_dialogue="puzzle7_altar2" before_dialogue="puzzle7_altar2" after_dialogue="puzzle7_altar2" talked="false" takeNote="false" has_item="false" />
 		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
-		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="true" takeNote="false" has_item="false" />
+		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<TriggerCultist current_dialogue="Floor2_Cultist" before_dialogue="Floor2_Cultist" after_dialogue="" talked="false" takeNote="false" has_item="false" triggered="false" />
 	</interactObj>
 	<item />
 	<doors>
 		<AlleyOut used="true" />
 		<Building1_Door used="true" />
 		<Building1_FloorDoorOpen used="false" />
-		<Building2_Door1 used="true" />
+		<Building2_Door1 used="false" />
 		<Building3_Exit used="true" />
-		<Building4Puzzle6Floor1Out used="false" />
+		<Building4Puzzle6Floor1Out used="true" />
 		<Building4Puzzle6Floor1Up used="false" />
 		<Building4Puzzle6Floor2Down used="false" />
 		<Building4Puzzle6Floor2Up used="false" />
@@ -54,7 +57,7 @@
 		<MainFloor2_Building1_Door used="true" />
 		<MainFloor2_Building2_Door used="false" />
 		<MainFloor2_Building3_Door used="false" />
-		<MainFloor2_Building4_Door used="true" />
+		<MainFloor2_Building4_Door used="false" />
 		<MainFloor2_BlackAlley used="true" />
 	</doors>
 	<NPCs>
@@ -65,8 +68,9 @@
 		<Building3_NPC7 hasItem="false" />
 		<Cultist_Mask hasItem="false" />
 		<Building3_Emma hasItem="false" />
-		<Puzzle6_NPC1 hasItem="false" />
 		<Puzzle6_NPC2 hasItem="false" />
+		<Puzzle6_NPC1_AfterPuzzle hasItem="false" />
+		<Cultist_AfterPuzzle hasItem="false" />
 		<Puzzle6_NPC1 hasItem="false" />
 		<Puzzle6_NPC2 hasItem="false" />
 		<Puzzle6_NPC1 hasItem="false" />
@@ -80,13 +84,13 @@
 	</NPCs>
 	<puzzles>
 		<BookshelfPuzzle done="false" passRequirements="false" />
-		<BookshelfPuzzle2 done="true" passRequirements="false" />
+		<BookshelfPuzzle2 done="false" passRequirements="false" />
 		<Numpad_Backdoor done="false" passRequirements="false" />
 		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="201" posY="-80">
+	<Player posX="235" posY="-80">
 		<inventory>
-			<item name="keyCard" multipleUse="true" />
+			<item />
 			<item />
 			<item />
 			<item />
@@ -95,16 +99,14 @@
 			<item />
 		</inventory>
 	</Player>
-	<Phone hasPhone="true" firstClose="false" note23Track="false">
-		<Notes>
-			<n name="Note1" />
-		</Notes>
+	<Phone hasPhone="false" firstClose="false" note23Track="false">
+		<Notes />
 		<Chats>
-			<c name="Unknown1" msgNo="7" />
+			<c name="Unknown1" msgNo="0" />
 			<c name="Unknown2" msgNo="0" />
 			<c name="Unknown3" msgNo="0" />
 		</Chats>
 		<npcTalked />
 	</Phone>
-	<Butler display="true" phase="2" />
+	<Butler display="true" phase="0" />
 </level>

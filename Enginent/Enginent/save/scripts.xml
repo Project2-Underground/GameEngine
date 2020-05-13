@@ -1027,12 +1027,12 @@
 			<Dialogue name = "Elias" text = "Alright.">
 				<item name = "Puzzle6_Paper" NPC = "Puzzle6_NPC1"/>
 			</Dialogue>
-			<Dialogue name = "Arlo" text = "Thank you… Oh, and one more thing, this scrap of paper might be his. \n Please, return it when you talk to him."/>
+			<Dialogue name = "Arlo" text = "Thank you... Oh, and one more thing, this scrap of paper might be his. \n Please, return it when you talk to him."/>
 		</sub>
 	</script>
 	<script key = "Building4_NPC2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "Who are you? You shouldn’t talk to me… you must know that I don't need to socialize here."/>
+			<Dialogue name = "Bob" text = "Who are you? You shouldn't talk to me... you must know that I don't need to socialize here."/>
 		</sub>
 	</script>
 	<script key = "Building4_NPC2_after" loopIndex = "0">
@@ -1050,14 +1050,14 @@
 	<script key = "Building4_NPC2B" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "What do people around here usually eat? \n I see a pile of flesh meat on the altar."/>
-			<Dialogue name = "Bob" text = "I don’t know anything about the meat and I'm not interested in knowing, I am vegetarian."/>
+			<Dialogue name = "Bob" text = "I don't know anything about the meat and I'm not interested in knowing, I am vegetarian."/>
 		</sub>
 	</script>
 	<script key = "Building4_NPC2C" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "If you know me better, you might not want to… *Sneezes*!! "/>
-			<Dialogue name = "Bob" text = "*Mumbles* \n (Um… looks like it’s time to take the medicine.) "/>
-			<Dialogue name = "Bob" text = "*Mumbles* \n (Uh… where is it? Come on, I am beginning to get sleepy.)"/>
+			<Dialogue name = "Bob" text = "If you know me better, you might not want to... *Sneezes*!! "/>
+			<Dialogue name = "Bob" text = "*Mumbles* \n (Um... looks like it's time to take the medicine.) "/>
+			<Dialogue name = "Bob" text = "*Mumbles* \n (Uh... where is it? Come on, I am beginning to get sleepy.)"/>
 		</sub>
 	</script>
 	<script key = "Building4_med2" loopIndex = "0">
@@ -1078,7 +1078,7 @@
 	</script>
 	<script key = "Building4_med2meatmed1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "Okay, I will accept your offer… You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you."/>
+			<Dialogue name = "Bob" text = "Okay, I will accept your offer... You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you."/>
 			<Dialogue name = "Elias" text = " Yeah, sure."/>
 		</sub>
 	</script>
@@ -1323,7 +1323,7 @@
 	</script>	
 	<script key = "puzzle7_quest2" loopIndex = "0">
 		<sub choice = "puzz7_quest2">
-			<Dialogue name = "Arlo" text = "What should you do when you don’t know how to help the friend in trouble?"/>
+			<Dialogue name = "Arlo" text = "What should you do when you don't know how to help the friend in trouble?"/>
 		</sub>
 	</script>	
 	<script key = "puzzle7_quest3" loopIndex = "0">
@@ -1594,7 +1594,7 @@
 			<Dialogue name = "Emily" text = "As expected of you."/>
 			<Dialogue name = "Elias" text = "Hm? What does that mean?"/>
 			<Dialogue name = "Emily" text = "Nothing."/>
-			<Dialogue name = "Emily" text = "Everything is over, mom." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "Emily" text = "Everything has come to an end, mom." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "He somehow turned into one of the good soldiers at the last minute." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "It's a pity we have to erase all of his memories." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "We can only hope he'll become our great success." cutscene = "Texture/Cutscene/3.png"/>

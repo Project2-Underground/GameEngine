@@ -181,6 +181,27 @@ void Game::SaveLoad(std::string filename) {
 		LoadGame(filename);
 		cursorGame->ResetCursor();
 		currentScreen->Pause = false;
+
+		switch (GetCurrentLevel()->levelNo)
+		{
+		case 0:
+			SoundManager::GetInstance()->stopAllSounds();
+			//SoundManager::GetInstance()->playSound(BGM, "Mainfloor1");
+			// floor 1
+			break;
+		case 1:
+			// floor 2
+			SoundManager::GetInstance()->stopAllSounds();
+			SoundManager::GetInstance()->playSound(BGM, "Mainfloor2");
+			break;
+		case 2:
+			// floor 3
+			SoundManager::GetInstance()->stopAllSounds();
+			SoundManager::GetInstance()->playSound(BGM, "Mainfloor3");
+			break;
+		default:
+			break;
+		}
 	}
 }
 

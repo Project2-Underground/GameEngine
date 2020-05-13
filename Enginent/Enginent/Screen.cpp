@@ -335,7 +335,6 @@ void GameScreen::ChangeLevel(int level) {
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 	currentLevel->GetCurrentRoom()->dialogue.clear();
-
 	switch (level)
 	{
 	case 0:

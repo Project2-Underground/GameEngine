@@ -68,7 +68,7 @@ Note::Note() {
 	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
 	scrollBar->Init(10.0f, -(TEXT_TOP_Y - TEXT_BOTTOM_Y), glm::vec3(290, 0, 1));
 	textBubble = new UIObject();
-	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
+	textBubble->SetTexture("Texture/UI/InfoPhone/textBubble.png");
 	textBubble->SetSize(575.0f, 250.0f);
 	textBubble->SetPosition(glm::vec3(-20, scrollBar->getPos().y, 1));
 	thumb->SetTexture("Texture/tmp_texture/tmp_scrollBar.PNG");
@@ -178,7 +178,7 @@ Chat::Chat() {
 	profilePic->SetSize(50.0f, -50.0f);
 	profilePic->SetPosition(glm::vec3(TEXT_START_X, 175.0f, 1));
 	textBubble = new UIObject();
-	textBubble->SetTexture("Texture/UI/ChoiceBox.PNG");
+	textBubble->SetTexture("Texture/UI/InfoPhone/textBubble.png");
 	scrollBar = new UIObject();
 	thumb = new UIObject();
 	scrollBar->SetTexture("Texture/tmp_texture/tmp_scrollBarBG.PNG");
@@ -340,7 +340,7 @@ void Application::Close() {
 void Application::OpenChat() {
 	float y = TAB_TOP_Y;
 	for (int i = 0; i < chats.size(); i++) {
-		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/ChoiceBox.png", chats[i]->name, i, chats[i]->noti);
+		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/InfoPhone/textBubble.png", chats[i]->name, i, chats[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
 		tab->hasNewInfo = chats[i]->noti;
@@ -355,7 +355,7 @@ void Application::OpenChat() {
 void Application::OpenNote() {
 	float y = TAB_TOP_Y;
 	for (int i = 0; i < notes.size(); i++) {
-		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/ChoiceBox.png", notes[i]->name, i, notes[i]->noti);
+		ChatNoteInfoButton* tab = new ChatNoteInfoButton("Texture/UI/InfoPhone/textBubble.png", notes[i]->name, i, notes[i]->noti);
 		tab->Init(TAB_SIZE_X, -50.0f, glm::vec3(TEXT_START_X + TAB_SIZE_X * 0.5f, y - TAB_SPACE * i, 1.0f));
 		tab->title->SetPosition(glm::vec3(TEXT_START_X + tab->title->getSize().x * 0.5f + TAB_TEXT_PADDING, y - TAB_SPACE * i, 1.0f));
 		itemTabs.push_back(tab);

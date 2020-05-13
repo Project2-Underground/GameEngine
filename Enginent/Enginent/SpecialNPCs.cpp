@@ -132,7 +132,11 @@ void Butler::Update() {
 		triggered = false;
 	}
 	if (!clickToInteract) {
-		PlayerTriggerObj::Update();
+		if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
+			action();
+			triggered = true;
+			Game::GetInstance()->GetPlayer()->StopWalking();
+		}
 	}
 	if (currentPhase == PHASE2 && !((GameScreen*)Game::GetInstance()->GetScreen())->IsPuzzleOpen() && !triggered) {
 		Player* player = Game::GetInstance()->GetPlayer();

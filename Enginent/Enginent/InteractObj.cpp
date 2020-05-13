@@ -373,11 +373,15 @@ PlayerTriggerObj::PlayerTriggerObj() {
 	triggered = false;
 }
 void PlayerTriggerObj::Update() {
+	if (anim && display)
+		anim->Update();
 	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
 		action();
 		triggered = true;
-
 		Game::GetInstance()->GetPlayer()->StopWalking();
+	}
+	if (triggered && !TextBox::GetInstance()->IsDisplay()) {
+		display = false;
 	}
 }
 

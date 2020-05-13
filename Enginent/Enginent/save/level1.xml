@@ -3,7 +3,7 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="1" startPosX="400" Start="EliasRoom">
-	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
+	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-60" dialogue="EliasRoom">
 		<background>
 			<bg texture="Texture/level1/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -45,9 +45,9 @@
 			<bg texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Door2 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
-			<Door3 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="1" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
-			<HallRoomUpperFloor_Door1 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="1" layer="0" dialogue="Big_door" dialogue_2="Big_door"/>
+			<Door2 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="727" posY="2" type="2" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<Door3 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="1364" posY="2" type="2" layer="0" dialogue="Hall_door" dialogue_2="Hall_door"/>
+			<HallRoomUpperFloor_Door1 texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door1.png" sizeX="301" sizeY="385" posX="-7" posY="-17" type="2" layer="0" dialogue="Big_door" dialogue_2="Big_door"/>
 		</interactObj>
 		<doors>
 			<EliasRoomOuterDoor texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Door2.png" sizeX="194" sizeY="359" posX="-1436" posY="2" next_room="EliasRoom" next_door="EliasRoomInnerDoor" layer="0" dialogue="Elias_hall_door" dialogue_2="Elias_hall_door">
