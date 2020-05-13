@@ -136,6 +136,16 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		interactObj->object_name = child->name();
 		CreateObject(interactObj, *child);
 
+		pugi::xml_node animaions = child->child("Animations");
+		if (animaions)
+			interactObj->InitAnimator();
+		for (pugi::xml_node_iterator anim = animaions.begin(); anim != animaions.end(); anim++) {
+			interactObj->anim->AddAnimation(anim->name(),
+				anim->attribute("texture").as_string(),
+				anim->attribute("frame").as_int(),
+				anim->attribute("time_per_frame").as_float(),
+				anim->attribute("loop").as_bool());
+		}
 		if (child->child("typeView")) {
 			interactObj->SetInteractType((InteractTypeList)child->child("typeView").attribute("type").as_int());
 		}
@@ -262,9 +272,15 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 
 		if (child->child("item")) 
 			npc->SetItem(child->child("item").attribute("name").as_string());
-		
-		npc->InitAnimator();
+
+		if (child->child("colOff")) {
+			npc->col->enable = false;
+			npc->SetDisplay(false);
+		}
+
 		pugi::xml_node animaions = child->child("Animations");
+		if(animaions)
+			npc->InitAnimator();
 		for (pugi::xml_node_iterator anim = animaions.begin(); anim != animaions.end(); anim++) {
 			npc->anim->AddAnimation(anim->name(), 
 									anim->attribute("texture").as_string(), 

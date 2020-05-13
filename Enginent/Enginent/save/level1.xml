@@ -2,7 +2,7 @@
 
 <!-- texture = NONE toset display false-->
 
-<level currentLevel="1" startPosX="0" Start="EliasRoom">
+<level currentLevel="1" startPosX="400" Start="EliasRoom">
 	<EliasRoom left_limit="-555" right_limit="548" top_limit="360" bottom_limit="-360" y="-50" dialogue="EliasRoom">
 		<background>
 			<bg texture="Texture/level1/EliasRoom/EliasRoom_Template.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
@@ -25,6 +25,9 @@
 			<Calendar texture="Texture/level1/EliasRoom/Elias_Room_Calendar.png" sizeX="58" sizeY="163" posX="-615" posY="-25" type="2" layer="3" dialogue="EliasRoom_calendar" dialogue_2 = "EliasRoom_calendar">
 				<view texture="Texture/ViewItem/Elias_Room_Calendar(V).png" sizeX="775" sizeY="776"/>
 			</Calendar>
+			<Elias_Room_Bin texture="Texture/level1/EliasRoom/Elias_Room_Bin.png" sizeX="162" sizeY="145" posX="564" posY="-190" type="1" layer="5">
+				<colOff/>
+			</Elias_Room_Bin>
 		</interactObj>
 		<doors>
 			<EliasRoomInnerDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
