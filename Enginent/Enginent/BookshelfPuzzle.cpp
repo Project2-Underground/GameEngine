@@ -3,8 +3,6 @@
 #include "MouseInput.h"
 
 Puzzle::~Puzzle() {
-	if(background)
-		delete background;
 	if(puzzle)
 		delete puzzle;
 	for (auto ui : UI)
@@ -69,6 +67,7 @@ bool Space::CheckCollide(Collider* col)
 
 Bookshelf::Bookshelf(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	soundAfterComplete = "Puzzle25DoorOpen";
 	dialogueAfterComplete = "Hall_Bookshelf_L3";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
@@ -168,6 +167,7 @@ void Bookshelf::Update()
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
 		TextBox::GetInstance()->setText(dialogueAfterComplete);
+		SoundManager::GetInstance()->playSound(SFX, soundAfterComplete);
 		doneAction = true;
 	}
 }
@@ -272,9 +272,7 @@ BookshelfPuzzle::BookshelfPuzzle()
 	space1.push_back(s6);
 
 	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
-	closeButton->SetPosition(glm::vec3(505.0f, 181.0f, 1.0f));
-	closeButton->SetSize(46.0f, -44.0f);
-	closeButton->SetCollder(new Collider(closeButton));
+	closeButton->Init(46.0f, -44.0f, glm::vec3(505.0f, 181.0f, 1.0f));
 	UI.push_back(closeButton);
 
 	puzzle = new Bookshelf("Texture/Puzzle/Puzzle1_BookShelf.png", -300, 0, 200, -400);
@@ -379,6 +377,7 @@ bool Book2::checkPaper()
 
 Bookshelf2::Bookshelf2(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	soundAfterComplete = "Puzzle25DoorOpen";
 	dialogueAfterComplete = "";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
@@ -458,6 +457,7 @@ void Bookshelf2::Update()
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
 		doneAction = true;
+		SoundManager::GetInstance()->playSound(SFX, soundAfterComplete);
 		TextBox::GetInstance()->setText(dialogueAfterComplete);
 	}
 }

@@ -6,7 +6,6 @@ Butler::Butler() {
 	currentPhase = PHASE0;
 	object_name = "butler";
 	interactType = TALK;
-	triggered = true;
 	turnLeft = true;
 	Init(180, -409, glm::vec3(-987, -102, 1));
 	col->setNewSize(350, -350);

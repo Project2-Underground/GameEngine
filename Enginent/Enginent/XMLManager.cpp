@@ -96,15 +96,13 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		case VIEW: {
 			ViewObj* obj = new ViewObj();
 			obj->SetViewTexture(child->child("view").attribute("texture").as_string());
-			obj->width = (child->child("view").attribute("sizeX").as_float());
-			obj->height = (child->child("view").attribute("sizeY").as_float());
+			obj->viewWidth = (child->child("view").attribute("sizeX").as_float());
+			obj->viewHeight = (child->child("view").attribute("sizeY").as_float());
 			interactObj = obj;
 		}break;
 		case OPEN: {
 			OpenObj* obj = new OpenObj();
 			obj->SetOpenTexture(child->child("clicked").attribute("texture").as_string());
-			if (child->child("sound"))
-				obj->SetSound(child->child("sound").attribute("name").as_string());
 			interactObj = obj;
 		}break;
 		case PUZZLE: {
@@ -135,9 +133,15 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			interactObj = new InteractableObj();
 		}break;
 		}
+		interactObj->object_name = child->name();
+		CreateObject(interactObj, *child);
 
-		if (child->child("typeView"))
+		if (child->child("typeView")) {
 			interactObj->SetInteractType((InteractTypeList)child->child("typeView").attribute("type").as_int());
+		}
+
+		if (child->child("sound"))
+			interactObj->SetSound(child->child("sound").attribute("name").as_string());
 
 		if (child->child("item")) {
 			interactObj->SetItem(child->child("item").attribute("name").as_string());
@@ -148,12 +152,21 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
+		if (child->child("used")) {
+			interactObj->SetUsedTexture(child->child("used").attribute("texture").as_string());
+			if (child->child("used").child("positionAfterUse")) {
+				interactObj->SetPositionAfterUsed(child->child("used").child("positionAfterUse").attribute("x").as_float(), 
+												  child->child("used").child("positionAfterUse").attribute("y").as_float());
+			}
+			if (child->child("used").child("newItemAfterUsed")) {
+				interactObj->SetNewItemAfterUsed(child->child("used").child("newItemAfterUsed").attribute("name").as_string());
+			}
+		}
+
 		if (child->child("note"))
 			for(pugi::xml_node_iterator note = child->child("note").begin(); note != child->child("note").end(); note++)
 				interactObj->AddNoteName(note->name());
 
-		interactObj->object_name = child->name();
-		CreateObject(interactObj, *child);
 
 		if (child->child("key"))
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
@@ -186,8 +199,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			door = new WallDoor(next_room, next_door);
 			door->SetDialogueAfterTriggerName(child->attribute("dialogueAfterTrigger").as_string());
 		}
-		else if (child->child("EliasDoor"))
-			door = new EliasDoor(next_room, next_door);
 		else if (child->child("Building4InnerDoor"))
 			door = new Building4InnerDoor(next_room, next_door);
 		else if (child->child("SecretDoor"))
@@ -212,8 +223,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 
 		if (child->child("openDoor"))
 			door->SetOpenTexture(child->child("openDoor").attribute("texture").as_string());
-		else
-			door->SetOpenTexture(door->GetTexture());
 
 		door->layer = OBJECT_LAYER;
 		door->subLayer = child->attribute("layer").as_int();
@@ -681,6 +690,10 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 				float ix = item->attribute("IsizeX").as_float();
 				float iy = item->attribute("IsizeY").as_float();
 				i->SetISize(ix, iy);
+			}
+
+			for (pugi::xml_node_iterator d = item->child("dialogueAferUseWithObjs").begin(); d != item->child("dialogueAferUseWithObjs").end(); d++) {
+				i->AddDialogueAfterUsedWithObj(d->name(), d->attribute("dialogue").as_string());
 			}
 
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());

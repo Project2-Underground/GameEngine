@@ -35,16 +35,23 @@ protected:
 
 	bool takeNote;
 	bool hasNextTexture;
+	bool hasUsedTexture;
+	bool hasPositionAfterUsed;
+	bool hasNewItemAfterUsed;
 	bool talk;
+	glm::vec3 positionAfterUse;
 	std::vector<std::string> noteNames;
 	std::string item_to_use;
+	std::string new_item_after_used;
 	std::string dialogue_name;
 	std::string dialogue_before;
 	std::string dialogue_after;
-	std::string dialogue_after_used;
+	std::string dialogue_after_use;
 	std::string dialogue_after_trigger;
-	std::string itemName;    
+	std::string itemName;
+	std::string sound;
 	unsigned int nextTexture; // after picking up an item
+	unsigned int usedTexture; // after picking up an item
 
 public:
 	std::vector<InteractableObj*> triggerObjs;
@@ -52,7 +59,7 @@ public:
 	bool triggered;
 	bool hasItem;
 	bool scriptHandleItem;
-	InteractableObj();
+	InteractableObj();	
 
 	virtual void action();
 	virtual void Trigger();
@@ -66,11 +73,16 @@ public:
 	void SetInteractType(InteractTypeList type) { interactType = type; }
 	void SetItemToUse(std::string item_to_unlock);
 	void SetNextTexture(std::string);
+	void SetUsedTexture(std::string);
+	void SetNewItemAfterUsed(std::string);
+	void SetPositionAfterUsed(float x, float y);
 	void SetItem(std::string item) { itemName = item; hasItem = true; }
 	Item* GetItem();
 	void TakeNote();
 	void PickUpItem();
+
 	virtual void UseItem(Item* item);
+
 	void AddTriggerObj(InteractableObj*);
 	void ChangeDialogue(std::string n, std::string a);
 	std::string GetCurrentDialogueName() { return dialogue_name; }
@@ -79,12 +91,15 @@ public:
 	void SetCurrentDialogueName(std::string d) { dialogue_name = d; }
 	void SetDialogueBeforeName(std::string d) { dialogue_before = d; }
 	void SetDialogueAfterName(std::string d) { dialogue_after = d; }
-	void SetDialogueAfterUsedName(std::string d) { dialogue_after_used = d; }
+	void SetDialogueAfterUsedName(std::string d) { dialogue_after_use = d; }
 	void SetDialogueAfterTriggerName(std::string d) { dialogue_after_trigger = d; }
 	void SetTalked(bool b);
 	void SetTakeNote(bool b) { takeNote = b; }
 	bool Talked() { return talk; }
 	bool TookNote() { return takeNote; }
+
+	void Used();
+	void SetSound(std::string);
 
 	InteractTypeList getType() { return interactType; };
 
@@ -93,7 +108,6 @@ public:
 };
 
 class OpenObj : public InteractableObj {
-	std::string sound;
 	bool open;
 	unsigned int openTexture;
 public:
@@ -102,7 +116,6 @@ public:
 	void SetOpenTexture(std::string);
 	void action();
 	bool IsOpen() { return open; }
-	void SetSound(std::string);
 
 	void Open();
 	void ClearItem();
@@ -117,8 +130,8 @@ public:
 
 	ViewObj() { interactType = VIEW; }
 
-	float width;
-	float height;
+	float viewWidth;
+	float viewHeight;
 
 	void SetViewTexture(std::string);
 	unsigned int GetViewTexture();
@@ -133,17 +146,17 @@ public:
 	void action();
 };
 
+class SaveObj : public InteractableObj {
+public:
+	SaveObj() { interactType = SAVE; }
+	void action();
+};
+
 class NonPlayer : public InteractableObj {
 	bool giveItem;
 	bool talk;
 public:
-	NonPlayer(std::string name) { object_name = name; interactType = TALK; talk = false; }
-	void action();
-};
-
-class SaveObj : public InteractableObj {
-public:
-	SaveObj() { interactType = SAVE; }
+	NonPlayer(std::string name);
 	void action();
 };
 

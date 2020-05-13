@@ -58,6 +58,7 @@ void DeleteButton::action() {
 
 Numpad::Numpad(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
+	soundAfterComplete = "Puzzle_3_finish_sound";
 	dialogueAfterComplete = "backdoor_com_pass";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);
@@ -106,6 +107,7 @@ void Numpad::Update()
 	if (pass && !doneAction) {
 		ActionAfterPuzzle();
 		doneAction = true;
+		SoundManager::GetInstance()->playSound(SFX, soundAfterComplete);
 		TextBox::GetInstance()->setText(dialogueAfterComplete);
 	}
 	for (int i = 0; i < (*input).size(); i++)
@@ -180,6 +182,10 @@ void Numpad2::ActionAfterPuzzle()
 void Numpad::CompletePuzzle() {
 	pass = true;
 	ActionAfterPuzzle();
+}
+Numpad2::Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) {
+	soundAfterComplete = "Puzzle25DoorOpen";
+	dialogueAfterComplete.clear(); 
 }
 void Numpad2::CompletePuzzle() {
 	pass = true;
@@ -397,18 +403,18 @@ NumpadPuzzle_2::NumpadPuzzle_2()
 	c[2] = 6;
 	std::vector<int>* input = new std::vector<int>();
 
-	NumberButton* n1 = new NumberButton("Texture/Puzzle2/button1.png", "Texture/Puzzle2/button1press.png", 1, -126, 118, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n2 = new NumberButton("Texture/Puzzle2/button2.png", "Texture/Puzzle2/button2press.png", 2, 0, 118, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n3 = new NumberButton("Texture/Puzzle2/button3.png", "Texture/Puzzle2/button3press.png", 3, 126, 118, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n4 = new NumberButton("Texture/Puzzle2/button4.png", "Texture/Puzzle2/button4press.png", 4, -126, -9, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n5 = new NumberButton("Texture/Puzzle2/button5.png", "Texture/Puzzle2/button5press.png", 5, 0, -9, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n6 = new NumberButton("Texture/Puzzle2/button6.png", "Texture/Puzzle2/button6press.png", 6, 126, -9, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n7 = new NumberButton("Texture/Puzzle2/button7.png", "Texture/Puzzle2/button7press.png", 7, -126, -135, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n8 = new NumberButton("Texture/Puzzle2/button8.png", "Texture/Puzzle2/button8press.png", 8, 0, -135, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n9 = new NumberButton("Texture/Puzzle2/button9.png", "Texture/Puzzle2/button9press.png", 9, 126, -135, 118, -118, input, 3, "EmmaNumpad");
-	NumberButton* n0 = new NumberButton("Texture/Puzzle2/button0.png", "Texture/Puzzle2/button0press.png", 0, 0, -263, 118, -118, input, 3, "EmmaNumpad");
-	EnterButton* e = new EnterButton("Texture/Puzzle2/buttonenter.png", "Texture/Puzzle2/buttonenterpress.png", 126, -263, 118, -118, (Numpad*)puzzle, "EmmaNumpad");
-	DeleteButton* d = new DeleteButton("Texture/Puzzle2/buttondel.png", "Texture/Puzzle2/buttondelpress.png", -126, -263, 118, -118, (Numpad*)puzzle, "EmmaNumpad");
+	NumberButton* n1 = new NumberButton("Texture/Puzzle2/button1.png", "Texture/Puzzle2/button1press.png", 1, -126, 118, 118, -118, input, 3, "Click_Button");
+	NumberButton* n2 = new NumberButton("Texture/Puzzle2/button2.png", "Texture/Puzzle2/button2press.png", 2, 0, 118, 118, -118, input, 3, "Click_Button");
+	NumberButton* n3 = new NumberButton("Texture/Puzzle2/button3.png", "Texture/Puzzle2/button3press.png", 3, 126, 118, 118, -118, input, 3, "Click_Button");
+	NumberButton* n4 = new NumberButton("Texture/Puzzle2/button4.png", "Texture/Puzzle2/button4press.png", 4, -126, -9, 118, -118, input, 3, "Click_Button");
+	NumberButton* n5 = new NumberButton("Texture/Puzzle2/button5.png", "Texture/Puzzle2/button5press.png", 5, 0, -9, 118, -118, input, 3, "Click_Button");
+	NumberButton* n6 = new NumberButton("Texture/Puzzle2/button6.png", "Texture/Puzzle2/button6press.png", 6, 126, -9, 118, -118, input, 3, "Click_Button");
+	NumberButton* n7 = new NumberButton("Texture/Puzzle2/button7.png", "Texture/Puzzle2/button7press.png", 7, -126, -135, 118, -118, input, 3, "Click_Button");
+	NumberButton* n8 = new NumberButton("Texture/Puzzle2/button8.png", "Texture/Puzzle2/button8press.png", 8, 0, -135, 118, -118, input, 3, "Click_Button");
+	NumberButton* n9 = new NumberButton("Texture/Puzzle2/button9.png", "Texture/Puzzle2/button9press.png", 9, 126, -135, 118, -118, input, 3, "Click_Button");
+	NumberButton* n0 = new NumberButton("Texture/Puzzle2/button0.png", "Texture/Puzzle2/button0press.png", 0, 0, -263, 118, -118, input, 3, "Click_Button");
+	EnterButton* e = new EnterButton("Texture/Puzzle2/buttonenter.png", "Texture/Puzzle2/buttonenterpress.png", 126, -263, 118, -118, (Numpad*)puzzle, "Click_Button");
+	DeleteButton* d = new DeleteButton("Texture/Puzzle2/buttondel.png", "Texture/Puzzle2/buttondelpress.png", -126, -263, 118, -118, (Numpad*)puzzle, "Click_Button");
 
 	buttons.push_back(n1);
 	buttons.push_back(n2);

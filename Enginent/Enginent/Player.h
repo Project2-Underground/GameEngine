@@ -9,7 +9,7 @@
 #include "InteractObj.h"
 
 
-class Player : public ImageObject
+class Player : public InteractableObj
 {
 public:
 	int walkSpeed = 250;
@@ -21,6 +21,9 @@ public:
 	~Player();
 
 	void Update();
+
+	void action();
+	void UseItem(Item* item);
 
 	void SetNextPosition(glm::vec3);
 	void SetNextPosition(float x, float y);
@@ -34,7 +37,6 @@ public:
 	void CheckTarget(InteractableObj* target);
 	//void CheckWalkLimit();
 
-	Collider* col;
 	glm::vec3 next_position;
 private:
 	Collider* walkLimit;

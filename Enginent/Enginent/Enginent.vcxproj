@@ -85,6 +85,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="NumpadPuzzle.cpp" />
     <ClCompile Include="PauseWindow.cpp" />
+    <ClCompile Include="PuppetPuzzle.cpp" />
     <ClCompile Include="SaveLoadWindow.cpp" />
     <ClCompile Include="ScriptManager.cpp" />
     <ClCompile Include="SettingWindow.cpp" />

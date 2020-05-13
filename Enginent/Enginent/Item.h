@@ -14,6 +14,7 @@ class Item {
 protected:
 	std::vector<std::string> itemsAfterSeparated;
 	std::map<std::string, std::string> itemsAfterCombined;
+	std::map<std::string, std::string> dialogueAfterUsedWithObj;
 	unsigned int iTexture;
 	unsigned int viewTexture;
 public:
@@ -30,6 +31,10 @@ public:
 
 	void AddSeparatedItem(std::string separatedItem);
 	void AddItemsToCombine(std::string itemToCombine, std::string combineResult);
+	void AddDialogueAfterUsedWithObj(std::string objName, std::string dialogueName);
+	void ChangeDialogueAfterUsedWithObj(std::string objName, std::string dialogueName);
+
+	std::string GetDialogueAfterUseWith(std::string objName);
 
 	void Separate();
 	void Combine(Item* other);

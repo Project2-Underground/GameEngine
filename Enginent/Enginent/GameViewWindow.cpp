@@ -19,7 +19,6 @@ ViewWindow::ViewWindow() {
 	trigger = false;
 	itemSizeY = 450.0f;
 
-	//bgWindow->SetDisplay(false);
 	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
 }
 
@@ -66,8 +65,8 @@ void ViewWindow::SetViewItem(Item* item) {
 }
 
 void ViewWindow::SetViewItem(ViewObj* obj) {
-	float sizeX = obj->width;
-	float sizeY = obj->height;
+	float sizeX = obj->viewWidth;
+	float sizeY = obj->viewHeight;
 	if (abs(sizeY) > itemSizeY) {
 		float aspect = sizeX / sizeY;
 		sizeX = itemSizeY * aspect;

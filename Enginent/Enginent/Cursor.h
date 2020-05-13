@@ -30,4 +30,5 @@ class CursorUI : public UIObject {
 		void setCursor(InteractTypeList);
 		void EnableCursor(unsigned char, bool);
 		void ResetCursor();
+		bool IsEnable();
 };

@@ -21,8 +21,10 @@ void Door::action() {
 			SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
 			Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
 		}
-		if (GetTexture() != openTexture && openTexture != 0)
+		if (hasOpenTexture && openTexture != texture) {
 			SetTexture(openTexture);
+			hasOpenTexture = false;
+		}
 		else
 			gs->ChangeRoom(nextRoom, nextDoor);
 	}
@@ -38,6 +40,7 @@ void Door::action() {
 
 void Door::SetOpenTexture(std::string texture) {
 	openTexture = Game::GetInstance()->GetRenderer()->LoadTexture(texture);
+	hasOpenTexture = true;
 }
 
 void Door::SetPlayerNextX(float x) {
@@ -90,21 +93,6 @@ void SecretDoor::action() {
 	}
 	else {
 		InteractableObj::action();
-	}
-}
-void EliasDoor::action() {
-	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-	if (used) {
-		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
-		SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
-		gs->ChangeRoom(nextRoom, nextDoor);
-	}
-	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
-		UseItem(gs->GetInventory()->GetSelectedItem());
-		TextBox::GetInstance()->setText("EliasRoom_door_useKey");
-	}
-	else {
-		Door::action();
 	}
 }
 void ChangeLevelDoor::action() {

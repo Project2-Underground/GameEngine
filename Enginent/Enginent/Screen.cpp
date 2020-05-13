@@ -236,9 +236,9 @@ void GameScreen::Update() {
 			currentLevel->Update();
 			player->Update();
 		}
-		if (InventoryEnable && !phone->open)
-			inventory->Update();
 	}
+	//if (InventoryEnable && !phone->open)
+	inventory->Update();
 }
 
 void GameScreen::RightClick(glm::vec3 screen, glm::vec3 world) {
@@ -336,10 +336,27 @@ void GameScreen::ChangeLevel(int level) {
 	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 	currentLevel->GetCurrentRoom()->dialogue.clear();
 
-	if (level == 2) {
+	switch (level)
+	{
+	case 0:
+		SoundManager::GetInstance()->stopAllSounds();
+		//SoundManager::GetInstance()->playSound(BGM, "Mainfloor1");
+		// floor 1
+		break;
+	case 1:
+		// floor 2
+		SoundManager::GetInstance()->stopAllSounds();
+		SoundManager::GetInstance()->playSound(BGM, "Mainfloor2");
+		break;
+	case 2:
 		// floor 3
+		SoundManager::GetInstance()->stopAllSounds();
+		SoundManager::GetInstance()->playSound(BGM, "Mainfloor3");
 		// assuming the Butler::PHASE is already set using the dialogue
 		butler->Appear();
+		break;
+	default:
+		break;
 	}
 }
 

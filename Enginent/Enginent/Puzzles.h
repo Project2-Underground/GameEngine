@@ -8,6 +8,7 @@
 
 class PuzzleTemplate : public UIObject {
 protected:
+	std::string soundAfterComplete;
 	bool pass;
 	bool doneAction;
 	std::string dialogueAfterComplete;
@@ -282,7 +283,7 @@ public:
 
 class Numpad2 : public Numpad {
 public:
-	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY) :Numpad(texture, posX, posY, sizeX, sizeY) { dialogueAfterComplete.clear(); }
+	Numpad2(std::string texture, int posX, int posY, int sizeX, int sizeY);
 	void CompletePuzzle();
 	void ActionAfterPuzzle();
 };
@@ -293,7 +294,6 @@ class Puzzle {
 protected:
 	int currentLevel;
 	std::vector<UIObject*> UI;
-	UIObject* background;
 	PuzzleTemplate* puzzle;
 	bool enableInventory;
 public:
@@ -378,4 +378,20 @@ public:
 	void UpdateMouseState(glm::vec3, glm::vec3);
 	void CompletePuzzle();
 	~NumpadPuzzle_2();
+};
+
+class PuppetPuzzle : public Puzzle {
+	bool firstClick;
+public:
+	PuppetPuzzle();
+	void Render();
+	void Update() {}
+	void Reset() {}
+	bool CheckRequirements();
+	void LeftClick(glm::vec3, glm::vec3);
+	void LeftRelease(glm::vec3, glm::vec3);
+	void RightClick(glm::vec3, glm::vec3) {}
+	void RightRelease(glm::vec3, glm::vec3) {}
+	void UpdateMouseState(glm::vec3, glm::vec3) {};
+	void CompletePuzzle() {}
 };

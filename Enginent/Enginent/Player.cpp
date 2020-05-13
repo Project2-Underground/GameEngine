@@ -2,10 +2,12 @@
 #include "SquareMeshVbo.h"
 #include "Game.h"
 #include "TimeSystem.h"
+#include "MouseInput.h"
 #include <iostream>
 
 Player::Player()
 {
+	object_name = "Elias";
 	walkLimit = nullptr;
 	next_position = glm::vec3(this->pos);
 	anim = new Animator();
@@ -33,6 +35,27 @@ void Player::Update()
 	}
 	anim->Update();
 
+}
+
+void Player::action() {
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		UseItem(gs->GetInventory()->GetSelectedItem());
+	}
+}
+
+void Player::UseItem(Item* item) {
+	if (item) {
+		if (item->name == "Puzzle6_PillMorning") {
+			//std::cout << "item is used and removed from the inventory\n";
+			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			Inventory* i = gs->GetInventory();
+			TextBox::GetInstance()->setText(item->GetDialogueAfterUseWith(this->object_name));
+			i->RemoveItem(item);
+			i->UnselectItem();
+			gs->FindItem("Puzzle6_PillBedtime_withMEAT")->ChangeDialogueAfterUsedWithObj("Puzzle6_NPC2", "Building4_med2meatmed1");
+		}
+	}
 }
 
 void Player::Turn() {
@@ -102,7 +125,6 @@ void Player::StopWalking() {
 
 void Player::CheckTarget(InteractableObj* target) {
 	float distance = abs(target->getPos().x - pos.x) - abs(target->getSize().x * 0.5f);
-	//std::cout << distance << std::endl;
 	if (distance <= ACTION_DISTANCE) {
 		target->action();
 		StopWalking();
@@ -117,6 +139,7 @@ void Player::CheckTarget(InteractableObj* target) {
 		}
 	}
 	else {
+		SoundManager::GetInstance()->playSound(SFX, "Click");
 		TextBox::GetInstance()->setText("tooFar");
 		TextBox::GetInstance()->SetDisplay(true);
 		StopWalking();

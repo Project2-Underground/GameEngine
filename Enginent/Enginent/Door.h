@@ -7,10 +7,11 @@ protected:
 	std::string nextRoom;
 	std::string nextDoor;
 	unsigned int openTexture;
+	bool hasOpenTexture;
 public:
 	Door(std::string nextroom, std::string nextdoor);
 	void SetOpenTexture(std::string texture);
-	void SetOpenTexture(unsigned int texture) { openTexture = texture; }
+	void SetOpenTexture(unsigned int texture) { openTexture = texture; hasOpenTexture = true; }
 	void SetPlayerNextX(float x);
 	void Trigger();
 	void Open();
@@ -29,13 +30,6 @@ public:
 class SecretDoor : public Door {
 public:
 	SecretDoor(std::string room, std::string door) :Door(room, door) { used = false; interactType = NORMAL; }
-	void action();
-};
-
-class EliasDoor :public Door {
-	std::string dialogueAfterOpen;
-public:
-	EliasDoor(std::string room, std::string door) :Door(room, door) { }
 	void action();
 };
 

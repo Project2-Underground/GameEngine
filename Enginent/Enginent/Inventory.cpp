@@ -67,7 +67,7 @@ void Inventory::Update() {
 	move = true;
 	if (IsMouseCollide(popArea, realPos.x, realPos.y)) {
 		triggeredOpen = true;
-		direction = 1;
+		direction = 1;		// up
 	}
 	else {
 		direction = -1;
@@ -82,8 +82,10 @@ void Inventory::Update() {
 			tab->SetPosition(glm::vec3(tab->getPos().x, minHeight, 1.0f));
 		}
 		else {
-			float vel = POPUP_SPEED * (float)direction;
-			tab->SetPosition(glm::vec3(tab->getPos().x, tab->getPos().y + vel, 1.0f));
+			if ((direction == 1 && Game::GetInstance()->GetCursor()->IsEnable()) || direction == -1) {
+				float vel = POPUP_SPEED * (float)direction;
+				tab->SetPosition(glm::vec3(tab->getPos().x, tab->getPos().y + vel, 1.0f));
+			}
 		}
 		SetAllBoxesPos(tab->getPos().y);
 		popArea->setNewPos(glm::vec3(popArea->getPosition().x, tab->getPos().y, 1.0f));
@@ -144,19 +146,23 @@ InventoryBoxButton* Inventory::GetInventoryBox(int index) {
 }
 
 void Inventory::LeftClick(float x, float y) {
-	for (auto *ib : InventoryBoxes) {
-		ib->checkColliderPressed(x, y);
+	if (!move) {
+		for (auto* ib : InventoryBoxes) {
+			ib->checkColliderPressed(x, y);
+		}
+		separateButton->checkColliderPressed(x, y);
+		combineButton->checkColliderPressed(x, y);
 	}
-	separateButton->checkColliderPressed(x, y);
-	combineButton->checkColliderPressed(x, y);
 }
 
 void Inventory::LeftRelease(float x, float y) {
-	for (auto* ib : InventoryBoxes) {
-		ib->checkColliderReleased(x, y);
+	if (!move) {
+		for (auto* ib : InventoryBoxes) {
+			ib->checkColliderReleased(x, y);
+		}
+		separateButton->checkColliderReleased(x, y);
+		combineButton->checkColliderReleased(x, y);
 	}
-	separateButton->checkColliderReleased(x, y);
-	combineButton->checkColliderReleased(x, y);
 }
 
 void Inventory::AddItem(Item* item) {

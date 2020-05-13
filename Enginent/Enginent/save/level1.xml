@@ -28,8 +28,6 @@
 		</interactObj>
 		<doors>
 			<EliasRoomInnerDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
-				<EliasDoor />
-				<openDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png"/>
 				<key name="keyCard"/>
 			</EliasRoomInnerDoor>
 		</doors>
@@ -149,7 +147,7 @@
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Emma/Emma_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-				<item name="Puzzle3_Pic1" scriptHandleItem="false"/>
+				<item name="Puzzle3_Pic1"/>
 			</Emma>
 		</NPCs>
 		

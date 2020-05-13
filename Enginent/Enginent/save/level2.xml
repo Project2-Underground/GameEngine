@@ -37,6 +37,7 @@
 				<key name="NONE"/>
 			</MainFloor2_Building2_Door>
 			<MainFloor2_Building3_Door texture="Texture/level2/MainFloor2/MainFloor2_Building3_Door.png" sizeX="369" sizeY="387" posX="3562" posY="2" next_room="" next_door="" layer="0" dialogue="Floor2_Building3">
+				<key name="NONE"/>
 			</MainFloor2_Building3_Door>
 			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="Floor2_Building4">
 			</MainFloor2_Building4_Door>
@@ -169,30 +170,208 @@
 			<fg texture="Texture/level2/Building3/Building3_ForeGround.png" sizeX="1326" sizeY="254" posX="29.5" posY="-233" layer="0"/>
 		</foreground>
 	</Building3>
-	<Building4Floor1 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90">
+	<Building4Puzzle6Floor1 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87">
 		<background>
-			<bg texture="Texture/level2/Building3/Building3_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
+			<Puzzle6_AltarwithPills  texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" sizeX="197" sizeY="236" posX="-165" posY="-85" type="13" layer="0" dialogue="">
+				<item name="Puzzle6_PillAfternoon" scriptHandleItem="true"/>
+			</Puzzle6_AltarwithPills>
 		</interactObj>
 		<doors>
-			<Building4InnerDoor texture="NONE" sizeX="124" sizeY="506" posX="-708.5" posY="-75" next_room="MainFloor2" next_door="MainFloor2_Building3_Door" layer="0" dialogue="">
+			<Building4Puzzle6Floor1Out texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="MainFloor2" next_door="MainFloor2_Building4_Door" layer="0" dialogue="">
 				<Building4InnerDoor/>
-				<playerNextX value="-619"/>
-			</Building4InnerDoor>
+			</Building4Puzzle6Floor1Out>
+			<Building4Puzzle6Floor1Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="Building4Puzzle6Floor2" next_door="Building4Puzzle6Floor2Down" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Building4Puzzle6Floor1Up>
 		</doors>
 		<NPCs>
-			<Building3_NPC4 sizeX="133" sizeY="376" posX="-65.5" posY="-42" layer="0" dialogue="">
+			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="-402" posY="-37" layer="0" dialogue="">
 				<Animations>
-					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Building3_NPC4>
+			</Puzzle6_NPC1>
+			<Puzzle6_NPC2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC2>
 		</NPCs>
 		<foreground>
-			
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
 		</foreground>
-	</Building4Floor1>
+	</Building4Puzzle6Floor1>
+	<Building4Puzzle6Floor2 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87">
+		<background>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Puzzle6_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
+				<clicked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetWithAlcohol.png"/>
+				<picked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetOpen.png"/>
+				<item name="Puzzle6_Alcohol" scriptHandleItem="false"/>
+				<sound name="OpenCabinet"/>
+			</Puzzle6_Cabinet>
+		</interactObj>
+		<doors>
+			<Building4Puzzle6Floor2Down texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="Building4Puzzle6Floor1" next_door="Building4Puzzle6Floor1Up" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Building4Puzzle6Floor2Down>
+			<Building4Puzzle6Floor2Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="Building4Puzzle6Floor3" next_door="Building4Puzzle6Floor3Down" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Building4Puzzle6Floor2Up>
+		</doors>
+		<NPCs>
+			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="-402" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC1>
+			<Puzzle6_NPC2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC2>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
+		</foreground>
+	</Building4Puzzle6Floor2>
+	<Building4Puzzle6Floor3 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87">
+		<background>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Puzzle6_WallTorch texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" sizeX="306" sizeY="350" posX="-367" posY="-28" type="3" layer="1">
+				<key name="Puzzle6_StickCloth_Wet"/>
+				<used texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png">
+					<newItemAfterUsed name="Puzzle6_StickonFIRE"/>
+				</used>
+			</Puzzle6_WallTorch>
+			<Puzzle6_LockedDoor texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" sizeX="254" sizeY="378" posX="-66" posY="5" type="2" layer="1"/>
+			<Puzzle6_Puppet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png" sizeX="269" sizeY="315" posX="403" posY="-79" type="2" layer="1">
+				<key name="Puzzle6_StickonFIRE"/>
+				<used texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_BurntPuppet.png">
+					<positionAfterUse x="403" y="-95"/>
+				</used>
+			</Puzzle6_Puppet>
+		</interactObj>
+		<doors>
+			<Building4Puzzle6Floor3Down texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="Building4Puzzle6Floor2" next_door="Building4Puzzle6Floor2Up" layer="0" dialogue="">
+			</Building4Puzzle6Floor3Down>
+			<Building4Puzzle6Floor3Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="" next_door="" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Building4Puzzle6Floor3Up>
+		</doors>
+		<NPCs>
+			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="163" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC1>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
+		</foreground>
+	</Building4Puzzle6Floor3>
+	<Building4Puzzle7Floor1 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87" dialogue="puzzle7_start">
+		<background>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Puzzle7_WallTorch texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" sizeX="306" sizeY="350" posX="-367" posY="-28" type="3" layer="1">
+				<key name="Puzzle7_Water"/>
+				<used texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_PerWallTorch.png"/>
+			</Puzzle7_WallTorch>
+			<Puzzle7_StabbedPuppet texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" sizeX="269" sizeY="315" posX="403" posY="-79" type="9" layer="1">
+				<puzzle name="PuppetPuzzle"/>
+			</Puzzle7_StabbedPuppet>
+			<Puzzle7_LockedDoor texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" sizeX="254" sizeY="378" posX="-66" posY="5" type="2" layer="1" dialogue="">
+				<key name="Puzzle7_CircularSaw"/>
+			</Puzzle7_LockedDoor>
+			<Puzzle7_EyeKeyFalse1 texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png" sizeX="37" sizeY="46" posX="-342.5" posY="-42" type="1" layer="1"/>
+		</interactObj>
+		<doors>
+			<Building4Puzzle7Floor1Out texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="" next_door="" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Building4Puzzle7Floor1Out>
+			<Building4Puzzle7Floor1Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="Building4Puzzle7Floor2" next_door="Building4Puzzle7Floor2Down" layer="0" dialogue="">
+			</Building4Puzzle7Floor1Up>
+		</doors>
+		<NPCs>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
+		</foreground>
+	</Building4Puzzle7Floor1>
+	<Building4Puzzle7Floor2 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87">
+		<background>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Puzzle7_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
+				<clicked texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_CabinetWithWater.png"/>
+				<picked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetOpen.png"/>
+				<item name="Puzzle7_Water" scriptHandleItem="false"/>
+				<sound name="OpenCabinet"/>
+			</Puzzle7_Cabinet>
+		</interactObj>
+		<doors>
+			<Building4Puzzle7Floor2Down texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="Building4Puzzle7Floor1" next_door="Building4Puzzle7Floor1Up" layer="0" dialogue="">
+			</Building4Puzzle7Floor2Down>
+			<Building4Puzzle7Floor2Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="Building4Puzzle7Floor3" next_door="Building4Puzzle7Floor3Down" layer="0" dialogue="">
+			</Building4Puzzle7Floor2Up>
+		</doors>
+		<NPCs>
+			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="293" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC1>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
+		</foreground>
+	</Building4Puzzle7Floor2>
+	<Building4Puzzle7Floor3 left_limit="-950" right_limit="950" top_limit="360" bottom_limit="-360" y="-87">
+		<background>
+			<bg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Template.png" sizeX="2144" sizeY="720" posX="0" posY="0" layer="0"/>
+		</background>
+		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
+		<interactObj>
+			<Puzzle7_Altar1 texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" sizeX="179" sizeY="209" posX="-243" posY="-98" type="3" layer="1" dialogue="puzzle7_altar1" dialogue_2="puzzle7_altar1_after">
+			</Puzzle7_Altar1>
+			<Puzzle7_Altar2 texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" sizeX="179" sizeY="209" posX="179" posY="-98" type="3" layer="1">
+				<key name="Puzzle7_Knife"/>
+				<used texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png">
+					<newItemAfterUsed name="Puzzle7_EarKeyFalse1"/>
+				</used>
+			</Puzzle7_Altar2>
+		</interactObj>
+		<doors>
+			<Building4Puzzle7Floor3Down texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="-638" posY="0" next_room="Building4Puzzle7Floor2" next_door="Building4Puzzle7Floor2Up" layer="0" dialogue="">
+			</Building4Puzzle7Floor3Down>
+			<Building4Puzzle7Floor3Up texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" sizeX="196" sizeY="368" posX="651" posY="0" next_room="" next_door="" layer="0" dialogue="">
+			</Building4Puzzle7Floor3Up>
+		</doors>
+		<NPCs>
+			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="293" posY="-37" layer="0" dialogue="">
+				<Animations>
+					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+			</Puzzle6_NPC1>
+		</NPCs>
+		<foreground>
+			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
+		</foreground>
+	</Building4Puzzle7Floor3>
 	<BackAlley left_limit="-680" right_limit="680" top_limit="360" bottom_limit="-360" y="-95">
 		<background>
 			<bg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>

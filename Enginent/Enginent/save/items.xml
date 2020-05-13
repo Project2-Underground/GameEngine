@@ -3,6 +3,11 @@
 <Items>
 	<keyCard v_texture="Texture/ViewItem/Elias_Room_IDCard(V).png" i_texture="Texture/level1/EliasRoom/Elias_Room_IDCard(I).png" sizeX="1080" sizeY="1080" dialogue="">
 		<multipleUse/>
+		<dialogueAferUseWithObjs>
+			<EliasRoomInnerDoor dialogue="EliasRoom_door_useKey"/>
+			<NumpadAfterUnlock dialogue="backdoor_card"/>
+			<bookShelfPuzzle2 dialogue="Hall_Bookshelf_R2"/>
+		</dialogueAferUseWithObjs>
 	</keyCard>
 	
 	<!-- Puzzle 1 -->
@@ -27,45 +32,50 @@
 	<Puzzle3_Pic2 i_texture = "Texture/Puzzle3/Puzzle3_Pic2.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic2.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
 	<Puzzle3_Pic3 i_texture = "Texture/Puzzle3/Puzzle3_Pic3.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic3.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
 	<Puzzle3_Pic4 i_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" v_texture = "Texture/Puzzle3/Puzzle3_Pic4.png" sizeX="640" sizeY="720" IsizeX="640" IsizeY="720"/>
-	
-	<!-- Puzzle 6 -->
-	<Puzzle6_Alcohol i_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773"/>
-	<Puzzle6_Cloth i_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719"/>
-	<Puzzle6_MEAT i_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" v_texture = "Texture/Puzzle6/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157"/>
-	<Puzzle6_Paper i_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" v_texture = "Texture/Puzzle6/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713"/>
-	
-	<Puzzle6_PillAfternoon_sep1 i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep1.png" sizeX="72" sizeY="64" IsizeX="72" IsizeY="64">
+
+	<!-- Puzzle 6 F1 -->
+	<Puzzle6_MEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_MEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157">
+	</Puzzle6_MEAT>
+	<Puzzle6_Paper i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713">
+		<dialogueAferUseWithObjs>
+			<Puzzle6_NPC1 dialogue="puzzle6_2_NPC1_pres"/>
+		</dialogueAferUseWithObjs>
+	</Puzzle6_Paper>
+	<Puzzle6_PillAfternoon_sep1 i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep1.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep1.png" sizeX="72" sizeY="64" IsizeX="72" IsizeY="64">
 		<combine>
 			<c itemToCombine="Puzzle6_PillAfternoon_sep2" afterCombined="Puzzle6_PillAfternoon"/>
 			<c itemToCombine="Puzzle6_PillEvening_sep2" afterCombined="Puzzle6_PillBedtime"/>
 		</combine>
 	</Puzzle6_PillAfternoon_sep1>
-	<Puzzle6_PillAfternoon_sep2 i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep2.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon_sep2.png" sizeX="72" sizeY="63" IsizeX="72" IsizeY="63">
+	<Puzzle6_PillAfternoon_sep2 i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep2.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep2.png" sizeX="72" sizeY="63" IsizeX="72" IsizeY="63">
 		<combine>
 			<c itemToCombine="Puzzle6_PillAfternoon_sep1" afterCombined="Puzzle6_PillAfternoon"/>
 			<c itemToCombine="Puzzle6_PillEvening_sep1" afterCombined="Puzzle6_PillMorning"/>
 		</combine>
 	</Puzzle6_PillAfternoon_sep2>
-	<Puzzle6_PillEvening_sep1 i_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep1.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep1.png" sizeX="73" sizeY="67" IsizeX="73" IsizeY="67">
+	<Puzzle6_PillEvening_sep1 i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening_sep1.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening_sep1.png" sizeX="73" sizeY="67" IsizeX="73" IsizeY="67">
 		<combine>
 			<c itemToCombine="Puzzle6_PillEvening_sep2" afterCombined="Puzzle6_PillEvening"/>
 			<c itemToCombine="Puzzle6_PillAfternoon_sep2" afterCombined="Puzzle6_PillMorning"/>
 		</combine>
 	</Puzzle6_PillEvening_sep1>
-	<Puzzle6_PillEvening_sep2 i_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep2.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening_sep2.png" sizeX="76" sizeY="70" IsizeX="76" IsizeY="70">
+	<Puzzle6_PillEvening_sep2 i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening_sep2.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening_sep2.png" sizeX="76" sizeY="70" IsizeX="76" IsizeY="70">
 		<combine>
 			<c itemToCombine="Puzzle6_PillAfternoon_sep1" afterCombined="Puzzle6_PillBedtime"/>
 			<c itemToCombine="Puzzle6_PillEvening_sep1" afterCombined="Puzzle6_PillEvening"/>
 		</combine>
 	</Puzzle6_PillEvening_sep2>
 	
-	<Puzzle6_PillAfternoon i_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon.png" v_texture = "Texture/Puzzle6/Puzzle6_PillAfternoon.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+	<Puzzle6_PillAfternoon i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
 		<separate>
 			<Puzzle6_PillAfternoon_sep1/>
 			<Puzzle6_PillAfternoon_sep2/>
 		</separate>
 	</Puzzle6_PillAfternoon>
-	<Puzzle6_PillBedtime i_texture = "Texture/Puzzle6/Puzzle6_PillBedtime.png" v_texture = "Texture/Puzzle6/Puzzle6_PillBedtime.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
+	<Puzzle6_PillBedtime i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
+		<dialogueAferUseWithObjs>
+			<Elias dialogue="Building4_med2"/>
+		</dialogueAferUseWithObjs>
 		<separate>
 			<Puzzle6_PillAfternoon_sep1/>
 			<Puzzle6_PillEvening_sep2/>
@@ -74,19 +84,179 @@
 			<c itemToCombine="Puzzle6_MEAT" afterCombined="Puzzle6_PillBedtime_withMEAT"/>
 		</combine>
 	</Puzzle6_PillBedtime>
-	<Puzzle6_PillEvening i_texture = "Texture/Puzzle6/Puzzle6_PillEvening.png" v_texture = "Texture/Puzzle6/Puzzle6_PillEvening.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+	<Puzzle6_PillEvening i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillEvening.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
 		<separate>
 			<Puzzle6_PillEvening_sep1/>
 			<Puzzle6_PillEvening_sep2/>
 		</separate>
 	</Puzzle6_PillEvening>
-	<Puzzle6_PillMorning i_texture = "Texture/Puzzle6/Puzzle6_PillMorning.png" v_texture = "Texture/Puzzle6/Puzzle6_PillMorning.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
+	<Puzzle6_PillMorning i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillMorning.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillMorning.png" sizeX="124" sizeY="88" IsizeX="124" IsizeY="88">
 		<separate>
 			<Puzzle6_PillEvening_sep1/>
 			<Puzzle6_PillAfternoon_sep2/>
 		</separate>
+		<dialogueAferUseWithObjs>
+			<Elias dialogue="Building4_med1"/>
+		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>
-	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/Puzzle6/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/Puzzle6/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86"/>
+	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
+		<dialogueAferUseWithObjs>
+			<Puzzle6_NPC2 dialogue="Building4_med2meat"/>
+		</dialogueAferUseWithObjs>
+	</Puzzle6_PillBedtime_withMEAT>
+	
+	
+	<!-- Puzzle 6 F2 -->
+	<Puzzle6_Alcohol i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773">
+		<dialogueAferUseWithObjs>
+			<Puzzle6_NPC2 dialogue="puzzle6_2_NPC2_liq"/>
+		</dialogueAferUseWithObjs>
+	</Puzzle6_Alcohol>
+	<Puzzle6_Cloth i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719">
+	</Puzzle6_Cloth>
+	
+	<!-- Puzzle 6 F3 -->
+	<Puzzle6_Stick i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Stick(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Stick.png" sizeX="782" sizeY="783" IsizeX="358" IsizeY="689">
+		<combine>
+			<c itemToCombine="Puzzle6_Cloth" afterCombined="Puzzle6_StickCloth"/>
+		</combine>
+	</Puzzle6_Stick>
+	<Puzzle6_StickCloth i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickCloth(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickCloth.png" sizeX="782" sizeY="783" IsizeX="383" IsizeY="696">
+		<combine>
+			<c itemToCombine="Puzzle6_Alcohol" afterCombined="Puzzle6_StickCloth_Wet"/>
+		</combine>
+	</Puzzle6_StickCloth>
+	<Puzzle6_StickCloth_Wet i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickCloth_Wet(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickCloth_Wet.png" sizeX="782" sizeY="783" IsizeX="366" IsizeY="696">
+	</Puzzle6_StickCloth_Wet>
+	<Puzzle6_StickonFIRE i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickonFIRE(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_StickonFIRE.png" sizeX="782" sizeY="783" IsizeX="533" IsizeY="780">
+		<dialogueAferUseWithObjs>
+			<Puzzle6_Puppet dialogue="puzzle6_3_puppettorch"/>
+		</dialogueAferUseWithObjs>
+	</Puzzle6_StickonFIRE>
+	
+	
+	<!-- Puzzle 7 F1 -->
+	<Puzzle7_CircularSaw i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_CircularSaw_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_CircularSaw_(I).png" sizeX="477" sizeY="453" IsizeX="477" IsizeY="453">
+		<dialogueAferUseWithObjs>	
+			<Puzzle7_LockedDoor dialogue=""/>
+		</dialogueAferUseWithObjs>
+	</Puzzle7_CircularSaw>
+	<Puzzle7_Knife i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Knife_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Knife_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565" dialogue="puzzle7_altar2" dialogue_2="puzzle7_altar2">
+		<dialogueAferUseWithObjs>	
+			<Puzzle7_Altar2 dialogue="puzzle7_altar2_knife"/>
+		</dialogueAferUseWithObjs>
+	</Puzzle7_Knife>
+	<Puzzle7_MedPrescript i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MedPrescript_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MedPrescript_(I).png" sizeX="586" sizeY="592" IsizeX="586" IsizeY="592">
+	</Puzzle7_MedPrescript>
+	<Puzzle7_Water i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Water_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Water_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+	</Puzzle7_Water>
+	
+	<!-- All combined ear keys -->
+	<Puzzle7_EarKey i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKey_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKey_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_EarKeyHandle/>
+			<Puzzle7_EarKeySep/>
+		</separate>
+	</Puzzle7_EarKey>
+	<Puzzle7_EarKeyFalse1 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyFalse1_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyFalse1_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_EarKeyHandle/>
+			<Puzzle7_MouthKeySep/>
+		</separate>
+	</Puzzle7_EarKeyFalse1>
+	<Puzzle7_EarKeyFalse2 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyFalse2_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyFalse2_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_EarKeyHandle/>
+			<Puzzle7_EyeKeySep/>
+		</separate>
+	</Puzzle7_EarKeyFalse2>
+	
+	<!-- All combined mouth keys -->
+	<Puzzle7_MouthKey i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKey_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKey_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_MouthKeyHandle/>
+			<Puzzle7_MouthKeySep/>
+		</separate>
+	</Puzzle7_MouthKey>
+	<Puzzle7_MouthKeyFalse1 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyFalse1_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyFalse1_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_MouthKeyHandle/>
+			<Puzzle7_EyeKeySep/>
+		</separate>
+	</Puzzle7_MouthKeyFalse1>
+	<Puzzle7_MouthKeyFalse2 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyFalse2_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyFalse2_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_MouthKeyHandle/>
+			<Puzzle7_EarKeySep/>
+		</separate>
+	</Puzzle7_MouthKeyFalse2>
+	
+	<!-- All combined eye keys -->
+	<Puzzle7_EyeKey i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKey_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKey_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_EyeKeyHandle/>
+			<Puzzle7_EyeKeySep/>
+		</separate>
+	</Puzzle7_EyeKey>
+	<Puzzle7_EyeKeyFalse1 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyFalse1_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyFalse1_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<separate>
+			<Puzzle7_EyeKeyHandle/>
+			<Puzzle7_EarKeySep/>
+		</separate>
+	</Puzzle7_EyeKeyFalse1>
+	<Puzzle7_EyeKeyFalse2 i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyFalse2_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyFalse2_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+	<separate>
+			<Puzzle7_EyeKeyHandle/>
+			<Puzzle7_MouthKeySep/>
+		</separate>
+	</Puzzle7_EyeKeyFalse2>
+
+	<!-- All handles -->
+	<Puzzle7_EarKeyHandle i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyHandle_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeyHandle_(I).png" sizeX="192" sizeY="196" IsizeX="192" IsizeY="196">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeySep" afterCombined="Puzzle7_EarKey"/>
+			<c itemToCombine="Puzzle7_EyeKeySep" afterCombined="Puzzle7_EarKeyFalse2"/>
+			<c itemToCombine="Puzzle7_MouthKeySep" afterCombined="Puzzle7_EarKeyFalse1"/>
+		</combine>
+	</Puzzle7_EarKeyHandle>
+	<Puzzle7_EyeKeyHandle i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyHandle_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeyHandle_(I).png" sizeX="291" sizeY="196" IsizeX="291" IsizeY="196">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeySep" afterCombined="Puzzle7_EyeKeyFalse1"/>
+			<c itemToCombine="Puzzle7_EyeKeySep" afterCombined="Puzzle7_EyeKey"/>
+			<c itemToCombine="Puzzle7_MouthKeySep" afterCombined="Puzzle7_EyeKeyFalse2"/>
+		</combine>
+	</Puzzle7_EyeKeyHandle>
+	<Puzzle7_MouthKeyHandle i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyHandle_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeyHandle_(I).png" sizeX="291" sizeY="196" IsizeX="291" IsizeY="196">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeySep" afterCombined="Puzzle7_MouthKeyFalse2"/>
+			<c itemToCombine="Puzzle7_EyeKeySep" afterCombined="Puzzle7_MouthKeyFalse1"/>
+			<c itemToCombine="Puzzle7_MouthKeySep" afterCombined="Puzzle7_MouthKey"/>
+		</combine>
+	</Puzzle7_MouthKeyHandle>
+	
+	<!-- All key seps -->
+	<Puzzle7_EarKeySep i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeySep_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EarKeySep_(I).png" sizeX="263" sizeY="407" IsizeX="263" IsizeY="407">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeyHandle" afterCombined="Puzzle7_EarKey"/>
+			<c itemToCombine="Puzzle7_EyeKeyHandle" afterCombined="Puzzle7_EyeKeyFalse1"/>
+			<c itemToCombine="Puzzle7_MouthKeyHandle" afterCombined="Puzzle7_MouthKeyFalse2"/>
+		</combine>
+	</Puzzle7_EarKeySep>
+	<Puzzle7_EyeKeySep i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeySep_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_EyeKeySep_(I).png" sizeX="263" sizeY="407" IsizeX="263" IsizeY="407">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeyHandle" afterCombined="Puzzle7_EarKeyFalse2"/>
+			<c itemToCombine="Puzzle7_EyeKeyHandle" afterCombined="Puzzle7_EyeKey"/>
+			<c itemToCombine="Puzzle7_MouthKeyHandle" afterCombined="Puzzle7_MouthKeyFalse1"/>
+		</combine>
+	</Puzzle7_EyeKeySep>
+	<Puzzle7_MouthKeySep i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeySep_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MouthKeySep_(I).png" sizeX="263" sizeY="407" IsizeX="263" IsizeY="407">
+		<combine>
+			<c itemToCombine="Puzzle7_EarKeyHandle" afterCombined="Puzzle7_EarKeyFalse1"/>
+			<c itemToCombine="Puzzle7_EyeKeyHandle" afterCombined="Puzzle7_EyeKeyFalse2"/>
+			<c itemToCombine="Puzzle7_MouthKeyHandle" afterCombined="Puzzle7_MouthKey"/>
+		</combine>
+	</Puzzle7_MouthKeySep>
+	
 	
 </Items>
 
