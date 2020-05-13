@@ -17,29 +17,22 @@ void PuppetPuzzle::Render() {
 	renderer->Render(UI);
 }
 bool PuppetPuzzle::CheckRequirements() {
-	if (!firstClick) {
-		TextBox::GetInstance()->setText("puzzle7_puppet");
-		firstClick = true;
-		return false;
+	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
+	bool hasEyeKey = i->IsItemInInventory("Puzzle7_EyeKey");
+	bool hasEarKey = i->IsItemInInventory("Puzzle7_EarKey");
+	bool hasMouthKey = i->IsItemInInventory("Puzzle7_MouthKey");
+
+	if (hasEarKey && hasEyeKey && hasMouthKey) {
+		i->RemoveItem("Puzzle7_EyeKey");
+		i->RemoveItem("Puzzle7_EarKey");
+		i->RemoveItem("Puzzle7_MouthKey");
+		i->RemoveItem("Puzzle7_MedPrescript");
+		TextBox::GetInstance()->setText("puzzle7_puppet_item");
+		return true;
 	}
 	else {
-		Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-		bool hasEyeKey = i->IsItemInInventory("Puzzle7_EyeKey");
-		bool hasEarKey = i->IsItemInInventory("Puzzle7_EarKey");
-		bool hasMouthKey = i->IsItemInInventory("Puzzle7_MouthKey");
-
-		if (hasEarKey && hasEyeKey && hasMouthKey) {
-			i->RemoveItem("Puzzle7_EyeKey");
-			i->RemoveItem("Puzzle7_EarKey");
-			i->RemoveItem("Puzzle7_MouthKey");
-			i->RemoveItem("Puzzle7_MedPrescript");
-			TextBox::GetInstance()->setText("puzzle7_puppet_after");
-			return false;
-		}
-		else {
-			TextBox::GetInstance()->setText("puzzle7_puppet_after");
-			return true;
-		}
+		TextBox::GetInstance()->setText("puzzle7_puppet_after");
+		return true;
 	}
 }
 void PuppetPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world) {

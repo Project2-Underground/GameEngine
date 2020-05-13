@@ -109,7 +109,7 @@ void InteractableObj::UseItem(Item* item) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		Inventory* i = gs->GetInventory();
 		used = true;
-		TextBox::GetInstance()->setText(item->GetDialogueAfterUseWith(this->object_name));
+		item->DialogueHandle(this->object_name);
 		if (hasPositionAfterUsed)
 			SetPosition(positionAfterUse);
 		if (hasUsedTexture)
@@ -301,19 +301,29 @@ void NonPlayer::action()
 {
 	Phone::GetInstance()->AddNPCInteracted(object_name);
 	//std::cout << interactType << std::endl;
-	if (talk == true)
-	{
-		if (dialogue_after != "")
-			dialogue_name = dialogue_after;
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		UseItem(gs->GetInventory()->GetSelectedItem());
+		dialogue_name = dialogue_after_use;
 	}
-	if (dialogue_name != "")
-	{
-		TextBox::GetInstance()->setText(this->dialogue_name, talk);
-		if (!talk)
+	else {
+		if (talk == true)
 		{
-			talk = true;
+			if (dialogue_after != "")
+				dialogue_name = dialogue_after;
 		}
-		TextBox::GetInstance()->SetDisplay(true);
+		if (dialogue_name != "")
+		{
+			TextBox::GetInstance()->setText(this->dialogue_name, talk);
+			if (!talk)
+			{
+				talk = true;
+			}
+			TextBox::GetInstance()->SetDisplay(true);
+			if (dialogue_name == "Floor2_Mask4_2" || dialogue_name == "Floor2_Mask7_2"
+				|| dialogue_name == "Floor2_Mask5_2" || dialogue_name == "Floor2_Mask6_2")
+				Game::GetInstance()->GetPlayer()->TriggerRouteB++;
+		}
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
 	if (object_name == "Emma") {
@@ -332,7 +342,14 @@ void PuzzleObj::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	Puzzle* p = gs->FindPuzzle(puzzleName);
 	//std::cout << " PuzzleObj::action() used " << used << std::endl;
-	if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		UseItem(gs->GetInventory()->GetSelectedItem());
+		if (used) {
+			dialogue_name = dialogue_after_use;
+			dialogue_after_use.clear();
+		}
+	}
+	else if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
 		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			dialogue_name = "";
@@ -342,10 +359,6 @@ void PuzzleObj::action() {
 			//TextBox::GetInstance()->setText(p->prepTalk);
 			gs->OpenPuzzle(puzzleName);
 		}
-	}
-	else if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
-		UseItem(gs->GetInventory()->GetSelectedItem());
-		dialogue_name = dialogue_after_use;
 	}
 	else {
 		InteractableObj::action();

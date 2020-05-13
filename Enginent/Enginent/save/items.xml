@@ -74,7 +74,7 @@
 	</Puzzle6_PillAfternoon>
 	<Puzzle6_PillBedtime i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
 		<dialogueAferUseWithObjs>
-			<Elias dialogue="Building4_med2"/>
+			<Puzzle6_NPC2 dialogue="Building4_med2"/>
 		</dialogueAferUseWithObjs>
 		<separate>
 			<Puzzle6_PillAfternoon_sep1/>
@@ -96,7 +96,9 @@
 			<Puzzle6_PillAfternoon_sep2/>
 		</separate>
 		<dialogueAferUseWithObjs>
-			<Elias dialogue="Building4_med1"/>
+			<Elias dialogue="Building4_med1">
+				<Puzzle6_PillBedtime objName="Puzzle6_NPC2" dialogue="Building4_med2meatmed1"/>
+			</Elias>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>
 	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
@@ -138,7 +140,8 @@
 	<!-- Puzzle 7 F1 -->
 	<Puzzle7_CircularSaw i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_CircularSaw_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_CircularSaw_(I).png" sizeX="477" sizeY="453" IsizeX="477" IsizeY="453">
 		<dialogueAferUseWithObjs>	
-			<Puzzle7_LockedDoor dialogue=""/>
+			<Puzzle7_LockedDoor dialogue="puzzle7_lockeddoor_item"/>
+			<Puzzle7_StabbedPuppet dialogue="puzzle7_puppet_chainsaw"/>
 		</dialogueAferUseWithObjs>
 	</Puzzle7_CircularSaw>
 	<Puzzle7_Knife i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Knife_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Knife_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565" dialogue="puzzle7_altar2" dialogue_2="puzzle7_altar2">
@@ -149,6 +152,9 @@
 	<Puzzle7_MedPrescript i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MedPrescript_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_MedPrescript_(I).png" sizeX="586" sizeY="592" IsizeX="586" IsizeY="592">
 	</Puzzle7_MedPrescript>
 	<Puzzle7_Water i_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Water_(I).png" v_texture = "Texture/level2/Building4/Puzzle7/ItemView/Puzzle7_Water_(I).png" sizeX="477" sizeY="565" IsizeX="477" IsizeY="565">
+		<dialogueAferUseWithObjs>	
+			<Puzzle7_WallTorch dialogue="puzzle7_torch_key"/>
+		</dialogueAferUseWithObjs>
 	</Puzzle7_Water>
 	
 	<!-- All combined ear keys -->

@@ -6,4 +6,9 @@
 			<Building1_FloorDoorOpen/>
 		</Building1_FloorDoorClose>
 	</Building1>
+	<Building2>
+		<Building2_Computer1>
+			<Building2_Door1/>
+		</Building2_Computer1>
+	</Building2>
 </Objects>

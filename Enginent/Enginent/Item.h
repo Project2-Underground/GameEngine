@@ -10,11 +10,19 @@ enum ItemType {
 	NONE
 };
 
+struct NextDialogueChange
+{
+	std::string otherObjName;
+	std::string otherItemName;
+	std::string dialogue;
+};
+
 class Item {
 protected:
 	std::vector<std::string> itemsAfterSeparated;
 	std::map<std::string, std::string> itemsAfterCombined;
 	std::map<std::string, std::string> dialogueAfterUsedWithObj;
+	std::map<std::string, std::vector<NextDialogueChange>> changeOtherDialogueAfterUsedWithObj;
 	unsigned int iTexture;
 	unsigned int viewTexture;
 public:
@@ -33,6 +41,9 @@ public:
 	void AddItemsToCombine(std::string itemToCombine, std::string combineResult);
 	void AddDialogueAfterUsedWithObj(std::string objName, std::string dialogueName);
 	void ChangeDialogueAfterUsedWithObj(std::string objName, std::string dialogueName);
+	void AddChangeOtherDialogueAfterUsedWithObj(std::string objName, std::string otherObjName, std::string otherItem, std::string dialogue);
+
+	void DialogueHandle(std::string objUsedWith);
 
 	std::string GetDialogueAfterUseWith(std::string objName);
 

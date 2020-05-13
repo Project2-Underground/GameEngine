@@ -900,7 +900,7 @@
 	</script>
 	<script key = "Route_A" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "This place... it's gome dark. \n The holograms are gone."/>
+			<Dialogue name = "Elias" text = "This place... it's gone dark. \n The holograms are gone."/>
 			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING."/>
 			<Dialogue name = "Elias" text = "( What! They got to her already? I need to help her. )"/>	
 		</sub>
@@ -1171,7 +1171,7 @@
 	<!-- Building 4-3 -->
 	<script key = "puzzle6_puppet" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "( It's a wooden puppet with the real human size. )"/>
+			<Dialogue name = "Elias" text = "( It's a human-size wooden puppet with the real human size. )"/>
 		</sub>
 	</script>
 	<script key = "puzzle6_3_NPC1" loopIndex = "0">

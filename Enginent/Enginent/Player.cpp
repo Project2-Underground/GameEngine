@@ -34,7 +34,8 @@ void Player::Update()
 		}
 	}
 	anim->Update();
-
+	if (TriggerRouteB == 4 && !TextBox::GetInstance()->IsDisplay())
+		TextBox::GetInstance()->setText("Route_B");
 }
 
 void Player::action() {

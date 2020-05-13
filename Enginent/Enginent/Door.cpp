@@ -98,24 +98,3 @@ void SecretDoor::action() {
 void ChangeLevelDoor::action() {
 	Game::GetInstance()->TriggerChangeLevel(nextLevel);
 }
-
-Building4InnerDoor::Building4InnerDoor(std::string room, std::string door) :Door(room, door) {
-	triggered = false;
-	used = false;
-}
-
-void Building4InnerDoor::action() {
-	if (triggered) {
-		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-		SoundManager::GetInstance()->playSound(SFX, "OpenDoor", false);
-		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
-		gs->ChangeRoom(nextRoom, nextDoor);
-		// does something nice
-		// ...
-	}
-	else {
-		Game::GetInstance()->GetPlayer()->anim->Play("Pickup", false);
-		SoundManager::GetInstance()->playSound(SFX, "Locked");
-		InteractableObj::action();
-	}
-}

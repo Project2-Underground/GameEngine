@@ -209,8 +209,6 @@ void XMLManager::GenerateDoor(pugi::xml_node room, Room* r) {
 			door = new WallDoor(next_room, next_door);
 			door->SetDialogueAfterTriggerName(child->attribute("dialogueAfterTrigger").as_string());
 		}
-		else if (child->child("Building4InnerDoor"))
-			door = new Building4InnerDoor(next_room, next_door);
 		else if (child->child("SecretDoor"))
 			door = new SecretDoor(next_room, next_door);
 		else
@@ -277,6 +275,8 @@ void XMLManager::GenerateNPC(pugi::xml_node room, Room* r) {
 			npc->col->enable = false;
 			npc->SetDisplay(false);
 		}
+		if (child->child("key"))
+			npc->SetItemToUse(child->child("key").attribute("name").as_string());
 
 		pugi::xml_node animaions = child->child("Animations");
 		if(animaions)
@@ -710,6 +710,15 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 
 			for (pugi::xml_node_iterator d = item->child("dialogueAferUseWithObjs").begin(); d != item->child("dialogueAferUseWithObjs").end(); d++) {
 				i->AddDialogueAfterUsedWithObj(d->name(), d->attribute("dialogue").as_string());
+				if(d->first_child()){
+					std::string triggerName = d->name();
+					for (pugi::xml_node_iterator td = d->begin(); td != d->end(); td++) {
+						i->AddChangeOtherDialogueAfterUsedWithObj(triggerName,
+																  td->attribute("objName").as_string(), 
+																  td->name(), 
+																  td->attribute("dialogue").as_string());
+					}
+				}
 			}
 
 			i->SetInventoryTexture(item->attribute("i_texture").as_string());

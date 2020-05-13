@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "Game.h"
+#include "TextBox.h"
 
 Item::Item(std::string name) {
 	this->name = name;
@@ -36,6 +37,26 @@ void Item::AddDialogueAfterUsedWithObj(std::string objName, std::string dialogue
 }
 void Item::ChangeDialogueAfterUsedWithObj(std::string objName, std::string dialogueName) {
 	dialogueAfterUsedWithObj[objName] = dialogueName;
+}
+void Item::AddChangeOtherDialogueAfterUsedWithObj(std::string objName, std::string otherObjName, std::string otherItem, std::string dialogue) {
+	NextDialogueChange tmp;
+	tmp.dialogue = dialogue;
+	tmp.otherItemName = otherItem;
+	tmp.otherObjName = otherObjName;
+	std::vector<NextDialogueChange> tmpvec;
+	changeOtherDialogueAfterUsedWithObj.insert(std::pair<std::string, std::vector<NextDialogueChange>>(objName, tmpvec));
+	changeOtherDialogueAfterUsedWithObj[objName].push_back(tmp);
+}
+void Item::DialogueHandle(std::string objName) {
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	for (auto obj : changeOtherDialogueAfterUsedWithObj) {
+		if (obj.first == objName) {
+			for (auto obj2 : obj.second) {
+				gs->FindItem(obj2.otherItemName)->ChangeDialogueAfterUsedWithObj(obj2.otherObjName, obj2.dialogue);
+			}
+		}
+	}
+	TextBox::GetInstance()->setText(GetDialogueAfterUseWith(objName));
 }
 std::string Item::GetDialogueAfterUseWith(std::string objName) {
 	for (auto obj : dialogueAfterUsedWithObj) {
