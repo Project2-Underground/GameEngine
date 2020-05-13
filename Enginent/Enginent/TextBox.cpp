@@ -89,6 +89,13 @@ void TextBox::setText(std::string key, bool talk)
 				SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 			}
 
+			//chat
+			if (d_text->dialogue[d_index].chatName != "")
+			{
+				Phone* phone = Phone::GetInstance();
+				phone->AddPage(CHAT, d_text->dialogue[d_index].chatName);
+			}
+
 			//puzzle
 			if (d_text->dialogue[d_index].puzzleName != "")
 			{
@@ -310,6 +317,13 @@ void TextBox::clickLeft(glm::vec3 pos)
 			Phone* phone = Phone::GetInstance();
 			phone->AddPage(NOTE, d_text->dialogue[d_index].noteName);
 			SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
+		}
+
+		//chat
+		if (d_text->dialogue[d_index].chatName != "")
+		{
+			Phone* phone = Phone::GetInstance();
+			phone->AddPage(CHAT, d_text->dialogue[d_index].chatName);
 		}
 
 		//puzzle

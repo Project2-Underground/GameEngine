@@ -1182,7 +1182,7 @@
 			<Dialogue name = "Arlo" text = "And that means you are necessary for our ceremony."/>
 			<Dialogue name = "Elias" text = "So... What do I have to do?"/>
 			<Dialogue name = "Arlo" text = "Here is our order 'The traitor does not deserve judgements from the others, but the key holder will be the one who gives him a warm welcome.'">
-				<item name = ""/>
+				<item name = "Puzzle6_Stick"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "That's my job? \n Let me figure something out."/>
 		</sub>
@@ -1201,7 +1201,7 @@
 	<script key = "puzzle6_3_puppettorch" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Wooden puppet" text = "Aaaaaaaaa!!!!!">
-				<sprite name = "" texture = ""/>
+				<sprite name = "Puzzle6_Puppet" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_BurntPuppet.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Did it just scream?"/>
 		</sub>
@@ -1254,7 +1254,9 @@
 	<script key = "puzzle7_start" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Why... am I... here?"/>
-			<Dialogue name = "Elias" text = "? There's a new message from the tablet."/>
+			<Dialogue name = "Elias" text = "? There's a new message from the tablet.">
+				<chat name = "Unknown3" index = "0"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "puzzle7_door1" loopIndex = "0">
@@ -1272,7 +1274,10 @@
 		<sub>
 			<Dialogue name = "Elias" text = "Wait, I think this puppet must be burnt already."/>
 			<Dialogue name = "Elias" text = "And what about this knife?"/>
-			<Dialogue name = "puppet" text = "AHHHHHHH!"/>
+			<Dialogue name = "puppet" text = "AHHHHHHH!">
+				<item name = "Puzzle7_Knife"/>
+				<sprite name = "Puzzle7_StabbedPuppet" texture = "Puzzle6_Puppet.png"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "What?! \n This thing can talk?"/>
 			<Dialogue name = "puppet" text = "Who are you? \n Your voice is not like those monsters."/>
 			<Dialogue name = "Elias" text = "Yeah, need some help to get out of this puppet?"/>
@@ -1302,7 +1307,9 @@
 			<Dialogue name = "Arlo" text = "Hello, are you a newcomer?"/>
 			<Dialogue name = "Elias" text = "Don't you remember me? \n I just passed your test for a couple of hours."/>
 			<Dialogue name = "Arlo" text = "I don't think so...."/>
-			<Dialogue name = "Arlo" text = "However, take this paper. \n Whoever come in this place have to hold it."/>
+			<Dialogue name = "Arlo" text = "However, take this paper. \n Whoever come in this place have to hold it.">
+				<item name = "Puzzle7_MedPrescript"/>
+			</Dialogue>
 			<Dialogue name = "Arlo" text = "Oh, and There are some rules you have to learn."/>
 			<Dialogue name = "Elias" text = "What rule?"/>
 			<Dialogue name = "Arlo" text = "It's what every members have to do to join our cult. \n Let's start when you ready."/>
@@ -1326,7 +1333,9 @@
 	</script>	
 	<script key = "puzzle7_quest4" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Arlo" text = "Wow, you are also one of us right? \n I'll give you this key as a memento."/>
+			<Dialogue name = "Arlo" text = "Wow, you are also one of us right? \n I'll give you this key as a memento.">
+				<item name = "Puzzle7_MouthKeyFalse1"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "puzzle7_quest_pass" loopIndex = "0">
@@ -1359,18 +1368,23 @@
 	
 	<script key = "puzzle7_altar2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "There's another one?"/>
+			<Dialogue name = "Elias" text = "There's another one?" sound = "key"/>
 		</sub>
 	</script>
 	<script key = "puzzle7_altar2_knife" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "So... this one is inside the meat."/>
+			<Dialogue name = "Elias" text = "So... this one is inside the meat.">
+				<item name = "Puzzle7_EarKeyFalse1"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "puzzle7_puppet_item" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Finally... wait, it doesn't make the puppet open."/>
-			<Dialogue name = "Elias" text = "There is something behind the padlock."/>
+			<Dialogue name = "Elias" text = "There is something behind the padlock.">
+				<item name = "Puzzle7_CircularSaw"/>
+			</Dialogue>
+			
 		</sub>
 	</script>
 	<script key = "puzzle7_puppet_chainsaw" loopIndex = "0">
