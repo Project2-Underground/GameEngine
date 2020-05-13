@@ -114,9 +114,12 @@ void ScriptManager::LoadScript()
 				std::string animName = "";
 				std::string puzzleName = "";
 				std::string soundName = "";
+				std::string roomName = "";
 				std::string cutscene = "";
 				std::string spriteObj = "";
 				std::string spriteName = "";
+				std::string Enable = "";
+				bool en = true;
 				bool cutSceneBL = false;
 				bool sprite = false;
 				bool showWin = false;
@@ -153,6 +156,10 @@ void ScriptManager::LoadScript()
 					spriteName = dialogue->child("sprite").attribute("texture").as_string();
 					sprite = true;
 				}
+				if (dialogue->attribute("room"))
+				{
+					roomName = dialogue->attribute("room").as_string();
+				}
 				if (dialogue->attribute("sound"))
 				{
 					soundName = dialogue->attribute("sound").as_string();
@@ -165,6 +172,14 @@ void ScriptManager::LoadScript()
 				{
 					cutscene = dialogue->attribute("cutscene").as_string();
 					cutSceneBL = true;
+				}
+				if (dialogue->attribute("enable"))
+				{
+					Enable = dialogue->attribute("enable").as_string();
+				}
+				if (dialogue->attribute("bool"))
+				{
+					en = dialogue->attribute("bool").as_bool();
 				}
 				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName, soundName, showWin);
 				if (cutSceneBL)
@@ -181,6 +196,9 @@ void ScriptManager::LoadScript()
 					tmp.spriteChange = spriteObj;
 				}
 				tmp.CutScenebl = cutSceneBL;
+				tmp.roomName = roomName;
+				tmp.Enable = Enable;
+				tmp.en = en;
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}

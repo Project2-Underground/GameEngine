@@ -5,6 +5,7 @@
 		<Building1 dialogue="" />
 		<Building2 dialogue="" />
 		<Building3 dialogue="" />
+		<Building4Floor1 dialogue="" />
 		<MainFloor2 dialogue="" />
 	</rooms>
 	<interactObj>
@@ -21,6 +22,7 @@
 		<Building1_FloorDoorOpen used="false" />
 		<Building2_Door1 used="true" />
 		<Building3_Exit used="true" />
+		<Building4InnerDoor used="false" />
 		<MainFloor2_Building1_Door used="true" />
 		<MainFloor2_Building2_Door used="false" />
 		<MainFloor2_Building3_Door used="true" />
@@ -35,6 +37,7 @@
 		<Building3_NPC7 hasItem="false" />
 		<Cultist_Mask hasItem="false" />
 		<Building3_Emma hasItem="false" />
+		<Building3_NPC4 hasItem="false" />
 		<NPC4 hasItem="false" />
 		<NPC5 hasItem="false" />
 		<NPC6 hasItem="false" />
@@ -44,12 +47,12 @@
 	<puzzles>
 		<BookshelfPuzzle done="false" passRequirements="false" />
 		<BookshelfPuzzle2 done="true" passRequirements="false" />
-		<Numpad_Backdoor done="true" passRequirements="false" />
+		<Numpad_Backdoor done="false" passRequirements="false" />
 		<Numpad_Emma done="false" passRequirements="false" />
 	</puzzles>
-	<Player posX="251" posY="-80">
+	<Player posX="151" posY="-80">
 		<inventory>
-			<item name="keyCard" multipleUse="false" />
+			<item name="keyCard" multipleUse="true" />
 			<item />
 			<item />
 			<item />
@@ -59,15 +62,15 @@
 		</inventory>
 	</Player>
 	<Phone hasPhone="true" firstClose="false" note23Track="false">
-		<Notes>
-			<n name="Note1" />
-		</Notes>
+		<Notes />
 		<Chats>
 			<c name="Unknown1" msgNo="7" />
-			<c name="Unknown2" msgNo="5" />
+			<c name="Unknown2" msgNo="0" />
 			<c name="Unknown3" msgNo="0" />
 		</Chats>
-		<npcTalked />
+		<npcTalked>
+			<Cultist />
+		</npcTalked>
 	</Phone>
 	<Butler display="true" phase="2" />
 </level>
