@@ -789,7 +789,7 @@
 	</script>
 	<script key = "Floor2_mask7" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!" room = "Building4Puzzle7Floor1"/>
+			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!"/>
 			<Dialogue name = "Sophia" text = "We need to do something! \n We need to take care of that scientist!"/>
 			<Dialogue name = "Sophia" text = "Who knows what kind of tortures are waiting for us if we get caught."/>
 			<Dialogue name = "Charlotte" text = "The chief is searching for him, he'll tell us about it anytime soon. \n Right now he is preparing for our new rookie."/>
@@ -852,7 +852,7 @@
 	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
-			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"  enable = "MainFloor2_BlackAlley" room = "" door =""/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"  enable = "MainFloor2_BlackAlley"/>
 		</sub>
 	</script>
 	<script key = "Floor2_Mask4_2" loopIndex = "0">
