@@ -14,6 +14,11 @@ Door::Door(std::string next_room, std::string next_door) {
 	openTexture = 0;
 }
 
+void Door::ChangePortal(std::string next_room, std::string next_door) {
+	this->nextRoom = next_room;
+	this->nextDoor = next_door;
+}
+
 void Door::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used || triggered) {

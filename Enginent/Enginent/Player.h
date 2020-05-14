@@ -12,8 +12,8 @@
 class Player : public InteractableObj
 {
 public:
-	bool TriggerRouteB;
-	bool TriggerRouteA;
+	bool triggerRouteB;
+	bool triggerRouteA;
 
 	int walkSpeed = 250;
 	const float ACTION_DISTANCE = 70.0f;
@@ -37,6 +37,7 @@ public:
 	void Move();
 	void StopWalking();
 	void AddTriggerRouteB(std::string);
+	void TriggerRouteA();
 
 	void CheckTarget(InteractableObj* target);
 	//void CheckWalkLimit();

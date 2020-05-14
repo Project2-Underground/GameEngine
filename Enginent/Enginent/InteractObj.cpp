@@ -320,9 +320,9 @@ NonPlayer::NonPlayer(std::string name) {
 void NonPlayer::action()
 {
 	Phone::GetInstance()->AddNPCInteracted(object_name);
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	//std::cout << interactType << std::endl;
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
-		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		UseItem(gs->GetInventory()->GetSelectedItem());
 		dialogue_name = dialogue_after_use;
 	}
@@ -334,6 +334,14 @@ void NonPlayer::action()
 		}
 		if (dialogue_name != "")
 		{
+			if (dialogue_name == "RouteB_Building3_Cultist") {
+				Door* d = (Door*)gs->GetCurrentLevel()->FindObject("MainFloor2_Building4_Door");
+				d->ChangePortal("Building4Puzzle7Floor1", "Building4Puzzle7Floor1Out");
+				d->Open();
+
+				d = (Door*)gs->GetCurrentLevel()->FindObject("MainFloor2_Building1_Door");
+				d->Open();
+			}
 			Game::GetInstance()->GetPlayer()->AddTriggerRouteB(dialogue_name);
 			TextBox::GetInstance()->setText(this->dialogue_name, talk);
 			if (!talk)

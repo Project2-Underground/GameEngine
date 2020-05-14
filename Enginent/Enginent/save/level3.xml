@@ -4,17 +4,17 @@
 	<MainFloor3 left_limit="-3650" right_limit="3650" top_limit="360" bottom_limit="-360" y="21" dialogue="Floor3A" bgm="Mainfloor3">
 		<background>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_Template.png" sizeX="7427" sizeY="720" posX="0" posY="0" layer="0"/>
-			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0"/>
-			<bg texture="Texture/level3/MainFloor3/MainFloor3_Lab.png" sizeX="1259" sizeY="443" posX="-2767" posY="147.5" layer="0"/>
-			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0"/>
 		</background>
 		<interactObj>
-			<bgPeople texture="Texture/level3/MainFloor3/MainFloor3_People1.png" sizeX="7506" sizeY="293" posX="-1.5" posY="78" layer="0">
+			<bgPeople texture="Texture/level3/MainFloor3/MainFloor3_People2_Idle.png" sizeX="7506" sizeY="293" posX="-1.5" posY="78" layer="0">
 				<Animations>
-					<Idle texture="Texture/level3/MainFloor3/MainFloor3_People1.png" frame="2" time_per_frame="0.5" loop="True"/>
+					<Idle texture="Texture/level3/MainFloor3/MainFloor3_People2_Idle.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 				<colOff/>
 			</bgPeople>
+			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0"/>
+			<bg texture="Texture/level3/MainFloor3/MainFloor3_Lab.png" sizeX="1259" sizeY="443" posX="-2767" posY="147.5" layer="0"/>
+			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0"/>
 			<MainFloor3_House_DoorTrigger texture="NONE" sizeX="150" sizeY="720" posX="3581" posY="0" type="11" layer="1" dialogue="Floor3A_factory"/>
 			<MainFloor3_LabDoorTrigger texture="NONE" sizeX="386" sizeY="720" posX="-2710.5" posY="0" type="11" layer="1" dialogue="Floor3A_lab"/>
 			<people1 texture="NONE" sizeX="75" sizeY="720" posX="886" posY="0" type="11" layer="1" dialogue="Floor3A_people1"/>
@@ -27,23 +27,23 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/level3/Lab/MainFloor3_People1.png" sizeX="7427" sizeY="720" posX="0" posY="-157.5" layer="0"/>
-			<fg texture="Texture/level3/Lab/MainFloor3_FloorGround.png" sizeX="7427" sizeY="415" posX="0" posY="-157.5" layer="0"/>
+			<fg texture="Texture/level3/MainFloor3/MainFloor3_People1.png" sizeX="7427" sizeY="415" posX="0" posY="-157.5" layer="0"/>
+			<fg texture="Texture/level3/MainFloor3/MainFloor3_FloorGround.png" sizeX="7427" sizeY="415" posX="0" posY="-157.5" layer="0"/>
 		</foreground>
 	</MainFloor3>
 	<Lab left_limit="-1400" right_limit="1400" top_limit="360" bottom_limit="-360" y="-100.5" dialogue="Lab_start">
 		<background>
-			<bg texture="Texture/level3/Mainfloor3/MainFloor3_Template.png" sizeX="7427" sizeY="720" posX="0" posY="0" layer="0"/>
+			<bg texture="Texture/level3/Lab/Lab_Template.png" sizeX="3063" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
-			<Lab_Door texture="Texture/level3/Lab/Lab_Door.png" sizeX="394" sizeY="376" posX="1012" posY="0" layer="0" dialogue="">
-				<typeView type="4"/>
-			</Lab_Door>
 			<Lab_EndDoor texture="Texture/level3/Lab/Lab_EndDoor.png" sizeX="126" sizeY="597" posX="-1468.5" posY="-61.5" layer="0" dialogue="">
 				<typeView type="4"/>
 			</Lab_EndDoor>
 		</interactObj>
 		<doors>
+			<Lab_Door texture="Texture/level3/Lab/Lab_Door.png" sizeX="394" sizeY="376" posX="1012" posY="0" layer="0" dialogue="">
+				<key name="NONE"/>
+			</Lab_Door>
 		</doors>
 		<NPCs>
 			<Emily sizeX="132" sizeY="433" posX="-811" posY="-61" layer="0" dialogue="Lab_Emily" dialogue_2="">
