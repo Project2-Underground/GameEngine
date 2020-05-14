@@ -385,7 +385,7 @@ class PuppetPuzzle : public Puzzle {
 public:
 	PuppetPuzzle();
 	void Render();
-	void Update() {}
+	void Update();
 	void Reset() {}
 	bool CheckRequirements();
 	void LeftClick(glm::vec3, glm::vec3);

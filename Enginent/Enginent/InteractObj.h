@@ -141,7 +141,7 @@ public:
 class PuzzleObj : public InteractableObj {
 	std::string puzzleName;
 public:
-	PuzzleObj() { interactType = PUZZLE; }
+	PuzzleObj() { interactType = PUZZLE; used = true; }
 	void SetPuzzleName(std::string);
 	void action();
 };

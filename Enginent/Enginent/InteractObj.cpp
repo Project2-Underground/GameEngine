@@ -49,7 +49,7 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 }
 void InteractableObj::action() {
 	SoundManager::GetInstance()->playSound(SFX,sound);
-	std::cout << "InteractableObj::action() " << object_name << " " << dialogue_name << " \n";
+	//std::cout << "InteractableObj::action() " << object_name << " " << dialogue_name << " \n";
 
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
@@ -363,6 +363,7 @@ void PuzzleObj::action() {
 		}
 	}
 	else if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
+		std::cout << "PuzzleObj::action() " << dialogue_after_use << std::endl;
 		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			dialogue_name = "";

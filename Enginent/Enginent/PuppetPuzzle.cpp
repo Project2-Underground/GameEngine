@@ -16,24 +16,26 @@ void PuppetPuzzle::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 	renderer->Render(UI);
 }
-bool PuppetPuzzle::CheckRequirements() {
+void PuppetPuzzle::Update() {
 	Inventory* i = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
 	bool hasEyeKey = i->IsItemInInventory("Puzzle7_EyeKey");
 	bool hasEarKey = i->IsItemInInventory("Puzzle7_EarKey");
 	bool hasMouthKey = i->IsItemInInventory("Puzzle7_MouthKey");
 
+	std::cout << "PuppetPuzzle::CheckRequirements() " << hasEyeKey << hasEarKey << hasMouthKey << std::endl;
 	if (hasEarKey && hasEyeKey && hasMouthKey) {
 		i->RemoveItem("Puzzle7_EyeKey");
 		i->RemoveItem("Puzzle7_EarKey");
 		i->RemoveItem("Puzzle7_MouthKey");
 		i->RemoveItem("Puzzle7_MedPrescript");
 		TextBox::GetInstance()->setText("puzzle7_puppet_item");
-		return true;
 	}
 	else {
 		TextBox::GetInstance()->setText("puzzle7_puppet_after");
-		return true;
 	}
+}
+bool PuppetPuzzle::CheckRequirements() {
+	return true;
 }
 void PuppetPuzzle::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	for (int j = 0; j < UI.size(); j++)
