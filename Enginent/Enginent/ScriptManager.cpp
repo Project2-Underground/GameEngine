@@ -125,6 +125,7 @@ void ScriptManager::LoadScript()
 				bool cutSceneBL = false;
 				bool sprite = false;
 				bool showWin = false;
+				int level = -1;
 				if (dialogue->child("item"))
 				{
 					itemName = dialogue->child("item").attribute("name").as_string();
@@ -191,6 +192,10 @@ void ScriptManager::LoadScript()
 				{
 					en = dialogue->attribute("bool").as_bool();
 				}
+				if (dialogue->attribute("level"))
+				{
+					level = dialogue->attribute("level").as_int();
+				}
 				s_Dialogue tmp(name, text, itemName, NPCName, chatName, chatIndex, noteName, puzzleName, animName, soundName, showWin);
 				if (cutSceneBL)
 				{
@@ -211,6 +216,7 @@ void ScriptManager::LoadScript()
 				tmp.doorOpen = doorOpen;
 				tmp.Enable = Enable;
 				tmp.en = en;
+				tmp.level = level;
 				d.dialogue.push_back(tmp);
 				dialogue++;
 			}

@@ -139,6 +139,12 @@ void TextBox::setText(std::string key, bool talk)
 				Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName, d_text->dialogue[d_index].doorName);
 			}
 
+			//change level
+			if (d_text->dialogue[d_index].level != -1)
+			{
+				Game::GetInstance()->TriggerChangeLevel(d_text->dialogue[d_index].level);
+			}
+
 			//enable object
 			if (d_text->dialogue[d_index].Enable != "")
 			{
@@ -388,6 +394,12 @@ void TextBox::clickLeft(glm::vec3 pos)
 			Game::GetInstance()->GetCurrentLevel()->ChangeRoom(d_text->dialogue[d_index].roomName, d_text->dialogue[d_index].doorName);
 		}
 
+		//change level
+		if (d_text->dialogue[d_index].level != -1)
+		{
+			Game::GetInstance()->TriggerChangeLevel(d_text->dialogue[d_index].level);
+		}
+
 		//enable object
 			//enable object
 		if (d_text->dialogue[d_index].Enable != "")
@@ -452,6 +464,13 @@ void TextBox::clickLeft(glm::vec3 pos)
 		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, false);
 		display = false;
 		ViewWindow::GetInstance()->Close();
+	}
+	else if (d_text->nextLevel != -1)
+	{
+		display = false;
+		ViewWindow::GetInstance()->Close();
+		((GameScreen*)Game::GetInstance()->GetScreen())->ChangeLevel(d_text->nextLevel);
+		std::cout << "Textbox change level\n";
 	}
 	else
 	{

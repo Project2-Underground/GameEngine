@@ -36,6 +36,7 @@ struct s_Dialogue
 	std::string puzzleName;
 	std::string soundName;
 	std::string Enable;
+	int level = -1;
 	bool en;
 	std::string roomName = "";
 	std::string doorName = "";
@@ -76,6 +77,7 @@ struct Dialogue {
 	std::vector<diaplayAfterAction> displayObj;
 	std::map<std::string, ChangeName> changeNameObj;
 	std::string choice;
+	int nextLevel = -1;
 	Dialogue() {
 		choice = "";
 	}
