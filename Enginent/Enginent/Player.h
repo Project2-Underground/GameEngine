@@ -12,7 +12,7 @@
 class Player : public InteractableObj
 {
 public:
-	int TriggerRouteB;
+	bool TriggerRouteB;
 	bool TriggerRouteA;
 
 	int walkSpeed = 250;
@@ -36,12 +36,15 @@ public:
 	void Turn();
 	void Move();
 	void StopWalking();
+	void AddTriggerRouteB(std::string);
 
 	void CheckTarget(InteractableObj* target);
 	//void CheckWalkLimit();
 
 	glm::vec3 next_position;
 private:
+	std::string RouteB_Dialogue;
+	std::vector<std::string> npcTalkRouteB;
 	Collider* walkLimit;
 	InteractableObj* target;
 };

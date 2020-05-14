@@ -334,15 +334,13 @@ void NonPlayer::action()
 		}
 		if (dialogue_name != "")
 		{
+			Game::GetInstance()->GetPlayer()->AddTriggerRouteB(dialogue_name);
 			TextBox::GetInstance()->setText(this->dialogue_name, talk);
 			if (!talk)
 			{
 				talk = true;
 			}
 			TextBox::GetInstance()->SetDisplay(true);
-			if (dialogue_name == "Floor2_Mask4_2" || dialogue_name == "Floor2_Mask7_2"
-				|| dialogue_name == "Floor2_Mask5_2" || dialogue_name == "Floor2_Mask6_2")
-				Game::GetInstance()->GetPlayer()->TriggerRouteB++;
 		}
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");
