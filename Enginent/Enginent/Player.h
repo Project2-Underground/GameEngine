@@ -13,6 +13,7 @@ class Player : public InteractableObj
 {
 public:
 	int TriggerRouteB;
+	bool TriggerRouteA;
 
 	int walkSpeed = 250;
 	const float ACTION_DISTANCE = 70.0f;

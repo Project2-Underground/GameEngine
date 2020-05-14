@@ -162,6 +162,13 @@ void Level::LeftClick(float x, float y) {
 void Level::ChangeRoom(std::string roomName, std::string door) {
 	currentRoom = rooms[roomName];
 
+
+	SoundManager* sm = SoundManager::GetInstance();
+	if(!currentRoom->bgmName.empty() && sm->currentBGM != currentRoom->bgmName){
+		sm->StopCurrentBGM();
+		sm->playSound(BGM, currentRoom->bgmName);
+	}
+
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 
 	float playerNextx = 0;
@@ -187,6 +194,12 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	}
 
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
+
+	if (roomName == "Building2")
+		player->TriggerRouteA = true;
+
+	if (roomName == "MainFloor2" && player->TriggerRouteA)
+		TextBox::GetInstance()->setText("Route_A");
 }
 
 std::vector<DrawableObject*>* Level::Getobjects() {

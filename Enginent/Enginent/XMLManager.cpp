@@ -54,8 +54,9 @@ void XMLManager::GenerateRoom(std::string filename, std::map<std::string, Room*>
 			// camera limit
 			newRoom->SetCameraLimit(new Collider(objects[0]));
 			newRoom->SortObjLayer();
-			if(room->attribute("dialogue"))
-				newRoom->dialogue = room->attribute("dialogue").as_string();
+			newRoom->dialogue = room->attribute("dialogue").as_string();
+			newRoom->bgmName = room->attribute("bgm").as_string();
+
 			newRoom->y = room->attribute("y").as_float();
 
 			rooms.insert(std::pair<std::string, Room*>(newRoom->name, newRoom));
