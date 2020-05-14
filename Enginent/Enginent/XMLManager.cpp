@@ -162,7 +162,11 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("picked"))
 			interactObj->SetNextTexture(child->child("picked").attribute("texture").as_string());
 
+		if (child->child("key"))
+			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
+
 		if (child->child("used")) {
+			std::cout << child->name() << " used \n";
 			interactObj->SetUsedTexture(child->child("used").attribute("texture").as_string());
 			if (child->child("used").child("positionAfterUse")) {
 				interactObj->SetPositionAfterUsed(child->child("used").child("positionAfterUse").attribute("x").as_float(), 
@@ -176,10 +180,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 		if (child->child("note"))
 			for(pugi::xml_node_iterator note = child->child("note").begin(); note != child->child("note").end(); note++)
 				interactObj->AddNoteName(note->name());
-
-
-		if (child->child("key"))
-			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
 		interactObj->SetCollder(new Collider(interactObj));
 		if (child->child("colOff")) {

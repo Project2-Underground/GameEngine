@@ -50,19 +50,27 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 void InteractableObj::action() {
 	SoundManager::GetInstance()->playSound(SFX,sound);
 	std::cout << "InteractableObj::action() " << dialogue_name << " nnn\n";
-	if (talk == true)
-	{
-		if (dialogue_after != "")
-			dialogue_name = dialogue_after;
+
+	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
+		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		UseItem(gs->GetInventory()->GetSelectedItem());
+		dialogue_name = dialogue_after_use;
 	}
-	if (dialogue_name != "")
-	{
-		TextBox::GetInstance()->setText(this->dialogue_name, talk);
-		if (!talk)
+	else {
+		if (talk == true)
 		{
-			talk = true;
+			if (dialogue_after != "")
+				dialogue_name = dialogue_after;
 		}
-		TextBox::GetInstance()->SetDisplay(true);
+		if (dialogue_name != "")
+		{
+			TextBox::GetInstance()->setText(this->dialogue_name, talk);
+			if (!talk)
+			{
+				talk = true;
+			}
+			TextBox::GetInstance()->SetDisplay(true);
+		}
 	}
 	if(interactType != DOOR)
 		Game::GetInstance()->GetPlayer()->anim->Play("Idle");
@@ -106,10 +114,11 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 
 void InteractableObj::UseItem(Item* item) {
 	item->DialogueHandle(this->object_name);
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	Inventory* i = gs->GetInventory();
+
 	if (item != nullptr && item_to_use == item->name) {
 		//std::cout << "item is used and removed from the inventory\n";
-		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-		Inventory* i = gs->GetInventory();
 		used = true;
 		if (hasPositionAfterUsed)
 			SetPosition(positionAfterUse);
@@ -125,10 +134,10 @@ void InteractableObj::UseItem(Item* item) {
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
-		i->UnselectItem();
 		if (item->name == "Puzzle6_PillBedtime_withMEAT")
 			item->multipleUse = false;
 	}
+	i->UnselectItem();
 }
 void InteractableObj::Used() {
 	used = true;

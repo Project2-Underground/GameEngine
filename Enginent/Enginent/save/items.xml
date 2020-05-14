@@ -117,8 +117,14 @@
 		<dialogueAferUseWithObjs>
 			<Puzzle6_NPC2F2 dialogue="puzzle6_2_NPC2_liq"/>
 		</dialogueAferUseWithObjs>
+		<combine>
+			<c itemToCombine="Puzzle6_StickCloth" afterCombined="Puzzle6_StickCloth_Wet"/>
+		</combine>
 	</Puzzle6_Alcohol>
 	<Puzzle6_Cloth i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719">
+		<combine>
+			<c itemToCombine="Puzzle6_Stick" afterCombined="Puzzle6_StickCloth"/>
+		</combine>
 	</Puzzle6_Cloth>
 	
 	<!-- Puzzle 6 F3 -->
