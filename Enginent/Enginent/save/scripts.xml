@@ -1144,7 +1144,8 @@
 		</sub>
 	</script>
 	<script key = "puzzle6_2_NPC2_liq" loopIndex = "0">
-		<sub>
+		<sub change = "1">
+			<ChangeName name = "Puzzle6_NPC1" new = "puzzle6_2_NPC1_pres" new_a = "puzzle6_2_NPC1_pres"/>
 			<Dialogue name = "Bob" text = "Ah... Sorry, but you want me to take a med with the liqueur?"/>
 			<Dialogue name = "Elias" text = "Why not?"/>
 			<Dialogue name = "Bob" text = "Why yes?! \n Please be serious, I'm in hurry!"/>
