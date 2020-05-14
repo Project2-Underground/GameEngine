@@ -452,7 +452,6 @@ void XMLManager::LoadFromSave(std::string filename) {
 		for (pugi::xml_node_iterator itr = phoneNode.child("Chats").begin(); itr != phoneNode.child("Chats").end(); itr++) {
 			std::string name = itr->attribute("name").as_string();
 			phone->SetPage(CHAT, name);
-			phone->chats[name].currentMsgIndex = itr->attribute("msgNo").as_int();
 		}
 
 		TextBox::GetInstance()->SetDisplay(false);
@@ -573,10 +572,9 @@ void XMLManager::SaveGame(std::string filename) {
 		node.append_attribute("name").set_value(phone->app->notes[i]->name.c_str());
 	}
 
-	for (auto c:phone->chats) {
+	for (auto c:phone->app->chats) {
 		pugi::xml_node node = saveLevel.child("Phone").child("Chats").append_child("c");
-		node.append_attribute("name").set_value(c.second.name.c_str());
-		node.append_attribute("msgNo").set_value(c.second.currentMsgIndex);
+		node.append_attribute("name").set_value(c->name.c_str());
 	}
 
 	save.save_file(filename.c_str());
@@ -594,8 +592,6 @@ std::string XMLManager::GetMessage(std::string name, int index) {
 void XMLManager::SaveGameOptions() {
 	Game* game = Game::GetInstance();
 	pugi::xml_document gameOption;
-
-	SoundManager* soundManager = SoundManager::GetInstance();
 
 	pugi::xml_node options = gameOption.append_child("Options");
 

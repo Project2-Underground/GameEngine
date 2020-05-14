@@ -21,13 +21,13 @@ class Item {
 protected:
 	std::vector<std::string> itemsAfterSeparated;
 	std::map<std::string, std::string> itemsAfterCombined;
-	std::map<std::string, std::string> dialogueAfterUsedWithObj;
 	std::map<std::string, std::vector<NextDialogueChange>> changeOtherDialogueAfterUsedWithObj;
 	unsigned int iTexture;
 	unsigned int viewTexture;
 public:
 	std::string name;
 	std::string dialogue_name;
+	std::map<std::string, std::string> dialogueAfterUsedWithObj;
 
 	Item(std::string name);
 	void SetInventoryTexture(std::string path);

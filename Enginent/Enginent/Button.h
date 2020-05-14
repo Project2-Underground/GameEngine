@@ -47,13 +47,22 @@ public:
 	void action();
 };
 
-class CreaditButton :public Button {
+class CreditButton :public Button {
 	UIObject* creadit;
 public:
-	CreaditButton(std::string texture, UIObject* c) : Button(texture) { creadit = c; };
+	CreditButton(std::string texture, UIObject* c) : Button(texture) { creadit = c; };
 	void action()
 	{
 		creadit->SetDisplay(true);
+	};
+};
+class CreditBackButton :public Button {
+	UIObject* creadit;
+public:
+	CreditBackButton(std::string texture, UIObject* c) : Button(texture) { creadit = c; };
+	void action()
+	{
+		creadit->SetDisplay(false);
 	};
 };
 

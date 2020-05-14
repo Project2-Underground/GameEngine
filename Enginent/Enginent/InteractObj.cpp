@@ -137,8 +137,8 @@ void InteractableObj::UseItem(Item* item) {
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
-		if (item->name == "Puzzle6_PillBedtime_withMEAT")
-			item->multipleUse = false;
+		if (item->name == "Puzzle6_PillBedtime_withMEAT" && item->dialogueAfterUsedWithObj["Puzzle6_NPC2F1"] == "Building4_med2meatmed1")
+			i->RemoveItem(item);
 	}
 	i->UnselectItem();
 }

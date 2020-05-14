@@ -47,8 +47,10 @@ class MenuScreen :public Screen {
 	Button* load;
 	Button* setting;
 	Button* quit;
+	Button* creditBackButton;
 	UIObject* background;
 	UIObject* SplashScreen;
+	UIObject* Credit;
 	std::vector<UIObject*> UI;
 public:
 	MenuScreen();

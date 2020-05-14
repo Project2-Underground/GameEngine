@@ -36,7 +36,6 @@ struct ChatInfo {
 	std::vector<std::string> texts;
 	std::vector<glm::vec3> textPosition;
 	std::vector<int> lineCounts;
-	int currentMsgIndex = 0;
 	bool noti = true;
 
 	void AddText(std::string);

@@ -242,7 +242,7 @@ void Chat::OpenChat(const ChatInfo c) {
 	name->SetPosition(glm::vec3(profilePic->getPos().x + 50.0f + name->getSize().x * 0.5f, 160.0f, 1.0f));
 
 	float yPos = TEXT_TOP_Y;
-	for (int i = 0; i < c.currentMsgIndex; i++) {
+	for (int i = 0; i < c.texts.size(); i++) {
 		TextObject* tmpText = new TextObject();
 		tmpText->loadText(c.texts[i], textColor, FONT_SIZE);
 
@@ -260,7 +260,7 @@ void Chat::OpenChat(const ChatInfo c) {
 		tmpText->SetPosition(newPos);
 		allMsg.push_back(tmpText);
 	}
-	if (c.currentMsgIndex > 0) {
+	if (c.texts.size() > 0) {
 		upperBound = allMsg.at(0)->getPos().y;
 		lowerBound = -allMsg.at(allMsg.size() - 1)->getSize().y*0.25f + TEXT_BOTTOM_Y;
 	}
@@ -671,7 +671,6 @@ void Phone::SetPage(AppType apptype, std::string name) {
 
 void Phone::Message(std::string name, int msgIndex) {
 	((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
-	chats[name].currentMsgIndex = msgIndex;
 	chats[name].noti = true;
 	AddPage(CHAT, name);
 }

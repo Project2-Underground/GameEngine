@@ -19,22 +19,36 @@ void Screen::CloseGameAllWindow() {
 MenuScreen::MenuScreen() {
 	splashScreen = true;
 	splashScreenTime = 0;
-	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
+	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png");
 	play->Init(248, -70, glm::vec3(-258, 78, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
-	load->SetHoverTexture("Texture/tmp_texture/tmp_loadButtonPress.png");
+	load->SetPressTexture("Texture/tmp_texture/MainScreen_Load_Pressed.png");
 	load->Init(213, -74, glm::vec3(-277, -18, 1));
 
 	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
+	setting->SetPressTexture("Texture/UI/MainScreen/MainScreen_Sound_Pressed.png");
 	setting->Init(264, -81, glm::vec3(-266, -111, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png");;
-	quit->Init(186, -86, glm::vec3(-262, -211, 1.0f));
+	quit->Init(186, -86, glm::vec3(-262, -311, 1.0f));
 
 	SplashScreen = new UIObject();
 	SplashScreen->SetTexture("Texture/SplashScreen.png");
 	SplashScreen->SetSize(1280, -720);
+
+	Credit = new UIObject();
+	Credit->SetTexture("Texture/UI/MainScreen/Credit_template.png");
+	Credit->SetSize(1280, -720);
+	Credit->SetDisplay(false);
+
+	CreditButton* creditButton = new CreditButton("Texture/UI/MainScreen/Credit_button.png", Credit);
+	creditButton->SetPressTexture("Texture/UI/MainScreen/Credit_button_press.png");
+	creditButton->Init(282, -82, glm::vec3(-262, -211, 1));
+
+	creditBackButton = new CreditBackButton("Texture/UI/MainScreen/Back_button.png", Credit);
+	creditBackButton->SetPressTexture("Texture/UI/MainScreen/Back_button_push.png");
+	creditBackButton->Init(140, -30, glm::vec3(-570, -345, 1));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -50,6 +64,7 @@ MenuScreen::MenuScreen() {
 	UI.push_back(title);
 	UI.push_back(play);
 	UI.push_back(setting);
+	UI.push_back(creditButton);
 	UI.push_back(quit);
 	UI.push_back(load);
 
@@ -59,16 +74,22 @@ MenuScreen::MenuScreen() {
 }
 
 void MenuScreen::Render() {
-	if (splashScreen) {
-		splashScreenTime += TimeSystem::instance()->GetDT();
-		Game::GetInstance()->GetRenderer()->Render(SplashScreen);
-		if (splashScreenTime > 5)
-			splashScreen = false;
+	if (Credit->IsDisplay()) {
+		Game::GetInstance()->GetRenderer()->Render(Credit);
+		Game::GetInstance()->GetRenderer()->Render(creditBackButton);
 	}
 	else {
-		Game::GetInstance()->GetRenderer()->Render(UI);
-		for (auto w : windows)
-			w->Render();
+		if (splashScreen) {
+			splashScreenTime += TimeSystem::instance()->GetDT();
+			Game::GetInstance()->GetRenderer()->Render(SplashScreen);
+			if (splashScreenTime > 5)
+				splashScreen = false;
+		}
+		else {
+			Game::GetInstance()->GetRenderer()->Render(UI);
+			for (auto w : windows)
+				w->Render();
+		}
 	}
 }
 
@@ -78,7 +99,11 @@ void MenuScreen::Update() {
 }
 
 void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if (!splashScreen) {
+	if (Credit->IsDisplay()) {
+		Credit->SetDisplay(false);
+		creditBackButton->checkColliderPressed(screen.x, screen.y);
+	}
+	else if (!splashScreen) {
 		if (GameWindowOpen())
 			for (auto w : windows)
 				w->LeftClick(screen.x, screen.y);
@@ -112,6 +137,9 @@ void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 			for (int j = 0; j < UI.size(); j++)
 				if (Button * button = dynamic_cast<Button*>(UI[j]))
 					button->checkColliderReleased(screen.x, screen.y);
+	}
+	else {
+		creditBackButton->checkColliderReleased(screen.x, screen.y);
 	}
 }
 
@@ -441,7 +469,7 @@ void GameScreen::ClosePuzzle() {
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	/*switch (key)
+	switch (key)
 	{
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
@@ -470,7 +498,7 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 		break;
 	default:
 		break;
-	}*/
+	}
 }
 
 GameScreen::~GameScreen() {

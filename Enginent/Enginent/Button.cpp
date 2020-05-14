@@ -244,7 +244,7 @@ void SaveLoadGameButton::action() {
 		hasSaved = true;
 	}
 	if (hasSaved) {
-		SoundManager::GetInstance()->stopAllSounds();
+		//SoundManager::GetInstance()->stopAllSounds();
 		Game::GetInstance()->TriggerLoadGame(filename);
 	}
 }
