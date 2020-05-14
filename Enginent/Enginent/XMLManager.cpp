@@ -166,7 +166,6 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			interactObj->SetItemToUse(child->child("key").attribute("name").as_string());
 
 		if (child->child("used")) {
-			std::cout << child->name() << " used \n";
 			interactObj->SetUsedTexture(child->child("used").attribute("texture").as_string());
 			if (child->child("used").child("positionAfterUse")) {
 				interactObj->SetPositionAfterUsed(child->child("used").child("positionAfterUse").attribute("x").as_float(), 
@@ -594,15 +593,15 @@ void XMLManager::SaveGameOptions() {
 
 	pugi::xml_node options = gameOption.append_child("Options");
 
-	options.append_child("Settings");
-	options.child("Settings").append_child("Master").append_attribute("mute").set_value(soundManager->getMute(MASTER));
-	options.child("Settings").child("Master").append_attribute("volume").set_value(soundManager->getVolume(MASTER));
+	//options.append_child("Settings");
+	//options.child("Settings").append_child("Master").append_attribute("mute").set_value(soundManager->getMute(MASTER));
+	//options.child("Settings").child("Master").append_attribute("volume").set_value(soundManager->getVolume(MASTER));
 
-	options.child("Settings").append_child("BGM").append_attribute("mute").set_value(soundManager->getMute(BGM));
-	options.child("Settings").child("BGM").append_attribute("volume").set_value(soundManager->getVolume(BGM));
+	//options.child("Settings").append_child("BGM").append_attribute("mute").set_value(soundManager->getMute(BGM));
+	//options.child("Settings").child("BGM").append_attribute("volume").set_value(soundManager->getVolume(BGM));
 
-	options.child("Settings").append_child("SFX").append_attribute("mute").set_value(soundManager->getMute(SFX));
-	options.child("Settings").child("SFX").append_attribute("volume").set_value(soundManager->getVolume(SFX));
+	//options.child("Settings").append_child("SFX").append_attribute("mute").set_value(soundManager->getMute(SFX));
+	//options.child("Settings").child("SFX").append_attribute("volume").set_value(soundManager->getVolume(SFX));
 
 	options.append_child("SaveSlots");
 	std::vector<SaveLoadGameButton*> &buttons = SaveLoadWindow::GetInstance()->saveButtons;
@@ -623,13 +622,13 @@ void XMLManager::LoadGameOptions() {
 
 		pugi::xml_node settings = doc.child("Options").child("Settings");
 
-		soundManager->setVolume(MASTER, settings.child("Master").attribute("volume").as_float());
-		soundManager->setVolume(BGM, settings.child("BGM").attribute("volume").as_float());
-		soundManager->setVolume(SFX, settings.child("SFX").attribute("volume").as_float());
+		//soundManager->setVolume(MASTER, settings.child("Master").attribute("volume").as_float());
+		//soundManager->setVolume(BGM, settings.child("BGM").attribute("volume").as_float());
+		//soundManager->setVolume(SFX, settings.child("SFX").attribute("volume").as_float());
 
-		soundManager->setMute(MASTER, settings.child("Master").attribute("mute").as_bool());
-		soundManager->setMute(BGM, settings.child("BGM").attribute("mute").as_bool());
-		soundManager->setMute(SFX, settings.child("SFX").attribute("mute").as_bool());
+		//soundManager->setMute(MASTER, settings.child("Master").attribute("mute").as_bool());
+		//soundManager->setMute(BGM, settings.child("BGM").attribute("mute").as_bool());
+		//soundManager->setMute(SFX, settings.child("SFX").attribute("mute").as_bool());
 
 		std::vector<SaveLoadGameButton*>& buttons = SaveLoadWindow::GetInstance()->saveButtons;
 		pugi::xml_node save = doc.child("Options").child("SaveSlots").first_child();
@@ -694,7 +693,7 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 					i->AddItemsToCombine(c->attribute("itemToCombine").as_string(), c->attribute("afterCombined").as_string());
 					count++;
 				}
-				std::cout << " XMLManager::LoadItems " << item->name() << " " << count << std::endl;
+				//std::cout << " XMLManager::LoadItems " << item->name() << " " << count << std::endl;
 			}
 			
 

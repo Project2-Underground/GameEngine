@@ -209,6 +209,22 @@ void SoundMuteButton::updateButton(float x, float y) {
 	
 }
 
+void SoundMuteButton::checkColliderPressed(float x, float y) {
+	if (this->col->isClicked(x, y)) {
+		MouseInput::GetInstance()->SetCurrentButtonPressed(this);
+		Game::GetInstance()->GetScreen()->buttonClicked = true;
+	}
+}
+
+void SoundMuteButton::checkColliderReleased(float x, float y) {
+	if (this->col->isClicked(x, y)) {
+		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			action();
+		}
+	}
+}
+
 ChatNoteInfoButton::ChatNoteInfoButton(std::string texture, std::string _title, int _index, bool noti) :Button(texture) {
 	hasNewInfo = noti;
 	index = _index;

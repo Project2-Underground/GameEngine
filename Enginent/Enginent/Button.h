@@ -191,6 +191,8 @@ public:
 	SoundMuteButton(std::string texture, int t) : Button(texture) { type = t; }
 	void SetMuteTexture(std::string);
 	void updateButton(float, float);
+	void checkColliderPressed(float x, float y);
+	void checkColliderReleased(float x, float y);
 	void action();
 };
 
