@@ -40,7 +40,7 @@
 			<fg texture="Texture/level1/EliasRoom/Elias_Room_Foreground.png" sizeX="1280" sizeY="720" posX="0" posY="0" layer="0"/>
 		</foreground>
 	</EliasRoom>
-	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70" dialogue="HallRoom">
+	<MainHallUpper left_limit="-1571" right_limit="1571" top_limit="360" bottom_limit="-360" y="-70" dialogue="HallRoom" bgm="HallRoom">
 		<background>
 			<bg texture="Texture/level1/MainHall/UpperFloor/HallRoomUpperFloor_Template.png" sizeX="3142" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>

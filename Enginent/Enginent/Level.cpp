@@ -162,6 +162,13 @@ void Level::LeftClick(float x, float y) {
 void Level::ChangeRoom(std::string roomName, std::string door) {
 	currentRoom = rooms[roomName];
 
+
+	SoundManager* sm = SoundManager::GetInstance();
+	if(!currentRoom->bgmName.empty() && sm->currentBGM != currentRoom->bgmName){
+		sm->StopCurrentBGM();
+		sm->playSound(BGM, currentRoom->bgmName);
+	}
+
 	Player* player = ((GameScreen*)Game::GetInstance()->GetScreen())->GetPlayer();
 
 	float playerNextx = 0;

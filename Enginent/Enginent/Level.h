@@ -28,6 +28,7 @@ public:
 	std::map<std::string, Door*> doors;
 	std::string name;
 	std::string dialogue;
+	std::string bgmName;
 
 	void Render();
 	void Update();

@@ -42,6 +42,7 @@ public:
 	void upVolume(SoundType);
 	void downVolume(SoundType);
 	void toggleMute(SoundType);
+	void StopCurrentBGM();
 
 	float getVolume(SoundType);
 	void setVolume(SoundType, float);
@@ -49,4 +50,6 @@ public:
 	void setMute(SoundType, bool);
 	void LoadMute();
 	~SoundManager();
+
+	std::string currentBGM;
 };

@@ -19,6 +19,9 @@ void SoundManager::Init()
 	bgms["MainScreen"] = createSound("Sound/BG_Mainscreen.mp3");
 	bgms["Mainfloor2"] = createSound("Sound/mainfloor2.mp3");
 	bgms["Mainfloor3"] = createSound("Sound/mainfloor3.mp3");
+	bgms["HallRoom"] = createSound("Sound/Hall_Room_BG_Music.mp3");
+	bgms["EndTheme"] = createSound("Sound/Ending_Theme.mp3");
+	bgms["Buildng3"] = createSound("Sound/Building3_BGM.mp3");
 
 	// normal SFX
 	sfxs["Walking"] = createSound("Sound/walking_sound.mp3");
@@ -54,7 +57,8 @@ void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 			switch (t)
 			{
 			case BGM:
-				soundEngine->play2D(bgms[sound], loop);
+				soundEngine->play2D(bgms[sound], loop); 
+				currentBGM = sound;
 				break;
 			case SFX:
 				soundEngine->play2D(sfxs[sound], loop);
@@ -98,8 +102,13 @@ void SoundManager::stop(SoundType t,std::string sound) {
 	}
 }
 
+void SoundManager::StopCurrentBGM() {
+	soundEngine->stopAllSoundsOfSoundSource(bgms[currentBGM]);
+}
+
 void SoundManager::stopAllSounds() {
 	soundEngine->stopAllSounds();
+	currentBGM.clear();
 }
 
 void SoundManager::upVolume(SoundType t) {
