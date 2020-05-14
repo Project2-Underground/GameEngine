@@ -49,7 +49,7 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 }
 void InteractableObj::action() {
 	SoundManager::GetInstance()->playSound(SFX,sound);
-	std::cout << "InteractableObj::action() " << dialogue_name << " nnn\n";
+	std::cout << "InteractableObj::action() " << object_name << " " << dialogue_name << " \n";
 
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
@@ -389,6 +389,10 @@ void PlayerTriggerObj::Update() {
 	if (anim && display)
 		anim->Update();
 	if (!triggered && col->isCollide(Game::GetInstance()->GetPlayer()->col)) {
+
+		// hardcode
+		if (object_name == "Puzzle6_NPC1F1")
+			dialogue_name = "Building4_NPC1";
 		action();
 		triggered = true;
 		Game::GetInstance()->GetPlayer()->StopWalking();

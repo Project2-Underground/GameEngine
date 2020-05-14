@@ -43,9 +43,9 @@
 			<MainFloor2_Building4_Door texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" sizeX="788" sizeY="379" posX="5064" posY="1" next_room="" next_door="" layer="0" dialogue="Floor2_Building4">
 				<key name="NONE"/>
 			</MainFloor2_Building4_Door>
-			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" layer="0" type="1" dialogue="Floor2_BackAlley">
+			<MainFloor2_BlackAlley texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" sizeX="243" sizeY="570" posX="-5728" posY="75" next_room="BackAlley" next_door="AlleyOut" layer="0" dialogue="Floor2_BackAlley" dialogue_2="Floor2_BackAlley">
+				<wall_door/>
 				<isOpenDoor/>
-				<colOff/>
 			</MainFloor2_BlackAlley>
 		</doors>
 		<NPCs>
@@ -248,6 +248,7 @@
 		</doors>
 		<NPCs>
 			<Puzzle6_NPC1F2 sizeX="152" sizeY="369" posX="-402" posY="-37" layer="0" dialogue="">
+				<key name="Puzzle6_Paper"/>
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -403,6 +404,7 @@
 		</interactObj>
 		<doors>
 			<AlleyOut texture="NONE" sizeX="250" sizeY="720" posX="-662.5" posY="0" next_room="MainFloor2" next_door="MainFloor2_BlackAlley" layer="0">
+				<isOpenDoor/>
 				<playerNextX value="-674"/>
 			</AlleyOut>
 		</doors>
@@ -414,7 +416,7 @@
 			</BackAlley_Emma>
 		</NPCs>
 		<foreground>
-			<fg texture="Texture/level2/BackAlley/BackAlley_Template.png" sizeX="1575" sizeY="169" posX="0" posY="-275.5" layer="0"/>
+			<fg texture="Texture/level2/BackAlley/BackAlley_Foreground.png" sizeX="1575" sizeY="169" posX="0" posY="-275.5" layer="0"/>
 		</foreground>
 	</BackAlley>
 </level>

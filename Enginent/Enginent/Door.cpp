@@ -63,7 +63,7 @@ void Door::Open() {
 void WallDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	//std::cout << "WallDoor::action() " << used << " " << triggered << std::endl;
-	if (triggered) {
+	if (used || triggered) {
 		interactType = DOOR;
 		if (!dialogue_after_trigger.empty()) {
 			TextBox::GetInstance()->setText(dialogue_after_trigger);

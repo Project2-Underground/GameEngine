@@ -34,9 +34,9 @@ TextBox::TextBox()
 void TextBox::setText(std::string key, bool talk)
 {
 	//std::cout << "key: " << key << std::endl;
-	Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 	if (key != "")
 	{
+		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 		SetDisplay(true);
 		Dialogue* tmp = scriptManager->GetDialogue(key);
 		if (tmp->dialogue.size() != 0)

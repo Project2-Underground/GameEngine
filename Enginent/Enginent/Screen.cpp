@@ -166,7 +166,7 @@ void GameScreen::Init() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
 	PuzzleTime = false;
 
-	pause = new OpenPauseWindowButton("Texture/tmp_texture/tmp_pause.png");
+	pause = new OpenPauseWindowButton("Texture/UI/GameUI/Pause_button.png");
 	pause->SetSize(60, -60);
 	pause->SetPosition(glm::vec3(600, 300, 1));
 	pause->SetCollder(new Collider(pause));

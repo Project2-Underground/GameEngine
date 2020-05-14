@@ -164,7 +164,6 @@ void SoundManager::toggleMute(SoundType t) {
 		for (auto sound : bgms)
 			if (sound.second != nullptr)
 				sound.second->setDefaultVolume(vol);
-
 		break;
 	case SFX:
 		sfxMute = !sfxMute;
