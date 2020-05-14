@@ -469,7 +469,7 @@ void GameScreen::ClosePuzzle() {
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	switch (key)
+	/*switch (key)
 	{
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
@@ -498,7 +498,7 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 		break;
 	default:
 		break;
-	}
+	}*/
 }
 
 GameScreen::~GameScreen() {
