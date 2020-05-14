@@ -943,7 +943,9 @@
 			<Dialogue name = " " text = "*Smashes sound*">
 				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png" enable = "MainFloor2_BlackAlley" bool = "0"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door"/>
+			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door">
+				<sprite name = "MainFloor2_Template" texture ="Texture/Test/black.png"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
 		</sub>
 	</script>
