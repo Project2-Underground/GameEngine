@@ -41,7 +41,7 @@
 	</Puzzle6_MEAT>
 	<Puzzle6_Paper i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713">
 		<dialogueAferUseWithObjs>
-			<Puzzle6_NPC1 dialogue="puzzle6_2_NPC1_pres"/>
+			<Puzzle6_NPC1F2 dialogue="puzzle6_2_NPC1_pres"/>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_Paper>
 	<Puzzle6_PillAfternoon_sep1 i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep1.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillAfternoon_sep1.png" sizeX="72" sizeY="64" IsizeX="72" IsizeY="64">
@@ -100,7 +100,7 @@
 		</separate>
 		<dialogueAferUseWithObjs>
 			<Elias dialogue="Building4_med1">
-				<Puzzle6_PillBedtime objName="Puzzle6_NPC2F1" dialogue="Building4_med2meatmed1"/>
+				<Puzzle6_PillBedtime_withMEAT objName="Puzzle6_NPC2F1" dialogue="Building4_med2meatmed1"/>
 			</Elias>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>

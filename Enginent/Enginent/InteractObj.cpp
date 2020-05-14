@@ -49,6 +49,7 @@ void InteractableObj::SetDialogueName(std::string n, std::string a)
 }
 void InteractableObj::action() {
 	SoundManager::GetInstance()->playSound(SFX,sound);
+	std::cout << "InteractableObj::action() " << dialogue_name << " nnn\n";
 	if (talk == true)
 	{
 		if (dialogue_after != "")
