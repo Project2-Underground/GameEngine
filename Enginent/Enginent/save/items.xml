@@ -77,7 +77,7 @@
 	</Puzzle6_PillAfternoon>
 	<Puzzle6_PillBedtime i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
 		<dialogueAferUseWithObjs>
-			<Puzzle6_NPC2 dialogue="Building4_med2"/>
+			<Puzzle6_NPC2F1 dialogue="Building4_med2"/>
 		</dialogueAferUseWithObjs>
 		<separate>
 			<Puzzle6_PillAfternoon_sep1/>
@@ -100,14 +100,14 @@
 		</separate>
 		<dialogueAferUseWithObjs>
 			<Elias dialogue="Building4_med1">
-				<Puzzle6_PillBedtime objName="Puzzle6_NPC2" dialogue="Building4_med2meatmed1"/>
+				<Puzzle6_PillBedtime objName="Puzzle6_NPC2F1" dialogue="Building4_med2meatmed1"/>
 			</Elias>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>
 	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
 		<multipleUse/>
 		<dialogueAferUseWithObjs>
-			<Puzzle6_NPC2 dialogue="Building4_med2meat"/>
+			<Puzzle6_NPC2F1 dialogue="Building4_med2meat"/>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillBedtime_withMEAT>
 	
@@ -115,7 +115,7 @@
 	<!-- Puzzle 6 F2 -->
 	<Puzzle6_Alcohol i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol.png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773">
 		<dialogueAferUseWithObjs>
-			<Puzzle6_NPC2 dialogue="puzzle6_2_NPC2_liq"/>
+			<Puzzle6_NPC2F2 dialogue="puzzle6_2_NPC2_liq"/>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_Alcohol>
 	<Puzzle6_Cloth i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Cloth(I).png" sizeX="782" sizeY="783" IsizeX="535" IsizeY="719">
