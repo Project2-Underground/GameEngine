@@ -72,8 +72,8 @@
 		<choice text = "What will happen if I'm still stuck in this experiment?" nextDialogue = "BackAlley_Emma1_B"/>
 	</choices>	
 	<choices key = "c_emily">
-		<choice text = "I want to go outside." nextDialogue = "Lab_Emily_A"/>
-		<choice text = "I'm staying." nextDialogue = "Lab_Emily_B"/>
+		<choice text = "I want to go outside." nextDialogue = "Lab_EmilyAns"/>
+		<choice text = "I'm staying." nextDialogue = "Lab_EmilyAns"/>
 	</choices>	
 
 	

@@ -1574,7 +1574,9 @@
 		</sub>
 	</script>
 	<script key = "Lab_Emily" loopIndex = "0">
-		<sub choice = "c_emily">
+		<sub choice = "c_emily" change = "2">
+			<ChangeName name = "Lab_EndDoor" new = "Lab_DoorUp"/>
+			<ChangeName name = "Lab_Door" new = "Lab_Door"/>
 			<Dialogue name = "Elias" text = "Emma?"/>
 			<Dialogue name = "???" text = "Everyone always think that."/>
 			<Dialogue name = "Emily" text = "My name is Emily, a scientist supervising this place. \n And... a daughter of Emma that you've met."/>
@@ -1602,6 +1604,12 @@
 			<Dialogue name = "Emily" text = "It's fine. There are lots of people down there. Sooner or later, someone will be able to replace you. I can't imagine a chicken like yourself to be in an army anyways."/>
 			<Dialogue name = "Emily" text = "But that's your choice to choose. If you choose to be with the army, you might be helping out a lot of people."/>
 			<Dialogue name = "Elias" text = "( My choice... )"/>
+		</sub>
+	</script>
+	<script key = "Lab_EmilyAns" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "If you want to return to a normal life, then good luck. Continue this way, I'll handle everything else."/>
+			<Dialogue name = "Emily" text = "But if you want to join the army, walk out through the lab door. My Buttler robot will handle everything."/>
 		</sub>
 	</script>
 	<script key = "Lab_DoorUp" loopIndex = "0">
