@@ -1078,7 +1078,8 @@
 	</script>
 	<script key = "Building4_med2meatmed1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "Okay, I will accept your offer... You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you."/>
+			<Dialogue name = "Bob" text = "Okay, I will accept your offer... You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you." enable = "Building4Puzzle6Floor1Up"/>
+				
 			<Dialogue name = "Elias" text = " Yeah, sure."/>
 		</sub>
 	</script>

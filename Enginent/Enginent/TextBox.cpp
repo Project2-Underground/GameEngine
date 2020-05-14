@@ -138,11 +138,21 @@ void TextBox::setText(std::string key, bool talk)
 			//enable object
 			if (d_text->dialogue[d_index].Enable != "")
 			{
-				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+				Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
 				if (obj != nullptr)
 				{
 					obj->SetDisplay(d_text->dialogue[d_index].en);
 					obj->col->enable = d_text->dialogue[d_index].en;
+					obj->Open();
+				}
+				else
+				{
+					ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+					if (obj2 != nullptr)
+					{
+						obj2->SetDisplay(d_text->dialogue[d_index].en);
+						obj2->col->enable = d_text->dialogue[d_index].en;
+					}
 				}
 			}
 
@@ -368,13 +378,25 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//enable object
 		if (d_text->dialogue[d_index].Enable != "")
 		{
-			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+			Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
 			if (obj != nullptr)
 			{
 				obj->SetDisplay(d_text->dialogue[d_index].en);
 				obj->col->enable = d_text->dialogue[d_index].en;
+				obj->Open();
+			}
+			else
+			{
+				ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+				if (obj2 != nullptr)
+				{
+					obj2->SetDisplay(d_text->dialogue[d_index].en);
+					obj2->col->enable = d_text->dialogue[d_index].en;
+				}
 			}
 		}
+
+		
 
 		ViewWindow* vw = ViewWindow::GetInstance();
 		if (d_text->dialogue[d_index].showItemWin)
