@@ -36,7 +36,10 @@ void Player::Update()
 	anim->Update();
 	if (TriggerRouteB == 4 && !TextBox::GetInstance()->IsDisplay()) {
 		TextBox::GetInstance()->setText("Route_B");
-		((GameScreen*)Game::GetInstance()->GetScreen())->butler->currentPhase = Butler::ROUTE_B;
+		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
+		gs->butler->currentPhase = Butler::ROUTE_B;
+		// change others dialogue in floor 2
+
 	}
 }
 

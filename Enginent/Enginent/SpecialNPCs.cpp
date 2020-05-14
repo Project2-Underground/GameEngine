@@ -94,6 +94,10 @@ void Butler::Appear() {
 		disappearAfterAction = false;
 		clickToInteract = false;
 		triggered = false;
+		// change others dialogues in floor3
+		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
+
+
 		break;
 	default:
 		break;
