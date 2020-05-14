@@ -1224,7 +1224,7 @@
 		<sub>
 			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Building4Puzzle6Floor2Down"/>
 			<Dialogue name = "Arlo" text = "..." enable = "Puzzle6_NPC1F3" bool = "0"/>
-			<Dialogue name = "Arlo" text = "( He is really fast. I better be hurry. )"/>
+			<Dialogue name = "Arlo" text = "( He is really fast. I better be hurry. )" enable = "Puzzle6_NPC2F2" bool = "0"/>
 		</sub>
 	</script>
 	
