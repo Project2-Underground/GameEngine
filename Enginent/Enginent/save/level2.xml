@@ -125,7 +125,7 @@
 			<fg texture="Texture/level2/Building2/Building2_Foreground1.png" sizeX="1575" sizeY="121" posX="0" posY="-299.5" layer="0"/>
 		</foreground>
 	</Building2>
-	<Building3 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90">
+	<Building3 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90" dialogue="RouteA_Building3">
 		<background>
 			<bg texture="Texture/level2/Building3/Building3_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
@@ -138,27 +138,27 @@
 			</Building3_Exit>
 		</doors>
 		<NPCs>
-			<Building3_NPC4 sizeX="133" sizeY="376" posX="-65.5" posY="-42" layer="0" dialogue="">
+			<Building3_NPC4 sizeX="133" sizeY="376" posX="-65.5" posY="-42" layer="0" dialogue="RouteA_Building3_NPC4">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC4.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Building3_NPC4>
-			<Building3_NPC5 sizeX="139" sizeY="391" posX="107" posY="-28.5" layer="0" dialogue="">
+			<Building3_NPC5 sizeX="139" sizeY="391" posX="107" posY="-28.5" layer="0" dialogue="RouteA_Building3_NPC5">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC5.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Building3_NPC5>
-			<Building3_NPC6 sizeX="156" sizeY="411" posX="-425.5" posY="-17.5" layer="0" dialogue="">
+			<Building3_NPC6 sizeX="156" sizeY="411" posX="-425.5" posY="-17.5" layer="0" dialogue="RouteA_Building3_NPC6">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC6.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Building3_NPC6>
-			<Building3_NPC7 sizeX="130" sizeY="376" posX="-241" posY="-40.5" layer="0" dialogue="">
+			<Building3_NPC7 sizeX="130" sizeY="376" posX="-241" posY="-40.5" layer="0" dialogue="RouteA_Building3_NPC7">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/NPC7.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Building3_NPC7>
-			<Cultist_Mask sizeX="145.5" sizeY="366" posX="340.5" posY="-54.5" layer="0" dialogue="" dialogue_2="">
+			<Cultist_Mask sizeX="145.5" sizeY="366" posX="340.5" posY="-54.5" layer="0" dialogue="RouteA_Building3_Cultist" dialogue_2="">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/Floor2/Cultist_Mask.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
@@ -231,7 +231,7 @@
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
 			<Puzzle6_NPC1Trigger texture="NONE" sizeX="202" sizeY="369" posX="-402" posY="-37" type="11" layer="0" dialogue="puzzle6_2_NPC1"/>
-			<Puzzle6_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
+			<Puzzle6_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="292" sizeY="285" posX="-84" posY="-80" type="8" layer="1">
 				<clicked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetWithAlcohol.png"/>
 				<picked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetOpen.png"/>
 				<item name="Puzzle6_Alcohol" scriptHandleItem="false"/>
@@ -339,7 +339,7 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
-			<Puzzle7_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="297" sizeY="356" posX="-441" posY="-18" type="8" layer="1">
+			<Puzzle7_Cabinet texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" sizeX="292" sizeY="285" posX="-194" posY="-80" type="8" layer="1">
 				<clicked texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_CabinetWithWater.png"/>
 				<picked texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_CabinetOpen.png"/>
 				<item name="Puzzle7_Water" scriptHandleItem="false"/>
