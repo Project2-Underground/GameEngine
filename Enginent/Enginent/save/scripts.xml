@@ -1145,7 +1145,7 @@
 	</script>
 	<script key = "puzzle6_2_NPC2_liq" loopIndex = "0">
 		<sub change = "1">
-			<ChangeName name = "Puzzle6_NPC1" new = "puzzle6_2_NPC1_pres" new_a = "puzzle6_2_NPC1_pres"/>
+			<ChangeName name = "Puzzle6_NPC1F2" new = "puzzle6_2_NPC1_pres" new_a = "puzzle6_2_NPC1_pres"/>
 			<Dialogue name = "Bob" text = "Ah... Sorry, but you want me to take a med with the liqueur?"/>
 			<Dialogue name = "Elias" text = "Why not?"/>
 			<Dialogue name = "Bob" text = "Why yes?! \n Please be serious, I'm in hurry!"/>
@@ -1202,16 +1202,17 @@
 		</sub>
 	</script>
 	<script key = "puzzle6_3_puppettorch" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Wooden puppet" text = "Aaaaaaaaa!!!!!">
+		<sub change = "1">
+			<ChangeName name = "Puzzle6_NPC1F3" new = "puzzle6_3_pass" new_a = ""/>
+			<Dialogue name = "Wooden puppet" text = "Aaaaaaaaa!!!!!" enable = "Puzzle6_NPC1_AfterPuzzle">
 				<sprite name = "Puzzle6_Puppet" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_BurntPuppet.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Did it just scream?"/>
+			<Dialogue name = "Elias" text = "Did it just scream?" enable = "Cultist_AfterPuzzle"/>
 		</sub>
 	</script>
 	<script key = "puzzle6_3_pass" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this."/>
+			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Puzzle6_NPC1F3" bool = "0"/>
 		</sub>
 	</script>
 	
