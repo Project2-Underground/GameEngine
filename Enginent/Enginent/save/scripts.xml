@@ -636,13 +636,13 @@
 	<script key = "Dann1_C" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Dann" text = "Huh? The books? When I took it out?"/>
-			<Dialogue name = "Dann" text = "( Oh no, is he gone again? )"/>
+			<Dialogue name = "Elias" text = "( Oh no, is he gone again? )"/>
 			<Dialogue name = "Elias" text = "Mister, can you remember anything, at all?"/>
-			<Dialogue name = "Elias" text = "Hm... \n Some books were already got taken out when I went to grab one."/>
-			<Dialogue name = "Elias" text = "Each row has only one color and the symbols do not repeat."/>
-			<Dialogue name = "Elias" text = "I switch the place around before taking the book. \n It was quite fun."/>
+			<Dialogue name = "Dann" text = "Hm... \n Some books were already got taken out when I went to grab one."/>
+			<Dialogue name = "Dann" text = "Each row has only one color and the symbols do not repeat."/>
+			<Dialogue name = "Dann" text = "I switch the place around before taking the book. \n It was quite fun."/>
 			<Dialogue name = "Elias" text = "You mixed them all up?!"/>
-			<Dialogue name = "Elias" text = "Right? \n But, but, I re-ordered the symbols to their correct places, although the colors are not quite right."/>
+			<Dialogue name = "Dann" text = "Right? \n But, but, I re-ordered the symbols to their correct places, although the colors are not quite right."/>
 			<Dialogue name = "Elias" text = "( Hm... Atleast I can still use the symbols as the guideline. \n So, the symbols will not repeat on the same row... )"/>
 		</sub>		
 	</script>
@@ -1224,7 +1224,7 @@
 		<sub>
 			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Building4Puzzle6Floor2Down"/>
 			<Dialogue name = "Arlo" text = "..." enable = "Puzzle6_NPC1F3" bool = "0"/>
-			<Dialogue name = "Arlo" text = "( He is really fast. I better be hurry. )"/>
+			<Dialogue name = "Arlo" text = "( He is really fast. I better be hurry. )" enable = "Puzzle6_NPC2F2" bool = "0"/>
 		</sub>
 	</script>
 	
@@ -1408,7 +1408,7 @@
 	</script>
 	<script key = "puzzle7_lockeddoor_item" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Farewell, puppet boy."/>
+			<Dialogue name = "Elias" text = "Farewell, puppet boy." sound = "chainsaw"/>
 			<Dialogue name = "Elias" text = "..." sound = "OpenDoor" level = "2"/>
 		</sub>
 	</script>

@@ -539,7 +539,6 @@ void XMLManager::SaveGame(std::string filename) {
 	saveLevel.append_child("Butler").append_attribute("display").set_value(butler->IsDisplay());
 	saveLevel.child("Butler").append_attribute("phase").set_value((int)butler->currentPhase);
 
-
 	// saving player and inventory
 	Player* player = game->GetPlayer();
 	saveLevel.child("Player").append_attribute("posX").set_value(player->getPos().x);
