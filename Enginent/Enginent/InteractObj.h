@@ -37,9 +37,11 @@ protected:
 	bool hasNextTexture;
 	bool hasUsedTexture;
 	bool hasPositionAfterUsed;
+	bool hasSizeAfterUsed;
 	bool hasNewItemAfterUsed;
 	bool talk;
 	glm::vec3 positionAfterUse;
+	glm::vec3 sizeAfterUse;
 	std::vector<std::string> noteNames;
 	std::string item_to_use;
 	std::string new_item_after_used;
@@ -75,6 +77,7 @@ public:
 	void SetNextTexture(std::string);
 	void SetUsedTexture(std::string);
 	void SetNewItemAfterUsed(std::string);
+	void SetNewSizeAfterUsed(float x, float y);
 	void SetPositionAfterUsed(float x, float y);
 	void SetItem(std::string item) { itemName = item; hasItem = true; }
 	Item* GetItem();

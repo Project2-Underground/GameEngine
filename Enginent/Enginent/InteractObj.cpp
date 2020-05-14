@@ -131,6 +131,9 @@ void InteractableObj::UseItem(Item* item) {
 			vw->SetViewItem(item);
 			vw->Open();
 		}
+		if (hasSizeAfterUsed) {
+			SetSize(sizeAfterUse);
+		}
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
@@ -207,6 +210,10 @@ void InteractableObj::SetNextTexture(std::string next) {
 void InteractableObj::SetUsedTexture(std::string used) {
 	usedTexture = Game::GetInstance()->GetRenderer()->LoadTexture(used);
 	hasUsedTexture = true;
+}
+void InteractableObj::SetNewSizeAfterUsed(float x, float y) {
+	sizeAfterUse = glm::vec3(x, y, 1);
+	hasSizeAfterUsed = true;
 }
 void InteractableObj::SetPositionAfterUsed(float x, float y) {
 	positionAfterUse = glm::vec3(x, y, 1);
@@ -327,15 +334,13 @@ void NonPlayer::action()
 		}
 		if (dialogue_name != "")
 		{
+			Game::GetInstance()->GetPlayer()->AddTriggerRouteB(dialogue_name);
 			TextBox::GetInstance()->setText(this->dialogue_name, talk);
 			if (!talk)
 			{
 				talk = true;
 			}
 			TextBox::GetInstance()->SetDisplay(true);
-			if (dialogue_name == "Floor2_Mask4_2" || dialogue_name == "Floor2_Mask7_2"
-				|| dialogue_name == "Floor2_Mask5_2" || dialogue_name == "Floor2_Mask6_2")
-				Game::GetInstance()->GetPlayer()->TriggerRouteB++;
 		}
 	}
 	Game::GetInstance()->GetPlayer()->anim->Play("Idle");

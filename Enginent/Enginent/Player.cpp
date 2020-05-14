@@ -7,7 +7,8 @@
 
 Player::Player()
 {
-	object_name = "Elias";
+	object_name = "Elias"; 
+	RouteB_Dialogue = "Route_B";
 	walkLimit = nullptr;
 	next_position = glm::vec3(this->pos);
 	anim = new Animator();
@@ -34,8 +35,9 @@ void Player::Update()
 		}
 	}
 	anim->Update();
-	if (TriggerRouteB == 4 && !TextBox::GetInstance()->IsDisplay()) {
-		TextBox::GetInstance()->setText("Route_B");
+	if (TriggerRouteB && !RouteB_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
+		TextBox::GetInstance()->setText(RouteB_Dialogue);
+		RouteB_Dialogue.clear();
 		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
 		gs->butler->currentPhase = Butler::ROUTE_B;
 		// change others dialogue in floor 2
@@ -62,6 +64,21 @@ void Player::UseItem(Item* item) {
 			i->UnselectItem();
 			gs->FindItem("Puzzle6_PillBedtime_withMEAT")->ChangeDialogueAfterUsedWithObj("Puzzle6_NPC2", "Building4_med2meatmed1");
 		}
+	}
+}
+
+void Player::AddTriggerRouteB(std::string dialogueName) {
+	for (auto npc : npcTalkRouteB)
+		if (npc == dialogueName)
+			return;
+
+	std::cout << " Player::AddTriggerRouteB " << dialogueName << std::endl;
+	if (dialogueName == "Floor2_Mask4_2" || dialogueName == "Floor2_Mask7_2"
+		|| dialogueName == "Floor2_Mask5_2" || dialogueName == "Floor2_Mask6_2") {
+		npcTalkRouteB.push_back(dialogueName);
+		if (npcTalkRouteB.size() == 4)
+			TriggerRouteB = true;
+		std::cout << " Player::AddTriggerRouteB " << npcTalkRouteB.size() << std::endl;
 	}
 }
 
