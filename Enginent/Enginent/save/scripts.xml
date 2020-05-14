@@ -1019,10 +1019,11 @@
 		</sub>
 	</script>
 	<script key = "RouteB_Building3_Cultist" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this."/>
-			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it."/>
-			<Dialogue name = "Elias" text = "( I am finally going out. )"/>
+		<sub change = "1">
+			<ChangeName name = "MainFloor2_Building2_Door" new = "Floor2_Building2"/>
+			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this." enable = "BackAlley_Emma" bool = "0"/>
+			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it." enable = "MainFloor2_Building1_Door"/>
+			<Dialogue name = "Elias" text = "( I am finally going out. )" enable = "MainFloor2_BlackAlley"/>
 			<Dialogue name = "Noel" text = "I believe there is an exit within that information!" enable = "MainFloor2_Building4_Door">
 				<note name = "EmmaNote5"/>
 			</Dialogue>
