@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "TimeSystem.h"
 
-#define TEXT_SPEED 100
+#define TEXT_SPEED 50
 
 TextBox* TextBox::_instance = nullptr;
 
@@ -140,9 +140,16 @@ void TextBox::setText(std::string key, bool talk)
 			}
 
 			//change level
-			if (d_text->dialogue[d_index].level != -1)
+			if (d_text->dialogue[d_index].level != -1 && d_text->dialogue[d_index].level < 3)
 			{
 				Game::GetInstance()->TriggerChangeLevel(d_text->dialogue[d_index].level);
+			}
+			else if (d_text->dialogue[d_index].level != -1)
+			{
+				Game* game = Game::GetInstance();
+				game->GetScreen()->CloseGameAllWindow();
+				game->ChangeScreenState(MENUSCREEN);
+				SoundManager::GetInstance()->stopAllSounds();
 			}
 
 			//enable object
@@ -395,9 +402,16 @@ void TextBox::clickLeft(glm::vec3 pos)
 		}
 
 		//change level
-		if (d_text->dialogue[d_index].level != -1)
+		if (d_text->dialogue[d_index].level != -1 && d_text->dialogue[d_index].level < 3)
 		{
 			Game::GetInstance()->TriggerChangeLevel(d_text->dialogue[d_index].level);
+		}
+		else if(d_text->dialogue[d_index].level != -1)
+		{
+			Game* game = Game::GetInstance();
+			game->GetScreen()->CloseGameAllWindow();
+			game->ChangeScreenState(MENUSCREEN);
+			SoundManager::GetInstance()->stopAllSounds();
 		}
 
 		//enable object

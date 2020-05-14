@@ -26,7 +26,7 @@ MenuScreen::MenuScreen() {
 	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
 	setting->Init(264, -81, glm::vec3(-266, -111, 1.0f));
 
-	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/ExitBotton_Point.png", "Texture/UI/MainScreen/ExitBotton_Click.png");;
+	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png");;
 	quit->Init(186, -86, glm::vec3(-262, -211, 1.0f));
 
 	background = new UIObject();

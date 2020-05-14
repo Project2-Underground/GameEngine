@@ -789,7 +789,7 @@
 	</script>
 	<script key = "Floor2_mask7" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!" room = "Building4Puzzle7Floor1"/>
+			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!"/>
 			<Dialogue name = "Sophia" text = "We need to do something! \n We need to take care of that scientist!"/>
 			<Dialogue name = "Sophia" text = "Who knows what kind of tortures are waiting for us if we get caught."/>
 			<Dialogue name = "Charlotte" text = "The chief is searching for him, he'll tell us about it anytime soon. \n Right now he is preparing for our new rookie."/>
@@ -852,7 +852,7 @@
 	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
-			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"  enable = "MainFloor2_BlackAlley" room = "" door =""/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"  enable = "MainFloor2_BlackAlley"/>
 		</sub>
 	</script>
 	<script key = "Floor2_Mask4_2" loopIndex = "0">
@@ -1552,6 +1552,7 @@
 			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/black.png"/>
 			<Dialogue name = "???" text = "What a shame. The subject named Elias is still imperfect."/>
 			<Dialogue name = "???" text = "... This is such an unfortunate event. They both were so close."/>
+			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
 	<script key = "Floor3B_factory" loopIndex = "0">
@@ -1563,6 +1564,7 @@
 			<Dialogue name = "???" text = "Finally, we got a usable seed." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "At last... we have accomplished something." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
 	
@@ -1619,6 +1621,7 @@
 			<Dialogue name = "Elias" text = "So, can you tell me something about myself? What happened throughout these years that I'm gone." cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Emily" text = "Are you sure? How about what you are going to do after this?" cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Elias" text = "I don't know. Maybe I'll go find what left of Emma's. I feel like I know her before." cutscene = "Texture/Cutscene/1.png"/>
+			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
 	<script key = "Lab_Door" loopIndex = "0">
@@ -1631,6 +1634,7 @@
 			<Dialogue name = "Emily" text = "He somehow turned into one of the good soldiers at the last minute." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "It's a pity we have to erase all of his memories." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "We can only hope he'll become our great success." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
 	
