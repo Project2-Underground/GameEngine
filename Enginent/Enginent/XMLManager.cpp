@@ -431,6 +431,9 @@ void XMLManager::LoadFromSave(std::string filename) {
 				tmpI->multipleUse = item.attribute("multipleUse").as_bool();
 				gs->GetInventory()->GetInventoryBox(i)->SetItem(tmpI);
 			}
+			else {
+				gs->GetInventory()->GetInventoryBox(i)->RemoveItem();
+			}
 			item = item.next_sibling();
 		}
 

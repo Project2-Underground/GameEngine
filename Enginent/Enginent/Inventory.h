@@ -37,9 +37,11 @@ public:
 	void CombineItem(Item* item);
 	void SelectItem(Item* item);
 	void UnselectItem();
+	int FreeSlot();
 	bool IsItemInInventory(std::string);
 	Item* FindItem(std::string);
 	Item* GetSelectedItem() { return other; }
+	void ClearItem();
 
 	int GetSize() { return (int)InventoryBoxes.size(); }
 	//void displayItem();

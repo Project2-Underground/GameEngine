@@ -58,6 +58,11 @@ Item* Inventory::FindItem(std::string itemName) {
 	}
 	return nullptr;
 }
+void Inventory::ClearItem() {
+	for (auto ib : InventoryBoxes) {
+		ib->RemoveItem();
+	}
+}
 void Inventory::Update() {
 	// temporary mouse input
 	int x, y;
@@ -109,6 +114,14 @@ void Inventory::UnselectItem() {
 		MouseInput::GetInstance()->ResetActionType();
 		triggeredOpen = false;
 	}
+}
+int Inventory::FreeSlot() {
+	int count = 0;
+	for (auto* ib : InventoryBoxes) {
+		if (ib->GetItem() != nullptr)
+			count++;
+	}
+	return count;
 }
 void Inventory::Render() {
 	GLRenderer* renderer = Game::GetInstance()->GetRenderer();

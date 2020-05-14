@@ -69,11 +69,16 @@ std::string Item::GetDialogueAfterUseWith(std::string objName) {
 void Item::Separate() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	Inventory* inventory = gs->GetInventory();
-	if (itemsAfterSeparated.size() != 0) {
-		inventory->RemoveItem(this);
-		for (auto i : itemsAfterSeparated) {
-			inventory->AddItem(gs->FindItem(i));
+	if (inventory->FreeSlot() >= itemsAfterSeparated.size()) {
+		if (itemsAfterSeparated.size() != 0) {
+			inventory->RemoveItem(this);
+			for (auto i : itemsAfterSeparated) {
+				inventory->AddItem(gs->FindItem(i));
+			}
 		}
+	}
+	else {
+		// settext inventory full
 	}
 }
 void Item::Combine(Item* other) {
