@@ -3,7 +3,7 @@
 <!-- texture = NONE toset display false-->
 
 <level currentLevel="2" startPosX="-2949" Start="MainFloor2">
-	<MainFloor2 left_limit="-5700" right_limit="5700" top_limit="360" bottom_limit="-360" y="-80" dialogue="Floor2_start">
+	<MainFloor2 left_limit="-5700" right_limit="5700" top_limit="360" bottom_limit="-360" y="-80" dialogue="Floor2_start" bgm="Mainfloor2">
 		<background>
 			<MainFloor2_Template texture="Texture/level2/MainFloor2/MainFloor2_Template.png" sizeX="11699" sizeY="720" posX="0" posY="0" layer="0"/>
 			<MainFloor2_BG6 texture="Texture/level2/MainFloor2/MainFloor2_BG6.png" sizeX="11699" sizeY="375" posX="0" posY="173" layer="0"/>

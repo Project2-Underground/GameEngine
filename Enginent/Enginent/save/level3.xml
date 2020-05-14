@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <level currentLevel="3" startPosX="2696" Start="MainFloor3">
-	<MainFloor3 left_limit="-3650" right_limit="3650" top_limit="360" bottom_limit="-360" y="21" dialogue="Floor3A">
+	<MainFloor3 left_limit="-3650" right_limit="3650" top_limit="360" bottom_limit="-360" y="21" dialogue="Floor3A" bgm="Mainfloor3">
 		<background>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_Template.png" sizeX="7427" sizeY="720" posX="0" posY="0" layer="0"/>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0"/>
@@ -27,8 +27,8 @@
 		<NPCs>
 		</NPCs>
 		<foreground>
+			<fg texture="Texture/level3/Lab/MainFloor3_People1.png" sizeX="7427" sizeY="720" posX="0" posY="-157.5" layer="0"/>
 			<fg texture="Texture/level3/Lab/MainFloor3_FloorGround.png" sizeX="7427" sizeY="415" posX="0" posY="-157.5" layer="0"/>
-			<fg texture="Texture/level3/Lab/Lab_ForeGound.png" sizeX="7427" sizeY="720" posX="0" posY="-157.5" layer="0"/>
 		</foreground>
 	</MainFloor3>
 	<Lab left_limit="-1400" right_limit="1400" top_limit="360" bottom_limit="-360" y="-100.5" dialogue="Lab_start">
