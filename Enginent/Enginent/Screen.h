@@ -41,11 +41,14 @@ public:
 };
 
 class MenuScreen :public Screen {
+	bool splashScreen;
+	float splashScreenTime;
 	Button* play;
 	Button* load;
 	Button* setting;
 	Button* quit;
 	UIObject* background;
+	UIObject* SplashScreen;
 	std::vector<UIObject*> UI;
 public:
 	MenuScreen();

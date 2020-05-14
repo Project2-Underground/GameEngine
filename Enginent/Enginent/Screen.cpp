@@ -1,6 +1,7 @@
 
 #include "Screen.h"
 #include "Game.h"
+#include "TimeSystem.h"
 
 bool Screen::GameWindowOpen() {
 	for (auto w : windows)
@@ -16,6 +17,8 @@ void Screen::CloseGameAllWindow() {
 
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
+	splashScreen = true;
+	splashScreenTime = 0;
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/StartBotton_Point.png", "Texture/UI/MainScreen/StartBotton_Click.png");
 	play->Init(248, -70, glm::vec3(-258, 78, 1));
 
@@ -28,6 +31,10 @@ MenuScreen::MenuScreen() {
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png");;
 	quit->Init(186, -86, glm::vec3(-262, -211, 1.0f));
+
+	SplashScreen = new UIObject();
+	SplashScreen->SetTexture("Texture/SplashScreen.png");
+	SplashScreen->SetSize(1280, -720);
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -52,9 +59,18 @@ MenuScreen::MenuScreen() {
 }
 
 void MenuScreen::Render() {
-	Game::GetInstance()->GetRenderer()->Render(UI);
-	for (auto w : windows)
-		w->Render();
+	if (splashScreen) {
+		std::cout << splashScreenTime << std::endl;
+		splashScreenTime += TimeSystem::instance()->GetDT();
+		Game::GetInstance()->GetRenderer()->Render(SplashScreen);
+		if (splashScreenTime > 5)
+			splashScreen = false;
+	}
+	else {
+		Game::GetInstance()->GetRenderer()->Render(UI);
+		for (auto w : windows)
+			w->Render();
+	}
 }
 
 void MenuScreen::Update() {
@@ -63,13 +79,18 @@ void MenuScreen::Update() {
 }
 
 void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
-	if(GameWindowOpen())
-		for (auto w : windows)
-			w->LeftClick(screen.x, screen.y);
-	else 
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderPressed(screen.x, screen.y);
+	if (!splashScreen) {
+		if (GameWindowOpen())
+			for (auto w : windows)
+				w->LeftClick(screen.x, screen.y);
+		else
+			for (int j = 0; j < UI.size(); j++)
+				if (Button * button = dynamic_cast<Button*>(UI[j]))
+					button->checkColliderPressed(screen.x, screen.y);
+	}
+	else {
+		splashScreen = false;
+	}
 }
 
 void MenuScreen::RightClick(glm::vec3, glm::vec3)
@@ -84,13 +105,15 @@ void MenuScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
-	if (GameWindowOpen())
-		for (auto w : windows)
-			w->LeftRelease(screen.x, screen.y);
-	else
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j])) 
-				button->checkColliderReleased(screen.x, screen.y);
+	if (!splashScreen) {
+		if (GameWindowOpen())
+			for (auto w : windows)
+				w->LeftRelease(screen.x, screen.y);
+		else
+			for (int j = 0; j < UI.size(); j++)
+				if (Button * button = dynamic_cast<Button*>(UI[j]))
+					button->checkColliderReleased(screen.x, screen.y);
+	}
 }
 
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
