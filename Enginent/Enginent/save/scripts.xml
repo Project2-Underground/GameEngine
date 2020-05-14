@@ -932,7 +932,7 @@
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing down below will do. It won't explode in my face, right?"/>
 			<Dialogue name = " " text = "*Smashes sound*">
-				<sprite name="bg" texture="Texture/level2/Building2/Building2_Template2.png"/>
+				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door"/>
 			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
