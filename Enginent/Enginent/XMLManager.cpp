@@ -175,6 +175,10 @@ void XMLManager::GenerateInteractObj(pugi::xml_node room, Room* r) {
 			if (child->child("used").child("newItemAfterUsed")) {
 				interactObj->SetNewItemAfterUsed(child->child("used").child("newItemAfterUsed").attribute("name").as_string());
 			}
+			if (child->child("used").child("sizeAfterUse")) {
+				interactObj->SetNewSizeAfterUsed(child->child("used").child("sizeAfterUse").attribute("x").as_float(),
+					child->child("used").child("sizeAfterUse").attribute("y").as_float());
+			}
 		}
 
 		if (child->child("note"))

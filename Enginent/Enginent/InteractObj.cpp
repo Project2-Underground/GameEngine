@@ -131,6 +131,9 @@ void InteractableObj::UseItem(Item* item) {
 			vw->SetViewItem(item);
 			vw->Open();
 		}
+		if (hasSizeAfterUsed) {
+			SetSize(sizeAfterUse);
+		}
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
@@ -207,6 +210,10 @@ void InteractableObj::SetNextTexture(std::string next) {
 void InteractableObj::SetUsedTexture(std::string used) {
 	usedTexture = Game::GetInstance()->GetRenderer()->LoadTexture(used);
 	hasUsedTexture = true;
+}
+void InteractableObj::SetNewSizeAfterUsed(float x, float y) {
+	sizeAfterUse = glm::vec3(x, y, 1);
+	hasSizeAfterUsed = true;
 }
 void InteractableObj::SetPositionAfterUsed(float x, float y) {
 	positionAfterUse = glm::vec3(x, y, 1);
