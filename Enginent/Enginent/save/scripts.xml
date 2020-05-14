@@ -852,7 +852,7 @@
 	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
-			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!" enable = "MainFloor2_BlackAlley"/>
 		</sub>
 	</script>
 	<script key = "Floor2_Mask4_2" loopIndex = "0">
@@ -1025,7 +1025,7 @@
 		<sub>
 			<Dialogue name = "Arlo" text = "Hello, newcomer, could you help me talk with that gloomy guy over there? \n I think he might have some problems for a long time. \n Oh, and you must talk to him with caution, he seems to be a sensitive person."/>
 			<Dialogue name = "Elias" text = "Alright.">
-				<item name = "Puzzle6_Paper" NPC = "Puzzle6_NPC1"/>
+				<item name = "Puzzle6_Paper"/>
 			</Dialogue>
 			<Dialogue name = "Arlo" text = "Thank you... Oh, and one more thing, this scrap of paper might be his. \n Please, return it when you talk to him."/>
 		</sub>
@@ -1078,7 +1078,8 @@
 	</script>
 	<script key = "Building4_med2meatmed1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "Okay, I will accept your offer... You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you."/>
+			<Dialogue name = "Bob" text = "Okay, I will accept your offer... You might be a good guy. \n Can we meet each other on the 2nd floor? \n I will unlock the door for you." enable = "Building4Puzzle6Floor1Up"/>
+				
 			<Dialogue name = "Elias" text = " Yeah, sure."/>
 		</sub>
 	</script>
@@ -1087,6 +1088,7 @@
 			<Dialogue name = " " text = "A weird altar with a strange idol and disgusting offerings."/>
 			<Dialogue name = "Elias" text = "Why should these masks take the medicine anyway?"/>
 			<Dialogue name = "Elias" text = "I will take these meds then, they might work something out.">
+				<sprite name = "Puzzle6_AltarwithPills" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_Altar.png"/>
 			</Dialogue>
 			<Dialogue name = " " text = " ">
 				<item name = "Puzzle6_PillAfternoon"/>
@@ -1368,7 +1370,7 @@
 	
 	<script key = "puzzle7_altar2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "There's another one?" sound = "key"/>
+			<Dialogue name = "Elias" text = "There's another one?" sound = "Key"/>
 		</sub>
 	</script>
 	<script key = "puzzle7_altar2_knife" loopIndex = "0">

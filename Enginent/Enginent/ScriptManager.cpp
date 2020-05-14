@@ -116,6 +116,7 @@ void ScriptManager::LoadScript()
 				std::string soundName = "";
 				std::string roomName = "";
 				std::string doorName = "";
+				std::string doorOpen = "";
 				std::string cutscene = "";
 				std::string spriteObj = "";
 				std::string spriteName = "";
@@ -165,6 +166,10 @@ void ScriptManager::LoadScript()
 				{
 					doorName = dialogue->attribute("door").as_string();
 				}
+				if (dialogue->attribute("open"))
+				{
+					doorOpen = dialogue->attribute("open").as_string();
+				}
 				if (dialogue->attribute("sound"))
 				{
 					soundName = dialogue->attribute("sound").as_string();
@@ -203,6 +208,7 @@ void ScriptManager::LoadScript()
 				tmp.CutScenebl = cutSceneBL;
 				tmp.roomName = roomName;
 				tmp.doorName = doorName;
+				tmp.doorOpen = doorOpen;
 				tmp.Enable = Enable;
 				tmp.en = en;
 				d.dialogue.push_back(tmp);
