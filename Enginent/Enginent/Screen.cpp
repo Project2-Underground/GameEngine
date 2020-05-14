@@ -164,6 +164,7 @@ void GameScreen::Init() {
 	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Backdoor", new NumpadPuzzle()));
 	puzzles.insert(std::pair<std::string, Puzzle*>("Numpad_Emma", new NumpadPuzzle_2()));
 	puzzles.insert(std::pair<std::string, Puzzle*>("BookshelfPuzzle2", new BookshelfPuzzle_2()));
+	//puzzles.insert(std::pair<std::string, Puzzle*>("Puppet", new PuppetPuzzle()));
 	PuzzleTime = false;
 
 	pause = new OpenPauseWindowButton("Texture/UI/GameUI/Pause_button.png");
