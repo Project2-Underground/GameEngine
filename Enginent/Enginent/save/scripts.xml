@@ -635,8 +635,8 @@
 	</script>
 	<script key = "Dann1_C" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Ann" text = "Huh? The books? When I took it out?"/>
-			<Dialogue name = "Ann" text = "( Oh no, is he gone again? )"/>
+			<Dialogue name = "Dann" text = "Huh? The books? When I took it out?"/>
+			<Dialogue name = "Dann" text = "( Oh no, is he gone again? )"/>
 			<Dialogue name = "Elias" text = "Mister, can you remember anything, at all?"/>
 			<Dialogue name = "Elias" text = "Hm... \n Some books were already got taken out when I went to grab one."/>
 			<Dialogue name = "Elias" text = "Each row has only one color and the symbols do not repeat."/>
@@ -1214,7 +1214,7 @@
 	<script key = "puzzle6_3_puppettorch" loopIndex = "0">
 		<sub change = "1">
 			<ChangeName name = "Puzzle6_NPC1F3" new = "puzzle6_3_pass" new_a = ""/>
-			<Dialogue name = "Wooden puppet" text = "Aaaaaaaaa!!!!!" enable = "Puzzle6_NPC1_AfterPuzzle">
+			<Dialogue name = "Wooden puppet" text = "Aaaaaaaaa!!!!!" enable = "Puzzle6_NPC1_AfterPuzzle" sound = "fire">
 				<sprite name = "Puzzle6_Puppet" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_BurntPuppet.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Did it just scream?" enable = "Cultist_AfterPuzzle"/>
@@ -1413,19 +1413,6 @@
 		</sub>
 	</script>
 		
-	
-				
-		
-	
-	
-	
-	
-	<!-- Not proof read -->
-	
-	
-
-	
-	
 	<!-- Back Alley -->
 	<script key = "BackAlley_start" loopIndex = "0">
 		<sub>
@@ -1436,32 +1423,32 @@
 		<sub>
 			<Dialogue name = "Elias" text = "Emma! Is that you?"/>
 			<Dialogue name = "Emma" text = "Eh? Are you... Elias?"/>
-			<Dialogue name = "Elias" text = "What are you talking about? Yes, I'm Elias! Don't you remember?"/>
-			<Dialogue name = "Emma" text = "Guess what? You're right. I kind of forget that."/>
-			<Dialogue name = "Elias" text = "What! Are you serious? When you told me that you have a bad memory I didn't think it is this bad"/>
-			<Dialogue name = "Emma" text = "I have my own ways. Look, I have noted everything important on my arms."/>
-			<Dialogue name = "Elias" text = "That might help a bit... wait! Aren't you the one behind this experiment?"/>
-			<Dialogue name = "Emma" text = "About that... I have anwers. I've read about this, please, let me explain."/>
+			<Dialogue name = "Elias" text = "What are you talking about? \n Yes, I'm Elias! Don't you remember?"/>
+			<Dialogue name = "Emma" text = "Guess what? You're right. \n I kind of forget that."/>
+			<Dialogue name = "Elias" text = "What! \n Are you serious? When you told me that you have a bad memory I didn't think it is this bad"/>
+			<Dialogue name = "Emma" text = "I have my own ways. \n Look, I have noted everything important on my arms."/>
+			<Dialogue name = "Elias" text = "That might help a bit... wait! \n Aren't you the one behind this experiment?"/>
+			<Dialogue name = "Emma" text = "About that... I have anwers. \n I've read about this, please, let me explain."/>
 			<Dialogue name = "Elias" text = "( After all of this, I bet she knew everything from the start )"/>
 			<Dialogue name = "Emma" text = "But before that, there is something else."/>
-			<Dialogue name = "Elias" text = "What! you can't just-"/>
-			<Dialogue name = "Emma" text = "Look at my arm! There's a writing said 'The goal is to get outside'."/>
+			<Dialogue name = "Elias" text = "What! \n You can't just-"/>
+			<Dialogue name = "Emma" text = "Look at my arm! \n There's a writing said 'The goal is to get outside'."/>
 			<Dialogue name = "Elias" text = "True, but."/>
-			<Dialogue name = "Emma" text = "Come on, it seems I don't have much time left. Some documents are also missing..."/>
+			<Dialogue name = "Emma" text = "Come on, it seems I don't have much time left. \n Some documents are also missing..."/>
 			<Dialogue name = "Elias" text = "What do you mean?"/>
 			<Dialogue name = "Emma" text = "Well, you see, I'm sort of being hunt by those people, and this place is not safe."/>
 			<Dialogue name = "Elias" text = "And you probably know the exit."/>
-			<Dialogue name = "Emma" text = "Of course! Listen carefully."/>
-			<Dialogue name = "Emma" text = "Did you see shabby building near the mansion? There's a secret path down to a secret room under the carpet." enable = "Building1_FloorDoorOpen"/>
+			<Dialogue name = "Emma" text = "Of course! \n Listen carefully."/>
+			<Dialogue name = "Emma" text = "Did you see shabby building near the mansion? \n There's a secret path down to a secret room under the carpet." enable = "Building1_FloorDoorOpen"/>
 			<Dialogue name = "Emma" text = "Once you got in, turn off that machine inside the room and come back here."/>
 			<Dialogue name = "Elias" text = "Aren't you coming?"/>
-			<Dialogue name = "Emma" text = "Going out right now might not be the best idea for me. Ha ha..."/>
-			<Dialogue name = "Elias" text = "( She looks tired. People on this floor are super weird. I should help her. )"/>	
+			<Dialogue name = "Emma" text = "Going out right now might not be the best idea for me. \n Ha ha..."/>
+			<Dialogue name = "Elias" text = "( She looks tired. People on this floor are super weird. \n I should help her. )"/>	
 		</sub>
 	</script>
 	<script key = "BackAlley_Emma1_A" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Emma" text = "Well... it seems there was a time where I was a scientist. But right now, I doubt I'm one."/>
+			<Dialogue name = "Emma" text = "Well... it seems there was a time where I was a scientist. \n But right now, I doubt I'm one."/>
 			<Dialogue name = "Elias" text = "Does that means you know the way out?"/>
 			<Dialogue name = "Emma" text = "I...There was a situation and I got banned from project before the design of the experiment is done."/>
 			<Dialogue name = "Emma" text = "And as you can see, from the start, I am the same as you -- a lab rat."/>
@@ -1472,10 +1459,10 @@
 	<script key = "BackAlley_Emma1_B" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Emma" text = "I think... you will be put through more experiment projects."/>
-			<Dialogue name = "Emma" text = "Then they might create an army of Eliases. Something like that."/>
-			<Dialogue name = "Emma" text = "Your family will receive the some kind of compensations. But you will stuck here."/>
-			<Dialogue name = "Elias" text = "( I will be stuck here forever? This is worse than I thought. Even if this is a military service it's still terrible. )"/>
-			<Dialogue name = "Emma" text = "H... hey! We will get out of here."/>
+			<Dialogue name = "Emma" text = "Then they might create an army of Eliases. \n Something like that."/>
+			<Dialogue name = "Emma" text = "Your family will receive the some kind of compensations. \n But you will stuck here."/>
+			<Dialogue name = "Elias" text = "( I will be stuck here forever? \n This is worse than I thought. Even if this is a military service it's still terrible. )"/>
+			<Dialogue name = "Emma" text = "H... hey! \n We will get out of here."/>
 			<Dialogue name = "Elias" text = "Yeah..."/>
 		</sub>
 	</script>
@@ -1488,18 +1475,18 @@
 	<!-- Main Floor 3 routeA -->
 	<script key = "Floor3A" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Ugh...it felt like I was being pushed up here"/>
-			<Dialogue name = "Elias" text = "This place...feels like...in a war"/>
+			<Dialogue name = "Elias" text = "Ugh...it felt like I was being pushed up here."/>
+			<Dialogue name = "Elias" text = "This place...feels like...in a war."/>
 		</sub>
 	</script>
 	<script key = "Floor3A_people1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "People" text = "To the left, for the left"/>
+			<Dialogue name = "People" text = "To the left, for the left."/>
 		</sub>
 	</script>
 	<script key = "Floor3A_people2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "People" text = "Our hope... Our hope has come"/>
+			<Dialogue name = "People" text = "Our hope... Our hope has come."/>
 		</sub>
 	</script>
 	<script key = "Floor3A_butler" loopIndex = "0">
@@ -1511,13 +1498,13 @@
 	<script key = "Floor3A_lab" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "..."/>
-			<Dialogue name = "???" text = "What are you waiting for? Come on in, nothing to worry about."/>
+			<Dialogue name = "???" text = "What are you waiting for? \n Come on in, nothing to worry about."/>
 			<Dialogue name = "Elias" text = "Okay..."/>
 		</sub>
 	</script>
 	<script key = "Floor3A_factory" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "I should do what the butler told me"/>
+			<Dialogue name = "Elias" text = "I should do what the butler told me."/>
 		</sub>
 	</script>
 	
@@ -1541,24 +1528,24 @@
 	</script>
 	<script key = "Floor3B_butler" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Butler" text = "Greetings Mr Elias. You have walked the wrong path. Hence..."/>
-			<Dialogue name = "Butler" text = "I won't be able to let you pass"/>
+			<Dialogue name = "Butler" text = "Greetings Mr Elias. \n You have walked the wrong path. \n Hence..."/>
+			<Dialogue name = "Butler" text = "I won't be able to let you pass."/>
 			<Dialogue name = "Elias" text = "What does that mean?"/>
 			<Dialogue name = "Butler" text = "Ms. Emily has decided that you lack of humaneness."/>
 			<Dialogue name = "Elias" text = "What does that even mean?!"/>
-			<Dialogue name = "Butler" text = "My apologies."/>
-			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/2.png"/>
+			<Dialogue name = "Butler" text = "My apologies." sound = "Reload"/>
+			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/2.png" sound = "Butler_Shoot"/>
 			<Dialogue name = "Elias" text = "Eh?"/>
 			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/black.png"/>
-			<Dialogue name = "???" text = "What a shame. The subject named Elias is still imperfect."/>
-			<Dialogue name = "???" text = "... This is such an unfortunate event. They both were so close."/>
+			<Dialogue name = "???" text = "What a shame. \n The subject named Elias is still imperfect."/>
+			<Dialogue name = "???" text = "... This is such an unfortunate event. \n They both were so close."/>
 			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
 	<script key = "Floor3B_factory" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "This is the way to the military cantonment!"/>
-			<Dialogue name = "Elias" text = "That must be my destination"/>
+			<Dialogue name = "Elias" text = "That must be my destination."/>
 			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "Finally, we got a usable seed." cutscene = "Texture/Cutscene/3.png"/>
@@ -1571,7 +1558,7 @@
 	<!-- Lab -->
 	<script key = "Lab_start" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Are those thing inside the tube... Corpses?! The lab?"/>
+			<Dialogue name = "Elias" text = "Are those thing inside the tube... Corpses?! \n The lab?"/>
 			<Dialogue name = "???" text = "Took you long enough."/>
 		</sub>
 	</script>
@@ -1586,41 +1573,41 @@
 			<Dialogue name = "Emily" text = "It's 2046, though you might think it is 2020."/>
 			<Dialogue name = "Elias" text = "Are you saying that me and your mother... travelled into the future... something like that?"/>
 			<Dialogue name = "Emily" text = "No no no. You guys are the samples from the seed, and are being selected under this project."/>
-			<Dialogue name = "Elias" text = "Seed...? Can you, uh...give me the brief of the...current situation?"/>
+			<Dialogue name = "Elias" text = "Seed...? \n Can you, uh...give me the brief of the...current situation?"/>
 			<Dialogue name = "Emily" text = "Certainly."/>
 			<Dialogue name = "Emily" text = "This is a project called 'Underground', a huge project beneath the Earth surface where we create armies of qualitie clones to use in the upcoming war."/>
-			<Dialogue name = "Elias" text = "War? What about everything I've seen below? Even my room."/>
+			<Dialogue name = "Elias" text = "War? \n What about everything I've seen below? Even my room."/>
 			<Dialogue name = "Emily" text = "Surely, everything has been created by us, even your room. Everything is from your memory."/>
 			<Dialogue name = "Elias" text = "So, the people down there won't be able to meet their goals from the beginning?"/>
-			<Dialogue name = "Emily" text = "As you said. Mother thought they will eventually recover from the distorted behavior."/>
-			<Dialogue name = "Emily" text = "Even so, all they really did was making their own colony and talking nonsense. They weren't even trying to find the way out."/>
-			<Dialogue name = "Emily" text = "Even so, it's the same reason why I still left her down there. In spite of her memory issues, it is almost impossible for her to come out."/>
+			<Dialogue name = "Emily" text = "As you said. \n Mother thought they will eventually recover from the distorted behavior."/>
+			<Dialogue name = "Emily" text = "Even so, all they really did was making their own colony and talking nonsense. \n They weren't even trying to find the way out."/>
+			<Dialogue name = "Emily" text = "Even so, it's the same reason why I still left her down there. \n In spite of her memory issues, it is almost impossible for her to come out."/>
 			<Dialogue name = "Emily" text = "I'm still amazed how you managed to help her out."/>
 			<Dialogue name = "Elias" text = "..."/>
-			<Dialogue name = "Emily" text = "But let's just throw away the past. I want you to choose what will happen next."/>
+			<Dialogue name = "Emily" text = "But let's just throw away the past. \n I want you to choose what will happen next."/>
 			<Dialogue name = "Elias" text = "Me... choosing?"/>
 			<Dialogue name = "Emily" text = "It's what she wanted."/>
 			<Dialogue name = "Elias" text = "Emma?"/>
 			<Dialogue name = "Emily" text = "She wanted you to live a happy life in the outside world."/>
 			<Dialogue name = "Elias" text = "Is it really okay to let me go?"/>
-			<Dialogue name = "Emily" text = "It's fine. There are lots of people down there. Sooner or later, someone will be able to replace you. I can't imagine a chicken like yourself to be in an army anyways."/>
-			<Dialogue name = "Emily" text = "But that's your choice to choose. If you choose to be with the army, you might be helping out a lot of people."/>
+			<Dialogue name = "Emily" text = "It's fine. There are lots of people down there. \n Sooner or later, someone will be able to replace you. \n I can't imagine a chicken like yourself to be in an army anyways."/>
+			<Dialogue name = "Emily" text = "But that's your choice to choose. \n If you choose to be with the army, you might be helping out a lot of people."/>
 			<Dialogue name = "Elias" text = "( My choice... )"/>
 		</sub>
 	</script>
 	<script key = "Lab_EmilyAns" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "If you want to return to a normal life, then good luck. Continue this way, I'll handle everything else."/>
-			<Dialogue name = "Emily" text = "But if you want to join the army, walk out through the lab door. My Buttler robot will handle everything."/>
+			<Dialogue name = "Emily" text = "But if you want to join the army, walk out through the lab door. \n My Buttler robot will handle everything."/>
 		</sub>
 	</script>
 	<script key = "Lab_DoorUp" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "I've rest enough all these 26 years. Maybe there's still someone out there that I know."/>
-			<Dialogue name = "Emily" text = "There is definitely someone you know. I believe so." cutscene = "Texture/Cutscene/1.png"/>
-			<Dialogue name = "Elias" text = "So, can you tell me something about myself? What happened throughout these years that I'm gone." cutscene = "Texture/Cutscene/1.png"/>
+			<Dialogue name = "Elias" text = "I've rest enough all these 26 years. \n Maybe there's still someone out there that I know."/>
+			<Dialogue name = "Emily" text = "There is definitely someone you know. \n I believe so." cutscene = "Texture/Cutscene/1.png"/>
+			<Dialogue name = "Elias" text = "So, can you tell me something about myself? \n What happened throughout these years that I'm gone." cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Emily" text = "Are you sure? How about what you are going to do after this?" cutscene = "Texture/Cutscene/1.png"/>
-			<Dialogue name = "Elias" text = "I don't know. Maybe I'll go find what left of Emma's. I feel like I know her before." cutscene = "Texture/Cutscene/1.png"/>
+			<Dialogue name = "Elias" text = "I don't know. \n Maybe I'll go find what left of Emma's. \n I feel like I know her before." cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = " " text = " " level = "4"/>
 		</sub>
 	</script>
@@ -1628,7 +1615,7 @@
 		<sub>
 			<Dialogue name = "Elias" text = "I'd like to thank Emma, but, I don't know, going out at these times sounds scary."/>
 			<Dialogue name = "Emily" text = "As expected of you."/>
-			<Dialogue name = "Elias" text = "Hm? What does that mean?"/>
+			<Dialogue name = "Elias" text = "Hm? \n What does that mean?"/>
 			<Dialogue name = "Emily" text = "Nothing."/>
 			<Dialogue name = "Emily" text = "Everything has come to an end, mom." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "He somehow turned into one of the good soldiers at the last minute." cutscene = "Texture/Cutscene/3.png"/>

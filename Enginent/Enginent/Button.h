@@ -47,6 +47,16 @@ public:
 	void action();
 };
 
+class CreaditButton :public Button {
+	UIObject* creadit;
+public:
+	CreaditButton(std::string texture, UIObject* c) : Button(texture) { creadit = c; };
+	void action()
+	{
+		creadit->SetDisplay(true);
+	};
+};
+
 class PhoneOpenButton : public Button {
 	unsigned int notiTexture;
 public:

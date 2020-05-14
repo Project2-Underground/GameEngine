@@ -42,6 +42,7 @@ void SoundManager::Init()
 	sfxs["Reload"] = createSound("Sound/Reload.mp3");
 	sfxs["Butler_Shoot"] = createSound("Sound/Butler_Shoot.mp3");
 	sfxs["fire"] = createSound("Sound/fire-sound-effects.mp3");
+	sfxs["water"] = createSound("Sound/Water.mp3");
 }
 
 ISoundSource* SoundManager::createSound(const char* filename)
