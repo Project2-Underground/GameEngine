@@ -1343,7 +1343,7 @@
 		</sub>
 	</script>	
 	<script key = "puzzle7_quest4" loopIndex = "0">
-		<sub change = 1>
+		<sub change = "1">
 			<ChangeName name = "Puzzle7_NPC1F2" new = "puzzle7_quest_pass" new_a = "puzzle7_quest_pass"/>
 			<Dialogue name = "Arlo" text = "Wow, you are also one of us right? \n I'll give you this key as a memento.">
 				<item name = "Puzzle7_MouthKeyFalse1"/>
