@@ -789,7 +789,7 @@
 	</script>
 	<script key = "Floor2_mask7" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!"/>
+			<Dialogue name = "Charlotte" text = "A scientist is hiding among us, it's going to kill us!" room = "Building4Puzzle7Floor1"/>
 			<Dialogue name = "Sophia" text = "We need to do something! \n We need to take care of that scientist!"/>
 			<Dialogue name = "Sophia" text = "Who knows what kind of tortures are waiting for us if we get caught."/>
 			<Dialogue name = "Charlotte" text = "The chief is searching for him, he'll tell us about it anytime soon. \n Right now he is preparing for our new rookie."/>
@@ -1343,7 +1343,8 @@
 		</sub>
 	</script>	
 	<script key = "puzzle7_quest4" loopIndex = "0">
-		<sub>
+		<sub change = 1>
+			<ChangeName name = "Puzzle7_NPC1F2" new = "puzzle7_quest_pass" new_a = "puzzle7_quest_pass"/>
 			<Dialogue name = "Arlo" text = "Wow, you are also one of us right? \n I'll give you this key as a memento.">
 				<item name = "Puzzle7_MouthKeyFalse1"/>
 			</Dialogue>
