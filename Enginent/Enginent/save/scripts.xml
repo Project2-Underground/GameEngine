@@ -1211,7 +1211,8 @@
 		</sub>
 	</script>
 	<script key = "puzzle6_3_pass" loopIndex = "0">
-		<sub>
+		<sub change = "1">
+			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_BackAlley_FinishedPuzzle" new_a = ""/>
 			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Puzzle6_NPC1F3" bool = "0"/>
 		</sub>
 	</script>
@@ -1244,7 +1245,7 @@
 			<Dialogue name = "Noel" text = "Tell them, 'The scientist is hiding in the shadow'."/>
 			<Dialogue name = "Noel" text = "We are going to find her, and we are going to find the answer together."/>
 			<Dialogue name = "Noel" text = "After that, we will be leaving this place. \n She will be our key out of here."/>
-			<Dialogue name = "Elias" text = "( The hiding place behind the shadow? )"/>
+			<Dialogue name = "Elias" text = "( The hiding place behind the shadow? )" enable = "Building4Puzzle6Floor1Out"/>
 		</sub>
 	</script>
 	<script key = "puzzle6_pass_cultist_after" loopIndex = "0">
