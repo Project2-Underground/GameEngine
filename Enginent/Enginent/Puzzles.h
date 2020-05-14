@@ -308,7 +308,7 @@ public:
 	virtual void UpdateMouseState(glm::vec3, glm::vec3) = 0;
 	virtual void CompletePuzzle() = 0;
 	bool IsInventoryEnable() { return enableInventory; }
-	bool Passed() { return puzzle->Passed(); }
+	virtual bool Passed() { return puzzle->Passed(); }
 	bool passedReqiurements;
 	int GetPuzzleLevel() { return currentLevel; }
 	~Puzzle();
@@ -381,7 +381,7 @@ public:
 };
 
 class PuppetPuzzle : public Puzzle {
-	bool firstClick;
+	bool passed;
 public:
 	PuppetPuzzle();
 	void Render();
@@ -393,5 +393,6 @@ public:
 	void RightClick(glm::vec3, glm::vec3) {}
 	void RightRelease(glm::vec3, glm::vec3) {}
 	void UpdateMouseState(glm::vec3, glm::vec3) {};
+	bool Passed();
 	void CompletePuzzle() {}
 };

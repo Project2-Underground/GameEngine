@@ -354,7 +354,7 @@ void PuzzleObj::SetPuzzleName(std::string name) {
 void PuzzleObj::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	Puzzle* p = gs->FindPuzzle(puzzleName);
-	//std::cout << " PuzzleObj::action() used " << used << std::endl;
+	//std::cout << " PuzzleObj::action() used " << used << "CheckRequirements " << "p " << (p ? "1" : "0") << gs->puzzles[puzzleName]->CheckRequirements() << std::endl;
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		UseItem(gs->GetInventory()->GetSelectedItem());
 		if (used) {
@@ -363,7 +363,7 @@ void PuzzleObj::action() {
 		}
 	}
 	else if (p && used && gs->puzzles[puzzleName]->CheckRequirements()) {
-		std::cout << "PuzzleObj::action() " << dialogue_after_use << std::endl;
+		//std::cout << "PuzzleObj::action() " << dialogue_after_use << std::endl;
 		if (dialogue_name != "") {
 			TextBox::GetInstance()->setText(dialogue_name);
 			dialogue_name = "";
