@@ -1083,7 +1083,7 @@
 		</sub>
 	</script>
 	<script key = "Building4_altar" loopIndex = "0">
-		<sub choice = "c_altar">
+		<sub>
 			<Dialogue name = " " text = "A weird altar with a strange idol and disgusting offerings."/>
 			<Dialogue name = "Elias" text = "Why should these masks take the medicine anyway?"/>
 			<Dialogue name = "Elias" text = "I will take these meds then, they might work something out.">

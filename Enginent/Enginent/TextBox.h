@@ -13,7 +13,7 @@ class ChoiceBox : UIObject {
 	Choice choice;
 	UIObject* background;
 	TextObject* text;
-	SDL_Color choiceColor = { 0, 0, 0, 0 };
+	SDL_Color choiceColor = { 255, 255, 255, 255 };
 public:
 	ChoiceBox();
 	void setChoice(Choice);
