@@ -1375,19 +1375,6 @@
 			<Dialogue name = "Elias" text = "Ah.. these offerings are disgusting as always."/>
 		</sub>
 	</script>
-	
-	
-				
-		
-	
-	
-	
-	
-	<!-- Not proof read -->
-	
-	
-
-	
 	<script key = "puzzle7_altar2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "There's another one?" sound = "Key"/>
@@ -1425,6 +1412,18 @@
 			<Dialogue name = "Elias" text = "..." sound = "OpenDoor" level = "2"/>
 		</sub>
 	</script>
+		
+	
+				
+		
+	
+	
+	
+	
+	<!-- Not proof read -->
+	
+	
+
 	
 	
 	<!-- Back Alley -->
@@ -1575,7 +1574,7 @@
 		</sub>
 	</script>
 	<script key = "Lab_Emily" loopIndex = "0">
-		<sub>
+		<sub choice = "c_emily">
 			<Dialogue name = "Elias" text = "Emma?"/>
 			<Dialogue name = "???" text = "Everyone always think that."/>
 			<Dialogue name = "Emily" text = "My name is Emily, a scientist supervising this place. \n And... a daughter of Emma that you've met."/>
