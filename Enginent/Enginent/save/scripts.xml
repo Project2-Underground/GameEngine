@@ -1019,11 +1019,12 @@
 		</sub>
 	</script>
 	<script key = "RouteB_Building3_Cultist" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this."/>
-			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it."/>
-			<Dialogue name = "Elias" text = "( I am finally going out. )"/>
-			<Dialogue name = "Noel" text = "I believe there is an exit within that information!">
+		<sub change = "1">
+			<ChangeName name = "MainFloor2_Building2_Door" new = "Floor2_Building2"/>
+			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this." enable = "BackAlley_Emma" bool = "0"/>
+			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it." enable = "MainFloor2_Building1_Door"/>
+			<Dialogue name = "Elias" text = "( I am finally going out. )" enable = "MainFloor2_BlackAlley"/>
+			<Dialogue name = "Noel" text = "I believe there is an exit within that information!" enable = "MainFloor2_Building4_Door">
 				<note name = "EmmaNote5"/>
 			</Dialogue>
 		</sub>
@@ -1374,19 +1375,6 @@
 			<Dialogue name = "Elias" text = "Ah.. these offerings are disgusting as always."/>
 		</sub>
 	</script>
-	
-	
-				
-		
-	
-	
-	
-	
-	<!-- Not proof read -->
-	
-	
-
-	
 	<script key = "puzzle7_altar2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "There's another one?" sound = "Key"/>
@@ -1424,6 +1412,18 @@
 			<Dialogue name = "Elias" text = "..." sound = "OpenDoor" level = "2"/>
 		</sub>
 	</script>
+		
+	
+				
+		
+	
+	
+	
+	
+	<!-- Not proof read -->
+	
+	
+
 	
 	
 	<!-- Back Alley -->
@@ -1574,7 +1574,9 @@
 		</sub>
 	</script>
 	<script key = "Lab_Emily" loopIndex = "0">
-		<sub>
+		<sub choice = "c_emily" change = "2">
+			<ChangeName name = "Lab_EndDoor" new = "Lab_DoorUp"/>
+			<ChangeName name = "Lab_Door" new = "Lab_Door"/>
 			<Dialogue name = "Elias" text = "Emma?"/>
 			<Dialogue name = "???" text = "Everyone always think that."/>
 			<Dialogue name = "Emily" text = "My name is Emily, a scientist supervising this place. \n And... a daughter of Emma that you've met."/>
@@ -1602,6 +1604,12 @@
 			<Dialogue name = "Emily" text = "It's fine. There are lots of people down there. Sooner or later, someone will be able to replace you. I can't imagine a chicken like yourself to be in an army anyways."/>
 			<Dialogue name = "Emily" text = "But that's your choice to choose. If you choose to be with the army, you might be helping out a lot of people."/>
 			<Dialogue name = "Elias" text = "( My choice... )"/>
+		</sub>
+	</script>
+	<script key = "Lab_EmilyAns" loopIndex = "0">
+		<sub>
+			<Dialogue name = "Elias" text = "If you want to return to a normal life, then good luck. Continue this way, I'll handle everything else."/>
+			<Dialogue name = "Emily" text = "But if you want to join the army, walk out through the lab door. My Buttler robot will handle everything."/>
 		</sub>
 	</script>
 	<script key = "Lab_DoorUp" loopIndex = "0">

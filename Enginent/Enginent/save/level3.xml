@@ -46,7 +46,7 @@
 			</Lab_Door>
 		</doors>
 		<NPCs>
-			<Emily sizeX="132" sizeY="433" posX="-811" posY="-61" layer="0" dialogue="Lab_Emily" dialogue_2="">
+			<Emily sizeX="132" sizeY="433" posX="-811" posY="-61" layer="0" dialogue="Lab_Emily" dialogue_2="Lab_EmilyAns">
 				<Animations>
 					<Idle texture="Texture/Character/NPCs/EmilySpriteSheet_copy.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
