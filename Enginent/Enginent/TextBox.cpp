@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "TimeSystem.h"
 
-#define TEXT_SPEED 100
+#define TEXT_SPEED 50
 
 TextBox* TextBox::_instance = nullptr;
 
