@@ -104,12 +104,12 @@ void InteractableObj::SetItemToUse(std::string item_to_unlock) {
 }
 
 void InteractableObj::UseItem(Item* item) {
+	item->DialogueHandle(this->object_name);
 	if (item != nullptr && item_to_use == item->name) {
 		//std::cout << "item is used and removed from the inventory\n";
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 		Inventory* i = gs->GetInventory();
 		used = true;
-		item->DialogueHandle(this->object_name);
 		if (hasPositionAfterUsed)
 			SetPosition(positionAfterUse);
 		if (hasUsedTexture)
@@ -303,6 +303,7 @@ void NonPlayer::action()
 	//std::cout << interactType << std::endl;
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+		std::cout << " NonPlayer::action use item\n";
 		UseItem(gs->GetInventory()->GetSelectedItem());
 		dialogue_name = dialogue_after_use;
 	}
@@ -382,6 +383,7 @@ void PlayerTriggerObj::Update() {
 	}
 	if (triggered && !TextBox::GetInstance()->IsDisplay()) {
 		display = false;
+		col->enable = false;
 	}
 }
 

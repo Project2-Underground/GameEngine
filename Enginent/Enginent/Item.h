@@ -61,19 +61,3 @@ public:
 	bool operator==(const Item& item);
 	virtual void action() {};
 };
-
-//class SeparatableItem :public Item {
-//	// the items that will be separated into
-//public:
-//	SeparatableItem(std::string, std::vector<std::string>);
-//	void action();
-//};
-//
-//class CombinableItem :public Item {
-//	std::string itemToCombine;			// item that can be combined with
-//	std::string scombinedItem;			// item after combined
-//public:
-//
-//	CombinableItem(std::string, std::string itc, std::string ci);
-//	void action();
-//};

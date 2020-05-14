@@ -35,6 +35,9 @@
 
 	<!-- Puzzle 6 F1 -->
 	<Puzzle6_MEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_MEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_MEAT.png" sizeX="191" sizeY="157" IsizeX="191" IsizeY="157">
+		<combine>
+			<c itemToCombine="Puzzle6_PillBedtime" afterCombined="Puzzle6_PillBedtime_withMEAT"/>
+		</combine>
 	</Puzzle6_MEAT>
 	<Puzzle6_Paper i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Paper(I).png" sizeX="855" sizeY="850" IsizeX="602" IsizeY="713">
 		<dialogueAferUseWithObjs>
@@ -102,6 +105,7 @@
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>
 	<Puzzle6_PillBedtime_withMEAT i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_PillBedtime_withMEAT.png" sizeX="120" sizeY="86" IsizeX="120" IsizeY="86">
+		<multipleUse/>
 		<dialogueAferUseWithObjs>
 			<Puzzle6_NPC2 dialogue="Building4_med2meat"/>
 		</dialogueAferUseWithObjs>

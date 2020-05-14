@@ -185,8 +185,9 @@
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Puzzle6_NPC1>
-			<Puzzle6_AltarwithPills  texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" sizeX="197" sizeY="236" posX="-165" posY="-85" type="13" layer="0" dialogue="Building4_altar" dialogue_2="Building4_altar_after">
+			<Puzzle6_AltarwithPills  texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" sizeX="197" sizeY="236" posX="-165" posY="-85" type="3" layer="0" dialogue="Building4_altar" dialogue_2="Building4_altar_after">
 				<item name="Puzzle6_PillAfternoon" scriptHandleItem="true"/>
+				<pick texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Altar.png"/>
 			</Puzzle6_AltarwithPills>
 		</interactObj>
 		<doors>
@@ -199,6 +200,7 @@
 		</doors>
 		<NPCs>
 			<Puzzle6_NPC2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="Building4_NPC2" dialogue_2="Building4_NPC2_after">
+				<key name="Puzzle6_PillBedtime_withMEAT"/>
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>

@@ -46,12 +46,12 @@ void Player::action() {
 }
 
 void Player::UseItem(Item* item) {
+	item->DialogueHandle(this->object_name);
 	if (item) {
 		if (item->name == "Puzzle6_PillMorning") {
 			//std::cout << "item is used and removed from the inventory\n";
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 			Inventory* i = gs->GetInventory();
-			TextBox::GetInstance()->setText(item->GetDialogueAfterUseWith(this->object_name));
 			i->RemoveItem(item);
 			i->UnselectItem();
 			gs->FindItem("Puzzle6_PillBedtime_withMEAT")->ChangeDialogueAfterUsedWithObj("Puzzle6_NPC2", "Building4_med2meatmed1");

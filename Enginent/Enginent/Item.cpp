@@ -48,11 +48,15 @@ void Item::AddChangeOtherDialogueAfterUsedWithObj(std::string objName, std::stri
 	changeOtherDialogueAfterUsedWithObj[objName].push_back(tmp);
 }
 void Item::DialogueHandle(std::string objName) {
+	std::cout << " Item::DialogueHandle " << changeOtherDialogueAfterUsedWithObj.size() << std::endl;
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	for (auto obj : changeOtherDialogueAfterUsedWithObj) {
 		if (obj.first == objName) {
 			for (auto obj2 : obj.second) {
-				gs->FindItem(obj2.otherItemName)->ChangeDialogueAfterUsedWithObj(obj2.otherObjName, obj2.dialogue);
+				Item* i = gs->FindItem(obj2.otherItemName);
+				i->ChangeDialogueAfterUsedWithObj(obj2.otherObjName, obj2.dialogue);
+				i->multipleUse = false;
+				std::cout << " Item::DialogueHandle " << i->name << std::endl;
 			}
 		}
 	}
@@ -87,39 +91,6 @@ void Item::Combine(Item* other) {
 		}
 	}
 }
-//SeparatableItem::SeparatableItem(std::string name, std::vector<std::string> items) :Item(name) {
-//	for (auto i : items)
-//		this->itemsAfterSeparated.push_back(i);
-//}
-//
-//void SeparatableItem::action() {
-//	// add the new items to the inventory
-//	Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-//	for (auto i : itemsAfterSeparated) {
-//		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(i));
-//	}
-//	// remove *this from the inventory
-//	inventory->RemoveItem(this);
-//}
-//
-//CombinableItem::CombinableItem(std::string name, std::string itc, std::string ci) :Item(name) {
-//	itemToCombine = itc;
-//	scombinedItem = ci;
-//}
-//
-//void CombinableItem::action() {
-//	if (other->name == itemToCombine) {
-//		Inventory* inventory = ((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory();
-//		// add combinedItem to the inventory
-//		// remove item and *this from the inventory
-//		inventory->RemoveItem(other);
-//		inventory->RemoveItem(this);
-//		inventory->AddItem(((GameScreen*)Game::GetInstance()->GetScreen())->FindItem(scombinedItem));
-//	}
-//	/*else {
-//		std::cout << "Combine fail\n";
-//	}*/
-//}
 
 bool Item::operator==(const Item& item) {
 	if (this->name == item.name) {

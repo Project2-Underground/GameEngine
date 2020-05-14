@@ -65,6 +65,8 @@ void Inventory::Update() {
 	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
 
 	move = true;
+	if (other)
+		move = false;
 	if (IsMouseCollide(popArea, realPos.x, realPos.y)) {
 		triggeredOpen = true;
 		direction = 1;		// up
@@ -72,7 +74,7 @@ void Inventory::Update() {
 	else {
 		direction = -1;
 	}
-	if (move && !other) {
+	if (move) {
 		if (tab->getPos().y >= maxHeight && direction == 1) {
 			move = false;
 			tab->SetPosition(glm::vec3(tab->getPos().x, maxHeight, 1.0f));

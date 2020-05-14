@@ -688,10 +688,15 @@ void XMLManager::LoadItems(std::vector<Item*> &items) {
 					i->AddSeparatedItem(s->name());
 				}
 
-			if(item->child("combine"))
-				for (pugi::xml_node_iterator c = item->child("separate").begin(); c != item->child("separate").end(); c++) {
+			int count = 0;
+			if (item->child("combine")) {
+				for (pugi::xml_node_iterator c = item->child("combine").begin(); c != item->child("combine").end(); c++) {
 					i->AddItemsToCombine(c->attribute("itemToCombine").as_string(), c->attribute("afterCombined").as_string());
+					count++;
 				}
+				std::cout << " XMLManager::LoadItems " << item->name() << " " << count << std::endl;
+			}
+			
 
 			if (item->child("multipleUse"))
 				i->multipleUse = true;
