@@ -1156,7 +1156,7 @@
 			<Dialogue name = "Elias" text = "Have you seen this sheet?"/>
 			<Dialogue name = "Arlo" text = "No, I don't want to interfere with personal information."/>
 			<Dialogue name = "Arlo" text = "Oh, maybe this might be an exception."/>
-			<Dialogue name = "Arlo" text = "You know what? you really did a great job. \n let's meet on the 3rd floor."/>
+			<Dialogue name = "Arlo" text = "You know what? you really did a great job. \n let's meet on the 3rd floor." enable = "Building4Puzzle6Floor2Up"/>
 		</sub>
 	</script>
 	<script key = "puzzle6_2_door1" loopIndex = "0">
