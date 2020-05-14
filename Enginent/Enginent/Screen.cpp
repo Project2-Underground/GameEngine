@@ -354,6 +354,7 @@ void GameScreen::ChangeLevel(int level) {
 		SoundManager::GetInstance()->playSound(BGM, "Mainfloor3");
 		// assuming the Butler::PHASE is already set using the dialogue
 		butler->Appear();
+		dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 		break;
 	default:
 		break;

@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<level currentLevel="3" startPosX="-2949" Start="MainFloor3">
-	<MainFloor3 left_limit="-3650" right_limit="3650" top_limit="360" bottom_limit="-360" y="21">
+<level currentLevel="3" startPosX="2696" Start="MainFloor3">
+	<MainFloor3 left_limit="-3650" right_limit="3650" top_limit="360" bottom_limit="-360" y="21" dialogue="Floor3A">
 		<background>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_Template.png" sizeX="7427" sizeY="720" posX="0" posY="0" layer="0"/>
-			<bg texture="Texture/level3/MainFloor3/MainFloor3_People1.png" sizeX="7427" sizeY="415" posX="0" posY="157.5" layer="0"/>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0"/>
 			<bg texture="Texture/level3/MainFloor3/MainFloor3_Lab.png" sizeX="1259" sizeY="443" posX="-2767" posY="147.5" layer="0"/>
+			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0"/>
 		</background>
 		<interactObj>
-			<people1 texture="NONE" sizeX="75" sizeY="720" posX="886" posY="0" type="11" layer="1" dialogue=""/>
-			<people2 texture="NONE" sizeX="75" sizeY="720" posX="-407" posY="0" type="11" layer="1" dialogue=""/>
+			<bgPeople texture="Texture/level3/MainFloor3/MainFloor3_People1.png" sizeX="7506" sizeY="293" posX="-1.5" posY="78" layer="0">
+				<Animations>
+					<Idle texture="Texture/level3/MainFloor3/MainFloor3_People1.png" frame="2" time_per_frame="0.5" loop="True"/>
+				</Animations>
+				<colOff/>
+			</bgPeople>
+			<MainFloor3_House_DoorTrigger texture="NONE" sizeX="150" sizeY="720" posX="3581" posY="0" type="11" layer="1" dialogue="Floor3A_factory"/>
+			<MainFloor3_LabDoorTrigger texture="NONE" sizeX="386" sizeY="720" posX="-2710.5" posY="0" type="11" layer="1" dialogue="Floor3A_lab"/>
+			<people1 texture="NONE" sizeX="75" sizeY="720" posX="886" posY="0" type="11" layer="1" dialogue="Floor3A_people1"/>
+			<people2 texture="NONE" sizeX="75" sizeY="720" posX="-407" posY="0" type="11" layer="1" dialogue="Floor3A_people2"/>
 		</interactObj>
 		<doors>
-			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0" next_room="" next_door="" dialogue="">
-			</MainFloor3_House_Door>
 			<MainFloor3_LabDoor texture="Texture/level3/MainFloor3/MainFloor3_LabDoor.png" sizeX="386" sizeY="365" posX="-2710.5" posY="124.5" layer="0" next_room="Lab" next_door="Lab_Door" dialogue="">
 			</MainFloor3_LabDoor>
 		</doors>
@@ -25,22 +31,24 @@
 			<fg texture="Texture/level3/Lab/Lab_ForeGound.png" sizeX="7427" sizeY="720" posX="0" posY="-157.5" layer="0"/>
 		</foreground>
 	</MainFloor3>
-	<Lab left_limit="-1400" right_limit="1400" top_limit="360" bottom_limit="-360" y="-100.5">
+	<Lab left_limit="-1400" right_limit="1400" top_limit="360" bottom_limit="-360" y="-100.5" dialogue="Lab_start">
 		<background>
 			<bg texture="Texture/level3/Mainfloor3/MainFloor3_Template.png" sizeX="7427" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<interactObj>
+			<Lab_Door texture="Texture/level3/Lab/Lab_Door.png" sizeX="394" sizeY="376" posX="1012" posY="0" layer="0" dialogue="">
+				<typeView type="4"/>
+			</Lab_Door>
+			<Lab_EndDoor texture="Texture/level3/Lab/Lab_EndDoor.png" sizeX="126" sizeY="597" posX="-1468.5" posY="-61.5" layer="0" dialogue="">
+				<typeView type="4"/>
+			</Lab_EndDoor>
 		</interactObj>
 		<doors>
-			<Lab_Door texture="Texture/level3/Lab/Lab_Door.png" sizeX="394" sizeY="376" posX="1012" posY="0" layer="0" next_room="" next_door="" dialogue="">
-			</Lab_Door>
-			<Lab_EndDoor texture="Texture/level3/Lab/Lab_EndDoor.png" sizeX="126" sizeY="597" posX="-1468.5" posY="-61.5" layer="0" next_room="" next_door="" dialogue="">
-			</Lab_EndDoor>
 		</doors>
 		<NPCs>
-			<Emily sizeX="" sizeY="" posX="-811" posY="-61" layer="0" dialogue="" dialogue_2="">
+			<Emily sizeX="132" sizeY="433" posX="-811" posY="-61" layer="0" dialogue="Lab_Emily" dialogue_2="">
 				<Animations>
-					<Idle texture="Texture/Character/NPCs/.../NONE.png" frame="" time_per_frame="0.5" loop="True"/>
+					<Idle texture="Texture/Character/NPCs/EmilySpriteSheet_copy.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Emily>
 		</NPCs>
