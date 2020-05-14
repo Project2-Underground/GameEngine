@@ -35,14 +35,9 @@ void Player::Update()
 		}
 	}
 	anim->Update();
-	if (TriggerRouteB && !RouteB_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
+	if (triggerRouteB && !RouteB_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
 		TextBox::GetInstance()->setText(RouteB_Dialogue);
 		RouteB_Dialogue.clear();
-		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
-		gs->butler->currentPhase = Butler::ROUTE_B;
-		// change others dialogue in floor 2
-		gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
-		((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
 	}
 }
 
@@ -72,14 +67,26 @@ void Player::AddTriggerRouteB(std::string dialogueName) {
 		if (npc == dialogueName)
 			return;
 
-	std::cout << " Player::AddTriggerRouteB " << dialogueName << std::endl;
+	//std::cout << " Player::AddTriggerRouteB " << dialogueName << std::endl;
 	if (dialogueName == "Floor2_Mask4_2" || dialogueName == "Floor2_Mask7_2"
 		|| dialogueName == "Floor2_Mask5_2" || dialogueName == "Floor2_Mask6_2") {
 		npcTalkRouteB.push_back(dialogueName);
-		if (npcTalkRouteB.size() == 4)
-			TriggerRouteB = true;
-		std::cout << " Player::AddTriggerRouteB " << npcTalkRouteB.size() << std::endl;
+		if (npcTalkRouteB.size() == 4) {
+			triggerRouteB = true;
+			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+			gs->GetCurrentLevel()->rooms["Building4Puzzle7Floor1"]->dialogue.clear();
+			gs->butler->currentPhase = Butler::ROUTE_B;
+			gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
+			((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
+		}
+		//std::cout << " Player::AddTriggerRouteB " << npcTalkRouteB.size() << std::endl;
 	}
+}
+
+void Player::TriggerRouteA() {
+	triggerRouteA = true;
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	gs->butler->currentPhase = Butler::ROUTE_A;
 }
 
 void Player::Turn() {

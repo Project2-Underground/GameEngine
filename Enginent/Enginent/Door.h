@@ -10,6 +10,7 @@ protected:
 	bool hasOpenTexture;
 public:
 	Door(std::string nextroom, std::string nextdoor);
+	void ChangePortal(std::string nextroom, std::string nextdoor);
 	void SetOpenTexture(std::string texture);
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; hasOpenTexture = true; }
 	void SetPlayerNextX(float x);

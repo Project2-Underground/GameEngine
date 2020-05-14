@@ -57,7 +57,7 @@ void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 			switch (t)
 			{
 			case BGM:
-				soundEngine->play2D(bgms[sound], loop); 
+				soundEngine->play2D(bgms[sound], true); 
 				currentBGM = sound;
 				break;
 			case SFX:
