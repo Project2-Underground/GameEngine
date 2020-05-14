@@ -315,7 +315,7 @@
 					<positionAfterUse x="-367" y="-78.5"/>
 				</used>
 			</Puzzle7_WallTorch>
-			<Puzzle7_StabbedPuppet texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" sizeX="269" sizeY="315" posX="403" posY="-79" type="9" layer="1" dialogue="puzzle7_puppet">
+			<Puzzle7_StabbedPuppet texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" sizeX="269" sizeY="315" posX="403" posY="-79" type="9" layer="1" dialogue="puzzle7_puppet" dialogue_2 = "puzzle7_puppet_after">
 				<puzzle name="PuppetPuzzle"/>
 			</Puzzle7_StabbedPuppet>
 			<Puzzle7_LockedDoor texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" sizeX="254" sizeY="378" posX="-66" posY="5" type="2" layer="1" dialogue="puzzle7_lockeddoor" dialogue_2="puzzle7_lockeddoor">
