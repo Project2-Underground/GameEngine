@@ -891,18 +891,27 @@
 		</sub>
 	</script>
 	<script key = "Route_B" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Elias" text = "What are they going on about so loudly?"/>
-			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING."/>
-			<Dialogue name = "Elias" text = "( They got to her already? Where did they found her? )"/>
-			<Dialogue name = "Elias" text = "( I should get a move to the mask building. )"/>
+		<sub change = "5">
+			<ChangeName name = "Cultist_Mask" new = "RouteB_Building3_Cultist"/>
+			<ChangeName name = "MainFloor2_Building1_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_Building2_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_Building4_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_Building_mask"/>
+			<Dialogue name = "Elias" text = "What are they going on about so loudly?" enable = "MainFloor2_Building1_Door" bool = "0"/>
+			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING." enable = "MainFloor2_Building3_Door"/>
+			<Dialogue name = "Elias" text = "( They got to her already? Where did they found her? )" enable = "MainFloor2_Building4_Door" bool = "0"/>
+			<Dialogue name = "Elias" text = "( I should get a move to the mask building. )" enable = "MainFloor2_BlackAlley" bool = "0"/>
 		</sub>
 	</script>
 	<script key = "Route_A" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Elias" text = "This place... it's gone dark. \n The holograms are gone."/>
-			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING."/>
-			<Dialogue name = "Elias" text = "( What! They got to her already? I need to help her. )"/>	
+		<sub change = "4">
+			<ChangeName name = "MainFloor2_Building1_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_Building2_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_Building4_Door" new = "Floor2_Building_mask"/>
+			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_Building_mask"/>
+			<Dialogue name = "Elias" text = "This place... it's gone dark. \n The holograms are gone." enable = "MainFloor2_Building1_Door" bool = "0"/>
+			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING." enable = "MainFloor2_Building2_Door" bool = "0"/>
+			<Dialogue name = "Elias" text = "( What! They got to her already? I need to help her. )" enable = "MainFloor2_BlackAlley" bool = "0"/>	
 		</sub>
 	</script>
 	<script key = "Floor2_Building_mask" loopIndex = "0">
@@ -932,7 +941,7 @@
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing down below will do. It won't explode in my face, right?"/>
 			<Dialogue name = " " text = "*Smashes sound*">
-				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png"/>
+				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png" enable = "MainFloor2_BlackAlley" bool = "0"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door"/>
 			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
@@ -997,7 +1006,7 @@
 			<Dialogue name = "Noel" text = "You have been protecting her since you came here. \n Are you hiding anything from us?"/>
 			<Dialogue name = "People" text = "He must know the exit! \n Capture him!"/>
 			<Dialogue name = "Elias" text = "Wait! \n I also don't know the exit!"/>
-			<Dialogue name = " " text = "(............)"/>
+			<Dialogue name = " " text = "(............)" room = "Building4Puzzle7Floor1" door = "Building4Puzzle7Floor1Out"/>
 		</sub>
 	</script>
 	<script key = "RouteB_Building3" loopIndex = "0">
@@ -1537,7 +1546,9 @@
 			<Dialogue name = "Butler" text = "Ms. Emily has decided that you lack of humaneness."/>
 			<Dialogue name = "Elias" text = "What does that even mean?!"/>
 			<Dialogue name = "Butler" text = "My apologies."/>
+			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/2.png"/>
 			<Dialogue name = "Elias" text = "Eh?"/>
+			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/black.png"/>
 			<Dialogue name = "???" text = "What a shame. The subject named Elias is still imperfect."/>
 			<Dialogue name = "???" text = "... This is such an unfortunate event. They both were so close."/>
 		</sub>
@@ -1546,10 +1557,11 @@
 		<sub>
 			<Dialogue name = "Elias" text = "This is the way to the military cantonment!"/>
 			<Dialogue name = "Elias" text = "That must be my destination"/>
-			<Dialogue name = "Elias" text = "..."/>
-			<Dialogue name = "Elias" text = "Finally, we got a usable seed."/>
-			<Dialogue name = "Elias" text = "..."/>
-			<Dialogue name = "Elias" text = "At last... we have accomplished something."/>
+			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "???" text = "Finally, we got a usable seed." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "???" text = "At last... we have accomplished something." cutscene = "Texture/Cutscene/3.png"/>
 		</sub>
 	</script>
 	
