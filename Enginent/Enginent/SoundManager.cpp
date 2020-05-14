@@ -43,6 +43,7 @@ void SoundManager::Init()
 	sfxs["Butler_Shoot"] = createSound("Sound/Butler_Shoot.mp3");
 	sfxs["fire"] = createSound("Sound/fire_with_scream.mp3");
 	sfxs["water"] = createSound("Sound/Water.mp3");
+	sfxs["chainsaw"] = createSound("Sound/chainsaw.mp3");
 }
 
 ISoundSource* SoundManager::createSound(const char* filename)
