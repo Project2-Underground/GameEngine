@@ -1023,7 +1023,7 @@
 			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this."/>
 			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it."/>
 			<Dialogue name = "Elias" text = "( I am finally going out. )"/>
-			<Dialogue name = "Noel" text = "I believe there is an exit within that information!">
+			<Dialogue name = "Noel" text = "I believe there is an exit within that information!" enable = "MainFloor2_Building4_Door">
 				<note name = "EmmaNote5"/>
 			</Dialogue>
 		</sub>
