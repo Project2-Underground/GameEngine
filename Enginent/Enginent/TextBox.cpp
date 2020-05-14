@@ -127,6 +127,10 @@ void TextBox::setText(std::string key, bool talk)
 				{
 					obj->SetTexture(d_text->dialogue[d_index].sprite);
 				}
+				else
+				{
+					std::cout << "CHange sprite: Cannot find " << d_text->dialogue[d_index].spriteChange << std::endl;
+				}
 			}
 
 			//change room
@@ -366,6 +370,10 @@ void TextBox::clickLeft(glm::vec3 pos)
 			if (obj != nullptr)
 			{
 				obj->SetTexture(d_text->dialogue[d_index].sprite);
+			}
+			else
+			{
+				std::cout << "CHange sprite: Cannot find " << d_text->dialogue[d_index].spriteChange << std::endl;
 			}
 		}
 

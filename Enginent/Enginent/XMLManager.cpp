@@ -75,6 +75,7 @@ void XMLManager::GenerateImage(pugi::xml_node room, Room* r, std::string type) {
 
 		if (type == "background") {
 			bg->layer = BACKGROUND_LAYER;
+			bg->object_name = child->name();
 			r->objects.push_back(bg);
 		}
 		else if (type == "foreground") {
