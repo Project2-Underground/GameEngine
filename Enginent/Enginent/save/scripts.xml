@@ -1369,7 +1369,7 @@
 	
 	<script key = "puzzle7_altar2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "There's another one?" sound = "key"/>
+			<Dialogue name = "Elias" text = "There's another one?" sound = "Key"/>
 		</sub>
 	</script>
 	<script key = "puzzle7_altar2_knife" loopIndex = "0">
