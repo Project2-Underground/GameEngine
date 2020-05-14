@@ -99,8 +99,8 @@ void Butler::Appear() {
 
 
 		break;
-	default:
-		break;
+	//default:
+	//	break;
 	}
 	SetDisplay(true);
 	col->enable = true;
