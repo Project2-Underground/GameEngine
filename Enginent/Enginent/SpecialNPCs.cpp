@@ -96,8 +96,11 @@ void Butler::Appear() {
 		triggered = false;
 		// change others dialogues in floor3
 		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
-
-
+		Level* lvl = gs->GetCurrentLevel();
+		lvl->rooms["MainFloor3"]->dialogue = "Floor3B";
+		((InteractableObj*)lvl->FindObject("people1"))->SetCurrentDialogueName("Floor3B_people1");
+		((InteractableObj*)lvl->FindObject("people2"))->SetCurrentDialogueName("Floor3B_people2");
+		((InteractableObj*)lvl->FindObject("MainFloor3_House_DoorTrigger"))->SetCurrentDialogueName("Floor3B_factory");
 	}break;
 	}
 	SetDisplay(true);
