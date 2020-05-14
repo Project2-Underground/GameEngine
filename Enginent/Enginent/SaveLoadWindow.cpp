@@ -2,9 +2,9 @@
 #include "Game.h"
 
 SaveLoadWindow::SaveLoadWindow() {
-	closeButton = new SaveLoadWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new SaveLoadWindowCloseButton("Texture/UI/GameUI/ChatnameboxClose.png");
 	bgWindow = new UIObject();
-	bgWindow->SetTexture("Texture/tmp_texture/tmp_pausebg.png");
+	bgWindow->SetTexture("Texture/UI/GameUI/Save Menu Box.png");
 }
 
 SaveLoadWindow::~SaveLoadWindow() {
@@ -13,30 +13,30 @@ SaveLoadWindow::~SaveLoadWindow() {
 }
 
 void SaveLoadWindow::Init(int width, int height) {
-	bgWindow->SetSize((float)width * 0.5f, -(float)height * 0.75f);
+	bgWindow->SetSize(737, -632);
 
-	SaveLoadGameButton* tmp1 = new SaveLoadGameButton("Texture/tmp_texture/tmp_savefile.png", "save/save1.xml");
-	tmp1->SetPressTexture("Texture/tmp_texture/tmp_savefilePress.png");
-	tmp1->SetHoverTexture("Texture/tmp_texture/tmp_savefileHover.png");
-	tmp1->Init(320.0f, -90.0f,glm::vec3(0,200,1));
+	SaveLoadGameButton* tmp1 = new SaveLoadGameButton("Texture/UI/GameUI/SaveBox.png", "save/save1.xml");
+	tmp1->SetPressTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp1->SetHoverTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp1->Init(432, -84,glm::vec3(0,200,1));
 	tmp1->InitSaveLoadButton();
 
-	SaveLoadGameButton* tmp2 = new SaveLoadGameButton("Texture/tmp_texture/tmp_savefile.png", "save/save2.xml");
-	tmp2->SetPressTexture("Texture/tmp_texture/tmp_savefilePress.png");
-	tmp2->SetHoverTexture("Texture/tmp_texture/tmp_savefileHover.png");
-	tmp2->Init(320.0f, -90.0f,glm::vec3(0,90,1));
+	SaveLoadGameButton* tmp2 = new SaveLoadGameButton("Texture/UI/GameUI/SaveBox.png", "save/save2.xml");
+	tmp2->SetPressTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp2->SetHoverTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp2->Init(432, -84,glm::vec3(0,90,1));
 	tmp2->InitSaveLoadButton();
 
-	SaveLoadGameButton* tmp3 = new SaveLoadGameButton("Texture/tmp_texture/tmp_savefile.png", "save/save3.xml");
-	tmp3->SetPressTexture("Texture/tmp_texture/tmp_savefilePress.png");
-	tmp3->SetHoverTexture("Texture/tmp_texture/tmp_savefileHover.png");
-	tmp3->Init(320.0f, -90.0f,glm::vec3(0,-20,1));
+	SaveLoadGameButton* tmp3 = new SaveLoadGameButton("Texture/UI/GameUI/SaveBox.png", "save/save3.xml");
+	tmp3->SetPressTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp3->SetHoverTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp3->Init(432, -84,glm::vec3(0,-20,1));
 	tmp3->InitSaveLoadButton();
 
-	SaveLoadGameButton* tmp4 = new SaveLoadGameButton("Texture/tmp_texture/tmp_savefile.png", "save/save4.xml");
-	tmp4->SetPressTexture("Texture/tmp_texture/tmp_savefilePress.png");
-	tmp4->SetHoverTexture("Texture/tmp_texture/tmp_savefileHover.png");
-	tmp4->Init(320.0f, -90.0f,glm::vec3(0,-130,1));
+	SaveLoadGameButton* tmp4 = new SaveLoadGameButton("Texture/UI/GameUI/SaveBox.png", "save/save4.xml");
+	tmp4->SetPressTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp4->SetHoverTexture("Texture/UI/GameUI/SaveBox.png");
+	tmp4->Init(432, -84,glm::vec3(0,-130,1));
 	tmp4->InitSaveLoadButton();
 
 	saveButtons.push_back(tmp1);
@@ -44,7 +44,7 @@ void SaveLoadWindow::Init(int width, int height) {
 	saveButtons.push_back(tmp3);
 	saveButtons.push_back(tmp4);
 
-	closeButton->Init(320.0f, -40.0f, glm::vec3(0, -240, 0.0f));
+	closeButton->Init(255, -58, glm::vec3(0, -240, 0.0f));
 }
 
 void SaveLoadWindow::Render() {

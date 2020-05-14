@@ -25,14 +25,14 @@ SettingWindow::SettingWindow() {
 	sfxMute = new SoundMuteButton("Texture/UI/GameUI/SVolume_button2.png", SFX);
 	sfxMute->SetMuteTexture("Texture/UI/GameUI/SVolume_button.png");
 	
-	closeButton = new SettingWindowCloseButton("Texture/tmp_texture/tmp_closeButton.png");
+	closeButton = new SettingWindowCloseButton("Texture/UI/GameUI/ChatnameboxClose.png");
 }
 void SettingWindow::Init(int width, int height) {
 	bgWindow->SetSize(487, -346);
 	masterMute->Init(100.0f, -100.0f, glm::vec3(160.0f, 0, 1));
 	bgmMute->Init(100.0f, -100.0f, glm::vec3(0.0f, 0, 1));
 	sfxMute->Init(100.0f, -100.0f, glm::vec3(-160.0f, 0, 1));
-	closeButton->Init(bgWindow->getSize().x * 0.5f, bgWindow->getSize().y * 0.1f, 
+	closeButton->Init(237, -44,
 		glm::vec3(bgWindow->getPos().x, bgWindow->getPos().y - -bgWindow->getSize().y * 0.5 + -closeButton->getSize().y, 0.0f));
 
 

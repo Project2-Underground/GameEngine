@@ -12,7 +12,6 @@ ViewWindow* ViewWindow::GetInstance() {
 	return instance;
 }
 ViewWindow::ViewWindow() {
-	closeButton = new ViewWindowCloseButton("Texture/Puzzle/CloseButton.png");
 	viewItem = new UIObject();
 	bgWindow = new UIObject();
 	display = false;
@@ -41,12 +40,6 @@ void ViewWindow::Init(int width, int height) {
 	bgWindow->Init((float)width * 0.45f, -(float)height * 0.5f, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
 	viewItem->SetSize(540, -540);
 	viewItem->SetPosition(bgWindow->getPos());
-	float closeButtonSize = 40.0f;
-	closeButton->Init(closeButtonSize, -closeButtonSize,
-					  glm::vec3(bgWindow->col->getMaxBound().x + closeButtonSize * 0.5f,
-					  bgWindow->col->getMaxBound().y - closeButtonSize * 0.75f,
-					  0.0f));
-	closeButton->col->setNewSize(100, -100);
 }
 
 void ViewWindow::SetViewItem(Item* item) {
@@ -59,9 +52,6 @@ void ViewWindow::SetViewItem(Item* item) {
 	//std::cout << sizeX << " " << sizeY << std::endl;
 	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(item->GetViewTexture());
-	if (viewItem->getSize().x > bgWindow->getSize().x) {
-		closeButton->SetPosition(glm::vec3(viewItem->getSize().x * 0.5f + closeButton->getSize().x * 0.5f, closeButton->getPos().y, 0));
-	}
 }
 
 void ViewWindow::SetViewItem(ViewObj* obj) {
@@ -74,9 +64,6 @@ void ViewWindow::SetViewItem(ViewObj* obj) {
 	}
 	viewItem->SetSize(sizeX, sizeY);
 	viewItem->SetTexture(obj->GetViewTexture());
-	if (viewItem->getSize().x > bgWindow->getSize().x) {
-		closeButton->SetPosition(glm::vec3(viewItem->getSize().x * 0.5f + closeButton->getSize().x * 0.5f, closeButton->getPos().y, 0));
-	}
 }
 
 void ViewWindow::SetText() {
@@ -85,7 +72,6 @@ void ViewWindow::SetText() {
 
 ViewWindow::~ViewWindow() {
 	delete viewItem;
-	delete closeButton;
 	delete bgWindow;
 }
 
@@ -94,26 +80,20 @@ void ViewWindow::Render() {
 		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 		renderer->Render(bgWindow);
 		renderer->Render(viewItem);
-		renderer->Render(closeButton);
 	}
 }
 
 void ViewWindow::LeftClick(float x, float y) {
 	if (display) {
-		closeButton->checkColliderPressed(x, y);
+		Close();
 	}
 }
 
 void ViewWindow::LeftRelease(float x, float y) {
-	if (display) {
-		closeButton->checkColliderReleased(x, y);
-	}
 }
 
 void ViewWindow::UpdateMouseButton(glm::vec3 screen) {
-	if (display) {
-		closeButton->updateButton(screen.x, screen.y);
-	}
+
 }
 
 void GameWindow::ForceClose() {

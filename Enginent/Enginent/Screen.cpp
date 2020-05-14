@@ -60,7 +60,6 @@ MenuScreen::MenuScreen() {
 
 void MenuScreen::Render() {
 	if (splashScreen) {
-		std::cout << splashScreenTime << std::endl;
 		splashScreenTime += TimeSystem::instance()->GetDT();
 		Game::GetInstance()->GetRenderer()->Render(SplashScreen);
 		if (splashScreenTime > 5)
@@ -258,7 +257,6 @@ void GameScreen::Update() {
 			player->Update();
 		}
 	}
-	//if (InventoryEnable && !phone->open)
 	inventory->Update();
 }
 
