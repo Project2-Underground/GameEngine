@@ -39,7 +39,8 @@ void Player::Update()
 		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
 		gs->butler->currentPhase = Butler::ROUTE_B;
 		// change others dialogue in floor 2
-
+		gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
+		((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
 	}
 }
 

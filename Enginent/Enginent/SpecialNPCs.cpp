@@ -82,7 +82,7 @@ void Butler::Appear() {
 		triggered = false;
 		SetPosition(glm::vec3(1974, -37, 1));
 		break;
-	case Butler::ROUTE_B:
+	case Butler::ROUTE_B: {
 		if (turnLeft) {
 			SetScale(-1, 1);
 			turnLeft = !turnLeft;
@@ -97,8 +97,7 @@ void Butler::Appear() {
 		// change others dialogues in floor3
 		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
 
-
-		break;
+	}break;
 	default:
 		break;
 	}

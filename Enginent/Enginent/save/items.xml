@@ -100,7 +100,7 @@
 		</separate>
 		<dialogueAferUseWithObjs>
 			<Elias dialogue="Building4_med1">
-				<Puzzle6_PillBedtime objName="Puzzle6_NPC2F1" dialogue="Building4_med2meatmed1"/>
+				<Puzzle6_PillBedtime_withMEAT objName="Puzzle6_NPC2F1" dialogue="Building4_med2meatmed1"/>
 			</Elias>
 		</dialogueAferUseWithObjs>
 	</Puzzle6_PillMorning>
