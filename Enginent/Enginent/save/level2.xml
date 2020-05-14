@@ -310,6 +310,7 @@
 				<key name="Puzzle7_Water"/>
 				<used texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_PerWallTorch.png">
 					<newItemAfterUsed name="Puzzle7_EyeKeyFalse1"/>
+					<positionAfterUse x="-367" y="-78.5"/>
 				</used>
 			</Puzzle7_WallTorch>
 			<Puzzle7_StabbedPuppet texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" sizeX="269" sizeY="315" posX="403" posY="-79" type="9" layer="1" dialogue="puzzle7_puppet">
