@@ -34,8 +34,10 @@ void Player::Update()
 		}
 	}
 	anim->Update();
-	if (TriggerRouteB == 4 && !TextBox::GetInstance()->IsDisplay())
+	if (TriggerRouteB == 4 && !TextBox::GetInstance()->IsDisplay()) {
 		TextBox::GetInstance()->setText("Route_B");
+		((GameScreen*)Game::GetInstance()->GetScreen())->butler->currentPhase = Butler::ROUTE_B;
+	}
 }
 
 void Player::action() {
