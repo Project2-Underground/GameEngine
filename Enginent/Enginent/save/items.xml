@@ -113,7 +113,7 @@
 	
 	
 	<!-- Puzzle 6 F2 -->
-	<Puzzle6_Alcohol i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773">
+	<Puzzle6_Alcohol i_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol(I).png" v_texture = "Texture/level2/Building4/Puzzle6/Item/Puzzle6_Alcohol.png" sizeX="782" sizeY="783" IsizeX="272" IsizeY="773">
 		<dialogueAferUseWithObjs>
 			<Puzzle6_NPC2 dialogue="puzzle6_2_NPC2_liq"/>
 		</dialogueAferUseWithObjs>
