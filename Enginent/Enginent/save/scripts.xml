@@ -1421,6 +1421,7 @@
 	<script key = "puzzle7_lockeddoor_item" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Farewell, puppet boy."/>
+			<Dialogue name = "Elias" text = "..." sound = "OpenDoor" level = "2"/>
 		</sub>
 	</script>
 	
