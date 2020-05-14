@@ -48,15 +48,12 @@ void Item::AddChangeOtherDialogueAfterUsedWithObj(std::string objName, std::stri
 	changeOtherDialogueAfterUsedWithObj[objName].push_back(tmp);
 }
 void Item::DialogueHandle(std::string objName) {
-	std::cout << " Item::DialogueHandle " << changeOtherDialogueAfterUsedWithObj.size() << std::endl;
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	for (auto obj : changeOtherDialogueAfterUsedWithObj) {
 		if (obj.first == objName) {
 			for (auto obj2 : obj.second) {
 				Item* i = gs->FindItem(obj2.otherItemName);
 				i->ChangeDialogueAfterUsedWithObj(obj2.otherObjName, obj2.dialogue);
-				i->multipleUse = false;
-				std::cout << " Item::DialogueHandle " << i->name << std::endl;
 			}
 		}
 	}

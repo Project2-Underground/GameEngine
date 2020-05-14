@@ -121,9 +121,12 @@ void InteractableObj::UseItem(Item* item) {
 			vw->SetViewItem(item);
 			vw->Open();
 		}
+		std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
 		i->UnselectItem();
+		if (item->name == "Puzzle6_PillBedtime_withMEAT")
+			item->multipleUse = false;
 	}
 }
 void InteractableObj::Used() {
@@ -303,7 +306,6 @@ void NonPlayer::action()
 	//std::cout << interactType << std::endl;
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {
 		GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-		std::cout << " NonPlayer::action use item\n";
 		UseItem(gs->GetInventory()->GetSelectedItem());
 		dialogue_name = dialogue_after_use;
 	}
