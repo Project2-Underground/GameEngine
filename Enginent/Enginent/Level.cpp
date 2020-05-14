@@ -187,6 +187,12 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 	}
 
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
+
+	if (roomName == "Building2")
+		player->TriggerRouteA = true;
+
+	if (roomName == "MainFloor2" && player->TriggerRouteA)
+		TextBox::GetInstance()->setText("Route_A");
 }
 
 std::vector<DrawableObject*>* Level::Getobjects() {
