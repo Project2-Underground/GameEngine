@@ -3,7 +3,7 @@
 <scripts>
 	<script key = "" loopIndex = "">
 		<sub>
-			<Dialogue name = "" text = "" sound = "" show = "" cutscene = "" room = "" enable = "" bool = "">
+			<Dialogue name = "" text = "" sound = "" show = "" cutscene = "" room = "" door = "" enable = "" bool = "">
 				<item name = "" NPC = "" />
 				<chat name = "" index = ""/>
 				<note name = ""/>
@@ -852,7 +852,7 @@
 	<script key = "Floor2_BackAlley_FinishedPuzzle" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "Behind this? \n Isn't this a hologram?"/>
-			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!" enable = "MainFloor2_BlackAlley"/>
+			<Dialogue name = "Elias" text = "Hm? \n My hand is going through the picture!"  enable = "MainFloor2_BlackAlley" room = "" door =""/>
 		</sub>
 	</script>
 	<script key = "Floor2_Mask4_2" loopIndex = "0">
@@ -932,10 +932,10 @@
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing down below will do. It won't explode in my face, right?"/>
 			<Dialogue name = " " text = "*Smashes sound*">
-				<sprite name="bg" texture="Texture/level2/Building2/Building2_Template2.png"/>
+				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Smoke... smoke is coming out."/>
-			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma."/>
+			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door"/>
+			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
 		</sub>
 	</script>
 	<script key = "Building2_com_broke" loopIndex = "0">
@@ -1112,7 +1112,7 @@
 	<script key = "puzzle6_2_NPC1" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Arlo" text = "You have already talked to him? It seems to be going well, you spend some times on that floor but still be able to get here."/>
-			<Dialogue name = "Arlo" text = "Hm? \n Wait, what's that stain on your hands?"/>
+			<Dialogue name = "Arlo" text = "Hm? \n Wait, what's that stain on your hands?" enable = "Puzzle6_NPC2F1" bool = "0"/>
 			<Dialogue name = "Elias" text = "Oh, I think I got this when I tried to help that guy with something."/>
 			<Dialogue name = "Arlo" text = "To be honest, it smells really stinky. Please, take this.">
 				<item name = "Puzzle6_Cloth"/>
@@ -1156,8 +1156,8 @@
 		<sub>
 			<Dialogue name = "Elias" text = "Have you seen this sheet?"/>
 			<Dialogue name = "Arlo" text = "No, I don't want to interfere with personal information."/>
-			<Dialogue name = "Arlo" text = "Oh, maybe this might be an exception."/>
-			<Dialogue name = "Arlo" text = "You know what? you really did a great job. \n let's meet on the 3rd floor." enable = "Building4Puzzle6Floor2Up"/>
+			<Dialogue name = "Arlo" text = "Oh, maybe this might be an exception." enable = "Building4Puzzle6Floor2Up"/>
+			<Dialogue name = "Arlo" text = "You know what? you really did a great job. \n let's meet on the 3rd floor."/>
 		</sub>
 	</script>
 	<script key = "puzzle6_2_door1" loopIndex = "0">
@@ -1179,9 +1179,9 @@
 	</script>
 	<script key = "puzzle6_3_NPC1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Arlo" text = "Oh, you're here. First thing first, I have something to tell you."/>
+			<Dialogue name = "Arlo" text = "Oh, you're here. First thing first, I have something to tell you." enable = "Puzzle6_NPC1F2" bool = "0"/>
 			<Dialogue name = "Arlo" text = "First, we found the traitor from the evidence that you gave to me. \n Although, all of us have med prescription, but no one is required to take the bedtime medicine."/>
-			<Dialogue name = "Arlo" text = "Second, I'm not sure if you know, but you are now a key holder."/>
+			<Dialogue name = "Arlo" text = "Second, I'm not sure if you know, but you are now a key holder."  enable = "Puzzle6_NPC1F2" bool = "0"/>
 			<Dialogue name = "Arlo" text = "And that means you are necessary for our ceremony."/>
 			<Dialogue name = "Elias" text = "So... What do I have to do?"/>
 			<Dialogue name = "Arlo" text = "Here is our order 'The traitor does not deserve judgements from the others, but the key holder will be the one who gives him a warm welcome.'">
@@ -1211,9 +1211,10 @@
 		</sub>
 	</script>
 	<script key = "puzzle6_3_pass" loopIndex = "0">
-		<sub change = "1">
-			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_BackAlley_FinishedPuzzle" new_a = ""/>
-			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Puzzle6_NPC1F3" bool = "0"/>
+		<sub>
+			<Dialogue name = "Arlo" text = "You've done a great job. \n Come meet us on the 1st floor after this." enable = "Building4Puzzle6Floor2Down"/>
+			<Dialogue name = "Arlo" text = "..." enable = "Puzzle6_NPC1F3" bool = "0"/>
+			<Dialogue name = "Arlo" text = "( He is really fast. I better be hurry. )"/>
 		</sub>
 	</script>
 	
@@ -1224,8 +1225,13 @@
 		</sub>
 	</script>
 	<script key = "puzzle6_pass_cultist" loopIndex = "0">
-		<sub>
-			<Dialogue name = "Noel" text = "Congratulations. \n You passed the test, just as I thought."/>
+		<sub change = "5">
+			<ChangeName name = "NPC4" new = "Floor2_Mask4_2" new_a = ""/>
+			<ChangeName name = "NPC5" new = "Floor2_Mask5_2" new_a = ""/>
+			<ChangeName name = "NPC6" new = "Floor2_Mask6_2" new_a = ""/>
+			<ChangeName name = "NPC7" new = "Floor2_Mask7_2" new_a = ""/>
+			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_BackAlley_FinishedPuzzle" new_a = ""/>
+			<Dialogue name = "Noel" text = "Congratulations. \n You passed the test, just as I thought." enable = "Cultist" bool = "0"/>
 			<Dialogue name = "Noel" text = "You are now one of us. \n Please, take this mask."/>
 			<Dialogue name = "Elias" text = "Ah... no thanks. \n More importantly! You were going to tell me about the exit weren't you?"/>
 			<Dialogue name = "Noel" text = "I'm surely I have told you that, however..."/>
@@ -1435,7 +1441,7 @@
 			<Dialogue name = "Emma" text = "Well, you see, I'm sort of being hunt by those people, and this place is not safe."/>
 			<Dialogue name = "Elias" text = "And you probably know the exit."/>
 			<Dialogue name = "Emma" text = "Of course! Listen carefully."/>
-			<Dialogue name = "Emma" text = "Did you see shabby building near the mansion? There's a secret path down to a secret room under the carpet."/>
+			<Dialogue name = "Emma" text = "Did you see shabby building near the mansion? There's a secret path down to a secret room under the carpet." enable = "Building1_FloorDoorOpen"/>
 			<Dialogue name = "Emma" text = "Once you got in, turn off that machine inside the room and come back here."/>
 			<Dialogue name = "Elias" text = "Aren't you coming?"/>
 			<Dialogue name = "Emma" text = "Going out right now might not be the best idea for me. Ha ha..."/>

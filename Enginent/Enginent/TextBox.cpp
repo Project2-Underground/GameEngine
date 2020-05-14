@@ -122,7 +122,7 @@ void TextBox::setText(std::string key, bool talk)
 			//change texture
 			if (d_text->dialogue[d_index].spriteChange != "")
 			{
-				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].spriteChange));
+				ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].spriteChange));
 				if (obj != nullptr)
 				{
 					obj->SetTexture(d_text->dialogue[d_index].sprite);
@@ -138,7 +138,7 @@ void TextBox::setText(std::string key, bool talk)
 			//enable object
 			if (d_text->dialogue[d_index].Enable != "")
 			{
-				Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+				Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].Enable));
 				if (obj != nullptr)
 				{
 					obj->SetDisplay(d_text->dialogue[d_index].en);
@@ -147,7 +147,7 @@ void TextBox::setText(std::string key, bool talk)
 				}
 				else
 				{
-					ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+					ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].Enable));
 					if (obj2 != nullptr)
 					{
 						obj2->SetDisplay(d_text->dialogue[d_index].en);
@@ -170,7 +170,7 @@ void TextBox::setText(std::string key, bool talk)
 			Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
 			InteractableObj* obj = nullptr;
 			if(d_text->dialogue[d_index].NPCName != "")
-				obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+				obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].NPCName));
 			if (item != nullptr && ((obj != nullptr && obj->hasItem) || d_text->dialogue[d_index].NPCName == ""))
 			{
 				gs->GetInventory()->AddItem(item);
@@ -362,7 +362,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//change texture
 		if (d_text->dialogue[d_index].spriteChange != "")
 		{
-			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].spriteChange));
+			ImageObject* obj = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].spriteChange));
 			if (obj != nullptr)
 			{
 				obj->SetTexture(d_text->dialogue[d_index].sprite);
@@ -378,7 +378,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//enable object
 		if (d_text->dialogue[d_index].Enable != "")
 		{
-			Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+			Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].Enable));
 			if (obj != nullptr)
 			{
 				obj->SetDisplay(d_text->dialogue[d_index].en);
@@ -387,7 +387,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 			}
 			else
 			{
-				ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].Enable));
+				ImageObject* obj2 = dynamic_cast<ImageObject*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].Enable));
 				if (obj2 != nullptr)
 				{
 					obj2->SetDisplay(d_text->dialogue[d_index].en);
@@ -412,7 +412,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 		Item* item = gs->FindItem(d_text->dialogue[d_index].itemName);
 		InteractableObj* obj = nullptr;
 		if (d_text->dialogue[d_index].NPCName != "")
-			obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->GetCurrentRoom()->FindObject(d_text->dialogue[d_index].NPCName));
+			obj = dynamic_cast<InteractableObj*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].NPCName));
 		if (item != nullptr && ((obj != nullptr && obj->hasItem) || d_text->dialogue[d_index].NPCName == ""))
 		{
 			gs->GetInventory()->AddItem(item);
