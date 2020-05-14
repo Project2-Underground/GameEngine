@@ -145,9 +145,14 @@ void TextBox::setText(std::string key, bool talk)
 				Door* obj = dynamic_cast<Door*>(Game::GetInstance()->GetCurrentLevel()->FindObject(d_text->dialogue[d_index].Enable));
 				if (obj != nullptr)
 				{
-					obj->SetDisplay(d_text->dialogue[d_index].en);
-					obj->col->enable = d_text->dialogue[d_index].en;
-					obj->Open();
+					if (d_text->dialogue[d_index].en)
+					{
+						obj->Open();
+					}
+					else
+					{
+						
+					}
 				}
 				else
 				{

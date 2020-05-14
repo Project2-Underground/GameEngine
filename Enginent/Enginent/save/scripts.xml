@@ -998,7 +998,7 @@
 			<Dialogue name = "Noel" text = "You have been protecting her since you came here. \n Are you hiding anything from us?"/>
 			<Dialogue name = "People" text = "He must know the exit! \n Capture him!"/>
 			<Dialogue name = "Elias" text = "Wait! \n I also don't know the exit!"/>
-			<Dialogue name = " " text = "(............)"/>
+			<Dialogue name = " " text = "(............)" room = "Building4Puzzle7Floor1" door = "Building4Puzzle7Floor1Out"/>
 		</sub>
 	</script>
 	<script key = "RouteB_Building3" loopIndex = "0">
