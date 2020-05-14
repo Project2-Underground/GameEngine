@@ -420,7 +420,7 @@ void GameScreen::ClosePuzzle() {
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	switch (key)
+	/*switch (key)
 	{
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
@@ -441,9 +441,15 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	case SDLK_s:
 		player->walkSpeed = 1000;
 		break;
+	case SDLK_a:
+		player->TriggerRouteA();
+		break;
+	case SDLK_d:
+		player->TriggerRouteB();
+		break;
 	default:
 		break;
-	}
+	}*/
 }
 
 GameScreen::~GameScreen() {

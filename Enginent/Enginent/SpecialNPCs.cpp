@@ -80,9 +80,11 @@ void Butler::Appear() {
 		disappearAfterAction = false;
 		clickToInteract = true;
 		triggered = false;
-		SetPosition(glm::vec3(1974, -37, 1));
+		SetPosition(glm::vec3(1974, 37, 1));
+		//std::cout << "Butler::Appear() ROUTE_A\n";
 		break;
 	case Butler::ROUTE_B: {
+		//std::cout << "Butler::Appear() ROUTE_B\n";
 		if (turnLeft) {
 			SetScale(-1, 1);
 			turnLeft = !turnLeft;
@@ -90,7 +92,7 @@ void Butler::Appear() {
 		currentLevel = 3;
 		dialogue_name = "Floor3B_butler";
 		MoveIn("MainFloor3");
-		SetPosition(glm::vec3(-2185, -37, 1));
+		SetPosition(glm::vec3(-2185, 37, 1));
 		disappearAfterAction = false;
 		clickToInteract = false;
 		triggered = false;

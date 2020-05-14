@@ -38,13 +38,14 @@ public:
 	void StopWalking();
 	void AddTriggerRouteB(std::string);
 	void TriggerRouteA();
+	void TriggerRouteB();
 
 	void CheckTarget(InteractableObj* target);
 	//void CheckWalkLimit();
 
 	glm::vec3 next_position;
 private:
-	std::string RouteB_Dialogue;
+	std::string Route_Dialogue;
 	std::vector<std::string> npcTalkRouteB;
 	Collider* walkLimit;
 	InteractableObj* target;

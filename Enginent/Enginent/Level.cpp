@@ -194,8 +194,9 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 
 	Game::GetInstance()->GetCamera()->SetLimit(currentRoom->GetCameraLimit());
 
-	if (roomName == "Building2")
-		player->triggerRouteA = true;
+	if (roomName == "Building2") {
+		player->TriggerRouteA();
+	}
 
 	if (roomName == "Building3") {
 		((InteractableObj*)FindObject("NPC4"))->SetDisplay(false);

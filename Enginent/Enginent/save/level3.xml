@@ -12,16 +12,22 @@
 				</Animations>
 				<colOff/>
 			</bgPeople>
-			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0"/>
-			<bg texture="Texture/level3/MainFloor3/MainFloor3_Lab.png" sizeX="1259" sizeY="443" posX="-2767" posY="147.5" layer="0"/>
-			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0"/>
+			<bg texture="Texture/level3/MainFloor3/MainFloor3_House.png" sizeX="228" sizeY="644" posX="3599.5" posY="47" layer="0">
+				<colOff/>
+			</bg>
+			<bg texture="Texture/level3/MainFloor3/MainFloor3_Lab.png" sizeX="1259" sizeY="443" posX="-2767" posY="147.5" layer="0">
+				<colOff/>
+			</bg>
+			<MainFloor3_House_Door texture="Texture/level3/MainFloor3/MainFloor3_House_Door.png" sizeX="75" sizeY="442" posX="3581" posY="69.5" layer="0">
+				<colOff/>
+			</MainFloor3_House_Door>
 			<MainFloor3_House_DoorTrigger texture="NONE" sizeX="150" sizeY="720" posX="3581" posY="0" type="11" layer="1" dialogue="Floor3A_factory"/>
-			<MainFloor3_LabDoorTrigger texture="NONE" sizeX="386" sizeY="720" posX="-2710.5" posY="0" type="11" layer="1" dialogue="Floor3A_lab"/>
+			<MainFloor3_LabDoorTrigger texture="NONE" sizeX="150" sizeY="720" posX="-2500.5" posY="0" type="11" layer="1" dialogue="Floor3A_lab"/>
 			<people1 texture="NONE" sizeX="75" sizeY="720" posX="886" posY="0" type="11" layer="1" dialogue="Floor3A_people1"/>
 			<people2 texture="NONE" sizeX="75" sizeY="720" posX="-407" posY="0" type="11" layer="1" dialogue="Floor3A_people2"/>
 		</interactObj>
 		<doors>
-			<MainFloor3_LabDoor texture="Texture/level3/MainFloor3/MainFloor3_LabDoor.png" sizeX="386" sizeY="365" posX="-2710.5" posY="124.5" layer="0" next_room="Lab" next_door="Lab_Door" dialogue="">
+			<MainFloor3_LabDoor texture="Texture/level3/MainFloor3/MainFloor3_LabDoor.png" sizeX="386" sizeY="365" posX="-2710.5" posY="124.5" layer="5" next_room="Lab" next_door="Lab_Door" dialogue="">
 			</MainFloor3_LabDoor>
 		</doors>
 		<NPCs>

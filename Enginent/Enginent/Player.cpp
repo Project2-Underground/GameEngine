@@ -8,7 +8,7 @@
 Player::Player()
 {
 	object_name = "Elias"; 
-	RouteB_Dialogue = "Route_B";
+	Route_Dialogue = "Route_A";
 	walkLimit = nullptr;
 	next_position = glm::vec3(this->pos);
 	anim = new Animator();
@@ -35,9 +35,9 @@ void Player::Update()
 		}
 	}
 	anim->Update();
-	if (triggerRouteB && !RouteB_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
-		TextBox::GetInstance()->setText(RouteB_Dialogue);
-		RouteB_Dialogue.clear();
+	if (triggerRouteB && !Route_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
+		TextBox::GetInstance()->setText(Route_Dialogue);
+		Route_Dialogue.clear();
 	}
 }
 
@@ -72,12 +72,7 @@ void Player::AddTriggerRouteB(std::string dialogueName) {
 		|| dialogueName == "Floor2_Mask5_2" || dialogueName == "Floor2_Mask6_2") {
 		npcTalkRouteB.push_back(dialogueName);
 		if (npcTalkRouteB.size() == 4) {
-			triggerRouteB = true;
-			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
-			gs->GetCurrentLevel()->rooms["Building4Puzzle7Floor1"]->dialogue.clear();
-			gs->butler->currentPhase = Butler::ROUTE_B;
-			gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
-			((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
+			TriggerRouteB();
 		}
 		//std::cout << " Player::AddTriggerRouteB " << npcTalkRouteB.size() << std::endl;
 	}
@@ -85,8 +80,19 @@ void Player::AddTriggerRouteB(std::string dialogueName) {
 
 void Player::TriggerRouteA() {
 	triggerRouteA = true;
+	Route_Dialogue = "Route_A";
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	gs->butler->currentPhase = Butler::ROUTE_A;
+}
+
+void Player::TriggerRouteB() {
+	triggerRouteB = true;
+	Route_Dialogue = "Route_B";
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	gs->GetCurrentLevel()->rooms["Building4Puzzle7Floor1"]->dialogue.clear();
+	gs->butler->currentPhase = Butler::ROUTE_B;
+	gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
+	((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
 }
 
 void Player::Turn() {
