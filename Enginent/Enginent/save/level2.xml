@@ -123,12 +123,14 @@
 			<fg texture="Texture/level2/Building2/Building2_Foreground1.png" sizeX="1575" sizeY="121" posX="0" posY="-299.5" layer="0"/>
 		</foreground>
 	</Building2>
-	<Building3 left_limit="-700" right_limit="700" top_limit="360" bottom_limit="-360" y="-90" dialogue="RouteA_Building3" bgm="Buildng3">
+	<Building3 left_limit="-700" right_limit="350" top_limit="360" bottom_limit="-360" y="-90" dialogue="RouteA_Building3" bgm="Buildng3">
 		<background>
 			<bg texture="Texture/level2/Building3/Building3_Template.png" sizeX="1575" sizeY="720" posX="0" posY="0" layer="0"/>
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
+			<Building3_Emma texture="Texture/Character/NPCs/Emma/Building3_Emma.png" sizeX="186" sizeY="350" posX="648.5" posY="70.5" type="1" layer="0" dialogue="" dialogue_2="">
+			</Building3_Emma>
 		</interactObj>
 		<doors>
 			<Building3_Exit texture="NONE" sizeX="124" sizeY="506" posX="-708.5" posY="-75" next_room="MainFloor2" next_door="MainFloor2_Building3_Door" layer="0" dialogue="">
@@ -161,11 +163,6 @@
 					<Idle texture="Texture/Character/NPCs/Floor2/Cultist_Mask.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
 			</Cultist_Mask>
-			<Building3_Emma sizeX="186" sizeY="350" posX="648.5" posY="70.5" layer="0" dialogue="" dialogue_2="">
-				<Animations>
-					<Idle texture="Texture/Character/NPCs/Emma/Building3_Emma.png" frame="1" time_per_frame="0" loop="True"/>
-				</Animations>
-			</Building3_Emma>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/level2/Building3/Building3_ForeGround.png" sizeX="1326" sizeY="254" posX="29.5" posY="-233" layer="0"/>

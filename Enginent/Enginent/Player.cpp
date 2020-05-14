@@ -38,11 +38,6 @@ void Player::Update()
 	if (triggerRouteB && !RouteB_Dialogue.empty() && !TextBox::GetInstance()->IsDisplay()) {
 		TextBox::GetInstance()->setText(RouteB_Dialogue);
 		RouteB_Dialogue.clear();
-		GameScreen* gs = (GameScreen*)Game::GetInstance()->GetScreen();
-		gs->butler->currentPhase = Butler::ROUTE_B;
-		// change others dialogue in floor 2
-		gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
-		((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
 	}
 }
 
@@ -81,6 +76,8 @@ void Player::AddTriggerRouteB(std::string dialogueName) {
 			GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 			gs->GetCurrentLevel()->rooms["Building4Puzzle7Floor1"]->dialogue.clear();
 			gs->butler->currentPhase = Butler::ROUTE_B;
+			gs->GetCurrentLevel()->rooms["Building3"]->dialogue = "RouteB_Building3";
+			((InteractableObj*)gs->GetCurrentLevel()->FindObject("Cultist_Mask"))->SetDialogueName("RouteB_Building3_Cultist", "");
 		}
 		//std::cout << " Player::AddTriggerRouteB " << npcTalkRouteB.size() << std::endl;
 	}
