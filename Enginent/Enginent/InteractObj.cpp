@@ -121,7 +121,7 @@ void InteractableObj::UseItem(Item* item) {
 			vw->SetViewItem(item);
 			vw->Open();
 		}
-		std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
+		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
 		i->UnselectItem();

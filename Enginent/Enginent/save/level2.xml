@@ -179,12 +179,12 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
-			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="-402" posY="-37" type="11" layer="0" dialogue="Building4_NPC1">
+			<Puzzle6_NPC1F1 sizeX="152" sizeY="369" posX="-402" posY="-37" type="11" layer="0" dialogue="Building4_NPC1">
 				<typeView type="5" />
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC1>
+			</Puzzle6_NPC1F1>
 			<Puzzle6_AltarwithPills  texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" sizeX="197" sizeY="236" posX="-165" posY="-85" type="3" layer="0" dialogue="Building4_altar" dialogue_2="Building4_altar_after">
 				<item name="Puzzle6_PillAfternoon" scriptHandleItem="true"/>
 				<pick texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Altar.png"/>
@@ -199,12 +199,12 @@
 			</Building4Puzzle6Floor1Up>
 		</doors>
 		<NPCs>
-			<Puzzle6_NPC2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="Building4_NPC2" dialogue_2="Building4_NPC2_after">
+			<Puzzle6_NPC2F1 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="Building4_NPC2" dialogue_2="Building4_NPC2_after">
 				<key name="Puzzle6_PillBedtime_withMEAT"/>
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC2>
+			</Puzzle6_NPC2F1>
 			
 			<!-- npc to spawn after puzzle -->
 			<Puzzle6_NPC1_AfterPuzzle sizeX="152" sizeY="369" posX="370" posY="-37" layer="0" dialogue="puzzle6_pass_NPC1" dialogue_2="puzzle6_pass_NPC1">
@@ -247,16 +247,16 @@
 			</Building4Puzzle6Floor2Up>
 		</doors>
 		<NPCs>
-			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="-402" posY="-37" layer="0" dialogue="">
+			<Puzzle6_NPC1F2 sizeX="152" sizeY="369" posX="-402" posY="-37" layer="0" dialogue="">
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC1>
-			<Puzzle6_NPC2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="puzzle6_2_NPC2" dialogue_2="puzzle6_2_NPC2_after">
+			</Puzzle6_NPC1F2>
+			<Puzzle6_NPC2F2 sizeX="118" sizeY="374" posX="370" posY="-37" layer="0" dialogue="puzzle6_2_NPC2" dialogue_2="puzzle6_2_NPC2_after">
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC2.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC2>
+			</Puzzle6_NPC2F2>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
@@ -290,11 +290,11 @@
 			</Building4Puzzle6Floor3Up>
 		</doors>
 		<NPCs>
-			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="163" posY="-37" layer="0" dialogue="puzzle6_3_NPC1" dialogue_2="puzzle6_3_NPC1_after">
+			<Puzzle6_NPC1F3 sizeX="152" sizeY="369" posX="163" posY="-37" layer="0" dialogue="puzzle6_3_NPC1" dialogue_2="puzzle6_3_NPC1_after">
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC1>
+			</Puzzle6_NPC1F3>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
@@ -354,11 +354,11 @@
 			</Building4Puzzle7Floor2Up>
 		</doors>
 		<NPCs>
-			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="293" posY="-37" layer="0" dialogue="puzzle7_NPC1" dialogue_2="puzzle7_quest1">
+			<Puzzle7_NPC1F2 sizeX="152" sizeY="369" posX="293" posY="-37" layer="0" dialogue="puzzle7_NPC1" dialogue_2="puzzle7_quest1">
 				<Animations>
 					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
 				</Animations>
-			</Puzzle6_NPC1>
+			</Puzzle7_NPC1F2>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
@@ -386,11 +386,6 @@
 			</Building4Puzzle7Floor3Up>
 		</doors>
 		<NPCs>
-			<Puzzle6_NPC1 sizeX="152" sizeY="369" posX="293" posY="-37" layer="0" dialogue="">
-				<Animations>
-					<Idle texture="Texture/level2/Building4/Puzzle6/NPC/Puzzle6_NPC1.png" frame="2" time_per_frame="0.5" loop="True"/>
-				</Animations>
-			</Puzzle6_NPC1>
 		</NPCs>
 		<foreground>
 			<fg texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Foreground.png" sizeX="2144" sizeY="720" posX="0" posY="-175.5" layer="0"/>
