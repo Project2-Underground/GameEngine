@@ -372,7 +372,7 @@
 		</background>
 		<!-- type 1: normal, 2: view, 3: pick up, 4: door, 5: talk, 6: change scene, 7: save, 8: open, 9: puzzle, 11:Trigger -->
 		<interactObj>
-			<Puzzle7_Altar1 texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" sizeX="179" sizeY="209" posX="-243" posY="-98" type="3" layer="1" dialogue="puzzle7_altar1" dialogue_2="puzzle7_altar1_after">
+			<Puzzle7_Altar1 texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" sizeX="179" sizeY="209" posX="-243" posY="-98" type="2" layer="1" dialogue="puzzle7_altar1" dialogue_2="puzzle7_altar1_after">
 			</Puzzle7_Altar1>
 			<Puzzle7_Altar2 texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" sizeX="179" sizeY="209" posX="179" posY="-98" type="3" layer="1" dialogue="puzzle7_altar2" dialogue_2="puzzle7_altar2">
 				<key name="Puzzle7_Knife"/>

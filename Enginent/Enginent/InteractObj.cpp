@@ -133,6 +133,11 @@ void InteractableObj::UseItem(Item* item) {
 		if (object_name == "Puzzle7_WallTorch")
 			SetSize(191, -197);
 
+		if (object_name == "Puzzle7_Altar2") {
+			dialogue_after = "puzzle7_altar2_noKey";
+			interactType = VIEW;
+		}
+
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);

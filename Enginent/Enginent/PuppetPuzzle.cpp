@@ -27,7 +27,6 @@ bool PuppetPuzzle::CheckRequirements() {
 	bool hasEarKey = i->IsItemInInventory("Puzzle7_EarKey");
 	bool hasMouthKey = i->IsItemInInventory("Puzzle7_MouthKey");
 
-	std::cout << "PuppetPuzzle::CheckRequirements() " << hasEyeKey << hasEarKey << hasMouthKey << std::endl;
 	if (hasEarKey && hasEyeKey && hasMouthKey) {
 		i->RemoveItem("Puzzle7_EyeKey");
 		i->RemoveItem("Puzzle7_EarKey");

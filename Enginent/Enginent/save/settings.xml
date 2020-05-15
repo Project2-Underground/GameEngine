@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Options>
 	<SaveSlots>
-		<s hasSaveFile="true" details="Level 2" />
-		<s hasSaveFile="true" details="Level 2" />
+		<s hasSaveFile="false" details="" />
+		<s hasSaveFile="false" details="" />
 		<s hasSaveFile="false" details="" />
 		<s hasSaveFile="false" details="" />
 	</SaveSlots>
