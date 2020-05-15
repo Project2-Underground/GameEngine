@@ -27,6 +27,7 @@ public:
 	void InitAnimator() { anim = new Animator(); }
 	void Appear(bool b);
 	unsigned int GetTexture();
+	string GetTexturePath();
 	bool IsDisplay() { return display; }
 	void SetDisplay(bool d) { display = d; }
 	virtual void Render(glm::mat4 globalModelTransform);

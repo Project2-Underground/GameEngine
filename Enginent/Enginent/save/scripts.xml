@@ -83,7 +83,7 @@
 	<script key = "EliasRoom_carbinet2" loopIndex = "1">
 		<sub>
 			<Dialogue name = "??" text = "Hm... no cards."/>
-			<Dialogue name = "??" text = "Come to think of it, I own more military training books than I thought."/>
+			<Dialogue name = "??" text = "Come to think of it, I own more of these military training books than I thought."/>
 		</sub>
 		<sub>
 			<Dialogue name = "??" text = "There are only military trainging books, body donation form and other documents in here."/>
@@ -139,7 +139,7 @@
 	</script>
 	<script key = "Elias_hall_door" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "How did it turn into a wall? \n This gives me goose bumps."/>
+			<Dialogue name = "Elias" text = "How did it turn into a wall? \n This gives me the goosebumps."/>
 		</sub>
 	</script>
 	<script key = "Butler_start" loopIndex = "0">
@@ -154,7 +154,7 @@
 		<sub>
 			<Dialogue name = "Elias" text = "The experiment? \n What the hell is this!?"/>
 			<Dialogue name = "Elias" text = "Mr butler... \n Where did he go?"/>
-			<Dialogue name = "Elias" text = "Darn it! \n I cannot send back a message from this phone."/>
+			<Dialogue name = "Elias" text = "Darn it! \n I cannot send messages from this phone."/>
 			<Dialogue name = "Elias" text = "Looks like I have to be a good lab rat for now."/>
 			<Dialogue name = "Elias" text = "At least it has a Note on this phone."/>
 		</sub>
@@ -239,27 +239,27 @@
 		<sub>
 			<Dialogue name = "???" text = "Is there someone outside?"/>
 			<Dialogue name = "???" text = "Do you have a moment?"/>
-			<Dialogue name = "Elias" text = "( There is a girl voice coming from behind. )"/>
+			<Dialogue name = "Elias" text = "( There is a woman voice coming from behind. )"/>
 		</sub>
 	</script>
 	<script key = "Emma_door" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "This time it's a real door. \n There must be someone on the other side."/>
+			<Dialogue name = "Elias" text = "It's a real door this time. \n There must be someone on the other side."/>
 			<Dialogue name = "Elias" text = "Hello, who are you?"/>
-			<Dialogue name = "???" text = "Someone really does come!"/>
+			<Dialogue name = "???" text = "Someone really come!"/>
 			<Dialogue name = "Emma" text = "My name is Emma. \n Could you do me a favor? \n You see, I can't get out of this room."/>
 			<Dialogue name = "Elias" text = "And what do you want me to do?"/>
-			<Dialogue name = "Emma" text = "I remember I got out and maybe left my note that has my password outside."/>
+			<Dialogue name = "Emma" text = "I remember that I got out and maybe left my note that has my password outside."/>
 			<Dialogue name = "Emma" text = "Can you help me find it? \n I would really love to go for a walk outside right about now."/>
 			<Dialogue name = "Elias" text = "Hold on a minute! \n How did you get inside again?"/>
-			<Dialogue name = "Emma" text = "Maybe I uh... came back to open the door and... or did I left the note outside the door?"/>
+			<Dialogue name = "Emma" text = "Maybe I uh... after I came back, I open the door and... or did I left the note outside the door?"/>
 			<Dialogue name = "Elias" text = "That's not what I meant. \n Your door didn't disappear after you got out?"/>
 			<Dialogue name = "Emma" text = "Are you okay? \n How can a door disappear like that?"/>
-			<Dialogue name = "Elias" text = "Did you really got out of the room?"/>
-			<Dialogue name = "Emma" text = "Hm... actually, I don't know. \n It seems like I already forgot about it ha ha..."/>
-			<Dialogue name = "Elias" text = "Are you okay? \n If you did actually come out then you must have remembered it. \n And how come you are going for a stroll with this experiemental going on?"/>
+			<Dialogue name = "Elias" text = "Did you really leave the room?"/>
+			<Dialogue name = "Emma" text = "Hm... actually, I don't know. \n It seems like I have already forgotten about it, ha ha..."/>
+			<Dialogue name = "Elias" text = "Are you okay? \n If you did actually come out then you must have remembered it. \n And how come you are going for a stroll while this experiemental going on?"/>
 			<Dialogue name = "Emma" text = "Why are you such a whinny? \n You're getting old! \n Let's just get me out of here first."/>
-			<Dialogue name = "Elias" text = "( You are getting old! )"/>
+			<Dialogue name = "Elias" text = "( You are the one who is getting old! )"/>
 		</sub>
 	</script>
 	<script key = "Emma_door_after" loopIndex = "0">
@@ -287,13 +287,13 @@
 	<script key = "backdoor_card" loopIndex = "0">
 		<sub>
 			<Dialogue name = "System" text = "Your card has been updated."/>
-			<Dialogue name = "Elias" text = "( Okay... What should I do next. )"/>
+			<Dialogue name = "Elias" text = "( Okay... What do I do next. )"/>
 		</sub>
 	</script>
 	<script key = "backdoor_card" loopIndex = "0">
 		<sub>
 			<Dialogue name = "System" text = "Your card has been updated."/>
-			<Dialogue name = "Elias" text = "( Okay... What should I do next. )"/>
+			<Dialogue name = "Elias" text = "( Okay... What do I do next. )"/>
 		</sub>
 	</script>
 	<script key = "EmmaRoom_start" loopIndex = "0">
@@ -304,16 +304,16 @@
 			<Dialogue name = "Emma" text = "Hey!"/>
 			<Dialogue name = "Elias" text = "Huh?"/>
 			<Dialogue name = "Emma" text = "How did you get into my room?"/>
-			<Dialogue name = "Elias" text = "I found your drawings and the color code. \n I just tried putting in the numbers."/>
-			<Dialogue name = "Emma" text = "What drawings? \n I mean. \n What I was asking was why did you come into my room?"/>
-			<Dialogue name = "Elias" text = "Didn't you call me to open the door?"/>
-			<Dialogue name = "Emma" text = "Now, why would I want you to come in?... Hm. Or maybe I would. \n Who are you?"/>
+			<Dialogue name = "Elias" text = "I found your drawings and the color code. \n I was just putting in the numbers."/>
+			<Dialogue name = "Emma" text = "What drawings? \n I mean. \n What I meant was why did you come into my room?"/>
+			<Dialogue name = "Elias" text = "Didn't you ask me to open the door?"/>
+			<Dialogue name = "Emma" text = "Now, why would I want you to come in?... Hm. Or maybe I did. \n Who are you?"/>
 			<Dialogue name = "Elias" text = "( This lady seems a bit silly. )"/>
 			<Dialogue name = "Elias" text = "My name is Elias. \n Does that ring a bell?"/>
-			<Dialogue name = "Emma" text = "Sounds familiar. \n I'm Emma, looks like I got a memory of a sieve"/>
+			<Dialogue name = "Emma" text = "Sounds familiar. \n I'm Emma, looks like I got a memory of a goldfish"/>
 			<Dialogue name = "Elias" text = "How old are you, again?"/>
-			<Dialogue name = "Emma" text = " Are you calling me old? \n You look young, but you speak like an old man, an old man that is older than me! \n Thanks for opening the door for me. \n Now go back the way you came!"/>
-			<Dialogue name = "Elias" text = "( Darn it! \n the thought just slipped through my lips. )"/>
+			<Dialogue name = "Emma" text = " Are you calling me old? \n Although you look young, you speak like an old man, an old man that is older than me! \n Thanks for opening the door for me. \n Now go back the way you came!"/>
+			<Dialogue name = "Elias" text = "( Darn it! \n The thought just slipped through my lips. )"/>
 			<Dialogue name = "Elias" text = "Hold on a second! \n You said you can help me get out of this experiment, I need to ask you about that."/>
 			<Dialogue name = "Emma" text = "The experiment?"/>
 			<Dialogue name = "Elias" text = "( Emma's taking out a book from the pile of papers to read. )"/>
@@ -339,7 +339,7 @@
 		<sub>
 			<Dialogue name = "Elias" text = "There's a window in here? \n Have you try opening it?"/>
 			<Dialogue name = "Emma" text = "Hm... that window?"/>
-			<Dialogue name = "Emma" text = "Although, you can see the light ray shining through glass, that's the hologram of a window."/>
+			<Dialogue name = "Emma" text = "Although, you can see the light ray shining through glass, that's just a hologram of a window."/>
 			<Dialogue name = "Elias" text = "How can a hologram be this realistic?"/>
 			<Dialogue name = "Emma" text = "I have no idea."/>
 		</sub>
@@ -352,7 +352,7 @@
 	<script key = "EmmaRoom_picture2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "A father, a mother and a child?"/>
-			<Dialogue name = "Elias" text = "What's this... a new message?"/>
+			<Dialogue name = "Elias" text = "What's this... a message?"/>
 			<Dialogue name = " " text = "( I've found a way up to the ground floor. \n See you there, soon. )"/>
 			<Dialogue name = "Elias" text = "The ground floor? \n We are underground? \n How did she know all of this?"/>
 		</sub>
@@ -410,11 +410,11 @@
 	<script key = "Hubert1_A" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Hubert" text = "You can go find the exit all you want."/>
-			<Dialogue name = "Hubert" text = "No one here interested to go outside."/>
-			<Dialogue name = "Elias" text = "Why? \n y'all don't want to go outside?"/>
-			<Dialogue name = "Hubert" text = "At first, I was going to be my first day of work."/>
+			<Dialogue name = "Hubert" text = "No one here is interested in going outside."/>
+			<Dialogue name = "Elias" text = "Why? \n You guys don't want to go outside?"/>
+			<Dialogue name = "Hubert" text = "At first, it was going to be my first day of work."/>
 			<Dialogue name = "Hubert" text = "But when I'm here, those works mean nothing."/>
-			<Dialogue name = "Hubert" text = "You know what? \n Go ask that short-hair lady down there. \n She's the first one to come out and has been mumbling something for a while now."/>
+			<Dialogue name = "Hubert" text = "You know what? \n Go ask that short-hair lady over there. \n She's the first one to come out and has been mumbling something for a while now."/>
 			<Dialogue name = "Elias" text = "( Working on a Sunday? \n Is this person still sane? )"/>
 		</sub>		
 	</script>
@@ -426,7 +426,7 @@
 			<Dialogue name = "Hubert" text = "What can some books do? \n They are just books."/>
 			<Dialogue name = "Elias" text = "What makes you so sure that you have done it correctly?"/>
 			<Dialogue name = "Hubert" text = "Are you saying I'm stupid?"/>
-			<Dialogue name = "Hubert" text = "You know what? \n You do as you please."/>
+			<Dialogue name = "Hubert" text = "You know what? \n Do as you please."/>
 			<Dialogue name = "Hubert" text = "And get this book back on the shelf for me. \n I'm just going to sit and watch.">
 				<item name = "Book1"  NPC = "Hubert"/>
 			</Dialogue>
@@ -435,7 +435,7 @@
 	<script key = "Hubert1_C" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Hubert" text = "Not given up yet? \n Why are you asking about this anyway?"/>
-			<Dialogue name = "Hubert" text = "When I went to take the book, it's as if the order of the books on the second row is the opposite of the third row, that's it."/>
+			<Dialogue name = "Hubert" text = "When I took the book, it's as if the order of the books on the second row is the opposite of the third row, that's it."/>
 			<Dialogue name = "Hubert" text = "Let it go, kid. \n There's no way out of here."/>
 		</sub>
 	</script>
@@ -444,12 +444,12 @@
 			<Dialogue name = "Elias" text = "Excuse me, may I ask you something?"/>
 			<Dialogue name = "Dialy" text = "Yeah?"/>
 			<Dialogue name = "Elias" text = "( She won't look away from her phone. )"/>
-			<Dialogue name = "Elias" text = "( Wait! Can her phone send messages outside? )"/>
-			<Dialogue name = "Elias" text = "Your phone have a signal?"/>
-			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either."/>
+			<Dialogue name = "Elias" text = "( Wait! she can send messages outside? )"/>
+			<Dialogue name = "Elias" text = "Is your phone receiving a signal?"/>
+			<Dialogue name = "Dialy" text = "Nope, my phone doesn't have one either."/>
 			<Dialogue name = "Elias" text = "Then why..."/>
 			<Dialogue name = "Dialy" text = "Am I always looking at my phone?"/>
-			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down."/>
+			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I must not put it down."/>
 			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications."/>
 			<Dialogue name = "Dialy" text = "I won't be putting this down, never."/>
 			<Dialogue name = "Elias" text = "( Did she said after she came here? )"/>
@@ -466,12 +466,12 @@
 			<Dialogue name = "Elias" text = "Excuse me, may I ask you something?"/>
 			<Dialogue name = "Dialy" text = "Yeah?"/>
 			<Dialogue name = "Elias" text = "( She won't look away from her phone. )"/>
-			<Dialogue name = "Elias" text = "( Wait! Can her phone send messages outside? )"/>
-			<Dialogue name = "Elias" text = "Your phone have a signal?"/>
-			<Dialogue name = "Dialy" text = "Nope, not my phone doesn't have one either."/>
+			<Dialogue name = "Elias" text = "( Wait! she can send messages outside? )"/>
+			<Dialogue name = "Elias" text = "Is your phone receiving a signal?"/>
+			<Dialogue name = "Dialy" text = "Nope, my phone doesn't have one either."/>
 			<Dialogue name = "Elias" text = "Then why..."/>
 			<Dialogue name = "Dialy" text = "Am I always looking at my phone?"/>
-			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I cannot put it down."/>
+			<Dialogue name = "Dialy" text = "Since I pickup this phone, I have a feeling that I must not put it down."/>
 			<Dialogue name = "Dialy" text = "I need to keep my eyes on it to make sure I won't miss any notifications."/>
 			<Dialogue name = "Dialy" text = "I won't be putting this down, never."/>
 			<Dialogue name = "Elias" text = "( Did she said after she came here? )"/>
@@ -503,7 +503,7 @@
 	<script key = "Dialy1_C" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Dialy" text = "The books' position? "/>
-			<Dialogue name = "Dialy" text = "I remember the symbols of the books on the third row are ordered opposite from the first row."/>
+			<Dialogue name = "Dialy" text = "I remember the symbols of the books on the third row are in opposite order from the first row."/>
 			<Dialogue name = "Dialy" text = "Other than that, I have no idea."/>
 			<Dialogue name = "Elias" text = "( The symbols of the books on the third row are ordered opposite from the first row. )"/>
 			<Dialogue name = "Elias" text = " ( Let's hope she remembers it correctly. )"/>
@@ -548,12 +548,12 @@
 	<script key = "Ann1_A" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Ann" text = " ... There was a man, earlier, said that the books in the bookcase will help getting him out of here. \n So, I... I took one."/>
-			<Dialogue name = "Ann" text = "...I took one of those weird books and read the pages, just like everyone else."/>
+			<Dialogue name = "Ann" text = "...I took one of those weird books and read some pages, just like everyone else."/>
 			<Dialogue name = "Elias" text = "You also took a book from the bookshelf?"/>
 			<Dialogue name = "Ann" text = "Yeah... But it's not important anymore. \n You can take it">
 				<item name = "Book4" NPC = "Ann"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Ah...Thank you. \n I'm going find a way to use it. \n And please, don't do something suicidal."/>
+			<Dialogue name = "Elias" text = "Ah...Thank you. \n I'm going find a way to use it. \n And please, don't do any suicidal."/>
 			<Dialogue name = "Ann" text = "What gives you the thought?"/>
 			<Dialogue name = "Elias" text = "Hm... I might have met someone with depression disorder, kind of like you... But it was quite a long time ago."/>
 			<Dialogue name = "Ann" text = "........"/>
@@ -626,7 +626,7 @@
 		<sub>
 			<Dialogue name = "Dann" text = "Hm...ah...oh the books."/>
 			<Dialogue name = "Dann" text = "I saw them took out the books to read and started yelling."/>
-			<Dialogue name = "Dann" text = "I took one of the books out to read. \n Nothing interesting."/>
+			<Dialogue name = "Dann" text = "I took out one of the books to read. \n Nothing interesting."/>
 			<Dialogue name = "Dann" text = " ...Could you return this book for me?"/>
 			<Dialogue name = "Dann" text = "I think the way out has nothing to do with the books, even so I still don't care about it enough to be bother."/>
 			<Dialogue name = "Dann" text = "......"/>
@@ -644,7 +644,7 @@
 			<Dialogue name = "Dann" text = "Each row has only one color and the symbols do not repeat."/>
 			<Dialogue name = "Dann" text = "I switch the place around before taking the book. \n It was quite fun."/>
 			<Dialogue name = "Elias" text = "You mixed them all up?!"/>
-			<Dialogue name = "Dann" text = "Right? \n But, but, I re-ordered the symbols to their correct places, although the colors are not quite right."/>
+			<Dialogue name = "Dann" text = "Right? \n But. But I re-ordered the symbols to their correct places, although the colors are not quite right."/>
 			<Dialogue name = "Elias" text = "( Hm... Atleast I can still use the symbols as the guideline. \n So, the symbols will not repeat on the same row... )"/>
 		</sub>		
 	</script>
@@ -657,7 +657,7 @@
 		<sub>
 			<Dialogue name = "Emma" text = "How are you?"/>
 			<Dialogue name = "Emma" text = "I think the hint to the password is in those papers."/>
-			<Dialogue name = "Emma" text = "Let's meet after you have done that. \n I need to read something."/>
+			<Dialogue name = "Emma" text = "Let's meet after you're done with that. \n I still need to read something."/>
 		</sub>
 	</script>	
 	<script key = "Emma1_A" loopIndex = "0">
@@ -669,7 +669,7 @@
 			<Dialogue name = "Elias" text = "You are also going out?"/>
 			<Dialogue name = "Emma" text = "Certainly, yes."/>
 			<Dialogue name = "Elias" text = "( Finally, someone with the same heart as me! )"/>
-			<Dialogue name = "Emma" text = "..."/>
+			<Dialogue name = "Emma" text = "..."/>			
 			<Dialogue name = "Emma" text = "... I think I got something."/>
 			<Dialogue name = "Emma" text = "From what I understand, you have skipped one of the test."/>
 			<Dialogue name = "Elias" text = "What do you mean?"/>
@@ -678,7 +678,7 @@
 			<Dialogue name = "Emma" text = "Heh? Really? \n Seems like it's the same for you, too."/>
 			<Dialogue name = "Elias" text = "What are you talking about?"/>
 			<Dialogue name = "Emma" text = "I think there's another way for you."/>
-			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And, take this, it seems to be a hint on how to power on that in there."/>
+			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And take this. \n It seems to be a hint on how to turn on that thing in there."/>
 			<Dialogue name = " " text = "You received pictures.">
 				<item name = "Puzzle3_Pic1" NPC = "Emma"/>
 			</Dialogue>
@@ -702,7 +702,7 @@
 			<Dialogue name = "Elias" text = "However...?"/>
 			<Dialogue name = "Emma" text = "I might have forgot all of it. \n Ha ha..."/>
 			<Dialogue name = "Elias" text = "What?! \n Are you being serious?"/>
-			<Dialogue name = "Elias" text = "If your mamory is this bad, why don't you just write it down on your body?"/>
+			<Dialogue name = "Elias" text = "If your memory is that bad, why don't you just write it down on your body?"/>
 			<Dialogue name = "Emma" text = "Oh my god! \n That's a great idea you've got there!"/>
 			<Dialogue name = "Elias" text = "( She has got to be kidding me. )">
 			</Dialogue>
@@ -715,7 +715,7 @@
 			<Dialogue name = "Emma" text = "Heh? Really? \n Seems like it's the same for you, too."/>
 			<Dialogue name = "Elias" text = "What are you talking about?"/>
 			<Dialogue name = "Emma" text = "I think there's another way for you."/>
-			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And, take this, it seems to be a hint on how to power on that in there."/>
+			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And take this. \n It seems to be a hint on how to turn on that thing in there."/>
 			<Dialogue name = " " text = "You received pictures.">
 				<item name = "Puzzle3_Pic1" NPC = "Emma"/>
 			</Dialogue>
@@ -728,7 +728,7 @@
 			<Dialogue name = " " text = " ">
 				<item name = "Puzzle3_Pic4"/>
 			</Dialogue>				
-			<Dialogue name = "Emma" text = "Put your card in there and go back to the first room."/>
+			<Dialogue name = "Emma" text = "Update your card and go back to the first room."/>
 			<Dialogue name = "Elias" text = "What about you?"/>
 			<Dialogue name = "Emma" text = "I'm going to read these papers for a while, might find something else."/>	
 		</sub>		
@@ -771,7 +771,7 @@
 	</script>
 	<script key = "Floor2_mask6" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "( These people with strange masks are looking at meใ )"/>
+			<Dialogue name = "Elias" text = "( These people with strange masks are looking at me )"/>
 			<Dialogue name = "Asher" text = "I heard a scientist just showed up."/>
 			<Dialogue name = "Leo" text = "How?! \n We need to find that man."/>
 			<Dialogue name = "Asher" text = "I think he used a secret tunnel to come here."/>
@@ -782,7 +782,7 @@
 	<script key = "Floor2_mask5" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Leo" text = "I heard that the scientist came here to kill us."/>
-			<Dialogue name = "Leo" text = "They think we are of no use to them."/>
+			<Dialogue name = "Leo" text = "They think we have no use to them."/>
 			<Dialogue name = "Asher" text = "I never heard of anyone who got pass this place."/>
 			<Dialogue name = "Asher" text = "This experiment is just smoke and mirrors, they just want to kill us."/>
 			<Dialogue name = "Leo" text = "The chief will save us! \n The chief is always right!"/>
@@ -800,21 +800,21 @@
 	<script key = "Floor2_mask4" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Sophia" text = "I saw the writings in that scientist's paper, it says they are making clones of us."/>
-			<Dialogue name = "Sophia" text = "They are going to brainwash us to create their army of clones."/>
+			<Dialogue name = "Sophia" text = "They are going to brainwash us and create their army of clones."/>
 			<Dialogue name = "Charlotte" text = "Is this true?! They are treating us like a lab rat!"/>
 		</sub>
 	</script>
 	<script key = "Floor2_Cultist" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Noel" text = "Good day, you are the newcomer, yes? \n What's your name?"/>
-			<Dialogue name = "Elias" text = "I'm Elias, and you? \n And why is everyone wearing some weird masks?"/>
-			<Dialogue name = "Noel" text = "So your name is Elias. \n Soon you will know why they have those smiles on their face."/>
+			<Dialogue name = "Elias" text = "I'm Elias, and who are you? \n Why is everyone wearing some weird masks?"/>
+			<Dialogue name = "Noel" text = "So your name is Elias. \n Soon, you will know why they have those smiles on their face."/>
 			<Dialogue name = "Noel" text = "I am Noel, the leader of these people, and you are an individual that needs a guiding light."/>
 			<Dialogue name = "Noel" text = "Thus why I am offering you to come with us."/>
-			<Dialogue name = "Elias" text = "( This person overly suspicious, only mad people would believe him. )"/>
-			<Dialogue name = "Noel" text = "I know you probably have no interest in what I am doing. \n But I do believe, that is not a smart idea."/>
-			<Dialogue name = "Elias" text = "What do you mean!"/>
-			<Dialogue name = "Noel" text = "In other words, I can assist you with the way out. \n Especially now, as I have got my hands on these fascinating data."/>
+			<Dialogue name = "Elias" text = "( This person is overly suspicious, only mad people would believe him. )"/>
+			<Dialogue name = "Noel" text = "I know you probably have no interest in what I am doing. \n But I do believe, that that is not a smart idea."/>
+			<Dialogue name = "Elias" text = "What do you mean?"/>
+			<Dialogue name = "Noel" text = "In other words, I can assist you with finding the way out. \n Especially now, as I have got my hands on these fascinating data."/>
 			<Dialogue name = "Elias" text = "( Does he know the way out? )"/>
 			<Dialogue name = "Noel" text = "I have my duty -- to assist people in getting out. \n But not everyone gets the privilege."/>
 			<Dialogue name = "Elias" text = "And what will I have to do for you to let me out?"/>
@@ -877,7 +877,7 @@
 	<script key = "Floor2_Mask5_2" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Leo" text = "Hey there, mate! \n Nice move befriending that gloomy person."/>
-			<Dialogue name = "Leo" text = "Though, I never saw his face anywhere."/>
+			<Dialogue name = "Leo" text = "...Though, I never saw his face anywhere."/>
 			<Dialogue name = "Elias" text = "Your chief ask you guys to search for the scientist. \n She's behind the shadow somewhere."/>
 			<Dialogue name = "Leo" text = "Roger that! \n Party after this?"/>
 			<Dialogue name = "Elias" text = "Ha ha... maybe another time."/>
@@ -887,7 +887,7 @@
 		<sub>
 			<Dialogue name = "Asher" text = "Hey! You're the person they are talking about? \n Cool! Let's go grab something to eat."/>
 			<Dialogue name = "Elias" text = "Uh...before that. The chief told us to search for the scientist behind the shadow."/>
-			<Dialogue name = "Asher" text = "Huh. I'll definitely treat you to the meal next time!"/>
+			<Dialogue name = "Asher" text = "Bruh. I'll definitely treat you to the meal next time!"/>
 			<Dialogue name = "Elias" text = "What is up with him..."/>
 			
 		</sub>
@@ -900,7 +900,7 @@
 			<ChangeName name = "MainFloor2_Building4_Door" new = "Floor2_Building_mask"/>
 			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_Building_mask"/>
 			<Dialogue name = "Elias" text = "What are they going on about so loudly?" enable = "MainFloor2_Building1_Door" bool = "0"/>
-			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING." enable = "MainFloor2_Building3_Door"/>
+			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO GATHER IN THE MASK BUILDING." enable = "MainFloor2_Building3_Door"/>
 			<Dialogue name = "Elias" text = "( They got to her already? Where did they found her? )" enable = "MainFloor2_Building4_Door" bool = "0"/>
 			<Dialogue name = "Elias" text = "( I should get a move to the mask building. )" enable = "MainFloor2_BlackAlley" bool = "0"/>
 		</sub>
@@ -912,7 +912,7 @@
 			<ChangeName name = "MainFloor2_Building4_Door" new = "Floor2_Building_mask"/>
 			<ChangeName name = "MainFloor2_BlackAlley" new = "Floor2_Building_mask"/>
 			<Dialogue name = "Elias" text = "This place... it's gone dark. \n The holograms are gone." enable = "MainFloor2_Building1_Door" bool = "0"/>
-			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO ASSEMBLE AT THE MASK BUILDING." enable = "MainFloor2_Building2_Door" bool = "0"/>
+			<Dialogue name = "People" text = "YEAH! EVERYONE! \n THE CHIEF HAS CAPTURED THE SCIENTIST. \n HE WANTS EVERYONE TO GATHER IN THE MASK BUILDING." enable = "MainFloor2_Building2_Door" bool = "0"/>
 			<Dialogue name = "Elias" text = "( What! They got to her already? I need to help her. )" enable = "MainFloor2_BlackAlley" bool = "0"/>	
 		</sub>
 	</script>
@@ -936,16 +936,16 @@
 	<script key = "Building2_com" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "What is it doing?"/>
-			<Dialogue name = "Elias" text = "And how am I going to shut down this?"/>
+			<Dialogue name = "Elias" text = "And how am I going to shut this down?"/>
 			<Dialogue name = "Elias" text = "There's no going back now. \n I'll have to do it my way, then."/>
 			<Dialogue name = " " text = "( Smashes the computer screen. )">
 				<sprite name="Building2_Computer1" texture="Texture/level2/Building2/Building2_Computer2.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing down below will do. It won't explode in my face, right?"/>
-			<Dialogue name = " " text = "*Smashes sound*">
+			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing below will do. It won't explode in my face, right?"/>
+			<Dialogue name = " " text = "* Smash sounds *">
 				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png" enable = "MainFloor2_BlackAlley" bool = "0"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Smoke... smoke is coming out." enable = "MainFloor2_Building3_Door">
+			<Dialogue name = "Elias" text = "Smoke... the smoke is coming out." enable = "MainFloor2_Building3_Door">
 				<sprite name = "MainFloor2_Template" texture ="Texture/Test/black.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
@@ -969,7 +969,7 @@
 				<animation name = "Panic"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "( Is that... Emma?! \n She's not moving at all! )"/>
-			<Dialogue name = "Noel" text = "Everyone! \n It is finally the day we are waiting!"/>
+			<Dialogue name = "Noel" text = "Everyone! \n It is finally the day we are waiting for!"/>
 		</sub>
 	</script>
 	<script key = "RouteA_Building3_NPC4" loopIndex = "0">
@@ -1003,11 +1003,11 @@
 			<Dialogue name = "Noel" text = "The first time I came here, everything was full of sadness, and cannot accept that."/>
 			<Dialogue name = "Noel" text = "And for the masks. \n I want everyone to see smile faces, even if it's from the masks."/>
 			<Dialogue name = "Noel" text = "We all have places to go back."/>
-			<Dialogue name = "Noel" text = "But she won't tell us the way out! \n She doesn't want us to get out! \n And she is paying for that!"/>
+			<Dialogue name = "Noel" text = "But she won't tell us the way out! \n She doesn't want us to leave! \n And she is paying for that!"/>
 			<Dialogue name = "Elias" text = "She doesn't know."/>
-			<Dialogue name = "People" text = "Liar! \n She has to know the exit!"/>
+			<Dialogue name = "People" text = "That's not true! \n She has to know the exit!"/>
 			<Dialogue name = "Noel" text = "..."/>
-			<Dialogue name = "Noel" text = "You have been protecting her since you came here. \n Are you hiding anything from us?"/>
+			<Dialogue name = "Noel" text = "You have been protecting her since you came in here. \n Are you hiding anything from us?"/>
 			<Dialogue name = "People" text = "He must know the exit! \n Capture him!"/>
 			<Dialogue name = "Elias" text = "Wait! \n I also don't know the exit!"/>
 			<Dialogue name = " " text = "(............)" cutscene = "Texture/Cutscene/black.png"/>
@@ -1026,10 +1026,10 @@
 	<script key = "RouteB_Building3_Cultist" loopIndex = "0">
 		<sub change = "1">
 			<ChangeName name = "MainFloor2_Building2_Door" new = "Floor2_Building2"/>
-			<Dialogue name = "Noel" text = "I am greatly appreciate your help in this." enable = "BackAlley_Emma" bool = "0"/>
-			<Dialogue name = "Noel" text = "As we discussed, I got more information from her, and I want everyone to accept it." enable = "MainFloor2_Building1_Door"/>
+			<Dialogue name = "Noel" text = "I greatly appreciate your help in this." enable = "BackAlley_Emma" bool = "0"/>
+			<Dialogue name = "Noel" text = "As we discussed earlier, I got more information from her, and I want everyone to know." enable = "MainFloor2_Building1_Door"/>
 			<Dialogue name = "Elias" text = "( I am finally going out. )" enable = "MainFloor2_BlackAlley"/>
-			<Dialogue name = "Noel" text = "I believe there is an exit within that information!" enable = "MainFloor2_Building4_Door">
+			<Dialogue name = "Noel" text = "I believe there is an exit within the information!" enable = "MainFloor2_Building4_Door">
 				<note name = "EmmaNote5"/>
 			</Dialogue>
 		</sub>
@@ -1038,7 +1038,7 @@
 	<!-- Building 4-1 -->
 	<script key = "Building4_NPC1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Arlo" text = "Hello, newcomer, could you help me talk with that gloomy guy over there? \n I think he might have some problems for a long time. \n Oh, and you must talk to him with caution, he seems to be a sensitive person."/>
+			<Dialogue name = "Arlo" text = "Hello, newcomer, could you help me talk with that gloomy guy over there? \n I think he might have some problems for a long time. \n Oh, and you must talk to him with caution, he seems to be a very sensitive person."/>
 			<Dialogue name = "Elias" text = "Alright.">
 				<item name = "Puzzle6_Paper"/>
 			</Dialogue>
@@ -1047,7 +1047,7 @@
 	</script>
 	<script key = "Building4_NPC2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "Who are you? You shouldn't talk to me... you must know that I don't need to socialize here."/>
+			<Dialogue name = "Bob" text = "Who are you? You shouldn't talk to me... you should know that I don't need to socialize here."/>
 		</sub>
 	</script>
 	<script key = "Building4_NPC2_after" loopIndex = "0">
@@ -1058,8 +1058,8 @@
 	<script key = "Building4_NPC2A" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "I just want to return this paper to you."/>
-			<Dialogue name = "Elias" text = "( Hand over the Med prescription. )"/>
-			<Dialogue name = "Bob" text = "Oh, you can keep it or just discard it. \n That scrap of paper isn't necessary anymore."/>
+			<Dialogue name = "Elias" text = "( Hands over the Med prescription. )"/>
+			<Dialogue name = "Bob" text = "Oh, you can keep it or just throw it away. \n That scrap of paper isn't necessary anymore."/>
 		</sub>
 	</script>
 	<script key = "Building4_NPC2B" loopIndex = "0">
@@ -1088,7 +1088,7 @@
 	</script>
 	<script key = "Building4_med2meat" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Bob" text = "You want to give me this med? \n I might be appreciated that, but could you also take the med so I can know that you didn't poisoned me or anything."/>
+			<Dialogue name = "Bob" text = "You want to give me this med? \n I might be appreciated that, but would you also take the med so I know that you didn't poisoned me or anything."/>
 		</sub>
 	</script>
 	<script key = "Building4_med2meatmed1" loopIndex = "0">
@@ -1102,7 +1102,7 @@
 		<sub>
 			<Dialogue name = " " text = "A weird altar with a strange idol and disgusting offerings."/>
 			<Dialogue name = "Elias" text = "Why should these masks take the medicine anyway?"/>
-			<Dialogue name = "Elias" text = "I will take these meds then, they might work something out.">
+			<Dialogue name = "Elias" text = "I will take these meds then, they might work with something.">
 				<sprite name = "Puzzle6_AltarwithPills" texture = "Texture/level2/Building4/Puzzle6/Object/Puzzle6_Altar.png"/>
 			</Dialogue>
 			<Dialogue name = " " text = " ">
@@ -1111,7 +1111,7 @@
 			<Dialogue name = " " text = " ">
 				<item name = "Puzzle6_PillEvening"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "And also some meats.">
+			<Dialogue name = "Elias" text = "And also some meat.">
 				<item name = "Puzzle6_MEAT" NPC = ""/>
 			</Dialogue>
 		</sub>
@@ -1126,10 +1126,10 @@
 	<!-- Building 4-2 -->
 	<script key = "puzzle6_2_NPC1" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Arlo" text = "You have already talked to him? It seems to be going well, you spend some times on that floor but still be able to get here."/>
+			<Dialogue name = "Arlo" text = "You have already talked to him? It seems to be going well, you spent some times on that floor but still able to get here."/>
 			<Dialogue name = "Arlo" text = "Hm? \n Wait, what's that stain on your hands?" enable = "Puzzle6_NPC2F1" bool = "0"/>
 			<Dialogue name = "Elias" text = "Oh, I think I got this when I tried to help that guy with something."/>
-			<Dialogue name = "Arlo" text = "To be honest, it smells really stinky. Please, take this.">
+			<Dialogue name = "Arlo" text = "To be honest, it smells really nasty. Please, take this.">
 				<item name = "Puzzle6_Cloth"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Oh, thank you."/>
@@ -1161,7 +1161,7 @@
 	<script key = "puzzle6_2_NPC2_liq" loopIndex = "0">
 		<sub change = "1">
 			<ChangeName name = "Puzzle6_NPC1F2" new = "puzzle6_2_NPC1_pres" new_a = "puzzle6_2_NPC1_pres"/>
-			<Dialogue name = "Bob" text = "Ah... Sorry, but you want me to take a med with the liqueur?"/>
+			<Dialogue name = "Bob" text = "Um... Excuse me? You want me to take the med with liqueur?"/>
 			<Dialogue name = "Elias" text = "Why not?"/>
 			<Dialogue name = "Bob" text = "Why yes?! \n Please be serious, I'm in hurry!"/>
 			<Dialogue name = "Elias" text = "( What an annoying human. )"/>

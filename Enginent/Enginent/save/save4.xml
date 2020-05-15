@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <level currentLevel="2" currentRoom="Building1">
 	<rooms>
-		<BackAlley dialogue="BackAlley_start" />
+		<BackAlley dialogue="" />
 		<Building1 dialogue="" />
-		<Building2 dialogue="Building2" />
+		<Building2 dialogue="" />
 		<Building3 dialogue="RouteA_Building3" />
 		<Building4Puzzle6Floor1 dialogue="" />
 		<Building4Puzzle6Floor2 dialogue="" />
@@ -14,53 +14,53 @@
 		<MainFloor2 dialogue="" />
 	</rooms>
 	<interactObj>
-		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building1/Building1_RabbitCage.png" />
-		<Building2_Computer1 current_dialogue="Building2_com" before_dialogue="Building2_com" after_dialogue="Building2_com_broke" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building2/Building2_Computer1.png" />
-		<Building3_Emma current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/Character/NPCs/Emma/Building3_Emma.png" />
-		<Puzzle6_NPC1F1 current_dialogue="Building4_NPC1" before_dialogue="Building4_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="" triggered="true" />
-		<Puzzle6_AltarwithPills current_dialogue="Building4_altar" before_dialogue="Building4_altar" after_dialogue="Building4_altar_after" talked="true" takeNote="false" has_item="true" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" />
-		<Puzzle6_NPC1Trigger current_dialogue="puzzle6_2_NPC1" before_dialogue="puzzle6_2_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="" triggered="true" />
-		<Puzzle6_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" open="true" />
-		<Puzzle6_WallTorch current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" />
-		<Puzzle6_LockedDoor current_dialogue="puzzle6_3_doorlock" before_dialogue="puzzle6_3_doorlock" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" />
-		<Puzzle6_Puppet current_dialogue="" before_dialogue="puzzle6_puppet" after_dialogue="puzzle6_puppet" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png" />
-		<Puzzle7_WallTorch current_dialogue="puzzle7_torch" before_dialogue="puzzle7_torch" after_dialogue="puzzle7_torch" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" />
-		<Puzzle7_StabbedPuppet current_dialogue="puzzle7_puppet" before_dialogue="puzzle7_puppet" after_dialogue="puzzle7_puppet_after" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" />
-		<Puzzle7_LockedDoor current_dialogue="puzzle7_lockeddoor" before_dialogue="puzzle7_lockeddoor" after_dialogue="puzzle7_lockeddoor" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" />
-		<Puzzle7_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="true" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" open="false" />
-		<Puzzle7_Altar1 current_dialogue="puzzle7_altar1" before_dialogue="puzzle7_altar1" after_dialogue="puzzle7_altar1_after" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" />
-		<Puzzle7_Altar2 current_dialogue="puzzle7_altar2" before_dialogue="puzzle7_altar2" after_dialogue="puzzle7_altar2" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_Altar.png" />
-		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/MainFloor2/MainFloor2_Building5_Door.png" />
-		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="" />
-		<TriggerCultist current_dialogue="Floor2_Cultist" before_dialogue="Floor2_Cultist" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="" triggered="true" />
+		<RabbitCage current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Building2_Computer1 current_dialogue="Building2_com" before_dialogue="Building2_com" after_dialogue="Building2_com_broke" talked="true" takeNote="false" has_item="false" />
+		<Building3_Emma current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_NPC1F1 current_dialogue="Building4_NPC1" before_dialogue="Building4_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" triggered="true" />
+		<Puzzle6_AltarwithPills current_dialogue="Building4_altar_after" before_dialogue="Building4_altar" after_dialogue="Building4_altar_after" talked="true" takeNote="false" has_item="true" />
+		<Puzzle6_NPC1Trigger current_dialogue="puzzle6_2_NPC1" before_dialogue="puzzle6_2_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" triggered="true" />
+		<Puzzle6_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" open="true" />
+		<Puzzle6_WallTorch current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_LockedDoor current_dialogue="puzzle6_3_doorlock" before_dialogue="puzzle6_3_doorlock" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<Puzzle6_Puppet current_dialogue="puzzle6_puppet" before_dialogue="puzzle6_puppet" after_dialogue="puzzle6_puppet" talked="true" takeNote="false" has_item="false" />
+		<Puzzle7_WallTorch current_dialogue="puzzle7_torch" before_dialogue="puzzle7_torch" after_dialogue="puzzle7_torch" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_StabbedPuppet current_dialogue="puzzle7_puppet" before_dialogue="puzzle7_puppet" after_dialogue="puzzle7_puppet_after" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_LockedDoor current_dialogue="puzzle7_lockeddoor" before_dialogue="puzzle7_lockeddoor" after_dialogue="puzzle7_lockeddoor" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="true" open="false" />
+		<Puzzle7_Altar1 current_dialogue="puzzle7_altar1" before_dialogue="puzzle7_altar1" after_dialogue="puzzle7_altar1_after" talked="false" takeNote="false" has_item="false" />
+		<Puzzle7_Altar2 current_dialogue="puzzle7_altar2" before_dialogue="puzzle7_altar2" after_dialogue="puzzle7_altar2" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Building5_Door current_dialogue="Floor2_Building5" before_dialogue="Floor2_Building5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<MainFloor2_Mansion_Door current_dialogue="Floor2_mansiondoor" before_dialogue="Floor2_mansiondoor" after_dialogue="" talked="false" takeNote="false" has_item="false" />
+		<TriggerCultist current_dialogue="Floor2_Cultist" before_dialogue="Floor2_Cultist" after_dialogue="" talked="true" takeNote="false" has_item="false" triggered="true" />
 	</interactObj>
 	<item />
 	<doors>
-		<AlleyOut used="true" current_dialogue="" texture="" />
-		<Building1_Door used="true" current_dialogue="" texture="Texture/level2/Building1/Building1_Door.png" />
-		<Building1_FloorDoorOpen used="false" current_dialogue="" texture="Texture/level2/Building1/Building1_FloorDoorClose.png" />
-		<Building2_Door1 used="false" current_dialogue="Building2_door" texture="Texture/level2/Building2/Building2_Door1.png" />
-		<Building3_Exit used="true" current_dialogue="" texture="" />
-		<Building4Puzzle6Floor1Out used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle6Floor1Up used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle6Floor2Down used="true" current_dialogue="puzzle6_2_door1" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle6Floor2Up used="true" current_dialogue="puzzle6_2_door3" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle6Floor3Down used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle6Floor3Up used="false" current_dialogue="puzzle6_2_door3" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor1Out used="false" current_dialogue="puzzle7_door1" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor1Up used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor2Down used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor2Up used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor3Down used="true" current_dialogue="" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<Building4Puzzle7Floor3Up used="true" current_dialogue="puzzle7_door2" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Door.png" />
-		<MainFloor2_Building1_Door used="true" current_dialogue="" texture="Texture/level2/MainFloor2/MainFloor2_Building1_Door.png" />
-		<MainFloor2_Building2_Door used="false" current_dialogue="Floor2_Building2" texture="Texture/level2/MainFloor2/MainFloor2_Building2_Door.png" />
-		<MainFloor2_Building3_Door used="false" current_dialogue="Floor2_Building3" texture="Texture/level2/MainFloor2/MainFloor2_Building3_Door.png" />
-		<MainFloor2_Building4_Door used="false" current_dialogue="Floor2_Building4" texture="Texture/level2/MainFloor2/MainFloor2_Building4_Door.png" />
-		<MainFloor2_BlackAlley used="false" current_dialogue="Floor2_BackAlley_FinishedPuzzle" texture="Texture/level2/MainFloor2/MainFloor2_BlackAlley.png" />
+		<AlleyOut used="true" current_dialogue="" />
+		<Building1_Door used="true" current_dialogue="" />
+		<Building1_FloorDoorOpen used="true" current_dialogue="" />
+		<Building2_Door1 used="true" current_dialogue="Building2_door" />
+		<Building3_Exit used="true" current_dialogue="" />
+		<Building4Puzzle6Floor1Out used="true" current_dialogue="" />
+		<Building4Puzzle6Floor1Up used="true" current_dialogue="" />
+		<Building4Puzzle6Floor2Down used="true" current_dialogue="puzzle6_2_door1" />
+		<Building4Puzzle6Floor2Up used="true" current_dialogue="puzzle6_2_door3" />
+		<Building4Puzzle6Floor3Down used="true" current_dialogue="" />
+		<Building4Puzzle6Floor3Up used="false" current_dialogue="puzzle6_2_door3" />
+		<Building4Puzzle7Floor1Out used="false" current_dialogue="puzzle7_door1" />
+		<Building4Puzzle7Floor1Up used="true" current_dialogue="" />
+		<Building4Puzzle7Floor2Down used="true" current_dialogue="" />
+		<Building4Puzzle7Floor2Up used="true" current_dialogue="" />
+		<Building4Puzzle7Floor3Down used="true" current_dialogue="" />
+		<Building4Puzzle7Floor3Up used="true" current_dialogue="puzzle7_door2" />
+		<MainFloor2_Building1_Door used="true" current_dialogue="" />
+		<MainFloor2_Building2_Door used="false" current_dialogue="Floor2_Building2" />
+		<MainFloor2_Building3_Door used="true" current_dialogue="Floor2_Building3" />
+		<MainFloor2_Building4_Door used="false" current_dialogue="Floor2_Building4" />
+		<MainFloor2_BlackAlley used="true" current_dialogue="Floor2_BackAlley_FinishedPuzzle" />
 	</doors>
 	<NPCs>
-		<BackAlley_Emma hasItem="false" display="true" current_dialogue="BackAlley_Emma1" before_dialogue="BackAlley_Emma1" after_dialogue="BackAlley_Emma1_after" talked="false" takeNote="false" has_item="false" />
+		<BackAlley_Emma hasItem="false" display="true" current_dialogue="BackAlley_Emma1_after" before_dialogue="BackAlley_Emma1" after_dialogue="BackAlley_Emma1_after" talked="false" takeNote="false" has_item="false" />
 		<Building3_NPC4 hasItem="false" display="true" current_dialogue="RouteA_Building3_NPC4" before_dialogue="RouteA_Building3_NPC4" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<Building3_NPC5 hasItem="false" display="true" current_dialogue="RouteA_Building3_NPC5" before_dialogue="RouteA_Building3_NPC5" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<Building3_NPC6 hasItem="false" display="true" current_dialogue="RouteA_Building3_NPC6" before_dialogue="RouteA_Building3_NPC6" after_dialogue="" talked="false" takeNote="false" has_item="false" />
@@ -80,10 +80,10 @@
 		<Cultist hasItem="false" display="false" current_dialogue="Floor2_Cultist_after" before_dialogue="Floor2_Cultist_after" after_dialogue="Floor2_Cultist_after" talked="false" takeNote="false" has_item="false" />
 	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="true" passRequirements="false" />
+		<BookshelfPuzzle done="false" passRequirements="false" />
 		<BookshelfPuzzle2 done="true" passRequirements="false" />
-		<Numpad_Backdoor done="true" passRequirements="false" />
-		<Numpad_Emma done="true" passRequirements="false" />
+		<Numpad_Backdoor done="false" passRequirements="false" />
+		<Numpad_Emma done="false" passRequirements="false" />
 		<PuppetPuzzle done="false" passRequirements="false" />
 	</puzzles>
 	<items>
@@ -259,7 +259,7 @@
 			<dialogueAfterUse />
 		</Puzzle7_MouthKeySep>
 	</items>
-	<Player posX="150" posY="-80">
+	<Player posX="308.5" posY="-80">
 		<inventory>
 			<item />
 			<item />
@@ -272,6 +272,10 @@
 	</Player>
 	<Phone hasPhone="true" firstClose="false" note3Track="false" note2Track="false">
 		<Notes>
+			<n name="Note1" />
+			<n name="EmmaNote1" />
+			<n name="EmmaNote2" />
+			<n name="EmmaNote3" />
 			<n name="EmmaNote4" />
 		</Notes>
 		<Chats>
@@ -281,5 +285,5 @@
 		<npcTalkedNote2 />
 		<npcTalkedNote3 />
 	</Phone>
-	<Butler display="true" phase="2" />
+	<Butler display="true" phase="4" />
 </level>

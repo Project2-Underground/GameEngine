@@ -361,9 +361,11 @@ void XMLManager::LoadFromSave(std::string filename) {
 			for (int i = 0; i < objects.size(); i++) {
 				// load from save
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
-					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
+					pugi::xml_node node = file.child("level").child("doors").child(door->object_name.c_str());
+					if (node.attribute("used").as_bool())
 						door->Open();
-					door->SetCurrentDialogueName(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_string());
+					door->SetCurrentDialogueName(node.attribute("current_dialogue").as_string());
+					door->SetTexture(node.attribute("texture").as_string());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
@@ -371,6 +373,8 @@ void XMLManager::LoadFromSave(std::string filename) {
 					obj->SetDialogueBeforeName(node.attribute("before_dialogue").as_string());
 					obj->SetDialogueAfterName(node.attribute("after_dialogue").as_string());
 					obj->SetTakeNote(node.attribute("takeNote").as_bool());
+					obj->SetTexture(node.attribute("texture").as_string());
+
 					if (node.attribute("talked").as_bool()) 
 						obj->SetTalked(node.attribute("talked").as_bool());
 
@@ -520,6 +524,7 @@ void XMLManager::SaveGame(std::string filename) {
 				if (door->getType() != STAIR) {
 					saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
 					saveLevel.child("doors").child(objects[i]->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogueName().c_str());
+					saveLevel.child("doors").child(objects[i]->object_name.c_str()).append_attribute("texture").set_value(door->GetTexturePath().c_str());
 				}
 				//saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
@@ -533,6 +538,7 @@ void XMLManager::SaveGame(std::string filename) {
 				node.append_attribute("talked").set_value(obj->Talked());
 				node.append_attribute("takeNote").set_value(obj->TookNote());
 				node.append_attribute("has_item").set_value(obj->hasItem);
+				node.append_attribute("texture").set_value(obj->GetTexturePath().c_str());
 
 				
 				if (OpenObj * o = dynamic_cast<OpenObj*>(obj)) {
@@ -559,7 +565,6 @@ void XMLManager::SaveGame(std::string filename) {
 			node.append_attribute("talked").set_value(npc->Talked());
 			node.append_attribute("takeNote").set_value(npc->TookNote());
 			node.append_attribute("has_item").set_value(npc->hasItem);
-
 		}
 	}
 
