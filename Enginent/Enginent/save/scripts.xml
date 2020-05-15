@@ -189,7 +189,6 @@
 		<sub>
 			<Dialogue name = "Elias" text = "( Done. )"/>
 			<Dialogue name = "Elias" text = "What is this experiment anyway?"/>
-			<Dialogue name = " " text = "* sound of a door unlocking *"/>
 			<Dialogue name = " " text = "( From somewhere, a door has been unlocked. )"/>
 		</sub>
 	</script>
@@ -335,7 +334,7 @@
 	</script>
 	<script key = "EmmaRoom_window" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "There's a window in here? #n Have you try opening it?"/>
+			<Dialogue name = "Elias" text = "There's a window in here? /n Have you try opening it?"/>
 			<Dialogue name = "Emma" text = "Hm... that window?"/>
 			<Dialogue name = "Emma" text = "Although, you can see the light ray shining through glass, that's the hologram of a window."/>
 			<Dialogue name = "Elias" text = "How can a hologram be this realistic?"/>
@@ -677,7 +676,7 @@
 			<Dialogue name = "Elias" text = "What are you talking about?"/>
 			<Dialogue name = "Emma" text = "I think there's another way for you."/>
 			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And, take this, it seems to be a hint on how to power on that in there."/>
-			<Dialogue name = " " text = "You received pictures.">
+			<Dialogue name = " " text = " ">
 				<item name = "Puzzle3_Pic1" NPC = "Emma"/>
 			</Dialogue>
 			<Dialogue name = " " text = " ">
@@ -714,7 +713,7 @@
 			<Dialogue name = "Elias" text = "What are you talking about?"/>
 			<Dialogue name = "Emma" text = "I think there's another way for you."/>
 			<Dialogue name = "Emma" text = "In the next room, the storage room, there is a computer sitting on the table. \n And, take this, it seems to be a hint on how to power on that in there."/>
-			<Dialogue name = " " text = "You received pictures.">
+			<Dialogue name = " " text = " ">
 				<item name = "Puzzle3_Pic1" NPC = "Emma"/>
 			</Dialogue>
 			<Dialogue name = " " text = " ">

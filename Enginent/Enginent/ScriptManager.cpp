@@ -209,6 +209,7 @@ void ScriptManager::LoadScript()
 					unsigned int texture = img_tmp.GetTexture();
 					tmp.sprite = texture;
 					tmp.spriteChange = spriteObj;
+					tmp.spriteName = spriteName;
 				}
 				tmp.CutScenebl = cutSceneBL;
 				tmp.roomName = roomName;
