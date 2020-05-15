@@ -42,6 +42,7 @@ struct s_Dialogue
 	std::string doorName = "";
 	std::string doorOpen = "";
 	std::string spriteChange = "";
+	std::string spriteName = "";
 	unsigned int sprite;
 	unsigned int CutScene;
 	bool CutScenebl = 0;

@@ -43,6 +43,7 @@ void ViewWindow::Init(int width, int height) {
 }
 
 void ViewWindow::SetViewItem(Item* item) {
+	playItemSound = true;
 	float sizeX = item->width;
 	float sizeY = item->height;
 	if (abs(sizeY) > itemSizeY) {
@@ -77,6 +78,10 @@ ViewWindow::~ViewWindow() {
 
 void ViewWindow::Render() {
 	if (display) {
+		if (playItemSound) {
+			SoundManager::GetInstance()->playSound(SFX, "Key");
+			playItemSound = false;
+		}
 		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
 		//renderer->Render(bgWindow);
 		renderer->Render(viewItem);

@@ -428,6 +428,19 @@ void XMLManager::LoadFromSave(std::string filename) {
 			butler->col->enable = false;
 		}
 
+		// load special bgs
+		if (level->levelNo == 2) {
+			pugi::xml_node node = file.child("level").child("specialBGs");
+			((ImageObject*)level->FindObject("MainFloor2_Template"))->SetTexture(node.child("MainFloor2_Template").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG1"))->SetTexture(node.child("MainFloor2_BG1").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG2"))->SetTexture(node.child("MainFloor2_BG2").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG3"))->SetTexture(node.child("MainFloor2_BG3").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG4"))->SetTexture(node.child("MainFloor2_BG4").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG5"))->SetTexture(node.child("MainFloor2_BG5").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("MainFloor2_BG6"))->SetTexture(node.child("MainFloor2_BG6").attribute("texture").as_string());
+			((ImageObject*)level->FindObject("verySpecialBG"))->SetTexture(node.child("verySpecialBG").attribute("texture").as_string());
+		}
+
 		// loading items dialogue
 		for (auto i : gs->items) {
 			pugi::xml_node node = file.child("level").child("items").child(i->name.c_str());
@@ -566,6 +579,27 @@ void XMLManager::SaveGame(std::string filename) {
 			node.append_attribute("takeNote").set_value(npc->TookNote());
 			node.append_attribute("has_item").set_value(npc->hasItem);
 		}
+	}
+
+	// saving special bgs
+	if (level->levelNo == 2) {
+		pugi::xml_node node = saveLevel.append_child("specialBGs");
+		ImageObject* bg = (ImageObject*)level->FindObject("MainFloor2_Template");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG1");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG2");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG3");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG4");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG5");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("MainFloor2_BG6");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
+		bg = (ImageObject*)level->FindObject("verySpecialBG");
+		node.append_child(bg->object_name.c_str()).append_attribute("texture").set_value(bg->GetTexturePath().c_str());
 	}
 
 	// saving puzzles 

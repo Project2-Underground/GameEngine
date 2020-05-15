@@ -56,6 +56,9 @@ void ImageObject::SetTexture(string path)
 	texture = Game::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
+void ImageObject::SetTexturePath(string path) {
+	texturePath = path;
+}
 void ImageObject::SetPosition(glm::vec3 newPosition) {
 	DrawableObject::SetPosition(newPosition);
 	if (col) 

@@ -930,25 +930,35 @@
 	</script>
 	<script key = "Building2" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "So, this is the secret... computer room."/>
+			<Dialogue name = "Elias" text = "So, this is the secret... computer room.">
+				<sprite name = "MainFloor2_BG1" texture ="Texture/Test/black.png"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "Building2_com" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "What is it doing?"/>
-			<Dialogue name = "Elias" text = "And how am I going to shut this down?"/>
+			<Dialogue name = "Elias" text = "What is it doing?">
+				<sprite name="MainFloor2_BG6" texture="Texture/Test/black.png"/>
+			</Dialogue>
+			<Dialogue name = "Elias" text = "And how am I going to shut this down?">
+				<sprite name="MainFloor2_BG5" texture="Texture/Test/black.png"/>
+			</Dialogue>
 			<Dialogue name = "Elias" text = "There's no going back now. \n I'll have to do it my way, then."/>
 			<Dialogue name = " " text = "( Smashes the computer screen. )">
-				<sprite name="Building2_Computer1" texture="Texture/level2/Building2/Building2_Computer2.png"/>
+				<sprite name="MainFloor2_BG4" texture="Texture/Test/black.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing below will do. It won't explode in my face, right?"/>
+			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing below will do. It won't explode in my face, right?">
+				<sprite name = "MainFloor2_BG3" texture ="Texture/Test/black.png"/>
+			</Dialogue>
 			<Dialogue name = " " text = "* Smash sounds *">
 				<sprite name="verySpecialBG" texture="Texture/level2/Building2/Building2_Template2.png" enable = "MainFloor2_BlackAlley" bool = "0"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Smoke... the smoke is coming out." enable = "MainFloor2_Building3_Door">
 				<sprite name = "MainFloor2_Template" texture ="Texture/Test/black.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1"/>
+			<Dialogue name = "Elias" text = "It surely won't work anymore. \n I should go back to Emma." enable = "Building2_Door1">
+				<sprite name = "MainFloor2_BG2" texture ="Texture/Test/black.png"/>
+			</Dialogue>
 		</sub>
 	</script>
 	<script key = "Building2_com_broke" loopIndex = "0">
@@ -1169,7 +1179,7 @@
 	</script>
 	<script key = "puzzle6_2_NPC1_pres" loopIndex = "0">
 		<sub>
-			<Dialogue name = "Elias" text = "Have you seen this sheet?"/>
+			<Dialogue name = "Elias" text = "Have you look at this sheet?"/>
 			<Dialogue name = "Arlo" text = "No, I don't want to interfere with personal information."/>
 			<Dialogue name = "Arlo" text = "Oh, maybe this might be an exception." enable = "Building4Puzzle6Floor2Up"/>
 			<Dialogue name = "Arlo" text = "You know what? you really did a great job. \n let's meet on the 3rd floor."/>
@@ -1540,24 +1550,26 @@
 			<Dialogue name = "Butler" text = "Ms. Emily has decided that you lack of humaneness."/>
 			<Dialogue name = "Elias" text = "What does that even mean?!"/>
 			<Dialogue name = "Butler" text = "My apologies." sound = "Reload"/>
-			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/2.png" sound = "Butler_Shoot"/>
+			<Dialogue name = " " text = " " sound = "EndTheme" cutscene = "Texture/Cutscene/2.png" sound = "Butler_Shoot"/>
 			<Dialogue name = "Elias" text = "What?"  cutscene = "Texture/Cutscene/2.png"/>
 			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/black.png"/>
 			<Dialogue name = "???" text = "What a shame. \n The subject named Elias is still imperfect." cutscene = "Texture/Cutscene/black.png"/>
 			<Dialogue name = "???" text = "... This is such an unfortunate event. \n They both were so close."  cutscene = "Texture/Cutscene/black.png"/>
-			<Dialogue name = " " text = " "  cutscene = "Texture/Cutscene/black.png" level = "4"/>
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" /> -->
+			<!-- <Dialogue name = " " text = " "  cutscene = "Texture/Cutscene/End.png" level = "4"/> -->
 		</sub>
 	</script>
 	<script key = "Floor3B_factory" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "This is the way to the military cantonment!"/>
 			<Dialogue name = "Elias" text = "That must be my destination."/>
-			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = " " text = " " sound = "EndTheme" cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "Finally, we got a usable seed." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "..." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "???" text = "At last... we have accomplished something." cutscene = "Texture/Cutscene/3.png"/>
-			<Dialogue name = " " text = " "  cutscene = "Texture/Cutscene/3.png" level = "4"/>
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" /> -->
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" level = "4"/> -->
 		</sub>
 	</script>
 	
@@ -1610,11 +1622,12 @@
 	<script key = "Lab_DoorUp" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "I've rest enough all these 26 years. \n Maybe there's still someone out there that I know."/>
-			<Dialogue name = "Emily" text = "There is definitely someone you know. \n I believe so." cutscene = "Texture/Cutscene/1.png"/>
+			<Dialogue name = "Emily" text = "There is definitely someone you know. \n I believe so." sound = "EndTheme" cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Elias" text = "So, can you tell me something about myself? \n What happened throughout these years that I'm gone." cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Emily" text = "Are you sure? How about what you are going to do after this?" cutscene = "Texture/Cutscene/1.png"/>
 			<Dialogue name = "Elias" text = "I don't know. \n Maybe I'll go find what Emma left behind. \n I feel like I used to know her." cutscene = "Texture/Cutscene/1.png"/>
-			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/1.png" level = "4"/>
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" /> -->
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" level = "4"/> -->
 		</sub>
 	</script>
 	<script key = "Lab_Door" loopIndex = "0">
@@ -1623,11 +1636,12 @@
 			<Dialogue name = "Emily" text = "As expected of you."/>
 			<Dialogue name = "Elias" text = "Hm? \n What does that mean?"/>
 			<Dialogue name = "Emily" text = "Nothing."/>
-			<Dialogue name = "Emily" text = "Everything has come to an end, mom." cutscene = "Texture/Cutscene/3.png"/>
+			<Dialogue name = "Emily" text = "Everything has come to an end, mom." sound = "EndTheme" cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "He somehow turned into one of the good soldiers at the last minute." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "It's a pity we have to erase all of his memories." cutscene = "Texture/Cutscene/3.png"/>
 			<Dialogue name = "Emily" text = "We can only hope he'll become our great success." cutscene = "Texture/Cutscene/3.png"/>
-			<Dialogue name = " " text = " " cutscene = "Texture/Cutscene/3.png" level = "4"/>
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" /> -->
+			<!-- <Dialogue name = " " text = " " cutscene = "Texture/Cutscene/End.png" level = "4"/> -->
 		</sub>
 	</script>
 	

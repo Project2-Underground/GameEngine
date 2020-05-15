@@ -22,6 +22,7 @@ public:
 	ImageObject();
 	~ImageObject();
 	virtual void SetTexture(string path);
+	void SetTexturePath(string path);
 	virtual void SetTexture(unsigned int texture);
 	void SetPosition(glm::vec3 newPosition);
 	void InitAnimator() { anim = new Animator(); }

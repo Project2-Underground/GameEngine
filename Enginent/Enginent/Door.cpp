@@ -91,8 +91,10 @@ void SecretDoor::Open() {
 void SecretDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used || triggered) {
-		if (GetTexture() != openTexture && openTexture != 0)
+		if (GetTexture() != openTexture && openTexture != 0) {
 			SetTexture(openTexture);
+			TextBox::GetInstance()->setText("Building1_FloorDoorClose");
+		}
 		else
 			gs->ChangeRoom(nextRoom, nextDoor);
 	}

@@ -284,6 +284,8 @@ void OpenObj::Open() {
 	if (!sound.empty()) {
 		SoundManager::GetInstance()->playSound(SFX, sound, false);
 	}
+	if (object_name == "Puzzle6_Cabinet" || object_name == "Puzzle7_Cabinet")
+		SetSize(431, -285);
 	SetTexture(openTexture);
 	if (hasItem)interactType = PICKUP;
 	else interactType = NORMAL;

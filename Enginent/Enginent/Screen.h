@@ -119,4 +119,5 @@ public:
 
 	// special npcs
 	Butler* butler;
+	UIObject* endScreen;
 };

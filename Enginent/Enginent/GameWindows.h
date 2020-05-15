@@ -28,6 +28,7 @@ class ViewWindow :public GameWindow{
 	UIObject* viewItem;
 	ViewWindow();
 	float itemSizeY;
+	bool playItemSound;
 	// textbox to display description
 public:
 	static ViewWindow* GetInstance();

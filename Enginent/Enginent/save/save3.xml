@@ -18,12 +18,12 @@
 		<Building2_Computer1 current_dialogue="Building2_com" before_dialogue="Building2_com" after_dialogue="Building2_com_broke" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building2/Building2_Computer1.png" />
 		<Building3_Emma current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/Character/NPCs/Emma/Building3_Emma.png" />
 		<Puzzle6_NPC1F1 current_dialogue="Building4_NPC1" before_dialogue="Building4_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="" triggered="true" />
-		<Puzzle6_AltarwithPills current_dialogue="Building4_altar" before_dialogue="Building4_altar" after_dialogue="Building4_altar_after" talked="true" takeNote="false" has_item="true" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_AltarwithPills.png" />
+		<Puzzle6_AltarwithPills current_dialogue="Building4_altar" before_dialogue="Building4_altar" after_dialogue="Building4_altar_after" talked="true" takeNote="false" has_item="true" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Altar.png" />
 		<Puzzle6_NPC1Trigger current_dialogue="puzzle6_2_NPC1" before_dialogue="puzzle6_2_NPC1" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="" triggered="true" />
 		<Puzzle6_Cabinet current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Cabinet.png" open="true" />
 		<Puzzle6_WallTorch current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" />
-		<Puzzle6_LockedDoor current_dialogue="puzzle6_3_doorlock" before_dialogue="puzzle6_3_doorlock" after_dialogue="" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" />
-		<Puzzle6_Puppet current_dialogue="" before_dialogue="puzzle6_puppet" after_dialogue="puzzle6_puppet" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png" />
+		<Puzzle6_LockedDoor current_dialogue="puzzle6_3_doorlock" before_dialogue="puzzle6_3_doorlock" after_dialogue="" talked="true" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" />
+		<Puzzle6_Puppet current_dialogue="puzzle6_puppet" before_dialogue="puzzle6_puppet" after_dialogue="puzzle6_puppet" talked="true" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_Puppet.png" />
 		<Puzzle7_WallTorch current_dialogue="puzzle7_torch" before_dialogue="puzzle7_torch" after_dialogue="puzzle7_torch" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_WallTorch.png" />
 		<Puzzle7_StabbedPuppet current_dialogue="puzzle7_puppet" before_dialogue="puzzle7_puppet" after_dialogue="puzzle7_puppet_after" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle7/Object/Puzzle7_StabbedPuppet.png" />
 		<Puzzle7_LockedDoor current_dialogue="puzzle7_lockeddoor" before_dialogue="puzzle7_lockeddoor" after_dialogue="puzzle7_lockeddoor" talked="false" takeNote="false" has_item="false" texture="Texture/level2/Building4/Puzzle6/Object/Puzzle6_LockedDoor.png" />
@@ -68,7 +68,7 @@
 		<Cultist_Mask hasItem="false" display="true" current_dialogue="RouteA_Building3_Cultist" before_dialogue="RouteA_Building3_Cultist" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<Puzzle6_NPC2F1 hasItem="false" display="false" current_dialogue="" before_dialogue="Building4_NPC2" after_dialogue="Building4_NPC2_after" talked="false" takeNote="false" has_item="false" />
 		<Puzzle6_NPC1_AfterPuzzle hasItem="false" display="true" current_dialogue="puzzle6_pass_NPC1" before_dialogue="puzzle6_pass_NPC1" after_dialogue="puzzle6_pass_NPC1" talked="false" takeNote="false" has_item="false" />
-		<Cultist_AfterPuzzle hasItem="false" display="true" current_dialogue="puzzle6_pass_cultist_after" before_dialogue="puzzle6_pass_cultist" after_dialogue="puzzle6_pass_cultist_after" talked="false" takeNote="false" has_item="false" />
+		<Cultist_AfterPuzzle hasItem="false" display="true" current_dialogue="puzzle6_pass_cultist" before_dialogue="puzzle6_pass_cultist" after_dialogue="puzzle6_pass_cultist_after" talked="false" takeNote="false" has_item="false" />
 		<Puzzle6_NPC1F2 hasItem="false" display="false" current_dialogue="" before_dialogue="" after_dialogue="" talked="false" takeNote="false" has_item="false" />
 		<Puzzle6_NPC2F2 hasItem="false" display="false" current_dialogue="puzzle6_2_NPC2" before_dialogue="puzzle6_2_NPC2" after_dialogue="puzzle6_2_NPC2_after" talked="false" takeNote="false" has_item="false" />
 		<Puzzle6_NPC1F3 hasItem="false" display="false" current_dialogue="puzzle6_3_pass" before_dialogue="puzzle6_3_pass" after_dialogue="" talked="false" takeNote="false" has_item="false" />
@@ -80,10 +80,10 @@
 		<Cultist hasItem="false" display="false" current_dialogue="Floor2_Cultist_after" before_dialogue="Floor2_Cultist_after" after_dialogue="Floor2_Cultist_after" talked="false" takeNote="false" has_item="false" />
 	</NPCs>
 	<puzzles>
-		<BookshelfPuzzle done="true" passRequirements="false" />
-		<BookshelfPuzzle2 done="true" passRequirements="false" />
-		<Numpad_Backdoor done="true" passRequirements="false" />
-		<Numpad_Emma done="true" passRequirements="false" />
+		<BookshelfPuzzle done="false" passRequirements="false" />
+		<BookshelfPuzzle2 done="false" passRequirements="false" />
+		<Numpad_Backdoor done="false" passRequirements="false" />
+		<Numpad_Emma done="false" passRequirements="false" />
 		<PuppetPuzzle done="false" passRequirements="false" />
 	</puzzles>
 	<items>
@@ -259,7 +259,7 @@
 			<dialogueAfterUse />
 		</Puzzle7_MouthKeySep>
 	</items>
-	<Player posX="150" posY="-80">
+	<Player posX="201" posY="-80">
 		<inventory>
 			<item />
 			<item />

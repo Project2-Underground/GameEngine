@@ -198,7 +198,6 @@ void TextBox::setText(std::string key, bool talk)
 				gs->GetInventory()->AddItem(item);
 
 				vw->SetViewItem(item);
-				SoundManager::GetInstance()->playSound(SFX, "Pickup");
 				vw->Open();
 				if (obj != nullptr)
 					obj->hasItem = false;
@@ -368,12 +367,17 @@ void TextBox::clickLeft(glm::vec3 pos)
 		//sound
 		if (d_text->dialogue[d_index].soundName != "")
 		{
-			SoundManager::GetInstance()->playSound(SFX, d_text->dialogue[d_index].soundName);
+			if (d_text->dialogue[d_index].soundName == "EndTheme") {
+				SoundManager::GetInstance()->StopCurrentBGM();
+				SoundManager::GetInstance()->playSound(BGM, "EndTheme");
+			}else
+				SoundManager::GetInstance()->playSound(SFX, d_text->dialogue[d_index].soundName);
 		}
 
 		//cutscene
 		if (d_text->dialogue[d_index].CutScenebl)
 		{
+			
 			cutscene->SetTexture(d_text->dialogue[d_index].CutScene);
 			cutscene->SetDisplay(true);
 		}
@@ -389,6 +393,7 @@ void TextBox::clickLeft(glm::vec3 pos)
 			if (obj != nullptr)
 			{
 				obj->SetTexture(d_text->dialogue[d_index].sprite);
+				obj->SetTexturePath(d_text->dialogue[d_index].spriteName);
 			}
 			else
 			{
@@ -475,10 +480,13 @@ void TextBox::clickLeft(glm::vec3 pos)
 	}
 	else if (d_text->choice == "")
 	{
-		//Game::GetInstance()->GetCursor()->enableChange(true);
 		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, false);
 		display = false;
 		ViewWindow::GetInstance()->Close();
+		if (SoundManager::GetInstance()->currentBGM == "EndTheme") {
+			((GameScreen*)Game::GetInstance()->GetScreen())->endScreen->SetDisplay(true);
+			Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_OTHER_WINDOW_ON, true);
+		}
 	}
 	else if (d_text->nextLevel != -1)
 	{
