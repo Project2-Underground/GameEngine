@@ -16,7 +16,7 @@ Player::Player()
 	anim->AddAnimation("Idle", "Texture/Character/Elias_idle.png",4,0.25f);
 	anim->AddAnimation("Move", "Texture/Character/Elias_walk.png",4,0.25f);
 	anim->AddAnimation("Pickup", "Texture/Character/Elias_pick.png",4,0.25f,true);
-	anim->AddAnimation("Panic", "Texture/Character/Elias_pick.png",1,0.75f,true);
+	anim->AddAnimation("Panic", "Texture/Character/Elias_panic.png",2,0.5f,true);
 	anim->Play("Idle", true);
 
 	walk = false;

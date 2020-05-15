@@ -34,7 +34,6 @@ void InteractableObj::TakeNote() {
 			phone->AddPage(NOTE, noteNames[i]);
 		}
 		takeNote = false;
-		SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 	}
 }
 
@@ -131,9 +130,9 @@ void InteractableObj::UseItem(Item* item) {
 			vw->SetViewItem(item);
 			vw->Open();
 		}
-		if (hasSizeAfterUsed) {
-			SetSize(sizeAfterUse);
-		}
+		if (object_name == "Puzzle7_WallTorch")
+			SetSize(191, -197);
+
 		//std::cout << "InteractableObj::UseItem " << item->name << " multiple use " << item->multipleUse << std::endl;
 		if(!item->multipleUse)
 			i->RemoveItem(item);
@@ -319,7 +318,6 @@ NonPlayer::NonPlayer(std::string name) {
 }
 void NonPlayer::action()
 {
-	Phone::GetInstance()->AddNPCInteracted(object_name);
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	//std::cout << interactType << std::endl;
 	if (MouseInput::GetInstance()->GetActionEvent() == ITEM_SELECTED_ACTION) {

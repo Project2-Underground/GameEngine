@@ -15,8 +15,6 @@
 enum ScreenState {
 	MENUSCREEN = 0,
 	GAMESCREEN,
-	CREDITSCREEN,
-	TESTSCENE
 };
 
 class Screen {
@@ -47,7 +45,6 @@ class MenuScreen :public Screen {
 	Button* load;
 	Button* setting;
 	Button* quit;
-	Button* creditBackButton;
 	UIObject* background;
 	UIObject* SplashScreen;
 	UIObject* Credit;
@@ -122,39 +119,4 @@ public:
 
 	// special npcs
 	Butler* butler;
-};
-
-// may change to other thing
-class CreditScreen :public Screen {
-public:
-	CreditScreen();
-	void Render();
-	void Init() {}
-	void Update();
-	void RightClick(glm::vec3, glm::vec3);
-	void LeftClick(glm::vec3, glm::vec3);
-	void RightRelease(glm::vec3, glm::vec3);
-	void LeftRelease(glm::vec3, glm::vec3);
-	void UpdateMouseState(glm::vec3, glm::vec3);
-	void HandleKey(SDL_Keycode);
-};
-
-class TestScreen : public Screen {
-public:
-	std::vector<UIObject*> UI;
-	UIObject* background;
-	PuzzleTemplate* puzzle;
-	Puzzle* numpad;
-public:
-	TestScreen();
-	void Init();
-	void Render();
-	void Update();
-	void RightClick(glm::vec3, glm::vec3);
-	void LeftClick(glm::vec3, glm::vec3);
-	void UpdateMouseState(glm::vec3, glm::vec3);
-	void RightRelease(glm::vec3, glm::vec3);
-	void LeftRelease(glm::vec3 screen, glm::vec3 world);
-	void HandleKey(SDL_Keycode);
-	~TestScreen();
 };

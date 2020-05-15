@@ -19,19 +19,21 @@ void Screen::CloseGameAllWindow() {
 MenuScreen::MenuScreen() {
 	splashScreen = true;
 	splashScreenTime = 0;
-	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png");
-	play->Init(248, -70, glm::vec3(-258, 78, 1));
+	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png");
+	play->Init(248, -70, glm::vec3(-258, 98, 1));
 
 	load = new OpenLoadSaveWindow("Texture/UI/MainScreen/MainScreen_Load.png");
-	load->SetPressTexture("Texture/tmp_texture/MainScreen_Load_Pressed.png");
-	load->Init(213, -74, glm::vec3(-277, -18, 1));
+	load->SetPressTexture("Texture/UI/MainScreen/MainScreen_Load_Pressed.png");
+	load->SetHoverTexture("Texture/UI/MainScreen/MainScreen_Load_Pressed.png");
+	load->Init(213, -74, glm::vec3(-277, 2, 1));
 
 	setting = new SettingButton("Texture/UI/MainScreen/MainScreen_Sound.png");
 	setting->SetPressTexture("Texture/UI/MainScreen/MainScreen_Sound_Pressed.png");
-	setting->Init(264, -81, glm::vec3(-266, -111, 1.0f));
+	setting->SetHoverTexture("Texture/UI/MainScreen/MainScreen_Sound_Pressed.png");
+	setting->Init(264, -81, glm::vec3(-266, -91, 1.0f));
 
 	quit = new Exit_Button("Texture/UI/MainScreen/MainScreen_Ouit.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png", "Texture/UI/MainScreen/MainScreen_Ouit_Pressed.png");;
-	quit->Init(186, -86, glm::vec3(-262, -311, 1.0f));
+	quit->Init(186, -86, glm::vec3(-262, -291, 1.0f));
 
 	SplashScreen = new UIObject();
 	SplashScreen->SetTexture("Texture/SplashScreen.png");
@@ -44,11 +46,8 @@ MenuScreen::MenuScreen() {
 
 	CreditButton* creditButton = new CreditButton("Texture/UI/MainScreen/Credit_button.png", Credit);
 	creditButton->SetPressTexture("Texture/UI/MainScreen/Credit_button_press.png");
-	creditButton->Init(282, -82, glm::vec3(-262, -211, 1));
-
-	creditBackButton = new CreditBackButton("Texture/UI/MainScreen/Back_button.png", Credit);
-	creditBackButton->SetPressTexture("Texture/UI/MainScreen/Back_button_push.png");
-	creditBackButton->Init(140, -30, glm::vec3(-570, -345, 1));
+	creditButton->SetHoverTexture("Texture/UI/MainScreen/Credit_button_press.png");
+	creditButton->Init(282, -82, glm::vec3(-262, -191, 1));
 
 	background = new UIObject();
 	background->SetTexture("Texture/UI/MainScreen/MainScreen_Template.png");
@@ -76,7 +75,6 @@ MenuScreen::MenuScreen() {
 void MenuScreen::Render() {
 	if (Credit->IsDisplay()) {
 		Game::GetInstance()->GetRenderer()->Render(Credit);
-		Game::GetInstance()->GetRenderer()->Render(creditBackButton);
 	}
 	else {
 		if (splashScreen) {
@@ -101,7 +99,6 @@ void MenuScreen::Update() {
 void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (Credit->IsDisplay()) {
 		Credit->SetDisplay(false);
-		creditBackButton->checkColliderPressed(screen.x, screen.y);
 	}
 	else if (!splashScreen) {
 		if (GameWindowOpen())
@@ -138,21 +135,21 @@ void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 				if (Button * button = dynamic_cast<Button*>(UI[j]))
 					button->checkColliderReleased(screen.x, screen.y);
 	}
-	else {
-		creditBackButton->checkColliderReleased(screen.x, screen.y);
-	}
 }
 
 void MenuScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world) {
-	play->updateButton(screen.x, screen.y);
-	//setting->updateButton(realPos.x, realPos.y);
-	quit->updateButton(screen.x, screen.y);
-	if(GameWindowOpen())
-		for(auto w:windows)
+	if (GameWindowOpen()) {
+		for (auto w : windows)
 			if (w->IsOpen()) {
 				w->UpdateMouseButton(screen);
 				break;
 			}
+	}
+	else {
+		for (int j = 0; j < UI.size(); j++)
+			if (Button * button = dynamic_cast<Button*>(UI[j]))
+				button->updateButton(screen.x, screen.y);
+	}
 }
 
 void MenuScreen::HandleKey(SDL_Keycode key) {
@@ -308,9 +305,11 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	}
 	else {
 		buttonClicked = false;
-		for (int j = 0; j < UI.size(); j++) {
-			if (Button * button = dynamic_cast<Button*>(UI[j])) {
-				button->checkColliderPressed(screen.x, screen.y);
+		if (!PuzzleTime) {
+			for (int j = 0; j < UI.size(); j++) {
+				if (Button * button = dynamic_cast<Button*>(UI[j])) {
+					button->checkColliderPressed(screen.x, screen.y);
+				}
 			}
 		}
 		if (GameWindowOpen() || dialogueText->IsDisplay() && !buttonClicked) {
@@ -386,6 +385,9 @@ void GameScreen::ChangeLevel(int level) {
 	camera->SetLimit(currentLevel->GetCurrentRoom()->GetCameraLimit());
 	dialogueText->setText(currentLevel->GetCurrentRoom()->dialogue);
 	currentLevel->GetCurrentRoom()->dialogue.clear();
+	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
+	if(gs->GetInventory())
+		gs->GetInventory()->ClearItem();
 	switch (level)
 	{
 	case 0:
@@ -469,7 +471,7 @@ void GameScreen::ClosePuzzle() {
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	/*switch (key)
+	switch (key)
 	{
 	case SDLK_1:
 		puzzles["BookshelfPuzzle"]->CompletePuzzle();
@@ -490,15 +492,12 @@ void GameScreen::HandleKey(SDL_Keycode key) {
 	case SDLK_s:
 		player->walkSpeed = 1000;
 		break;
-	case SDLK_a:
-		player->TriggerRouteA();
-		break;
-	case SDLK_d:
-		player->TriggerRouteB();
+	case SDLK_w:
+		currentLevel->ChangeRoom("Building4Puzzle7Floor1", "Building4Puzzle7Floor1Out");
 		break;
 	default:
 		break;
-	}*/
+	}
 }
 
 GameScreen::~GameScreen() {
@@ -523,195 +522,4 @@ GameScreen::~GameScreen() {
 		delete p.second;
 
 	delete inventory;
-}
-
-/*CUTSCENE*/
-CreditScreen::CreditScreen() {
-	TextObject* credit = new TextObject();
-	std::string creditText;
-	float startY = -380;
-	float startX = -450;
-
-
-}
-
-void CreditScreen::Render() {
-	// play the cutscene
-}
-void CreditScreen::Update() {
-	// eg. 2 clicks to skip a cutscene
-}
-
-void CreditScreen::LeftClick(glm::vec3, glm::vec3) {
-
-}
-
-void CreditScreen::RightClick(glm::vec3, glm::vec3)
-{
-
-}
-
-void CreditScreen::RightRelease(glm::vec3, glm::vec3)
-{
-
-}
-
-void CreditScreen::LeftRelease(glm::vec3, glm::vec3)
-{
-
-}
-
-void CreditScreen::UpdateMouseState(glm::vec3, glm::vec3)
-{
-
-}
-
-void CreditScreen::HandleKey(SDL_Keycode key) {
-
-}
-
-/*TestScene NumPad*/
-
-TestScreen::TestScreen()
-{
-	puzzle = new Bookshelf2("Texture/puzzle5/Puzzle5_BookShelf.png", 0, 0, 1280, -720);
-	//void Init(std::vector<Book2*>, std::vector<Space2*>, std::vector<UIObject*>, std::vector<Paper*>);
-	std::vector<Book2*> books;
-	std::vector<Book*> books_1;
-	std::vector<Space*> spaces;
-	std::vector<UIObject*> images;
-	std::vector<Paper*> papers;
-
-	Book2* tmp_book = new Book2(11, "Texture/puzzle5/Puzzle5_IncomBook1.png", 65, -155, 0, 268, 1);
-	books.push_back(tmp_book);
-	tmp_book = new Book2(12, "Texture/puzzle5/Puzzle5_IncomBook2.png", 65, -155, 0, 98, 5);
-	books.push_back(tmp_book);
-	tmp_book = new Book2(13, "Texture/puzzle5/Puzzle5_IncomBook3.png", 65, -155, 0, -89, 6);
-	books.push_back(tmp_book);
-	tmp_book = new Book2(14, "Texture/puzzle5/Puzzle5_IncomBook4.png", 65, -155, 0, -270, 4);
-	books.push_back(tmp_book);
-
-
-	Book* tmp_book1 = new Book(4, "Texture/puzzle5/Puzzle5_WhiteBook4.png", 65, -155, -107, 268);
-	books_1.push_back(tmp_book1);
-	Space* tmp_space = new Space(1, glm::vec3(-107, 268, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(8, "Texture/puzzle5/Puzzle5_WhiteBook8.png", 65, -155, 107, 268);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(2, glm::vec3(107, 268, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(3, "Texture/puzzle5/Puzzle5_WhiteBook3.png", 65, -155, -107, 93);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(3, glm::vec3(-107, 93, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(1, "Texture/puzzle5/Puzzle5_WhiteBook1.png", 65, -155, 107, 93);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(4, glm::vec3(107, 93, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(6, "Texture/puzzle5/Puzzle5_WhiteBook6.png", 65, -155, -107, -88);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(5, glm::vec3(-107, -88, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(5, "Texture/puzzle5/Puzzle5_WhiteBook5.png", 65, -155, 107, -88);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(6, glm::vec3(107, -88, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(7, "Texture/puzzle5/Puzzle5_WhiteBook7.png", 65, -155, -107, -269);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(7, glm::vec3(-107, -269, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	tmp_book1 = new Book(2, "Texture/puzzle5/Puzzle5_WhiteBook2.png", 65, -155, 107, -269);
-	books_1.push_back(tmp_book1);
-	tmp_space = new Space(8, glm::vec3(107, -269, 0), 70, -160);
-	tmp_space->book = tmp_book1;
-	spaces.push_back(tmp_space);
-
-	UIObject* tmp_image = new UIObject();
-	tmp_image->SetTexture("Texture/puzzle5/Puzzle5_BookShelf.png");
-	tmp_image->SetSize(1280, -720);
-	tmp_image->SetPosition(glm::vec3(0, 0, 0));
-	images.push_back(tmp_image);
-
-	Paper* tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper1(I).png", "Texture/puzzle5/Puzzle5_Paper1.png", glm::vec3(338, 263, 0), 229, -161, 1);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper2(I).png", "Texture/puzzle5/Puzzle5_Paper2.png", glm::vec3(338, 68, 0), 229, -161, 2);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper3(I).png", "Texture/puzzle5/Puzzle5_Paper3.png", glm::vec3(338, -89, 0), 229, -161, 3);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper4(I).png", "Texture/puzzle5/Puzzle5_Paper4.png", glm::vec3(338, -247, 0), 229, -161, 4);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper5(I).png", "Texture/puzzle5/Puzzle5_Paper5.png", glm::vec3(497, 263, 0), 229, -161, 5);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper6(I).png", "Texture/puzzle5/Puzzle5_Paper6.png", glm::vec3(497, 68, 0), 229, -161, 6);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper7(I).png", "Texture/puzzle5/Puzzle5_Paper7.png", glm::vec3(497, -89, 0), 229, -161, 7);
-	papers.push_back(tmp_paper);
-	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper8(I).png", "Texture/puzzle5/Puzzle5_Paper8.png", glm::vec3(497, -247, 0), 229, -161, 8);
-	papers.push_back(tmp_paper);
-
-	((Bookshelf2*)puzzle)->Init(books_1, books, spaces, images, papers);
-}
-
-void TestScreen::Init()
-{
-
-}
-
-void TestScreen::Render()
-{
-	((Bookshelf2*)puzzle)->Render();
-}
-
-void TestScreen::Update()
-{
-	((Bookshelf2*)puzzle)->Update();
-}
-
-void TestScreen::RightClick(glm::vec3 screen, glm::vec3 world)
-{
-	((Bookshelf2*)puzzle)->RightClick(screen, world);
-}
-
-void TestScreen::LeftClick(glm::vec3 screen, glm::vec3 world)
-{
-	((Bookshelf2*)puzzle)->LeftClick(screen, world);
-}
-
-void TestScreen::UpdateMouseState(glm::vec3 screen, glm::vec3 world)
-{
-
-}
-
-TestScreen::~TestScreen()
-{
-
-}
-
-void TestScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
-{
-	((Bookshelf2*)puzzle)->RightRelease(screen, world);
-}
-
-void TestScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
-{
-	((Bookshelf2*)puzzle)->LeftRelease(screen, world);
-}
-
-void TestScreen::HandleKey(SDL_Keycode)
-{
-
 }

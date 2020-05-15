@@ -36,6 +36,7 @@ void TextBox::setText(std::string key, bool talk)
 	//std::cout << "key: " << key << std::endl;
 	if (key != "")
 	{
+		Phone::GetInstance()->AddDialogueTalked(key);
 		Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, true);
 		SetDisplay(true);
 		Dialogue* tmp = scriptManager->GetDialogue(key);
@@ -86,7 +87,6 @@ void TextBox::setText(std::string key, bool talk)
 			{
 				Phone* phone = Phone::GetInstance();
 				phone->AddPage(NOTE, d_text->dialogue[d_index].noteName);
-				SoundManager::GetInstance()->playSound(SFX, "CollectNote", false);
 			}
 
 			//chat
@@ -198,6 +198,7 @@ void TextBox::setText(std::string key, bool talk)
 				gs->GetInventory()->AddItem(item);
 
 				vw->SetViewItem(item);
+				SoundManager::GetInstance()->playSound(SFX, "Pickup");
 				vw->Open();
 				if (obj != nullptr)
 					obj->hasItem = false;
@@ -529,6 +530,7 @@ bool ChoiceBox::CheckClick(glm::vec3 pos)
 		else
 		{
 			TextBox::GetInstance()->SetDisplay(false);
+			Game::GetInstance()->GetCursor()->EnableCursor(CURSOR_DIALOGUE_ON, false);
 		}
 		if (choice.puzzleName != "")
 		{

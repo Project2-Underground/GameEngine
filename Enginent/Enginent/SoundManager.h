@@ -35,17 +35,15 @@ public:
 	ISoundSource* createSound(const char* filename);
 	void Init();
 	void playSound(SoundType, std::string, bool loop = false);
-	void pause(SoundType, std::string);
+	void PauseBGM(bool b);
+	void PauseSFX(bool b);
 	void pause(bool b);
 	void stop(SoundType, std::string);
 	void stopAllSounds();
-	void upVolume(SoundType);
-	void downVolume(SoundType);
 	void toggleMute(SoundType);
+	void StopBGM(std::string name);
 	void StopCurrentBGM();
 
-	float getVolume(SoundType);
-	void setVolume(SoundType, float);
 	float getMute(SoundType);
 	void setMute(SoundType, bool);
 	void LoadMute();

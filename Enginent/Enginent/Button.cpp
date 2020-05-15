@@ -13,6 +13,7 @@ Button::Button(std::string texture)
 	normalTexture = GetTexture();
 	hoverTexture = normalTexture;
 	pressTexture = normalTexture;
+	sound = "Click_ButtonUI";
 }
 void Button::Appear() {
 	SetDisplay(true);
@@ -63,6 +64,7 @@ void Button::checkColliderReleased(float x, float y) {
 	if (this->col->isClicked(x, y)) {
 		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			SoundManager::GetInstance()->playSound(SFX, sound);
 			action();
 		}
 	}
@@ -102,6 +104,7 @@ void PhoneOpenButton::checkColliderReleased(float x, float y) {
 	if (this->col->isClicked(x, y)) {
 		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			SoundManager::GetInstance()->playSound(SFX, sound);
 			action();
 		}
 	}
@@ -220,6 +223,7 @@ void SoundMuteButton::checkColliderReleased(float x, float y) {
 	if (this->col->isClicked(x, y)) {
 		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			SoundManager::GetInstance()->playSound(SFX, sound);
 			action();
 		}
 	}
@@ -296,6 +300,7 @@ void SaveLoadGameButton::checkColliderReleased(float x, float y) {
 	if (this->col->isClicked(x, y)) {
 		if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 			MouseInput::GetInstance()->SetCurrentButtonPressed(nullptr);
+			SoundManager::GetInstance()->playSound(SFX, sound);
 			action();
 		}
 	}

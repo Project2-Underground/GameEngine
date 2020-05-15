@@ -647,6 +647,7 @@ void Phone::AddPage(AppType apptype, std::string name) {
 		{
 		case NOTE: {
 			app->AddNote(&notes[name]);
+			SoundManager::GetInstance()->playSound(SFX, "CollectNote");
 		}break;
 		case CHAT:
 			app->AddChat(&chats[name]);
@@ -670,35 +671,51 @@ void Phone::SetPage(AppType apptype, std::string name) {
 }
 
 void Phone::Message(std::string name, int msgIndex) {
-	((GameScreen*)Game::GetInstance()->GetScreen())->phoneIcon->UpdateButton(true);
 	chats[name].noti = true;
 	AddPage(CHAT, name);
 }
 
-void Phone::AddNPCInteracted(std::string name) {
-	bool duplicate = false;
-	for (auto n : npcTalked) {
-		if (n == name) {
-			duplicate = true;
-			break;
+void Phone::AddDialogueTalked(std::string name) {
+	if ((name == "Dialy1_C" || name == "Hubert1_C" || name == "Ann1_C" || name == "Dann1_C") && !note3Done) {
+		bool duplicate = false;
+		for (auto n : npcTalkedNote3) {
+			if (n == name) {
+				duplicate = true;
+				break;
+			}
+		}
+		if (!duplicate)
+			npcTalkedNote3.push_back(name);
+
+		if (npcTalkedNote3.size() == 4) {
+			AddPage(NOTE, "Note3");
+			note3Done = true;
 		}
 	}
-	if (!duplicate)
-		npcTalked.push_back(name);
+	else if ((name == "Dialy1" || name == "Hubert1" || name == "Ann1" || name == "Dann1") && !note2Done) {;
+		bool duplicate = false;
+		for (auto n : npcTalkedNote2) {
+			if (n == name) {
+				duplicate = true;
+				break;
+			}
+		}
+		if (!duplicate)
+			npcTalkedNote2.push_back(name);
 
-	if (npcTalked.size() == 4 && !note23Done) {
-		AddPage(NOTE, "Note2");
-		AddPage(NOTE, "Note3");
-		note23Done = true;
+		if (npcTalkedNote2.size() == 4) {
+			AddPage(NOTE, "Note2");
+			note2Done = true;
+		}
 	}
 }
 
 void Phone::Clear() {
 	app->Clear();
-	note23Done = false;
+	note3Done = false;
 	firstClose = false;
 	textAfterClose = "Phone_start";
-	npcTalked.clear();
+	npcTalkedNote3.clear();
 }
 
 void Phone::Open() { 

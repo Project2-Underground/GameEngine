@@ -30,7 +30,7 @@
 			</Elias_Room_Bin>
 		</interactObj>
 		<doors>
-			<EliasRoomInnerDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="-4" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
+			<EliasRoomInnerDoor texture="Texture/level1/EliasRoom/Elias_Room_Door1.png" sizeX="264" sizeY="414" posX="-200" posY="12" next_room="MainHallUpper" next_door="EliasRoomOuterDoor" layer="0" dialogue="EliasRoom_InnerDoor" dialogue_2="EliasRoom_InnerDoor_after">
 				<key name="keyCard"/>
 			</EliasRoomInnerDoor>
 		</doors>

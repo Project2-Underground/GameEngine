@@ -18,7 +18,7 @@ ViewWindow::ViewWindow() {
 	trigger = false;
 	itemSizeY = 450.0f;
 
-	bgWindow->SetTexture("Texture/tmp_texture/tmp_inventoryBox.png");
+	bgWindow->SetTexture("Texture/tmp_texture/tmp_pausebg.png");
 }
 
 void GameWindow::Update() {
@@ -37,7 +37,7 @@ void GameWindow::Update() {
 
 void ViewWindow::Init(int width, int height) {
 	//set size, pos of this, description box and viewItem
-	bgWindow->Init((float)width * 0.45f, -(float)height * 0.5f, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
+	bgWindow->Init(200,-200, glm::vec3(0, (float)height * 0.5f * 0.3f, 0.0f));
 	viewItem->SetSize(540, -540);
 	viewItem->SetPosition(bgWindow->getPos());
 }
@@ -78,7 +78,7 @@ ViewWindow::~ViewWindow() {
 void ViewWindow::Render() {
 	if (display) {
 		GLRenderer* renderer = Game::GetInstance()->GetRenderer();
-		renderer->Render(bgWindow);
+		//renderer->Render(bgWindow);
 		renderer->Render(viewItem);
 	}
 }

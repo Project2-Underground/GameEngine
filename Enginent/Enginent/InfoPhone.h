@@ -149,20 +149,22 @@ public:
 	void Scroll(glm::vec3, int);
 	void PrintAllChat();
 	void Clear();
-	void AddNPCInteracted(std::string name);
+	void AddDialogueTalked(std::string name);
 
 	bool open;
 	bool notiNote;
 	bool notiChat;
 	bool firstClose;
-	bool note23Done;
+	bool note3Done;
+	bool note2Done;
 	Application* app;
 
 	~Phone();
 
 	std::map<std::string, NoteInfo> notes;
 	std::map<std::string, ChatInfo> chats;
-	std::vector<std::string> npcTalked;
+	std::vector<std::string> npcTalkedNote3;
+	std::vector<std::string> npcTalkedNote2;
 	std::string textAfterClose;
 private:
 

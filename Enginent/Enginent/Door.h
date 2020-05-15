@@ -15,7 +15,7 @@ public:
 	void SetOpenTexture(unsigned int texture) { openTexture = texture; hasOpenTexture = true; }
 	void SetPlayerNextX(float x);
 	void Trigger();
-	void Open();
+	virtual void Open();
 	void action();
 	float playerNextX;
 	bool hasNextX;
@@ -31,6 +31,7 @@ public:
 class SecretDoor : public Door {
 public:
 	SecretDoor(std::string room, std::string door) :Door(room, door) { used = false; interactType = NORMAL; }
+	void Open();
 	void action();
 };
 

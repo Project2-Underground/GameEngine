@@ -22,6 +22,7 @@ void SoundManager::Init()
 	bgms["HallRoom"] = createSound("Sound/Hall_Room_BG_Music.mp3");
 	bgms["EndTheme"] = createSound("Sound/Ending_Theme.mp3");
 	bgms["Buildng3"] = createSound("Sound/Building3_BGM.mp3");
+	bgms["talkingAmbient"] = createSound("Sound/people-talking-in-background-ambience.mp3");
 
 	// normal SFX
 	sfxs["Walking"] = createSound("Sound/walking_sound.mp3");
@@ -33,6 +34,7 @@ void SoundManager::Init()
 	sfxs["OpenCabinet"] = createSound("Sound/open_closet.mp3");
 	sfxs["Key"] = createSound("Sound/Key.mp3");
 	sfxs["Click_Button"] = createSound("Sound/Click_Button.mp3");
+	sfxs["Click_ButtonUI"] = createSound("Sound/Click_ButtonUI.mp3");
 	sfxs["BasementNumpad"] = createSound("Sound/BasementNumpadSound.mp3");
 	sfxs["Click"] = createSound("Sound/Click.mp3");
 	sfxs["Puzzle25DoorOpen"] = createSound("Sound/Puzzle_2-5_DoorOpen.mp3");
@@ -60,7 +62,8 @@ void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 			{
 			case BGM:
 				soundEngine->play2D(bgms[sound], true); 
-				currentBGM = sound;
+				if(sound != "talkingAmbient")
+					currentBGM = sound;
 				break;
 			case SFX:
 				soundEngine->play2D(sfxs[sound], loop);
@@ -75,18 +78,39 @@ void SoundManager::playSound(SoundType t, std::string sound, bool loop)
 void SoundManager::pause(bool b) {
 	soundEngine->setAllSoundsPaused(b);
 }
+void SoundManager::PauseBGM(bool b) {
+	if (b) {
+		for (auto sound : bgms)
+			if (sound.second != nullptr) {
+				soundEngine->stopAllSoundsOfSoundSource(sound.second);
+				sound.second->setDefaultVolume(0);
+			}
+	}
+	else {
+		for (auto sound : bgms)
+			if (sound.second != nullptr) {
+				sound.second->setDefaultVolume(1);
+			}
+		soundEngine->play2D(bgms[currentBGM], true);
+		if (currentBGM == "Mainfloor2" || currentBGM == "Mainfloor3") {
+			soundEngine->play2D(bgms["talkingAmbient"], true);
+		}
+	}
+}
 
-void SoundManager::pause(SoundType t, std::string sound) {
-	switch (t)
-	{
-	case BGM:
-		soundEngine->setAllSoundsPaused(bgms[sound]);
-		break;
-	case SFX:
-		soundEngine->setAllSoundsPaused(sfxs[sound]);
-		break;
-	default:
-		break;
+void SoundManager::PauseSFX(bool b) {
+	if (b) {
+		for (auto sound : sfxs)
+			if (sound.second != nullptr) {
+				soundEngine->stopAllSoundsOfSoundSource(sound.second);
+				sound.second->setDefaultVolume(0);
+			}
+	}
+	else {
+		for (auto sound : sfxs)
+			if (sound.second != nullptr) {
+				sound.second->setDefaultVolume(1);
+			}
 	}
 }
 
@@ -106,61 +130,16 @@ void SoundManager::stop(SoundType t,std::string sound) {
 
 void SoundManager::StopCurrentBGM() {
 	soundEngine->stopAllSoundsOfSoundSource(bgms[currentBGM]);
+	soundEngine->stopAllSoundsOfSoundSource(bgms["talkingAmbient"]);
+	currentBGM.clear();
+}
+void SoundManager::StopBGM(std::string name) {
+	soundEngine->stopAllSoundsOfSoundSource(bgms[name]);
 }
 
 void SoundManager::stopAllSounds() {
 	soundEngine->stopAllSounds();
 	currentBGM.clear();
-}
-
-void SoundManager::upVolume(SoundType t) {
-	switch (t)
-	{
-	case BGM:
-		if (bgmVol < 1.0f) {
-			bgmVol += incVol;
-			for (auto sound : bgms)
-				if (sound.second != nullptr)
-					sound.second->setDefaultVolume(bgmVol);
-		}
-		break;
-	case SFX:
-		if (sfxs.begin()->second->getDefaultVolume() < 1.0f) {
-			sfxVol += incVol;
-			for (auto sound : sfxs)
-				if (sound.second != nullptr)
-					sound.second->setDefaultVolume(sfxVol);
-		}
-		break;
-	default:
-		if (soundEngine->getSoundVolume() <= 1.0f) {
-			masterVol += incVol;
-			soundEngine->setSoundVolume(masterVol);
-		}
-		break;
-	}
-}
-
-void SoundManager::downVolume(SoundType t) {
-	switch (t)
-	{
-	case BGM:
-		if (bgms.begin()->second->getDefaultVolume() >= 0.0f)
-			for (auto sound : bgms)
-				if (sound.second != nullptr)
-					sound.second->setDefaultVolume(sound.second->getDefaultVolume() - incVol);
-		break;
-	case SFX:
-		if (sfxs.begin()->second->getDefaultVolume() >= 0.0f) 
-			for (auto sound : sfxs)
-				if(sound.second != nullptr)
-					sound.second->setDefaultVolume(sound.second->getDefaultVolume() - incVol);
-		break;
-	default:
-		if (soundEngine->getSoundVolume() >= 0.0f) 
-			soundEngine->setSoundVolume(soundEngine->getSoundVolume() - incVol);
-		break;
-	}
 }
 
 void SoundManager::toggleMute(SoundType t) {
@@ -169,24 +148,11 @@ void SoundManager::toggleMute(SoundType t) {
 	{
 	case BGM:
 		bgmMute = !bgmMute;
-		vol = bgmVol;
-		if (bgmMute)
-			vol = 0.0f;
-		for (auto sound : bgms)
-			if (sound.second != nullptr)
-				sound.second->setDefaultVolume(vol);
+		PauseBGM(bgmMute);
 		break;
 	case SFX:
 		sfxMute = !sfxMute;
-		vol = sfxVol;
-		if (sfxMute)
-			vol = 0.0f;
-		if (sfxs.begin()->second->getDefaultVolume() > 0.0f)
-			vol = 0.0f;
-		for (auto sound : sfxs)
-			if (sound.second != nullptr)
-				sound.second->setDefaultVolume(vol);
-
+		PauseSFX(sfxMute);
 		break;
 	default:
 		masterMute = !masterMute;
@@ -196,19 +162,6 @@ void SoundManager::toggleMute(SoundType t) {
 		soundEngine->setSoundVolume(vol);
 		break;
 	}
-}
-
-float SoundManager::getVolume(SoundType t) {
-	switch (t)
-	{
-	case BGM:
-		return bgmVol;
-	case SFX:
-		return sfxVol;
-	case MASTER:
-		return masterVol;
-	}
-	return 0.0f;
 }
 
 float SoundManager::getMute(SoundType t) {
@@ -222,21 +175,6 @@ float SoundManager::getMute(SoundType t) {
 		return masterMute;
 	}
 	return false;
-}
-void SoundManager::setVolume(SoundType t, float vol) {
-	switch (t)
-	{
-	case BGM:
-		for (auto sound : bgms)
-			if (sound.second != nullptr)
-				sound.second->setDefaultVolume(vol);
-	case SFX:
-		for (auto sound : sfxs)
-			if(sound.second != nullptr)
-				sound.second->setDefaultVolume(vol);
-	case MASTER:
-		soundEngine->setSoundVolume(vol);
-	}
 }
 
 void SoundManager::setMute(SoundType t, bool m) {

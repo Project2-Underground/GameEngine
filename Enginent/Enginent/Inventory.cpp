@@ -70,7 +70,7 @@ void Inventory::Update() {
 	glm::vec3 realPos = Game::GetInstance()->FindMousePosition(x, y);
 
 	move = true;
-	if (other)
+	if (other && !TextBox::GetInstance()->IsDisplay())
 		move = false;
 	if (IsMouseCollide(popArea, realPos.x, realPos.y)) {
 		triggeredOpen = true;

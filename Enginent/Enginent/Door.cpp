@@ -84,6 +84,10 @@ void WallDoor::action() {
 		interactType = NORMAL;
 	}
 }
+void SecretDoor::Open() {
+	used = true;
+	interactType = DOOR;
+}
 void SecretDoor::action() {
 	GameScreen* gs = ((GameScreen*)Game::GetInstance()->GetScreen());
 	if (used || triggered) {

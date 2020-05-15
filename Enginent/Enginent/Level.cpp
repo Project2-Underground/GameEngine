@@ -160,9 +160,21 @@ void Level::LeftClick(float x, float y) {
 }
 
 void Level::ChangeRoom(std::string roomName, std::string door) {
+
+	if (currentRoom->name == "Building4Puzzle6Floor1" && roomName == "MainFloor2") {
+		((InteractableObj*)FindObject("MainFloor2_BlackAlley"))->SetCurrentDialogueName("Floor2_BackAlley_FinishedPuzzle");
+	}
+
 	currentRoom = rooms[roomName];
 
 	SoundManager* sm = SoundManager::GetInstance();
+	if (roomName != "MainFloor2" && roomName != "MainFloor3") {
+		sm->StopBGM("talkingAmbient");
+	}
+	else {
+		sm->playSound(BGM, "talkingAmbient");
+	}
+
 	if(!currentRoom->bgmName.empty() && sm->currentBGM != currentRoom->bgmName){
 		sm->StopCurrentBGM();
 		sm->playSound(BGM, currentRoom->bgmName);
@@ -198,11 +210,31 @@ void Level::ChangeRoom(std::string roomName, std::string door) {
 		player->TriggerRouteA();
 	}
 
+	if (roomName == "Building4Puzzle6Floor3") {
+		InteractableObj* n = ((InteractableObj*)FindObject("Puzzle6_NPC1F2"));
+		n->SetDisplay(false);
+		n->col->enable = false;
+		n = ((InteractableObj*)FindObject("Puzzle6_NPC2F2"));
+		n->SetDisplay(false);
+		n->col->enable = false;
+	}
+
 	if (roomName == "Building3") {
-		((InteractableObj*)FindObject("NPC4"))->SetDisplay(false);
-		((InteractableObj*)FindObject("NPC5"))->SetDisplay(false);
-		((InteractableObj*)FindObject("NPC6"))->SetDisplay(false);
-		((InteractableObj*)FindObject("NPC7"))->SetDisplay(false);
+		InteractableObj* n = ((InteractableObj*)FindObject("NPC4"));
+		n->SetDisplay(false);
+		n->col->enable = false;
+
+		n = ((InteractableObj*)FindObject("NPC5"));
+		n->SetDisplay(false);
+		n->col->enable = false;
+
+		n = ((InteractableObj*)FindObject("NPC6"));
+		n->SetDisplay(false);
+		n->col->enable = false;
+
+		n = ((InteractableObj*)FindObject("NPC7"));
+		n->SetDisplay(false);
+		n->col->enable = false;
 	}
 
 	if (roomName == "MainFloor2" && player->triggerRouteA)

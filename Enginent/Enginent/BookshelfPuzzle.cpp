@@ -67,7 +67,6 @@ bool Space::CheckCollide(Collider* col)
 
 Bookshelf::Bookshelf(std::string texture, int posX, int posY, int sizeX, int sizeY)
 {
-	soundAfterComplete = "Puzzle25DoorOpen";
 	dialogueAfterComplete = "Hall_Bookshelf_L3";
 	this->texture = new UIObject();
 	this->texture->SetTexture(texture);

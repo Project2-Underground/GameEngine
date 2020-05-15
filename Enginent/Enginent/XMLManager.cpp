@@ -363,6 +363,7 @@ void XMLManager::LoadFromSave(std::string filename) {
 				if (Door * door = dynamic_cast<Door*>(objects[i])) {
 					if (file.child("level").child("doors").child(door->object_name.c_str()).attribute("used").as_bool())
 						door->Open();
+					door->SetCurrentDialogueName(file.child("level").child("doors").child(door->object_name.c_str()).attribute("current_dialogue").as_string());
 				}
 				else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
 					pugi::xml_node node = file.child("level").child("interactObj").child(obj->object_name.c_str());
@@ -399,7 +400,16 @@ void XMLManager::LoadFromSave(std::string filename) {
 			}
 			for (int i = 0; i < npcs.size(); i++) {
 				NonPlayer* npc = (NonPlayer*)npcs[i];
-				npc->hasItem = file.child("level").child("NPCs").child(npc->object_name.c_str()).attribute("hasItem").as_bool();
+				pugi::xml_node currentnpcNode = file.child("level").child("NPCs").child(npc->object_name.c_str());
+				npc->hasItem = currentnpcNode.attribute("has_item").as_bool();
+				npc->SetDisplay(currentnpcNode.attribute("display").as_bool());
+				if (npc->IsDisplay())
+					npc->col->enable = true;
+				npc->SetCurrentDialogueName(currentnpcNode.attribute("current_dialogue").as_string());
+				npc->SetDialogueBeforeName(currentnpcNode.attribute("before_dialogue").as_string());
+				npc->SetDialogueAfterName(currentnpcNode.attribute("after_dialogue").as_string());
+				npc->SetTalked(currentnpcNode.attribute("talked").as_bool());
+				npc->SetTakeNote(currentnpcNode.attribute("takeNote").as_bool());
 			}
 		}
 
@@ -412,6 +422,14 @@ void XMLManager::LoadFromSave(std::string filename) {
 		else {
 			butler->SetDisplay(false);
 			butler->col->enable = false;
+		}
+
+		// loading items dialogue
+		for (auto i : gs->items) {
+			pugi::xml_node node = file.child("level").child("items").child(i->name.c_str());
+			for (pugi::xml_node_iterator itr = node.child("dialogueAfterUse").begin(); itr != node.child("dialogueAfterUse").end(); itr++) {
+				i->dialogueAfterUsedWithObj[itr->name()] = itr->attribute("dialogue").as_string();
+			}
 		}
 
 		// load player and inventory
@@ -442,9 +460,13 @@ void XMLManager::LoadFromSave(std::string filename) {
 		Phone* phone = Phone::GetInstance();
 		phone->Clear();
 		phone->firstClose = phoneNode.attribute("firstClose").as_bool();
-		phone->note23Done = phoneNode.attribute("note23Track").as_bool();
-		for (pugi::xml_node_iterator track = phoneNode.child("npcTalked").begin(); track != phoneNode.child("npcTalked").end(); track++) {
-			phone->npcTalked.push_back(track->name());
+		phone->note3Done = phoneNode.attribute("note3Track").as_bool();
+		phone->note2Done = phoneNode.attribute("note2Track").as_bool();
+		for (pugi::xml_node_iterator track = phoneNode.child("npcTalkedNote2").begin(); track != phoneNode.child("npcTalkedNote2").end(); track++) {
+			phone->npcTalkedNote2.push_back(track->name());
+		}
+		for (pugi::xml_node_iterator track = phoneNode.child("npcTalkedNote3").begin(); track != phoneNode.child("npcTalkedNote3").end(); track++) {
+			phone->npcTalkedNote3.push_back(track->name());
 		}
 		if (phoneNode.attribute("hasPhone").as_bool())
 			gs->phoneIcon->Appear();
@@ -475,6 +497,7 @@ void XMLManager::SaveGame(std::string filename) {
 	save.child("level").append_child("doors");
 	save.child("level").append_child("NPCs");
 	save.child("level").append_child("puzzles");
+	save.child("level").append_child("items");
 	save.child("level").append_child("Player");
 	save.child("level").child("Player").append_child("inventory");
 	save.child("level").append_child("Phone");
@@ -494,8 +517,10 @@ void XMLManager::SaveGame(std::string filename) {
 			// save
 
 			if (Door * door = dynamic_cast<Door*>(objects[i])) {
-				if(door->getType() != STAIR)
+				if (door->getType() != STAIR) {
 					saveLevel.child("doors").append_child(objects[i]->object_name.c_str()).append_attribute("used").set_value(door->used);
+					saveLevel.child("doors").child(objects[i]->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogueName().c_str());
+				}
 				//saveLevel.child("doors").child(door->object_name.c_str()).append_attribute("current_dialogue").set_value(door->GetCurrentDialogue());
 			}
 			else if (InteractableObj * obj = dynamic_cast<InteractableObj*>(objects[i])) {
@@ -527,14 +552,31 @@ void XMLManager::SaveGame(std::string filename) {
 			NonPlayer* npc = (NonPlayer*)npcs[i];
 			pugi::xml_node node = saveLevel.child("NPCs").append_child(npc->object_name.c_str());
 			node.append_attribute("hasItem").set_value(npc->hasItem);
+			node.append_attribute("display").set_value(npc->IsDisplay());
+			node.append_attribute("current_dialogue").set_value(npc->GetCurrentDialogueName().c_str());
+			node.append_attribute("before_dialogue").set_value(npc->GetDialogueBeforeName().c_str());
+			node.append_attribute("after_dialogue").set_value(npc->GetDialogueAfterName().c_str());
+			node.append_attribute("talked").set_value(npc->Talked());
+			node.append_attribute("takeNote").set_value(npc->TookNote());
+			node.append_attribute("has_item").set_value(npc->hasItem);
+
 		}
 	}
 
 	// saving puzzles 
 	for (auto p : gs->puzzles) {
-		saveLevel.child("puzzles").append_child(p.first.c_str());
-		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("done").set_value(p.second->Passed());
-		saveLevel.child("puzzles").child(p.first.c_str()).append_attribute("passRequirements").set_value(p.second->passedReqiurements);
+		pugi::xml_node node = saveLevel.child("puzzles").append_child(p.first.c_str());
+		node.append_attribute("done").set_value(p.second->Passed());
+		node.append_attribute("passRequirements").set_value(p.second->passedReqiurements);
+	}
+
+	// saving items dialogue
+	for (auto i : gs->items) {
+		pugi::xml_node node = saveLevel.child("items").append_child(i->name.c_str());
+		node.append_child("dialogueAfterUse");
+		for (auto d : i->dialogueAfterUsedWithObj) {
+			node.child("dialogueAfterUse").append_child(d.first.c_str()).append_attribute("dialogue").set_value(d.second.c_str());
+		}
 	}
 
 	// saving special npcs
@@ -563,10 +605,15 @@ void XMLManager::SaveGame(std::string filename) {
 
 	saveLevel.child("Phone").append_attribute("hasPhone").set_value(gs->phoneIcon->IsDisplay());
 	saveLevel.child("Phone").append_attribute("firstClose").set_value(phone->firstClose);
-	saveLevel.child("Phone").append_attribute("note23Track").set_value(phone->note23Done);
-	saveLevel.child("Phone").append_child("npcTalked");
-	for (int i = 0; i < phone->npcTalked.size(); i++) {
-		saveLevel.child("Phone").child("npcTalked").append_child(phone->npcTalked[i].c_str());
+	saveLevel.child("Phone").append_attribute("note3Track").set_value(phone->note3Done);
+	saveLevel.child("Phone").append_attribute("note2Track").set_value(phone->note2Done);
+	saveLevel.child("Phone").append_child("npcTalkedNote2");
+	saveLevel.child("Phone").append_child("npcTalkedNote3");
+	for (int i = 0; i < phone->npcTalkedNote2.size(); i++) {
+		saveLevel.child("Phone").child("npcTalkedNote2").append_child(phone->npcTalkedNote2[i].c_str());
+	}
+	for (int i = 0; i < phone->npcTalkedNote3.size(); i++) {
+		saveLevel.child("Phone").child("npcTalkedNote3").append_child(phone->npcTalkedNote3[i].c_str());
 	}
 
 	for (int i = 0; i < noteSize; i++) {

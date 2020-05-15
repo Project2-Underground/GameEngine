@@ -160,6 +160,7 @@ void ChangeMouseActionTypeButton::checkColliderReleased(float x, float y) {
 			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
 				((GameScreen*)Game::GetInstance()->GetScreen())->GetInventory()->UnselectItem();
 				SetTexture(pressTexture);
+				SoundManager::GetInstance()->playSound(SFX, sound);
 				action();
 			}
 		else
@@ -169,7 +170,9 @@ void ChangeMouseActionTypeButton::checkColliderReleased(float x, float y) {
 	}
 	else 
 		if (col->isClicked(x, y)) 
-			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) 
+			if (MouseInput::GetInstance()->GetCurrentButtonPressed() == this) {
+				SoundManager::GetInstance()->playSound(SFX, sound);
 				action();
+			}
 
 }
