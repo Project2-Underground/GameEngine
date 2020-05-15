@@ -493,33 +493,33 @@ void GameScreen::ClosePuzzle() {
 }
 
 void GameScreen::HandleKey(SDL_Keycode key) {
-	switch (key)
-	{
-	case SDLK_1:
-		puzzles["BookshelfPuzzle"]->CompletePuzzle();
-		break;
-	case SDLK_2:
-		puzzles["Numpad_Emma"]->CompletePuzzle();
-		break;
-	case SDLK_3:
-		puzzles["Numpad_Backdoor"]->CompletePuzzle();
-		((NumpadPuzzleAfter*)currentLevel->rooms["BackDoorRoomBasement"]->FindObject("NumpadAfterUnlock"))->UnlockBookshelf();
-		break;
-	case SDLK_4:
-		puzzles["BookshelfPuzzle2"]->CompletePuzzle();
-		break;
-	case SDLK_q:
-		Game::GetInstance()->TriggerChangeLevel(1);
-		break;
-	case SDLK_s:
-		player->walkSpeed = 1000;
-		break;
-	case SDLK_w:
-		currentLevel->ChangeRoom("Building4Puzzle7Floor1", "Building4Puzzle7Floor1Out");
-		break;
-	default:
-		break;
-	}
+	//switch (key)
+	//{
+	//case SDLK_1:
+	//	puzzles["BookshelfPuzzle"]->CompletePuzzle();
+	//	break;
+	//case SDLK_2:
+	//	puzzles["Numpad_Emma"]->CompletePuzzle();
+	//	break;
+	//case SDLK_3:
+	//	puzzles["Numpad_Backdoor"]->CompletePuzzle();
+	//	((NumpadPuzzleAfter*)currentLevel->rooms["BackDoorRoomBasement"]->FindObject("NumpadAfterUnlock"))->UnlockBookshelf();
+	//	break;
+	//case SDLK_4:
+	//	puzzles["BookshelfPuzzle2"]->CompletePuzzle();
+	//	break;
+	//case SDLK_q:
+	//	Game::GetInstance()->TriggerChangeLevel(1);
+	//	break;
+	//case SDLK_s:
+	//	player->walkSpeed = 1000;
+	//	break;
+	//case SDLK_w:
+	//	currentLevel->ChangeRoom("Building4Puzzle7Floor1", "Building4Puzzle7Floor1Out");
+	//	break;
+	//default:
+	//	break;
+	//}
 }
 
 GameScreen::~GameScreen() {
