@@ -299,8 +299,8 @@ NumpadPuzzle::NumpadPuzzle()
 	buttons.push_back(e);
 	buttons.push_back(d);
 
-	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
-	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/tmp_texture/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(597, 318, 1.0f));
 	UI.push_back(closeButton);
 
 	((Numpad*)puzzle)->Init(images, buttons, c, 4, input);
@@ -429,8 +429,8 @@ NumpadPuzzle_2::NumpadPuzzle_2()
 	buttons.push_back(e);
 	buttons.push_back(d);
 
-	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
-	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/tmp_texture/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(597, 318, 1.0f));
 	UI.push_back(closeButton);
 
 	SDL_Color numColor = { 255, 255, 255, 1 };

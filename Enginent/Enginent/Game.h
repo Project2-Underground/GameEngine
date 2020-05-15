@@ -80,4 +80,5 @@ public:
 	Level* GetCurrentLevel();
 	Player* GetPlayer();
 	glm::vec3 FindMousePosition(int, int);
+	bool splashScreen;
 };

@@ -63,4 +63,5 @@ class TextBox : public UIObject {
 		void Render();
 		void clickLeft(glm::vec3);
 		void Update();
+		bool IsCutsceneDisplay();
 };

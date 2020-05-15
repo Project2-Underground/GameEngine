@@ -39,7 +39,6 @@ public:
 };
 
 class MenuScreen :public Screen {
-	bool splashScreen;
 	float splashScreenTime;
 	Button* play;
 	Button* load;

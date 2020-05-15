@@ -8,8 +8,8 @@ PuppetPuzzle::PuppetPuzzle() {
 	background->SetSize(1280, 720);
 	UI.push_back(background);
 
-	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
-	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/tmp_texture/CloseButton.png");
+	closeButton->Init(46.0f, -44.0f, glm::vec3(597, 318, 1.0f));
 	UI.push_back(closeButton);
 }
 void PuppetPuzzle::Render() {

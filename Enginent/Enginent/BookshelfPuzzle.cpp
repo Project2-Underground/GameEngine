@@ -774,7 +774,7 @@ BookshelfPuzzle_2::BookshelfPuzzle_2()
 	tmp_paper = new Paper("Texture/puzzle5/Puzzle5_Paper8(I).png", "Texture/puzzle5/Puzzle5_Paper8.png", glm::vec3(497, -247, 0), 229, -161, 8);
 	papers.push_back(tmp_paper);
 
-	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/Puzzle/CloseButton.png");
+	ClosePuzzleButton* closeButton = new ClosePuzzleButton("Texture/tmp_texture/CloseButton.png");
 	closeButton->Init(46.0f, -44.0f, glm::vec3(617, 338, 1.0f));
 	UI.push_back(closeButton);
 

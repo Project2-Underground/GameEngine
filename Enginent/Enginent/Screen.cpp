@@ -17,7 +17,6 @@ void Screen::CloseGameAllWindow() {
 
 /*MAIN MENU*/
 MenuScreen::MenuScreen() {
-	splashScreen = true;
 	splashScreenTime = 0;
 	play = new SwitchScene_Button("Texture/UI/MainScreen/MainScreen_Play.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png", "Texture/UI/MainScreen/MainScreen_Play_Pressed.png");
 	play->Init(248, -70, glm::vec3(-258, 98, 1));
@@ -79,11 +78,11 @@ void MenuScreen::Render() {
 		Game::GetInstance()->GetRenderer()->Render(Credit);
 	}
 	else {
-		if (splashScreen) {
+		if (Game::GetInstance()->splashScreen) {
 			splashScreenTime += TimeSystem::instance()->GetDT();
 			Game::GetInstance()->GetRenderer()->Render(SplashScreen);
 			if (splashScreenTime > 5)
-				splashScreen = false;
+				Game::GetInstance()->splashScreen = false;
 		}
 		else {
 			Game::GetInstance()->GetRenderer()->Render(UI);
@@ -102,7 +101,7 @@ void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 	if (Credit->IsDisplay()) {
 		Credit->SetDisplay(false);
 	}
-	else if (!splashScreen) {
+	else if (!Game::GetInstance()->splashScreen) {
 		if (GameWindowOpen())
 			for (auto w : windows)
 				w->LeftClick(screen.x, screen.y);
@@ -112,7 +111,7 @@ void MenuScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 					button->checkColliderPressed(screen.x, screen.y);
 	}
 	else {
-		splashScreen = false;
+		Game::GetInstance()->splashScreen = false;
 	}
 }
 
@@ -128,7 +127,7 @@ void MenuScreen::RightRelease(glm::vec3 screen, glm::vec3 world)
 
 void MenuScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 {
-	if (!splashScreen) {
+	if (!Game::GetInstance()->splashScreen) {
 		if (GameWindowOpen())
 			for (auto w : windows)
 				w->LeftRelease(screen.x, screen.y);
@@ -322,7 +321,7 @@ void GameScreen::LeftClick(glm::vec3 screen, glm::vec3 world) {
 		}
 		else {
 			buttonClicked = false;
-			if (!PuzzleTime) {
+			if (!PuzzleTime && !dialogueText->IsCutsceneDisplay()) {
 				for (int j = 0; j < UI.size(); j++) {
 					if (Button * button = dynamic_cast<Button*>(UI[j])) {
 						button->checkColliderPressed(screen.x, screen.y);
@@ -372,9 +371,11 @@ void GameScreen::LeftRelease(glm::vec3 screen, glm::vec3 world)
 			currentPuzzle->LeftRelease(screen, world);
 		else if (InventoryEnable)
 			inventory->LeftRelease(screen.x, screen.y);
-		for (int j = 0; j < UI.size(); j++)
-			if (Button * button = dynamic_cast<Button*>(UI[j]))
-				button->checkColliderReleased(screen.x, screen.y);
+		if (!dialogueText->IsCutsceneDisplay()) {
+			for (int j = 0; j < UI.size(); j++)
+				if (Button * button = dynamic_cast<Button*>(UI[j]))
+					button->checkColliderReleased(screen.x, screen.y);
+		}
 	}
 }
 

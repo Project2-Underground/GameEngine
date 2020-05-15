@@ -198,9 +198,9 @@
 	<script key = "Hall_gramophone" loopIndex = "0">
 		<sub>
 			<Dialogue name = "Elias" text = "This thing looks like the one at home." show = "1"/>
-			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago." show = "1"/>
-			<Dialogue name = "Elias" text = "Though it feels like I just listen to it not that long ago." show = "1"/>
-			<Dialogue name = "Elias" text = "Wait. \n There's a piece of paper stuck under the disk." show = "1">
+			<Dialogue name = "Elias" text = "Before dad sold it away 10 years ago."/>
+			<Dialogue name = "Elias" text = "Though it feels like I just listen to it not that long ago."/>
+			<Dialogue name = "Elias" text = "Wait. \n There's a piece of paper stuck under the disk.">
 				<item name = "Puzzle2_ColorCode1"  NPC = "Gramophone"/>
 				<animation name = "Pickup"/>
 			</Dialogue>
@@ -943,9 +943,11 @@
 			<Dialogue name = "Elias" text = "And how am I going to shut this down?">
 				<sprite name="MainFloor2_BG5" texture="Texture/Test/black.png"/>
 			</Dialogue>
-			<Dialogue name = "Elias" text = "There's no going back now. \n I'll have to do it my way, then."/>
-			<Dialogue name = " " text = "( Smashes the computer screen. )">
+			<Dialogue name = "Elias" text = "There's no going back now. \n I'll have to do it my way, then.">
 				<sprite name="MainFloor2_BG4" texture="Texture/Test/black.png"/>
+			</Dialogue>
+			<Dialogue name = " " text = "( Smashes the computer screen. )">
+			    <sprite name="Building2_Computer1" texture="Texture/level2/Building2/Building2_Computer2.png"/>
 			</Dialogue>
 			<Dialogue name = "Elias" text = "Hm... it's still running. \n Maybe smashing the thing below will do. It won't explode in my face, right?">
 				<sprite name = "MainFloor2_BG3" texture ="Texture/Test/black.png"/>

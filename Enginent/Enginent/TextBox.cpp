@@ -243,6 +243,10 @@ void TextBox::Render()
 	}
 }
 
+bool TextBox::IsCutsceneDisplay() {
+	return cutscene->IsDisplay();
+}
+
 void TextBox::Update()
 {
 	time += TimeSystem::instance()->GetTimeBetweenFrame();

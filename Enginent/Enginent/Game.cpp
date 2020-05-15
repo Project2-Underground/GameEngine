@@ -25,6 +25,7 @@ GLRenderer* Game::GetRenderer()
 
 void Game::Init(int width, int height)
 {
+	splashScreen = true;
 	winWidth = width;
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
